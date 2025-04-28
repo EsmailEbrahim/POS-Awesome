@@ -290,6 +290,7 @@ export default {
 
             evntBus.$emit("set_all_items", vm.items);
             vm.loading = false;
+            vm.update_items_details(vm.items);
             console.info("Items Loaded");
             if (
               vm.pos_profile.posa_local_storage &&
