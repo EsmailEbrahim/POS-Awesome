@@ -3,6 +3,10 @@
         <v-card>
             <v-card-title class="primary white--text">
                 {{ __("Select Warehouse") }}
+                <v-spacer />
+                <v-btn icon @click="closeDialog" :title="__('Close dialog')">
+                    <v-icon>mdi-close</v-icon>
+                </v-btn>
             </v-card-title>
             <v-card-text>
                 <v-data-table :headers="computedHeaders" :items="warehouseStock" item-key="warehouse"
@@ -62,7 +66,7 @@ export default {
                 method: "posawesome.posawesome.api.posapp.get_item_warehouse_stock",
                 args: {
                     item_code: this.item.item_code,
-                    warehouses: this.warehouses.map(w => w.warehouse),
+                    warehouses: this.warehouses.map((w) => w.warehouse),
                     main_warehouse: this.main_warehouse,
                 },
                 callback: (result) => {
@@ -74,7 +78,7 @@ export default {
             if (chosen.actual_qty <= 0) {
                 return;
             }
-
+            
             this.$emit("select", {
                 ...this.item,
                 item_selected_warehouse: chosen.warehouse,
