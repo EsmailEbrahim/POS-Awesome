@@ -2,7 +2,7 @@
   <div>
     <v-card
       class="selection mx-auto grey lighten-5 mt-3"
-      style="max-height: 75vh; height: 75vh"
+      style="max-height: 70vh; height: 70vh"
     >
       <v-progress-linear
         :active="loading"
@@ -597,7 +597,7 @@ export default {
 
   computed: {
     filtred_items() {
-      console.log(this.pos_profile);
+      // console.log(this.pos_profile);
       this.search = this.get_search(this.first_search);
       // if (!this.pos_profile.pose_use_limit_search) {
       let filtred_list = [];
