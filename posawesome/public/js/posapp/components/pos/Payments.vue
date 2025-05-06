@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-card
-      class="selection mx-auto grey lighten-5 d-1"
+      class="selection mx-auto grey lighten-5 d-1 mt-3"
       style="max-height: 76vh; height: 76vh"
     >
       <v-progress-linear
@@ -611,8 +611,8 @@
               :no-data-text="__('Sales Partner not found')"
               hide-details
               :filter="salesPartnerFilter"
-              :disabled="readonly"
             >
+              <!-- :disabled="readonly" -->
               <!-- !change the item text -->
               <template v-slot:item="data">
                 <template>
@@ -649,8 +649,8 @@
               :no-data-text="__('Sales Person not found')"
               hide-details
               :filter="salesPersonFilter"
-              :disabled="readonly"
             >
+              <!-- :disabled="readonly" -->
               <template v-slot:item="data">
                 <template>
                   <v-list-item-content>
