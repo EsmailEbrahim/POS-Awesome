@@ -965,7 +965,12 @@ export default {
         return;
       }
 
-      this.submit_invoice(print);
+      if (this.invoiceType === "Order") {
+        this.submit_order();
+      } else {
+        this.submit_invoice(print);
+      }
+
       this.customer_credit_dict = [];
       this.redeem_customer_credit = false;
       this.is_cashback = true;
@@ -1038,6 +1043,29 @@ export default {
             });
             frappe.utils.play_sound("submit");
             this.addresses = [];
+          }
+        },
+      });
+    },
+    submit_order() {
+      const args = {
+        data: {
+          change: this.paid_change,
+          paid_amount: this.paid_amount,
+          outstanding_amount: this.outstanding_amount,
+        },
+        invoice: this.invoice_doc,
+      };
+      frappe.call({
+        method: "posawesome.posawesome.api.posapp.submit_order",
+        args,
+        callback: (r) => {
+          if (r.message) {
+            evntBus.$emit("show_mesage", {
+              text: `Sales Order ${r.message.name} Created`,
+              color: "success",
+            });
+            frappe.utils.play_sound("submit");
           }
         },
       });

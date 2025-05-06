@@ -730,6 +730,48 @@ def submit_invoice(invoice, data):
     return {"name": invoice_doc.name, "status": invoice_doc.docstatus}
 
 
+@frappe.whitelist()
+def submit_order(data, invoice):
+    if isinstance(data, str):
+        data = json.loads(data)
+    if isinstance(invoice, str):
+        invoice = json.loads(invoice)
+    
+    so = frappe.get_doc({
+        "doctype": "Sales Order",
+        "customer": invoice.get("customer"),
+        "transaction_date": nowdate(),
+        "delivery_date": invoice.get("posa_delivery_date"),
+        "po_no": invoice.get("po_no"),
+        "po_date": invoice.get("po_date"),
+        "shipping_address_name": invoice.get("shipping_address_name"),
+        "sales_partner": invoice.get("sales_partner"),
+        "sales_person": invoice.get("sales_person"),
+        "posa_notes": invoice.get("posa_notes"),
+        "items": [
+            {
+                "item_code": item.get("item_code"),
+                "item_name": item.get("item_name"),
+                "description": (item.get("description")
+                                or item.get("posa_notes")
+                                or item.get("item_name")),
+                "posa_notes": item.get("posa_notes"),
+                "qty": item.get("qty"),
+                "rate": item.get("rate"),
+                "delivery_date": item.get("posa_delivery_date"),
+                "warehouse": item.get("warehouse"),
+
+            }
+            for item in invoice.get("items", [])
+        ]
+    })
+    so.flags.ignore_permissions = True
+    so.insert()
+    so.submit()
+    
+    return so.as_dict()
+
+
 def set_batch_nos_for_bundels(doc, warehouse_field, throw=False):
     """Automatically select `batch_no` for outgoing items in item table"""
     for d in doc.packed_items:
