@@ -93,6 +93,16 @@
                         </span>
                       </div>
                       <v-btn
+                        v-if="invoiceType==='Order'"
+                        small
+                        icon
+                        @click.stop="showItemDetails(item)"
+                        :title="__('Click to show item details')"
+                      >
+                        <v-icon>mdi-information</v-icon>
+                      </v-btn>
+                      <v-btn
+                        v-else
                         small
                         icon
                         @click.stop="showWarehousesQuantities(item)"
@@ -135,6 +145,16 @@
                   </template>
                   <template v-slot:item.actions="{ item }">
                     <v-btn
+                      v-if="invoiceType==='Order'"
+                      small
+                      icon
+                      @click.stop="showItemDetails(item)"
+                      :title="__('Click to show item details')"
+                    >
+                      <v-icon>mdi-information</v-icon>
+                    </v-btn>
+                    <v-btn
+                      v-else
                       small
                       icon
                       @click.stop="showWarehousesQuantities(item)"
@@ -248,6 +268,7 @@ export default {
     new_line: false,
     qty: 1,
     pos_tags_filters: [],
+    invoiceType: "Invoice",
   }),
 
   watch: {
@@ -269,6 +290,9 @@ export default {
   methods: {
     showWarehousesQuantities(item) {
       evntBus.$emit('show_warehouse_dialog', item);
+    },
+    showItemDetails(item) {
+      evntBus.$emit('show_item_details_dialog', item);
     },
     show_offers() {
       evntBus.$emit("show_offers", "true");
@@ -791,6 +815,12 @@ export default {
 
   mounted() {
     this.scan_barcoud();
+    evntBus.$on("update_invoice_type", (data) => {
+      this.invoiceType = data;
+    });
+  },
+  beforeDestroy() {
+    evntBus.$off("update_invoice_type");
   },
 };
 </script>

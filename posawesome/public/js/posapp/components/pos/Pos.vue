@@ -65,6 +65,14 @@
       @select="handleWarehouseSelect"
       @close="showWarehouseDialog = false"
     />
+    <item-information-dialog
+      v-if="showItemInformationDialog"
+      :item="selectedItem"
+      :warehouses="pos_plus_additional_warehouses"
+      :main_warehouse="main_warehouse"
+      @select="handleWarehouseSelect"
+      @close="showItemInformationDialog = false"
+    />
   </div>
 </template>
 
@@ -83,6 +91,7 @@ import Variants from "./Variants.vue";
 import Returns from "./Returns.vue";
 import MpesaPayments from "./Mpesa-Payments.vue";
 import WarehouseDialog from './WarehouseDialog.vue';
+import ItemInformationDialog from './ItemInformationDialog.vue';
 
 export default {
   data: function () {
@@ -94,6 +103,7 @@ export default {
       offers: false,
       coupons: false,
       showWarehouseDialog: false,
+      showItemInformationDialog: false,
       selectedItem: null,
       pos_plus_additional_warehouses: [],
       main_warehouse: "",
@@ -115,12 +125,17 @@ export default {
     Variants,
     MpesaPayments,
     WarehouseDialog,
+    ItemInformationDialog,
   },
 
   created() {
     evntBus.$on('show_warehouse_dialog', (item) => {
       this.selectedItem = item;
       this.showWarehouseDialog = true;
+    });
+    evntBus.$on('show_item_details_dialog', (item) => {
+      this.selectedItem = item;
+      this.showItemInformationDialog = true;
     });
   },
 
