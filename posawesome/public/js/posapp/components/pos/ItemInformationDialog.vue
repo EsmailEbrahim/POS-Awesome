@@ -61,6 +61,11 @@
                             :title="item.actual_qty <= 0 ? __('Out of stock') : __('Add from this warehouse')">
                             <v-icon>mdi-cart-plus</v-icon>
                         </v-btn>
+                        <v-btn small icon
+                              @click="openOffers(item)"
+                              :title="__('Show Offers for this item')">
+                            <v-icon>mdi-tag</v-icon>
+                         </v-btn>
                     </template>
                 </v-data-table>
             </v-card-text>
@@ -70,6 +75,7 @@
 
 <script>
 import format from "../../format";
+import { evntBus } from "../../bus";
 
 export default {
     mixins: [format],
@@ -126,6 +132,12 @@ export default {
                 item_selected_warehouse_actual_qty: chosen.actual_qty
             });
             this.closeDialog();
+        },
+        openOffers(chosen) {
+            evntBus.$emit("show_offers_dialog", {
+                item_code: this.item.item_code,
+                warehouse: chosen.warehouse,
+            });
         },
         closeDialog() {
             this.isOpen = false;

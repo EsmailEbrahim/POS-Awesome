@@ -1913,3 +1913,44 @@ def get_item_warehouse_stock(item_code, warehouses, main_warehouse):
         'main_warehouse': True,
     })
     return stock_data
+
+
+@frappe.whitelist()
+def get_item_offers(item_code, warehouse, profile):
+    """
+    Return active POS Offers for a given item + warehouse under the specified POS Profile.
+    """
+    offers = frappe.get_all("POS Offer",
+        filters={
+            "disable": 0,
+            "pos_profile": profile,
+            "warehouse": warehouse,
+            "company": frappe.db.get_value("POS Profile", profile, "company"),
+            "valid_from": ["<=", frappe.utils.nowdate()],
+            "valid_upto": [">=", frappe.utils.nowdate()]
+        },
+        fields=[
+            "name", "title", "description", "offer", "apply_on",
+            "item", "item_group", "brand",
+            "valid_from", "valid_upto",
+            "min_qty", "max_qty", "min_amt", "max_amt",
+            "discount_type", "rate", "discount_amount", "discount_percentage",
+            "given_qty", "apply_item_code", "apply_item_group"
+        ]
+    )
+
+    valid = []
+    for o in offers:
+        if o.apply_on == "Item Code" and o.item == item_code:
+            valid.append(o)
+        elif o.apply_on == "Item Group":
+            grp = frappe.db.get_value("Item", item_code, "item_group")
+            if o.item_group == grp:
+                valid.append(o)
+        elif o.apply_on == "Brand":
+            brand = frappe.db.get_value("Item", item_code, "brand")
+            if o.brand == brand:
+                valid.append(o)
+        if o.offer == "Give Product" and o.apply_item_code == item_code:
+            valid.append(o)
+    return valid
