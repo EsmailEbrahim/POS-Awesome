@@ -1643,7 +1643,7 @@ export default {
                 element.posa_row_id === item.posa_row_id &&
                 element.warehouse === item.warehouse
               );
-              if (!updated) return;
+              if (!updated_item) return;
 
               item.actual_qty = updated_item.actual_qty;
               item.serial_no_data = updated_item.serial_no_data;
@@ -1890,6 +1890,9 @@ export default {
     set_serial_no(item) {
       if (!item.has_serial_no) return;
       item.serial_no = "";
+      if (!item.serial_no_selected) {
+        item.serial_no_selected = [];
+      }
       item.serial_no_selected.forEach((element) => {
         item.serial_no += element + "\n";
       });
