@@ -486,9 +486,12 @@
                     cols="12"
                     v-if="item.has_serial_no == 1 || item.serial_no"
                   >
+                  <!-- :items="item.serial_no_data" -->
                     <v-autocomplete
                       v-model="item.serial_no_selected"
-                      :items="item.serial_no_data"
+                      :items="item.warehouses_serial_no_data
+                                .filter(e => e.warehouse === item.warehouse)
+                                .map(e => e.serial_no)"
                       item-text="serial_no"
                       outlined
                       dense
@@ -1644,6 +1647,7 @@ export default {
 
               item.actual_qty = updated_item.actual_qty;
               item.serial_no_data = updated_item.serial_no_data;
+              item.warehouses_serial_no_data = updated_item.warehouses_serial_no_data;
               item.batch_no_data = updated_item.batch_no_data;
               item.item_uoms = updated_item.item_uoms;
               item.has_batch_no = updated_item.has_batch_no;
