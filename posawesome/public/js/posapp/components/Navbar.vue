@@ -251,10 +251,10 @@ export default {
     close_shift_dialog() {
       this.eventBus.emit("open_closing_dialog");
     },
-    show_mesage(data) {
+    showMessage(data) {
       this.snack = true;
       this.snackColor = data.color;
-      this.snackText = data.text;
+      this.snackText = data.title;
     },
     logOut() {
       frappe.call({
@@ -282,8 +282,8 @@ export default {
   },
   created: function () {
     this.$nextTick(function () {
-      this.eventBus.on("show_mesage", (data) => {
-        this.show_mesage(data);
+      this.eventBus.on("show_message", (data) => {
+        this.showMessage(data);
       });
       this.eventBus.on("set_company", (data) => {
         this.company = data.name || "POS PLUS";

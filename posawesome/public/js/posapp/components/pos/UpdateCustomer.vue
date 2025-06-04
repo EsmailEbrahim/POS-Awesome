@@ -324,22 +324,22 @@ export default {
     submit_dialog() {
       // validate if all required fields are filled
       if (!this.customer_name) {
-        evntBus.$emit("show_mesage", {
-          text: __("Customer name is required."),
+        evntBus.$emit("show_message", {
+          title: __("Customer name is required."),
           color: "error",
         });
         return;
       }
       if (!this.group) {
-        evntBus.$emit("show_mesage", {
-          text: __("Customer group is required."),
+        evntBus.$emit("show_message", {
+          title: __("Customer group is required."),
           color: "error",
         });
         return;
       }
       if (!this.territory) {
-        evntBus.$emit("show_mesage", {
-          text: __("Customer territory is required."),
+        evntBus.$emit("show_message", {
+          title: __("Customer territory is required."),
           color: "error",
         });
         return;
@@ -375,8 +375,8 @@ export default {
               if (vm.customer_id) {
                 text = __("Customer updated successfully.");
               }
-              evntBus.$emit("show_mesage", {
-                text: text,
+              evntBus.$emit("show_message", {
+                title: text,
                 color: "success",
               });
               args.name = r.message.name;
@@ -387,8 +387,8 @@ export default {
               this.close_dialog();
             } else {
               frappe.utils.play_sound("error");
-              evntBus.$emit("show_mesage", {
-                text: __("Customer creation failed."),
+              evntBus.$emit("show_message", {
+                title: __("Customer creation failed."),
                 color: "error",
               });
             }
