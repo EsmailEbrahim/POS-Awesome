@@ -857,6 +857,7 @@ def submit_invoice(invoice, data):
     return {"name": invoice_doc.name, "status": invoice_doc.docstatus}
 
 
+# Test it in version 15 (ETMS Custom)
 @frappe.whitelist()
 def submit_order(data, invoice):
     if isinstance(data, str):
