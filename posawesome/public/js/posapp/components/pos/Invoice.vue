@@ -1049,8 +1049,8 @@ export default {
         this.update_items_details([cur_item]);
         if (item.has_serial_no && item.to_set_serial_no) {
           if (cur_item.serial_no_selected.includes(item.to_set_serial_no)) {
-            evntBus.$emit("show_mesage", {
-              text: __(`This Serial Number {0} has already been added!`, [
+            evntBus.$emit("show_message", {
+              title: __(`This Serial Number {0} has already been added!`, [
                 item.to_set_serial_no,
               ]),
               color: "warning",
@@ -1142,8 +1142,8 @@ export default {
           async: true,
           callback: function (r) {
             if (r.message) {
-              evntBus.$emit("show_mesage", {
-                text: r.message,
+              evntBus.$emit("show_message", {
+                title: r.message,
                 color: "warning",
               });
             }
@@ -1184,8 +1184,8 @@ export default {
             },
             callback: (r) => {
                 if (r.message) {
-                    evntBus.$emit("show_mesage", {
-                        text: `Sales Order ${r.message.name} Created`,
+                    evntBus.$emit("show_message", {
+                        title: `Sales Order ${r.message.name} Created`,
                         color: "success",
                     });
                     frappe.utils.play_sound("submit");
@@ -1369,15 +1369,15 @@ export default {
 
     show_payment() {
       if (!this.customer) {
-        evntBus.$emit("show_mesage", {
-          text: __(`There is no Customer !`),
+        evntBus.$emit("show_message", {
+          title: __(`There is no Customer !`),
           color: "error",
         });
         return;
       }
       if (!this.items.length) {
-        evntBus.$emit("show_mesage", {
-          text: __(`There is no Items !`),
+        evntBus.$emit("show_message", {
+          title: __(`There is no Items !`),
           color: "error",
         });
         return;
@@ -1398,8 +1398,8 @@ export default {
           flt(item.discount_amount) >
             this.pos_profile.custom_posa_max_discount_amount_allowed
         ) {
-          evntBus.$emit("show_mesage", {
-            text: __(
+          evntBus.$emit("show_message", {
+            title: __(
               `Discount Amount for item '{0}' cannot be greater than {1} {2}`,
               [
                 item.item_name,
@@ -1422,8 +1422,8 @@ export default {
                 this.pos_profile.posa_max_discount_allowed &&
               this.pos_profile.posa_use_percentage_discount
             ) {
-              evntBus.$emit("show_mesage", {
-                text: __(
+              evntBus.$emit("show_message", {
+                title: __(
                   `Discount percentage for item '{0}' cannot be greater than {1}%`,
                   [item.item_name, this.pos_profile.posa_max_discount_allowed]
                 ),
@@ -1439,8 +1439,8 @@ export default {
             ((item.is_stock_item && item.stock_qty && !item.actual_qty) ||
               (item.is_stock_item && item.stock_qty > item.actual_qty))
           ) {
-            evntBus.$emit("show_mesage", {
-              text: __(
+            evntBus.$emit("show_message", {
+              title: __(
                 `The existing quantity '{0}' for item '{1}' is not enough in warehouse '{2}'`,
                 [item.actual_qty, item.item_name, item.warehouse]
               ),
@@ -1450,8 +1450,8 @@ export default {
           }
         }
         if (item.qty == 0) {
-          evntBus.$emit("show_mesage", {
-            text: __(`Quantity for item '{0}' cannot be Zero (0)`, [
+          evntBus.$emit("show_message", {
+            title: __(`Quantity for item '{0}' cannot be Zero (0)`, [
               item.item_name,
             ]),
             color: "error",
@@ -1462,8 +1462,8 @@ export default {
           item.max_discount > 0 &&
           item.discount_percentage > item.max_discount
         ) {
-          evntBus.$emit("show_mesage", {
-            text: __(`Maximum discount for Item {0} is {1}%`, [
+          evntBus.$emit("show_message", {
+            title: __(`Maximum discount for Item {0} is {1}%`, [
               item.item_name,
               item.max_discount,
             ]),
@@ -1477,8 +1477,8 @@ export default {
             (!item.serial_no_selected ||
               item.stock_qty != item.serial_no_selected.length)
           ) {
-            evntBus.$emit("show_mesage", {
-              text: __(`Selected serial numbers of item {0} is incorrect`, [
+            evntBus.$emit("show_message", {
+              title: __(`Selected serial numbers of item {0} is incorrect`, [
                 item.item_name,
               ]),
               color: "error",
@@ -1488,8 +1488,8 @@ export default {
         }
         if (item.has_batch_no) {
           if (item.stock_qty > item.actual_batch_qty) {
-            evntBus.$emit("show_mesage", {
-              text: __(
+            evntBus.$emit("show_message", {
+              title: __(
                 `The existing batch quantity of item {0} is not enough`,
                 [item.item_name]
               ),
@@ -1512,8 +1512,8 @@ export default {
             !this.pos_profile.custom_posa_use_amount_discount
           ) {
             if (clac_percentage > this.pos_profile.posa_max_discount_allowed) {
-              evntBus.$emit("show_mesage", {
-                text: __(`The discount should not be higher than {0}%`, [
+              evntBus.$emit("show_message", {
+                title: __(`The discount should not be higher than {0}%`, [
                   this.pos_profile.posa_max_discount_allowed,
                 ]),
                 color: "error",
@@ -1526,8 +1526,8 @@ export default {
             clac_percentage > this.pos_profile.posa_max_discount_allowed &&
             this.pos_profile.posa_use_percentage_discount
           ) {
-            evntBus.$emit("show_mesage", {
-              text: __(`The discount should not be higher than {0}%`, [
+            evntBus.$emit("show_message", {
+              title: __(`The discount should not be higher than {0}%`, [
                 this.pos_profile.posa_max_discount_allowed,
               ]),
               color: "error",
@@ -1538,8 +1538,8 @@ export default {
               this.pos_profile.custom_posa_max_discount_amount_allowed &&
             this.pos_profile.custom_posa_use_amount_discount
           ) {
-            evntBus.$emit("show_mesage", {
-              text: __(`The discount should not be higher than {0} {1}`, [
+            evntBus.$emit("show_message", {
+              title: __(`The discount should not be higher than {0} {1}`, [
                 this.pos_profile.custom_posa_max_discount_amount_allowed,
                 this.pos_profile.currency,
               ]),
@@ -1550,16 +1550,16 @@ export default {
         }
         if (this.invoice_doc.is_return) {
           if (this.subtotal >= 0) {
-            evntBus.$emit("show_mesage", {
-              text: __(`Return Invoice Total Not Correct`),
+            evntBus.$emit("show_message", {
+              title: __(`Return Invoice Total Not Correct`),
               color: "error",
             });
             value = false;
             return value;
           }
           if (this.subtotal * -1 > this.return_doc.total) {
-            evntBus.$emit("show_mesage", {
-              text: __(`Return Invoice Total should not be higher than {0}`, [
+            evntBus.$emit("show_message", {
+              title: __(`Return Invoice Total should not be higher than {0}`, [
                 this.return_doc.total,
               ]),
               color: "error",
@@ -1573,8 +1573,8 @@ export default {
             );
 
             if (!return_item) {
-              evntBus.$emit("show_mesage", {
-                text: __(
+              evntBus.$emit("show_message", {
+                title: __(
                   `The item {0} cannot be returned because it is not in the invoice {1}`,
                   [item.item_name, this.return_doc.name]
                 ),
@@ -1583,8 +1583,8 @@ export default {
               value = false;
               return value;
             } else if (item.qty * -1 > return_item.qty || item.qty >= 0) {
-              evntBus.$emit("show_mesage", {
-                text: __(`The QTY of the item {0} cannot be greater than {1}`, [
+              evntBus.$emit("show_message", {
+                title: __(`The QTY of the item {0} cannot be greater than {1}`, [
                   item.item_name,
                   return_item.qty,
                 ]),
@@ -2528,8 +2528,8 @@ export default {
         this.ApplyOnTotal(offer);
       }
       if (offer.offer === "Loyalty Point") {
-        evntBus.$emit("show_mesage", {
-          text: __("Loyalty Point Offer Applied"),
+        evntBus.$emit("show_message", {
+          title: __("Loyalty Point Offer Applied"),
           color: "success",
         });
       }
@@ -2749,8 +2749,8 @@ export default {
 
     print_draft_invoice() {
       if (!this.pos_profile.posa_allow_print_draft_invoices) {
-        evntBus.$emit("show_mesage", {
-          text: __(`You are not allowed to print draft invoices`),
+        evntBus.$emit("show_message", {
+          title: __(`You are not allowed to print draft invoices`),
           color: "error",
         });
         return;
