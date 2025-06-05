@@ -1,16 +1,21 @@
 <template>
+  <!-- Main Invoice Wrapper -->
   <div>
+    <!-- Cancel Sale Confirmation Dialog -->
     <v-dialog v-model="cancel_dialog" max-width="330">
       <v-card>
         <v-card-title class="text-h5">
-          <span class="headline primary--text">{{
-            __("Cancel Current Invoice ?")
-          }}</span>
+          <span class="text-h5 text-primary">{{
+            __("Cancel Sale ?")
+            }}</span>
         </v-card-title>
+        <v-card-text>
+          This would cancel and delete the current sale. To save it as Draft, click the "Save and Clear" instead.
+        </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn color="error" @click="cancel_invoice">
-            {{ __("Cancel") }}
+            {{ __("Yes, Cancel sale") }}
           </v-btn>
           <v-btn color="warning" @click="cancel_dialog = false">
             {{ __("Back") }}
@@ -18,32 +23,27 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
-    <v-card
-      style="max-height: 70vh; height: 70vh"
-      class="cards my-0 py-0 mt-3 grey lighten-5"
-    >
+
+    <!-- Main Invoice Card (contains all invoice content) -->
+    <v-card style="max-height: 70vh; height: 70vh"
+      :class="['cards my-0 py-0 mt-3 bg-grey-lighten-5', { 'return-mode': invoiceType === 'Return' }]">
+      <!-- Top Row: Customer Selection and Invoice Type -->
       <v-row align="center" class="items px-2 py-1">
         <v-col
-          v-if="pos_profile.posa_allow_sales_order"
-          cols="9"
+          :cols="pos_profile.posa_allow_sales_order ? 9 : 12"
           class="pb-2 pr-0"
         >
-          <Customer></Customer>
+          <!-- Customer selection component -->
+          <Customer />
         </v-col>
-        <v-col
-          v-if="!pos_profile.posa_allow_sales_order"
-          cols="12"
-          class="pb-2"
-        >
-          <Customer></Customer>
-        </v-col>
+        <!-- Invoice Type Selection (Only shown if sales orders are allowed) -->
         <v-col v-if="pos_profile.posa_allow_sales_order" cols="3" class="pb-2">
           <v-select
-            dense
+            density="compact"
             hide-details
-            outlined
+            variant="outlined"
             color="primary"
-            background-color="white"
+            bg-color="white"
             :items="invoiceTypes"
             :label="frappe._('Type')"
             v-model="invoiceType"
@@ -52,89 +52,83 @@
         </v-col>
       </v-row>
 
+      <!-- Delivery Charges Section (Only if enabled in POS profile) -->
       <v-row
         align="center"
         class="items px-2 py-1 mt-0 pt-0"
         v-if="pos_profile.posa_use_delivery_charges"
       >
         <v-col cols="8" class="pb-0 mb-0 pr-0 pt-0">
+          <!-- Delivery Charges Selection Dropdown -->
           <v-autocomplete
-            dense
+            density="compact"
             clearable
             auto-select-first
-            outlined
+            variant="outlined"
             color="primary"
             :label="frappe._('Delivery Charges')"
-            v-model="selcted_delivery_charges"
+            v-model="selected_delivery_charge"
             :items="delivery_charges"
-            item-text="name"
+            item-title="name"
+            item-value="name"
             return-object
-            background-color="white"
+            bg-color="white"
             :no-data-text="__('Charges not found')"
             hide-details
-            :filter="deliveryChargesFilter"
+            :customFilter="deliveryChargesFilter"
             :disabled="readonly"
-            @change="update_delivery_charges()"
+            @update:model-value="update_delivery_charges()"
           >
-            <template v-slot:item="data">
-              <template>
-                <v-list-item-content>
-                  <v-list-item-title
-                    class="primary--text subtitle-1"
-                    v-html="data.item.name"
-                  ></v-list-item-title>
-                  <v-list-item-subtitle
-                    v-html="`Rate: ${data.item.rate}`"
-                  ></v-list-item-subtitle>
-                </v-list-item-content>
-              </template>
+            <template v-slot:item="{ props, item }">
+              <v-list-item v-bind="props">
+                <v-list-item-title class="text-primary text-subtitle-1" v-html="item.raw.name"></v-list-item-title>
+                <v-list-item-subtitle v-html="`Rate: ${item.raw.rate}`"></v-list-item-subtitle>
+              </v-list-item>
             </template>
           </v-autocomplete>
         </v-col>
+        <!-- Delivery Charges Rate Display -->
         <v-col cols="4" class="pb-0 mb-0 pt-0">
           <v-text-field
-            dense
-            outlined
+            density="compact"
+            variant="outlined"
             color="primary"
             :label="frappe._('Delivery Charges Rate')"
-            background-color="white"
+            bg-color="white"
             hide-details
-            :value="formtCurrency(delivery_charges_rate)"
+            :model-value="formatCurrency(delivery_charges_rate)"
             :prefix="currencySymbol(pos_profile.currency)"
             disabled
           ></v-text-field>
         </v-col>
       </v-row>
+
+      <!-- Posting Date and Customer Balance Section -->
       <v-row
         align="center"
         class="items px-2 py-1 mt-0 pt-0"
         v-if="pos_profile.posa_allow_change_posting_date"
       >
-        <v-col
-          v-if="pos_profile.posa_allow_change_posting_date"
-          cols="4"
-          class="pb-2"
-        >
+        <!-- Posting Date Selection with Date Picker -->
+        <v-col cols="6" class="pb-2">
           <v-menu
-            ref="invoice_posting_date"
-            v-model="invoice_posting_date"
+            v-model="posting_date_menu"
             :close-on-content-click="false"
             transition="scale-transition"
-            dense
+            density="default"
           >
-            <template v-slot:activator="{ on, attrs }">
+            <template v-slot:activator="{ props }">
               <v-text-field
-                v-model="posting_date"
+                v-model="formatted_posting_date"
                 :label="frappe._('Posting Date')"
                 readonly
-                outlined
-                dense
-                background-color="white"
+                variant="solo"
+                density="compact"
                 clearable
                 color="primary"
                 hide-details
-                v-bind="attrs"
-                v-on="on"
+                prepend-inner-icon="mdi-calendar"
+                v-bind="props"
               ></v-text-field>
             </template>
             <v-date-picker
@@ -142,14 +136,34 @@
               no-title
               scrollable
               color="primary"
-              :min="
-                frappe.datetime.add_days(frappe.datetime.now_date(true), -7)
-              "
-              :max="frappe.datetime.add_days(frappe.datetime.now_date(true), 7)"
-              @input="invoice_posting_date = false"
+              :min="frappe.datetime.add_days(frappe.datetime.nowdate(true), -7)"
+              :max="frappe.datetime.add_days(frappe.datetime.nowdate(true), 7)"
             >
+              <template #actions>
+                <v-spacer></v-spacer>
+                <v-btn
+                  text
+                  color="primary"
+                  @click="posting_date = null; posting_date_menu = false"
+                >
+                  {{ __('Clear')}}
+                </v-btn>
+                <v-btn
+                  text color="primary"
+                  @click="posting_date_menu = false"
+                >
+                  {{ __('OK') }}
+                </v-btn>
+              </template>
             </v-date-picker>
           </v-menu>
+        </v-col>
+        <!-- Customer Balance Display (Only if enabled in POS profile) -->
+        <v-col v-if="pos_profile.posa_show_customer_balance" cols="6" class="pb-2 d-flex align-center">
+          <div class="balance-field">
+            <strong>Balance:</strong>
+            <span class="balance-value">{{ formatCurrency(customer_balance) }}</span>
+          </div>
         </v-col>
       </v-row>
       <div class="my-0 py-0 overflow-y-auto" style="max-height: 60vh">
@@ -648,15 +662,15 @@
         </template>
       </div>
     </v-card>
-    <v-card class="cards mb-0 mt-3 py-0 grey lighten-5">
+    <v-card class="cards mb-0 mt-3 py-2 px-3 rounded-lg bg-grey-lighten-4">
       <v-row no-gutters v-if="pos_profile.posa_display_additional_notes && invoiceType==='Order'" class="mb-0">
         <v-col cols="12">
           <v-textarea
             v-model="invoice_doc.posa_notes"
             class="p-2"
-            outlined
-            dense
-            background-color="white"
+            variant="outlined"
+            density="compact"
+            bg-color="white"
             clearable
             color="primary"
             auto-grow
@@ -665,24 +679,26 @@
           ></v-textarea>
         </v-col>
       </v-row>
-      <v-row no-gutters>
-        <v-col cols="7">
-          <v-row no-gutters class="pa-1 pr-1" :class="invoiceType==='Invoice' ? 'pt-9' : ''">
-            <v-col cols="6" class="pa-1">
+      <v-row dense>
+        <!-- Summary Info -->
+        <v-col cols="12" md="7">
+          <v-row dense class="pr-1" :class="invoiceType==='Invoice' ? 'pt-9' : ''">
+            <!-- Total Qty -->
+            <v-col cols="6">
               <v-text-field
-                :value="formtFloat(total_qty)"
+                :model-value="formatFloat(total_qty)"
                 :label="frappe._('Total Qty')"
-                outlined
-                dense
+                prepend-inner-icon="mdi-format-list-numbered"
+                variant="solo"
+                density="compact"
                 readonly
-                hide-details
                 color="accent"
-              ></v-text-field>
+              />
             </v-col>
+            <!-- Additional Discount (Amount or Percentage) -->
             <v-col
               v-if="!pos_profile.posa_use_percentage_discount"
               cols="6"
-              class="pa-1"
             >
               <v-text-field
                 :value="formtCurrency(discount_amount)"
@@ -872,7 +888,7 @@
 </template>
 
 <script>
-import { evntBus } from "../../bus";
+
 import format from "../../format";
 import Customer from "./Customer.vue";
 
@@ -880,6 +896,7 @@ export default {
   mixins: [format],
   data() {
     return {
+      // POS profile settings
       pos_profile: "",
       pos_opening_shift: "",
       stock_settings: "",
@@ -887,44 +904,52 @@ export default {
       return_doc: "",
       customer: "",
       customer_info: "",
+      customer_balance: 0,
       discount_amount: 0,
+      additional_discount: 0,
       additional_discount_percentage: 0,
       total_tax: 0,
-      items: [],
-      posOffers: [],
-      posa_offers: [],
-      posa_coupons: [],
-      allItems: [],
-      discount_percentage_offer_name: null,
-      invoiceTypes: ["Invoice", "Order"],
-      invoiceType: "Invoice",
-      itemsPerPage: 1000,
-      expanded: [],
-      singleExpand: true,
-      cancel_dialog: false,
-      float_precision: 2,
-      currency_precision: 2,
-      new_line: false,
-      delivery_charges: [],
-      delivery_charges_rate: 0,
-      selcted_delivery_charges: {},
-      invoice_posting_date: false,
-      posting_date: frappe.datetime.nowdate(),
+      items: [], // List of invoice items
+      posOffers: [], // All available offers
+      posa_offers: [], // Offers applied to this invoice
+      posa_coupons: [], // Coupons applied
+      allItems: [], // All items for offer logic
+      discount_percentage_offer_name: null, // Track which offer is applied
+      invoiceTypes: ["Invoice", "Order"], // Types of invoices
+      invoiceType: "Invoice", // Current invoice type
+      itemsPerPage: 1000, // Items per page in table
+      expanded: [], // Array of expanded row IDs
+      singleExpand: true, // Only one row expanded at a time
+      cancel_dialog: false, // Cancel dialog visibility
+      float_precision: 6, // Float precision for calculations
+      currency_precision: 6, // Currency precision for display
+      new_line: false, // Add new line for item
+      delivery_charges: [], // List of delivery charges
+      delivery_charges_rate: 0, // Selected delivery charge rate
+      selected_delivery_charge: "", // Selected delivery charge object
+      invoice_posting_date: false, // Posting date dialog
+      posting_date: frappe.datetime.nowdate(), // Invoice posting date
       posa_last_active_item_row_id: null,
       posa_last_active_item_warehouse_row_id: null,
+      posting_date_menu: false, // Posting date menu visibility
       items_headers: [
+        // Table headers for items
         {
-          text: __("Name"),
+          title: __("Name"),
           align: "start",
           sortable: true,
-          value: "item_name",
+          key: "item_name",
           width: "40%",
         },
-        { text: __("QTY"), value: "qty", align: "center" },
-        { text: __("Rate"), value: "rate", align: "center" },
-        { text: __("Amount"), value: "amount", align: "center" },
-        { text: __("Warehouse"), value: "warehouse", align: "center" },
+        { title: __("QTY"), key: "qty", align: "center" },
+        { title: __("UOM"), key: "uom", align: "center" },
+        { title: __("Rate"), key: "rate", align: "center" },
+        { title: __("Amount"), key: "amount", align: "center" },
+        { title: __("Warehouse"), key: "warehouse", align: "center" },
       ],
+      selected_currency: "", // Currently selected currency
+      exchange_rate: 1, // Current exchange rate
+      available_currencies: [], // List of available currencies
     };
   },
 
@@ -933,6 +958,7 @@ export default {
   },
 
   computed: {
+    // Calculate total quantity of all items
     total_qty() {
       this.close_payments();
       let qty = 0;
@@ -941,29 +967,76 @@ export default {
       });
       return this.flt(qty, this.float_precision);
     },
+    // Calculate total amount for all items (handles returns)
     Total() {
       let sum = 0;
       this.items.forEach((item) => {
-        sum += flt(item.qty) * flt(item.rate);
+        // For returns, use absolute value for correct calculation
+        const qty = this.invoiceType === "Return" ? Math.abs(flt(item.qty)) : flt(item.qty);
+        const rate = flt(item.rate);
+        sum += qty * rate;
       });
       return this.flt(sum, this.currency_precision);
     },
+    // Calculate subtotal after discounts and delivery charges
     subtotal() {
       this.close_payments();
       let sum = 0;
       this.items.forEach((item) => {
-        sum += flt(item.qty) * flt(item.rate);
+        // For returns, use absolute value for correct calculation
+        const qty = this.invoiceType === "Return" ? Math.abs(flt(item.qty)) : flt(item.qty);
+        const rate = flt(item.rate);
+        sum += qty * rate;
       });
-      sum -= this.flt(this.discount_amount);
-      sum += this.flt(this.delivery_charges_rate);
+      // Subtract additional discount
+      const additional_discount = this.flt(this.additional_discount);
+      sum -= additional_discount;
+      // Add delivery charges
+      const delivery_charges = this.flt(this.delivery_charges_rate);
+      sum += delivery_charges;
       return this.flt(sum, this.currency_precision);
     },
+    // Calculate total discount amount for all items
     total_items_discount_amount() {
       let sum = 0;
       this.items.forEach((item) => {
-        sum += flt(item.qty) * flt(item.discount_amount);
+        // For returns, use absolute value for correct calculation
+        if (this.invoiceType === "Return") {
+          sum += Math.abs(flt(item.qty)) * flt(item.discount_amount);
+        } else {
+          sum += flt(item.qty) * flt(item.discount_amount);
+        }
       });
       return this.flt(sum, this.float_precision);
+    },
+    // Format posting_date for display as DD-MM-YYYY
+    formatted_posting_date: {
+      get() {
+        if (!this.posting_date) return '';
+        const parts = this.posting_date.split('-');
+        if (parts.length === 3) {
+          return `${parts[2]}-${parts[1]}-${parts[0]}`;
+        }
+        return this.posting_date;
+      },
+      set(val) {
+        const parts = val.split('-');
+        if (parts.length === 3) {
+          this.posting_date = `${parts[2]}-${parts[1]}-${parts[0]}`;
+        } else {
+          this.posting_date = val;
+        }
+      }
+    },
+    // Get currency symbol for display
+    currencySymbol() {
+      return (currency) => {
+        return get_currency_symbol(currency || this.selected_currency || this.pos_profile.currency);
+      };
+    },
+    // Get display currency
+    displayCurrency() {
+      return this.selected_currency || this.pos_profile.currency;
     },
   },
 
@@ -978,6 +1051,23 @@ export default {
         return "";
       }
     },
+
+    handleExpandedUpdate(newExpanded) {
+      console.log('Expanded state updated:', newExpanded);
+      this.expanded = newExpanded;
+      
+      // Update item details for newly expanded items
+      if (newExpanded && newExpanded.length > 0) {
+        const expandedItemId = newExpanded[0];
+        const expandedItem = this.items.find(item => item.posa_row_id === expandedItemId);
+        if (expandedItem) {
+          this.$nextTick(() => {
+            this.update_item_detail(expandedItem);
+          });
+        }
+      }
+    },
+
     remove_item(item) {
       const index = this.items.findIndex(
         (el) => el.posa_row_id == item.posa_row_id
@@ -985,24 +1075,40 @@ export default {
       if (index >= 0) {
         this.items.splice(index, 1);
       }
-      const idx = this.expanded.findIndex(
-        (el) => el.posa_row_id == item.posa_row_id
-      );
-      if (idx >= 0) {
-        this.expanded.splice(idx, 1);
-      }
+      // const idx = this.expanded.findIndex(
+      //   (el) => el.posa_row_id == item.posa_row_id
+      // );
+      // if (idx >= 0) {
+      //   this.expanded.splice(idx, 1);
+      // }
+
+      // Remove from expanded if present
+      this.expanded = this.expanded.filter(id => id !== item.posa_row_id);
     },
 
+    // Increase quantity of an item (handles return logic)
     add_one(item) {
-      item.qty++;
+      // For returns, we need to add (make more negative)
+      if (this.invoiceType === "Return") {
+        item.qty++;
+      } else {
+        item.qty++;
+      }
       if (item.qty == 0) {
         this.remove_item(item);
       }
       this.calc_stock_qty(item, item.qty);
       this.$forceUpdate();
     },
+
+    // Decrease quantity of an item (handles return logic)
     subtract_one(item) {
-      item.qty--;
+      // For returns, we need to subtract (make less negative)
+      if (this.invoiceType === "Return") {
+        item.qty--;
+      } else {
+        item.qty--;
+      }
       if (item.qty == 0) {
         this.remove_item(item);
       }
@@ -1026,30 +1132,46 @@ export default {
             el.uom === item.uom &&
             !el.posa_is_offer &&
             !el.posa_is_replace &&
-            el.batch_no === item.batch_no
+            ((el.batch_no && item.batch_no && el.batch_no === item.batch_no) || (!el.batch_no && !item.batch_no))
         );
       }
+
+      let new_item;
       if (index === -1 || this.new_line) {
-        const new_item = this.get_new_item(item);
+        new_item = this.get_new_item(item);
+        // Handle serial number logic
         if (item.has_serial_no && item.to_set_serial_no) {
           new_item.serial_no_selected = [];
           new_item.serial_no_selected.push(item.to_set_serial_no);
           item.to_set_serial_no = null;
         }
+        // Handle batch number logic
         if (item.has_batch_no && item.to_set_batch_no) {
           new_item.batch_no = item.to_set_batch_no;
           item.to_set_batch_no = null;
           item.batch_no = null;
           this.set_batch_qty(new_item, new_item.batch_no, false);
         }
+        // Make quantity negative for returns
+        if (this.invoiceType === "Return") {
+          new_item.qty = -Math.abs(new_item.qty || 1);
+        }
         this.items.unshift(new_item);
         this.update_item_detail(new_item);
+
+        // Expand new item if it has batch or serial number
+        if ((!this.pos_profile.posa_auto_set_batch && new_item.has_batch_no) || new_item.has_serial_no) {
+          this.$nextTick(() => {
+            this.expanded = [new_item.posa_row_id];
+          });
+        }
       } else {
         const cur_item = this.items[index];
         this.update_items_details([cur_item]);
+        // Serial number logic for existing item
         if (item.has_serial_no && item.to_set_serial_no) {
           if (cur_item.serial_no_selected.includes(item.to_set_serial_no)) {
-            evntBus.$emit("show_message", {
+            this.eventBus.emit("show_message", {
               title: __(`This Serial Number {0} has already been added!`, [
                 item.to_set_serial_no,
               ]),
@@ -1089,8 +1211,14 @@ export default {
         this.set_serial_no(cur_item);
       }
       this.$forceUpdate();
+      
+      // Only try to expand if new_item exists and should be expanded
+      if (new_item && ((!this.pos_profile.posa_auto_set_batch && new_item.has_batch_no) || new_item.has_serial_no)) {
+        this.expanded = [new_item.posa_row_id];
+      }
     },
 
+    // Create a new item object with default and calculated fields
     get_new_item(item) {
       const new_item = { ...item };
       if (!item.qty) {
@@ -1102,13 +1230,41 @@ export default {
       if (!item.posa_is_replace) {
         item.posa_is_replace = "";
       }
+      
+      // Initialize flag for tracking manual rate changes
+      new_item._manual_rate_set = false;
+
+      // Set negative quantity for return invoices
+      if (this.invoiceType === "Return" && item.qty > 0) {
+        item.qty = -Math.abs(item.qty);
+      }
+
       new_item.stock_qty = item.qty;
       new_item.discount_amount = 0;
       new_item.discount_percentage = 0;
       new_item.discount_amount_per_item = 0;
       new_item.price_list_rate = item.rate;
+      
+      // Setup base rates properly for multi-currency
+      if (this.selected_currency !== this.pos_profile.currency) {
+        // Store original base currency values
+        new_item.base_price_list_rate = item.rate * this.exchange_rate;
+        new_item.base_rate = item.rate * this.exchange_rate;
+        new_item.base_discount_amount = 0;
+      } else {
+        // In base currency, base rates = displayed rates
+        new_item.base_price_list_rate = item.rate;
+        new_item.base_rate = item.rate;
+        new_item.base_discount_amount = 0;
+      }
+      
       new_item.qty = item.qty;
       new_item.uom = item.uom ? item.uom : item.stock_uom;
+      // Ensure item_uoms is initialized
+      new_item.item_uoms = item.item_uoms || [];
+      if (new_item.item_uoms.length === 0 && new_item.stock_uom) {
+        new_item.item_uoms.push({ uom: new_item.stock_uom, conversion_factor: 1 });
+      }
       new_item.actual_batch_qty = "";
       new_item.conversion_factor = 1;
       new_item.posa_offers = JSON.stringify([]);
@@ -1121,6 +1277,7 @@ export default {
       new_item.posa_row_id = this.makeid(20);
       new_item.warehouse = item.item_selected_warehouse;
       new_item.actual_qty = item.item_selected_warehouse_actual_qty;
+      // Expand row if batch/serial required
       if (
         (!this.pos_profile.posa_auto_set_batch && new_item.has_batch_no) ||
         new_item.has_serial_no
@@ -1130,19 +1287,21 @@ export default {
       return new_item;
     },
 
-    cancel_invoice() {
+    // Cancel the current invoice, optionally delete from backend
+    async cancel_invoice() {
       const doc = this.get_invoice_doc();
       this.invoiceType = this.invoiceType === 'Order' ? "Order" : "Invoice";
       this.invoiceTypes = ["Invoice", "Order"];
       this.posting_date = frappe.datetime.nowdate();
+      var vm = this;
       if (doc.name && this.pos_profile.posa_allow_delete) {
-        frappe.call({
+        await frappe.call({
           method: "posawesome.posawesome.api.posapp.delete_invoice",
           args: { invoice: doc.name },
           async: true,
           callback: function (r) {
             if (r.message) {
-              evntBus.$emit("show_message", {
+              vm.eventBus.emit("show_message", {
                 title: r.message,
                 color: "warning",
               });
@@ -1150,19 +1309,56 @@ export default {
           },
         });
       }
+      this.clear_invoice()
+      this.cancel_dialog = false;
+    },
+
+    // Reset all invoice fields to default/empty values
+    clear_invoice() {
       this.items = [];
       this.posa_offers = [];
-      evntBus.$emit("set_pos_coupons", []);
+      this.expanded = [];
+      this.eventBus.emit("set_pos_coupons", []);
       this.posa_coupons = [];
-      this.customer = this.pos_profile.customer;
       this.invoice_doc = { posa_notes: ""};
       this.return_doc = "";
       this.discount_amount = 0;
+      this.additional_discount = 0;  // Added for additional discount
       this.additional_discount_percentage = 0;
       this.delivery_charges_rate = 0;
-      this.selcted_delivery_charges = {};
-      evntBus.$emit("set_customer_readonly", false);
-      this.cancel_dialog = false;
+      this.selected_delivery_charge = "";
+      // Reset posting date to today
+      this.posting_date = frappe.datetime.nowdate();
+
+      // Always reset to default customer after invoice
+      this.customer = this.pos_profile.customer;
+
+      this.eventBus.emit("set_customer_readonly", false);
+      this.invoiceType = this.pos_profile.posa_default_sales_order ? "Order" : "Invoice";
+      this.invoiceTypes = ["Invoice", "Order"];
+    },
+
+    // Fetch customer balance from backend
+    async fetch_customer_balance() {
+      try {
+        if (!this.customer) {
+          this.customer_balance = 0;
+          return;
+        }
+        const r = await frappe.call({
+          method: "posawesome.posawesome.api.customer.get_customer_balance",
+          args: { customer: this.customer }
+        });
+        this.customer_balance = r?.message?.balance || 0;
+
+      } catch (error) {
+        console.error("Error fetching balance:", error);
+        this.eventBus.emit("show_message", {
+          title: __("Error fetching customer balance"),
+          color: "error"
+        });
+        this.customer_balance = 0;
+      }
     },
 
     new_invoice(data = {}) {
@@ -2891,11 +3087,14 @@ export default {
     document.removeEventListener("keydown", this.shortOpenFirstItem);
     document.removeEventListener("keydown", this.shortSelectDiscount);
   },
+  // Vue watchers for reactive data changes
   watch: {
+    // Watch for customer change and update related data
     customer() {
       this.close_payments();
-      evntBus.$emit("set_customer", this.customer);
+      this.eventBus.emit("set_customer", this.customer);
       this.fetch_customer_details();
+      this.fetch_customer_balance();
       this.set_delivery_charges();
     },
     customer_info() {
