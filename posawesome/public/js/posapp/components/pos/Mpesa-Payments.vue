@@ -55,19 +55,19 @@ export default {
     headers: [
       {
         title: __('Full Name'),
-        value: 'full_name',
+        key: 'full_name',
         align: 'start',
         sortable: true,
       },
       {
         title: __('Mobile No'),
-        value: 'mobile_no',
+        key: 'mobile_no',
         align: 'start',
         sortable: true,
       },
       {
         title: __('Amount'),
-        value: 'amount',
+        key: 'amount',
         align: 'start',
         sortable: true,
       },
@@ -75,7 +75,7 @@ export default {
         title: __('Date'),
         align: 'start',
         sortable: true,
-        value: 'posting_date',
+        key: 'posting_date',
       },
     ],
   }),

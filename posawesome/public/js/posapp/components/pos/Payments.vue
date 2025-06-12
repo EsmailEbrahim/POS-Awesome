@@ -1188,7 +1188,7 @@ export default {
               vm.load_print_page();
             }
           }, 1000);
-          evntBus.$emit("etms_pos__submitted_invoice", r.message);
+          this.eventBus.emit("etms_pos__submitted_invoice", r.message);
           vm.customer_credit_dict = [];
           vm.redeem_customer_credit = false;
           vm.is_cashback = true;
@@ -1222,7 +1222,7 @@ export default {
         args,
         callback: (r) => {
           if (r.message) {
-            evntBus.$emit("show_message", {
+            this.eventBus.emit("show_message", {
               title: `Sales Order ${r.message.name} Created`,
               color: "success",
             });

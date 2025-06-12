@@ -100,7 +100,7 @@ export default {
           if (r.message) {
             const res = r.message;
             if (res.msg != 'Apply' || !res.coupon) {
-              evntBus.$emit('show_message', {
+              this.eventBus.emit('show_message', {
                 title: res.msg,
                 color: 'error',
               });

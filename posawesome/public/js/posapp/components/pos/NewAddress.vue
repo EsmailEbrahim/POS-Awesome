@@ -74,7 +74,7 @@ export default {
           if (!r.exc) {
             vm.eventBus.emit('add_the_new_address', r.message);
             vm.eventBus.emit('show_message', {
-              text: 'Customer Address created successfully.',
+              title: 'Customer Address created successfully.',
               color: 'success',
             });
             vm.addressDialog = false;

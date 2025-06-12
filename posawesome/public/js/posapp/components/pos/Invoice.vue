@@ -4691,7 +4691,7 @@ export default {
         } catch (error) {
           console.error("Error updating currency:", error);
           this.eventBus.emit("show_message", {
-            text: "Error updating currency",
+            title: "Error updating currency",
             color: "error",
           });
         }

@@ -196,7 +196,7 @@ export default {
       drawer: false,
       mini: true,
       item: 0,
-      items: [{ text: "POS", icon: "mdi-network-pos" }],
+      items: [{ title: "POS", icon: "mdi-network-pos" }],
       company: '',
       companyImg: '/assets/erpnext/images/erpnext-logo.svg',
       posProfile: {},
@@ -308,16 +308,16 @@ export default {
 
         this.posProfile = data.pos_profile;
         this.pos_settings_panel = data.pos_settings_panel
-        const payments = { text: "Payments", icon: "mdi-cash-register" };
+        const payments = { title: "Payments", icon: "mdi-cash-register" };
         if (
           this.posProfile.posa_use_pos_awesome_payments &&
           this.items.length !== 2
         ) {
           this.items.push(payments);
         }
-        this.items.push({ text: "Orders", icon: "mdi-salesforce" });
+        this.items.push({ title: "Orders", icon: "mdi-salesforce" });
         this.items.push({
-          text: "Invoices",
+          title: "Invoices",
           icon: "mdi-cash",
         });
       });

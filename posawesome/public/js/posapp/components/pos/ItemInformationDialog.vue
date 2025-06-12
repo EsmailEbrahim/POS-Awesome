@@ -75,7 +75,7 @@
 
 <script>
 import format from "../../format";
-import { evntBus } from "../../bus";
+// import { evntBus } from "../../bus";
 
 export default {
     mixins: [format],
@@ -93,9 +93,9 @@ export default {
     computed: {
         computedHeaders() {
             return [
-                { text: this.__("Warehouse"), value: "warehouse" },
-                { text: this.__("Available Qty"), value: "actual_qty", align: 'center' },
-                { text: this.__("Actions"), value: "actions", sortable: false, align: 'center' },
+                { title: this.__("Warehouse"), key: "warehouse" },
+                { title: this.__("Available Qty"), key: "actual_qty", align: 'center' },
+                { title: this.__("Actions"), key: "actions", sortable: false, align: 'center' },
             ];
         },
     },
@@ -134,7 +134,7 @@ export default {
             this.closeDialog();
         },
         openOffers(chosen) {
-            evntBus.$emit("show_offers_dialog", {
+            this.eventBus.emit("show_offers_dialog", {
                 item_code: this.item.item_code,
                 warehouse: chosen.warehouse,
             });
