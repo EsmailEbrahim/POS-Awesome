@@ -59,7 +59,7 @@
               <!-- @item-selected="onOrderSelected" -->
               <template v-slot:item.grand_total="{ item }">
                 {{ currencySymbol(item.currency) }}
-                {{ formtCurrency(item.grand_total) }}
+                {{ formatCurrency(item.grand_total) }}
               </template>
               <template v-slot:item.status="{ item }">
                 <v-chip variant="elevated" :color="item.color">

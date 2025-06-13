@@ -1571,6 +1571,16 @@ export default {
       const items = this.get_invoice_items();
       doc.items = items;
       
+      doc.items.forEach(item => {
+        if (item.posa_delivery_date) {
+          const d = new Date(item.posa_delivery_date);
+          const yyyy = d.getFullYear();
+          const mm = String(d.getMonth() + 1).padStart(2, '0');
+          const dd = String(d.getDate()).padStart(2, '0');
+          item.posa_delivery_date = `${yyyy}-${mm}-${dd}`;
+        }
+      });
+      
       // Calculate totals in selected currency ensuring negative values for returns
       let total = this.Total;
       if (isReturn && total > 0) total = -Math.abs(total);

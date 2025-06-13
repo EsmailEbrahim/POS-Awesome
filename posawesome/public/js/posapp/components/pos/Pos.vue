@@ -8,16 +8,16 @@
     <Variants></Variants>
     <OpeningDialog v-if="dialog" :dialog="dialog"></OpeningDialog>
     <v-row v-show="!dialog">
-      <v-col v-show="!payment && !offers && !coupons" xl="5" lg="5" md="5" sm="5" cols="12" class="pos pr-0">
+      <v-col v-show="!payment && !offers && !coupons" xl="6" lg="6" md="6" sm="6" cols="12" class="pos pr-0">
         <ItemsSelector></ItemsSelector>
       </v-col>
-      <v-col v-show="offers" xl="5" lg="5" md="5" sm="5" cols="12" class="pos pr-0">
+      <v-col v-show="offers" xl="6" lg="6" md="6" sm="6" cols="12" class="pos pr-0">
         <PosOffers></PosOffers>
       </v-col>
-      <v-col v-show="coupons" xl="5" lg="5" md="5" sm="5" cols="12" class="pos pr-0">
+      <v-col v-show="coupons" xl="6" lg="6" md="6" sm="6" cols="12" class="pos pr-0">
         <PosCoupons></PosCoupons>
       </v-col>
-      <v-col v-show="payment" xl="5" lg="5" md="5" sm="5" cols="12" class="pos pr-0">
+      <v-col v-show="payment" xl="6" lg="6" md="6" sm="6" cols="12" class="pos pr-0">
         <Payments></Payments>
       </v-col>
 

@@ -13,14 +13,14 @@
         :src="companyImg"
         :alt="company"
         max-width="32"
-        class="mx-3"
+        class="mx-2"
       />
       <v-toolbar-title
         @click="goDesk"
         class="text-h6 font-weight-bold text-primary"
         style="cursor: pointer;"
       >
-        <span class="font-weight-light">{{ company }}</span>
+        <span class="font-weight-light me-1">{{ company }}</span>
         <span>POS</span>
       </v-toolbar-title>
 
@@ -196,7 +196,7 @@ export default {
       drawer: false,
       mini: true,
       item: 0,
-      items: [{ title: "POS", icon: "mdi-network-pos" }],
+      items: [{ text: "POS", icon: "mdi-network-pos" }],
       company: '',
       companyImg: '/assets/erpnext/images/erpnext-logo.svg',
       posProfile: {},
@@ -308,16 +308,16 @@ export default {
 
         this.posProfile = data.pos_profile;
         this.pos_settings_panel = data.pos_settings_panel
-        const payments = { title: "Payments", icon: "mdi-cash-register" };
+        const payments = { text: "Payments", icon: "mdi-cash-register" };
         if (
           this.posProfile.posa_use_pos_awesome_payments &&
           this.items.length !== 2
         ) {
           this.items.push(payments);
         }
-        this.items.push({ title: "Orders", icon: "mdi-salesforce" });
+        this.items.push({ text: "Orders", icon: "mdi-salesforce" });
         this.items.push({
-          title: "Invoices",
+          text: "Invoices",
           icon: "mdi-cash",
         });
       });

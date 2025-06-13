@@ -68,12 +68,12 @@
               <!-- @item-selected="onOrderSelected" -->
               <template v-slot:item.grand_total="{ item }">
                 {{ currencySymbol(item.currency) }}
-                {{ formtCurrency(item.grand_total) }}
+                {{ formatCurrency(item.grand_total) }}
               </template>
               <template v-slot:item.outstanding_amount="{ item }">
                 <span class="primary--text"
                   >{{ currencySymbol(item.currency) }}
-                  {{ formtCurrency(item.outstanding_amount) }}</span
+                  {{ formatCurrency(item.outstanding_amount) }}</span
                 >
               </template>
             </v-data-table>

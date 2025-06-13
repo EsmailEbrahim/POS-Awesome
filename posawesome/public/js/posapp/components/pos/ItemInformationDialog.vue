@@ -25,7 +25,7 @@
                             <v-col cols="6">
                                 <div class="text-caption grey--text">{{ __("Price") }}</div>
                                 <div class="text-h5 primary--text">
-                                    {{ currencySymbol(item.currency) }}{{ formtCurrency(item.rate) }}
+                                    {{ currencySymbol(item.currency) }}{{ formatCurrency(item.rate) }}
                                 </div>
                             </v-col>
                             <v-col cols="6">

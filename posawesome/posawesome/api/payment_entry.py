@@ -96,7 +96,7 @@ def create_payment_entry(
 
     if party_account and bank:
         pe.set_amounts()
-4
+
     # Insert and submit in one go if needed
     pe.insert(ignore_permissions=True)
     if submit:

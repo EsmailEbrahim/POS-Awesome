@@ -878,7 +878,7 @@ export default {
           const textField =
             this.$refs[this.invoice_doc.payments[i].mode_of_payment];
           if (textField) {
-            textField.value = this.formtCurrency(
+            textField.value = this.formatCurrency(
               this.invoice_doc.payments[i].amount
             );
           }
@@ -1188,7 +1188,7 @@ export default {
               vm.load_print_page();
             }
           }, 1000);
-          this.eventBus.emit("etms_pos__submitted_invoice", r.message);
+          vm.eventBus.emit("etms_pos__submitted_invoice", r.message);
           vm.customer_credit_dict = [];
           vm.redeem_customer_credit = false;
           vm.is_cashback = true;
