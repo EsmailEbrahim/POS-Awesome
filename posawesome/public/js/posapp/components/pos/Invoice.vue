@@ -1117,7 +1117,8 @@ export default {
       new_item.posa_is_replace = item.posa_is_replace || null;
       new_item.is_free_item = 0;
       new_item.posa_notes = "";
-      new_item.posa_delivery_date = "";
+      // new_item.posa_delivery_date = "";
+      new_item.posa_delivery_date = frappe.datetime.now_date();
       new_item.posa_row_id = this.makeid(20);
       new_item.warehouse = item.item_selected_warehouse;
       new_item.actual_qty = item.item_selected_warehouse_actual_qty;
