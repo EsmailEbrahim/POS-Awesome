@@ -1268,6 +1268,15 @@ export default {
       
       if (this.invoiceType === "Order") {
         const doc = this.get_invoice_doc();
+
+        if (!doc.items.length) {
+          this.eventBus.emit("show_message", {
+            title: __(`Nothing to save`),
+            color: "error",
+          });
+          return;
+        }
+
         frappe.call({
             method: "posawesome.posawesome.api.posapp.submit_order",
             args: {
