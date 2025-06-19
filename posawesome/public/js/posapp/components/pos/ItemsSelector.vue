@@ -131,6 +131,7 @@
                 :items-per-page="itemsPerPage"
                 hide-default-footer
                 @click:row="click_item_row"
+                dense
               >
                 <template v-slot:item.rate="{ item }">
                   <div>
@@ -152,18 +153,24 @@
                 <template v-slot:item.actions="{ item }">
                     <v-btn
                       v-if="invoiceType==='Order'"
-                      size="small"
-                      icon="mdi-information"
+                      icon
+                      size="large"
+                      density="compact"
                       @click.stop="showItemDetails(item)"
                       :title="__('Click to show item details')"
-                    ></v-btn>
+                    >
+                      <v-icon size="28">mdi-information</v-icon>
+                    </v-btn>
                     <v-btn
                       v-else
-                      size="small"
-                      icon="mdi-database-eye"
+                      icon
+                      size="large"
+                      density="compact"
                       @click.stop="showWarehousesQuantities(item)"
                       :title="__('Click to show quantity per warehouses')"
-                    ></v-btn>
+                    >
+                      <v-icon size="28">mdi-database-eye</v-icon>
+                    </v-btn>
                   </template>
               </v-data-table>
             </div>
