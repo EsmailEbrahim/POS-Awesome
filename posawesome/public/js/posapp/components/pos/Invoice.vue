@@ -241,29 +241,48 @@
           <template v-slot:expanded-row="{ columns: headers, item }">
             <td :colspan="headers.length" class="ma-0 pa-2">
               <!-- Expanded Item Action Buttons Row -->
-              <v-row class="mb-2" dense>
+              <v-row
+                class="mb-2 d-flex justify-space-between align-center"
+                dense
+              >
                 <v-col cols="auto">
                   <v-btn
                     :disabled="!!item.posa_is_replace"
-                    icon="mdi-delete" size="large"
+                    icon
+                    size="large"
+                    density="compact"
                     color="error"
                     variant="tonal"
-                    class="mr-2"
-                    width="52"
-                    height="52"
                     @click.stop="remove_item(item)"
                   >
-                    <v-icon size="large">mdi-delete</v-icon>
+                    <v-icon size="28">mdi-delete</v-icon>
                   </v-btn>
                 </v-col>
-                <v-spacer></v-spacer>
+              
                 <v-col cols="auto">
-                  <v-btn-group density="default" class="mx-2">
-                    <v-btn :disabled="!!item.posa_is_replace" size="large" color="error" variant="tonal" width="52" height="52" class="mr-1" @click.stop="subtract_one(item)">
-                      <v-icon size="large">mdi-minus</v-icon>
+                  <v-btn-group density="compact" class="mx-2">
+                    <v-btn
+                      :disabled="!!item.posa_is_replace"
+                      icon
+                      size="large"
+                      density="compact"
+                      color="error"
+                      variant="tonal"
+                      @click.stop="subtract_one(item)"
+                      class="me-2"
+                    >
+                      <v-icon size="28">mdi-minus</v-icon>
                     </v-btn>
-                    <v-btn :disabled="!!item.posa_is_replace" size="large" color="success" variant="tonal" width="52" height="52" class="ml-1" @click.stop="add_one(item)">
-                      <v-icon size="large">mdi-plus</v-icon>
+                    <v-btn
+                      :disabled="!!item.posa_is_replace"
+                      icon
+                      size="large"
+                      density="compact"
+                      color="success"
+                      variant="tonal"
+                      @click.stop="add_one(item)"
+                    >
+                      <v-icon size="28">mdi-plus</v-icon>
                     </v-btn>
                   </v-btn-group>
                 </v-col>
@@ -583,7 +602,7 @@
       </v-row>
       <v-row dense>
         <!-- Summary Info -->
-        <v-col cols="12" md="7">
+        <v-col cols="12" :md="invoiceType === 'Order' ? 7 : 6">
           <v-row dense class="pr-1" :class="invoiceType==='Invoice' ? 'pt-9' : ''">
             <!-- Total Qty -->
             <v-col cols="6">
@@ -661,36 +680,38 @@
 
         <!-- Test it in version 15 (ETMS custom) -->
         <!-- Action Buttons -->
-        <v-col cols="5" v-if="invoiceType==='Order'">
-          <v-row dense class="pa-1 pl-0">
+        <v-col cols="5" v-if="invoiceType === 'Order'">
+          <v-row dense class="pa-1">
             <v-col cols="12" class="pa-1">
               <v-btn
                 block
-                class="pa-0"
+                class="py-2"
                 color="accent"
                 theme="dark"
+                size="large"
+                prepend-icon="mdi-content-save"
                 @click="new_invoice"
               >
                 {{ frappe._("Save") }}
-              </v-btn
-              >
+              </v-btn>
             </v-col>
             <v-col cols="12" class="pa-1">
               <v-btn
                 block
-                class="pa-0"
+                class="py-2"
                 color="error"
                 theme="dark"
+                size="large"
+                prepend-icon="mdi-close-circle"
                 @click="cancel_dialog = true"
               >
                 {{ frappe._("Cancel") }}
-              </v-btn
-              >
+              </v-btn>
             </v-col>
           </v-row>
         </v-col>
-        <v-col cols="12" md="5" v-else>
-          <v-row dense>
+        <v-col cols="12" md="6" v-else>
+          <v-row dense class="gap-2">
             <!-- Test it in version 15 (Not ETMS Custom) -->
             <!-- <v-col cols="6" class="pa-1">
               <v-btn
