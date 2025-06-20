@@ -1130,6 +1130,7 @@ export default {
     this.$nextTick(function () { });
     this.eventBus.on("register_pos_profile", (data) => {
       this.pos_profile = data.pos_profile;
+      this.selected_currency = this.pos_profile.currency;
       this.get_items();
       this.get_items_groups();
       this.items_view = this.pos_profile.posa_default_card_view
