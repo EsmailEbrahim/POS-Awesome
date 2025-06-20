@@ -163,6 +163,7 @@
           <div class="balance-field">
             <strong>Balance:</strong>
             <span class="balance-value">{{ formatCurrency(customer_balance) }}</span>
+            <span class="balance-value">{{ currencySymbol(company_currency) }}</span>
           </div>
         </v-col>
       </v-row>
@@ -832,6 +833,7 @@ export default {
       customer: "",
       customer_info: "",
       customer_balance: 0,
+      company_currency: "",
       discount_amount: 0,
       additional_discount: 0,
       additional_discount_percentage: 0,
@@ -1260,13 +1262,18 @@ export default {
       try {
         if (!this.customer) {
           this.customer_balance = 0;
+          this.company_currency = "";
           return;
         }
         const r = await frappe.call({
           method: "posawesome.posawesome.api.customer.get_customer_balance",
-          args: { customer: this.customer }
+          args: {
+            customer: this.customer,
+            company: this.pos_profile.company
+          }
         });
         this.customer_balance = r?.message?.balance || 0;
+        this.company_currency = r?.message?.company_currency || "";
 
       } catch (error) {
         console.error("Error fetching balance:", error);
@@ -1275,6 +1282,7 @@ export default {
           color: "error"
         });
         this.customer_balance = 0;
+        this.company_currency = "";
       }
     },
 
