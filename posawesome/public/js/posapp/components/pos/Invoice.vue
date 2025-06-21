@@ -107,10 +107,10 @@
       <v-row
         align="center"
         class="items px-2 py-1 mt-0 pt-0"
-        v-if="pos_profile.posa_allow_change_posting_date"
+        v-if="pos_profile.posa_allow_change_posting_date || pos_profile.posa_show_customer_balance"
       >
         <!-- Posting Date Selection with Date Picker -->
-        <v-col cols="6" class="pb-2">
+        <v-col cols="6" class="pb-2" v-if="pos_profile.posa_allow_change_posting_date">
           <v-menu
             v-model="posting_date_menu"
             :close-on-content-click="false"
