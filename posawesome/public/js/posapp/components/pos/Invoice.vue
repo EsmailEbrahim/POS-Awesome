@@ -623,7 +623,8 @@
               cols="6"
             >
               <v-text-field
-                v-model="additional_discount"
+                v-model.number="additional_discount"
+                type="number"
                 :label="frappe._('Additional Discount')"
                 prepend-inner-icon="mdi-cash-minus"
                 variant="solo"
@@ -631,14 +632,14 @@
                 color="warning"
                 :prefix="currencySymbol(pos_profile.currency)"
                 :disabled="!pos_profile.posa_allow_user_to_edit_additional_discount"
+                min="0"
               />
             </v-col>
 
             <v-col cols="6" v-else>
               <v-text-field
-                v-model="additional_discount_percentage"
-                @change="update_discount_umount()"
-                :rules="[isNumber]"
+                v-model.number="additional_discount_percentage"
+                type="number"
                 :label="frappe._('Additional Discount %')"
                 suffix="%"
                 prepend-inner-icon="mdi-percent"
@@ -646,6 +647,9 @@
                 density="compact"
                 color="warning"
                 :disabled="!pos_profile.posa_allow_user_to_edit_additional_discount || !!discount_percentage_offer_name"
+                min="0"
+                max="100"
+                @change="update_discount_umount()"
               />
             </v-col>
 
