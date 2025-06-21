@@ -86,12 +86,12 @@
                   </v-img>
                   <v-card-text class="text--primary pa-1">
                     <div class="d-flex align-center justify-space-between">
-                      <div class="d-flex align-center">
-                        <span class="text-caption text-primary">
+                      <div class="d-flex flex-column align-center">
+                        <span class="text-caption text-primary" style="white-space: normal; word-break: break-word;">
                           {{ currencySymbol(pos_profile.currency) || "" }}
                           {{ format_currency(item.rate, pos_profile.currency, 4) }}
                         </span>
-                        <span v-if="pos_profile.posa_allow_multi_currency && selected_currency !== pos_profile.currency" class="text-caption text-success">
+                        <span v-if="pos_profile.posa_allow_multi_currency && selected_currency !== pos_profile.currency" class="text-caption text-success" style="white-space: normal; word-break: break-word;">
                           {{ currencySymbol(selected_currency) || "" }}
                           {{ format_currency(getConvertedRate(item), selected_currency, 4) }}
                         </span>
