@@ -283,6 +283,7 @@ fixtures = [
                     "Sales Invoice Item-posa_warranty_no_of_years",  # int
                     "POS Profile-pos_plus_additional_warehouses_section",
                     "POS Profile-pos_plus_additional_warehouses",
+                    "POS Profile-posa_allow_multi_currency"
                 ),
             ]
         ],
@@ -290,17 +291,5 @@ fixtures = [
     {
         "doctype": "Property Setter",
         "filters": [["name", "in", ("Sales Invoice-posa_pos_opening_shift-no_copy")]],
-    },
-    {
-        "doctype": "Custom Field",
-        "filters": [
-            [
-                "name",
-                "in",
-                [
-                    "POS Profile-posa_allow_multi_currency"
-                ]
-            ]
-        ]
     }
 ]
