@@ -21,6 +21,12 @@ def validate(doc, method):
     auto_set_delivery_charges(doc)
     calc_delivery_charges(doc)
 
+    try:
+        if doc.get('posp_original_posting_date'):
+            doc.posting_date = doc.get('posp_original_posting_date')
+    except Exception as e:
+        print('error in setting posting date in validate: ' + str(e))
+
 
 def before_submit(doc, method):
     add_loyalty_point(doc)

@@ -701,6 +701,7 @@ def update_invoice(data):
 
     invoice_doc.calculate_taxes_and_totals()
     invoice_doc.docstatus = 0
+    invoice_doc.posp_original_posting_date = payload.get("posting_date")
     invoice_doc.save()
 
     # Return both the invoice doc and the updated data

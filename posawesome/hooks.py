@@ -161,6 +161,7 @@ fixtures = [
                 "in",
                 (
                     "Sales Invoice-posa_pos_opening_shift",
+                    "Sales Invoice-posp_original_posting_date",
                     "Item Barcode-posa_uom",
                     "POS Profile-posa_pos_awesome_settings",
                     "POS Profile-posa_allow_delete",
@@ -241,6 +242,7 @@ fixtures = [
                     "POS Profile-posa_use_delivery_charges",
                     "POS Profile-hide_expected_amount",
                     "POS Profile-posa_allow_change_posting_date",
+                    "POS Profile-posp_days_allowed_before_today_date",
                     "POS Profile-posa_default_card_view",
                     "POS Profile-posa_default_sales_order",
                     "POS Profile-column_break_dqsba",

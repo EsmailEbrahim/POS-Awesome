@@ -136,8 +136,8 @@
               no-title
               scrollable
               color="primary"
-              :min="frappe.datetime.add_days(frappe.datetime.nowdate(true), -7)"
-              :max="frappe.datetime.add_days(frappe.datetime.nowdate(true), 7)"
+              :min="frappe.datetime.add_days(frappe.datetime.nowdate(), -Number(pos_profile.posp_days_allowed_before_today_date || 0))"
+              :max="frappe.datetime.nowdate()"
             >
               <template #actions>
                 <v-spacer></v-spacer>
