@@ -633,7 +633,6 @@
                 :prefix="currencySymbol(pos_profile.currency)"
                 :disabled="!pos_profile.posa_allow_user_to_edit_additional_discount"
                 min="0"
-                :max="pos_profile.custom_posa_max_discount_amount_allowed ? pos_profile.custom_posa_max_discount_amount_allowed : null"
                 @change="validateAdditionalDiscount"
               />
             </v-col>
@@ -4800,18 +4799,19 @@ export default {
     },
     validateAdditionalDiscount() {
       if (this.pos_profile.custom_posa_use_amount_discount) {
+        const maxAllowedAmount = (this.Total * this.pos_profile.custom_posa_max_discount_amount_allowed) / 100;
         if (
-          this.additional_discount > this.pos_profile.custom_posa_max_discount_amount_allowed &&
-          this.pos_profile.custom_posa_max_discount_amount_allowed > 0
+          this.additional_discount > maxAllowedAmount
         ) {
           this.eventBus.emit('show_message', {
-            title: __('Additional discount cannot exceed {0} {1}', [
-              this.pos_profile.custom_posa_max_discount_amount_allowed,
-              this.pos_profile.currency
+            title: __('Additional discount cannot exceed {0} {1} ({2}% of total)', [
+              this.formatCurrency(maxAllowedAmount),
+              this.pos_profile.currency,
+              this.pos_profile.custom_posa_max_discount_amount_allowed
             ]),
             color: 'error'
           });
-          this.additional_discount = this.pos_profile.custom_posa_max_discount_amount_allowed;
+          this.additional_discount = maxAllowedAmount;
         }
       }
       else if (this.pos_profile.posa_use_percentage_discount) {
