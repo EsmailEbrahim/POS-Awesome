@@ -54,6 +54,9 @@ export default {
         item: Object,
         warehouses: Array,
         main_warehouse: String,
+        pos_profile: Object,
+        selected_currency: String,
+        exchange_rate: Number,
     },
     data() {
         return {
