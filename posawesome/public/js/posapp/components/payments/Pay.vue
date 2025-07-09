@@ -32,7 +32,7 @@
               </v-col>
             </v-row>
             <v-row align="center" no-gutters class="mb-1">
-              <v-col md="4" cols="12">
+              <v-col md="3" cols="6" class="p-1">
                 <v-select
                   density="compact"
                   variant="outlined"
@@ -45,8 +45,18 @@
                   label="Select POS Profile"
                 ></v-select>
               </v-col>
-              <v-col md="1" cols="0"> </v-col>
-              <v-col md="3" cols="12">
+              <v-col md="3" cols="6" class="p-1">
+                <v-text-field
+                  density="compact"
+                  variant="outlined"
+                  hide-details
+                  bg-color="white"
+                  v-model="invoice_filter"
+                  :label="__('Invoice ID')"
+                  clearable
+                ></v-text-field>
+              </v-col>
+              <v-col md="3" cols="6" class="p-1">
                 <v-btn
                   block
                   color="warning"
@@ -56,8 +66,7 @@
                   {{ __("Search") }}
                 </v-btn>
               </v-col>
-              <v-col md="1" cols="0"> </v-col>
-              <v-col md="3" cols="12">
+              <v-col md="3" cols="6" class="p-1">
                 <v-btn
                   v-if="selected_invoices.length"
                   block
@@ -354,6 +363,7 @@ export default {
       selected_mpesa_payments: [],
       pos_profiles_list: [],
       pos_profile_search: "",
+      invoice_filter: "",
       payment_methods_list: [],
       mpesa_search_name: "",
       mpesa_search_mobile: "",
@@ -505,6 +515,7 @@ export default {
             
             // Initialize pos_profile_search as empty
             this.pos_profile_search = "";
+            this.invoice_filter = "";
             
             // Initialize the dropdown list with profiles but don't select any
             this.pos_profiles_list = [];
@@ -593,6 +604,7 @@ export default {
             company: this.company,
             currency: this.pos_profile.currency,
             pos_profile: this.pos_profile_search || null,
+            invoice_id: this.invoice_filter || null,
           }
         )
         .then((r) => {
