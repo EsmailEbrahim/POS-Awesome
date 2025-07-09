@@ -264,14 +264,33 @@
             <div v-if="pos_profile.posa_allow_make_new_payments">
               <h4 class="text-primary">{{ __('Make New Payment') }}</h4>
               <v-row v-if="payment_methods.length" v-for="method in payment_methods" :key="method.row_id">
-                <v-col md="7"><span class="mt-1">{{ __(method.mode_of_payment) }}:</span>
+                <v-col md="7">
+                  <v-btn
+                    class="mt-1"
+                    block
+                    color="primary"
+                    theme="dark"
+                    @click="set_full_amount(method)"
+                  >
+                    {{ __(method.mode_of_payment) }}
+                  </v-btn>
                 </v-col>
                 <v-col md="5">
                   <div class="d-flex align-center">
-                    <div class="mr-1 text-primary">{{ currencySymbol(pos_profile.currency) }}</div>
-                    <v-text-field class="p-0 m-0" density="compact" color="primary" bg-color="white"
-                      hide-details v-model="method.amount" type="number" flat 
-                      @input="$forceUpdate()"></v-text-field>
+                    <div class="mr-1 text-primary">
+                      {{ currencySymbol(pos_profile.currency) }}
+                    </div>
+                    <v-text-field
+                      class="p-0 m-0"
+                      density="compact"
+                      color="primary"
+                      bg-color="white"
+                      hide-details
+                      v-model="method.amount"
+                      type="number"
+                      flat 
+                      @input="$forceUpdate()"
+                    ></v-text-field>
                   </div>
                 </v-col>
               </v-row>
@@ -896,6 +915,16 @@ export default {
         this.selected_payments.push(item);
       }
       this.$nextTick(() => this.$forceUpdate());
+    },
+    set_full_amount(method) {
+      this.payment_methods.forEach(payment => {
+        payment.amount = 0;
+      });
+
+      method.amount = this.total_selected_invoices;
+
+      // Force Vue to update the view
+      this.$forceUpdate();
     },
   },
 
