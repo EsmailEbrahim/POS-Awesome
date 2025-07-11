@@ -885,6 +885,7 @@ export default {
         
         if (item.customer && !this.customer_name) {
           this.eventBus.emit("set_customer", item.customer);
+          this.customer_name = item.customer; // this for fixing the unset locally customer
         }
       }
       
