@@ -911,6 +911,7 @@ export default {
       return this.flt(qty, this.float_precision);
     },
     // Calculate total amount for all items (handles returns)
+    //////////////// Start old ////////////////
     Total() {
       let sum = 0;
       this.items.forEach((item) => {
@@ -939,6 +940,20 @@ export default {
       sum += delivery_charges;
       return this.flt(sum, this.currency_precision);
     },
+    //////////////// End old ////////////////
+    //////////////// Start new ////////////////
+    // Total() {
+    //   return this.flt(
+    //     this.items.reduce((acc, item) => acc + flt(item.qty) * flt(item.rate), 0),
+    //     this.currency_precision
+    //   );
+    // },
+    // subtotal() {
+    //   this.close_payments();
+    //   const base = this.items.reduce((acc, item) => acc + flt(item.qty) * flt(item.rate), 0);
+    //   return this.flt(base - flt(this.additional_discount) + flt(this.delivery_charges_rate), this.currency_precision);
+    // },
+    //////////////// End new ////////////////
     // Calculate total discount amount for all items
     total_items_discount_amount() {
       let sum = 0;

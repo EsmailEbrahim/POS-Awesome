@@ -604,6 +604,33 @@ export default {
     },
     submit_dialog() {
       if (this.selected.length > 0) {
+        //////////////// Start new ////////////////
+        // const sel = this.selected[0];
+        // frappe.call({
+        //   method: 'frappe.client.get',
+        //   args: { doctype: 'Sales Invoice', name: sel.name },
+        //   callback: (r) => {
+        //     const orig = r.message;
+        //     const items = orig.items.map(i => ({
+        //       ...i,
+        //       // make quantities and amounts negative for the return
+        //       qty: -Math.abs(i.qty),
+        //       stock_qty: -Math.abs(i.stock_qty),
+        //       amount: -Math.abs(i.amount)
+        //     }));
+        //     const invoice_doc = {
+        //       items,
+        //       is_return: 1,
+        //       return_against: orig.name,
+        //       customer: orig.customer,
+        //       grand_total: -Math.abs(orig.grand_total)
+        //     };
+        //     this.eventBus.emit('load_return_invoice', { invoice_doc, return_doc: orig });
+        //     this.invoicesDialog = false;
+        //   }
+        // });
+        //////////////// End new ////////////////
+        //////////////// Start old ////////////////
         console.log('Starting return with invoice flow');
         const return_doc = this.selected[0];
         const invoice_doc = {};
@@ -642,6 +669,7 @@ export default {
         
         this.eventBus.emit('load_return_invoice', data);
         this.invoicesDialog = false;
+        //////////////// End old ////////////////
       }
     },
   },
