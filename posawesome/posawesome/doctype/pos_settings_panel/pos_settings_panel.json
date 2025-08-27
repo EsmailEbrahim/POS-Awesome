@@ -11,6 +11,7 @@
   "country_code",
   "column_break_1mdhc",
   "use_outstanding_amount_in_sales_invoice",
+  "enable_barcode_auto_add",
   "customer_defaults_section",
   "default_customer_group",
   "default_customer_territory",
@@ -68,12 +69,18 @@
    "fieldname": "exact_payment",
    "fieldtype": "Check",
    "label": "Exact Payment"
+  },
+  {
+   "default": "1",
+   "fieldname": "enable_barcode_auto_add",
+   "fieldtype": "Check",
+   "label": "Enable Barcode Auto-Add"
   }
  ],
  "index_web_pages_for_search": 1,
  "issingle": 1,
  "links": [],
- "modified": "2024-07-25 12:38:56.060726",
+ "modified": "2025-08-27 05:14:33.928907",
  "modified_by": "Administrator",
  "module": "POSAwesome",
  "name": "POS Settings Panel",
