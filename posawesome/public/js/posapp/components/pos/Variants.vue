@@ -42,8 +42,8 @@
                 border
                 hover
                 class="h-100"
+                @click="add_item(item)"
               >
-                <!-- @click="add_item(item)" -->
                 <v-img
                   :src="item.image || '/assets/posawesome/js/posapp/components/pos/placeholder-image.png'"
                   cover
@@ -205,6 +205,39 @@ export default {
     },
     
     add_item(item) {
+      // Prepare the item with default warehouse and actual quantity
+      item = {
+        ...item,
+        item_selected_warehouse: this.pos_profile.warehouse,
+        item_selected_warehouse_actual_qty: item.actual_qty
+      };
+      
+      // Ensure UOMs are initialized before adding the item
+      if (!item.item_uoms || item.item_uoms.length === 0) {
+        // If UOMs are not available, add stock UOM as fallback
+        item.item_uoms = [{ uom: item.stock_uom, conversion_factor: 1.0 }];
+      }
+      
+      // Convert rate if multi-currency is enabled
+      if (this.pos_profile.posa_allow_multi_currency && 
+          this.selected_currency !== this.pos_profile.currency) {
+        // Store original rate as base_rate
+        item.base_rate = item.rate;
+        item.base_price_list_rate = item.price_list_rate;
+        
+        // Set converted rates
+        item.rate = this.getConvertedRate(item);
+        item.price_list_rate = this.getConvertedRate(item);
+        
+        // Set currency
+        item.currency = this.selected_currency;
+      }
+
+      // Set default quantity
+      if (!item.qty || item.qty === 1) {
+        item.qty = 1; // Use default qty of 1
+      }
+      
       this.eventBus.emit('add_item', item);
       this.close_dialog();
     }
