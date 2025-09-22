@@ -3,7 +3,22 @@
     <v-card min-height="500">
       <v-toolbar color="primary" density="compact">
         <v-toolbar-title class="text-h5">{{ frappe._('Select Item') }}</v-toolbar-title>
+
         <v-spacer></v-spacer>
+
+        <!-- Toggle: Close dialog after adding item -->
+        <div class="d-flex align-center mr-2" style="gap: 8px; align-items: center;">
+          <span class="text-caption" style="color: rgba(255,255,255,0.9)">{{ __('Close on add') }}</span>
+          <v-switch
+            v-model="closeOnAdd"
+            density="compact"
+            hide-details
+            @change="saveClosePreference"
+            :label="''"
+            inset
+          ></v-switch>
+        </div>
+
         <v-btn icon="mdi-close" @click="close_dialog"></v-btn>
       </v-toolbar>
 
@@ -115,6 +130,7 @@ export default {
     items: null,
     filters: {},
     filteredItems: [],
+    closeOnAdd: true,
   }),
 
   computed: {
@@ -204,6 +220,30 @@ export default {
       this.filteredItems = items;
     },
     
+    saveClosePreference() {
+      try {
+        localStorage.setItem("posplus_close_on_add", JSON.stringify(!!this.closeOnAdd));
+      } catch (e) {
+        // ignore localStorage errors (e.g., privacy mode)
+        console.warn('Could not save POS preference to localStorage', e);
+      }
+    },
+
+    loadClosePreference() {
+      try {
+        const v = localStorage.getItem("posplus_close_on_add");
+        if (v !== null) {
+          this.closeOnAdd = JSON.parse(v);
+        } else {
+          // default true if not set
+          this.closeOnAdd = true;
+        }
+      } catch (e) {
+        // fallback default
+        this.closeOnAdd = true;
+      }
+    },
+    
     add_item(item) {
       // Prepare the item with default warehouse and actual quantity
       item = {
@@ -239,7 +279,15 @@ export default {
       }
       
       this.eventBus.emit('add_item', item);
-      this.close_dialog();
+
+      // Only close the dialog if user wants so
+      if (this.closeOnAdd) {
+        this.close_dialog();
+      } else {
+        // keep dialog open; but refresh filteredItems (optional)
+        // If you want to re-filter after add, call updateFilteredItems()
+        // this.updateFilteredItems();
+      }
     }
   },
 
@@ -250,6 +298,7 @@ export default {
       this.items = data.items;
       this.filters = {};
       this.filteredItems = this.variantsItems;
+      this.loadClosePreference(); // Load toggle preference when dialog opens
     });
   },
 
