@@ -470,8 +470,8 @@ export default {
       if (search) {
         sr = search;
       }
-      if (vm.item_group != "ALL") {
-        gr = vm.item_group.toLowerCase();
+      if (vm.item_group != "ALL" && vm.item_group) {
+        gr = vm.item_group.toLowerCase().trim();
       }
       if (
         vm.pos_profile.posa_local_storage &&
@@ -931,10 +931,21 @@ export default {
       }
     },
     setFastItemGroupFilter(event, groupName) {
+      // Safety check for undefined groupName
+      if (!groupName || groupName === undefined || groupName === null) {
+        console.warn("Received undefined groupName, defaulting to ALL");
+        this.item_group = "ALL";
+        return;
+      }
+
       if (this.item_group === groupName) {
         this.item_group = "ALL";
       } else {
         this.item_group = groupName;
+
+        if (this.items_loaded) {
+          this.get_items();
+        }
       }
     },
     generateWordCombinations(inputString) {
@@ -1126,10 +1137,23 @@ export default {
         }
       });
     },
+    
+    getPaginatedItems(items) { // New method for pagination, but it did not be triggered?
+      if (!items || !items.length) return [];
+      
+      const pageSize = this.pos_profile.custom_posa_items_per_page || 100;
+      
+      return items.slice(0, pageSize);
+    },
   },
 
   computed: {
     filtered_items() {
+      // Fix the TypeError in Group Filter
+      if (!this.items || !Array.isArray(this.items)) {
+        return [];
+      }
+
       // console.log(this.pos_profile);
       this.search = this.get_search(this.first_search);
 
@@ -1147,16 +1171,22 @@ export default {
       // if (!this.pos_profile.pose_use_limit_search) {
       let filtered_list = [];
       let filtered_group_list = [];
-      if (this.item_group != "ALL") {
+      if (this.item_group != "ALL" && this.item_group) {
         filtered_group_list = this.items.filter((item) => {
-          const itemGroup = item.item_group || '';
-          return itemGroup.toLowerCase().includes(this.item_group.toLowerCase());
+          if (!item || !item.item_group) return false;
+          
+          const itemGroup = item.item_group.toString().toLowerCase().trim();
+          const filterGroup = this.item_group.toString().toLowerCase().trim();
+          
+          return itemGroup === filterGroup;
         });
       } else {
         filtered_group_list = this.items;
       }
       if (this.pos_tags_filters && this.pos_tags_filters.length > 0) {
         filtered_group_list = filtered_group_list.filter((fItem) => {
+          if (!fItem.pos_tags || !Array.isArray(fItem.pos_tags)) return false;
+          
           return fItem.pos_tags.some((itemPosTag) => {
             return this.pos_tags_filters.some(
               (filterPosTag) => filterPosTag.tag_name === itemPosTag.tag_name
@@ -1319,8 +1349,12 @@ export default {
           this.update_items_details(final_filtered_list);
         }, 100);
       }
+
+      let finalResult = final_filtered_list;
       
-      return final_filtered_list;
+      finalResult = this.getPaginatedItems(finalResult);
+  
+      return finalResult;
 
       function levenshteinDistance(itemName, searchQuery) {
         let searchWords = searchQuery.split(" ");
