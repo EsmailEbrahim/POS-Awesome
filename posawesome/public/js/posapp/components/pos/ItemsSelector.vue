@@ -13,7 +13,7 @@
       ></v-progress-linear>
       <div class="flex-grow-0 pa-2 border-b">
         <v-row align="center" class="items px-2 py-1">
-          <v-col :cols="pos_profile.posa_input_qty ? 6 : 9" class="pb-0 mb-2">
+          <v-col :cols="pos_profile.posa_input_qty ? 6 : 9" class="pb-0 mb-1">
             <v-text-field
               density="compact"
               clearable
@@ -32,6 +32,10 @@
               @focus="handleItemSearchFocus"
               ref="debounce_search"
             ></v-text-field>
+            <div class="text-caption text-grey mt-1">
+              {{ __("Showing") }} {{ displayedItemsCount }} {{ __("of") }} {{ totalFilteredItemsCount }} {{ __("items") }}
+              <span v-if="item_group !== 'ALL'">({{ __("Group") }}: {{ item_group }})</span>
+            </div>
           </v-col>
           <v-col cols="3" class="pb-0 mb-2" v-if="pos_profile.posa_input_qty">
             <v-text-field
@@ -1411,6 +1415,27 @@ export default {
             this.first_search = newValue;
         }
       }, 300),
+    },
+    displayedItemsCount() {
+      return this.filtered_items ? this.filtered_items.length : 0;
+    },
+    
+    totalFilteredItemsCount() {
+      if (!this.items || !this.items.length) return 0;
+      
+      if (this.item_group !== "ALL") {
+        const filtered = this.items.filter((item) => {
+          if (!item || !item.item_group) return false;
+
+          const itemGroup = item.item_group.toString().toLowerCase().trim();
+          const filterGroup = this.item_group.toString().toLowerCase().trim();
+          
+          return itemGroup === filterGroup;
+        });
+        return filtered.length;
+      }
+      
+      return this.items.length;
     },
   },
 
