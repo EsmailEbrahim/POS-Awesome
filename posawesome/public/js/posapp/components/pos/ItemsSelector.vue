@@ -21,7 +21,8 @@
               variant="solo"
               color="primary"
               :label="frappe._('Search Items')"
-              hint="Search by item code, serial number, batch no or barcode"
+              :placeholder="__('Search by item code, serial number, batch no or barcode')"
+              :title="__('Search by item code, serial number, batch no or barcode')"
               bg-color="white"
               hide-details
               v-model="debounce_search"
