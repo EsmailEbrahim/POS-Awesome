@@ -37,27 +37,22 @@
 					<v-chip v-if="item.is_bundle" color="secondary" size="x-small" class="ml-1">
 						{{ __("Bundle") }}
 					</v-chip>
-                                        <v-chip v-if="item.name_overridden" color="primary" size="x-small" class="ml-1">
-                                                {{ __("Edited") }}
-                                        </v-chip>
-                                        <v-tooltip v-if="item.pricing_rule_badge" location="bottom">
-                                                <template #activator="{ props }">
-                                                        <v-chip
-                                                                v-bind="props"
-                                                                color="primary"
-                                                                size="x-small"
-                                                                class="ml-1"
-                                                        >
-                                                                {{ item.pricing_rule_badge.label }}
-                                                        </v-chip>
-                                                </template>
-                                                <span>{{ item.pricing_rule_badge.tooltip }}</span>
-                                        </v-tooltip>
-                                        <v-icon
-                                                v-if="pos_profile.posa_allow_line_item_name_override && !item.posa_is_replace"
-                                                size="x-small"
-                                                class="ml-1"
-                                                @click.stop="openNameDialog(item)"
+					<v-chip v-if="item.name_overridden" color="primary" size="x-small" class="ml-1">
+						{{ __("Edited") }}
+					</v-chip>
+					<v-tooltip v-if="item.pricing_rule_badge" location="bottom">
+						<template #activator="{ props }">
+							<v-chip v-bind="props" color="primary" size="x-small" class="ml-1">
+								{{ item.pricing_rule_badge.label }}
+							</v-chip>
+						</template>
+						<span>{{ item.pricing_rule_badge.tooltip }}</span>
+					</v-tooltip>
+					<v-icon
+						v-if="pos_profile.posa_allow_line_item_name_override && !item.posa_is_replace"
+						size="x-small"
+						class="ml-1"
+						@click.stop="openNameDialog(item)"
 						>mdi-pencil</v-icon
 					>
 					<v-icon
@@ -74,7 +69,11 @@
 			<template v-slot:item.qty="{ item }">
 				<div class="pos-table__qty-counter" :class="{ 'rtl-layout': isRTL }" :title="`RTL: ${isRTL}`">
 					<v-btn
-						:disabled="!!item.posa_is_replace || (isReturnInvoice && (item.is_free_item || item.posa_is_offer || item.posa_is_replace))"
+						:disabled="
+							!!item.posa_is_replace ||
+							(isReturnInvoice &&
+								(item.is_free_item || item.posa_is_offer || item.posa_is_replace))
+						"
 						size="small"
 						variant="flat"
 						class="pos-table__qty-btn pos-table__qty-btn--minus minus-btn qty-control-btn"
@@ -108,10 +107,18 @@
 						ref="qtyInput"
 						:autofocus="true"
 						type="number"
-						:disabled="isReturnInvoice && (item.is_free_item || item.posa_is_offer || item.posa_is_replace)"
+						:disabled="
+							isReturnInvoice &&
+							(item.is_free_item || item.posa_is_offer || item.posa_is_replace)
+						"
 					></v-text-field>
 					<v-btn
-						:disabled="!!item.posa_is_replace || item.disable_increment || (isReturnInvoice && (item.is_free_item || item.posa_is_offer || item.posa_is_replace))"
+						:disabled="
+							!!item.posa_is_replace ||
+							item.disable_increment ||
+							(isReturnInvoice &&
+								(item.is_free_item || item.posa_is_offer || item.posa_is_replace))
+						"
 						size="small"
 						variant="flat"
 						class="pos-table__qty-btn pos-table__qty-btn--plus plus-btn qty-control-btn"
@@ -145,30 +152,32 @@
 			</template>
 
 			<!-- Discount percentage column -->
-                        <template v-slot:item.discount_value="{ item }">
-                                <div class="currency-display right-aligned">
-                                        <span class="amount-value">
-                                                {{
-                                                        formatFloat(
-                                                                Math.abs(
-                                                                        item.discount_percentage ||
-                                                                                (item.price_list_rate
-                                                                                        ? (item.discount_amount / item.price_list_rate) * 100
-                                                                                        : 0),
-                                                                ),
-                                                        )
-                                                }}%
-                                        </span>
-                                </div>
-                        </template>
+			<template v-slot:item.discount_value="{ item }">
+				<div class="currency-display right-aligned">
+					<span class="amount-value">
+						{{
+							formatFloat(
+								Math.abs(
+									item.discount_percentage ||
+										(item.price_list_rate
+											? (item.discount_amount / item.price_list_rate) * 100
+											: 0),
+								),
+							)
+						}}%
+					</span>
+				</div>
+			</template>
 
 			<!-- Discount amount column -->
 			<template v-slot:item.discount_amount="{ item }">
 				<div class="currency-display right-aligned">
 					<span class="currency-symbol">{{ currencySymbol(displayCurrency) }}</span>
-                                        <span class="amount-value">{{ formatCurrency(Math.abs(item.discount_amount || 0)) }}</span>
-                                </div>
-                        </template>
+					<span class="amount-value">{{
+						formatCurrency(Math.abs(item.discount_amount || 0))
+					}}</span>
+				</div>
+			</template>
 
 			<!-- Price list rate column -->
 			<template v-slot:item.price_list_rate="{ item }">
@@ -325,7 +334,9 @@
 											:label="frappe._('Discount %')"
 											class="pos-themed-input"
 											hide-details
-                                                                                :model-value="formatFloat(Math.abs(item.discount_percentage || 0))"
+											:model-value="
+												formatFloat(Math.abs(item.discount_percentage || 0))
+											"
 											@change="[
 												setFormatedCurrency(
 													item,
@@ -353,7 +364,7 @@
 											:label="frappe._('Discount Amount')"
 											class="pos-themed-input"
 											hide-details
-                                                                                :model-value="formatCurrency(Math.abs(item.discount_amount || 0))"
+											:model-value="formatCurrency(Math.abs(item.discount_amount || 0))"
 											@change="[
 												setFormatedCurrency(
 													item,

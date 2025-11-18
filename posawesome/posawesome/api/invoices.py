@@ -157,12 +157,7 @@ def _deduplicate_free_items(invoice_doc):
     for item in items:
         if cint(item.get("is_free_item")):
             key = (
-                cstr(
-                    item.get("source_rule")
-                    or item.get("pricing_rule")
-                    or item.get("pricing_rules")
-                    or ""
-                ),
+                cstr(item.get("source_rule") or item.get("pricing_rule") or item.get("pricing_rules") or ""),
                 cstr(item.get("item_code") or ""),
                 cstr(item.get("warehouse") or ""),
                 cstr(item.get("uom") or ""),

@@ -313,7 +313,9 @@ def merge_item_row(
 
     meta = lookup_data.meta_map.get(item_code, frappe._dict())
     uoms = _ensure_stock_uom(lookup_data.uom_map.get(item_code, []), meta.get("stock_uom"))
-    price_row = _select_price(lookup_data.price_map.get(item_code, {}), item.get("uom"), meta.get("stock_uom"))
+    price_row = _select_price(
+        lookup_data.price_map.get(item_code, {}), item.get("uom"), meta.get("stock_uom")
+    )
     price_currency = price_row.get("currency") if price_row else None
 
     row = dict(item)
@@ -373,7 +375,9 @@ class ItemDetailAggregator:
 
         if not self.price_list:
             return self.pos_profile.get("currency")
-        return frappe.db.get_value("Price List", self.price_list, "currency") or self.pos_profile.get("currency")
+        return frappe.db.get_value("Price List", self.price_list, "currency") or self.pos_profile.get(
+            "currency"
+        )
 
     def _compute_exchange_rate(self) -> float:
         """Compute the price list to company currency exchange rate."""
@@ -485,7 +489,12 @@ class ItemDetailAggregator:
             if not item.get("item_code") or item.get("has_variants"):
                 continue
             result.append(
-                merge_item_row(item, lookup_data, self.price_list_currency or self.pos_profile.get("currency"), self.exchange_rate)
+                merge_item_row(
+                    item,
+                    lookup_data,
+                    self.price_list_currency or self.pos_profile.get("currency"),
+                    self.exchange_rate,
+                )
             )
         return result
 

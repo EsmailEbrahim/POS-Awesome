@@ -1033,12 +1033,8 @@ def parse_scale_barcode(barcode: str):
     if settings:
         metadata = {
             "prefix": cstr(getattr(settings, "prefix", "") or "").strip(),
-            "prefix_included_or_not": cint(
-                getattr(settings, "prefix_included_or_not", 0)
-            ),
-            "no_of_prefix_characters": cint(
-                getattr(settings, "no_of_prefix_characters", 0)
-            ),
+            "prefix_included_or_not": cint(getattr(settings, "prefix_included_or_not", 0)),
+            "no_of_prefix_characters": cint(getattr(settings, "no_of_prefix_characters", 0)),
         }
 
     data = _parse_scale_barcode_data(barcode)
