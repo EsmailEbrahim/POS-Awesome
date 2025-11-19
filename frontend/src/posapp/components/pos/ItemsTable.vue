@@ -1511,20 +1511,19 @@ export default {
 	/* Ensure full width utilization */
 	margin: 0;
 	position: relative;
-	overflow: visible;
+	overflow-y: auto;
+	max-height: 60vh;
 }
 
 @keyframes expandIn {
 	from {
 		opacity: 0;
 		transform: translateY(-20px) scale(0.95);
-		max-height: 0;
 	}
 
 	to {
 		opacity: 1;
 		transform: translateY(0) scale(1);
-		max-height: 1000px;
 	}
 }
 
