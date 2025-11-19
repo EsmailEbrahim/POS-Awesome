@@ -245,18 +245,20 @@ def _fetch_batches(warehouse: str, item_codes: Tuple[str, ...]):
     bundle_rows = frappe.db.sql(
         """
         SELECT
-            sbe.item_code,
+            sbb.item_code,
             sbe.batch_no,
             SUM(sbe.qty) AS qty
         FROM `tabSerial and Batch Entry` sbe
+        INNER JOIN `tabSerial and Batch Bundle` sbb
+            ON sbb.name = sbe.parent
         INNER JOIN `tabStock Ledger Entry` sle
-            ON sle.serial_and_batch_bundle = sbe.parent
+            ON sle.serial_and_batch_bundle = sbb.name
         WHERE
             sbe.batch_no IS NOT NULL
-            AND sbe.item_code IN %(item_codes)s
-            AND sbe.warehouse IN %(warehouses)s
+            AND sbb.item_code IN %(item_codes)s
+            AND sbb.warehouse IN %(warehouses)s
             AND sle.is_cancelled = 0
-        GROUP BY sbe.item_code, sbe.batch_no
+        GROUP BY sbb.item_code, sbe.batch_no
         """,
         {"item_codes": item_codes, "warehouses": warehouses},
         as_dict=True,
