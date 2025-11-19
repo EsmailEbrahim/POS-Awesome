@@ -1486,7 +1486,7 @@ export default {
 	padding: 0 !important;
 	width: 100% !important;
 	max-width: 100% !important;
-	overflow: hidden;
+	overflow: visible;
 	box-sizing: border-box;
 	/* Ensure it spans the full table width including expand column */
 	position: relative;
@@ -1518,13 +1518,11 @@ export default {
 	from {
 		opacity: 0;
 		transform: translateY(-20px) scale(0.95);
-		max-height: 0;
 	}
 
 	to {
 		opacity: 1;
 		transform: translateY(0) scale(1);
-		max-height: 1000px;
 	}
 }
 
