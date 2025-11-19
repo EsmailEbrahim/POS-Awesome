@@ -205,6 +205,13 @@ def _fetch_batches(warehouse: str, item_codes: Tuple[str, ...]):
     if not item_codes or not warehouse:
         return []
 
+    warehouses: Tuple[str, ...] = (warehouse,)
+    if frappe.db.get_value("Warehouse", warehouse, "is_group"):
+        descendants = frappe.db.get_descendants("Warehouse", warehouse) or []
+        if not descendants:
+            return []
+        warehouses = tuple(descendants)
+
     batch_docs = frappe.get_all(
         "Batch",
         filters={"item": ["in", item_codes], "disabled": 0},
@@ -228,13 +235,13 @@ def _fetch_batches(warehouse: str, item_codes: Tuple[str, ...]):
             SUM(actual_qty) AS qty
         FROM `tabStock Ledger Entry`
         WHERE
-            warehouse = %(warehouse)s
+            warehouse IN %(warehouses)s
             AND item_code in %(item_codes)s
             AND batch_no is not null
             AND is_cancelled = 0
         GROUP BY item_code, batch_no
         """,
-        {"warehouse": warehouse, "item_codes": item_codes},
+        {"warehouses": warehouses, "item_codes": item_codes},
         as_dict=True,
     )
 
