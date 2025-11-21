@@ -821,9 +821,7 @@ def get_item_detail(item, doc=None, warehouse=None, price_list=None, company=Non
                     "expiry_date": row.expiry_date,
                     "batch_price": row.batch_price,
                     "manufacturing_date": row.manufacturing_date,
-                    "is_expired": bool(
-                        row.expiry_date and str(row.expiry_date) <= str(today)
-                    ),
+                    "is_expired": bool(row.expiry_date and str(row.expiry_date) <= str(today)),
                 }
             )
     if warehouse and item.get("has_serial_no"):

@@ -2229,9 +2229,7 @@ export default {
 		if (this.redeemed_customer_credit) remaining_amount -= this.redeemed_customer_credit;
 
 		// Find the index of the default payment method
-		const defaultPaymentIndex = this.pos_profile.payments.findIndex(
-			(payment) => payment.default === 1,
-		);
+		const defaultPaymentIndex = this.pos_profile.payments.findIndex((payment) => payment.default === 1);
 		const targetIndex = defaultPaymentIndex >= 0 ? defaultPaymentIndex : 0;
 
 		this.pos_profile.payments.forEach((payment, index) => {

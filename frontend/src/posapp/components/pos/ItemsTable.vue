@@ -33,27 +33,27 @@
 			<!-- Item name column -->
 			<template v-slot:item.item_name="{ item }">
 				<div class="d-flex align-center">
-                                        <span>{{ item.item_name }}</span>
-                                        <v-chip v-if="item.is_bundle" color="secondary" size="x-small" class="ml-1">
-                                                {{ __("Bundle") }}
-                                        </v-chip>
-                                        <v-chip v-if="item.name_overridden" color="primary" size="x-small" class="ml-1">
-                                                {{ __("Edited") }}
-                                        </v-chip>
-                                        <v-chip
-                                                v-if="item.batch_no_is_expired"
-                                                color="error"
-                                                size="x-small"
-                                                variant="flat"
-                                                class="ml-1"
-                                        >
-                                                {{ __("Expired") }}
-                                        </v-chip>
-                                        <v-tooltip v-if="item.pricing_rule_badge" location="bottom">
-                                                <template #activator="{ props }">
-                                                        <v-chip v-bind="props" color="primary" size="x-small" class="ml-1">
-                                                                {{ item.pricing_rule_badge.label }}
-                                                        </v-chip>
+					<span>{{ item.item_name }}</span>
+					<v-chip v-if="item.is_bundle" color="secondary" size="x-small" class="ml-1">
+						{{ __("Bundle") }}
+					</v-chip>
+					<v-chip v-if="item.name_overridden" color="primary" size="x-small" class="ml-1">
+						{{ __("Edited") }}
+					</v-chip>
+					<v-chip
+						v-if="item.batch_no_is_expired"
+						color="error"
+						size="x-small"
+						variant="flat"
+						class="ml-1"
+					>
+						{{ __("Expired") }}
+					</v-chip>
+					<v-tooltip v-if="item.pricing_rule_badge" location="bottom">
+						<template #activator="{ props }">
+							<v-chip v-bind="props" color="primary" size="x-small" class="ml-1">
+								{{ item.pricing_rule_badge.label }}
+							</v-chip>
 						</template>
 						<span>{{ item.pricing_rule_badge.tooltip }}</span>
 					</v-tooltip>
@@ -552,9 +552,9 @@
 								</div>
 								<div class="form-row">
 									<div class="form-field full-width">
-                                                                                <v-autocomplete
-                                                                                        v-model="item.serial_no_selected"
-                                                                                        :items="getSerialOptions(item)"
+										<v-autocomplete
+											v-model="item.serial_no_selected"
+											:items="getSerialOptions(item)"
 											item-title="serial_no"
 											item-value="serial_no"
 											variant="outlined"
@@ -607,10 +607,10 @@
 										></v-text-field>
 									</div>
 									<div class="form-field">
-                                                                                <v-autocomplete
-                                                                                        v-model="item.batch_no"
-                                                                                        :items="item.batch_no_data"
-                                                                                        item-title="batch_no"
+										<v-autocomplete
+											v-model="item.batch_no"
+											:items="item.batch_no_data"
+											item-title="batch_no"
 											variant="outlined"
 											density="compact"
 											color="primary"
@@ -620,32 +620,32 @@
 											hide-details
 											prepend-inner-icon="mdi-package-variant-closed"
 										>
-                                                                                        <template v-slot:item="{ props, item }">
-                                                                                                <v-list-item v-bind="props">
-                                                                                                        <v-list-item-title
-                                                                                                                v-html="item.raw.batch_no"
-                                                                                                        ></v-list-item-title>
-                                                                                                        <v-list-item-subtitle class="d-flex align-center">
-                                                                                                <span
-                                                                                                        v-html="
-                                                                                                                `Available QTY  '${item.raw.available_qty ?? item.raw.batch_qty}' - Expiry Date ${item.raw.expiry_date}`
-                                                                                                        "
-                                                                                                ></span>
-                                                                                                                <v-chip
-                                                                                                                        v-if="item.raw.is_expired"
-                                                                                                                        color="error"
-                                                                                                                        size="x-small"
-                                                                                                                        variant="flat"
-                                                                                                                        class="ml-2"
-                                                                                                                >
-                                                                                                                        {{ __("Expired") }}
-                                                                                                                </v-chip>
-                                                                                                        </v-list-item-subtitle>
-                                                                                                </v-list-item>
-                                                                                        </template>
-                                                                                </v-autocomplete>
-                                                                        </div>
-                                                                </div>
+											<template v-slot:item="{ props, item }">
+												<v-list-item v-bind="props">
+													<v-list-item-title
+														v-html="item.raw.batch_no"
+													></v-list-item-title>
+													<v-list-item-subtitle class="d-flex align-center">
+														<span
+															v-html="
+																`Available QTY  '${item.raw.available_qty ?? item.raw.batch_qty}' - Expiry Date ${item.raw.expiry_date}`
+															"
+														></span>
+														<v-chip
+															v-if="item.raw.is_expired"
+															color="error"
+															size="x-small"
+															variant="flat"
+															class="ml-2"
+														>
+															{{ __("Expired") }}
+														</v-chip>
+													</v-list-item-subtitle>
+												</v-list-item>
+											</template>
+										</v-autocomplete>
+									</div>
+								</div>
 							</div>
 
 							<!-- Delivery Date Section -->
@@ -959,15 +959,15 @@ export default {
 			return this._rtlComputed;
 		},
 	},
-        methods: {
-                getSerialOptions(item) {
-                        if (Array.isArray(item?.filtered_serial_no_data)) {
-                                return item.filtered_serial_no_data;
-                        }
-                        return Array.isArray(item?.serial_no_data) ? item.serial_no_data : [];
-                },
+	methods: {
+		getSerialOptions(item) {
+			if (Array.isArray(item?.filtered_serial_no_data)) {
+				return item.filtered_serial_no_data;
+			}
+			return Array.isArray(item?.serial_no_data) ? item.serial_no_data : [];
+		},
 
-                customItemFilter(value, search, item) {
+		customItemFilter(value, search, item) {
 			if (search == null) {
 				return true;
 			}

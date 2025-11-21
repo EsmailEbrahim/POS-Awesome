@@ -767,9 +767,7 @@ def submit_invoice(invoice, data):
     _deduplicate_free_items(invoice_doc)
 
     if invoice_doc.redeem_loyalty_points and not invoice_doc.loyalty_program:
-        invoice_doc.loyalty_program = frappe.db.get_value(
-            "Customer", invoice_doc.customer, "loyalty_program"
-        )
+        invoice_doc.loyalty_program = frappe.db.get_value("Customer", invoice_doc.customer, "loyalty_program")
 
     if invoice_doc.redeem_loyalty_points and invoice_doc.loyalty_program:
         if not invoice_doc.loyalty_redemption_account:
@@ -778,8 +776,8 @@ def submit_invoice(invoice, data):
             )
 
         if not invoice_doc.loyalty_redemption_cost_center:
-            invoice_doc.loyalty_redemption_cost_center = (
-                invoice_doc.cost_center or frappe.db.get_value("POS Profile", pos_profile, "cost_center")
+            invoice_doc.loyalty_redemption_cost_center = invoice_doc.cost_center or frappe.db.get_value(
+                "POS Profile", pos_profile, "cost_center"
             )
 
     # Ensure item name overrides are respected on submit
@@ -924,9 +922,7 @@ def submit_in_background_job(kwargs):
     invoice_doc.remarks = "\n".join(items)
 
     if invoice_doc.redeem_loyalty_points and not invoice_doc.loyalty_program:
-        invoice_doc.loyalty_program = frappe.db.get_value(
-            "Customer", invoice_doc.customer, "loyalty_program"
-        )
+        invoice_doc.loyalty_program = frappe.db.get_value("Customer", invoice_doc.customer, "loyalty_program")
 
     if invoice_doc.redeem_loyalty_points and invoice_doc.loyalty_program:
         if not invoice_doc.loyalty_redemption_account:

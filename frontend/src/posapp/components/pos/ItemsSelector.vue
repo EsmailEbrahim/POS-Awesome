@@ -3453,7 +3453,8 @@ export default {
 							newItem.skip_force_update = true;
 						} else {
 							const uomInfo =
-								newItem.item_uoms && newItem.item_uoms.find((u) => u.uom === barcodeMatch.posa_uom);
+								newItem.item_uoms &&
+								newItem.item_uoms.find((u) => u.uom === barcodeMatch.posa_uom);
 							if (uomInfo && uomInfo.conversion_factor) {
 								const factor = parseFloat(uomInfo.conversion_factor);
 								const currentConversion = newItem.conversion_factor || 1;

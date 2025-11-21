@@ -165,9 +165,7 @@
 							color="primary"
 							:label="
 								frappe._('You can redeem up to') +
-								(customer_info.loyalty_points
-									? ` (${customer_info.loyalty_points} pts)`
-									: '')
+								(customer_info.loyalty_points ? ` (${customer_info.loyalty_points} pts)` : '')
 							"
 							class="sleek-field pos-themed-input"
 							hide-details
@@ -1129,8 +1127,7 @@ export default {
 				if (!this.is_credit_sale && this.invoice_doc.payments) {
 					const default_payment = this.invoice_doc.payments.find((p) => p.default === 1);
 					if (default_payment) {
-						const invoice_total =
-							this.invoice_doc.rounded_total || this.invoice_doc.grand_total;
+						const invoice_total = this.invoice_doc.rounded_total || this.invoice_doc.grand_total;
 						const other_payments = this.invoice_doc.payments.reduce((sum, p) => {
 							if (p !== default_payment) {
 								return sum + this.flt(p.amount);
