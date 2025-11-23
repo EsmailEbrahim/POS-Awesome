@@ -14,9 +14,11 @@ from erpnext.stock.doctype.batch.batch import (
 )  # This should be from erpnext directly
 from frappe import _
 from frappe.utils import (
+    add_days,
     cint,
     cstr,
     flt,
+    formatdate,
     getdate,
     money_in_words,
     nowdate,
@@ -33,6 +35,58 @@ from posawesome.posawesome.api.utilities import (
 )  # Updated imports
 
 from .items import get_stock_availability
+
+
+def _get_return_validity_settings(pos_profile: str | None = None):
+    """Return whether return validity is enabled and the default days window.
+
+    Positional profile-specific configuration takes precedence over the
+    global POS Settings toggle, falling back to the global values when the
+    profile does not opt in.
+    """
+
+    enable_validity = 0
+    default_days = 0
+
+    if pos_profile:
+        profile = frappe.get_cached_doc("POS Profile", pos_profile)
+        enable_validity = cint(getattr(profile, "posa_enable_return_validity", 0))
+        if enable_validity:
+            default_days = cint(getattr(profile, "posa_return_validity_days", 0))
+
+    if not enable_validity:
+        settings = frappe.get_cached_doc("POS Settings")
+        enable_validity = cint(getattr(settings, "posa_enable_return_validity", 0))
+        if enable_validity:
+            default_days = cint(getattr(settings, "posa_return_validity_days", 0))
+
+    return enable_validity, default_days
+
+
+def _set_return_valid_upto(invoice_doc, enabled, default_days):
+    if not enabled or invoice_doc.is_return:
+        return
+
+    if invoice_doc.get("posa_return_valid_upto"):
+        return
+
+    posting_date = getdate(invoice_doc.get("posting_date") or nowdate())
+    if default_days:
+        invoice_doc.posa_return_valid_upto = add_days(posting_date, default_days)
+    else:
+        invoice_doc.posa_return_valid_upto = posting_date
+
+
+def _validate_return_window(invoice_doc, doctype, enabled):
+    if not enabled or not invoice_doc.is_return or not invoice_doc.get("return_against"):
+        return
+
+    original_invoice = frappe.get_doc(doctype, invoice_doc.return_against)
+    validity_date = original_invoice.get("posa_return_valid_upto")
+    if validity_date and getdate(nowdate()) > getdate(validity_date):
+        frappe.throw(
+            _("Returns are only allowed until {0}").format(formatdate(validity_date))
+        )
 
 
 def _sanitize_item_name(name: str) -> str:
@@ -384,6 +438,8 @@ def update_invoice(data):
     # Ensure the document type is set for new invoices to prevent validation errors
     data.setdefault("doctype", doctype)
 
+    return_validity_enabled, default_validity_days = _get_return_validity_settings(pos_profile)
+
     if data.get("name"):
         invoice_doc = frappe.get_doc(doctype, data.get("name"))
         invoice_doc.update(data)
@@ -400,6 +456,8 @@ def update_invoice(data):
         )
         if not validation.get("valid"):
             frappe.throw(validation.get("message"))
+
+    _validate_return_window(invoice_doc, doctype, return_validity_enabled)
     selected_currency = data.get("currency")
     price_list_currency = data.get("price_list_currency")
     if not price_list_currency and invoice_doc.get("selling_price_list"):
@@ -446,6 +504,8 @@ def update_invoice(data):
 
     # Set missing values first
     invoice_doc.set_missing_values()
+
+    _set_return_valid_upto(invoice_doc, return_validity_enabled, default_validity_days)
 
     # Reapply any custom item names after defaults are set
     _apply_item_name_overrides(invoice_doc, overrides)
@@ -992,6 +1052,7 @@ def search_invoices_for_return(
     min_amount=None,
     max_amount=None,
     page=1,
+    pos_profile=None,
     doctype="Sales Invoice",
 ):
     """
@@ -1015,6 +1076,8 @@ def search_invoices_for_return(
         - invoices: List of invoice documents
         - has_more: Boolean indicating if there are more invoices to load
     """
+    enforce_return_validity, _ = _get_return_validity_settings(pos_profile)
+
     # Start with base filters
     filters = {
         "company": company,
@@ -1124,6 +1187,14 @@ def search_invoices_for_return(
     for invoice in invoices_list:
         invoice_doc = frappe.get_doc(doctype, invoice.name)
 
+        validity_date = invoice_doc.get("posa_return_valid_upto")
+        expired = False
+
+        if enforce_return_validity and validity_date:
+            expired = getdate(nowdate()) > getdate(validity_date)
+
+        invoice_doc.posa_return_expired = cint(expired)
+
         # Check if any items have already been returned
         has_returns = frappe.get_all(
             doctype,
@@ -1157,6 +1228,8 @@ def search_invoices_for_return(
                 # Create a copy of invoice with filtered items
                 filtered_invoice = frappe.get_doc(doctype, invoice.name)
                 filtered_invoice.items = filtered_items
+                filtered_invoice.posa_return_expired = cint(expired)
+                filtered_invoice.posa_return_valid_upto = validity_date
                 data.append(filtered_invoice)
         else:
             data.append(invoice_doc)
