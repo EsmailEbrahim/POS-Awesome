@@ -224,12 +224,12 @@
 								v-else
 								ref="itemsContainer"
 								class="virtual-scroller"
-								:list-class="['items-card-grid', { 'item-container': isOverflowing }]"
+								:list-class="['items-virtual-list', { 'item-container': isOverflowing }]"
 								:items="displayedItems"
 								key-field="item_code"
-								:item-size="cardRowHeight"
+								:item-size="cardSlotHeight"
 								:grid-items="cardColumns"
-								:item-secondary-size="cardColumnWidth"
+								:item-secondary-size="cardSlotWidth"
 								:buffer="virtualScrollBuffer"
 								:emit-update="true"
 								@update="onVirtualRangeUpdate"
@@ -239,6 +239,10 @@
 										v-if="item"
 										:key="item.item_code"
 										class="card-item-card"
+										:style="{
+											width: cardColumnWidth + 'px',
+											height: cardRowHeight + 'px',
+										}"
 										@click="select_item($event, item)"
 										:draggable="true"
 										@dragstart="onDragStart($event, item)"
@@ -3906,12 +3910,18 @@ export default {
 		},
 		cardRowHeight() {
 			if (this.windowWidth <= 768) {
-				return 220;
+				return 260;
 			}
 			if (this.windowWidth <= 1200) {
-				return 240;
+				return 280;
 			}
-			return 260;
+			return 300;
+		},
+		cardSlotHeight() {
+			return this.cardRowHeight + this.cardGap;
+		},
+		cardSlotWidth() {
+			return this.cardColumnWidth + this.cardGap;
 		},
 		cardColumnWidth() {
 			const columns = Math.max(1, this.cardColumns);
@@ -4590,6 +4600,24 @@ export default {
 .items-card-grid::-webkit-scrollbar-thumb {
 	background-color: rgba(0, 0, 0, 0.2);
 	border-radius: 4px;
+}
+
+.virtual-scroller :deep(.items-virtual-list) {
+	padding: 16px;
+	contain: layout style;
+	box-sizing: border-box;
+}
+
+@media (max-width: 1200px) {
+	.virtual-scroller :deep(.items-virtual-list) {
+		padding: 12px;
+	}
+}
+
+@media (max-width: 768px) {
+	.virtual-scroller :deep(.items-virtual-list) {
+		padding: 10px;
+	}
 }
 
 .card-item-card {
