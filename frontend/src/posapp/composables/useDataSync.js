@@ -99,6 +99,10 @@ export function useDataSync(intervalSeconds = 30) {
 
 	return {
 		lastSyncTime,
+		formattedLastSyncTime: computed(() => {
+			if (!lastSyncTime.value) return "Never";
+			return lastSyncTime.value.toLocaleTimeString();
+		}),
 		lastSyncSize: computed(() => formatBytes(lastSyncSize.value)),
 		totalSyncSize: computed(() => formatBytes(totalSyncSize.value)),
 		estimatedHourlyUsage,

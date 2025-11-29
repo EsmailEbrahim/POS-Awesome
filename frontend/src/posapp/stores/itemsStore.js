@@ -640,7 +640,19 @@ export const useItemsStore = defineStore("items", () => {
 
 			if (fetchedItems.length > 0) {
 				updateItemsInPlace(fetchedItems);
-				setItemsLastSync(new Date().toISOString());
+				await saveItemsBulk(fetchedItems);
+
+				// Find the latest modification timestamp from the fetched items
+				let maxModified = "";
+				for (const item of fetchedItems) {
+					if (item.modified && item.modified > maxModified) {
+						maxModified = item.modified;
+					}
+				}
+
+				if (maxModified) {
+					setItemsLastSync(maxModified);
+				}
 			}
 
 			return { size, count: fetchedItems.length };

@@ -37,11 +37,12 @@ export default {
 		cacheReady: Boolean,
 	},
 	setup() {
-		const { lastSyncSize, estimatedHourlyUsage, isSyncing } = useDataSync(30);
+		const { lastSyncSize, estimatedHourlyUsage, isSyncing, formattedLastSyncTime } = useDataSync(30);
 		return {
 			lastSyncSize,
 			estimatedHourlyUsage,
 			isSyncing,
+			formattedLastSyncTime,
 		};
 	},
 	computed: {
@@ -184,7 +185,7 @@ export default {
 			}
 
 			if (this.networkOnline) {
-				status += ` | Usage: ${this.lastSyncSize} (Est: ${this.estimatedHourlyUsage}/hr)`;
+				status += ` | Usage: ${this.lastSyncSize} (Est: ${this.estimatedHourlyUsage}/hr) | Sync: ${this.formattedLastSyncTime}`;
 			}
 			return status;
 		},
