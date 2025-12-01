@@ -934,11 +934,10 @@ export default {
 			};
 		},
 
-		blockSaleBeyondAvailableQty() {
-			if (["Order", "Quotation"].includes(this.invoiceType)) return false;
-			const allowNegative = parseBooleanSetting(this.stock_settings?.allow_negative_stock);
-			return !allowNegative && !!this.pos_profile?.posa_block_sale_beyond_available_qty;
-		},
+                blockSaleBeyondAvailableQty() {
+                        if (["Order", "Quotation"].includes(this.invoiceType)) return false;
+                        return !!this.pos_profile?.posa_block_sale_beyond_available_qty;
+                },
 
 		// Responsive headers based on container size
 		responsiveHeaders() {
