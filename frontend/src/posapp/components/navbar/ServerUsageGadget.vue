@@ -1,25 +1,24 @@
 <template>
 	<div class="cpu-gadget-section mx-1">
-		<v-tooltip location="bottom">
-			<template #activator="{ props }">
-				<div v-bind="props" class="cpu-meter-container">
-					<v-icon size="22" color="primary">mdi-server</v-icon>
-					<span class="cpu-current-lag">{{ cpuLag.toFixed(1) }} ms</span>
-				</div>
-			</template>
-			<div class="cpu-tooltip-content">
-				<div class="cpu-tooltip-title">
-					<v-icon size="16" color="primary" class="mr-1">mdi-server</v-icon>
-					{{ __("Server Health") }}
-				</div>
-				<v-divider class="my-2" />
-				<div class="cpu-tooltip-section-title mb-1">{{ __("Server Metrics") }}</div>
-				<div class="cpu-tooltip-peak mb-1">
-					<v-icon size="14" color="success" class="mr-1">mdi-arrow-up-bold</v-icon>
-					{{ __("Peak:") }}
-					<b>{{ peakLag.toFixed(1) }} ms</b>
-					({{ peakPercent }}%)
-				</div>
+		<div class="d-flex align-center mb-2">
+			<div class="cpu-meter-container mr-3">
+				<v-icon size="22" color="primary">mdi-server</v-icon>
+				<span class="cpu-current-lag">{{ cpuLag.toFixed(1) }} ms</span>
+			</div>
+			<div class="cpu-tooltip-title mb-0">
+				<v-icon size="16" color="primary" class="mr-1">mdi-server</v-icon>
+				{{ __("Server Health") }}
+			</div>
+		</div>
+
+		<div class="cpu-tooltip-content">
+			<div class="cpu-tooltip-section-title mb-1">{{ __("Server Metrics") }}</div>
+			<div class="cpu-tooltip-peak mb-1">
+				<v-icon size="14" color="success" class="mr-1">mdi-arrow-up-bold</v-icon>
+				{{ __("Peak:") }}
+				<b>{{ peakLag.toFixed(1) }} ms</b>
+				({{ peakPercent }}%)
+			</div>
 				<div class="cpu-tooltip-sparkline mb-2">
 					<svg :width="180" :height="40" class="cpu-sparkline-large">
 						<defs>
@@ -121,12 +120,11 @@
 					<v-icon size="14" color="info" class="mr-1">mdi-chip</v-icon>
 					{{ __("Event-loop lag measures how busy your browser is. Lower is better.") }}
 				</div>
-				<div class="cpu-tooltip-action mt-2">
-					<v-icon size="14" class="mr-1">mdi-refresh</v-icon>
-					{{ __("Updates automatically") }}
-				</div>
+			<div class="cpu-tooltip-action mt-2">
+				<v-icon size="14" class="mr-1">mdi-refresh</v-icon>
+				{{ __("Updates automatically") }}
 			</div>
-		</v-tooltip>
+		</div>
 	</div>
 </template>
 
@@ -256,7 +254,7 @@ const peakPercent = computed(() => Math.round(Math.min(peakLag.value, 100)));
 	font-weight: 600;
 	font-size: 14px;
 	margin-bottom: 8px;
-	color: var(--primary);
+	/* Removed hardcoded color for theme adaptability */
 }
 
 .cpu-tooltip-detail {
@@ -273,7 +271,6 @@ const peakPercent = computed(() => Math.round(Math.min(peakLag.value, 100)));
 	display: flex;
 	align-items: center;
 	margin-top: 8px;
-	color: var(--primary);
 	direction: ltr;
 	text-align: left;
 }
@@ -313,7 +310,7 @@ const peakPercent = computed(() => Math.round(Math.min(peakLag.value, 100)));
 	text-align: left;
 }
 .cpu-tooltip-tip {
-	color: #1976d2;
+	/* Removed hardcoded color */
 	font-size: 12px;
 	display: flex;
 	align-items: center;
@@ -321,7 +318,7 @@ const peakPercent = computed(() => Math.round(Math.min(peakLag.value, 100)));
 	text-align: left;
 }
 .cpu-tooltip-explanation {
-	color: #0288d1;
+	/* Removed hardcoded color */
 	font-size: 12px;
 	display: flex;
 	align-items: center;
@@ -377,44 +374,11 @@ const peakPercent = computed(() => Math.round(Math.min(peakLag.value, 100)));
 	background: #1976d2;
 }
 
-/* Fix tooltip background and text color in light mode */
-:deep(.v-tooltip .v-overlay__content),
-:deep(.v-overlay__content) {
-	background: #e3f2fd !important;
-	color: #1a237e !important;
-	box-shadow: 0 4px 16px rgba(25, 118, 210, 0.1) !important;
-	border: 1px solid #90caf9 !important;
-	direction: ltr !important;
-	text-align: left !important;
-}
-
-.cpu-tooltip-title,
-.cpu-tooltip-action {
-	color: #1a237e !important;
-}
-
-:deep([data-theme="dark"]) .v-tooltip .v-overlay__content,
-:deep(.v-theme--dark) .v-tooltip .v-overlay__content,
-:deep([data-theme="dark"]) .v-overlay__content,
-:deep(.v-theme--dark) .v-overlay__content {
-	background: #26344d !important;
-	color: #fff !important;
-	border: 1px solid #1976d2 !important;
-	direction: ltr !important;
-	text-align: left !important;
-}
-
-:deep([data-theme="dark"]) .cpu-tooltip-title,
-:deep(.v-theme--dark) .cpu-tooltip-title,
-:deep([data-theme="dark"]) .cpu-tooltip-action,
-:deep(.v-theme--dark) .cpu-tooltip-action {
-	color: #fff !important;
-}
 .cpu-tooltip-section-title {
 	font-weight: 600;
 	font-size: 13px;
 	margin-bottom: 4px;
-	color: var(--primary);
+	/* Removed hardcoded color */
 	opacity: 0.85;
 	direction: ltr;
 	text-align: left;
