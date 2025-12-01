@@ -878,42 +878,44 @@ export default {
 		const serverFree = Array.isArray(message.free_lines) ? message.free_lines : [];
 		const invoiceUpdates = message.invoice_updates || {};
 
-		const serverDiscountAmount = Number.parseFloat(invoiceUpdates.discount_amount || 0);
-		const serverDiscountPercentage = Number.parseFloat(invoiceUpdates.additional_discount_percentage || 0);
-		const serverRules = invoiceUpdates.pricing_rules;
+                const hasDiscountUpdate =
+                        invoiceUpdates &&
+                        (Object.prototype.hasOwnProperty.call(invoiceUpdates, "discount_amount") ||
+                                Object.prototype.hasOwnProperty.call(
+                                        invoiceUpdates,
+                                        "additional_discount_percentage",
+                                ));
 
-		if (serverRules) {
-			// Rule applied by server
-			if (this.pos_profile?.posa_use_percentage_discount) {
-				if (serverDiscountPercentage > 0) {
-					this.additional_discount_percentage = serverDiscountPercentage;
-				} else if (serverDiscountAmount > 0 && this.Total > 0) {
-					this.additional_discount_percentage = (serverDiscountAmount / this.Total) * 100;
-				} else {
-					this.additional_discount_percentage = 0;
-				}
-				this.update_discount_umount();
-			} else {
-				this.additional_discount = serverDiscountAmount;
-				this.additional_discount_percentage = serverDiscountPercentage;
-				this.update_discount_umount();
-			}
-			if (this.invoice_doc) {
-				this.invoice_doc.pricing_rules = serverRules;
-			} else {
-				this.invoiceStore.mergeInvoiceDoc({ pricing_rules: serverRules });
-			}
-		} else if (this.invoice_doc?.pricing_rules) {
-			// No rules from server, but we had rules before. Clear them.
-			this.additional_discount = 0;
-			this.additional_discount_percentage = 0;
-			this.update_discount_umount();
-			if (this.invoice_doc) {
-				this.invoice_doc.pricing_rules = null;
-			} else {
-				this.invoiceStore.mergeInvoiceDoc({ pricing_rules: null });
-			}
-		}
+                const serverDiscountAmount = Number.parseFloat(invoiceUpdates.discount_amount || 0);
+                const serverDiscountPercentage = Number.parseFloat(
+                        invoiceUpdates.additional_discount_percentage || 0,
+                );
+                const serverRules = invoiceUpdates.pricing_rules;
+
+                if (hasDiscountUpdate) {
+                        if (this.pos_profile?.posa_use_percentage_discount) {
+                                if (serverDiscountPercentage > 0) {
+                                        this.additional_discount_percentage = serverDiscountPercentage;
+                                } else if (serverDiscountAmount > 0 && this.Total > 0) {
+                                        this.additional_discount_percentage = (serverDiscountAmount / this.Total) * 100;
+                                } else {
+                                        this.additional_discount_percentage = 0;
+                                }
+                                this.update_discount_umount();
+                        } else {
+                                this.additional_discount = serverDiscountAmount;
+                                this.additional_discount_percentage = serverDiscountPercentage;
+                                this.discount_amount = this.additional_discount;
+                        }
+                }
+
+                if (serverRules !== undefined) {
+                        if (this.invoice_doc) {
+                                this.invoice_doc.pricing_rules = serverRules || null;
+                        } else {
+                                this.invoiceStore.mergeInvoiceDoc({ pricing_rules: serverRules || null });
+                        }
+                }
 
 		serverFree.forEach((entry) => {
 			if (!entry || !entry.item_code) {
@@ -3077,10 +3079,27 @@ export default {
 				}
 			}
 
-			// Update invoice_doc with current currency info
-			invoice_doc.currency = this.selected_currency || this.pos_profile.currency;
-			invoice_doc.conversion_rate = this.conversion_rate || 1;
-			invoice_doc.plc_conversion_rate = this.exchange_rate || 1;
+                        // Update invoice_doc with current currency info
+                        invoice_doc.currency = this.selected_currency || this.pos_profile.currency;
+                        invoice_doc.conversion_rate = this.conversion_rate || 1;
+                        invoice_doc.plc_conversion_rate = this.exchange_rate || 1;
+
+                        // Sync additional discount values back to the UI so totals remain accurate
+                        // in the summary panel even after the invoice is refreshed from the server.
+                        if (invoice_doc.discount_amount !== undefined && invoice_doc.discount_amount !== null) {
+                                this.discount_amount = this.flt(invoice_doc.discount_amount, this.currency_precision);
+                                this.additional_discount = this.discount_amount;
+                        }
+
+                        if (
+                                invoice_doc.additional_discount_percentage !== undefined &&
+                                invoice_doc.additional_discount_percentage !== null
+                        ) {
+                                this.additional_discount_percentage = this.flt(
+                                        invoice_doc.additional_discount_percentage,
+                                        this.float_precision,
+                                );
+                        }
 
 			// Preserve totals calculated on the server to ensure taxes are included
 			// The process_invoice method already updates the invoice with taxes and
