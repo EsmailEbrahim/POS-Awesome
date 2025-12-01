@@ -887,13 +887,12 @@ export default {
 		displayCurrency() {
 			return this.invoice_doc ? this.invoice_doc.currency : "";
 		},
-		blockSaleBeyondAvailableQty() {
-			if (["Order", "Quotation"].includes(this.invoiceType)) {
-				return false;
-			}
-			const allowNegative = parseBooleanSetting(this.stock_settings?.allow_negative_stock);
-			return !allowNegative && Boolean(this.pos_profile?.posa_block_sale_beyond_available_qty);
-		},
+                blockSaleBeyondAvailableQty() {
+                        if (["Order", "Quotation"].includes(this.invoiceType)) {
+                                return false;
+                        }
+                        return Boolean(this.pos_profile?.posa_block_sale_beyond_available_qty);
+                },
 		// Calculate total payments (all methods, loyalty, credit)
 		total_payments() {
 			let total = 0;

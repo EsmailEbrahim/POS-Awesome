@@ -3563,9 +3563,11 @@ export default {
 				const formattedRequested = this.format_number
 					? this.format_number(requestedQty, this.hide_qty_decimals ? 0 : this.float_precision)
 					: requestedQty;
-				const negativeStockEnabled = this.isNegativeStockEnabled();
-				const shouldBlock =
-					!negativeStockEnabled && (this.blockSaleBeyondAvailableQty || availableQty <= 0);
+                                const negativeStockEnabled = this.isNegativeStockEnabled(newItem);
+                                const exceedsAvailable = availableQty < requestedQty;
+                                const shouldBlock =
+                                        (this.blockSaleBeyondAvailableQty && exceedsAvailable) ||
+                                        (!negativeStockEnabled && exceedsAvailable);
 
 				if (shouldBlock) {
 					this.showScanError({
@@ -3629,8 +3631,10 @@ export default {
 				this.awaitingScanResult = false;
 			}
 		},
-		isNegativeStockEnabled() {
-			return parseBooleanSetting(this.stock_settings?.allow_negative_stock);
+                isNegativeStockEnabled(item = null) {
+                        const allowNegativeSetting = parseBooleanSetting(this.stock_settings?.allow_negative_stock);
+                        const allowNegativeItem = item ? parseBooleanSetting(item.allow_negative_stock) : false;
+                        return allowNegativeSetting || allowNegativeItem;
 		},
 		showMultipleItemsDialog(items, scannedCode) {
 			// Create a dialog to let user choose from multiple matches
@@ -3880,10 +3884,7 @@ export default {
 			return 500;
 		},
 		blockSaleBeyondAvailableQty() {
-			return (
-				Boolean(this.pos_profile?.posa_block_sale_beyond_available_qty) &&
-				!this.isNegativeStockEnabled()
-			);
+                        return Boolean(this.pos_profile?.posa_block_sale_beyond_available_qty);
 		},
 		headers() {
 			return this.getItemsHeaders();

@@ -16,6 +16,7 @@ import { useBatchSerial } from "../../composables/useBatchSerial.js";
 import { useDiscounts } from "../../composables/useDiscounts.js";
 import { useItemAddition } from "../../composables/useItemAddition.js";
 import { useStockUtils } from "../../composables/useStockUtils.js";
+import { parseBooleanSetting } from "../../utils/stock.js";
 import stockCoordinator from "../../utils/stockCoordinator.js";
 import { useItemsStore } from "../../stores/itemsStore.js";
 import { usePricingRulesStore } from "../../stores/pricingRulesStore.js";
@@ -4270,12 +4271,13 @@ export default {
 			this.update_qty_limits(item);
 		}
 
-		const blockSale =
-			this.pos_profile?.posa_block_sale_beyond_available_qty || this.blockSaleBeyondAvailableQty;
-		const allowNegativeStock =
-			item.allow_negative_stock === 1 ||
-			item.allow_negative_stock === true ||
-			item.allow_negative_stock === "1";
+                const blockSale = Boolean(
+                        this.pos_profile?.posa_block_sale_beyond_available_qty || this.blockSaleBeyondAvailableQty,
+                );
+                const allowNegativeStock =
+                        !blockSale &&
+                        (parseBooleanSetting(this.stock_settings?.allow_negative_stock) ||
+                                parseBooleanSetting(item?.allow_negative_stock));
 		let clamped = false;
 		if (
 			blockSale &&
@@ -4319,23 +4321,25 @@ export default {
 			item.max_qty = flt(item._base_actual_qty / (item.conversion_factor || 1));
 
 			// Set increment disable flag based on stock limits
-			const blockSale =
-				this.pos_profile?.posa_block_sale_beyond_available_qty || this.blockSaleBeyondAvailableQty;
-			const allowNegativeStock =
-				item.allow_negative_stock === 1 ||
-				item.allow_negative_stock === true ||
-				item.allow_negative_stock === "1";
+                        const blockSale = Boolean(
+                                this.pos_profile?.posa_block_sale_beyond_available_qty || this.blockSaleBeyondAvailableQty,
+                        );
+                        const allowNegativeStock =
+                                !blockSale &&
+                                (parseBooleanSetting(this.stock_settings?.allow_negative_stock) ||
+                                        parseBooleanSetting(item?.allow_negative_stock));
 
-			if (allowNegativeStock) {
-				item.disable_increment = false;
-			} else if (blockSale) {
-				item.disable_increment = item.qty >= item.max_qty;
-			} else {
-				item.disable_increment =
-					!this.stock_settings.allow_negative_stock && item.qty >= item.max_qty;
-			}
-		}
-	},
+                        if (allowNegativeStock) {
+                                item.disable_increment = false;
+                        } else if (blockSale) {
+                                item.disable_increment = item.qty >= item.max_qty;
+                        } else {
+                                item.disable_increment =
+                                        !parseBooleanSetting(this.stock_settings?.allow_negative_stock) &&
+                                        item.qty >= item.max_qty;
+                        }
+                }
+        },
 
 	// Fetch available stock for an item and cache it
 	async fetch_available_qty(item) {

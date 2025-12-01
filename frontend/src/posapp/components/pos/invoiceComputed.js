@@ -138,13 +138,12 @@ export default {
 	isReturnInvoice() {
 		return this.invoiceType === "Return" || (this.invoice_doc && this.invoice_doc.is_return);
 	},
-	blockSaleBeyondAvailableQty() {
-		if (["Order", "Quotation"].includes(this.invoiceType)) {
-			return false;
-		}
-		const allowNegative = parseBooleanSetting(this.stock_settings?.allow_negative_stock);
-		return !allowNegative && Boolean(this.pos_profile?.posa_block_sale_beyond_available_qty);
-	},
+        blockSaleBeyondAvailableQty() {
+                if (["Order", "Quotation"].includes(this.invoiceType)) {
+                        return false;
+                }
+                return Boolean(this.pos_profile?.posa_block_sale_beyond_available_qty);
+        },
 	// Table headers for item table (for another table if needed)
 	itemTableHeaders() {
 		return [
