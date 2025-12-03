@@ -167,17 +167,14 @@
                                                                                                 density="compact"
                                                                                                 color="primary"
                                                                                         ></v-switch>
-                                                                                        <v-radio-group
+                                                                                        <v-switch
                                                                                                 v-model="temp_show_last_invoice_rate"
-                                                                                                :label="__('Last invoice rate display')"
+                                                                                                :label="__('Show last invoice rate')"
                                                                                                 hide-details
                                                                                                 density="compact"
-                                                                                                class="mt-2"
-                                                                                                inline
-                                                                                        >
-                                                                                                <v-radio :label="__('On')" :value="true" density="compact"></v-radio>
-                                                                                                <v-radio :label="__('Off')" :value="false" density="compact"></v-radio>
-                                                                                        </v-radio-group>
+                                                                                                color="primary"
+                                                                                                class="mb-2"
+                                                                                        ></v-switch>
                                                                                         <v-switch
                                                                                                 v-model="temp_enable_custom_items_per_page"
                                                                                                 :label="__('Custom items per page')"
