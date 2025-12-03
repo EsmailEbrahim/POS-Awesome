@@ -328,23 +328,29 @@
                                 <div v-if="getLastInvoiceRate(item)" class="last-rate-chip">
                                         <v-icon size="14" class="mr-1" color="secondary">mdi-history</v-icon>
                                         <span class="last-rate-label">{{ __('Last') }}:</span>
-                                        <span class="last-rate-value">
-                                                {{
-                                                        currencySymbol(
-                                                                getLastInvoiceRate(item).currency ||
-                                                                        pos_profile.currency,
+                                                <span class="last-rate-value">
+                                                        {{
+                                                                currencySymbol(
+                                                                        getLastInvoiceRate(item).currency ||
+                                                                                pos_profile.currency,
                                                         )
                                                 }}
                                                 {{
-                                                        format_currency(
-                                                                getLastInvoiceRate(item).rate,
-                                                                getLastInvoiceRate(item).currency ||
-                                                                        pos_profile.currency,
-                                                                ratePrecision(getLastInvoiceRate(item).rate || 0),
-                                                        )
-                                                }}
-                                        </span>
-                                </div>
+                                                                format_currency(
+                                                                        getLastInvoiceRate(item).rate,
+                                                                        getLastInvoiceRate(item).currency ||
+                                                                                pos_profile.currency,
+                                                                        ratePrecision(getLastInvoiceRate(item).rate || 0),
+                                                                )
+                                                        }}
+                                                        <span
+                                                                v-if="getLastInvoiceRate(item).uom"
+                                                                class="last-rate-uom"
+                                                        >
+                                                                /{{ getLastInvoiceRate(item).uom }}
+                                                        </span>
+                                                </span>
+                                        </div>
                                                                                                 </div>
                                                                                                 <div class="card-item-stock">
                                                                                                         <v-icon size="small" class="stock-icon">
@@ -422,6 +428,12 @@
                                                                                                                 ratePrecision(getLastInvoiceRate(item).rate || 0),
                                                                                                         )
                                                                                                 }}
+                                                                                                <span
+                                                                                                        v-if="getLastInvoiceRate(item).uom"
+                                                                                                        class="last-rate-uom"
+                                                                                                >
+                                                                                                        /{{ getLastInvoiceRate(item).uom }}
+                                                                                                </span>
                                                                                         </span>
                                                                                 </div>
                                                                                 <div
@@ -1575,16 +1587,17 @@ export default {
 
                                 const rows = (res && res.message) || [];
                                 const updatedCache = new Map(cachedForCustomer);
-                                rows.forEach((row) => {
-                                        if (row && row.item_code) {
-                                                updatedCache.set(row.item_code, {
-                                                        rate: row.rate,
-                                                        currency: row.currency,
-                                                        invoice: row.invoice,
-                                                        posting_date: row.posting_date,
+                                                rows.forEach((row) => {
+                                                        if (row && row.item_code) {
+                                                                updatedCache.set(row.item_code, {
+                                                                        rate: row.rate,
+                                                                        currency: row.currency,
+                                                                        invoice: row.invoice,
+                                                                        uom: row.uom,
+                                                                        posting_date: row.posting_date,
+                                                                });
+                                                        }
                                                 });
-                                        }
-                                });
 
                                 this.lastInvoiceRateCache.set(customer, updatedCache);
                                 this.lastInvoiceRates = Object.fromEntries(updatedCache);
@@ -4952,6 +4965,13 @@ export default {
 .last-rate-value {
         font-weight: 700;
         color: var(--primary-color, #1976d2);
+}
+
+.last-rate-uom {
+        margin-left: 2px;
+        font-weight: 600;
+        font-size: 0.78rem;
+        opacity: 0.8;
 }
 
 .last-rate-inline {
