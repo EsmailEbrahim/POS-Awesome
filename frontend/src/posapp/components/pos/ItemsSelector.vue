@@ -160,18 +160,29 @@
 												color="primary"
 												class="mb-2"
 											></v-switch>
-											<v-switch
-												v-model="temp_hide_zero_rate_items"
-												:label="__('Hide zero rated items')"
-												hide-details
-												density="compact"
-												color="primary"
-											></v-switch>
-											<v-switch
-												v-model="temp_enable_custom_items_per_page"
-												:label="__('Custom items per page')"
-												hide-details
-												density="compact"
+                                                                                        <v-switch
+                                                                                                v-model="temp_hide_zero_rate_items"
+                                                                                                :label="__('Hide zero rated items')"
+                                                                                                hide-details
+                                                                                                density="compact"
+                                                                                                color="primary"
+                                                                                        ></v-switch>
+                                                                                        <v-radio-group
+                                                                                                v-model="temp_show_last_invoice_rate"
+                                                                                                :label="__('Last invoice rate display')"
+                                                                                                hide-details
+                                                                                                density="compact"
+                                                                                                class="mt-2"
+                                                                                                inline
+                                                                                        >
+                                                                                                <v-radio :label="__('On')" :value="true" density="compact"></v-radio>
+                                                                                                <v-radio :label="__('Off')" :value="false" density="compact"></v-radio>
+                                                                                        </v-radio-group>
+                                                                                        <v-switch
+                                                                                                v-model="temp_enable_custom_items_per_page"
+                                                                                                :label="__('Custom items per page')"
+                                                                                                hide-details
+                                                                                                density="compact"
 												color="primary"
 												class="mb-2"
 											>
@@ -635,11 +646,13 @@ export default {
 		items_request_token: 0,
 		pendingGetItems: null,
 		lastGetItemsKey: "",
-		show_item_settings: false,
-		hide_qty_decimals: false,
-		temp_hide_qty_decimals: false,
-		hide_zero_rate_items: false,
-		temp_hide_zero_rate_items: false,
+                show_item_settings: false,
+                hide_qty_decimals: false,
+                temp_hide_qty_decimals: false,
+                hide_zero_rate_items: false,
+                temp_hide_zero_rate_items: false,
+                show_last_invoice_rate: true,
+                temp_show_last_invoice_rate: true,
 		isDragging: false,
 		// Items per page configuration
 		enable_custom_items_per_page: false,
@@ -1497,6 +1510,11 @@ export default {
                 },
 
                 scheduleLastInvoiceRateRefresh() {
+                        if (!this.show_last_invoice_rate) {
+                                this.lastInvoiceRates = {};
+                                return;
+                        }
+
                         if (!this.lastInvoiceRateScheduler) {
                                 this.lastInvoiceRateScheduler = _.debounce(() => {
                                         this.refreshLastInvoiceRatesForVisibleItems();
@@ -1507,6 +1525,11 @@ export default {
                 },
 
                 async refreshLastInvoiceRatesForVisibleItems() {
+                        if (!this.show_last_invoice_rate) {
+                                this.lastInvoiceRates = {};
+                                return this.lastInvoiceRates;
+                        }
+
                         if (!this.displayedItems || !this.displayedItems.length) {
                                 this.lastInvoiceRates = {};
                                 return this.lastInvoiceRates;
@@ -1517,6 +1540,11 @@ export default {
                 },
 
                 async fetchLastInvoiceRates(itemCodes = []) {
+                        if (!this.show_last_invoice_rate) {
+                                this.lastInvoiceRates = {};
+                                return this.lastInvoiceRates;
+                        }
+
                         const customer = this.customer || this.selectedCustomer;
 
                         if (!customer) {
@@ -1574,6 +1602,10 @@ export default {
                 },
 
                 getLastInvoiceRate(item) {
+                        if (!this.show_last_invoice_rate) {
+                                return null;
+                        }
+
                         if (!item || !item.item_code) {
                                 return null;
                         }
@@ -3894,32 +3926,39 @@ export default {
 			}
 		},
 
-		toggleItemSettings() {
-			this.temp_hide_qty_decimals = this.hide_qty_decimals;
-			this.temp_hide_zero_rate_items = this.hide_zero_rate_items;
-			this.temp_enable_custom_items_per_page = this.enable_custom_items_per_page;
-			this.temp_items_per_page = this.items_per_page;
-			this.temp_force_server_items = !!(this.pos_profile && this.pos_profile.posa_force_server_items);
-			this.show_item_settings = true;
-		},
+                toggleItemSettings() {
+                        this.temp_hide_qty_decimals = this.hide_qty_decimals;
+                        this.temp_hide_zero_rate_items = this.hide_zero_rate_items;
+                        this.temp_enable_custom_items_per_page = this.enable_custom_items_per_page;
+                        this.temp_items_per_page = this.items_per_page;
+                        this.temp_force_server_items = !!(this.pos_profile && this.pos_profile.posa_force_server_items);
+                        this.temp_show_last_invoice_rate = this.show_last_invoice_rate;
+                        this.show_item_settings = true;
+                },
 		cancelItemSettings() {
 			this.show_item_settings = false;
 		},
 		applyItemSettings() {
-			this.hide_qty_decimals = this.temp_hide_qty_decimals;
-			this.hide_zero_rate_items = this.temp_hide_zero_rate_items;
-			this.enable_custom_items_per_page = this.temp_enable_custom_items_per_page;
-			if (this.enable_custom_items_per_page) {
-				this.items_per_page = parseInt(this.temp_items_per_page) || 50;
+                        this.hide_qty_decimals = this.temp_hide_qty_decimals;
+                        this.hide_zero_rate_items = this.temp_hide_zero_rate_items;
+                        this.show_last_invoice_rate = this.temp_show_last_invoice_rate;
+                        this.enable_custom_items_per_page = this.temp_enable_custom_items_per_page;
+                        if (this.enable_custom_items_per_page) {
+                                this.items_per_page = parseInt(this.temp_items_per_page) || 50;
 			} else {
 				this.items_per_page = 50;
 			}
-			this.itemsPerPage = this.items_per_page;
-			this.pos_profile.posa_force_server_items = this.temp_force_server_items ? 1 : 0;
-			this.savePosProfileSetting("posa_force_server_items", this.pos_profile.posa_force_server_items);
-			this.saveItemSettings();
-			this.show_item_settings = false;
-		},
+                        this.itemsPerPage = this.items_per_page;
+                        this.pos_profile.posa_force_server_items = this.temp_force_server_items ? 1 : 0;
+                        this.savePosProfileSetting("posa_force_server_items", this.pos_profile.posa_force_server_items);
+                        if (!this.show_last_invoice_rate) {
+                                this.lastInvoiceRates = {};
+                        } else {
+                                this.scheduleLastInvoiceRateRefresh();
+                        }
+                        this.saveItemSettings();
+                        this.show_item_settings = false;
+                },
 		onDragStart(event, item) {
 			this.isDragging = true;
 
@@ -3947,12 +3986,13 @@ export default {
 		saveItemSettings() {
 			if (!this.localStorageAvailable) return;
 			try {
-				const settings = {
-					hide_qty_decimals: this.hide_qty_decimals,
-					hide_zero_rate_items: this.hide_zero_rate_items,
-					enable_custom_items_per_page: this.enable_custom_items_per_page,
-					items_per_page: this.items_per_page,
-				};
+                                const settings = {
+                                        hide_qty_decimals: this.hide_qty_decimals,
+                                        hide_zero_rate_items: this.hide_zero_rate_items,
+                                        show_last_invoice_rate: this.show_last_invoice_rate,
+                                        enable_custom_items_per_page: this.enable_custom_items_per_page,
+                                        items_per_page: this.items_per_page,
+                                };
 				localStorage.setItem("posawesome_item_selector_settings", JSON.stringify(settings));
 			} catch (e) {
 				console.error("Failed to save item selector settings:", e);
@@ -3975,12 +4015,15 @@ export default {
 					if (typeof opts.hide_qty_decimals === "boolean") {
 						this.hide_qty_decimals = opts.hide_qty_decimals;
 					}
-					if (typeof opts.hide_zero_rate_items === "boolean") {
-						this.hide_zero_rate_items = opts.hide_zero_rate_items;
-					}
-					if (typeof opts.enable_custom_items_per_page === "boolean") {
-						this.enable_custom_items_per_page = opts.enable_custom_items_per_page;
-					}
+                                        if (typeof opts.hide_zero_rate_items === "boolean") {
+                                                this.hide_zero_rate_items = opts.hide_zero_rate_items;
+                                        }
+                                        if (typeof opts.show_last_invoice_rate === "boolean") {
+                                                this.show_last_invoice_rate = opts.show_last_invoice_rate;
+                                        }
+                                        if (typeof opts.enable_custom_items_per_page === "boolean") {
+                                                this.enable_custom_items_per_page = opts.enable_custom_items_per_page;
+                                        }
 					if (typeof opts.items_per_page === "number") {
 						this.items_per_page = opts.items_per_page;
 						this.itemsPerPage = this.items_per_page;
@@ -4901,6 +4944,7 @@ export default {
         gap: 4px;
         font-size: 0.85rem;
         color: rgba(0, 0, 0, 0.65);
+        white-space: nowrap;
 }
 
 .last-rate-label {
@@ -4915,6 +4959,7 @@ export default {
 
 .last-rate-inline {
         color: rgba(0, 0, 0, 0.6);
+        white-space: nowrap;
 }
 
 :deep(.v-theme--dark) .last-rate-chip,
