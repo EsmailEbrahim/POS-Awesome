@@ -129,6 +129,7 @@ const DatabaseUsageGadget = defineAsyncComponent(() => import("./navbar/Database
 const DEFAULT_SNACK_TIMEOUT = 3000;
 const OFFLINE_WARNING_TITLE = "Connection lost. Some features might not work.";
 const OFFLINE_WARNING_COOLDOWN_MS = 5 * 60 * 1000; // 5 minutes
+const OFFLINE_NOTIFICATION_KEY = "offline-connection-warning";
 
 export default {
 	name: "NavBar",
@@ -460,25 +461,31 @@ export default {
 				this.processNextNotification();
 			}
 		},
-		normalizeNotification(data = {}) {
-			const title = typeof data.title === "string" ? data.title.trim() : "";
-			const color = data.color || "success";
+                normalizeNotification(data = {}) {
+                        const title = typeof data.title === "string" ? data.title.trim() : "";
+                        const color = data.color || "success";
                         const timeout =
                                 typeof data.timeout === "number" && data.timeout >= 0 ? data.timeout : DEFAULT_SNACK_TIMEOUT;
-                        const cooldownMs =
-                                typeof data.cooldownMs === "number" && data.cooldownMs >= 0 ? data.cooldownMs : undefined;
                         const summary = typeof data.summary === "string" ? data.summary.trim() : "";
                         const detail = typeof data.detail === "string" ? data.detail.trim() : "";
                         const count = Number.isFinite(data.count) && data.count > 0 ? Math.floor(data.count) : 1;
                         const providedKey =
                                 (typeof data.groupId === "string" && data.groupId.trim()) ||
-				(typeof data.groupKey === "string" && data.groupKey.trim()) ||
-				"";
+                                (typeof data.groupKey === "string" && data.groupKey.trim()) ||
+                                "";
 
-			const baseKey = providedKey || `${color}::${summary || title}`;
+                        const offlineWarning = this.isConnectionLossNotification(title, summary, detail);
+                        const cooldownMs =
+                                typeof data.cooldownMs === "number" && data.cooldownMs >= 0
+                                        ? data.cooldownMs
+                                        : offlineWarning
+                                                ? OFFLINE_WARNING_COOLDOWN_MS
+                                                : undefined;
 
-			return {
-				title,
+                        const baseKey = offlineWarning ? OFFLINE_NOTIFICATION_KEY : providedKey || `${color}::${summary || title}`;
+
+                        return {
+                                title,
                                 color,
                                 timeout,
                                 count,
@@ -486,6 +493,7 @@ export default {
                                 summary,
                                 latestDetail: detail,
                                 cooldownMs,
+                                isOfflineWarning: offlineWarning,
                         };
                 },
                 shouldThrottleNotification(notification) {
@@ -509,11 +517,24 @@ export default {
                                 return notification.cooldownMs;
                         }
 
-                        if (notification.title === OFFLINE_WARNING_TITLE) {
+                        if (notification.isOfflineWarning || notification.title === OFFLINE_WARNING_TITLE) {
                                 return OFFLINE_WARNING_COOLDOWN_MS;
                         }
 
                         return 0;
+                },
+                isConnectionLossNotification(title = "", summary = "", detail = "") {
+                        const combined = `${title} ${summary} ${detail}`.toLowerCase();
+                        if (!combined) {
+                                return false;
+                        }
+
+                        return (
+                                combined.includes("connection lost") ||
+                                combined.includes("not connected to internet") ||
+                                (combined.includes("connection") && combined.includes("offline")) ||
+                                (combined.includes("internet") && combined.includes("retry"))
+                        );
                 },
 		mergeNotifications(target, incoming) {
 			target.count += incoming.count;
