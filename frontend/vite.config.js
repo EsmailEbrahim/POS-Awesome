@@ -70,6 +70,7 @@ export default defineConfig({
 		target: "esnext",
 		outDir: "../posawesome/public/dist/js",
 		emptyOutDir: true,
+		cssCodeSplit: false,
 		rollupOptions: {
 			input: {
 				posawesome: path.resolve(__dirname, "src/posawesome.bundle.js"),
@@ -79,6 +80,7 @@ export default defineConfig({
 				format: "es",
 				entryFileNames: "[name].js",
 				chunkFileNames: "[name]-[hash].js",
+				assetFileNames: "posawesome.[ext]",
 				manualChunks: (id) => {
 					if (id.includes("node_modules")) {
 						if (id.includes("vuetify")) {
