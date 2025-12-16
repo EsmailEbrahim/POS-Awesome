@@ -4165,25 +4165,26 @@ export default {
 			const searchTerm = this.get_search(this.first_search).trim().toLowerCase();
 			let filteredItems = baseItems;
 
-			// Optimization: If the store hasn't caught up to the current search term yet (due to debounce),
-			// we could optimistically filter here. However, to keep this computed property fast,
-			// we will rely on the store's state, especially since we disabled the extra debounce layer.
-
-			// Apply search filter only for queries with at least three characters if local filtering is needed
-			// (e.g. if baseItems contains all items but we have a new search term)
-			// Checking if baseItems is "All" vs "Filtered" is complex, but generally if we have a search term
-			// and the store has returned items, they match.
-			// The only case for local filtering is if the store result is a SUPERSET of what we want.
-			// But for now, we assume the store is correct to avoid double filtering cost.
-
-			// If the user is typing (searchTerm exists) but the list is huge, we might still want to filter
-			// locally to narrow down results faster than the store update if the store is slow.
-			// But sticking to the store result is safer and cleaner.
-			// We DO apply the search filter if we detect we are likely looking at a stale "All Items" list
-			// while having a search term.
-			// However, detecting "All Items" cheaply is tricky.
-			// For this optimization pass, we remove the redundant full-scan search filter block entirely
-			// because the store (useItemsStore) handles search filtering efficiently.
+			// Restore local filtering for immediate feedback (Auto Search)
+			// This provides instant results while the store debounces/fetches in the background.
+			if (searchTerm && searchTerm.length >= 3) {
+				const searchTerms = searchTerm.split(/\s+/).filter(Boolean);
+				filteredItems = filteredItems.filter((item) => {
+					// Use optimized search index if available
+					if (item._search_index) {
+						return searchTerms.every((term) => item._search_index.includes(term));
+					}
+					// Fallback for items without index
+					const rawIndex = (
+						(item.item_code || "") +
+						" " +
+						(item.item_name || "") +
+						" " +
+						(item.barcode || "")
+					).toLowerCase();
+					return searchTerms.every((term) => rawIndex.includes(term));
+				});
+			}
 
 			// Redundant item_group filter removed as store handles it.
 
