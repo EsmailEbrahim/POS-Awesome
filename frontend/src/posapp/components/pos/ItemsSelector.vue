@@ -290,7 +290,7 @@
 														</span>
 														<span class="price-amount">
 															{{
-																format_currency(
+																memoizedFormatCurrency(
 																	item.base_price_list_rate ??
 																		item.rate ??
 																		0,
@@ -317,7 +317,7 @@
                                                                                                                 </span>
                                                                                                                 <span class="price-amount">
                                                                                                                         {{
-                                                                                                                               format_currency(
+                                                                                                                               memoizedFormatCurrency(
                                                                                                                                item.rate,
                                                                                                                                selected_currency,
                                                                                                                                ratePrecision(item.rate),
@@ -336,7 +336,7 @@
                                                         )
                                                 }}
                                                 {{
-                                                                format_currency(
+                                                                memoizedFormatCurrency(
                                                                         getLastInvoiceRate(item).rate,
                                                                         getLastInvoiceRate(item).currency ||
                                                                                 pos_profile.currency,
@@ -363,7 +363,7 @@
 														}"
 													>
 														{{
-															format_number(
+															memoizedFormatNumber(
 																item.actual_qty,
 																hide_qty_decimals ? 0 : 4,
 															) || 0
@@ -398,7 +398,7 @@
                                                                                                 currencySymbol(item.original_currency || pos_profile.currency)
                                                                                         }}
                                                                                         {{
-                                                                                                format_currency(
+                                                                                                memoizedFormatCurrency(
                                                                                                         item.base_price_list_rate ?? item.rate ?? 0,
                                                                                                         item.original_currency || pos_profile.currency,
                                                                                                         ratePrecision(
@@ -421,7 +421,7 @@
                                                                                                         )
                                                                                                 }}
                                                                                                 {{
-                                                                                                        format_currency(
+                                                                                                        memoizedFormatCurrency(
                                                                                                                 getLastInvoiceRate(item).rate,
                                                                                                                 getLastInvoiceRate(item).currency ||
                                                                                                                         pos_profile.currency,
@@ -445,7 +445,7 @@
                                                                                 >
                                                                                         {{ currencySymbol(selected_currency) }}
                                                                                         {{
-                                                                                                format_currency(
+                                                                                                memoizedFormatCurrency(
                                                                                                         item.rate,
                                                                                                         selected_currency,
                                                                                                         ratePrecision(item.rate),
@@ -458,7 +458,7 @@
                                                                         <span
                                                                                 class="golden--text"
                                                                                 :class="{ 'negative-number': isNegative(item.actual_qty) }"
-                                                                                >{{ format_number(item.actual_qty, hide_qty_decimals ? 0 : 4) }}</span
+                                                                                >{{ memoizedFormatNumber(item.actual_qty, hide_qty_decimals ? 0 : 4) }}</span
 									>
 								</template>
 							</v-data-table-virtual>
@@ -905,6 +905,7 @@ export default {
 
 		// Refresh item prices whenever the user changes currency
 		selected_currency() {
+			if (this.formatCache) this.formatCache.clear();
 			this.applyCurrencyConversionToItems();
 		},
 
@@ -4070,6 +4071,36 @@ export default {
 	},
 
 	computed: {
+		memoizedFormatCurrency() {
+			return (value, currency, precision) => {
+				const prec = precision ?? this.currency_precision ?? 2;
+				// Handle null/undefined values by defaulting to 0, consistent with format_currency
+				const safeValue = value ?? 0;
+				const key = `c_${safeValue}_${currency}_${prec}`;
+				if (this.formatCache && this.formatCache.has(key)) return this.formatCache.get(key);
+				const result = this.format_currency(value, currency, precision);
+				if (this.formatCache) {
+					this.formatCache.set(key, result);
+					if (this.formatCache.size > 2000) this.formatCache.clear();
+				}
+				return result;
+			};
+		},
+		memoizedFormatNumber() {
+			return (value, precision) => {
+				const prec = precision ?? this.float_precision ?? 2;
+				// Handle null/undefined values by defaulting to 0, consistent with format_number
+				const safeValue = value ?? 0;
+				const key = `n_${safeValue}_${prec}`;
+				if (this.formatCache && this.formatCache.has(key)) return this.formatCache.get(key);
+				const result = this.format_number(value, precision);
+				if (this.formatCache) {
+					this.formatCache.set(key, result);
+					if (this.formatCache.size > 2000) this.formatCache.clear();
+				}
+				return result;
+			};
+		},
 		usesLimitSearch() {
 			const rawValue =
 				this.pos_profile?.pose_use_limit_search ?? this.pos_profile?.posa_use_limit_search;
@@ -4258,6 +4289,7 @@ export default {
 		this.barcodeIndex = new Map();
 		this.itemCache = new Map();
 		this.lastInvoiceRateCache = new Map();
+		this.formatCache = new Map();
 
 		console.log("ItemsSelector created - starting initialization with Pinia store");
 
@@ -4494,6 +4526,10 @@ export default {
 		// Clear interval when component is destroyed
 		if (this.refresh_interval) {
 			clearInterval(this.refresh_interval);
+		}
+
+		if (this.formatCache) {
+			this.formatCache.clear();
 		}
 
 		if (this.keyboardScanTimer) {
