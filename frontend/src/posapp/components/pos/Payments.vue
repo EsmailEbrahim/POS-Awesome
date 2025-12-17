@@ -1636,7 +1636,7 @@ export default {
                                                 invoice: this.invoice_doc,
                                                 order: this.invoice_doc,
                                                 submit_in_background:
-                                                        print && this.pos_profile.posa_allow_submissions_in_background_job,
+                                                        this.pos_profile.posa_allow_submissions_in_background_job,
                                         },
                                 });
 
