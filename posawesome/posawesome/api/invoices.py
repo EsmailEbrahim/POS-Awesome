@@ -835,9 +835,10 @@ def _create_change_payment_entries(invoice_doc, data, pos_profile=None, cash_acc
 
 
 @frappe.whitelist()
-def submit_invoice(invoice, data):
+def submit_invoice(invoice, data, submit_in_background=False):
     data = json.loads(data)
     invoice = json.loads(invoice)
+    submit_in_background = cint(submit_in_background)
     _strip_client_freebies_from_payload(invoice)
     pos_profile = invoice.get("pos_profile")
     doctype = "Sales Invoice"
@@ -950,11 +951,13 @@ def submit_invoice(invoice, data):
             update_modified=False,
         )
 
-    if frappe.get_value(
+    allow_background_submit = frappe.get_value(
         "POS Profile",
         invoice_doc.pos_profile,
         "posa_allow_submissions_in_background_job",
-    ):
+    )
+
+    if submit_in_background and allow_background_submit:
         enqueue(
             method=submit_in_background_job,
             queue="short",
@@ -988,6 +991,12 @@ def submit_in_background_job(kwargs):
     payments = kwargs.get("payments")
 
     invoice_doc = frappe.get_doc(doctype, invoice)
+
+    if invoice_doc.docstatus == 1:
+        return
+
+    invoice_doc.flags.ignore_permissions = True
+    frappe.flags.ignore_account_permission = True
 
     # Update remarks with items details for background job
     items = []
