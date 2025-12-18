@@ -1,14 +1,25 @@
 const path = require("path");
 const { app, BrowserWindow, ipcMain, net, shell } = require("electron");
-const Store = require("electron-store");
 
 const DEFAULT_PATH = "/app/posapp";
-const store = new Store({
-	name: "posawesome-desktop",
-	defaults: {
-		serverUrl: "",
-	},
-});
+
+let store;
+const storeReady = (async () => {
+	const { default: Store } = await import("electron-store");
+	store = new Store({
+		name: "posawesome-desktop",
+		defaults: {
+			serverUrl: "",
+		},
+	});
+})();
+
+async function ensureStoreReady() {
+	await storeReady;
+	if (!store) {
+		throw new Error("Failed to initialize settings store");
+	}
+}
 
 let mainWindow;
 
@@ -49,14 +60,20 @@ function ensureUrl(rawUrl) {
 		return "";
 	}
 
-	if (!parsed.pathname || parsed.pathname === "/") {
+	const trimmedPath = parsed.pathname?.replace(/\/+$/, "") || "";
+	if (!trimmedPath || trimmedPath === "/") {
 		parsed.pathname = DEFAULT_PATH;
+	} else if (trimmedPath === "/app/posawesome" || trimmedPath.startsWith("/app/posawesome/")) {
+		parsed.pathname = trimmedPath.replace("/app/posawesome", DEFAULT_PATH);
 	}
 
 	return parsed.toString().replace(/\/$/, "");
 }
 
 function getStoredUrl() {
+	if (!store) {
+		return "";
+	}
 	const raw = store.get("serverUrl", "");
 	const normalized = ensureUrl(raw);
 	if (!normalized) {
@@ -115,6 +132,9 @@ function loadOffline() {
 }
 
 function loadServer(serverUrl) {
+	if (!store) {
+		return;
+	}
 	const normalized = ensureUrl(serverUrl);
 	if (!normalized) {
 		loadSetup();
@@ -126,6 +146,7 @@ function loadServer(serverUrl) {
 }
 
 async function probeServer() {
+	await ensureStoreReady();
 	const url = getStoredUrl();
 	if (!url) {
 		return { reachable: false, message: "No server URL configured" };
@@ -149,7 +170,8 @@ app.on("window-all-closed", () => {
 	}
 });
 
-app.whenReady().then(() => {
+app.whenReady().then(async () => {
+	await ensureStoreReady();
 	app.setAppUserModelId("com.posawesome.desktop");
 	createWindow();
 
@@ -160,13 +182,15 @@ app.whenReady().then(() => {
 	});
 });
 
-ipcMain.handle("get-server-url", () => {
+ipcMain.handle("get-server-url", async () => {
+	await ensureStoreReady();
 	return store.get("serverUrl", "");
 });
 
 ipcMain.handle("normalize-server-url", (_event, value) => ensureUrl(value));
 
-ipcMain.handle("set-server-url", (_event, value) => {
+ipcMain.handle("set-server-url", async (_event, value) => {
+	await ensureStoreReady();
 	const normalized = ensureUrl(value);
 	if (!normalized) {
 		throw new Error("Please provide a valid server URL (e.g. https://example.com)");
@@ -175,7 +199,8 @@ ipcMain.handle("set-server-url", (_event, value) => {
 	return normalized;
 });
 
-ipcMain.handle("retry-load", () => {
+ipcMain.handle("retry-load", async () => {
+	await ensureStoreReady();
 	const url = getStoredUrl();
 	if (!url) {
 		loadSetup();
@@ -192,7 +217,8 @@ ipcMain.handle("open-settings", () => {
 
 ipcMain.handle("probe-server", async () => probeServer());
 
-ipcMain.handle("reset-server", () => {
+ipcMain.handle("reset-server", async () => {
+	await ensureStoreReady();
 	store.delete("serverUrl");
 	loadSetup();
 });
