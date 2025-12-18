@@ -101,7 +101,7 @@
 		<div class="card">
 			<div class="icon">📡</div>
 			<h1>Offline Mode</h1>
-			<p>Network ya server tak pohanch nahi ho rahi. Local cache available hai, lekin sync ke liye server ki zaroorat hai.</p>
+			<p>We can't reach the network or your server right now. Your local cache is available, but syncing requires the server.</p>
 			<p id="server-label" class="small"></p>
 			<div class="actions">
 				<button id="retry" class="primary" type="button">Retry connection</button>
@@ -111,13 +111,13 @@
 		<script>
 			const serverLabel = document.getElementById("server-label");
 			window.electronAPI.getServerUrl().then((saved) => {
-				serverLabel.textContent = saved ? `Last saved server: ${saved}` : "Server URL set nahi hai.";
+				serverLabel.textContent = saved ? `Last saved server: ${saved}` : "No server URL is set.";
 			});
 
 			document.getElementById("retry").addEventListener("click", async () => {
 				const result = await window.electronAPI.retryLoad();
 				if (!result?.launched) {
-					serverLabel.textContent = "Server URL set nahi hai.";
+					serverLabel.textContent = "No server URL is set.";
 				}
 			});
 
