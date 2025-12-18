@@ -57,6 +57,7 @@
     "appId": "com.posawesome.desktop",
     "productName": "POS Awesome Desktop",
     "asar": true,
+    "publish": "never",
     "directories": {
       "output": "dist-electron"
     },
