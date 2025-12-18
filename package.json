@@ -1,6 +1,6 @@
 {
   "name": "posawesome",
-  "version": "15.9.3",
+  "version": "15.13.0",
   "main": "electron/main.js",
   "scripts": {
     "dev": "cd frontend && yarn dev",
@@ -68,21 +68,30 @@
       "node_modules/**/*"
     ],
     "mac": {
-      "target": ["dmg", "zip"]
+      "target": [
+        "dmg",
+        "zip"
+      ]
     },
     "win": {
-      "target": ["nsis"],
+      "target": [
+        "nsis"
+      ],
       "artifactName": "POSAwesome-Setup-${version}.${ext}"
     },
     "linux": {
-      "target": ["AppImage"],
+      "target": [
+        "AppImage"
+      ],
       "artifactName": "POSAwesome-${version}.${ext}",
       "category": "Office"
     },
     "protocols": [
       {
         "name": "POS Awesome Links",
-        "schemes": ["posawesome"]
+        "schemes": [
+          "posawesome"
+        ]
       }
     ]
   },
