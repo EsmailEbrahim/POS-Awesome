@@ -1,5 +1,5 @@
 const path = require("path");
-const { app, BrowserWindow, ipcMain, net, shell } = require("electron");
+const { app, BrowserWindow, ipcMain, net, shell, Menu } = require("electron");
 
 const DEFAULT_PATH = "/app/posapp";
 
@@ -119,6 +119,8 @@ function createWindow() {
 	} else {
 		loadSetup();
 	}
+
+	buildAppMenu();
 }
 
 function loadSetup() {
@@ -143,6 +145,36 @@ function loadServer(serverUrl) {
 
 	store.set("serverUrl", normalized);
 	mainWindow.loadURL(normalized);
+}
+
+function buildAppMenu() {
+	const template = [
+		{
+			label: "POS Awesome",
+			submenu: [
+				{
+					label: "Change server",
+					accelerator: "CmdOrCtrl+Shift+C",
+					click: () => {
+						if (mainWindow) {
+							loadSetup();
+							mainWindow.focus();
+						}
+					},
+				},
+				{ type: "separator" },
+				{ role: "reload" },
+				{ role: "toggleDevTools" },
+				{ type: "separator" },
+				process.platform === "darwin" ? { role: "close" } : { role: "quit" },
+			].filter(Boolean),
+		},
+		{ role: "editMenu" },
+		{ role: "viewMenu" },
+	];
+
+	const menu = Menu.buildFromTemplate(template);
+	Menu.setApplicationMenu(menu);
 }
 
 async function probeServer() {
