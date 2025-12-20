@@ -1702,8 +1702,8 @@ export default {
 						status === 1 ||
 						(docstatus === undefined && status === undefined);
 
-					if (!wasSubmitted) {
-						if (this.pos_profile?.posa_allow_submissions_in_background_job && backgroundReason) {
+					if (!wasSubmitted && backgroundReason) {
+						if (this.pos_profile?.posa_allow_submissions_in_background_job) {
 							if (this.eventBus && typeof this.eventBus.emit === "function") {
 								this.eventBus.emit("invoice_submission_failed", {
 									invoice: responseInvoiceName,
@@ -1713,8 +1713,8 @@ export default {
 						}
 
 						this.eventBus.emit("show_message", {
-							title: __("Invoice {0} stayed in draft", [responseInvoiceName || ""]),
-							color: "warning",
+							title: __("Error submitting invoice: {0}", [responseInvoiceName || ""]),
+							color: "error",
 							detail: backgroundReason,
 						});
 						this.finishSubmissionNavigation(true);
