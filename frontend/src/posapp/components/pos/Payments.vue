@@ -1688,28 +1688,34 @@ export default {
 						return;
 					}
 
-					const wasSubmitted = r.message?.docstatus === 1 || r.message?.status === 1;
+					const docstatus = r.message?.docstatus;
+					const status = r.message?.status;
 					const responseInvoiceName = r.message?.name || this.invoice_doc?.name;
+					const backgroundReason =
+						r.message?.error ||
+						r.message?.exc ||
+						r.message?.exception ||
+						r.message?.message;
 
-					if (!wasSubmitted && this.pos_profile?.posa_allow_submissions_in_background_job) {
-						const backgroundReason =
-							r.message?.error ||
-							r.message?.exc ||
-							r.message?.exception ||
-							r.message?.message ||
-							__("Submission kept as draft while processing in background.");
-						if (this.eventBus && typeof this.eventBus.emit === "function") {
-							this.eventBus.emit("invoice_submission_failed", {
-								invoice: responseInvoiceName,
-								reason: backgroundReason,
-							});
-						}
-					}
+					const wasSubmitted =
+						docstatus === 1 ||
+						status === 1 ||
+						(docstatus === undefined && status === undefined);
 
 					if (!wasSubmitted) {
+						if (this.pos_profile?.posa_allow_submissions_in_background_job && backgroundReason) {
+							if (this.eventBus && typeof this.eventBus.emit === "function") {
+								this.eventBus.emit("invoice_submission_failed", {
+									invoice: responseInvoiceName,
+									reason: backgroundReason,
+								});
+							}
+						}
+
 						this.eventBus.emit("show_message", {
 							title: __("Invoice {0} stayed in draft", [responseInvoiceName || ""]),
 							color: "warning",
+							detail: backgroundReason,
 						});
 						this.finishSubmissionNavigation(true);
 						return;
