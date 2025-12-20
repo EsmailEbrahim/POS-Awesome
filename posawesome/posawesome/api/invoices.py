@@ -967,8 +967,8 @@ def submit_invoice(invoice, data, submit_in_background=False):
     if submit_in_background and allow_background_submit:
         enqueue(
             method=submit_in_background_job,
-            queue="short",
-            timeout=1000,
+            queue="default",
+            timeout=3000,
             is_async=True,
             kwargs={
                 "invoice": invoice_doc.name,
