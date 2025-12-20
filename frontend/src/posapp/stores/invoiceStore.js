@@ -41,11 +41,47 @@ export const useInvoiceStore = defineStore("invoice", () => {
 		changeVersion: 0,
 	});
 
+	// Totals as refs for O(1) access and controlled updates
+	const totalQty = ref(0);
+	const grossTotal = ref(0);
+	const discountTotal = ref(0);
+
 	const touch = () => {
 		metadata.value = {
 			lastUpdated: Date.now(),
 			changeVersion: metadata.value.changeVersion + 1,
 		};
+	};
+
+	// O(n) calculation of totals
+	const recalculateTotals = () => {
+		let tQty = 0;
+		let tGross = 0;
+		let tDisc = 0;
+
+		for (const item of itemsData.values()) {
+			const qty = toNumber(item.qty);
+			const rate = toNumber(item.rate);
+			const disc = toNumber(item.discount_amount || 0);
+
+			tQty += qty;
+			tGross += qty * rate;
+			tDisc += Math.abs(qty * disc);
+		}
+
+		totalQty.value = tQty;
+		grossTotal.value = tGross;
+		discountTotal.value = tDisc;
+	};
+
+	// Throttled update trigger
+	let updateTimer = null;
+	const triggerUpdateTotals = () => {
+		if (updateTimer) return;
+		updateTimer = setTimeout(() => {
+			recalculateTotals();
+			updateTimer = null;
+		}, 50);
 	};
 
 	const normalizeDoc = (doc) => {
@@ -86,6 +122,7 @@ export const useInvoiceStore = defineStore("invoice", () => {
 		}
 		itemOrder.value = order;
 		touch();
+		recalculateTotals(); // Immediate update on set
 	};
 
 	const addItem = (item, index = -1) => {
@@ -104,6 +141,7 @@ export const useInvoiceStore = defineStore("invoice", () => {
 			itemOrder.value.push(rowId);
 		}
 		touch();
+		triggerUpdateTotals(); // Throttled update for additions (can be immediate if preferred)
 		// Return the reactive proxy from the map
 		return itemsData.get(rowId);
 	};
@@ -129,9 +167,10 @@ export const useInvoiceStore = defineStore("invoice", () => {
 				itemOrder.value.push(...addedIds);
 			}
 			touch();
+			recalculateTotals(); // Immediate update for batch addition
 		}
 
-		return addedIds.map(id => itemsData.get(id));
+		return addedIds.map((id) => itemsData.get(id));
 	};
 
 	const replaceItemAt = (index, item) => {
@@ -148,6 +187,7 @@ export const useInvoiceStore = defineStore("invoice", () => {
 		}
 		itemsData.set(rowId, cloneItem(item));
 		touch();
+		triggerUpdateTotals();
 	};
 
 	const upsertItem = (item) => {
@@ -168,6 +208,7 @@ export const useInvoiceStore = defineStore("invoice", () => {
 		} else {
 			addItem(item);
 		}
+		// Watcher will catch this, or addItem triggers it
 	};
 
 	const removeItemByRowId = (rowId) => {
@@ -182,6 +223,7 @@ export const useInvoiceStore = defineStore("invoice", () => {
 				itemOrder.value.splice(idx, 1);
 			}
 			touch();
+			recalculateTotals(); // Immediate update on remove
 		}
 	};
 
@@ -190,6 +232,9 @@ export const useInvoiceStore = defineStore("invoice", () => {
 			itemOrder.value = [];
 			itemsData.clear();
 			touch();
+			totalQty.value = 0;
+			grossTotal.value = 0;
+			discountTotal.value = 0;
 		}
 	};
 
@@ -212,38 +257,9 @@ export const useInvoiceStore = defineStore("invoice", () => {
 			.filter((item) => item !== undefined && item !== null);
 	});
 
-	const totalQty = computed(() => {
-		let sum = 0;
-		for (const item of itemsData.values()) {
-			sum += toNumber(item.qty);
-		}
-		return sum;
-	});
-
-	const grossTotal = computed(() => {
-		let sum = 0;
-		for (const item of itemsData.values()) {
-			sum += toNumber(item.qty) * toNumber(item.rate);
-		}
-		return sum;
-	});
-
-	const discountTotal = computed(() => {
-		let sum = 0;
-		for (const item of itemsData.values()) {
-			const qty = Math.abs(toNumber(item.qty));
-			sum += qty * toNumber(item.discount_amount || 0);
-		}
-		return sum;
-	});
-
 	const itemsCount = computed(() => itemOrder.value.length);
 
 	const itemsMap = computed(() => {
-		// Return the reactive map directly or a readonly version
-		// For backward compatibility where itemsMap was computed from array
-		// Here we can just return a Map that has index info if needed?
-		// Previous implementation: map.set(item.posa_row_id, { index, item });
 		const map = new Map();
 		itemOrder.value.forEach((id, index) => {
 			const item = itemsData.get(id);
@@ -259,6 +275,7 @@ export const useInvoiceStore = defineStore("invoice", () => {
 		itemsData,
 		() => {
 			touch();
+			triggerUpdateTotals();
 		},
 		{ deep: true },
 	);
@@ -286,6 +303,7 @@ export const useInvoiceStore = defineStore("invoice", () => {
 		clearItems,
 		setPackedItems,
 		clear,
+		recalculateTotals, // Exposed for manual trigger if needed
 	};
 });
 
