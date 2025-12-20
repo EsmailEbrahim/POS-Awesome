@@ -831,11 +831,11 @@ export default {
 		return { invoiceStore, selectedCustomer, customerInfoFromStore: customerInfo };
 	},
 	data() {
-		return {
-			loading: false, // UI loading state
-			pos_profile: "", // POS profile settings
-			pos_settings: {}, // POS settings
-			stock_settings: "", // Stock settings
+			return {
+				loading: false, // UI loading state
+				pos_profile: "", // POS profile settings
+				pos_settings: {}, // POS settings
+				stock_settings: "", // Stock settings
 			invoiceType: "Invoice", // Type of invoice
 			is_return: false, // Is this a return invoice?
 			loyalty_amount: 0, // Loyalty points to redeem
@@ -862,12 +862,13 @@ export default {
 			mpesa_modes: [], // List of available M-Pesa modes
 			sales_persons: [], // List of sales persons
 			sales_person: "", // Selected sales person
-			addresses: [], // List of customer addresses
-			is_user_editing_paid_change: false, // User interaction flag
-			highlightSubmit: false, // Highlight state for submit button
-			last_payment_change_was_cash: null, // Track last edited payment type
-		};
-	},
+				addresses: [], // List of customer addresses
+				is_user_editing_paid_change: false, // User interaction flag
+				highlightSubmit: false, // Highlight state for submit button
+				last_payment_change_was_cash: null, // Track last edited payment type
+				backgroundStatusCheck: null,
+			};
+		},
 	computed: {
 		invoice_doc: {
 			get() {
@@ -1718,6 +1719,7 @@ export default {
 							detail: backgroundReason,
 						});
 						this.finishSubmissionNavigation(true);
+						this.scheduleBackgroundStatusCheck(responseInvoiceName, r.message?.doctype);
 						return;
 					}
 
@@ -1728,33 +1730,34 @@ export default {
 					this.redeem_customer_credit = false;
 					this.is_cashback = true;
 					this.is_credit_return = false;
-					this.sales_person = "";
-					this.eventBus.emit("set_last_invoice", this.invoice_doc.name);
-					this.eventBus.emit("show_message", {
-						title:
-							this.invoiceType === "Order" && this.pos_profile.posa_create_only_sales_order
-								? __("Sales Order {0} is Submitted", [r.message.name])
-								: this.invoiceType === "Quotation"
-									? __("Quotation {0} is Submitted", [r.message.name])
-									: __("Invoice {0} is Submitted", [r.message.name]),
-						color: "success",
-					});
-					frappe.utils.play_sound("submit");
-					const submittedItems = Array.isArray(this.invoice_doc.items) ? this.invoice_doc.items : [];
-					updateLocalStock(submittedItems);
-					stockCoordinator.applyInvoiceConsumption(submittedItems, {
-						source: "invoice",
-					});
-					const submittedCodes = submittedItems
-						.map((item) => (item ? item.item_code : null))
-						.filter((code) => code !== undefined && code !== null);
-					this.eventBus.emit("invoice_stock_adjusted", {
-						items: submittedItems,
-						item_codes: submittedCodes,
-						timestamp: Date.now(),
-					});
-					this.finishSubmissionNavigation(true);
-				} catch (exc) {
+				this.sales_person = "";
+				this.eventBus.emit("set_last_invoice", this.invoice_doc.name);
+				this.eventBus.emit("show_message", {
+					title:
+						this.invoiceType === "Order" && this.pos_profile.posa_create_only_sales_order
+							? __("Sales Order {0} is Submitted", [r.message.name])
+							: this.invoiceType === "Quotation"
+								? __("Quotation {0} is Submitted", [r.message.name])
+								: __("Invoice {0} is Submitted", [r.message.name]),
+					color: "success",
+				});
+				frappe.utils.play_sound("submit");
+				const submittedItems = Array.isArray(this.invoice_doc.items) ? this.invoice_doc.items : [];
+				updateLocalStock(submittedItems);
+				stockCoordinator.applyInvoiceConsumption(submittedItems, {
+					source: "invoice",
+				});
+				const submittedCodes = submittedItems
+					.map((item) => (item ? item.item_code : null))
+					.filter((code) => code !== undefined && code !== null);
+				this.eventBus.emit("invoice_stock_adjusted", {
+					items: submittedItems,
+					item_codes: submittedCodes,
+					timestamp: Date.now(),
+				});
+				this.finishSubmissionNavigation(true);
+				this.scheduleBackgroundStatusCheck(responseInvoiceName, r.message?.doctype);
+			} catch (exc) {
 					console.error("Error submitting invoice:", exc);
 					let errorMsg = this.extractSubmissionErrorMessage(exc);
 					if (errorMsg.includes("Amount must be negative")) {
@@ -1789,10 +1792,58 @@ export default {
 							title: __("Error submitting invoice: ") + errorMsg,
 							color: "error",
 						});
-						if (this.pos_profile?.posa_allow_submissions_in_background_job) {
+					if (this.pos_profile?.posa_allow_submissions_in_background_job) {
 							this.finishSubmissionNavigation(true);
+							this.scheduleBackgroundStatusCheck(this.invoice_doc?.name, this.invoice_doc?.doctype);
 						}
 					}
+				}
+			},
+			scheduleBackgroundStatusCheck(invoiceName, doctype) {
+				this.clearBackgroundStatusCheck();
+				if (!this.pos_profile?.posa_allow_submissions_in_background_job) {
+					return;
+				}
+				if (!invoiceName) {
+					return;
+				}
+				this.backgroundStatusCheck = setTimeout(async () => {
+					try {
+						const result = await frappe.call({
+							method: "frappe.client.get_value",
+							args: {
+								doctype: doctype || this.invoice_doc?.doctype || "Sales Invoice",
+								filters: { name: invoiceName },
+								fieldname: ["docstatus"],
+							},
+						});
+						const status = result?.message?.docstatus;
+						if (status === 1) {
+							return;
+						}
+						const reason = this.__("Invoice is still in draft after background submission.");
+						if (this.eventBus && typeof this.eventBus.emit === "function") {
+							this.eventBus.emit("invoice_submission_failed", {
+								invoice: invoiceName,
+								reason,
+							});
+						}
+						this.eventBus.emit("show_message", {
+							title: __("Error submitting invoice: {0}", [invoiceName]),
+							color: "error",
+							detail: reason,
+						});
+					} catch (err) {
+						console.error("Background status check failed", err);
+					} finally {
+						this.clearBackgroundStatusCheck();
+					}
+				}, 10000);
+			},
+			clearBackgroundStatusCheck() {
+				if (this.backgroundStatusCheck) {
+					clearTimeout(this.backgroundStatusCheck);
+					this.backgroundStatusCheck = null;
 				}
 			},
 		// Set full amount for a payment method (or negative for returns)
@@ -2681,13 +2732,14 @@ export default {
 		this.eventBus.off("register_pos_profile");
 		this.eventBus.off("add_the_new_address");
 		this.eventBus.off("update_invoice_type");
-		this.eventBus.off("set_pos_settings");
-		this.eventBus.off("set_mpesa_payment");
-		this.eventBus.off("clear_invoice");
-		this.eventBus.off("network-online", this.syncPendingInvoices);
-		this.eventBus.off("server-online", this.syncPendingInvoices);
-		this.eventBus.off("show_payment", this.handleShowPayment);
-	},
+			this.eventBus.off("set_pos_settings");
+			this.eventBus.off("set_mpesa_payment");
+			this.eventBus.off("clear_invoice");
+			this.eventBus.off("network-online", this.syncPendingInvoices);
+			this.eventBus.off("server-online", this.syncPendingInvoices);
+			this.eventBus.off("show_payment", this.handleShowPayment);
+			this.clearBackgroundStatusCheck();
+		},
 	// Lifecycle hook: unmounted
 	unmounted() {
 		// Remove keyboard shortcut listener
