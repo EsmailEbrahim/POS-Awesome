@@ -729,7 +729,7 @@ export default {
 		keyboardScanLastTime: 0,
 		keyboardScanStartTime: 0,
 		keyboardScanPendingValue: "",
-		keyboardScanMinLength: 6,
+		keyboardScanMinLength: 8,
 		// Require scanner-like speed to avoid triggering on manual typing
 		keyboardScanMaxInterval: 45,
 		keyboardScanMaxDuration: 250,
