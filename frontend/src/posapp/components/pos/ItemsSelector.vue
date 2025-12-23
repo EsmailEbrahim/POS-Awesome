@@ -729,8 +729,10 @@ export default {
 		keyboardScanLastTime: 0,
 		keyboardScanStartTime: 0,
 		keyboardScanPendingValue: "",
-		keyboardScanMinLength: 6,
-		keyboardScanMaxInterval: 65,
+		keyboardScanMinLength: 8,
+		// Require scanner-like speed to avoid triggering on manual typing
+		keyboardScanMaxInterval: 45,
+		keyboardScanMaxDuration: 250,
 		keyboardScanProcessingDelay: 100,
 		lastInvoiceRates: {},
 		lastInvoiceRateScheduler: null,
@@ -2203,8 +2205,8 @@ export default {
 			// Keep first_search in sync with the value we are about to search for
 			vm.first_search = trimmedQuery;
 
-			// If the input is a numeric string longer than 6 characters, treat it as a barcode
-			if (/^\d{7,}$/.test(trimmedQuery)) {
+			// If the input is a numeric string longer than 8 characters, treat it as a barcode
+			if (/^\d{8,}$/.test(trimmedQuery)) {
 				vm.onBarcodeScanned(trimmedQuery);
 				return;
 			}
@@ -3411,6 +3413,14 @@ export default {
 
 			if (!duration || duration <= 0) {
 				return true;
+			}
+
+			if (
+				this.keyboardScanMaxDuration &&
+				typeof this.keyboardScanMaxDuration === "number" &&
+				duration > this.keyboardScanMaxDuration
+			) {
+				return false;
 			}
 
 			const averageInterval = duration / code.length;
