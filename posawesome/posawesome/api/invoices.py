@@ -673,8 +673,13 @@ def update_invoice(data):
             and "does not exist in Sales Invoice" in str(e)
         ):
             frappe.msgprint(str(e), title=_("Warning"), indicator="orange")
+            original_return_against = invoice_doc.return_against
             invoice_doc.return_against = None
             invoice_doc.save()
+            frappe.db.set_value(
+                invoice_doc.doctype, invoice_doc.name, "return_against", original_return_against
+            )
+            invoice_doc.return_against = original_return_against
         else:
             raise
 
@@ -994,7 +999,25 @@ def submit_invoice(invoice, data, submit_in_background=False):
             },
         )
     else:
-        invoice_doc.submit()
+        try:
+            invoice_doc.submit()
+        except frappe.ValidationError as e:
+            if (
+                invoice_doc.is_return
+                and invoice_doc.return_against
+                and "Returned Item" in str(e)
+                and "does not exist in Sales Invoice" in str(e)
+            ):
+                original_return_against = invoice_doc.return_against
+                invoice_doc.return_against = None
+                invoice_doc.submit()
+                frappe.db.set_value(
+                    invoice_doc.doctype, invoice_doc.name, "return_against", original_return_against
+                )
+                invoice_doc.return_against = original_return_against
+            else:
+                raise
+
         _create_change_payment_entries(invoice_doc, data, pos_profile, cash_account)
         redeeming_customer_credit(invoice_doc, data, is_payment_entry, total_cash, cash_account, payments)
 
@@ -1038,9 +1061,44 @@ def submit_in_background_job(kwargs):
             if not invoice_doc.loyalty_redemption_cost_center:
                 invoice_doc.loyalty_redemption_cost_center = invoice_doc.cost_center
 
-        invoice_doc.save()
+        try:
+            invoice_doc.save()
+        except frappe.ValidationError as e:
+            if (
+                invoice_doc.is_return
+                and invoice_doc.return_against
+                and "Returned Item" in str(e)
+                and "does not exist in Sales Invoice" in str(e)
+            ):
+                original_return_against = invoice_doc.return_against
+                invoice_doc.return_against = None
+                invoice_doc.save()
+                frappe.db.set_value(
+                    invoice_doc.doctype, invoice_doc.name, "return_against", original_return_against
+                )
+                invoice_doc.return_against = original_return_against
+            else:
+                raise
 
-        invoice_doc.submit()
+        try:
+            invoice_doc.submit()
+        except frappe.ValidationError as e:
+            if (
+                invoice_doc.is_return
+                and invoice_doc.return_against
+                and "Returned Item" in str(e)
+                and "does not exist in Sales Invoice" in str(e)
+            ):
+                original_return_against = invoice_doc.return_against
+                invoice_doc.return_against = None
+                invoice_doc.submit()
+                frappe.db.set_value(
+                    invoice_doc.doctype, invoice_doc.name, "return_against", original_return_against
+                )
+                invoice_doc.return_against = original_return_against
+            else:
+                raise
+
         _create_change_payment_entries(invoice_doc, data, invoice_doc.pos_profile, cash_account)
         redeeming_customer_credit(invoice_doc, data, is_payment_entry, total_cash, cash_account, payments)
 
