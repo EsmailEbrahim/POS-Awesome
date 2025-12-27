@@ -49,10 +49,15 @@ def _get_return_validity_settings(pos_profile: str | None = None):
     default_days = 0
 
     if pos_profile:
-        profile = frappe.get_cached_doc("POS Profile", pos_profile)
-        enable_validity = cint(getattr(profile, "posa_enable_return_validity", 0))
-        if enable_validity:
-            default_days = cint(getattr(profile, "posa_return_validity_days", 0))
+        profile = None
+        try:
+            profile = frappe.get_cached_doc("POS Profile", pos_profile)
+        except frappe.DoesNotExistError:
+            profile = None
+        if profile:
+            enable_validity = cint(getattr(profile, "posa_enable_return_validity", 0))
+            if enable_validity:
+                default_days = cint(getattr(profile, "posa_return_validity_days", 0))
 
     if not enable_validity:
         settings = frappe.get_cached_doc("POS Settings")
