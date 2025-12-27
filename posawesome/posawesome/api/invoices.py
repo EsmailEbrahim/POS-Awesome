@@ -965,7 +965,25 @@ def submit_invoice(invoice, data, submit_in_background=False):
     invoice_doc.flags.ignore_permissions = True
     frappe.flags.ignore_account_permission = True
     invoice_doc.posa_is_printed = 1
-    invoice_doc.save()
+    try:
+        invoice_doc.save()
+    except frappe.ValidationError as e:
+        if (
+            invoice_doc.is_return
+            and invoice_doc.return_against
+            and "Returned Item" in str(e)
+            and "does not exist in Sales Invoice" in str(e)
+        ):
+            frappe.msgprint(str(e), title=_("Warning"), indicator="orange")
+            original_return_against = invoice_doc.return_against
+            invoice_doc.return_against = None
+            invoice_doc.save()
+            frappe.db.set_value(
+                invoice_doc.doctype, invoice_doc.name, "return_against", original_return_against
+            )
+            invoice_doc.return_against = original_return_against
+        else:
+            raise
 
     if data.get("due_date"):
         frappe.db.set_value(

@@ -874,28 +874,6 @@ export default {
 			get() {
 				return this.invoiceStore.invoiceDoc;
 			},
-			extractSubmissionErrorMessage(exc) {
-				if (!exc) {
-					return __("Unknown error");
-				}
-				if (exc?._server_messages) {
-					try {
-						const parsed = JSON.parse(exc._server_messages);
-						if (Array.isArray(parsed) && parsed.length) {
-							const first = parsed[0];
-							if (typeof first === "string") {
-								return frappe.utils.strip_html(first);
-							}
-						}
-					} catch {
-						/* ignore parse issues */
-					}
-				}
-				if (exc?.message) {
-					return exc.message;
-				}
-				return exc.toString ? exc.toString() : __("Unknown error");
-			},
 			set(value) {
 				this.invoiceStore.setInvoiceDoc(value);
 			},
@@ -1334,6 +1312,28 @@ export default {
 		},
 	},
 	methods: {
+		extractSubmissionErrorMessage(exc) {
+			if (!exc) {
+				return __("Unknown error");
+			}
+			if (exc?._server_messages) {
+				try {
+					const parsed = JSON.parse(exc._server_messages);
+					if (Array.isArray(parsed) && parsed.length) {
+						const first = parsed[0];
+						if (typeof first === "string") {
+							return frappe.utils.strip_html(first);
+						}
+					}
+				} catch {
+					/* ignore parse issues */
+				}
+			}
+			if (exc?.message) {
+				return exc.message;
+			}
+			return exc.toString ? exc.toString() : __("Unknown error");
+		},
 		// Go back to invoice view and reset customer readonly
 		back_to_invoice() {
 			this.eventBus.emit("show_payment", "false");
