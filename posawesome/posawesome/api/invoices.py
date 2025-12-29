@@ -49,10 +49,15 @@ def _get_return_validity_settings(pos_profile: str | None = None):
     default_days = 0
 
     if pos_profile:
-        profile = frappe.get_cached_doc("POS Profile", pos_profile)
-        enable_validity = cint(getattr(profile, "posa_enable_return_validity", 0))
-        if enable_validity:
-            default_days = cint(getattr(profile, "posa_return_validity_days", 0))
+        profile = None
+        try:
+            profile = frappe.get_cached_doc("POS Profile", pos_profile)
+        except frappe.DoesNotExistError:
+            profile = None
+        if profile:
+            enable_validity = cint(getattr(profile, "posa_enable_return_validity", 0))
+            if enable_validity:
+                default_days = cint(getattr(profile, "posa_return_validity_days", 0))
 
     if not enable_validity:
         settings = frappe.get_cached_doc("POS Settings")
@@ -663,7 +668,30 @@ def update_invoice(data):
     invoice_doc.flags.ignore_permissions = True
     frappe.flags.ignore_account_permission = True
     invoice_doc.docstatus = 0
-    invoice_doc.save()
+    try:
+        invoice_doc.save()
+    except frappe.ValidationError as e:
+        if (
+            invoice_doc.is_return
+            and invoice_doc.return_against
+            and "Returned Item" in str(e)
+            and "does not exist in Sales Invoice" in str(e)
+        ):
+            frappe.msgprint(
+                _("Warning: Return link removed to allow non-original items."),
+                title=_("Warning"),
+                indicator="orange",
+            )
+            # Reload timestamp to prevent TimestampMismatchError on retry
+            latest_modified = frappe.db.get_value(
+                invoice_doc.doctype, invoice_doc.name, "modified"
+            )
+            if latest_modified:
+                invoice_doc.modified = latest_modified
+            invoice_doc.return_against = None
+            invoice_doc.save()
+        else:
+            raise
 
     # Return both the invoice doc and the updated data
     response = invoice_doc.as_dict()
@@ -947,7 +975,30 @@ def submit_invoice(invoice, data, submit_in_background=False):
     invoice_doc.flags.ignore_permissions = True
     frappe.flags.ignore_account_permission = True
     invoice_doc.posa_is_printed = 1
-    invoice_doc.save()
+    try:
+        invoice_doc.save()
+    except frappe.ValidationError as e:
+        if (
+            invoice_doc.is_return
+            and invoice_doc.return_against
+            and "Returned Item" in str(e)
+            and "does not exist in Sales Invoice" in str(e)
+        ):
+            frappe.msgprint(
+                _("Warning: Return link removed to allow non-original items."),
+                title=_("Warning"),
+                indicator="orange",
+            )
+            # Reload timestamp to prevent TimestampMismatchError on retry
+            latest_modified = frappe.db.get_value(
+                invoice_doc.doctype, invoice_doc.name, "modified"
+            )
+            if latest_modified:
+                invoice_doc.modified = latest_modified
+            invoice_doc.return_against = None
+            invoice_doc.save()
+        else:
+            raise
 
     if data.get("due_date"):
         frappe.db.set_value(
@@ -981,7 +1032,26 @@ def submit_invoice(invoice, data, submit_in_background=False):
             },
         )
     else:
-        invoice_doc.submit()
+        try:
+            invoice_doc.submit()
+        except frappe.ValidationError as e:
+            if (
+                invoice_doc.is_return
+                and invoice_doc.return_against
+                and "Returned Item" in str(e)
+                and "does not exist in Sales Invoice" in str(e)
+            ):
+                # Reload timestamp to prevent TimestampMismatchError on retry
+                latest_modified = frappe.db.get_value(
+                    invoice_doc.doctype, invoice_doc.name, "modified"
+                )
+                if latest_modified:
+                    invoice_doc.modified = latest_modified
+                invoice_doc.return_against = None
+                invoice_doc.submit()
+            else:
+                raise
+
         _create_change_payment_entries(invoice_doc, data, pos_profile, cash_account)
         redeeming_customer_credit(invoice_doc, data, is_payment_entry, total_cash, cash_account, payments)
 
@@ -1025,9 +1095,46 @@ def submit_in_background_job(kwargs):
             if not invoice_doc.loyalty_redemption_cost_center:
                 invoice_doc.loyalty_redemption_cost_center = invoice_doc.cost_center
 
-        invoice_doc.save()
+        try:
+            invoice_doc.save()
+        except frappe.ValidationError as e:
+            if (
+                invoice_doc.is_return
+                and invoice_doc.return_against
+                and "Returned Item" in str(e)
+                and "does not exist in Sales Invoice" in str(e)
+            ):
+                # Reload timestamp to prevent TimestampMismatchError on retry
+                latest_modified = frappe.db.get_value(
+                    invoice_doc.doctype, invoice_doc.name, "modified"
+                )
+                if latest_modified:
+                    invoice_doc.modified = latest_modified
+                invoice_doc.return_against = None
+                invoice_doc.save()
+            else:
+                raise
 
-        invoice_doc.submit()
+        try:
+            invoice_doc.submit()
+        except frappe.ValidationError as e:
+            if (
+                invoice_doc.is_return
+                and invoice_doc.return_against
+                and "Returned Item" in str(e)
+                and "does not exist in Sales Invoice" in str(e)
+            ):
+                # Reload timestamp to prevent TimestampMismatchError on retry
+                latest_modified = frappe.db.get_value(
+                    invoice_doc.doctype, invoice_doc.name, "modified"
+                )
+                if latest_modified:
+                    invoice_doc.modified = latest_modified
+                invoice_doc.return_against = None
+                invoice_doc.submit()
+            else:
+                raise
+
         _create_change_payment_entries(invoice_doc, data, invoice_doc.pos_profile, cash_account)
         redeeming_customer_credit(invoice_doc, data, is_payment_entry, total_cash, cash_account, payments)
 
