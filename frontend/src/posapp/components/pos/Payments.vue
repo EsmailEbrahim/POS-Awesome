@@ -1925,7 +1925,10 @@ export default {
 		},
 		// Open print page for invoice
 		load_print_page() {
-			const print_format = this.print_format || this.pos_profile.print_format_for_online || this.pos_profile.print_format;
+			const print_format =
+				this.print_format ||
+				this.pos_profile.print_format_for_online ||
+				this.pos_profile.print_format;
 			const letter_head = this.pos_profile.letter_head || 0;
 			let doctype;
 
@@ -2659,18 +2662,18 @@ export default {
 			frappe.call({
 				method: "posawesome.posawesome.api.print_formats.get_print_formats",
 				args: {
-					doctype: "Sales Invoice"
+					doctype: "Sales Invoice",
 				},
 				callback: (r) => {
 					this.print_formats = r.message;
-				}
+				},
 			});
 		},
 		set_print_format() {
 			this.print_format = "";
 			if (this.pos_profile.posa_print_format_rules && this.customer_info) {
 				const rule = this.pos_profile.posa_print_format_rules.find(
-					(r) => r.customer_group === this.customer_info.customer_group
+					(r) => r.customer_group === this.customer_info.customer_group,
 				);
 				if (rule) {
 					this.print_format = rule.print_format;

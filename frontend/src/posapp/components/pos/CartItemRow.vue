@@ -75,6 +75,11 @@
 					:data-length="qtyLength"
 					:title="formatFloat(item.qty, hideQtyDecimals ? 0 : undefined)"
 					@click.stop="openQtyEdit"
+					tabindex="0"
+					role="button"
+					:aria-label="__('Edit quantity')"
+					@keydown.enter.prevent="openQtyEdit"
+					@keydown.space.prevent="openQtyEdit"
 				>
 					{{ formatFloat(item.qty, hideQtyDecimals ? 0 : undefined) }}
 				</div>
@@ -163,6 +168,11 @@
 					v-if="!isEditingDiscountPercent"
 					class="pos-table__editor-display"
 					@click.stop="openDiscountPercentEdit"
+					tabindex="0"
+					role="button"
+					:aria-label="__('Edit discount percentage')"
+					@keydown.enter.prevent="openDiscountPercentEdit"
+					@keydown.space.prevent="openDiscountPercentEdit"
 				>
 					<span class="amount-value">
 						{{
@@ -201,6 +211,11 @@
 					v-if="!isEditingDiscountAmount"
 					class="pos-table__editor-display"
 					@click.stop="openDiscountAmountEdit"
+					tabindex="0"
+					role="button"
+					:aria-label="__('Edit discount amount')"
+					@keydown.enter.prevent="openDiscountAmountEdit"
+					@keydown.space.prevent="openDiscountAmountEdit"
 				>
 					<span class="currency-symbol">{{ currencySymbol(displayCurrency) }}</span>
 					<span class="amount-value">{{
@@ -227,7 +242,16 @@
 		<!-- Rate Column -->
 		<td class="text-center" :data-column-key="'rate'">
 			<div class="pos-table__editor-box">
-				<div v-if="!isEditingRate" class="pos-table__editor-display" @click.stop="openRateEdit">
+				<div
+					v-if="!isEditingRate"
+					class="pos-table__editor-display"
+					@click.stop="openRateEdit"
+					tabindex="0"
+					role="button"
+					:aria-label="__('Edit rate')"
+					@keydown.enter.prevent="openRateEdit"
+					@keydown.space.prevent="openRateEdit"
+				>
 					<span class="currency-symbol">{{ currencySymbol(displayCurrency) }}</span>
 					<span class="amount-value" :class="{ 'negative-number': isNegative(item.rate) }">
 						{{ formatCurrency(item.rate) }}
@@ -928,5 +952,13 @@ td {
 	text-align: center;
 	color: var(--pos-text-primary);
 	position: relative;
+}
+
+/* Keyboard focus styles */
+.pos-table__qty-display:focus-visible,
+.pos-table__editor-display:focus-visible {
+	outline: 2px solid var(--pos-primary);
+	outline-offset: 2px;
+	z-index: 10;
 }
 </style>
