@@ -3554,8 +3554,16 @@ export default {
 				}
 
 				const tableRef = this.$refs.itemsTable;
-				if (tableRef?.scrollToIndex) {
-					tableRef.scrollToIndex(index);
+				const scrollToIndex =
+					tableRef?.scrollToIndex || tableRef?.$?.exposed?.scrollToIndex || null;
+				if (scrollToIndex) {
+					const scheduleScroll =
+						typeof requestAnimationFrame === "function"
+							? requestAnimationFrame
+							: (callback) => setTimeout(callback, 0);
+					scheduleScroll(() => {
+						scrollToIndex(index);
+					});
 					return;
 				}
 
