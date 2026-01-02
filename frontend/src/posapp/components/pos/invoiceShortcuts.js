@@ -161,6 +161,12 @@ export default {
 			return;
 		}
 
+		if (keyLower === "l") {
+			consumeEvent(event);
+			this.get_draft_invoices?.();
+			return;
+		}
+
 		if (keyLower === "m") {
 			consumeEvent(event);
 			this.eventBus.emit("toggle_item_selector_settings");
