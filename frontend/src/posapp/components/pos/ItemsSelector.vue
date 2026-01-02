@@ -3571,6 +3571,12 @@ export default {
 				const wrapper = tableEl?.querySelector?.(".v-table__wrapper");
 				const rows = tableEl?.querySelectorAll?.("tbody tr");
 				if (wrapper && rows && rows.length > 0) {
+					const targetRow = rows[index];
+					if (targetRow && typeof targetRow.offsetTop === "number") {
+						wrapper.scrollTop = Math.max(0, targetRow.offsetTop - wrapper.clientHeight / 2);
+						return;
+					}
+
 					const rowHeight = rows[0].getBoundingClientRect().height || 0;
 					if (rowHeight > 0) {
 						wrapper.scrollTop = rowHeight * index;
