@@ -276,7 +276,7 @@
 									<div
 										v-if="item"
 										:key="item.item_code"
-										class="card-item-card"
+										:class="['card-item-card', { 'item-highlighted': isItemHighlighted(item) }]"
 										:style="{
 											width: cardColumnWidth + 'px',
 											height: cardRowHeight + 'px',
@@ -416,6 +416,7 @@
 						</div>
 						<div v-else class="items-table-container">
 							<v-data-table-virtual
+								ref="itemsTable"
 								:headers="headers"
 								:items="displayedItems"
 								class="sleek-data-table overflow-y-auto"
@@ -426,6 +427,7 @@
 								:header-props="headerProps"
 								:no-data-text="__('No items found')"
 								@click:row="click_item_row"
+								:item-class="getItemRowClass"
 								@scroll.passive="onListScroll"
 							>
 								<template v-slot:item.rate="{ item }">
@@ -764,6 +766,8 @@ export default {
 		keyboardScanMaxInterval: 45,
 		keyboardScanMaxDuration: 250,
 		keyboardScanProcessingDelay: 100,
+		highlightedIndex: -1,
+		highlightedItemCode: null,
 		lastInvoiceRates: {},
 		lastInvoiceRateScheduler: null,
 		lastInvoiceRateLoading: false,
@@ -772,6 +776,7 @@ export default {
 	watch: {
 		search_input(newValue) {
 			this.first_search = newValue;
+			this.clearHighlightedItem();
 			this.search_onchange();
 		},
 		customer: _.debounce(function () {
@@ -919,6 +924,7 @@ export default {
 				this.scheduleCardMetricsUpdate();
 			});
 			this.scheduleLastInvoiceRateRefresh();
+			this.syncHighlightedItem();
 		},
 		// Automatically search when the query has at least 3 characters
 		first_search: _.debounce(function (val, oldVal) {
@@ -2221,7 +2227,14 @@ export default {
 				}
 			}
 		},
-		onEnter() {
+		onEnter(event) {
+			if (this.highlightedIndex >= 0) {
+				if (event && typeof event.preventDefault === "function") {
+					event.preventDefault();
+				}
+				this.selectHighlightedItem();
+				return;
+			}
 			if (this.search_onchange.cancel) {
 				this.search_onchange.cancel();
 			}
@@ -3369,6 +3382,12 @@ export default {
 
 			const key = event.key || "";
 
+			if (key === "ArrowDown" || key === "ArrowUp") {
+				event.preventDefault();
+				this.navigateHighlightedItem(key === "ArrowDown" ? 1 : -1);
+				return;
+			}
+
 			if (key === "Enter" || key === "Escape") {
 				return;
 			}
@@ -3472,6 +3491,108 @@ export default {
 			this.keyboardScanLastTime = 0;
 			this.keyboardScanStartTime = 0;
 			this.keyboardScanPendingValue = "";
+		},
+		clearHighlightedItem() {
+			this.highlightedIndex = -1;
+			this.highlightedItemCode = null;
+		},
+		syncHighlightedItem() {
+			if (!Array.isArray(this.displayedItems) || this.displayedItems.length === 0) {
+				this.clearHighlightedItem();
+				return;
+			}
+
+			if (this.highlightedItemCode) {
+				const index = this.displayedItems.findIndex(
+					(item) => item && item.item_code === this.highlightedItemCode,
+				);
+				if (index >= 0) {
+					this.highlightedIndex = index;
+					return;
+				}
+			}
+
+			this.clearHighlightedItem();
+		},
+		navigateHighlightedItem(direction) {
+			if (!Array.isArray(this.displayedItems) || this.displayedItems.length === 0) {
+				this.clearHighlightedItem();
+				return;
+			}
+
+			let nextIndex = this.highlightedIndex;
+			if (nextIndex < 0) {
+				nextIndex = direction > 0 ? 0 : this.displayedItems.length - 1;
+			} else {
+				nextIndex += direction;
+			}
+
+			if (nextIndex < 0) {
+				nextIndex = 0;
+			}
+
+			if (nextIndex >= this.displayedItems.length) {
+				nextIndex = this.displayedItems.length - 1;
+			}
+
+			const nextItem = this.displayedItems[nextIndex];
+			if (!nextItem) {
+				this.clearHighlightedItem();
+				return;
+			}
+
+			this.highlightedIndex = nextIndex;
+			this.highlightedItemCode = nextItem.item_code || null;
+			this.scrollHighlightedItemIntoView(nextIndex);
+		},
+		scrollHighlightedItemIntoView(index) {
+			this.$nextTick(() => {
+				if (this.items_view === "card") {
+					this.$refs.itemsContainer?.scrollToItem?.(index);
+					return;
+				}
+
+				const tableRef = this.$refs.itemsTable;
+				if (tableRef?.scrollToIndex) {
+					tableRef.scrollToIndex(index);
+					return;
+				}
+
+				const tableEl = tableRef?.$el || tableRef;
+				const rows = tableEl?.querySelectorAll?.("tbody tr");
+				if (rows && rows[index]) {
+					rows[index].scrollIntoView({ block: "nearest" });
+				}
+			});
+		},
+		isItemHighlighted(item) {
+			if (!item || !this.highlightedItemCode) {
+				return false;
+			}
+			return item.item_code === this.highlightedItemCode;
+		},
+		getItemRowClass(item) {
+			return this.isItemHighlighted(item) ? "item-row-highlighted" : "";
+		},
+		async selectHighlightedItem() {
+			if (!Array.isArray(this.displayedItems) || this.displayedItems.length === 0) {
+				return;
+			}
+
+			const index = this.highlightedIndex;
+			if (index < 0 || index >= this.displayedItems.length) {
+				return;
+			}
+
+			const item = this.displayedItems[index];
+			if (!item) {
+				return;
+			}
+
+			await this.add_item(item);
+			this.clearHighlightedItem();
+			this.clearSearch();
+			this.focusItemSearch();
 		},
 		async processScannedItem(scannedCode) {
 			const mark = perfMarkStart("pos:scan-process");
@@ -4940,6 +5061,16 @@ export default {
 	transform: translate3d(0, -2px, 0);
 	box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
 	border-color: var(--primary-color, #1976d2);
+}
+
+.card-item-card.item-highlighted {
+	border-color: var(--primary-color, #1976d2);
+	box-shadow: 0 0 0 2px rgba(25, 118, 210, 0.2);
+	transform: translate3d(0, -1px, 0);
+}
+
+:deep(.item-row-highlighted) {
+	background-color: rgba(25, 118, 210, 0.12);
 }
 
 .card-item-image-container {
