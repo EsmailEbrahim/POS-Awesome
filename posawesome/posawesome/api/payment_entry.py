@@ -257,9 +257,45 @@ def get_outstanding_invoices(customer=None, company=None, currency=None, pos_pro
                 for entry in journal_entries
             ]
 
-            journal_entries = [
-                entry for entry in journal_entries if flt(entry.get("outstanding_amount")) > 0
-            ]
+            journal_entry_names = [entry.get("voucher_no") for entry in journal_entries]
+            allocated_map = {}
+            if party_account and journal_entry_names:
+                allocated_rows = frappe.db.sql(
+                    """
+                        SELECT
+                            against_voucher AS voucher_no,
+                            SUM(credit - debit) AS allocated_amount
+                        FROM `tabGL Entry`
+                        WHERE docstatus = 1
+                            AND against_voucher_type = 'Journal Entry'
+                            AND against_voucher IN %(voucher_nos)s
+                            AND party_type = 'Customer'
+                            AND party = %(customer)s
+                            AND account = %(party_account)s
+                        GROUP BY against_voucher
+                    """,
+                    {
+                        "voucher_nos": tuple(journal_entry_names),
+                        "customer": customer,
+                        "party_account": party_account,
+                    },
+                    as_dict=True,
+                )
+                allocated_map = {
+                    row.voucher_no: flt(row.allocated_amount) for row in allocated_rows or []
+                }
+
+            updated_entries = []
+            for entry in journal_entries:
+                allocated_amount = flt(allocated_map.get(entry.get("voucher_no")))
+                if allocated_amount:
+                    entry.outstanding_amount = max(
+                        0, flt(entry.outstanding_amount) - max(0, allocated_amount)
+                    )
+                if flt(entry.outstanding_amount) > 0:
+                    updated_entries.append(entry)
+
+            journal_entries = updated_entries
 
         outstanding_invoices = outstanding_invoices + journal_entries
         outstanding_invoices = sorted(
