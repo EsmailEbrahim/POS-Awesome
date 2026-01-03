@@ -273,20 +273,28 @@ export default {
 	watch: {
 		additional_discount(value) {
 			if (!this.isEditingAdditionalDiscount) {
-				this.additionalDiscountDisplay = value;
+				this.additionalDiscountDisplay = this.normalizeDiscountDisplay(value);
 			}
 		},
 		additional_discount_percentage(value) {
 			if (!this.isEditingAdditionalDiscountPercentage) {
-				this.additionalDiscountPercentageDisplay = value;
+				this.additionalDiscountPercentageDisplay = this.normalizeDiscountDisplay(value);
 			}
 		},
 	},
 	created() {
-		this.additionalDiscountDisplay = this.additional_discount;
-		this.additionalDiscountPercentageDisplay = this.additional_discount_percentage;
+		this.additionalDiscountDisplay = this.normalizeDiscountDisplay(this.additional_discount);
+		this.additionalDiscountPercentageDisplay = this.normalizeDiscountDisplay(
+			this.additional_discount_percentage,
+		);
 	},
 	methods: {
+		normalizeDiscountDisplay(value) {
+			if (value === 0 || value === "0") {
+				return "";
+			}
+			return value;
+		},
 		// Debounced handlers for better performance
 		handleAdditionalDiscountUpdate(value) {
 			this.$emit("update:additional_discount", value);
