@@ -23,8 +23,10 @@
 					<v-col cols="6" v-if="!pos_profile.posa_use_percentage_discount">
 						<v-text-field
 							ref="additionalDiscountField"
-							:model-value="additional_discount"
+							v-model="additionalDiscountDisplay"
 							@update:model-value="handleAdditionalDiscountUpdate"
+							@focus="handleAdditionalDiscountFocus"
+							@blur="handleAdditionalDiscountBlur"
 							:label="frappe._('Additional Discount')"
 							prepend-inner-icon="mdi-cash-minus"
 							variant="solo"
@@ -42,9 +44,11 @@
 					<v-col cols="6" v-else>
 						<v-text-field
 							ref="additionalDiscountField"
-							:model-value="additional_discount_percentage"
+							v-model="additionalDiscountPercentageDisplay"
 							@update:model-value="handleAdditionalDiscountPercentageUpdate"
 							@change="$emit('update_discount_umount')"
+							@focus="handleAdditionalDiscountPercentageFocus"
+							@blur="handleAdditionalDiscountPercentageBlur"
 							:rules="[isNumber]"
 							:label="frappe._('Additional Discount %')"
 							suffix="%"
@@ -233,6 +237,14 @@ export default {
 			printLoading: false,
 			applyOffersLoading: false,
 			paymentLoading: false,
+			additionalDiscountDisplay: null,
+			additionalDiscountPercentageDisplay: null,
+			previousAdditionalDiscount: null,
+			previousAdditionalDiscountPercentage: null,
+			isEditingAdditionalDiscount: false,
+			isEditingAdditionalDiscountPercentage: false,
+			isAdditionalDiscountDirty: false,
+			isAdditionalDiscountPercentageDirty: false,
 		};
 	},
 	emits: [
@@ -262,10 +274,41 @@ export default {
 			return false;
 		},
 	},
+	watch: {
+		additional_discount(value) {
+			if (!this.isEditingAdditionalDiscount) {
+				this.additionalDiscountDisplay = value;
+			}
+		},
+		additional_discount_percentage(value) {
+			if (!this.isEditingAdditionalDiscountPercentage) {
+				this.additionalDiscountPercentageDisplay = value;
+			}
+		},
+	},
+	created() {
+		this.additionalDiscountDisplay = this.additional_discount;
+		this.additionalDiscountPercentageDisplay = this.additional_discount_percentage;
+	},
 	methods: {
 		// Debounced handlers for better performance
 		handleAdditionalDiscountUpdate(value) {
+			this.isAdditionalDiscountDirty = true;
 			this.$emit("update:additional_discount", value);
+		},
+
+		handleAdditionalDiscountFocus() {
+			this.isEditingAdditionalDiscount = true;
+			this.isAdditionalDiscountDirty = false;
+			this.previousAdditionalDiscount = this.additional_discount;
+			this.additionalDiscountDisplay = "";
+		},
+
+		handleAdditionalDiscountBlur() {
+			if (!this.isAdditionalDiscountDirty) {
+				this.$emit("update:additional_discount", this.previousAdditionalDiscount);
+			}
+			this.isEditingAdditionalDiscount = false;
 		},
 
 		focusAdditionalDiscountField() {
@@ -278,7 +321,25 @@ export default {
 		},
 
 		handleAdditionalDiscountPercentageUpdate(value) {
+			this.isAdditionalDiscountPercentageDirty = true;
 			this.$emit("update:additional_discount_percentage", value);
+		},
+
+		handleAdditionalDiscountPercentageFocus() {
+			this.isEditingAdditionalDiscountPercentage = true;
+			this.isAdditionalDiscountPercentageDirty = false;
+			this.previousAdditionalDiscountPercentage = this.additional_discount_percentage;
+			this.additionalDiscountPercentageDisplay = "";
+		},
+
+		handleAdditionalDiscountPercentageBlur() {
+			if (!this.isAdditionalDiscountPercentageDirty) {
+				this.$emit(
+					"update:additional_discount_percentage",
+					this.previousAdditionalDiscountPercentage,
+				);
+			}
+			this.isEditingAdditionalDiscountPercentage = false;
 		},
 
 		async handleSaveAndClear() {
