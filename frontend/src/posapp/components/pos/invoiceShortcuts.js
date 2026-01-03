@@ -138,6 +138,12 @@ export default {
 			return;
 		}
 
+		if (keyLower === "a") {
+			consumeEvent(event);
+			this.focusAdditionalDiscountField?.();
+			return;
+		}
+
 		if (keyLower === "u") {
 			consumeEvent(event);
 			this.focusItemTableField("uom");

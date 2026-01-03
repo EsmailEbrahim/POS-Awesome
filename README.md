@@ -159,6 +159,7 @@ Notes:
 
 - `Alt + PageUp` open payments panel.
 - `Alt + Home` go to home and reload.
+- `Alt + A` focus additional discount field.
 - `Alt + Q` focus quantity field for first item and then the next item (cycles).
 - `Alt + U` focus UOM field for first item and then the next item (cycles).
 - `Alt + R` focus rate field for first item and then the next item (cycles).

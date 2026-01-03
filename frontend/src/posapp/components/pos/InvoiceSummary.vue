@@ -22,6 +22,7 @@
 					<!-- Additional Discount (Amount or Percentage) -->
 					<v-col cols="6" v-if="!pos_profile.posa_use_percentage_discount">
 						<v-text-field
+							ref="additionalDiscountField"
 							:model-value="additional_discount"
 							@update:model-value="handleAdditionalDiscountUpdate"
 							:label="frappe._('Additional Discount')"
@@ -40,6 +41,7 @@
 
 					<v-col cols="6" v-else>
 						<v-text-field
+							ref="additionalDiscountField"
 							:model-value="additional_discount_percentage"
 							@update:model-value="handleAdditionalDiscountPercentageUpdate"
 							@change="$emit('update_discount_umount')"
@@ -264,6 +266,15 @@ export default {
 		// Debounced handlers for better performance
 		handleAdditionalDiscountUpdate(value) {
 			this.$emit("update:additional_discount", value);
+		},
+
+		focusAdditionalDiscountField() {
+			const field = this.$refs.additionalDiscountField;
+			const input = field?.$el?.querySelector?.("input");
+			if (input?.disabled) {
+				return;
+			}
+			input?.focus?.();
 		},
 
 		handleAdditionalDiscountPercentageUpdate(value) {
