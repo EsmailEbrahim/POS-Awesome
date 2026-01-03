@@ -239,12 +239,8 @@ export default {
 			paymentLoading: false,
 			additionalDiscountDisplay: null,
 			additionalDiscountPercentageDisplay: null,
-			previousAdditionalDiscount: null,
-			previousAdditionalDiscountPercentage: null,
 			isEditingAdditionalDiscount: false,
 			isEditingAdditionalDiscountPercentage: false,
-			isAdditionalDiscountDirty: false,
-			isAdditionalDiscountPercentageDirty: false,
 		};
 	},
 	emits: [
@@ -293,21 +289,14 @@ export default {
 	methods: {
 		// Debounced handlers for better performance
 		handleAdditionalDiscountUpdate(value) {
-			this.isAdditionalDiscountDirty = true;
 			this.$emit("update:additional_discount", value);
 		},
 
 		handleAdditionalDiscountFocus() {
 			this.isEditingAdditionalDiscount = true;
-			this.isAdditionalDiscountDirty = false;
-			this.previousAdditionalDiscount = this.additional_discount;
-			this.additionalDiscountDisplay = "";
 		},
 
 		handleAdditionalDiscountBlur() {
-			if (!this.isAdditionalDiscountDirty) {
-				this.$emit("update:additional_discount", this.previousAdditionalDiscount);
-			}
 			this.isEditingAdditionalDiscount = false;
 		},
 
@@ -321,24 +310,14 @@ export default {
 		},
 
 		handleAdditionalDiscountPercentageUpdate(value) {
-			this.isAdditionalDiscountPercentageDirty = true;
 			this.$emit("update:additional_discount_percentage", value);
 		},
 
 		handleAdditionalDiscountPercentageFocus() {
 			this.isEditingAdditionalDiscountPercentage = true;
-			this.isAdditionalDiscountPercentageDirty = false;
-			this.previousAdditionalDiscountPercentage = this.additional_discount_percentage;
-			this.additionalDiscountPercentageDisplay = "";
 		},
 
 		handleAdditionalDiscountPercentageBlur() {
-			if (!this.isAdditionalDiscountPercentageDirty) {
-				this.$emit(
-					"update:additional_discount_percentage",
-					this.previousAdditionalDiscountPercentage,
-				);
-			}
 			this.isEditingAdditionalDiscountPercentage = false;
 		},
 
