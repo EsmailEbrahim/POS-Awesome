@@ -301,6 +301,7 @@
 		</v-card>
 		<!-- Payment Section -->
 		<InvoiceSummary
+			ref="invoiceSummary"
 			:pos_profile="pos_profile"
 			:total_qty="total_qty"
 			:additional_discount="additional_discount"
@@ -495,6 +496,10 @@ export default {
 
 		focusItemSearchField() {
 			this.eventBus.emit("focus_item_search");
+		},
+
+		focusAdditionalDiscountField() {
+			this.$refs.invoiceSummary?.focusAdditionalDiscountField?.();
 		},
 
 		initializeItemsHeaders() {

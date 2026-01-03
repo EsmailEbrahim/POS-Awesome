@@ -139,13 +139,13 @@ Notes:
 
 - `F4` profile switch (currently shows “not available” message).
 - `F5` open new customer form.
-- `F11` open shift details.
-- `F12` POS lock (currently shows “not available” message).
+- `F7` open shift details.
+- `F8` POS lock (currently shows “not available” message).
 
 #### Alt + Number
 
 - `Alt + 1` close payments panel.
-- `Alt + 2` clear invoice, reset posting date, focus item search.
+- `Alt + 2` open cancel dialog.
 - `Alt + 3` focus item search.
 - `Alt + 4` select top item.
 - `Alt + 5` focus customer search.
@@ -159,6 +159,7 @@ Notes:
 
 - `Alt + PageUp` open payments panel.
 - `Alt + Home` go to home and reload.
+- `Alt + A` focus additional discount field.
 - `Alt + Q` focus quantity field for first item and then the next item (cycles).
 - `Alt + U` focus UOM field for first item and then the next item (cycles).
 - `Alt + R` focus rate field for first item and then the next item (cycles).
@@ -167,7 +168,6 @@ Notes:
 - `Alt + L` load draft invoices.
 - `Alt + M` toggle item selector settings.
 - `Alt + S` save and clear invoice.
-- `Alt + C` open cancel dialog.
 
 #### Payments Panel
 

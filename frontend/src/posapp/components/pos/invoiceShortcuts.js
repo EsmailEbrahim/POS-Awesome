@@ -32,13 +32,13 @@ export default {
 			return;
 		}
 
-		if (key === "F11") {
+		if (key === "F7") {
 			consumeEvent(event);
 			this.eventBus.emit("open_shift_details");
 			return;
 		}
 
-		if (key === "F12") {
+		if (key === "F8") {
 			consumeEvent(event);
 			this.eventBus.emit("show_message", {
 				title: __("POS lock is not available yet"),
@@ -63,11 +63,7 @@ export default {
 
 		if (isDigit(event, 2)) {
 			consumeEvent(event);
-			if (typeof this.clear_invoice === "function") {
-				this.clear_invoice();
-				this.eventBus.emit("reset_posting_date");
-				this.eventBus.emit("focus_item_search");
-			}
+			this.cancel_dialog = true;
 			return;
 		}
 
@@ -138,6 +134,12 @@ export default {
 			return;
 		}
 
+		if (keyLower === "a") {
+			consumeEvent(event);
+			this.focusAdditionalDiscountField?.();
+			return;
+		}
+
 		if (keyLower === "u") {
 			consumeEvent(event);
 			this.focusItemTableField("uom");
@@ -185,12 +187,6 @@ export default {
 		if (keyLower === "s") {
 			consumeEvent(event);
 			this.save_and_clear_invoice?.();
-			return;
-		}
-
-		if (keyLower === "c") {
-			consumeEvent(event);
-			this.cancel_dialog = true;
 			return;
 		}
 
