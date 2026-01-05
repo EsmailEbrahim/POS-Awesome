@@ -118,6 +118,16 @@ export function useItemAddition() {
 		cache.lastItems = itemsRef;
 	};
 
+	const shouldAutoSetBatch = (context, item) => {
+		if (!context?.setBatchQty || !context?.pos_profile?.posa_auto_set_batch) {
+			return false;
+		}
+		if (!item?.has_batch_no || item.batch_no) {
+			return false;
+		}
+		return Array.isArray(item.batch_no_data) && item.batch_no_data.length > 0;
+	};
+
 	const invalidateMergeCache = (context) => {
 		if (context && context._mergeIndexCache) {
 			context._mergeIndexCache.signature = -1;
@@ -284,6 +294,10 @@ export function useItemAddition() {
 			addedItems.forEach((item, index) => {
 				const resolvers = currentResolvers[index]; // Array of resolvers
 				refreshMergeCacheEntry(context, item, 0);
+				// Benchmark note: Use preloaded batch data to avoid extra fetches on auto-assign.
+				if (shouldAutoSetBatch(context, item)) {
+					context.setBatchQty(item, null, false);
+				}
 				runAsyncTask(() => expandBundle(item, context), "expand_bundle");
 
 				// OPTIMIZATION: Removed immediate server calls.
@@ -436,6 +450,9 @@ export function useItemAddition() {
 				item.to_set_batch_no = null;
 				item.batch_no = null;
 				if (context.setBatchQty) context.setBatchQty(new_item, new_item.batch_no, false);
+			}
+			if (shouldAutoSetBatch(context, new_item)) {
+				context.setBatchQty(new_item, null, false);
 			}
 			// Make quantity negative for returns
 			if (context.isReturnInvoice) {
