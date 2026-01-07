@@ -137,7 +137,7 @@
 							</template>
 							<template v-slot:item.outstanding_amount="{ item }">
 								<span class="text-primary"
-									>{{ currencySymbol(item?.currency || pos_profile.currency) }}
+									>{{ currencySymbol(item?.party_account_currency || item?.currency || pos_profile.currency) }}
 									{{ formatCurrency(item?.outstanding_amount || 0) }}</span
 								>
 							</template>
