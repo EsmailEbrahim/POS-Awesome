@@ -195,6 +195,7 @@ def get_outstanding_invoices(customer=None, company=None, currency=None, pos_pro
                 "due_date",
                 "posting_date",
                 "currency",  # Always fetch currency
+                "party_account_currency",
                 "pos_profile",
                 "customer",
                 "customer_name",
