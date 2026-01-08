@@ -836,6 +836,7 @@ import { useInvoiceStore } from "../../stores/invoiceStore.js";
 import { useCustomersStore } from "../../stores/customersStore.js";
 import { storeToRefs } from "pinia";
 import stockCoordinator from "../../utils/stockCoordinator.js";
+import { parseBooleanSetting } from "../../utils/stock.js";
 
 export default {
 	// Using format mixin for shared formatting methods
@@ -913,7 +914,7 @@ export default {
 			if (["Order", "Quotation"].includes(this.invoiceType)) {
 				return false;
 			}
-			return Boolean(this.pos_profile?.posa_block_sale_beyond_available_qty);
+			return parseBooleanSetting(this.pos_profile?.posa_block_sale_beyond_available_qty);
 		},
 		// Performance: normalize payment amounts once per reactive update to avoid repeated parsing
 		// across totals, change calculations, and denomination rendering (cuts ~3 O(n) scans per render).
