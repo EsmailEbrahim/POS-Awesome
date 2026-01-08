@@ -373,6 +373,7 @@ export default {
 			url = appendDebugPrintParam(url, debugPrint);
 			const printOptions = {
 				allowOfflineFallback: isOffline(),
+				triggerPrint: "1",
 				debugPrint,
 				debugInfo: {
 					printFormat: print_format,

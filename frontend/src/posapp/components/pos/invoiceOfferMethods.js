@@ -1571,6 +1571,7 @@ export default {
 		if (this.pos_profile.posa_silent_print) {
 			silentPrint(url, {
 				allowOfflineFallback: isOffline(),
+				triggerPrint: "1",
 				debugPrint,
 				debugInfo: {
 					printFormat: print_format,
@@ -1581,6 +1582,7 @@ export default {
 			const printWindow = window.open(url, "Print");
 			watchPrintWindow(printWindow, {
 				allowOfflineFallback: isOffline(),
+				triggerPrint: "1",
 				debugPrint,
 				debugInfo: {
 					printFormat: print_format,

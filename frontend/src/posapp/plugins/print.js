@@ -267,20 +267,26 @@ async function ensureReadyAndPrint(targetWindow, options = {}) {
 	} = options;
 
 	const readySelectors = Array.isArray(selectors) ? selectors.filter(Boolean) : [selectors].filter(Boolean);
-	const triggerPrintValue = resolveTriggerPrint(targetWindow, options);
 	const resolvedDebugPrint = resolveDebugPrint(targetWindow, options);
 	const resolvedOnline = resolveOnlineStatus(targetWindow);
-	const resolvedShouldPrint = shouldPrint && triggerPrintValue === "1";
+	const resolvePrintState = () => {
+		const triggerPrintValue = resolveTriggerPrint(targetWindow, options);
+		return {
+			triggerPrintValue,
+			resolvedShouldPrint: shouldPrint && triggerPrintValue === "1",
+		};
+	};
+	const initialPrintState = resolvePrintState();
 
 	// Benchmark: avoid unnecessary print calls unless trigger_print is explicitly "1" for Android reliability.
 	logPrintDebug({
 		debugPrint: resolvedDebugPrint,
 		location: getWindowHref(targetWindow),
 		online: resolvedOnline,
-		triggerPrint: triggerPrintValue,
+		triggerPrint: initialPrintState.triggerPrintValue,
 		printFormat: options?.debugInfo?.printFormat,
 		templatePath: "online-printview",
-		shouldPrint: resolvedShouldPrint,
+		shouldPrint: initialPrintState.resolvedShouldPrint,
 	});
 
 	try {
@@ -289,6 +295,17 @@ async function ensureReadyAndPrint(targetWindow, options = {}) {
 			readySelectors.length ? readySelectors : DEFAULT_READY_SELECTORS,
 			timeout,
 		);
+		const { triggerPrintValue, resolvedShouldPrint } = resolvePrintState();
+		logPrintDebug({
+			debugPrint: resolvedDebugPrint,
+			location: getWindowHref(targetWindow),
+			online: resolvedOnline,
+			triggerPrint: triggerPrintValue,
+			printFormat: options?.debugInfo?.printFormat,
+			templatePath: "online-printview",
+			shouldPrint: resolvedShouldPrint,
+			note: "Print target ready",
+		});
 		if (resolvedShouldPrint) {
 			targetWindow.focus();
 			targetWindow.print();
@@ -296,6 +313,7 @@ async function ensureReadyAndPrint(targetWindow, options = {}) {
 	} catch (err) {
 		console.warn("Print readiness check failed", err);
 		const wantsSessionMessage = options.showSessionMessage !== false;
+		const { triggerPrintValue, resolvedShouldPrint } = resolvePrintState();
 		if (wantsSessionMessage && isLoginRedirect(targetWindow)) {
 			logPrintDebug({
 				debugPrint: resolvedDebugPrint,

@@ -1224,6 +1224,7 @@ export default {
 
 			const printOptions = {
 				allowOfflineFallback: isOffline(),
+				triggerPrint: "1",
 				debugPrint,
 				debugInfo: {
 					printFormat: null,

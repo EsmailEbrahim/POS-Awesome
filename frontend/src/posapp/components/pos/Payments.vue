@@ -1972,6 +1972,7 @@ export default {
 			const printOptions = {
 				invoiceDoc: this.invoice_doc,
 				allowOfflineFallback: isOffline(),
+				triggerPrint: "1",
 				debugPrint,
 				debugInfo: {
 					printFormat: print_format,
@@ -2009,6 +2010,7 @@ export default {
 				const printWindow = window.open(newTabUrl, "_blank");
 				watchPrintWindow(printWindow, {
 					...printOptions,
+					triggerPrint: "0",
 					shouldPrint: false,
 				});
 				return;
