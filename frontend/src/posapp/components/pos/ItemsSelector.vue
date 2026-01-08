@@ -4533,7 +4533,7 @@ export default {
 			return 500;
 		},
 		blockSaleBeyondAvailableQty() {
-			return Boolean(this.pos_profile?.posa_block_sale_beyond_available_qty);
+			return parseBooleanSetting(this.pos_profile?.posa_block_sale_beyond_available_qty);
 		},
 		headers() {
 			return this.getItemsHeaders();
