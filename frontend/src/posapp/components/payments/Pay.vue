@@ -304,7 +304,7 @@
 					class="invoices mx-auto mt-3 p-3 pos-themed-card"
 					style="max-height: 94vh; height: 94vh"
 				>
-					<strong>
+					<div class="totals-wrapper">
 						<h4 class="text-primary">Totals</h4>
 						<v-row>
 							<v-col md="7" class="mt-1">
@@ -319,7 +319,7 @@
 									:model-value="formatCurrency(total_selected_invoices)"
 									readonly
 									flat
-									:prefix="currencySymbol(pos_profile.currency)"
+									:prefix="currencySymbol(invoiceTotalCurrency)"  <!-- CHANGE THIS LINE -->
 								></v-text-field>
 								<small v-if="selected_invoices.length" class="text-primary"
 									>{{ selected_invoices.length }} invoice(s) selected</small
@@ -340,7 +340,7 @@
 									:model-value="formatCurrency(total_selected_payments)"
 									readonly
 									flat
-									:prefix="currencySymbol(pos_profile.currency)"
+									:prefix="currencySymbol(paymentTotalCurrency)"
 								></v-text-field>
 							</v-col>
 						</v-row>
@@ -358,7 +358,7 @@
 									:model-value="formatCurrency(total_selected_mpesa_payments)"
 									readonly
 									flat
-									:prefix="currencySymbol(pos_profile.currency)"
+									:prefix="currencySymbol(mpesaTotalCurrency)"
 								></v-text-field>
 							</v-col>
 						</v-row>
@@ -367,8 +367,8 @@
 						<div v-if="pos_profile.posa_allow_make_new_payments">
 							<h4 class="text-primary">Make New Payment</h4>
 							<v-row
-								v-if="payment_methods.length"
-								v-for="method in payment_methods"
+								v-if="filtered_payment_methods.length"
+								v-for="method in filtered_payment_methods"
 								:key="method.row_id"
 							>
 								<v-col md="7"
@@ -377,7 +377,7 @@
 								<v-col md="5">
 									<div class="d-flex align-center">
 										<div class="mr-1 text-primary">
-											{{ currencySymbol(pos_profile.currency) }}
+											{{ currencySymbol(getPaymentMethodCurrency(method.mode_of_payment)) }}
 										</div>
 										<v-text-field
 											class="p-0 m-0 pos-themed-input"
@@ -412,7 +412,7 @@
 								></v-text-field>
 							</v-col>
 						</v-row>
-					</strong>
+					</div>
 					<div class="pb-6 pr-6" style="position: absolute; bottom: 0; width: 100%">
 						<v-row>
 							<v-col cols="6" class="pr-1">
@@ -502,6 +502,7 @@ export default {
 			unallocated_payments_loading: false,
 			mpesa_payments_loading: false,
 			payment_methods: [],
+			payment_method_currencies: {},
 			outstanding_invoices: [],
 			unallocated_payments: [],
 			mpesa_payments: [],
@@ -664,82 +665,94 @@ export default {
 			var vm = this;
 			await initPromise;
 			await checkDbHealth();
-			return frappe
-				.call("posawesome.posawesome.api.shifts.check_opening_shift", {
+			
+			try {
+				const response = await frappe.call("posawesome.posawesome.api.shifts.check_opening_shift", {
 					user: frappe.session.user,
-				})
-				.then((r) => {
-					if (r.message) {
-						this.pos_profile = r.message.pos_profile;
-						this.pos_opening_shift = r.message.pos_opening_shift;
-						this.company = r.message.company.name;
-						vm.eventBus.emit("payments_register_pos_profile", r.message);
-						vm.eventBus.emit("set_company", r.message.company);
-						this.set_payment_methods();
-						try {
-							setOpeningStorage(r.message);
-						} catch (e) {
-							console.error("Failed to cache opening data", e);
-						}
-
-						// Initialize pos_profile_search as empty
-						this.pos_profile_search = "";
-
-						// Initialize the dropdown list with profiles but don't select any
-						this.pos_profiles_list = [];
-						// Add current profile to the list but don't select it
-						if (r.message.pos_profile && r.message.pos_profile.name) {
-							this.pos_profiles_list.push(r.message.pos_profile.name);
-						}
-
-						this.payment_methods_list = [];
-						this.pos_profile.payments.forEach((element) => {
-							this.payment_methods_list.push(element.mode_of_payment);
-						});
-						this.get_available_pos_profiles();
-						this.get_outstanding_invoices();
-						this.get_draft_mpesa_payments_register();
-					} else {
-						const data = getOpeningStorage();
-						if (data) {
-							this.pos_profile = data.pos_profile;
-							this.pos_opening_shift = data.pos_opening_shift;
-							this.company = data.company.name;
-							vm.eventBus.emit("payments_register_pos_profile", data);
-							vm.eventBus.emit("set_company", data.company);
-							this.set_payment_methods();
-							this.payment_methods_list = [];
-							this.pos_profile.payments.forEach((element) => {
-								this.payment_methods_list.push(element.mode_of_payment);
-							});
-							this.get_available_pos_profiles();
-							this.get_outstanding_invoices();
-							this.get_draft_mpesa_payments_register();
-							return;
-						}
-						this.create_opening_voucher();
+				});
+				
+				if (response.message) {
+					this.pos_profile = response.message.pos_profile;
+					this.pos_opening_shift = response.message.pos_opening_shift;
+					this.company = response.message.company.name;
+					vm.eventBus.emit("payments_register_pos_profile", response.message);
+					vm.eventBus.emit("set_company", response.message.company);
+					
+					this.set_payment_methods();
+					await this.loadPaymentMethodCurrencies(); // Now works with await
+					
+					try {
+						setOpeningStorage(response.message);
+					} catch (e) {
+						console.error("Failed to cache opening data", e);
 					}
-				})
-				.catch(() => {
-					const data = getOpeningStorage();
-					if (data) {
-						this.pos_profile = data.pos_profile;
-						this.pos_opening_shift = data.pos_opening_shift;
-						this.company = data.company.name;
-						vm.eventBus.emit("payments_register_pos_profile", data);
-						vm.eventBus.emit("set_company", data.company);
+
+					// Initialize pos_profile_search as empty
+					this.pos_profile_search = "";
+
+					// Initialize the dropdown list with profiles but don't select any
+					this.pos_profiles_list = [];
+					// Add current profile to the list but don't select it
+					if (response.message.pos_profile && response.message.pos_profile.name) {
+						this.pos_profiles_list.push(response.message.pos_profile.name);
+					}
+
+					this.payment_methods_list = [];
+					this.pos_profile.payments.forEach((element) => {
+						this.payment_methods_list.push(element.mode_of_payment);
+					});
+					
+					this.get_available_pos_profiles();
+					this.get_outstanding_invoices();
+					this.get_draft_mpesa_payments_register();
+				} else {
+					const cachedData = getOpeningStorage();
+					if (cachedData) {
+						this.pos_profile = cachedData.pos_profile;
+						this.pos_opening_shift = cachedData.pos_opening_shift;
+						this.company = cachedData.company.name;
+						vm.eventBus.emit("payments_register_pos_profile", cachedData);
+						vm.eventBus.emit("set_company", cachedData.company);
+						
 						this.set_payment_methods();
+						await this.loadPaymentMethodCurrencies(); // Now works with await
+						
 						this.payment_methods_list = [];
 						this.pos_profile.payments.forEach((element) => {
 							this.payment_methods_list.push(element.mode_of_payment);
 						});
+						
 						this.get_available_pos_profiles();
 						this.get_outstanding_invoices();
 						this.get_draft_mpesa_payments_register();
 						return;
 					}
 					this.create_opening_voucher();
-				});
+				}
+			} catch (error) {
+				const cachedData = getOpeningStorage();
+				if (cachedData) {
+					this.pos_profile = cachedData.pos_profile;
+					this.pos_opening_shift = cachedData.pos_opening_shift;
+					this.company = cachedData.company.name;
+					vm.eventBus.emit("payments_register_pos_profile", cachedData);
+					vm.eventBus.emit("set_company", cachedData.company);
+					
+					this.set_payment_methods();
+					await this.loadPaymentMethodCurrencies(); // Now works with await
+					
+					this.payment_methods_list = [];
+					this.pos_profile.payments.forEach((element) => {
+						this.payment_methods_list.push(element.mode_of_payment);
+					});
+					
+					this.get_available_pos_profiles();
+					this.get_outstanding_invoices();
+					this.get_draft_mpesa_payments_register();
+					return;
+				}
+				this.create_opening_voucher();
+			}
 		},
 		get_available_pos_profiles() {
 			if (!this.pos_profile.posa_allow_mpesa_reconcile_payments) return;
@@ -1012,6 +1025,47 @@ export default {
 				});
 			});
 		},
+
+		getPaymentMethodCurrency(mode_of_payment) {
+			return this.payment_method_currencies[mode_of_payment] || this.pos_profile.currency;
+		},
+
+		async loadPaymentMethodCurrencies() {
+			if (!this.pos_profile?.payments?.length || !this.company) {
+				console.log("Cannot load payment method currencies: missing payments or company");
+				return;
+			}
+			
+			try {
+				// Get all mode of payment names
+				const modeOfPaymentNames = this.pos_profile.payments
+					.map(p => p.mode_of_payment)
+					.filter(Boolean);
+				
+				console.log("Loading currencies for modes:", modeOfPaymentNames);
+				
+				if (!modeOfPaymentNames.length) return;
+				
+				// Call backend API to get payment method accounts and currencies
+				const response = await frappe.call({
+					method: "posawesome.posawesome.api.payment_entry.get_payment_methods_accounts",
+					args: {
+						company: this.company,
+						mode_of_payments: JSON.stringify(modeOfPaymentNames)
+					}
+				});
+				
+				const result = response.message || {};
+				console.log("Backend returned currencies:", result);
+				
+				// Ensure reactivity by creating a new object
+				this.payment_method_currencies = { ...result };
+				
+				console.log('Successfully loaded payment method currencies:', this.payment_method_currencies);
+			} catch (error) {
+				console.error('Failed to load payment method currencies:', error);
+			}
+		},
 		clear_all(with_customer_info = true) {
 			this.customer_name = "";
 			if (with_customer_info) {
@@ -1261,6 +1315,52 @@ export default {
 	},
 
 	computed: {
+		// Add these three new properties
+		invoiceTotalCurrency() {
+			// Use currency filter if it's active (not ALL)
+			if (this.currency_filter && this.currency_filter !== "ALL") {
+				return this.currency_filter;
+			}
+			// Otherwise use the party_account_currency (outstanding currency) of the first selected invoice
+			if (this.selected_invoices && this.selected_invoices.length > 0) {
+				const firstInvoice = this.selected_invoices[0];
+				return firstInvoice.party_account_currency || firstInvoice.currency || this.pos_profile.currency;
+			}
+			// Fallback to POS profile currency
+			return this.pos_profile.currency;
+		},
+		paymentTotalCurrency() {
+			if (this.selected_payments && this.selected_payments.length > 0) {
+				return this.selected_payments[0].currency || this.pos_profile.currency;
+			}
+			return this.pos_profile.currency;
+		},
+		mpesaTotalCurrency() {
+			if (this.selected_mpesa_payments && this.selected_mpesa_payments.length > 0) {
+				return this.selected_mpesa_payments[0].currency || this.pos_profile.currency;
+			}
+			return this.pos_profile.currency;
+		},
+
+		filtered_payment_methods() {
+			if (!this.payment_methods?.length) return [];
+			
+			// If no invoice selected, show all payment methods
+			if (!this.selected_invoices?.length) {
+				return this.payment_methods;
+			}
+			
+			// Get target currency from selected invoice's outstanding currency
+			const targetCurrency = this.selected_invoices[0]?.party_account_currency || 
+								this.selected_invoices[0]?.currency || 
+								this.pos_profile.currency;
+			
+			// Filter payment methods that match the currency
+			return this.payment_methods.filter(method => {
+				return this.getPaymentMethodCurrency(method.mode_of_payment) === targetCurrency;
+			});
+		},
+
 		// Get unique currencies from invoices
 		invoice_currencies() {
 			const currencies = new Set();
@@ -1439,5 +1539,9 @@ input[total_selected_mpesa_payments] {
 
 .credit-note-row {
 	background-color: rgba(76, 175, 80, 0.08) !important;
+}
+
+.totals-wrapper {
+    font-weight: bold;
 }
 </style>
