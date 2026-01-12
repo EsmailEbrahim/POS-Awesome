@@ -831,15 +831,16 @@ export function useItemAddition() {
 		new_item.price_list_rate = item.price_list_rate ?? item.rate ?? 0;
 
 		// Setup base rates properly for multi-currency
-		const baseCurrency = context.price_list_currency || context.pos_profile.currency;
-		if (context.selected_currency !== baseCurrency) {
-			// Store original base currency values
+		const companyCurrency = context.pos_profile.currency;
+		if (context.selected_currency !== companyCurrency) {
+			// Store original base currency values (Selected -> Company)
+			const conversionRate = context.conversion_rate || 1;
 			new_item.base_price_list_rate =
 				item.base_price_list_rate !== undefined
 					? item.base_price_list_rate
-					: item.rate / context.exchange_rate;
+					: item.rate * conversionRate;
 			new_item.base_rate =
-				item.base_rate !== undefined ? item.base_rate : item.rate / context.exchange_rate;
+				item.base_rate !== undefined ? item.base_rate : item.rate * conversionRate;
 			new_item.base_discount_amount = 0;
 		} else {
 			// In base currency, base rates = displayed rates
