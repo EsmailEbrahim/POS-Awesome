@@ -2940,7 +2940,11 @@ export default {
 			const price_list_rate = item.original_rate;
 
 			// Determine base rate using available conversion info (Price List -> Company)
-			const base_rate = price_list_rate * (item.plc_conversion_rate || 1);
+			const plc_to_sc_rate =
+				item.plc_conversion_rate ||
+				(item.original_currency === this.selected_currency ? 1 : this.exchange_rate || 1);
+			const sc_to_cc_rate = this.conversion_rate || 1;
+			const base_rate = price_list_rate * plc_to_sc_rate * sc_to_cc_rate;
 
 			item.base_rate = base_rate;
 			item.base_price_list_rate = base_rate;
