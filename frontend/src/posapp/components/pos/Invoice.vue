@@ -1050,6 +1050,7 @@ export default {
 			this.eventBus.emit("update_currency", {
 				currency: this.selected_currency || this.pos_profile.currency,
 				exchange_rate: this.exchange_rate,
+				conversion_rate: this.conversion_rate,
 			});
 
 			this.update_item_rates();

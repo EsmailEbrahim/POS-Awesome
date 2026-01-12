@@ -4857,7 +4857,7 @@ export default {
 		this.eventBus.on("update_currency", (data) => {
 			this.selected_currency = data.currency;
 			this.exchange_rate = data.exchange_rate;
-			this.conversion_rate = data.conversion_rate || 1;
+			this.conversion_rate = data.conversion_rate || this.conversion_rate || 1;
 
 			// Refresh visible item prices when currency changes
 			this.applyCurrencyConversionToItems();
