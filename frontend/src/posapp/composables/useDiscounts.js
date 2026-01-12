@@ -249,8 +249,16 @@ export function useDiscounts() {
 		if (item.price_list_rate) {
 			// Always work with base rates first
 			if (!item.base_price_list_rate) {
-				item.base_price_list_rate = item.price_list_rate;
-				item.base_rate = item.rate;
+				if (context.selected_currency !== companyCurrency) {
+					item.base_price_list_rate = context.flt(
+						item.price_list_rate * conversion_rate,
+						context.currency_precision,
+					);
+					item.base_rate = context.flt(item.rate * conversion_rate, context.currency_precision);
+				} else {
+					item.base_price_list_rate = item.price_list_rate;
+					item.base_rate = item.rate;
+				}
 			}
 
 			// Convert to selected currency
