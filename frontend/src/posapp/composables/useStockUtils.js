@@ -108,26 +108,31 @@ export function useStockUtils() {
 
 				if (offer) {
 					if (offer.discount_type === "Rate") {
+						// offer.rate is in Price List Currency, convert to Company Currency
+						const offerRate = offer.rate * conversionFactor;
 						base_rate = context.flt(
-							offer.rate * item.conversion_factor,
+							offerRate * item.conversion_factor,
 							context.currency_precision,
 						);
 						base_price = base_rate;
 						item.discount_percentage = 0;
 					} else if (offer.discount_type === "Discount Percentage") {
 						item.discount_percentage = offer.discount_percentage;
+						// uomRate is in Price List Currency, convert to Company Currency using base_price calculated above
 						base_discount = context.flt(
-							(uomRate * offer.discount_percentage) / 100,
+							(base_price * offer.discount_percentage) / 100,
 							context.currency_precision,
 						);
-						base_rate = context.flt(uomRate - base_discount, context.currency_precision);
+						base_rate = context.flt(base_price - base_discount, context.currency_precision);
 					} else if (offer.discount_type === "Discount Amount") {
+						// offer.discount_amount is in Price List Currency, convert to Company Currency
+						const offerDiscount = offer.discount_amount * conversionFactor;
 						item.discount_percentage = 0;
 						base_discount = context.flt(
-							offer.discount_amount * item.conversion_factor,
+							offerDiscount * item.conversion_factor,
 							context.currency_precision,
 						);
-						base_rate = context.flt(uomRate - base_discount, context.currency_precision);
+						base_rate = context.flt(base_price - base_discount, context.currency_precision);
 					}
 				}
 			}
