@@ -351,15 +351,11 @@
 														<span class="price-amount">
 															{{
 																memoizedFormatCurrency(
-																	item.original_rate ??
-																		item.rate ??
-																		0,
+																	item.original_rate ?? item.rate ?? 0,
 																	item.original_currency ||
 																		pos_profile.currency,
 																	ratePrecision(
-																		item.original_rate ??
-																			item.rate ??
-																			0,
+																		item.original_rate ?? item.rate ?? 0,
 																	),
 																)
 															}}
@@ -471,9 +467,7 @@
 												memoizedFormatCurrency(
 													item.original_rate ?? item.rate ?? 0,
 													item.original_currency || pos_profile.currency,
-													ratePrecision(
-														item.original_rate ?? item.rate ?? 0,
-													),
+													ratePrecision(item.original_rate ?? item.rate ?? 0),
 												)
 											}}
 										</div>
@@ -2171,10 +2165,17 @@ export default {
 			if (this.pos_profile.posa_allow_multi_currency) {
 				this.applyCurrencyConversionToItem(item);
 
+				const companyCurrency = this.pos_profile.currency;
+				const priceListCurrency = this.price_list_currency || companyCurrency;
+				const plcToCompanyRate =
+					item.plc_conversion_rate ??
+					(priceListCurrency === companyCurrency
+						? 1
+						: (this.exchange_rate || 1) * (this.conversion_rate || 1));
 				const base_rate =
-					item.original_currency === this.pos_profile.currency
+					item.original_currency === companyCurrency
 						? item.original_rate
-						: item.original_rate * (item.plc_conversion_rate || this.exchange_rate);
+						: item.original_rate * plcToCompanyRate;
 
 				item.base_rate = base_rate;
 				item.base_price_list_rate = base_rate;
@@ -2940,11 +2941,14 @@ export default {
 			const price_list_rate = item.original_rate;
 
 			// Determine base rate using available conversion info (Price List -> Company)
-			const plc_to_sc_rate =
-				item.plc_conversion_rate ||
-				(item.original_currency === this.selected_currency ? 1 : this.exchange_rate || 1);
-			const sc_to_cc_rate = this.conversion_rate || 1;
-			const base_rate = price_list_rate * plc_to_sc_rate * sc_to_cc_rate;
+			const companyCurrency = this.pos_profile.currency;
+			const priceListCurrency = this.price_list_currency || companyCurrency;
+			const plc_to_cc_rate =
+				item.plc_conversion_rate ??
+				(priceListCurrency === companyCurrency
+					? 1
+					: (this.exchange_rate || 1) * (this.conversion_rate || 1));
+			const base_rate = price_list_rate * plc_to_cc_rate;
 
 			item.base_rate = base_rate;
 			item.base_price_list_rate = base_rate;
@@ -4861,7 +4865,7 @@ export default {
 		this.eventBus.on("update_currency", (data) => {
 			this.selected_currency = data.currency;
 			this.exchange_rate = data.exchange_rate;
-			this.conversion_rate = data.conversion_rate || this.conversion_rate || 1;
+			this.conversion_rate = data.conversion_rate ?? this.conversion_rate ?? 1;
 
 			// Refresh visible item prices when currency changes
 			this.applyCurrencyConversionToItems();
