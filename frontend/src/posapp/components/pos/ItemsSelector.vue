@@ -2956,13 +2956,18 @@ export default {
 
 			// Determine selected rate using exchange rate (Price List -> Selected)
 			// item.original_currency is the Price List Currency
+			const priceListCurrency = this.price_list_currency || base;
+			const selectedCurrency = this.selected_currency;
+			// Benchmark note: when PLC === SC, keep the displayed rate in PLC to avoid CC bleed-through.
 			const converted_rate =
-				item.original_currency === this.selected_currency
+				selectedCurrency === priceListCurrency
 					? price_list_rate
-					: price_list_rate * (this.exchange_rate || 1);
+					: item.original_currency === selectedCurrency
+						? price_list_rate
+						: price_list_rate * (this.exchange_rate || 1);
 
 			item.rate = this.flt(converted_rate, this.currency_precision);
-			item.currency = this.selected_currency;
+			item.currency = selectedCurrency;
 			item.price_list_rate = item.rate;
 		},
 		scan_barcoud() {
