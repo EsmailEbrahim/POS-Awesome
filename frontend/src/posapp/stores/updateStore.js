@@ -79,7 +79,7 @@ function normalizeVersionInput(version, explicitTimestamp) {
 	}
 	const normalized = String(version);
 	const timestamp = explicitTimestamp ?? parseTimestamp(normalized);
-	return { normalized, timestamp: timestamp ?? null };
+	return { normalized, timestamp };
 }
 
 function formatTimestamp(timestamp) {
