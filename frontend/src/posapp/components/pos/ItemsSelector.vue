@@ -2166,12 +2166,7 @@ export default {
 				this.applyCurrencyConversionToItem(item);
 
 				const companyCurrency = this.pos_profile.currency;
-				const priceListCurrency = this.price_list_currency || companyCurrency;
-				const plcToCompanyRate =
-					item.plc_conversion_rate ??
-					(priceListCurrency === companyCurrency
-						? 1
-						: (this.exchange_rate || 1) * (this.conversion_rate || 1));
+				const plcToCompanyRate = this._getPlcToCompanyRate(item);
 				const base_rate =
 					item.original_currency === companyCurrency
 						? item.original_rate
@@ -2928,6 +2923,18 @@ export default {
 			this.items.forEach((it) => this.applyCurrencyConversionToItem(it));
 		},
 
+		_getPlcToCompanyRate(item) {
+			const companyCurrency = this.pos_profile.currency;
+			const priceListCurrency = this.price_list_currency || companyCurrency;
+			// Benchmark note: favor item-level plc_conversion_rate to avoid recomputing PLC->CC.
+			return (
+				item.plc_conversion_rate ??
+				(priceListCurrency === companyCurrency
+					? 1
+					: (this.exchange_rate || 1) * (this.conversion_rate || 1))
+			);
+		},
+
 		applyCurrencyConversionToItem(item) {
 			if (!item) return;
 			const base = this.pos_profile.currency;
@@ -2941,13 +2948,7 @@ export default {
 			const price_list_rate = item.original_rate;
 
 			// Determine base rate using available conversion info (Price List -> Company)
-			const companyCurrency = this.pos_profile.currency;
-			const priceListCurrency = this.price_list_currency || companyCurrency;
-			const plc_to_cc_rate =
-				item.plc_conversion_rate ??
-				(priceListCurrency === companyCurrency
-					? 1
-					: (this.exchange_rate || 1) * (this.conversion_rate || 1));
+			const plc_to_cc_rate = this._getPlcToCompanyRate(item);
 			const base_rate = price_list_rate * plc_to_cc_rate;
 
 			item.base_rate = base_rate;

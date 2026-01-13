@@ -1170,19 +1170,6 @@ export default {
 		},
 
 		// Update currency and exchange rate when currency is changed
-		getPlcConversionRate() {
-			const companyCurrency =
-				(this.company && this.company.default_currency) || this.pos_profile.currency;
-			const priceListCurrency = this.price_list_currency || companyCurrency;
-			if (priceListCurrency === companyCurrency) {
-				return 1;
-			}
-			const exchangeRate = Number.parseFloat(this.exchange_rate || 1) || 1;
-			const conversionRate = Number.parseFloat(this.conversion_rate || 1) || 1;
-			return exchangeRate * conversionRate;
-		},
-
-		// Update currency and exchange rate when currency is changed
 		async update_currency_and_rate() {
 			if (!this.selected_currency) return;
 
@@ -1253,7 +1240,7 @@ export default {
 				doc.currency = this.selected_currency;
 				doc.price_list_currency = priceListCurrency || this.pos_profile.currency;
 				doc.conversion_rate = this.conversion_rate;
-				doc.plc_conversion_rate = this.getPlcConversionRate();
+				doc.plc_conversion_rate = this._getPlcConversionRate();
 				try {
 					await this.update_invoice(doc);
 				} catch (error) {
@@ -1275,7 +1262,7 @@ export default {
 
 				const doc = this.get_invoice_doc();
 				doc.conversion_rate = this.conversion_rate;
-				doc.plc_conversion_rate = this.getPlcConversionRate();
+				doc.plc_conversion_rate = this._getPlcConversionRate();
 				try {
 					const resp = await this.update_invoice(doc);
 					if (resp && resp.exchange_rate_date) {
