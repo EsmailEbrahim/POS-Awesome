@@ -27,6 +27,7 @@ def create_payment_entry(
     amount,
     currency,
     mode_of_payment,
+    exchange_rate=None,
     reference_date=None,
     reference_no=None,
     posting_date=None,
@@ -57,7 +58,10 @@ def create_payment_entry(
     bank = get_bank_cash_account(company, mode_of_payment)
 
     # Get exchange rate
-    conversion_rate = get_exchange_rate(currency, company_currency, date, "for_selling")
+    if exchange_rate and flt(exchange_rate) > 0:
+        conversion_rate = flt(exchange_rate)
+    else:
+        conversion_rate = get_exchange_rate(currency, company_currency, date, "for_selling")
 
     # Calculate amounts
     paid_amount, received_amount = set_paid_amount_and_received_amount(
@@ -95,6 +99,12 @@ def create_payment_entry(
     # Set required fields
     pe.setup_party_account_field()
     pe.set_missing_values()
+
+    if exchange_rate and flt(exchange_rate) > 0:
+        pe.source_exchange_rate = flt(exchange_rate)
+        pe.target_exchange_rate = flt(exchange_rate)
+        frappe.logger().info(f"Set custom exchange rate: {exchange_rate}")
+
 
     if party_account and bank:
         pe.set_amounts()
@@ -1068,6 +1078,7 @@ def process_pos_payment(payload):
                     currency=currency,
                     amount=amount,
                     mode_of_payment=mode_of_payment,
+                    exchange_rate=data.get("exchange_rate"),
                     posting_date=today,
                     reference_no=pos_opening_shift_name,
                     reference_date=today,

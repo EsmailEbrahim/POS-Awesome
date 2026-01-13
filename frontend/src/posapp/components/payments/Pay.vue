@@ -319,7 +319,7 @@
 									:model-value="formatCurrency(total_selected_invoices)"
 									readonly
 									flat
-									:prefix="currencySymbol(invoiceTotalCurrency)"  <!-- CHANGE THIS LINE -->
+									:prefix="currencySymbol(invoiceTotalCurrency)"
 								></v-text-field>
 								<small v-if="selected_invoices.length" class="text-primary"
 									>{{ selected_invoices.length }} invoice(s) selected</small
@@ -394,6 +394,36 @@
 							</v-row>
 						</div>
 
+						<v-divider v-if="requiresExchangeRate"></v-divider>
+						<v-row v-if="requiresExchangeRate" class="mb-2">
+							<v-col md="7" class="mt-1">
+								<span class="text-primary">
+									{{ __("Exchange Rate") }} (1 {{ invoiceTotalCurrency }} = ? {{ companyCurrency }}):
+								</span>
+							</v-col>
+							<v-col md="5">
+								<div class="d-flex align-center">
+									<div class="mr-1 text-primary">
+										{{ currencySymbol(companyCurrency) }}
+									</div>
+									<v-text-field
+										class="p-0 m-0 pos-themed-input"
+										density="compact"
+										color="primary"
+										hide-details
+										v-model="exchangeRate"
+										type="number"
+										step="0.01"
+										flat
+										@input="validateExchangeRate"
+									></v-text-field>
+								</div>
+								<small class="text-caption text-medium-emphasis">
+									1 {{ invoiceTotalCurrency }} = {{ formatCurrency(exchangeRate || 0) }} {{ companyCurrency }}
+								</small>
+							</v-col>
+						</v-row>
+
 						<v-divider></v-divider>
 						<v-row>
 							<v-col md="7">
@@ -408,7 +438,7 @@
 									:model-value="formatCurrency(total_of_diff)"
 									readonly
 									flat
-									:prefix="currencySymbol(pos_profile.currency)"
+									:prefix="currencySymbol(invoiceTotalCurrency)"
 								></v-text-field>
 							</v-col>
 						</v-row>
@@ -517,6 +547,8 @@ export default {
 			mpesa_search_name: "",
 			mpesa_search_mobile: "",
 			currency_filter: "ALL",
+			exchangeRate: null,
+			companyCurrency: null,
 			invoices_headers: [
 				{
 					title: "",
@@ -675,6 +707,7 @@ export default {
 					this.pos_profile = response.message.pos_profile;
 					this.pos_opening_shift = response.message.pos_opening_shift;
 					this.company = response.message.company.name;
+					this.companyCurrency = response.message.company.default_currency;
 					vm.eventBus.emit("payments_register_pos_profile", response.message);
 					vm.eventBus.emit("set_company", response.message.company);
 					
@@ -711,6 +744,7 @@ export default {
 						this.pos_profile = cachedData.pos_profile;
 						this.pos_opening_shift = cachedData.pos_opening_shift;
 						this.company = cachedData.company.name;
+						this.companyCurrency = cachedData.company?.default_currency;
 						vm.eventBus.emit("payments_register_pos_profile", cachedData);
 						vm.eventBus.emit("set_company", cachedData.company);
 						
@@ -735,6 +769,7 @@ export default {
 					this.pos_profile = cachedData.pos_profile;
 					this.pos_opening_shift = cachedData.pos_opening_shift;
 					this.company = cachedData.company.name;
+					this.companyCurrency = cachedData.company?.default_currency;
 					vm.eventBus.emit("payments_register_pos_profile", cachedData);
 					vm.eventBus.emit("set_company", cachedData.company);
 					
@@ -1148,11 +1183,12 @@ export default {
 				const payload = {
 					customer,
 					company: this.company,
-					currency: this.pos_profile.currency,
+					currency: this.invoiceTotalCurrency,
+					exchange_rate: this.exchangeRate || null,
 					pos_opening_shift_name: this.pos_opening_shift.name,
 					pos_profile_name: this.pos_profile.name,
 					pos_profile: this.pos_profile,
-					payment_methods: this.payment_methods,
+					payment_methods: this.filtered_payment_methods,
 					selected_invoices: selectedInvoices,
 					selected_payments: this.selected_payments,
 					total_selected_invoices: flt(totalSelectedInvoicesAmount),
@@ -1312,6 +1348,91 @@ export default {
 				});
 			}
 		},
+
+		async fetchExchangeRate() {
+			if (!this.requiresExchangeRate) {
+				this.exchangeRate = 1;
+				return;
+			}
+			
+			try {
+				const response = await frappe.call({
+					method: "erpnext.setup.utils.get_exchange_rate",
+					args: {
+						from_currency: this.invoiceTotalCurrency,
+						to_currency: this.companyCurrency,
+						transaction_date: frappe.datetime.nowdate(),
+						args: "for_selling"
+					}
+				});
+				
+				this.exchangeRate = flt(response.message || 1);
+			} catch (error) {
+				console.error("Failed to fetch exchange rate:", error);
+				this.exchangeRate = 1;
+			}
+		},
+		
+		validateExchangeRate() {
+			if (!this.exchangeRate || this.exchangeRate <= 0) {
+				this.exchangeRate = 1;
+			}
+			this.$forceUpdate();
+		},
+		
+		async fetchCompanyCurrency() {
+			if (!this.company) return;
+			
+			try {
+				// Primary: Get from Company doctype
+				const response = await frappe.call({
+					method: "frappe.client.get_value",
+					args: {
+						doctype: "Company",
+						filters: { name: this.company },
+						fieldname: "default_currency"
+					}
+				});
+				
+				if (response.message?.default_currency) {
+					this.companyCurrency = response.message.default_currency;
+					return;
+				}
+				
+				// Secondary: Fallback to POS Profile currency
+				if (this.pos_profile?.currency) {
+					this.companyCurrency = this.pos_profile.currency;
+					return;
+				}
+				
+				// Tertiary: Get from Frappe global defaults
+				const globalDefaults = await frappe.call({
+					method: "frappe.client.get_value",
+					args: {
+						doctype: "Global Defaults",
+						filters: {}, // No filters needed - only one record exists
+						fieldname: "default_currency"
+					}
+				});
+				
+				this.companyCurrency = globalDefaults.message?.default_currency || 'USD';
+				
+			} catch (error) {
+				console.error("Failed to fetch company currency:", error);
+				
+				// Final fallback: Use POS profile or show error
+				this.companyCurrency = this.pos_profile?.currency;
+				
+				if (!this.companyCurrency) {
+					frappe.msgprint({
+						title: __("Currency Configuration Error"),
+						message: __("Could not determine company currency. Please check Company and POS Profile settings."),
+						indicator: "red"
+					});
+					this.companyCurrency = 'USD'; // Last resort - but user is warned
+				}
+			}
+		},
 	},
 
 	computed: {
@@ -1431,15 +1552,15 @@ export default {
 			return this.selected_mpesa_payments.reduce((acc, cur) => acc + flt(cur?.amount || 0), 0);
 		},
 		total_payment_methods() {
-			if (!this.payment_methods || !this.payment_methods.length) return 0;
+			if (!this.filtered_payment_methods || !this.filtered_payment_methods.length) return 0;
 
 			// Ensure each amount is properly converted to a number
-			const total = this.payment_methods.reduce((acc, cur) => {
+			const total = this.filtered_payment_methods.reduce((acc, cur) => {
 				const amount = parseFloat(cur?.amount || 0);
 				return acc + (isNaN(amount) ? 0 : amount);
 			}, 0);
 
-			console.log("Payment methods total:", total, "from", this.payment_methods);
+			console.log("Payment methods total:", total, "from", this.filtered_payment_methods);
 			return total;
 		},
 		total_of_diff() {
@@ -1460,6 +1581,9 @@ export default {
 
 			return flt(invoiceTotal - paymentTotal);
 		},
+		requiresExchangeRate() {
+			return this.invoiceTotalCurrency !== this.companyCurrency;
+		},
 	},
 
 	created() {
@@ -1471,7 +1595,7 @@ export default {
 	mounted() {
 		this.$watch(
 			() => this.selectedCustomer,
-			(customerName) => {
+			async (customerName) => {
 				const normalized = customerName || "";
 				if (!normalized) {
 					this.clear_all(true);
@@ -1479,6 +1603,7 @@ export default {
 					this.outstanding_invoices = [];
 					this.unallocated_payments = [];
 					this.mpesa_payments = [];
+					this.exchangeRate = null;
 					return;
 				}
 				if (normalized === this.customer_name) {
@@ -1486,6 +1611,9 @@ export default {
 				}
 				this.clear_all(true);
 				this.customer_name = normalized;
+				if (!this.companyCurrency) {
+					await this.fetchCompanyCurrency();
+				}
 				this.fetch_customer_details();
 				this.get_outstanding_invoices();
 				this.get_unallocated_payments();
