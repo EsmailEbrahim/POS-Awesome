@@ -1,7 +1,7 @@
 // Benchmark note: keep conversion helpers lightweight to avoid overhead in hot paths.
 export const getCompanyCurrency = (context) => context?.pos_profile?.currency;
 
-export const getBaseCurrency = (context) => context.price_list_currency || getCompanyCurrency(context);
+export const getBaseCurrency = (context) => context?.price_list_currency || getCompanyCurrency(context);
 
 export const isCompanyCurrencySelected = (context) =>
 	context.selected_currency === getCompanyCurrency(context);
