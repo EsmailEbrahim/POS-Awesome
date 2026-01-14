@@ -27,6 +27,7 @@ def create_payment_entry(
     amount,
     currency,
     mode_of_payment,
+    exchange_rate=None,
     reference_date=None,
     reference_no=None,
     posting_date=None,
@@ -57,7 +58,10 @@ def create_payment_entry(
     bank = get_bank_cash_account(company, mode_of_payment)
 
     # Get exchange rate
-    conversion_rate = get_exchange_rate(currency, company_currency, date, "for_selling")
+    if exchange_rate and flt(exchange_rate) > 0:
+        conversion_rate = flt(exchange_rate)
+    else:
+        conversion_rate = get_exchange_rate(currency, company_currency, date, "for_selling")
 
     # Calculate amounts
     paid_amount, received_amount = set_paid_amount_and_received_amount(
@@ -95,6 +99,12 @@ def create_payment_entry(
     # Set required fields
     pe.setup_party_account_field()
     pe.set_missing_values()
+
+    if exchange_rate and flt(exchange_rate) > 0:
+        pe.source_exchange_rate = flt(exchange_rate)
+        pe.target_exchange_rate = flt(exchange_rate)
+        frappe.logger().info(f"Set custom exchange rate: {exchange_rate}")
+
 
     if party_account and bank:
         pe.set_amounts()
@@ -1068,6 +1078,7 @@ def process_pos_payment(payload):
                     currency=currency,
                     amount=amount,
                     mode_of_payment=mode_of_payment,
+                    exchange_rate=data.get("exchange_rate"),
                     posting_date=today,
                     reference_no=pos_opening_shift_name,
                     reference_date=today,
@@ -1452,6 +1463,48 @@ def on_payment_entry_cancel(doc, method):
         frappe.log_error(f"Error cancelling linked Journal Entry: {str(e)}", "POS Error")
         frappe.msgprint(f"Error cancelling linked Journal Entry: {str(e)}", indicator="red")
 
+@frappe.whitelist()
+def get_payment_methods_accounts(company, mode_of_payments):
+    """Get payment method accounts and their currencies for a company"""
+    if not company or not mode_of_payments:
+        return {}
+    
+    try:
+        mode_of_payments = json.loads(mode_of_payments) if isinstance(mode_of_payments, str) else mode_of_payments
+        
+        # Query Mode of Payment Account for the company
+        accounts = frappe.get_all(
+            "Mode of Payment Account",
+            filters={
+                "parent": ["in", mode_of_payments],
+                "company": company
+            },
+            fields=["parent", "default_account"],
+            limit_page_length=1000
+        )
+        
+        if not accounts:
+            return {}
+        
+        # Get unique account names
+        account_names = list(set([acc["default_account"] for acc in accounts if acc["default_account"]]))
+        
+        # Query Account currencies
+        account_currencies = frappe.get_all(
+            "Account",
+            filters={"name": ["in", account_names]},
+            fields=["name", "account_currency"],
+            limit_page_length=1000
+        )
+        
+        # Build maps
+        currency_map = {acc["name"]: acc["account_currency"] for acc in account_currencies}
+        result = {acc["parent"]: currency_map.get(acc["default_account"]) for acc in accounts if acc["default_account"]}
+        
+        return result
+    except Exception as e:
+        frappe.log_error(f"Error in get_payment_methods_accounts: {str(e)}")
+        return {}
 
 # Add this code at the end of the file
 def setup_payment_entry_cancel_hook():
