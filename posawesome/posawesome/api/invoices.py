@@ -451,9 +451,8 @@ def _auto_set_return_batches(invoice_doc):
                 item.batch_no = b.get("batch_no")
                 assigned = True
                 break
-        
         if not assigned and not allow_free:
-             frappe.throw(_("No valid batches available in {0} for {1}.").format(item.warehouse, item.item_code))
+            frappe.throw(_("No valid batches available in {0} for {1}.").format(item.warehouse, item.item_code))
 
 
 @frappe.whitelist()
