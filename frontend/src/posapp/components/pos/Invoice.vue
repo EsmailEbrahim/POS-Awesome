@@ -315,7 +315,12 @@
 					<v-btn color="error" variant="text" @click="resolvePaymentConfirmation(false)">
 						{{ __("Cancel") }}
 					</v-btn>
-					<v-btn color="primary" variant="text" @click="resolvePaymentConfirmation(true)">
+					<v-btn
+						color="primary"
+						variant="text"
+						@click="resolvePaymentConfirmation(true)"
+						autofocus
+					>
 						{{ __("Yes") }}
 					</v-btn>
 				</v-card-actions>
