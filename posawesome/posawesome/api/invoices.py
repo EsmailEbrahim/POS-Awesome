@@ -405,6 +405,10 @@ def _auto_set_return_batches(invoice_doc):
         return
 
     allow_free = cint(frappe.db.get_value("POS Profile", profile, "posa_allow_free_batch_return") or 0)
+    today = getdate(nowdate())
+
+    items_to_process = []
+    all_batch_nos = set()
 
     for d in invoice_doc.items:
         if not d.get("item_code") or not d.get("warehouse"):
@@ -412,13 +416,43 @@ def _auto_set_return_batches(invoice_doc):
 
         has_batch = frappe.db.get_value("Item", d.item_code, "has_batch_no")
         if has_batch and not d.get("batch_no"):
+            d.use_serial_batch_fields = 1
+            # get_batch_qty returns batches sorted by default (usually FIFO/Expiration)
             batch_list = get_batch_qty(item_code=d.item_code, warehouse=d.warehouse) or []
-            batch_list = [b for b in batch_list if flt(b.get("qty")) > 0]
             if batch_list:
-                # FIFO: batches are already sorted by posting/expiry in ERPNext
-                d.batch_no = batch_list[0].get("batch_no")
+                items_to_process.append((d, batch_list))
+                for b in batch_list:
+                    if b.get("batch_no"):
+                        all_batch_nos.add(b.get("batch_no"))
             elif not allow_free:
                 frappe.throw(_("No batches available in {0} for {1}.").format(d.warehouse, d.item_code))
+
+    if not all_batch_nos:
+        return
+
+    # Fetch expiry dates for all collected batches in one query
+    batch_details = frappe.get_all(
+        "Batch",
+        filters={"name": ["in", list(all_batch_nos)]},
+        fields=["name", "expiry_date"],
+    )
+
+    valid_batches = {
+        b.name
+        for b in batch_details
+        if not b.expiry_date or getdate(b.expiry_date) >= today
+    }
+
+    # Assign batches
+    for item, batch_list in items_to_process:
+        assigned = False
+        for b in batch_list:
+            if b.get("batch_no") in valid_batches:
+                item.batch_no = b.get("batch_no")
+                assigned = True
+                break
+        if not assigned and not allow_free:
+            frappe.throw(_("No valid batches available in {0} for {1}.").format(item.warehouse, item.item_code))
 
 
 @frappe.whitelist()
@@ -1267,13 +1301,7 @@ def search_invoices_for_return(
             return {"invoices": [], "has_more": False}
 
     # Count total invoices matching the criteria (for has_more flag)
-    total_count_query = frappe.get_list(
-        doctype,
-        filters=filters,
-        fields=["count(name) as total_count"],
-        as_list=False,
-    )
-    total_count = total_count_query[0].total_count if total_count_query else 0
+    total_count = frappe.db.count(doctype, filters=filters)
 
     # Get invoices matching all criteria with pagination
     invoices_list = frappe.get_list(

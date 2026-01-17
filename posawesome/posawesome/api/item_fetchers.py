@@ -501,27 +501,54 @@ class ItemDetailAggregator:
         if not item_codes_tuple:
             return ItemLookupData({}, {}, {}, {}, {}, {}, {})
 
+        use_cache = bool(self.pos_profile.get("posa_use_server_cache"))
+
         price_rows = []
         if self.price_list:
-            price_rows = get_item_prices(
-                self.price_list,
-                self.price_list_currency or self.pos_profile.get("currency"),
-                item_codes_tuple,
-                self.customer,
-                today=self.today,
-                ttl=self.cache_ttl,
-            )
+            if use_cache:
+                price_rows = get_item_prices(
+                    self.price_list,
+                    self.price_list_currency or self.pos_profile.get("currency"),
+                    item_codes_tuple,
+                    self.customer,
+                    today=self.today,
+                    ttl=self.cache_ttl,
+                )
+            else:
+                price_rows = _fetch_item_prices(
+                    self.price_list,
+                    self.price_list_currency or self.pos_profile.get("currency"),
+                    item_codes_tuple,
+                    self.customer or "",
+                    self.today,
+                )
+
         # Stock, metadata, UOM and barcode data are reused both for batches and the
         # final merged item rows, so collect them up front.
-        stock_rows = get_bin_qty(self.warehouse, item_codes_tuple, ttl=self.cache_ttl)
-        meta_rows = get_item_meta(item_codes_tuple, ttl=self.cache_ttl)
-        uom_rows = get_uoms(item_codes_tuple, ttl=self.cache_ttl)
-        barcode_rows = get_barcodes(item_codes_tuple, ttl=self.cache_ttl)
+        if use_cache:
+            stock_rows = get_bin_qty(self.warehouse, item_codes_tuple, ttl=self.cache_ttl)
+            meta_rows = get_item_meta(item_codes_tuple, ttl=self.cache_ttl)
+            uom_rows = get_uoms(item_codes_tuple, ttl=self.cache_ttl)
+            barcode_rows = get_barcodes(item_codes_tuple, ttl=self.cache_ttl)
+        else:
+            stock_rows = _fetch_bin_qty(self.warehouse, item_codes_tuple)
+            meta_rows = _fetch_item_meta(item_codes_tuple)
+            uom_rows = _fetch_uoms(item_codes_tuple)
+            barcode_rows = _fetch_barcodes(item_codes_tuple)
 
         batch_items = [row.name for row in meta_rows if row.get("has_batch_no")]
         serial_items = [row.name for row in meta_rows if row.get("has_serial_no")]
-        batch_rows = get_batches(self.warehouse, _normalize_codes(batch_items), ttl=self.cache_ttl)
-        serial_rows = get_serials(self.warehouse, _normalize_codes(serial_items), ttl=self.cache_ttl)
+
+        if use_cache:
+            batch_rows = get_batches(
+                self.warehouse, _normalize_codes(batch_items), ttl=self.cache_ttl
+            )
+            serial_rows = get_serials(
+                self.warehouse, _normalize_codes(serial_items), ttl=self.cache_ttl
+            )
+        else:
+            batch_rows = _fetch_batches(self.warehouse, _normalize_codes(batch_items))
+            serial_rows = _fetch_serials(self.warehouse, _normalize_codes(serial_items))
 
         price_map: Dict[str, Dict[str, frappe._dict]] = {}
         for row in price_rows:
@@ -538,7 +565,9 @@ class ItemDetailAggregator:
 
         barcode_map: Dict[str, List[Dict[str, object]]] = {}
         for row in barcode_rows:
-            barcode_map.setdefault(row.parent, []).append({"barcode": row.barcode, "posa_uom": row.posa_uom})
+            barcode_map.setdefault(row.parent, []).append(
+                {"barcode": row.barcode, "posa_uom": row.posa_uom}
+            )
 
         batch_map: Dict[str, List[Dict[str, object]]] = {}
         for row in batch_rows:
