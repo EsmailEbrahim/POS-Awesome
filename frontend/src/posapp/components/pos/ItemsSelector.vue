@@ -38,8 +38,8 @@
 			}"
 		>
 			<v-progress-linear
-				:active="loading"
-				:indeterminate="loading"
+				:active="isLoadingOrSyncing"
+				:indeterminate="isLoadingOrSyncing"
 				absolute
 				location="top"
 				color="info"
@@ -258,7 +258,7 @@
 				<v-row class="items">
 					<v-col cols="12" class="pt-0 mt-0">
 						<div v-if="items_view == 'card'" class="items-card-container">
-							<div v-if="loading" class="items-card-grid">
+							<div v-if="isLoadingOrSyncing" class="items-card-grid">
 								<Skeleton v-for="n in 8" :key="n" class="mb-4" height="120" />
 							</div>
 							<div
@@ -1506,15 +1506,6 @@ export default {
 			}
 
 			vm.refreshInFlight = true;
-			const wasLoading = vm.loading;
-			if (!wasLoading) {
-				vm.loading = true;
-			}
-			const releaseLoading = () => {
-				if (!wasLoading) {
-					vm.loading = false;
-				}
-			};
 
 			try {
 				const itemCodes = vm.displayedItems.map((it) => it.item_code);
@@ -1552,7 +1543,6 @@ export default {
 					vm.$nextTick(() => {
 						updates.forEach(({ item, upd }) => Object.assign(item, upd));
 						updateLocalStockCache(cacheResult.cached);
-						releaseLoading();
 					});
 					return;
 				}
@@ -1613,11 +1603,9 @@ export default {
 			} catch (err) {
 				if (err.name !== "AbortError") {
 					console.error("Error fetching item details:", err);
-					releaseLoading();
 				}
 			} finally {
 				vm.refreshInFlight = false;
-				releaseLoading();
 			}
 		},
 
@@ -4710,6 +4698,9 @@ export default {
 		},
 		active_price_list() {
 			return this.customer_price_list || (this.pos_profile && this.pos_profile.selling_price_list);
+		},
+		isLoadingOrSyncing() {
+			return this.loading || this.isBackgroundLoading || this.refreshInFlight;
 		},
 	},
 
