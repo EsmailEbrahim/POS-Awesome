@@ -314,8 +314,14 @@ export const useItemsStore = defineStore("items", () => {
 			abortControllers.value.set(cacheKey, abortController);
 
 			// Fetch from server
+			const requestProfile = JSON.parse(JSON.stringify(posProfile.value));
+			if (forceServer) {
+				requestProfile.posa_use_server_cache = 0;
+				requestProfile.posa_force_reload_items = 1;
+			}
+
 			const args = {
-				pos_profile: JSON.stringify(posProfile.value),
+				pos_profile: JSON.stringify(requestProfile),
 				price_list: priceList || activePriceList.value,
 				item_group: normalizedGroup !== "ALL" ? normalizedGroup.toLowerCase() : "",
 				search_value: searchValue || "",
@@ -1022,16 +1028,19 @@ export const useItemsStore = defineStore("items", () => {
 			const profileGroups = posProfile.value?.item_groups?.map((g) => g.item_group) || [];
 
 			while (backgroundSyncState.value.token === token && shouldPersistItems()) {
+				// Clone posProfile and disable caching for this specific request
+				const requestProfile = JSON.parse(JSON.stringify(posProfile.value));
+				if (reset) {
+					requestProfile.posa_use_server_cache = 0;
+					requestProfile.posa_force_reload_items = 1;
+				}
+
 				const response = await frappe.call({
 					method: "posawesome.posawesome.api.items.get_items",
 					args: {
-						pos_profile: JSON.stringify(posProfile.value),
+						pos_profile: JSON.stringify(requestProfile),
 						price_list: activePriceList.value,
 						item_group: normalizedGroup !== "ALL" ? normalizedGroup.toLowerCase() : "",
-						search_value: "",
-						customer: customer.value,
-						include_image: 1,
-						item_groups: profileGroups,
 						start_after: lastItemName,
 						limit,
 					},
