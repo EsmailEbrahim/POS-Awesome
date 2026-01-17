@@ -17,7 +17,7 @@ export function useOnlineStatus() {
         listenersCount++;
 
         onUnmounted(() => {
-            listenersCount--;
+            listenersCount = Math.max(0, listenersCount - 1);
             if (listenersCount === 0) {
                 window.removeEventListener("online", updateOnlineStatus);
                 window.removeEventListener("offline", updateOnlineStatus);
