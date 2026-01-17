@@ -38,8 +38,8 @@
 			}"
 		>
 			<v-progress-linear
-				:active="loading"
-				:indeterminate="loading"
+				:active="isLoadingOrSyncing"
+				:indeterminate="isLoadingOrSyncing"
 				absolute
 				location="top"
 				color="info"
@@ -258,7 +258,7 @@
 				<v-row class="items">
 					<v-col cols="12" class="pt-0 mt-0">
 						<div v-if="items_view == 'card'" class="items-card-container">
-							<div v-if="loading" class="items-card-grid">
+							<div v-if="isLoadingOrSyncing" class="items-card-grid">
 								<Skeleton v-for="n in 8" :key="n" class="mb-4" height="120" />
 							</div>
 							<div
@@ -967,17 +967,9 @@ export default {
 			const newLen = (val || "").trim().length;
 			const oldLen = (oldVal || "").trim().length;
 
-			// When limit search is enabled, wait for an explicit Enter key press
-			if (this.usesLimitSearch) {
-				if (oldLen >= 3 && newLen === 0) {
-					// Reset items only when search is fully cleared
-					this.clearSearch();
-				}
-				return;
-			}
-
+			// Check if we should trigger search
 			if (newLen >= 3) {
-				// Call without arguments so search_onchange treats it like an Enter key
+				// Call without arguments so search_onchange treats it like an Enter key/Auto trigger
 				this.search_onchange();
 			} else if (oldLen >= 3 && newLen === 0) {
 				// Reset items only when search is fully cleared
@@ -1156,49 +1148,50 @@ export default {
 
 			// Filter by item group
 			if (itemGroup !== "ALL") {
+				const group = itemGroup.toLowerCase();
 				filtered = filtered.filter(
-					(item) =>
-						item.item_group && item.item_group.toLowerCase().includes(itemGroup.toLowerCase()),
+					(item) => item.item_group && item.item_group.toLowerCase() === group,
 				);
 			}
 
-			// Filter by search term only if it exists and is long enough
-			if (searchTerm && searchTerm.trim() && searchTerm.trim().length >= 3) {
-				const term = searchTerm.toLowerCase();
+			// Filter by search term
+			const rawSearch = (searchTerm || "").trim();
+			if (rawSearch && rawSearch.length >= 3) {
+				const term = rawSearch.toLowerCase();
 				const searchWords = term.split(/\s+/).filter(Boolean);
+				
 				filtered = filtered.filter((item) => {
-					if (!searchWords.length) {
-						return true;
-					}
+					if (!searchWords.length) return true;
 
-					const name = (item.item_name || "").toLowerCase();
-					const code = (item.item_code || "").toLowerCase();
+					// Collect all searchable values into a single string or array for checking
+					const searchable = [];
+					const pushValue = (v) => { 
+						if (v) searchable.push(String(v).toLowerCase()); 
+					};
 
-					const barcodeValues = [];
+					pushValue(item.item_code);
+					pushValue(item.item_name);
+					pushValue(item.barcode);
+					pushValue(item.description);
+					pushValue(item.brand);
+					
+					// Handle arrays (barcodes, serials, batches)
 					if (Array.isArray(item.item_barcode)) {
-						item.item_barcode.forEach((b) => {
-							if (b?.barcode) {
-								barcodeValues.push(String(b.barcode).toLowerCase());
-							}
-						});
+						item.item_barcode.forEach(b => pushValue(b?.barcode));
 					}
 					if (Array.isArray(item.barcodes)) {
-						item.barcodes.forEach((bc) => {
-							if (bc) {
-								barcodeValues.push(String(bc).toLowerCase());
-							}
-						});
+						item.barcodes.forEach(b => pushValue(b));
 					}
-					if (item.barcode) {
-						barcodeValues.push(String(item.barcode).toLowerCase());
+					if (Array.isArray(item.serial_no_data)) {
+						item.serial_no_data.forEach(s => pushValue(s?.serial_no));
+					}
+					if (Array.isArray(item.batch_no_data)) {
+						item.batch_no_data.forEach(b => pushValue(b?.batch_no));
 					}
 
-					return searchWords.every((word) => {
-						return (
-							code.includes(word) ||
-							name.includes(word) ||
-							barcodeValues.some((barcode) => barcode.includes(word))
-						);
+					// Verify EVERY search word is present in AT LEAST ONE of the fields
+					return searchWords.every(word => {
+						return searchable.some(field => field.includes(word));
 					});
 				});
 			}
@@ -1513,15 +1506,6 @@ export default {
 			}
 
 			vm.refreshInFlight = true;
-			const wasLoading = vm.loading;
-			if (!wasLoading) {
-				vm.loading = true;
-			}
-			const releaseLoading = () => {
-				if (!wasLoading) {
-					vm.loading = false;
-				}
-			};
 
 			try {
 				const itemCodes = vm.displayedItems.map((it) => it.item_code);
@@ -1559,7 +1543,6 @@ export default {
 					vm.$nextTick(() => {
 						updates.forEach(({ item, upd }) => Object.assign(item, upd));
 						updateLocalStockCache(cacheResult.cached);
-						releaseLoading();
 					});
 					return;
 				}
@@ -1620,11 +1603,9 @@ export default {
 			} catch (err) {
 				if (err.name !== "AbortError") {
 					console.error("Error fetching item details:", err);
-					releaseLoading();
 				}
 			} finally {
 				vm.refreshInFlight = false;
-				releaseLoading();
 			}
 		},
 
@@ -1770,24 +1751,40 @@ export default {
 			});
 		},
 		async forceReloadItems() {
-			console.log("[ItemsSelector] forceReloadItems called");
-			// Clear cached price list items so the reload always
-			// fetches the latest data from the server
-			await clearPriceListCache();
-			console.log("[ItemsSelector] price list cache cleared");
-			await this.ensureStorageHealth();
-			console.log("[ItemsSelector] storage health ensured");
+			if (isOffline()) {
+				frappe.msgprint(__("Cannot reload items while offline. Please connect to the internet."));
+				return;
+			}
 
-			// When no search term is entered, reset the search so
-			// we fetch the entire item list from the server.
+			console.log("[ItemsSelector] forceReloadItems called - Full Refresh");
+
+			// 1. Clear local component caches
+			this.itemDetailsRequestCache = { key: null, promise: null, result: null };
+			if (this.lastInvoiceRateCache) {
+				this.lastInvoiceRateCache.clear();
+			}
+			this.lastInvoiceRates = {};
+
+			// 2. Reset search if empty to ensure full load
 			if (!this.first_search || !this.first_search.trim()) {
-				console.log("[ItemsSelector] resetting empty search before reload");
 				this.first_search = "";
 				this.search = "";
 			}
 
-			console.log("[ItemsSelector] loading items from server");
-			await this.get_items(true);
+			// 3. Delegate to Store for full cache wipe and reload
+			// This calls itemsStore.refreshItems() which:
+			// - Clears memory/session/IDB caches
+			// - Resets pagination
+			// - Forces server fetch
+			// - Triggers background details sync
+			try {
+				await this.refreshItems();
+				frappe.show_alert({ message: __("Items reloaded from server"), indicator: "green" });
+			} catch (error) {
+				console.error("Failed to reload items:", error);
+				frappe.msgprint(__("Failed to reload items"));
+			}
+
 			console.log("[ItemsSelector] forceReloadItems finished");
 		},
 		async verifyServerItemCount() {
@@ -4718,6 +4715,9 @@ export default {
 		active_price_list() {
 			return this.customer_price_list || (this.pos_profile && this.pos_profile.selling_price_list);
 		},
+		isLoadingOrSyncing() {
+			return this.loading || this.isBackgroundLoading || this.refreshInFlight;
+		},
 	},
 
 	async created() {
@@ -4907,7 +4907,10 @@ export default {
 		// Load items if we have a profile and haven't loaded yet
 		if (this.pos_profile && this.pos_profile.name && !this.itemsLoaded) {
 			this.get_items_groups();
-			await this.get_items();
+			// Only load all items if NOT using limit search (memory optimization)
+			if (!this.usesLimitSearch) {
+				await this.get_items();
+			}
 		}
 
 		// Setup barcode scanner if enabled
