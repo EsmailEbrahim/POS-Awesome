@@ -1721,6 +1721,9 @@ export default {
 			this.eventBus.emit("show_coupons", "true");
 		},
 		async initializeItems() {
+			if (!this.pos_profile || !this.pos_profile.name) {
+				return;
+			}
 			await this.ensureStorageHealth();
 			if (
 				this.pos_profile &&
@@ -4437,6 +4440,9 @@ export default {
 			return null;
 		},
 		shouldRunBackgroundSync() {
+			if (!this.pos_profile || !this.pos_profile.name) {
+				return false;
+			}
 			if (!this.enable_background_sync) {
 				return false;
 			}
@@ -4737,7 +4743,23 @@ export default {
 			await this.initializeStore(this.pos_profile, this.customer, this.customer_price_list);
 			console.log("Pinia store initialized successfully");
 		} else {
-			console.warn("No POS Profile available for store initialization");
+			// Try to find POS profile from global state if missing in local data
+			if (frappe.boot && frappe.boot.pos_profile) {
+				this.pos_profile = frappe.boot.pos_profile;
+			} else if (window.cur_pos && window.cur_pos.pos_profile) {
+				this.pos_profile = window.cur_pos.pos_profile;
+			}
+
+			if (this.pos_profile && this.pos_profile.name) {
+				await this.initializeStore(this.pos_profile, this.customer, this.customer_price_list);
+				
+				// Start workers now that we have profile
+				this.startItemWorker();
+				this.update_cur_items_details();
+				this.startBackgroundSyncScheduler();
+				
+				console.log("Pinia store initialized successfully (from global state)");
+			}
 		}
 
 		// Keep legacy initialization for backward compatibility
@@ -4792,14 +4814,31 @@ export default {
 			} catch (error) {
 				console.error("Error during initialization:", error);
 			}
+
+			// Start workers if we have profile
+			if (this.pos_profile && this.pos_profile.name) {
+				this.startItemWorker();
+				this.update_cur_items_details();
+				this.startBackgroundSyncScheduler();
+			}
 		});
 
 		// Event listeners
 		this.eventBus.on("register_pos_profile", async (data) => {
 			this.pos_profile = data.pos_profile;
 			this.stock_settings = data.stock_settings || {};
+			// Initialize Store with the new profile
+			if (this.pos_profile && this.pos_profile.name) {
+				await this.initializeStore(this.pos_profile, this.customer, this.customer_price_list);
+				
+				// Start workers now that we have profile
+				this.startItemWorker();
+				this.update_cur_items_details();
+				this.startBackgroundSyncScheduler();
+			}
 			await this.ensureScaleBarcodeSettings(true);
 			this.get_items_groups();
+			// Legacy fallback
 			await this.initializeItems();
 			this.items_view = this.pos_profile.posa_default_card_view ? "card" : "list";
 		});
@@ -4852,7 +4891,6 @@ export default {
 			}
 		});
 
-		// Refresh item quantities when connection to server is restored
 		this.eventBus.on("server-online", async () => {
 			if (this.items && this.items.length > 0) {
 				await this.update_items_details(this.items);
@@ -4860,13 +4898,8 @@ export default {
 			await this.performBackgroundSync({ source: "server-online" });
 		});
 
-		this.startItemWorker();
-
-		// Setup auto-refresh for item quantities
-		// Trigger an immediate refresh once items are available
-		this.update_cur_items_details();
-		this.startBackgroundSyncScheduler();
-
+		// Workers are now started in memoryInitPromise.then or register_pos_profile
+		
 		// Add new event listener for currency changes
 		this.eventBus.on("update_currency", (data) => {
 			this.selected_currency = data.currency;
