@@ -43,6 +43,19 @@
 						</v-icon>
 					</template>
 				</v-tooltip>
+				<v-tooltip text="Reload Customers">
+					<template #activator="{ props }">
+						<v-icon
+							v-bind="props"
+							class="icon-button ml-1"
+							:class="{ 'disabled-icon': !networkOnline }"
+							@mousedown.prevent.stop
+							@click.stop="reload_customers"
+						>
+							mdi-reload
+						</v-icon>
+					</template>
+				</v-tooltip>
 			</template>
 
 			<!-- Add icon (right) -->
@@ -137,6 +150,12 @@
 	opacity: 1;
 	color: var(--v-theme-primary);
 }
+
+.disabled-icon {
+	opacity: 0.3 !important;
+	pointer-events: none;
+	cursor: not-allowed;
+}
 </style>
 
 <script>
@@ -176,6 +195,13 @@ export default {
 		const readonlyState = ref(false);
 
 		let scrollContainer = null;
+
+		let scrollContainer = null;
+		
+		const networkOnline = ref(navigator.onLine);
+		
+		window.addEventListener('online', () => { networkOnline.value = true; });
+		window.addEventListener('offline', () => { networkOnline.value = false; });
 
 		const effectiveReadonly = computed(() => readonlyState.value && navigator.onLine);
 
@@ -322,6 +348,11 @@ export default {
 		const edit_customer = () => {
 			eventBus?.emit("open_update_customer", customerInfo.value || {});
 		};
+		
+		const reload_customers = async () => {
+			if (!networkOnline.value) return;
+			await customersStore.reloadCustomers();
+		};
 
 		const selectFirstCustomer = () => {
 			const list =
@@ -437,7 +468,10 @@ export default {
 			edit_customer,
 			selectFirstCustomer,
 			openNewCustomer,
+			openNewCustomer,
 			focusCustomerSearch,
+			reload_customers,
+			networkOnline
 		};
 	},
 };

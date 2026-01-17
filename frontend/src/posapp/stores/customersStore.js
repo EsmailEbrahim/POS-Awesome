@@ -422,6 +422,19 @@ export const useCustomersStore = defineStore("customers", () => {
 		requestCustomerRefresh();
 	}
 
+	async function reloadCustomers() {
+		if (isOffline() || !navigator.onLine) {
+			console.warn("Cannot reload customers while offline");
+			return;
+		}
+
+		clearLocalState();
+		await clearCustomerStorage();
+		setCustomersLastSync(null);
+
+		await get_customer_names();
+	}
+
 	function clearLocalState() {
 		resetPagination();
 		selectedCustomer.value = null;
@@ -463,6 +476,7 @@ export const useCustomersStore = defineStore("customers", () => {
 		backgroundLoadCustomers,
 		addOrUpdateCustomer,
 		requestCustomerRefresh,
+		reloadCustomers,
 		clearLocalState,
 	};
 });
