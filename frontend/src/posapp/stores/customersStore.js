@@ -423,7 +423,7 @@ export const useCustomersStore = defineStore("customers", () => {
 	}
 
 	async function reloadCustomers() {
-		if (isOffline() || !navigator.onLine) {
+		if (isOffline()) {
 			console.warn("Cannot reload customers while offline");
 			return;
 		}
