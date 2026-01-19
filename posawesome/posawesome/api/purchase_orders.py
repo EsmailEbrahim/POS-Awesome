@@ -455,11 +455,11 @@ def _create_purchase_invoice(po_doc, payload, default_warehouse, transaction_dat
             "rate": po_item.rate,
             "warehouse": po_item.warehouse or default_warehouse,
             "purchase_order": po_doc.name,
-            "purchase_order_item": po_item.name,
+            "po_detail": po_item.name,
             "schedule_date": po_item.schedule_date,
         }
         receipt_item = receipt_items.get(po_item.name)
-        if receipt_item:
+        if receipt_item and receipt_doc:
             invoice_item["purchase_receipt"] = receipt_doc.name
             invoice_item["pr_detail"] = receipt_item.name
         invoice.append("items", invoice_item)
