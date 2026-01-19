@@ -1367,6 +1367,7 @@ export default {
 		},
 
 		fetchExchangeRate: async function() {
+			if (this.exchangeRateLoading) return;
 			if (!this.requiresExchangeRate || !this.invoiceTotalCurrency || !this.companyCurrency) {
 				this.exchangeRate = 1;
 				return;
