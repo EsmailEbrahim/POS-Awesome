@@ -133,13 +133,11 @@
 									color="primary"
 									class="pos-themed-input"
 									:loading="itemLoading"
-									:disabled="itemLoading"
 									:custom-filter="() => true"
 									:no-data-text="
 										itemLoading ? __('Loading items...') : __('Items not found')
 									"
 									@update:search="handleItemSearch"
-									@focus="searchItems('')"
 									clearable
 								>
 									<template #append-inner>
@@ -587,21 +585,17 @@ export default {
 			}, 300);
 		},
 		async searchItems(searchText = "") {
+			const searchValue = formatUtils.fromArabicNumerals(String(searchText || "")).trim();
 			this.itemLoading = true;
 			try {
 				const { message } = await frappe.call({
 					method: "posawesome.posawesome.api.purchase_orders.search_items",
 					args: {
-						search_text: searchText,
+						search_text: searchValue || null,
 						limit: 20,
 					},
 				});
-				const searchValue = formatUtils.fromArabicNumerals(String(searchText || "")).trim();
-				const shouldShowAll = !searchValue;
-				const results = Array.isArray(message) ? message : [];
-				this.itemResults = shouldShowAll
-					? results
-					: results.filter((row) => row.item_name || row.item_code);
+				this.itemResults = Array.isArray(message) ? message : [];
 			} catch (error) {
 				console.error("Failed to fetch items:", error);
 				this.itemResults = [];
@@ -932,6 +926,7 @@ export default {
 			this.resetDialog();
 			await Promise.all([
 				this.searchSuppliers(""),
+				this.searchItems(""),
 				this.loadSupplierGroups(),
 				this.loadItemGroups(),
 				this.loadUoms(),
