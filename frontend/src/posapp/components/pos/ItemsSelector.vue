@@ -121,6 +121,17 @@
 						<v-col cols="12" class="dynamic-margin-xs">
 							<div class="settings-container">
 								<v-btn
+									v-if="context === 'purchase'"
+									density="compact"
+									variant="text"
+									color="primary"
+									prepend-icon="mdi-plus"
+									@click="openNewItemDialog"
+									class="settings-btn"
+								>
+									{{ __("New Item") }}
+								</v-btn>
+								<v-btn
 									density="compact"
 									variant="text"
 									color="primary"
@@ -622,6 +633,80 @@
 			</v-row>
 		</v-card>
 
+		<!-- New Item Dialog -->
+		<v-dialog v-model="newItemDialog" max-width="500px">
+			<v-card>
+				<v-card-title class="text-h6 pa-4">
+					{{ __("Create New Item") }}
+				</v-card-title>
+				<v-card-text class="pa-4">
+					<v-row dense>
+						<v-col cols="12">
+							<v-text-field
+								v-model="newItemForm.item_code"
+								:label="frappe._('Item Code')"
+								density="compact"
+								variant="outlined"
+								class="pos-themed-input"
+								:rules="[(v) => !!v || __('* Required')]"
+							></v-text-field>
+						</v-col>
+						<v-col cols="12">
+							<v-text-field
+								v-model="newItemForm.item_name"
+								:label="frappe._('Item Name')"
+								density="compact"
+								variant="outlined"
+								class="pos-themed-input"
+								:rules="[(v) => !!v || __('* Required')]"
+							></v-text-field>
+						</v-col>
+						<v-col cols="12">
+							<v-select
+								v-model="newItemForm.item_group"
+								:items="items_group.filter((g) => g !== 'ALL')"
+								:label="frappe._('Item Group')"
+								density="compact"
+								variant="outlined"
+								class="pos-themed-input"
+								:rules="[(v) => !!v || __('* Required')]"
+							></v-select>
+						</v-col>
+						<v-col cols="6">
+							<v-autocomplete
+								v-model="newItemForm.stock_uom"
+								:items="uom_list"
+								:label="frappe._('Stock UOM')"
+								density="compact"
+								variant="outlined"
+								class="pos-themed-input"
+								:rules="[(v) => !!v || __('* Required')]"
+							></v-autocomplete>
+						</v-col>
+						<v-col cols="6">
+							<v-text-field
+								v-model="newItemForm.standard_rate"
+								:label="frappe._('Standard Rate')"
+								type="number"
+								density="compact"
+								variant="outlined"
+								class="pos-themed-input"
+							></v-text-field>
+						</v-col>
+					</v-row>
+				</v-card-text>
+				<v-card-actions class="pa-4 pt-0">
+					<v-spacer></v-spacer>
+					<v-btn color="error" variant="text" @click="closeNewItemDialog">
+						{{ __("Cancel") }}
+					</v-btn>
+					<v-btn color="primary" variant="tonal" @click="submitNewItem" :loading="newItemLoading">
+						{{ __("Create") }}
+					</v-btn>
+				</v-card-actions>
+			</v-card>
+		</v-dialog>
+
 		<!-- Camera Scanner Component -->
 		<CameraScanner
 			v-if="pos_profile.posa_enable_camera_scanning"
@@ -724,6 +809,16 @@ export default {
 		},
 	},
 	data: () => ({
+		newItemDialog: false,
+		newItemLoading: false,
+		newItemForm: {
+			item_code: "",
+			item_name: "",
+			item_group: "",
+			stock_uom: "Nos",
+			standard_rate: 0,
+		},
+		uom_list: [],
 		pos_profile: {},
 		stock_settings: {},
 		flags: {},
@@ -1047,6 +1142,95 @@ export default {
 	},
 
 	methods: {
+		openNewItemDialog() {
+			this.newItemForm = {
+				item_code: "",
+				item_name: "",
+				item_group:
+					this.items_group.length > 1 && this.items_group[1] !== "ALL"
+						? this.items_group[1]
+						: this.items_group[0] !== "ALL"
+							? this.items_group[0]
+							: "",
+				stock_uom: "Nos",
+				standard_rate: 0,
+			};
+			this.get_uoms();
+			this.newItemDialog = true;
+		},
+		async get_uoms() {
+			if (this.uom_list.length) return;
+			try {
+				const r = await frappe.call({
+					method: "frappe.client.get_list",
+					args: {
+						doctype: "UOM",
+						fields: ["name"],
+						limit_page_length: 0,
+					},
+				});
+				if (r.message) {
+					this.uom_list = r.message.map((d) => d.name);
+				}
+			} catch (e) {
+				console.error("Failed to fetch UOMs", e);
+				// Fallback
+				this.uom_list = ["Nos", "Kg", "Meter", "Box"];
+			}
+		},
+		closeNewItemDialog() {
+			this.newItemDialog = false;
+		},
+		async submitNewItem() {
+			if (
+				!this.newItemForm.item_code ||
+				!this.newItemForm.item_name ||
+				!this.newItemForm.item_group ||
+				!this.newItemForm.stock_uom
+			) {
+				frappe.msgprint(__("Please fill all required fields"));
+				return;
+			}
+			this.newItemLoading = true;
+			try {
+				const res = await frappe.call({
+					method: "frappe.client.insert",
+					args: {
+						doc: {
+							doctype: "Item",
+							item_code: this.newItemForm.item_code,
+							item_name: this.newItemForm.item_name,
+							item_group: this.newItemForm.item_group,
+							stock_uom: this.newItemForm.stock_uom,
+							standard_rate: this.newItemForm.standard_rate,
+							is_stock_item: 1,
+						},
+					},
+				});
+
+				const newItem = res.message || res;
+				newItem.actual_qty = 0; // Initialize stock
+				// Add to local list
+				this.items.unshift(newItem);
+				this.eventBus.emit("set_all_items", this.items);
+
+				// If search is active, it might filter this item out, so clear search or update it
+				if (this.search_input) {
+					this.clearSearch();
+				}
+
+				this.closeNewItemDialog();
+				frappe.show_alert({
+					message: __("Item created successfully"),
+					indicator: "green",
+				});
+			} catch (e) {
+				console.error(e);
+				frappe.msgprint(__("Failed to create item"));
+			} finally {
+				this.newItemLoading = false;
+			}
+		},
 		normalizeScaleBarcodeSettings(rawSettings = {}) {
 			const settings = rawSettings && typeof rawSettings === "object" ? rawSettings : {};
 			const prefix = String(settings.prefix || "").trim();
@@ -2140,20 +2324,23 @@ export default {
 
 			// Validate item before adding to cart
 			const requestedQty = this.qty != null ? Math.abs(this.qty) : 1;
-			const isValid = await this.cartValidation.validateCartItem(
-				item,
-				requestedQty,
-				this.pos_profile,
-				this.stock_settings,
-				this.eventBus,
-				this.blockSaleBeyondAvailableQty,
-				!suppressNegativeWarning,
-				true, // Skip server-side validation for instant add
-			);
 
-			if (!isValid) {
-				// Validation failed, error message already shown by validator
-				return;
+			if (this.context !== "purchase") {
+				const isValid = await this.cartValidation.validateCartItem(
+					item,
+					requestedQty,
+					this.pos_profile,
+					this.stock_settings,
+					this.eventBus,
+					this.blockSaleBeyondAvailableQty,
+					!suppressNegativeWarning,
+					true, // Skip server-side validation for instant add
+				);
+
+				if (!isValid) {
+					// Validation failed, error message already shown by validator
+					return;
+				}
 			}
 
 			// Prepare item for cart
