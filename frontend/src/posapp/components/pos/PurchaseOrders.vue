@@ -37,7 +37,6 @@
 										color="primary"
 										hide-details="auto"
 										:loading="supplierLoading"
-										:disabled="supplierLoading"
 										@update:search="handleSupplierSearch"
 										:custom-filter="() => true"
 										:no-data-text="
@@ -459,6 +458,7 @@ export default {
 					conversion_factor: 1,
 					qty: 1,
 					rate: rate,
+					standard_rate: item.standard_rate || 0, // Preserve standard_rate for fallback calculations
 					received_qty: this.receiveNow ? 1 : 0,
 					receivedQtyManual: false,
 				});
