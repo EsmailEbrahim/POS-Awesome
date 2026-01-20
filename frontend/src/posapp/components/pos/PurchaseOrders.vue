@@ -1,444 +1,449 @@
 <template>
-	<v-row justify="center">
-		<v-dialog v-model="dialog" max-width="1100px">
-			<v-card>
-				<v-card-title>
-					<span class="text-h5 text-primary">{{ __("Create Purchase Order") }}</span>
-				</v-card-title>
-				<v-card-text class="pa-0">
-					<v-container>
-						<v-row class="mb-2">
-							<v-col cols="12" md="8">
-								<v-autocomplete
-									v-model="supplier"
-									:items="supplierOptions"
-									item-title="supplier_name"
-									item-value="name"
-									:label="frappe._('Supplier')"
-									density="compact"
-									variant="solo"
-									color="primary"
-									class="pos-themed-input"
-									:loading="supplierLoading"
-									:disabled="supplierLoading"
-									:custom-filter="() => true"
-									:no-data-text="
-										supplierLoading
-											? __('Loading suppliers...')
-											: __('Suppliers not found')
-									"
-									@update:search="handleSupplierSearch"
-									clearable
-								>
-									<template #append-inner>
-										<v-tooltip v-if="allowCreateSupplier" text="Add new supplier">
-											<template #activator="{ props }">
-												<v-icon
-													v-bind="props"
-													class="icon-button"
-													@mousedown.prevent.stop
-													@click.stop="openCreateSupplierDialog"
+	<div class="pa-4">
+		<v-row justify="center">
+			<v-col cols="12">
+				<v-card>
+					<v-card-title>
+						<span class="text-h5 text-primary">{{ __("Create Purchase Order") }}</span>
+					</v-card-title>
+					<v-card-text class="pa-0">
+						<v-container>
+							<v-row class="mb-2">
+								<v-col cols="12" md="8">
+									<v-autocomplete
+										v-model="supplier"
+										:items="supplierOptions"
+										item-title="supplier_name"
+										item-value="name"
+										:label="frappe._('Supplier')"
+										density="compact"
+										variant="solo"
+										color="primary"
+										class="pos-themed-input"
+										:loading="supplierLoading"
+										:disabled="supplierLoading"
+										:custom-filter="() => true"
+										:no-data-text="
+											supplierLoading
+												? __('Loading suppliers...')
+												: __('Suppliers not found')
+										"
+										@update:search="handleSupplierSearch"
+										clearable
+									>
+										<template #append-inner>
+											<v-tooltip v-if="allowCreateSupplier" text="Add new supplier">
+												<template #activator="{ props }">
+													<v-icon
+														v-bind="props"
+														class="icon-button"
+														@mousedown.prevent.stop
+														@click.stop="openCreateSupplierDialog"
+													>
+														mdi-plus
+													</v-icon>
+												</template>
+											</v-tooltip>
+										</template>
+										<template #item="{ props, item }">
+											<v-list-item v-bind="props">
+												<v-list-item-title>{{
+													item.raw.supplier_name
+												}}</v-list-item-title>
+												<v-list-item-subtitle
+													v-if="item.raw.name !== item.raw.supplier_name"
 												>
-													mdi-plus
-												</v-icon>
-											</template>
-										</v-tooltip>
-									</template>
-									<template #item="{ props, item }">
-										<v-list-item v-bind="props">
-											<v-list-item-title>{{
-												item.raw.supplier_name
-											}}</v-list-item-title>
-											<v-list-item-subtitle
-												v-if="item.raw.name !== item.raw.supplier_name"
-											>
-												{{ item.raw.name }}
-											</v-list-item-subtitle>
-										</v-list-item>
-									</template>
-								</v-autocomplete>
-							</v-col>
-							<v-col cols="12" md="4" class="d-flex flex-column">
-								<v-switch
-									v-if="pos_profile.posa_allow_purchase_receipt"
-									v-model="receiveNow"
-									density="compact"
-									inset
-									color="success"
-									:label="__('Receive now')"
-								></v-switch>
-								<v-switch
-									v-model="createInvoice"
-									density="compact"
-									inset
-									color="primary"
-									:label="__('Create Purchase Invoice')"
-								></v-switch>
-							</v-col>
-						</v-row>
+													{{ item.raw.name }}
+												</v-list-item-subtitle>
+											</v-list-item>
+										</template>
+									</v-autocomplete>
+								</v-col>
+								<v-col cols="12" md="4" class="d-flex flex-column">
+									<v-switch
+										v-if="pos_profile.posa_allow_purchase_receipt"
+										v-model="receiveNow"
+										density="compact"
+										inset
+										color="success"
+										:label="__('Receive now')"
+									></v-switch>
+									<v-switch
+										v-model="createInvoice"
+										density="compact"
+										inset
+										color="primary"
+										:label="__('Create Purchase Invoice')"
+									></v-switch>
+								</v-col>
+							</v-row>
 
-						<v-row class="mb-2">
-							<v-col cols="12" sm="4">
-								<VueDatePicker
-									v-model="scheduleDate"
-									model-type="format"
-									format="dd-MM-yyyy"
-									:enable-time-picker="false"
-									auto-apply
-									:placeholder="frappe._('Required By')"
-									class="pos-themed-input"
-								/>
-							</v-col>
-							<v-col cols="12" sm="4">
-								<VueDatePicker
-									v-model="transactionDate"
-									model-type="format"
-									format="dd-MM-yyyy"
-									:enable-time-picker="false"
-									auto-apply
-									:placeholder="frappe._('Posting Date')"
-									class="pos-themed-input"
-								/>
-							</v-col>
-							<v-col cols="12" sm="4">
-								<v-autocomplete
-									v-model="warehouse"
-									:items="warehouseOptions"
-									item-title="warehouse_name"
-									item-value="name"
-									:label="frappe._('Warehouse')"
-									density="compact"
-									variant="solo"
-									color="primary"
-									class="pos-themed-input"
-									clearable
-									:loading="warehouseLoading"
-									:disabled="warehouseLoading"
-								/>
-							</v-col>
-						</v-row>
+							<v-row class="mb-2">
+								<v-col cols="12" sm="4">
+									<VueDatePicker
+										v-model="scheduleDate"
+										model-type="format"
+										format="dd-MM-yyyy"
+										:enable-time-picker="false"
+										auto-apply
+										:placeholder="frappe._('Required By')"
+										class="pos-themed-input"
+									/>
+								</v-col>
+								<v-col cols="12" sm="4">
+									<VueDatePicker
+										v-model="transactionDate"
+										model-type="format"
+										format="dd-MM-yyyy"
+										:enable-time-picker="false"
+										auto-apply
+										:placeholder="frappe._('Posting Date')"
+										class="pos-themed-input"
+									/>
+								</v-col>
+								<v-col cols="12" sm="4">
+									<v-autocomplete
+										v-model="warehouse"
+										:items="warehouseOptions"
+										item-title="warehouse_name"
+										item-value="name"
+										:label="frappe._('Warehouse')"
+										density="compact"
+										variant="solo"
+										color="primary"
+										class="pos-themed-input"
+										clearable
+										:loading="warehouseLoading"
+										:disabled="warehouseLoading"
+									/>
+								</v-col>
+							</v-row>
 
-						<v-divider class="my-2"></v-divider>
+							<v-divider class="my-2"></v-divider>
 
-						<v-row class="mb-2">
-							<v-col cols="12" md="8">
-								<v-autocomplete
-									v-model="selectedItemCode"
-									:items="itemResults"
-									item-title="item_name"
-									item-value="item_code"
-									:label="frappe._('Item')"
-									density="compact"
-									variant="solo"
-									color="primary"
-									class="pos-themed-input"
-									:loading="itemLoading"
-									:custom-filter="() => true"
-									:no-data-text="
-										itemLoading ? __('Loading items...') : __('Items not found')
-									"
-									@update:search="handleItemSearch"
-									clearable
-								>
-									<template #append-inner>
-										<v-tooltip v-if="allowCreateItem" text="Add new item">
-											<template #activator="{ props }">
-												<v-icon
-													v-bind="props"
-													class="icon-button"
-													@mousedown.prevent.stop
-													@click.stop="openCreateItemDialog"
-												>
-													mdi-plus
-												</v-icon>
-											</template>
-										</v-tooltip>
-									</template>
-									<template #item="{ props, item }">
-										<v-list-item v-bind="props">
-											<v-list-item-title>{{ item.raw.item_name }}</v-list-item-title>
-											<v-list-item-subtitle>
-												{{ item.raw.item_code }}
-												<span v-if="item.raw.stock_uom"
-													>- {{ item.raw.stock_uom }}</span
-												>
-											</v-list-item-subtitle>
-										</v-list-item>
-									</template>
-								</v-autocomplete>
-							</v-col>
-							<v-col cols="12" md="4" class="d-flex align-center">
-								<v-btn
-									block
-									color="primary"
-									theme="dark"
-									:disabled="!selectedItemCode"
-									@click="addSelectedItem"
-								>
-									{{ __("Add Item") }}
-								</v-btn>
-							</v-col>
-						</v-row>
+							<v-row class="mb-2">
+								<v-col cols="12" md="8">
+									<v-autocomplete
+										v-model="selectedItemCode"
+										:items="itemResults"
+										item-title="item_name"
+										item-value="item_code"
+										:label="frappe._('Item')"
+										density="compact"
+										variant="solo"
+										color="primary"
+										class="pos-themed-input"
+										:loading="itemLoading"
+										:custom-filter="() => true"
+										:no-data-text="
+											itemLoading ? __('Loading items...') : __('Items not found')
+										"
+										@update:search="handleItemSearch"
+										clearable
+									>
+										<template #append-inner>
+											<v-tooltip v-if="allowCreateItem" text="Add new item">
+												<template #activator="{ props }">
+													<v-icon
+														v-bind="props"
+														class="icon-button"
+														@mousedown.prevent.stop
+														@click.stop="openCreateItemDialog"
+													>
+														mdi-plus
+													</v-icon>
+												</template>
+											</v-tooltip>
+										</template>
+										<template #item="{ props, item }">
+											<v-list-item v-bind="props">
+												<v-list-item-title>{{
+													item.raw.item_name
+												}}</v-list-item-title>
+												<v-list-item-subtitle>
+													{{ item.raw.item_code }}
+													<span v-if="item.raw.stock_uom"
+														>- {{ item.raw.stock_uom }}</span
+													>
+												</v-list-item-subtitle>
+											</v-list-item>
+										</template>
+									</v-autocomplete>
+								</v-col>
+								<v-col cols="12" md="4" class="d-flex align-center">
+									<v-btn
+										block
+										color="primary"
+										theme="dark"
+										:disabled="!selectedItemCode"
+										@click="addSelectedItem"
+									>
+										{{ __("Add Item") }}
+									</v-btn>
+								</v-col>
+							</v-row>
 
-						<v-row>
-							<v-col cols="12" class="pa-1">
-								<v-data-table
-									:headers="itemHeaders"
-									:items="purchaseItems"
-									item-key="line_id"
-									class="elevation-1"
-									hide-default-footer
-								>
-									<template v-slot:item.uom="{ item }">
-										<v-select
-											density="compact"
-											variant="outlined"
-											class="pos-themed-input"
-											:model-value="item.uom"
-											:items="
-												item.item_uoms || [
-													{ uom: item.stock_uom, conversion_factor: 1 },
-												]
-											"
-											item-title="uom"
-											item-value="uom"
-											:disabled="!item.item_uoms || item.item_uoms.length <= 1"
-											@update:model-value="updateItemUom(item, $event)"
-										></v-select>
-									</template>
-									<template v-slot:item.qty="{ item }">
-										<v-text-field
-											density="compact"
-											variant="outlined"
-											class="pos-themed-input"
-											:rules="[isNumber]"
-											:label="frappe._('Qty')"
-											:model-value="formatFloat(item.qty)"
-											@change="updateItemQty(item, $event)"
-										></v-text-field>
-									</template>
-									<template v-slot:item.rate="{ item }">
-										<v-text-field
-											density="compact"
-											variant="outlined"
-											class="pos-themed-input"
-											:label="frappe._('Rate')"
-											:model-value="formatCurrency(item.rate)"
-											@change="updateItemRate(item, $event)"
-										></v-text-field>
-									</template>
-									<template v-slot:item.received_qty="{ item }">
-										<div v-if="receiveNow">
+							<v-row>
+								<v-col cols="12" class="pa-1">
+									<v-data-table
+										:headers="itemHeaders"
+										:items="purchaseItems"
+										item-key="line_id"
+										class="elevation-1"
+										hide-default-footer
+									>
+										<template v-slot:item.uom="{ item }">
+											<v-select
+												density="compact"
+												variant="outlined"
+												class="pos-themed-input"
+												:model-value="item.uom"
+												:items="
+													item.item_uoms || [
+														{ uom: item.stock_uom, conversion_factor: 1 },
+													]
+												"
+												item-title="uom"
+												item-value="uom"
+												:disabled="!item.item_uoms || item.item_uoms.length <= 1"
+												@update:model-value="updateItemUom(item, $event)"
+											></v-select>
+										</template>
+										<template v-slot:item.qty="{ item }">
 											<v-text-field
 												density="compact"
 												variant="outlined"
 												class="pos-themed-input"
-												:label="frappe._('Received')"
-												:model-value="formatFloat(item.received_qty)"
-												@change="updateItemReceivedQty(item, $event)"
+												:rules="[isNumber]"
+												:label="frappe._('Qty')"
+												:model-value="formatFloat(item.qty)"
+												@change="updateItemQty(item, $event)"
 											></v-text-field>
-										</div>
-									</template>
-									<template v-slot:item.amount="{ item }">
-										<div class="text-right">
-											{{ currencySymbol(pos_profile.currency) }}
-											{{ formatCurrency(item.qty * item.rate) }}
-										</div>
-									</template>
-									<template v-slot:item.actions="{ item }">
-										<v-btn
-											icon="mdi-delete"
-											variant="text"
-											color="error"
-											@click="removeItem(item)"
-										></v-btn>
-									</template>
-								</v-data-table>
-							</v-col>
-						</v-row>
+										</template>
+										<template v-slot:item.rate="{ item }">
+											<v-text-field
+												density="compact"
+												variant="outlined"
+												class="pos-themed-input"
+												:label="frappe._('Rate')"
+												:model-value="formatCurrency(item.rate)"
+												@change="updateItemRate(item, $event)"
+											></v-text-field>
+										</template>
+										<template v-slot:item.received_qty="{ item }">
+											<div v-if="receiveNow">
+												<v-text-field
+													density="compact"
+													variant="outlined"
+													class="pos-themed-input"
+													:label="frappe._('Received')"
+													:model-value="formatFloat(item.received_qty)"
+													@change="updateItemReceivedQty(item, $event)"
+												></v-text-field>
+											</div>
+										</template>
+										<template v-slot:item.amount="{ item }">
+											<div class="text-right">
+												{{ currencySymbol(pos_profile.currency) }}
+												{{ formatCurrency(item.qty * item.rate) }}
+											</div>
+										</template>
+										<template v-slot:item.actions="{ item }">
+											<v-btn
+												icon="mdi-delete"
+												variant="text"
+												color="error"
+												@click="removeItem(item)"
+											></v-btn>
+										</template>
+									</v-data-table>
+								</v-col>
+							</v-row>
 
-						<v-row v-if="errorMessage">
-							<v-col cols="12" class="pt-0">
-								<v-alert type="error" dense border="start" class="mx-2">
-									{{ errorMessage }}
-								</v-alert>
-							</v-col>
-						</v-row>
-					</v-container>
+							<v-row v-if="errorMessage">
+								<v-col cols="12" class="pt-0">
+									<v-alert type="error" dense border="start" class="mx-2">
+										{{ errorMessage }}
+									</v-alert>
+								</v-col>
+							</v-row>
+						</v-container>
+					</v-card-text>
+					<v-card-actions>
+						<v-spacer></v-spacer>
+						<v-btn
+							color="success"
+							theme="dark"
+							:loading="submitLoading"
+							:disabled="submitLoading"
+							@click="submitPurchaseOrder"
+						>
+							{{ __("Submit") }}
+						</v-btn>
+					</v-card-actions>
+				</v-card>
+			</v-col>
+		</v-row>
+
+		<v-dialog v-model="supplierDialog" max-width="520px">
+			<v-card>
+				<v-card-title>
+					<span class="text-h6 text-primary">{{ __("Create Supplier") }}</span>
+				</v-card-title>
+				<v-card-text>
+					<v-text-field
+						v-model="supplierForm.supplier_name"
+						:label="frappe._('Supplier Name')"
+						density="compact"
+						variant="outlined"
+						class="pos-themed-input"
+					/>
+					<v-select
+						v-model="supplierForm.supplier_group"
+						:items="supplierGroups"
+						:label="frappe._('Supplier Group')"
+						density="compact"
+						variant="outlined"
+						class="pos-themed-input"
+						clearable
+					/>
+					<v-select
+						v-model="supplierForm.supplier_type"
+						:items="supplierTypes"
+						:label="frappe._('Supplier Type')"
+						density="compact"
+						variant="outlined"
+						class="pos-themed-input"
+					/>
+					<v-text-field
+						v-model="supplierForm.tax_id"
+						:label="frappe._('Tax ID')"
+						density="compact"
+						variant="outlined"
+						class="pos-themed-input"
+					/>
+					<v-text-field
+						v-model="supplierForm.mobile_no"
+						:label="frappe._('Mobile Number')"
+						density="compact"
+						variant="outlined"
+						class="pos-themed-input"
+					/>
+					<v-text-field
+						v-model="supplierForm.email_id"
+						:label="frappe._('Email')"
+						density="compact"
+						variant="outlined"
+						class="pos-themed-input"
+					/>
 				</v-card-text>
 				<v-card-actions>
 					<v-spacer></v-spacer>
-					<v-btn color="error" theme="dark" @click="closeDialog">{{ __("Close") }}</v-btn>
+					<v-btn color="error" variant="text" @click="closeSupplierDialog">{{
+						__("Cancel")
+					}}</v-btn>
 					<v-btn
-						color="success"
-						theme="dark"
-						:loading="submitLoading"
-						:disabled="submitLoading"
-						@click="submitPurchaseOrder"
+						color="primary"
+						variant="tonal"
+						:loading="supplierSubmitLoading"
+						:disabled="supplierSubmitLoading"
+						@click="submitSupplier"
 					>
-						{{ __("Submit") }}
+						{{ __("Create") }}
 					</v-btn>
 				</v-card-actions>
 			</v-card>
 		</v-dialog>
-	</v-row>
 
-	<v-dialog v-model="supplierDialog" max-width="520px">
-		<v-card>
-			<v-card-title>
-				<span class="text-h6 text-primary">{{ __("Create Supplier") }}</span>
-			</v-card-title>
-			<v-card-text>
-				<v-text-field
-					v-model="supplierForm.supplier_name"
-					:label="frappe._('Supplier Name')"
-					density="compact"
-					variant="outlined"
-					class="pos-themed-input"
-				/>
-				<v-select
-					v-model="supplierForm.supplier_group"
-					:items="supplierGroups"
-					:label="frappe._('Supplier Group')"
-					density="compact"
-					variant="outlined"
-					class="pos-themed-input"
-					clearable
-				/>
-				<v-select
-					v-model="supplierForm.supplier_type"
-					:items="supplierTypes"
-					:label="frappe._('Supplier Type')"
-					density="compact"
-					variant="outlined"
-					class="pos-themed-input"
-				/>
-				<v-text-field
-					v-model="supplierForm.tax_id"
-					:label="frappe._('Tax ID')"
-					density="compact"
-					variant="outlined"
-					class="pos-themed-input"
-				/>
-				<v-text-field
-					v-model="supplierForm.mobile_no"
-					:label="frappe._('Mobile Number')"
-					density="compact"
-					variant="outlined"
-					class="pos-themed-input"
-				/>
-				<v-text-field
-					v-model="supplierForm.email_id"
-					:label="frappe._('Email')"
-					density="compact"
-					variant="outlined"
-					class="pos-themed-input"
-				/>
-			</v-card-text>
-			<v-card-actions>
-				<v-spacer></v-spacer>
-				<v-btn color="error" variant="text" @click="closeSupplierDialog">{{ __("Cancel") }}</v-btn>
-				<v-btn
-					color="primary"
-					variant="tonal"
-					:loading="supplierSubmitLoading"
-					:disabled="supplierSubmitLoading"
-					@click="submitSupplier"
-				>
-					{{ __("Create") }}
-				</v-btn>
-			</v-card-actions>
-		</v-card>
-	</v-dialog>
-
-	<v-dialog v-model="itemDialog" max-width="620px">
-		<v-card>
-			<v-card-title>
-				<span class="text-h6 text-primary">{{ __("Create Item") }}</span>
-			</v-card-title>
-			<v-card-text>
-				<v-text-field
-					v-model="itemForm.item_code"
-					:label="frappe._('Item Code')"
-					density="compact"
-					variant="outlined"
-					class="pos-themed-input"
-				/>
-				<v-text-field
-					v-model="itemForm.item_name"
-					:label="frappe._('Item Name')"
-					density="compact"
-					variant="outlined"
-					class="pos-themed-input"
-				/>
-				<v-autocomplete
-					v-model="itemForm.stock_uom"
-					:items="uomOptions"
-					:label="frappe._('Stock UOM')"
-					density="compact"
-					variant="outlined"
-					class="pos-themed-input"
-					clearable
-				/>
-				<v-select
-					v-model="itemForm.item_group"
-					:items="itemGroups"
-					:label="frappe._('Item Group')"
-					density="compact"
-					variant="outlined"
-					class="pos-themed-input"
-					clearable
-				/>
-				<v-text-field
-					v-model="itemForm.barcode"
-					:label="frappe._('Barcode')"
-					density="compact"
-					variant="outlined"
-					class="pos-themed-input"
-				/>
-				<v-text-field
-					v-model="itemForm.buying_price"
-					:label="frappe._('Buying Price')"
-					density="compact"
-					variant="outlined"
-					class="pos-themed-input"
-					@change="setFormatedCurrency(itemForm, 'buying_price', null, true, $event)"
-				/>
-				<v-text-field
-					v-model="itemForm.selling_price"
-					:label="frappe._('Selling Price')"
-					density="compact"
-					variant="outlined"
-					class="pos-themed-input"
-					@change="setFormatedCurrency(itemForm, 'selling_price', null, true, $event)"
-				/>
-			</v-card-text>
-			<v-card-actions>
-				<v-spacer></v-spacer>
-				<v-btn color="error" variant="text" @click="closeItemDialog">{{ __("Cancel") }}</v-btn>
-				<v-btn
-					color="primary"
-					variant="tonal"
-					:loading="itemSubmitLoading"
-					:disabled="itemSubmitLoading"
-					@click="submitItem"
-				>
-					{{ __("Create") }}
-				</v-btn>
-			</v-card-actions>
-		</v-card>
-	</v-dialog>
+		<v-dialog v-model="itemDialog" max-width="620px">
+			<v-card>
+				<v-card-title>
+					<span class="text-h6 text-primary">{{ __("Create Item") }}</span>
+				</v-card-title>
+				<v-card-text>
+					<v-text-field
+						v-model="itemForm.item_code"
+						:label="frappe._('Item Code')"
+						density="compact"
+						variant="outlined"
+						class="pos-themed-input"
+					/>
+					<v-text-field
+						v-model="itemForm.item_name"
+						:label="frappe._('Item Name')"
+						density="compact"
+						variant="outlined"
+						class="pos-themed-input"
+					/>
+					<v-autocomplete
+						v-model="itemForm.stock_uom"
+						:items="uomOptions"
+						:label="frappe._('Stock UOM')"
+						density="compact"
+						variant="outlined"
+						class="pos-themed-input"
+						clearable
+					/>
+					<v-select
+						v-model="itemForm.item_group"
+						:items="itemGroups"
+						:label="frappe._('Item Group')"
+						density="compact"
+						variant="outlined"
+						class="pos-themed-input"
+						clearable
+					/>
+					<v-text-field
+						v-model="itemForm.barcode"
+						:label="frappe._('Barcode')"
+						density="compact"
+						variant="outlined"
+						class="pos-themed-input"
+					/>
+					<v-text-field
+						v-model="itemForm.buying_price"
+						:label="frappe._('Buying Price')"
+						density="compact"
+						variant="outlined"
+						class="pos-themed-input"
+						@change="setFormatedCurrency(itemForm, 'buying_price', null, true, $event)"
+					/>
+					<v-text-field
+						v-model="itemForm.selling_price"
+						:label="frappe._('Selling Price')"
+						density="compact"
+						variant="outlined"
+						class="pos-themed-input"
+						@change="setFormatedCurrency(itemForm, 'selling_price', null, true, $event)"
+					/>
+				</v-card-text>
+				<v-card-actions>
+					<v-spacer></v-spacer>
+					<v-btn color="error" variant="text" @click="closeItemDialog">{{ __("Cancel") }}</v-btn>
+					<v-btn
+						color="primary"
+						variant="tonal"
+						:loading="itemSubmitLoading"
+						:disabled="itemSubmitLoading"
+						@click="submitItem"
+					>
+						{{ __("Create") }}
+					</v-btn>
+				</v-card-actions>
+			</v-card>
+		</v-dialog>
+	</div>
 </template>
 
 <script>
 /* global __, frappe */
 import format, { formatUtils } from "../../format";
 import { useStockUtils } from "../../composables/useStockUtils";
+import { getOpeningStorage } from "../../../offline/index.js";
 
 export default {
 	mixins: [format],
 	data: () => ({
-		dialog: false,
 		stockUtils: useStockUtils(),
 		pos_profile: {},
 		supplier: null,
@@ -551,7 +556,7 @@ export default {
 		getTodayDisplay() {
 			return formatUtils.toArabicNumerals(frappe.datetime.nowdate());
 		},
-		resetDialog() {
+		resetForm() {
 			this.supplier = null;
 			this.supplierOptions = [];
 			this.supplierLoading = false;
@@ -565,9 +570,6 @@ export default {
 			this.purchaseItems = [];
 			this.errorMessage = "";
 			this.submitLoading = false;
-		},
-		closeDialog() {
-			this.dialog = false;
 		},
 		async handleSupplierSearch(term) {
 			if (this.supplierSearchTimeout) {
@@ -871,7 +873,8 @@ export default {
 						const itemCodes = items.map((item) => item.item_code);
 						this.eventBus.emit("invoice_stock_adjusted", { item_codes: itemCodes });
 					}
-					this.dialog = false;
+					// this.dialog = false; // Dialog removed
+					this.resetForm(); // Reset form after success
 				}
 			} catch (error) {
 				console.error("Failed to submit purchase order:", error);
@@ -958,10 +961,16 @@ export default {
 				this.warehouseLoading = false;
 			}
 		},
-	},
-	created() {
-		this.eventBus.on("open_purchase_orders", async () => {
-			this.resetDialog();
+		async initialize() {
+			// Load POS Profile from storage if not present
+			if (!this.pos_profile || !this.pos_profile.name) {
+				const cachedData = getOpeningStorage();
+				if (cachedData && cachedData.pos_profile) {
+					this.pos_profile = cachedData.pos_profile;
+				}
+			}
+
+			this.resetForm();
 			await Promise.all([
 				this.searchSuppliers(""),
 				this.searchItems(""),
@@ -970,8 +979,10 @@ export default {
 				this.loadUoms(),
 				this.loadWarehouses(),
 			]);
-			this.dialog = true;
-		});
+		},
+	},
+	created() {
+		this.initialize();
 	},
 	mounted() {
 		this.eventBus.on("register_pos_profile", (data) => {
@@ -979,7 +990,6 @@ export default {
 		});
 	},
 	beforeUnmount() {
-		this.eventBus.off("open_purchase_orders");
 		this.eventBus.off("register_pos_profile");
 	},
 };
