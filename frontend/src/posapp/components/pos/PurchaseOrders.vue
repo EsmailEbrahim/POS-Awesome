@@ -427,8 +427,9 @@ export default {
 			if (!item.item_uoms || !item.item_uoms.length) {
 				try {
 					const details = await this.itemsStore.getItemByCode(item.item_code);
-					if (details && details.item_uoms) {
-						item.item_uoms = details.item_uoms;
+					if (details) {
+						if (details.item_uoms) item.item_uoms = details.item_uoms;
+						if (details.purchase_uom) item.purchase_uom = details.purchase_uom;
 					}
 				} catch (e) {
 					console.warn("Failed to fetch item details for UOMs", e);
@@ -446,23 +447,39 @@ export default {
 				// Use the rate from the store (which should be the buying price list rate)
 				// If not available, fallback to standard_rate
 				let rate = item.rate || item.standard_rate || 0;
+				let uom = item.purchase_uom || item.stock_uom; // Default to purchase UOM if set
+				let conversion_factor = 1;
 
-				this.purchaseItems.push({
+				if (uom !== item.stock_uom && item.item_uoms) {
+					const uomData = item.item_uoms.find((u) => u.uom === uom);
+					if (uomData) {
+						conversion_factor = uomData.conversion_factor;
+					}
+				}
+
+				const newItem = {
 					line_id: this.generateLineId(),
 					item_code: item.item_code,
 					item_name: item.item_name,
 					stock_uom: item.stock_uom,
 					item_group: item.item_group,
 					item_uoms: item.item_uoms || [{ uom: item.stock_uom, conversion_factor: 1 }],
-					uom: item.stock_uom, // Default to stock uom
-					conversion_factor: 1,
+					uom: uom,
+					conversion_factor: conversion_factor,
 					qty: 1,
 					rate: rate,
 					stock_uom_rate: rate, // Store the base rate for Stock UOM for conversions
 					standard_rate: item.standard_rate || 0,
 					received_qty: this.receiveNow ? 1 : 0,
 					receivedQtyManual: false,
-				});
+				};
+
+				this.purchaseItems.unshift(newItem); // Add to top of list
+
+				// Recalculate rate if UOM is different from stock UOM
+				if (newItem.uom !== newItem.stock_uom) {
+					this.updateItemUom(newItem, newItem.uom);
+				}
 			}
 		},
 		formatDateForBackend(date) {
