@@ -85,7 +85,6 @@ def _fetch_item_prices(
                 price_list = %(price_list)s
                 AND item_code IN %(item_codes)s
                 AND currency = %(currency)s
-                AND selling = 1
                 AND (valid_from IS NULL OR valid_from <= %(today)s)
                 AND IFNULL(customer, '') IN ('', %(customer)s)
                 AND (valid_upto IS NULL OR valid_upto = '' OR valid_upto >= %(today)s)
