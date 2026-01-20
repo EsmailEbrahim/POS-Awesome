@@ -965,6 +965,9 @@ export default {
 		});
 	},
 	beforeUnmount() {
+		if (this.itemsStore && this.pos_profile && this.pos_profile.selling_price_list) {
+			this.itemsStore.updatePriceList(this.pos_profile.selling_price_list);
+		}
 		this.eventBus.off("register_pos_profile");
 		this.eventBus.off("add_item", this.onAddItem);
 	},
