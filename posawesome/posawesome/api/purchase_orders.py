@@ -42,6 +42,12 @@ def _resolve_buying_price_list():
     buying_price_list = frappe.db.get_single_value("Buying Settings", "buying_price_list")
     if not buying_price_list:
         buying_price_list = frappe.db.get_value("Price List", {"buying": 1}, "name")
+    
+    if not buying_price_list:
+        # Fallback to standard default if exists
+        if frappe.db.exists("Price List", "Standard Buying"):
+            buying_price_list = "Standard Buying"
+            
     return buying_price_list
 
 

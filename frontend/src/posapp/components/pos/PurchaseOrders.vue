@@ -732,16 +732,23 @@ export default {
 					// Update store to use buying price list
 					// This will trigger a price refresh in the items store
 					if (this.itemsStore) {
+						// Force update even if it seems same, to ensure items are reloaded with correct price list
 						await this.itemsStore.updatePriceList(message);
+
+						// If store items are already loaded but price list update didn't trigger reload (e.g. same name),
+						// force a reload to ensure we get buying prices (since we cleared selling=1 filter)
+						if (this.itemsStore.activePriceList === message && this.itemsStore.items.length > 0) {
+							// Check if items seem to have selling prices (high rates) vs buying (low/standard)
+							// This is heuristic, but reloading is safer
+							await this.itemsStore.loadItems({
+								forceServer: true,
+								priceList: message,
+							});
+						}
 					}
 				}
 			} catch (e) {
 				console.error("Failed to load buying price list", e);
-			}
-
-			// Ensure items store is initialized to support ItemsSelector
-			if (this.itemsStore && !this.itemsStore.itemsLoaded && this.pos_profile) {
-				await this.itemsStore.initialize(this.pos_profile);
 			}
 
 			this.resetForm();
