@@ -112,7 +112,6 @@
 <script>
 /* global __ */
 import ItemsSelector from "./ItemsSelector.vue";
-import JsBarcode from "jsbarcode";
 import { useItemsStore } from "../../stores/itemsStore";
 import { mapStores } from "pinia";
 
