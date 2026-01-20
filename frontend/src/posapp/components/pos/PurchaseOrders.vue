@@ -415,8 +415,20 @@ export default {
 		},
 	},
 	methods: {
-		onAddItem(item) {
+		async onAddItem(item) {
 			if (!item) return;
+
+			// Fetch item details to get item_uoms if missing
+			if (!item.item_uoms || !item.item_uoms.length) {
+				try {
+					const details = await this.itemsStore.getItemByCode(item.item_code);
+					if (details && details.item_uoms) {
+						item.item_uoms = details.item_uoms;
+					}
+				} catch (e) {
+					console.warn("Failed to fetch item details for UOMs", e);
+				}
+			}
 
 			const existingItem = this.purchaseItems.find((p) => p.item_code === item.item_code);
 
@@ -426,9 +438,15 @@ export default {
 					existingItem.received_qty = existingItem.qty;
 				}
 			} else {
-				// Use standard_rate (Buying Price) if available, fallback to 0
-				// ItemsStore items might have standard_rate if loaded from server or cache
-				const rate = item.standard_rate || 0;
+				// Use Buying Price List rate if available, otherwise standard_rate, then 0
+				// The item object from store usually has 'rate' as selling rate.
+				// We need buying rate. Ideally it should be standard_rate (valuation rate) or from a buying price list.
+				// Since we don't have buying price list integration in itemsStore easily available,
+				// we fall back to standard_rate which is typically the valuation/buying rate in Frappe items.
+				let rate = item.standard_rate || 0;
+
+				// If we have a buying price list active in the backend configuration, we might want to fetch that.
+				// But for now, standard_rate is the best approximation available in the item object.
 
 				this.purchaseItems.push({
 					line_id: this.generateLineId(),
@@ -436,6 +454,7 @@ export default {
 					item_name: item.item_name,
 					stock_uom: item.stock_uom,
 					item_group: item.item_group,
+					item_uoms: item.item_uoms || [{ uom: item.stock_uom, conversion_factor: 1 }],
 					uom: item.stock_uom, // Default to stock uom
 					conversion_factor: 1,
 					qty: 1,

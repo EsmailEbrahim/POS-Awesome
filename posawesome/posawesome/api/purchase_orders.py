@@ -416,7 +416,7 @@ def search_items(search_text=None, limit=20):
         "Item",
         filters=filters,
         or_filters=or_filters,
-        fields=["name", "item_name", "stock_uom"],
+        fields=["name", "item_name", "stock_uom", "standard_rate"],
         limit_page_length=limit,
         order_by="name asc",
     )
@@ -447,6 +447,7 @@ def search_items(search_text=None, limit=20):
                 "item_name": it.get("item_name"),
                 "stock_uom": stock_uom,
                 "item_uoms": uoms,
+                "standard_rate": it.get("standard_rate"),
             }
         )
     return results
