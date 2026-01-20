@@ -44,6 +44,7 @@ import Navbar from "./components/Navbar.vue";
 import POS from "./components/pos/Pos.vue";
 import Payments from "./components/payments/Pay.vue";
 import PurchaseOrders from "./components/pos/PurchaseOrders.vue";
+import BarcodePrinting from "./components/pos/BarcodePrinting.vue";
 import ClosingDialog from "./components/pos/ClosingDialog.vue";
 import AppLoadingOverlay from "./components/ui/LoadingOverlay.vue";
 import UpdatePrompt from "./components/ui/UpdatePrompt.vue";
@@ -159,6 +160,7 @@ export default {
 		POS,
 		Payments,
 		"Purchase Order": PurchaseOrders,
+		"Barcode Printing": BarcodePrinting,
 		ClosingDialog,
 		AppLoadingOverlay,
 		UpdatePrompt,

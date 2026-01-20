@@ -214,6 +214,7 @@ export default {
 				{ text: "POS", icon: "mdi-network-pos" },
 				{ text: "Payments", icon: "mdi-credit-card" },
 				{ text: "Purchase Order", icon: "mdi-cart-plus" },
+				{ text: "Barcode Printing", icon: "mdi-barcode" },
 			],
 			company: "POS Awesome",
 			companyImg: posLogo,
