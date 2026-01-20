@@ -7,8 +7,8 @@
 			</v-col>
 
 			<!-- Right Column: Purchase Order Form (Cart) -->
-			<v-col cols="12" md="7" class="h-100 pa-0 bg-surface">
-				<v-card class="h-100 d-flex flex-column" flat>
+			<v-col cols="12" md="7" class="h-100 pa-0">
+				<v-card class="h-100 d-flex flex-column pos-themed-card" flat>
 					<v-card-title class="py-2 px-4 bg-primary text-white d-flex align-center">
 						<span class="text-h6">{{ __("Create Purchase Order") }}</span>
 						<v-spacer></v-spacer>
@@ -39,6 +39,7 @@
 										:loading="supplierLoading"
 										:disabled="supplierLoading"
 										@update:search="handleSupplierSearch"
+										class="pos-themed-input"
 										clearable
 									>
 										<template #append-inner>
@@ -70,6 +71,7 @@
 										hide-details="auto"
 										clearable
 										:loading="warehouseLoading"
+										class="pos-themed-input"
 									/>
 								</v-col>
 							</v-row>
@@ -83,6 +85,7 @@
 										:enable-time-picker="false"
 										auto-apply
 										:placeholder="frappe._('Posting Date')"
+										class="pos-themed-input"
 									/>
 								</v-col>
 								<v-col cols="6">
@@ -93,6 +96,7 @@
 										:enable-time-picker="false"
 										auto-apply
 										:placeholder="frappe._('Required By')"
+										class="pos-themed-input"
 									/>
 								</v-col>
 							</v-row>
@@ -139,6 +143,23 @@
 									</div>
 								</template>
 
+								<template v-slot:item.uom="{ item }">
+									<v-select
+										density="compact"
+										variant="outlined"
+										hide-details
+										:items="
+											item.item_uoms || [{ uom: item.stock_uom, conversion_factor: 1 }]
+										"
+										item-title="uom"
+										item-value="uom"
+										:model-value="item.uom"
+										@update:model-value="(val) => updateItemUom(item, val)"
+										class="pos-themed-input"
+										style="width: 100px"
+									></v-select>
+								</template>
+
 								<template v-slot:item.qty="{ item }">
 									<v-text-field
 										density="compact"
@@ -148,6 +169,7 @@
 										min="0"
 										:model-value="item.qty"
 										@update:model-value="(val) => updateItemQty(item, val)"
+										class="pos-themed-input"
 										style="width: 80px"
 									></v-text-field>
 								</template>
@@ -161,6 +183,7 @@
 										min="0"
 										:model-value="item.rate"
 										@update:model-value="(val) => updateItemRate(item, val)"
+										class="pos-themed-input"
 										style="width: 100px"
 									></v-text-field>
 								</template>
@@ -175,6 +198,7 @@
 										min="0"
 										:model-value="item.received_qty"
 										@update:model-value="(val) => updateItemReceivedQty(item, val)"
+										class="pos-themed-input"
 										style="width: 80px"
 									></v-text-field>
 								</template>
@@ -197,7 +221,7 @@
 
 								<template v-slot:bottom>
 									<div
-										class="d-flex justify-end pa-4 bg-grey-lighten-4 font-weight-bold text-subtitle-1"
+										class="d-flex justify-end pa-4 font-weight-bold text-subtitle-1 border-t"
 									>
 										<span class="mr-4">{{ __("Total:") }}</span>
 										<span>{{ formatCurrency(totalAmount) }}</span>
@@ -211,7 +235,7 @@
 						</v-container>
 					</v-card-text>
 
-					<v-card-actions class="pa-4 bg-grey-lighten-4 border-t">
+					<v-card-actions class="pa-4 border-t">
 						<v-spacer></v-spacer>
 						<v-btn
 							color="success"
@@ -359,12 +383,13 @@ export default {
 		},
 		itemHeaders() {
 			const headers = [
-				{ title: __("Item"), key: "item_name", align: "start", width: "40%" },
+				{ title: __("Item"), key: "item_name", align: "start", width: "35%" },
+				{ title: __("UOM"), key: "uom", align: "center", width: "15%" },
 				{ title: __("Qty"), key: "qty", align: "center", width: "15%" },
-				{ title: __("Rate"), key: "rate", align: "center", width: "20%" },
+				{ title: __("Rate"), key: "rate", align: "center", width: "15%" },
 			];
 			if (this.receiveNow) {
-				headers.push({ title: __("Received"), key: "received_qty", align: "center", width: "15%" });
+				headers.push({ title: __("Received"), key: "received_qty", align: "center", width: "10%" });
 			}
 			headers.push(
 				{ title: __("Amount"), key: "amount", align: "end", width: "10%" },
