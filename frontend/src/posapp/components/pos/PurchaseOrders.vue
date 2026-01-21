@@ -308,13 +308,23 @@
 					<v-card-actions class="pa-4 border-t">
 						<v-spacer></v-spacer>
 						<v-btn
+							color="info"
+							size="large"
+							variant="flat"
+							class="mr-2"
+							:loading="submitLoading"
+							:disabled="submitLoading || !purchaseItems.length"
+							@click="openPaymentDialog"
+						>
+							{{ __("Pay & Submit") }}
+						</v-btn>
+						<v-btn
 							color="success"
 							size="large"
 							variant="flat"
 							:loading="submitLoading"
 							:disabled="submitLoading || !purchaseItems.length"
 							@click="submitPurchaseOrder"
-							block
 						>
 							{{ __("Submit Purchase Order") }}
 						</v-btn>
@@ -322,6 +332,15 @@
 				</v-card>
 			</v-col>
 		</v-row>
+
+		<!-- Payment Dialog -->
+		<PurchasePaymentDialog
+			v-model="paymentDialog"
+			:total-amount="totalAmount"
+			:currency="supplierCurrency"
+			:pos-profile="pos_profile"
+			@submit="handlePaymentSubmit"
+		/>
 
 		<!-- Supplier Dialog -->
 		<v-dialog v-model="supplierDialog" max-width="520px">
@@ -404,11 +423,13 @@ import { getOpeningStorage } from "../../../offline/index.js";
 import { useItemsStore } from "../../stores/itemsStore";
 import { mapStores } from "pinia";
 import ItemsSelector from "./ItemsSelector.vue";
+import PurchasePaymentDialog from "./PurchasePaymentDialog.vue";
 
 export default {
 	mixins: [format],
 	components: {
 		ItemsSelector,
+		PurchasePaymentDialog,
 	},
 	data: () => ({
 		stockUtils: useStockUtils(),
@@ -418,6 +439,9 @@ export default {
 		supplierOptions: [],
 		supplierLoading: false,
 		supplierDialog: false,
+		paymentDialog: false,
+		payments: [],
+
 		supplierSubmitLoading: false,
 		supplierForm: {
 			supplier_name: "",
@@ -594,6 +618,7 @@ export default {
 			this.purchaseItems = [];
 			this.errorMessage = "";
 			this.submitLoading = false;
+			this.payments = [];
 		},
 		async handleSupplierSearch(term) {
 			if (this.supplierSearchTimeout) {
@@ -829,6 +854,7 @@ export default {
 					receive: this.receiveNow ? 1 : 0,
 					create_invoice: this.createInvoice ? 1 : 0,
 					pos_profile: this.pos_profile,
+					payments: this.payments,
 					items: items.map((item) => ({
 						item_code: item.item_code,
 						item_name: item.item_name,
@@ -870,6 +896,28 @@ export default {
 			} finally {
 				this.submitLoading = false;
 			}
+		},
+		openPaymentDialog() {
+			if (!this.supplier) {
+				this.errorMessage = __("Supplier is required.");
+				return;
+			}
+			const items = this.purchaseItems.filter((item) => item.qty > 0);
+			if (!items.length) {
+				this.errorMessage = __("Please add at least one item.");
+				return;
+			}
+			this.errorMessage = "";
+			this.paymentDialog = true;
+		},
+		handlePaymentSubmit(payments) {
+			this.payments = payments;
+			// If we are paying, we should probably ensure invoice is created, or at least it's an advance payment.
+			// Ideally, paying implies creating an invoice usually.
+			// But user can toggle "Create Bill". If they Pay, we might want to force Create Bill or just allow Advance Payment on PO.
+			// For now, let's respect the toggle but maybe warn?
+			// Actually, let's just submit.
+			this.submitPurchaseOrder();
 		},
 		async loadSupplierGroups() {
 			if (this.supplierGroups.length) return;
