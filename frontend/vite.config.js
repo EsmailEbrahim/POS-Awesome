@@ -42,6 +42,14 @@ export default defineConfig({
 					dest: "libs",
 				},
 				{
+					src: "node_modules/jsbarcode/dist/JsBarcode.all.min.js",
+					dest: "libs",
+				},
+				{
+					src: "node_modules/html2pdf.js/dist/html2pdf.bundle.min.js",
+					dest: "libs",
+				},
+				{
 					src: "src/offline/*",
 					dest: "offline",
 				},
