@@ -144,7 +144,17 @@ export default {
 		return {
 			items: [],
 			labelSize: "38x25mm",
-			labelSizeOptions: ["38x25mm", "50x30mm", "75x50mm", "A4 (3x7 labels)"],
+			labelSizeOptions: [
+				"38x25mm",
+				"50x30mm",
+				"50x25mm",
+				"40x30mm",
+				"40x20mm",
+				"58x40mm",
+				"58x60mm",
+				"75x50mm",
+				"A4 (3x7 labels)",
+			],
 			showOnlyBarcodeItems: false,
 		};
 	},

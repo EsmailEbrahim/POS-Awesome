@@ -4896,10 +4896,11 @@ export default {
 			// Check other filters
 			const hideZeroRate = this.hide_zero_rate_items;
 			const hideVariants = this.pos_profile?.posa_hide_variants_items;
+			const onlyBarcode = this.showOnlyBarcodeItems;
 			const limit = this.enable_custom_items_per_page ? this.items_per_page : this.itemsPerPage;
 
 			// PERF: If no filters needed, just slice and return to avoid O(N) filtering
-			if (!needsLocalSearch && !hideZeroRate && !hideVariants) {
+			if (!needsLocalSearch && !hideZeroRate && !hideVariants && !onlyBarcode) {
 				return baseItems.slice(0, limit);
 			}
 
@@ -4944,6 +4945,16 @@ export default {
 				// 3. Variant Filter
 				if (hideVariants) {
 					if (item.variant_of) continue;
+				}
+
+				// 4. Barcode Filter
+				if (onlyBarcode) {
+					const hasBarcode =
+						item.barcode ||
+						(Array.isArray(item.barcodes) && item.barcodes.length > 0) ||
+						(Array.isArray(item.item_barcode) && item.item_barcode.length > 0);
+
+					if (!hasBarcode) continue;
 				}
 
 				result.push(item);
