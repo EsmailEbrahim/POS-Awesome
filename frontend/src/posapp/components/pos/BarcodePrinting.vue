@@ -213,6 +213,7 @@ export default {
 			includePrice: true,
 			includeBatchSerial: false,
 			editingQtyValue: "",
+			pos_profile: null,
 		};
 	},
 	computed: {
@@ -242,6 +243,14 @@ export default {
 		async onAddItem(item) {
 			if (!item) return;
 
+			// Resolve POS Profile
+			const profile =
+				this.pos_profile && this.pos_profile.name
+					? this.pos_profile
+					: this.itemsStore && this.itemsStore.posProfile
+						? this.itemsStore.posProfile
+						: {};
+
 			// Check if item already exists
 			const existingItem = this.items.find((i) => i.item_code === item.item_code);
 			if (existingItem) {
@@ -265,28 +274,41 @@ export default {
 			// 4. If still not found, fetch details from server
 			if (!barcode) {
 				try {
-					const res = await frappe.call({
-						method: "posawesome.posawesome.api.items.get_items_details",
-						args: {
-							items_data: JSON.stringify([{ item_code: item.item_code }]),
-							pos_profile: JSON.stringify(this.pos_profile || {}),
-							price_list: this.pos_profile?.selling_price_list || "",
-						},
-					});
+					if (profile.name) {
+						const res = await frappe.call({
+							method: "posawesome.posawesome.api.items.get_items_details",
+							args: {
+								items_data: JSON.stringify([{ item_code: item.item_code }]),
+								pos_profile: JSON.stringify(profile),
+								price_list: profile.selling_price_list || "",
+							},
+							silent: true,
+						});
 
-					const details = res.message && res.message[0];
-					if (details) {
-						if (details.barcode) {
-							barcode = details.barcode;
-						} else if (Array.isArray(details.item_barcode) && details.item_barcode.length > 0) {
-							barcode = details.item_barcode[0].barcode;
-						} else if (Array.isArray(details.barcodes) && details.barcodes.length > 0) {
-							barcode = details.barcodes[0];
+						const details = res.message && res.message[0];
+						if (details) {
+							if (details.barcode) {
+								barcode = details.barcode;
+							} else if (
+								Array.isArray(details.item_barcode) &&
+								details.item_barcode.length > 0
+							) {
+								barcode = details.item_barcode[0].barcode;
+							} else if (Array.isArray(details.barcodes) && details.barcodes.length > 0) {
+								barcode = details.barcodes[0];
+							}
 						}
 					}
 				} catch (e) {
 					console.warn("Failed to fetch item details for barcode", e);
 				}
+			}
+
+			if (!barcode) {
+				this.eventBus.emit("show_message", {
+					title: __("Item '{0}' has no barcode", [item.item_name]),
+					color: "warning",
+				});
 			}
 
 			this.items.push({
