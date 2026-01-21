@@ -6,6 +6,8 @@ import json
 import frappe
 from frappe import _
 from frappe.utils import cint, flt, nowdate, getdate
+from erpnext.accounts.party import get_party_account
+
 
 from .utils import get_active_pos_profile, get_default_warehouse
 
@@ -343,10 +345,7 @@ def _create_payment_entry(reference_doc, payments, company, transaction_date):
         pe.paid_from = paid_from_account
 
         # Fetch party account
-        pe.paid_to = frappe.get_value("Supplier", reference_doc.supplier, "default_payable_account")
-        if not pe.paid_to:
-            pe.paid_to = frappe.get_value("Company", company, "default_payable_account")
-        
+        pe.paid_to = get_party_account("Supplier", reference_doc.supplier, company)
         if not pe.paid_to:
              frappe.throw(_("Please set Default Payable Account in Company {0}").format(company))
 
