@@ -311,17 +311,28 @@
 							color="success"
 							size="large"
 							variant="flat"
+							class="mr-2"
 							:loading="submitLoading"
 							:disabled="submitLoading || !purchaseItems.length"
-							@click="submitPurchaseOrder"
+							@click="openPaymentDialog"
 							block
 						>
-							{{ __("Submit Purchase Order") }}
+							{{ __("Pay") }}
 						</v-btn>
 					</v-card-actions>
 				</v-card>
 			</v-col>
 		</v-row>
+
+		<!-- Payment Dialog -->
+		<PurchasePaymentDialog
+			v-model="paymentDialog"
+			:total-amount="totalAmount"
+			:currency="supplierCurrency"
+			:pos-profile="pos_profile"
+			:create-invoice="createInvoice"
+			@submit="handlePaymentSubmit"
+		/>
 
 		<!-- Supplier Dialog -->
 		<v-dialog v-model="supplierDialog" max-width="520px">
@@ -404,11 +415,13 @@ import { getOpeningStorage } from "../../../offline/index.js";
 import { useItemsStore } from "../../stores/itemsStore";
 import { mapStores } from "pinia";
 import ItemsSelector from "./ItemsSelector.vue";
+import PurchasePaymentDialog from "./PurchasePaymentDialog.vue";
 
 export default {
 	mixins: [format],
 	components: {
 		ItemsSelector,
+		PurchasePaymentDialog,
 	},
 	data: () => ({
 		stockUtils: useStockUtils(),
@@ -418,6 +431,9 @@ export default {
 		supplierOptions: [],
 		supplierLoading: false,
 		supplierDialog: false,
+		paymentDialog: false,
+		payments: [],
+
 		supplierSubmitLoading: false,
 		supplierForm: {
 			supplier_name: "",
@@ -594,6 +610,7 @@ export default {
 			this.purchaseItems = [];
 			this.errorMessage = "";
 			this.submitLoading = false;
+			this.payments = [];
 		},
 		async handleSupplierSearch(term) {
 			if (this.supplierSearchTimeout) {
@@ -799,7 +816,7 @@ export default {
 				this.supplierSubmitLoading = false;
 			}
 		},
-		async submitPurchaseOrder() {
+		async submitPurchaseOrder(print = false, printFormat = null, printInvoice = false) {
 			if (!this.supplier) {
 				this.errorMessage = __("Supplier is required.");
 				return;
@@ -829,6 +846,7 @@ export default {
 					receive: this.receiveNow ? 1 : 0,
 					create_invoice: this.createInvoice ? 1 : 0,
 					pos_profile: this.pos_profile,
+					payments: this.payments,
 					items: items.map((item) => ({
 						item_code: item.item_code,
 						item_name: item.item_name,
@@ -862,6 +880,34 @@ export default {
 						const itemCodes = items.map((item) => item.item_code);
 						this.eventBus.emit("invoice_stock_adjusted", { item_codes: itemCodes });
 					}
+
+					if (print) {
+						// Print either invoice or order
+						// Prioritize Invoice if requested and available
+						let doctype = "Purchase Order";
+						let docname = message.purchase_order;
+
+						if (printInvoice && message.purchase_invoice) {
+							doctype = "Purchase Invoice";
+							docname = message.purchase_invoice;
+						}
+
+						const format =
+							printFormat ||
+							this.pos_profile.print_format_for_purchase ||
+							this.pos_profile.print_format;
+
+						if (docname) {
+							const printUrl = frappe.urllib.get_full_url(
+								`/printview?doctype=${doctype}&name=${docname}&print_format=${encodeURIComponent(format || "Standard")}`,
+							);
+							const printWindow = window.open(printUrl, "_blank");
+							if (printWindow) {
+								printWindow.focus();
+							}
+						}
+					}
+
 					this.resetForm();
 				}
 			} catch (error) {
@@ -870,6 +916,23 @@ export default {
 			} finally {
 				this.submitLoading = false;
 			}
+		},
+		openPaymentDialog() {
+			if (!this.supplier) {
+				this.errorMessage = __("Supplier is required.");
+				return;
+			}
+			const items = this.purchaseItems.filter((item) => item.qty > 0);
+			if (!items.length) {
+				this.errorMessage = __("Please add at least one item.");
+				return;
+			}
+			this.errorMessage = "";
+			this.paymentDialog = true;
+		},
+		handlePaymentSubmit({ payments, print, print_format, print_invoice }) {
+			this.payments = payments;
+			this.submitPurchaseOrder(print, print_format, print_invoice);
 		},
 		async loadSupplierGroups() {
 			if (this.supplierGroups.length) return;

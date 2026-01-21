@@ -5,9 +5,12 @@ import json
 
 import frappe
 from frappe import _
-from frappe.utils import cint, flt, nowdate
+from frappe.utils import cint, flt, nowdate, getdate
+from erpnext.accounts.party import get_party_account
+
 
 from .utils import get_active_pos_profile, get_default_warehouse
+
 
 
 def _resolve_pos_profile(pos_profile):
@@ -299,8 +302,92 @@ def create_purchase_item(data):
     }
 
 
+def _get_mode_of_payment_account(mode, company):
+    account = frappe.db.get_value(
+        "Mode of Payment Account", {"parent": mode, "company": company}, "default_account"
+    )
+    if not account:
+        frappe.throw(
+            _("Please set default account for Mode of Payment {0} in company {1}").format(
+                mode, company
+            )
+        )
+    return account
+
+
+def _create_payment_entry(reference_doc, payments, company, transaction_date):
+    if not payments:
+        return []
+
+    created_payments = []
+
+    # Check if reference is PO or PI
+    ref_doctype = reference_doc.doctype
+    ref_name = reference_doc.name
+
+    # Determine outstanding amount
+    outstanding_amount = 0
+    if ref_doctype == "Purchase Invoice":
+        outstanding_amount = reference_doc.outstanding_amount
+    else:
+        # For Purchase Order, use grand_total (assuming advance payment for new PO)
+        # Or calculate if some advance was already made, but here it's new.
+        outstanding_amount = reference_doc.grand_total
+
+    for pay in payments:
+        amount = flt(pay.get("amount"))
+        mode = pay.get("mode_of_payment")
+
+        if amount <= 0:
+            continue
+
+        paid_from_account = _get_mode_of_payment_account(mode, company)
+
+        pe = frappe.new_doc("Payment Entry")
+        pe.payment_type = "Pay"
+        pe.company = company
+        pe.posting_date = transaction_date
+        pe.mode_of_payment = mode
+        pe.party_type = "Supplier"
+        pe.party = reference_doc.supplier
+
+        pe.paid_from = paid_from_account
+
+        # Fetch party account
+        pe.paid_to = get_party_account("Supplier", reference_doc.supplier, company)
+        if not pe.paid_to:
+             frappe.throw(_("Please set Default Payable Account in Company {0}").format(company))
+
+        pe.paid_amount = amount
+        pe.received_amount = amount 
+        # Note: If currencies differ, conversion handling is needed. 
+        # Assuming base currency for simplified POS flow or that user enters converted amount.
+        
+        # References
+        # Allocate only up to outstanding amount
+        allocated_amount = 0
+        if outstanding_amount > 0:
+            allocated_amount = min(amount, outstanding_amount)
+            outstanding_amount -= allocated_amount
+        
+        if allocated_amount > 0:
+            pe.append("references", {
+                "reference_doctype": ref_doctype,
+                "reference_name": ref_name,
+                "allocated_amount": allocated_amount
+            })
+
+        pe.flags.ignore_permissions = True
+        pe.insert()
+        pe.submit()
+        created_payments.append(pe.name)
+
+    return created_payments
+
+
 @frappe.whitelist()
 def create_purchase_order(data):
+
     payload = json.loads(data) if isinstance(data, str) else data
     profile = _resolve_pos_profile(payload.get("pos_profile"))
     _ensure_allowed(profile, "posa_allow_purchase_order", _("Purchase orders"))
@@ -426,7 +513,14 @@ def create_purchase_order(data):
             po_doc, payload, warehouse, transaction_date, receipt_doc=receipt_doc
         )
 
+    payments = payload.get("payments")
+    if payments:
+        # Use PI if created, otherwise PO
+        ref_doc = frappe.get_doc("Purchase Invoice", invoice_name) if invoice_name else po_doc
+        _create_payment_entry(ref_doc, payments, company, transaction_date)
+
     return {
+
         "purchase_order": po_doc.name,
         "purchase_receipt": receipt_name,
         "purchase_invoice": invoice_name,
