@@ -65,6 +65,22 @@
 						></v-btn>
 					</v-col>
 				</v-row>
+
+				<!-- Print Format Selection -->
+				<v-row dense class="mt-4">
+					<v-col cols="12">
+						<v-select
+							v-model="selectedPrintFormat"
+							:items="printFormats"
+							:label="__('Print Format')"
+							density="compact"
+							variant="outlined"
+							hide-details
+							class="pos-themed-input"
+							clearable
+						></v-select>
+					</v-col>
+				</v-row>
 			</v-card-text>
 
 			<v-card-actions class="pa-4 border-t">
@@ -72,8 +88,22 @@
 					{{ __("Cancel") }}
 				</v-btn>
 				<v-spacer></v-spacer>
-				<v-btn color="success" variant="elevated" @click="submit" :disabled="remainingAmount > 0.01">
-					{{ __("Submit Payment") }}
+				<v-btn
+					color="info"
+					variant="text"
+					@click="submit(true)"
+					:disabled="remainingAmount > 0.01"
+					class="mr-2"
+				>
+					{{ __("Submit & Print") }}
+				</v-btn>
+				<v-btn
+					color="success"
+					variant="elevated"
+					@click="submit(false)"
+					:disabled="remainingAmount > 0.01"
+				>
+					{{ __("Submit") }}
 				</v-btn>
 			</v-card-actions>
 		</v-card>
@@ -81,8 +111,8 @@
 </template>
 
 <script>
-/* global __ */
-import format, { formatUtils } from "../../format";
+/* global __, frappe */
+import format from "../../format";
 
 export default {
 	name: "PurchasePaymentDialog",
@@ -106,6 +136,8 @@ export default {
 	data() {
 		return {
 			paymentLines: [],
+			printFormats: [],
+			selectedPrintFormat: null,
 		};
 	},
 	computed: {
@@ -131,6 +163,7 @@ export default {
 		dialog(val) {
 			if (val) {
 				this.initializePayments();
+				this.fetchPrintFormats();
 			}
 		},
 	},
@@ -161,21 +194,46 @@ export default {
 			}
 		},
 		currencySymbol(currency) {
-			// Basic fallback if format mixin doesn't cover it or isn't loaded yet
 			return currency || "";
 		},
 		close() {
 			this.dialog = false;
 		},
-		submit() {
+		submit(doPrint) {
 			const payments = this.paymentLines
 				.filter((p) => p.amount > 0)
 				.map((p) => ({
 					mode_of_payment: p.mode_of_payment,
 					amount: p.amount,
 				}));
-			this.$emit("submit", payments);
+			this.$emit("submit", {
+				payments,
+				print: doPrint,
+				print_format: this.selectedPrintFormat,
+			});
 			this.dialog = false;
+		},
+		async fetchPrintFormats() {
+			try {
+				const { message } = await frappe.call({
+					method: "posawesome.posawesome.api.print_formats.get_print_formats",
+					args: {
+						doctype: "Purchase Order",
+					},
+				});
+				this.printFormats = message || [];
+				if (this.printFormats.length && !this.selectedPrintFormat) {
+					// Set default if available or just first one?
+					// Usually we might want to check pos profile default print format
+					if (this.posProfile.print_format) {
+						this.selectedPrintFormat = this.posProfile.print_format;
+					} else {
+						this.selectedPrintFormat = this.printFormats[0];
+					}
+				}
+			} catch (e) {
+				console.error("Failed to fetch print formats", e);
+			}
 		},
 	},
 };

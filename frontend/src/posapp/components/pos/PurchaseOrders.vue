@@ -824,7 +824,7 @@ export default {
 				this.supplierSubmitLoading = false;
 			}
 		},
-		async submitPurchaseOrder() {
+		async submitPurchaseOrder(print = false, printFormat = null) {
 			if (!this.supplier) {
 				this.errorMessage = __("Supplier is required.");
 				return;
@@ -888,6 +888,28 @@ export default {
 						const itemCodes = items.map((item) => item.item_code);
 						this.eventBus.emit("invoice_stock_adjusted", { item_codes: itemCodes });
 					}
+
+					if (print) {
+						// Print either invoice or order
+						// Prioritize Invoice if created
+						const doctype = message.purchase_invoice ? "Purchase Invoice" : "Purchase Order";
+						const docname = message.purchase_invoice || message.purchase_order;
+						const format =
+							printFormat ||
+							this.pos_profile.print_format_for_purchase ||
+							this.pos_profile.print_format;
+
+						if (docname) {
+							const printUrl = frappe.urllib.get_full_url(
+								`/printview?doctype=${doctype}&name=${docname}&print_format=${encodeURIComponent(format || "Standard")}`,
+							);
+							const printWindow = window.open(printUrl, "_blank");
+							if (printWindow) {
+								printWindow.focus();
+							}
+						}
+					}
+
 					this.resetForm();
 				}
 			} catch (error) {
@@ -910,14 +932,9 @@ export default {
 			this.errorMessage = "";
 			this.paymentDialog = true;
 		},
-		handlePaymentSubmit(payments) {
+		handlePaymentSubmit({ payments, print, print_format }) {
 			this.payments = payments;
-			// If we are paying, we should probably ensure invoice is created, or at least it's an advance payment.
-			// Ideally, paying implies creating an invoice usually.
-			// But user can toggle "Create Bill". If they Pay, we might want to force Create Bill or just allow Advance Payment on PO.
-			// For now, let's respect the toggle but maybe warn?
-			// Actually, let's just submit.
-			this.submitPurchaseOrder();
+			this.submitPurchaseOrder(print, print_format);
 		},
 		async loadSupplierGroups() {
 			if (this.supplierGroups.length) return;
