@@ -72,7 +72,7 @@
 						<v-select
 							v-model="selectedPrintFormat"
 							:items="printFormats"
-							:label="__('Print Format')"
+							:label="createInvoice ? __('Print Format (Invoice)') : __('Print Format (Order)')"
 							density="compact"
 							variant="outlined"
 							hide-details
@@ -119,6 +119,10 @@ export default {
 		posProfile: {
 			type: Object,
 			required: true,
+		},
+		createInvoice: {
+			type: Boolean,
+			default: false,
 		},
 	},
 	emits: ["update:modelValue", "submit"],
@@ -204,10 +208,11 @@ export default {
 		},
 		async fetchPrintFormats() {
 			try {
+				const doctype = this.createInvoice ? "Purchase Invoice" : "Purchase Order";
 				const { message } = await frappe.call({
 					method: "posawesome.posawesome.api.print_formats.get_print_formats",
 					args: {
-						doctype: "Purchase Order",
+						doctype: doctype,
 					},
 				});
 				this.printFormats = message || [];

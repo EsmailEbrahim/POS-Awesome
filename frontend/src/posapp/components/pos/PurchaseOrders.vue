@@ -330,6 +330,7 @@
 			:total-amount="totalAmount"
 			:currency="supplierCurrency"
 			:pos-profile="pos_profile"
+			:create-invoice="createInvoice"
 			@submit="handlePaymentSubmit"
 		/>
 
