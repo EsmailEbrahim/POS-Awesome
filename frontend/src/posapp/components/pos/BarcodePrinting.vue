@@ -190,6 +190,31 @@
 				</v-card>
 			</v-col>
 		</v-row>
+
+		<!-- Add Item Quantity Dialog -->
+		<v-dialog v-model="addItemDialog" max-width="400">
+			<v-card v-if="pendingAddItem">
+				<v-card-title class="bg-primary text-white">
+					{{ __("Enter Quantity") }}
+				</v-card-title>
+				<v-card-text class="pt-4">
+					<div class="text-subtitle-1 mb-2">{{ pendingAddItem.item_name }}</div>
+					<v-text-field
+						v-model.number="addItemQty"
+						:label="__('Quantity')"
+						type="number"
+						min="1"
+						variant="outlined"
+						autofocus
+						@keydown.enter="confirmAddItem"
+					></v-text-field>
+				</v-card-text>
+				<v-card-actions class="justify-end">
+					<v-btn variant="text" @click="addItemDialog = false">{{ __("Cancel") }}</v-btn>
+					<v-btn color="primary" variant="elevated" @click="confirmAddItem">{{ __("Add") }}</v-btn>
+				</v-card-actions>
+			</v-card>
+		</v-dialog>
 	</div>
 </template>
 
@@ -214,6 +239,9 @@ export default {
 			includeBatchSerial: false,
 			editingQtyValue: "",
 			pos_profile: null,
+			addItemDialog: false,
+			addItemQty: 1,
+			pendingAddItem: null,
 		};
 	},
 	computed: {
@@ -311,13 +339,37 @@ export default {
 				});
 			}
 
-			this.items.push({
+			// Open Quantity Dialog before adding
+			this.pendingAddItem = {
 				item_code: item.item_code,
 				item_name: item.item_name,
 				barcode: barcode || "",
 				qty: 1,
 				price: item.rate || item.standard_rate || 0,
-			});
+			};
+			this.addItemQty = 1;
+			this.addItemDialog = true;
+		},
+		confirmAddItem() {
+			if (!this.pendingAddItem) return;
+
+			const item = this.pendingAddItem;
+			const qty = parseInt(this.addItemQty) || 1;
+
+			// Check if item already exists
+			const existingItem = this.items.find((i) => i.item_code === item.item_code);
+			if (existingItem) {
+				existingItem.qty += qty;
+				// Optional: Move to top if desired, but user only asked for new items to be at top
+				// However, if we updated it, it might be nice to see it.
+				// Let's keep existing logic: update in place.
+			} else {
+				item.qty = qty;
+				this.items.unshift(item);
+			}
+
+			this.addItemDialog = false;
+			this.pendingAddItem = null;
 		},
 		removeItem(item) {
 			this.items = this.items.filter((i) => i.item_code !== item.item_code);
