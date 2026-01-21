@@ -445,7 +445,9 @@ export default {
 				// A4 = 210mm x 297mm
 				// Default margins 10mm top/bottom
 				const availableHeight = 277; // 297 - 20
-				const rowHeight = Math.floor(availableHeight / rows);
+				// Subtract total vertical gap space (assuming 3mm per gap)
+				const totalGapSpace = (rows - 1) * 3;
+				const rowHeight = Math.floor((availableHeight - totalGapSpace) / rows);
 
 				return `
           @page { size: A4; margin: 10mm; }
@@ -453,7 +455,7 @@ export default {
           .label-container {
             display: grid;
             grid-template-columns: repeat(${cols}, 1fr);
-            gap: 10px; /* Reduced gap slightly */
+            gap: 3mm;
             page-break-after: always;
           }
           .label {
