@@ -376,6 +376,10 @@ export const evaluatePricingRules = ({ item, qty, docQty, baseRate, ctx, indexes
 			const minimum = Number.parseFloat(rule.min_qty || 0);
 			return effectiveQty >= minimum;
 		})
+		// Fix: Do not apply "Discount on Other Item" rules to the trigger item.
+		// If same_item is false (0), the rule targets another item, so we shouldn't
+		// apply the price discount to the current item (which matched the 'Apply On' criteria).
+		.filter((rule) => rule.same_item)
 		.sort(ruleSort);
 
 	let pricing = {
