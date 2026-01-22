@@ -382,20 +382,14 @@ export const evaluatePricingRules = ({ item, qty, docQty, baseRate, ctx, indexes
 		// We use loose equality check (!!rule.same_item) because it could be 1, true, or "1".
 		// ERPNext defaults same_item to 0 if unchecked.
 		.filter((rule) => {
-			// If same_item is explicitly false/0, it means the discount is for another item.
-			// However, if the rule definition itself has 'apply_on' set to the same item code
-			// as the target, it might be a configuration nuance, but standard ERPNext logic
-			// dictates that `same_item=0` means "Trigger is X, Target is Y".
-			// So, for the current item (which is X, the trigger), we skip this rule.
-			if (!rule.same_item) {
-				// Special Case: If "Discount on Other Item" fields are blank (apply_rule_on_other is not set),
-				// ERPNext treats this as "Apply on Self" (effectively same_item=1).
-				if (!rule.apply_rule_on_other) {
-					return true;
-				}
-				return false;
-			}
-			return true;
+			// Fix: Do not apply "Discount on Other Item" rules to the trigger item.
+			// If same_item is false (0), the rule targets another item, so we shouldn't
+			// apply the price discount to the current item (which matched the 'Apply On' criteria).
+			// We use loose equality check (!!rule.same_item) because it could be 1, true, or "1".
+
+			// Simplified logic: Keep rule if same_item is true OR if "Apply On Other" is not set.
+			// ERPNext treats blank "Apply On Other" as "Apply on Self" even if same_item is 0.
+			return !!rule.same_item || !rule.apply_rule_on_other;
 		})
 		.sort(ruleSort);
 
