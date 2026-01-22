@@ -488,33 +488,48 @@ export default {
 	},
 
 	calculateOfferQty(offer) {
-		let qty = offer.given_qty;
-		if (offer.is_recursive) {
-			let transaction_qty = 0;
-			if (offer.items) {
-				const itemsRowID = typeof offer.items === "string" ? JSON.parse(offer.items) : offer.items;
-				if (Array.isArray(itemsRowID)) {
-					itemsRowID.forEach((row_id) => {
-						const row_item = this.getItemFromRowID(row_id);
-						if (row_item) {
-							transaction_qty += this._resolveOfferQty(row_item);
-						}
-					});
-				}
-			}
+		const base_qty = offer.given_qty || 1;
 
-			transaction_qty = transaction_qty - (offer.apply_recursion_over || 0);
-			if (transaction_qty > 0) {
-				const recurse_for = offer.recurse_for || 1;
-				qty = (transaction_qty * offer.given_qty) / recurse_for;
-				if (offer.round_free_qty) {
-					qty = Math.floor(transaction_qty / recurse_for) * (offer.given_qty || 1);
-				}
-			} else {
-				qty = 0;
+		if (!offer.is_recursive) {
+			return base_qty;
+		}
+
+		let transaction_qty = 0;
+		if (offer.items) {
+			const itemsRowID = typeof offer.items === "string" ? JSON.parse(offer.items) : offer.items;
+			if (Array.isArray(itemsRowID)) {
+				itemsRowID.forEach((row_id) => {
+					const row_item = this.getItemFromRowID(row_id);
+					if (row_item) {
+						transaction_qty += this._resolveOfferQty(row_item);
+					}
+				});
 			}
 		}
-		return qty;
+
+		const effective_qty = Math.max(0, transaction_qty - (offer.apply_recursion_over || 0));
+
+		if (effective_qty <= 0) {
+			return 0;
+		}
+
+		const recurse_for = offer.recurse_for || 1;
+
+		if (offer.round_free_qty) {
+			return Math.floor(effective_qty / recurse_for) * base_qty;
+		}
+
+		return (effective_qty * base_qty) / recurse_for;
+	},
+
+	_finalizeOffer(offer, items) {
+		offer.items = items;
+		if (offer.offer === "Give Product") {
+			const qty = this.calculateOfferQty(offer);
+			if (!qty || qty <= 0) return null;
+			offer.given_qty = qty;
+		}
+		return offer;
 	},
 
 	getItemOffer(offer, context = {}) {
@@ -562,12 +577,7 @@ export default {
 			return null;
 		}
 
-		offer.items = items;
-		if (offer.offer === "Give Product") {
-			offer.given_qty = this.calculateOfferQty(offer);
-			if (offer.given_qty <= 0) return null;
-		}
-		return offer;
+		return this._finalizeOffer(offer, items);
 	},
 
 	getGroupOffer(offer, context = {}) {
@@ -615,12 +625,7 @@ export default {
 			return null;
 		}
 
-		offer.items = items;
-		if (offer.offer === "Give Product") {
-			offer.given_qty = this.calculateOfferQty(offer);
-			if (offer.given_qty <= 0) return null;
-		}
-		return offer;
+		return this._finalizeOffer(offer, items);
 	},
 
 	getBrandOffer(offer, context = {}) {
@@ -673,12 +678,7 @@ export default {
 			return null;
 		}
 
-		offer.items = items;
-		if (offer.offer === "Give Product") {
-			offer.given_qty = this.calculateOfferQty(offer);
-			if (offer.given_qty <= 0) return null;
-		}
-		return offer;
+		return this._finalizeOffer(offer, items);
 	},
 	getTransactionOffer(offer, context = {}) {
 		if (!offer || offer.apply_on !== "Transaction") {
@@ -699,12 +699,8 @@ export default {
 			return null;
 		}
 
-		offer.items = bucket.items.map((item) => item.posa_row_id);
-		if (offer.offer === "Give Product") {
-			offer.given_qty = this.calculateOfferQty(offer);
-			if (offer.given_qty <= 0) return null;
-		}
-		return offer;
+		const items = bucket.items.map((item) => item.posa_row_id);
+		return this._finalizeOffer(offer, items);
 	},
 
 	updatePosOffers(offers) {
