@@ -166,8 +166,13 @@ export default {
 		UpdatePrompt,
 	},
 	mounted() {
-		this.remove_frappe_nav();
-		this.adjust_frappe_sidebar_offset();
+		// Wait longer for Frappe to fully render
+		setTimeout(() => {
+			this.remove_frappe_nav();
+			this.setup_sidebar_observer();
+		}, 800); // Increased to 800ms
+
+		// Rest of your initialization code...
 		window.addEventListener("resize", this.adjust_frappe_sidebar_offset);
 		initLoadingSources(["init", "items", "customers"]);
 		this.initializeData();
@@ -495,25 +500,48 @@ export default {
 		},
 
 		remove_frappe_nav() {
-			this.$nextTick(() => {
-				$(".page-head").remove();
-				$(".navbar.navbar-default.navbar-fixed-top").remove();
-				this.adjust_frappe_sidebar_offset();
-			});
+			// Remove immediately without waiting for nextTick
+			$(".body-sidebar-container").remove();
+			$(".body-sidebar").remove();
+			$(".desk-sidebar").remove();
+			$(".app-sidebar").remove();
+			$(".layout-side-section").remove();
+			$(".page-head").remove();
+			$(".navbar.navbar-default.navbar-fixed-top").remove();
+			$(".sidebar-overlay").remove();
+			
+			// Force width to 0
+			document.documentElement.style.setProperty("--posa-desk-sidebar-width", "0px");
 		},
+
+		setup_sidebar_observer() {
+			const observer = new MutationObserver((mutations) => {
+				mutations.forEach((mutation) => {
+					if (mutation.addedNodes.length) {
+						// Check if any sidebar element was added back
+						const sidebarExists = 
+							$(".body-sidebar-container").length > 0 ||
+							$(".body-sidebar:visible").length > 0 ||
+							$(".desk-sidebar:visible").length > 0;
+						
+						if (sidebarExists) {
+							this.remove_frappe_nav();
+						}
+					}
+				});
+			});
+			
+			observer.observe(document.body, {
+				childList: true,
+				subtree: true
+			});
+			
+			this._sidebarObserver = observer;
+		},
+
 		adjust_frappe_sidebar_offset() {
-			const sidebar = document.querySelector(
-				".desk-sidebar, .app-sidebar, .sidebar, .side-section, .layout-side-section",
-			);
-			let sidebarWidth = 0;
-			if (sidebar) {
-				const sidebarStyles = window.getComputedStyle(sidebar);
-				const rect = sidebar.getBoundingClientRect();
-				if (sidebarStyles.display !== "none" && rect.width > 0) {
-					sidebarWidth = rect.width;
-				}
-			}
-			document.documentElement.style.setProperty("--posa-desk-sidebar-width", `${sidebarWidth}px`);
+			// Always return 0 since sidebar should be removed
+			document.documentElement.style.setProperty("--posa-desk-sidebar-width", "0px");
 		},
 	},
 	beforeUnmount() {

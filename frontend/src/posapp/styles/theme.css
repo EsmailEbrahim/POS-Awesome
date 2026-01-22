@@ -451,3 +451,82 @@
 [data-theme="dark"] .dp__action_cancel {
 	color: var(--pos-text-secondary) !important;
 }
+
+
+/* ==========================================================================
+   FORCE-HIDE FRAPPE DESK ELEMENTS IN POSAWESOME
+   ========================================================================== */
+
+/* 
+   CRITICAL: These rules are NOT scoped to .posapp
+   They apply globally to the POS page route
+*/
+
+/* Hide the entire sidebar container and its contents */
+body[data-page-route="posapp"] .body-sidebar-container,
+body[data-page-route="posapp"] .body-sidebar,
+body[data-page-route="posapp"] .body-sidebar-placeholder,
+body[data-page-route="posapp"] .overlay {
+    display: none !important;
+    visibility: hidden !important;
+    width: 0 !important;
+    height: 0 !important;
+    overflow: hidden !important;
+    position: absolute !important;
+    left: -9999px !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    max-width: 0 !important;
+    max-height: 0 !important;
+    clip-path: inset(100%) !important;
+    clip: rect(0, 0, 0, 0) !important;
+}
+
+/* Remove all sidebar-related elements */
+body[data-page-route="posapp"] .desk-sidebar,
+body[data-page-route="posapp"] .app-sidebar,
+body[data-page-route="posapp"] .layout-side-section,
+body[data-page-route="posapp"] .page-head,
+body[data-page-route="posapp"] .navbar.navbar-default.navbar-fixed-top,
+body[data-page-route="posapp"] .offcanvas_left_sidebar,
+body[data-page-route="posapp"] .sidebar-overlay,
+body[data-page-route="posapp"] .offcanvas-backdrop {
+    display: none !important;
+    visibility: hidden !important;
+    width: 0 !important;
+    height: 0 !important;
+    overflow: hidden !important;
+    position: absolute !important;
+    left: -9999px !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+}
+
+/* Ensure POS takes full viewport */
+body[data-page-route="posapp"] {
+    overflow-x: hidden !important;
+}
+
+body[data-page-route="posapp"] .main-section,
+body[data-page-route="posapp"] .page-content,
+body[data-page-route="posapp"] .page-body,
+body[data-page-route="posapp"] .page-wrapper {
+    padding-left: 0 !important;
+    margin-left: 0 !important;
+    width: 100vw !important;
+    max-width: 100vw !important;
+    overflow-x: hidden !important;
+}
+
+/* Reset padding for POS container */
+body[data-page-route="posapp"] .container1 {
+    padding-inline-start: 0 !important;
+}
+
+/* Hide footer */
+body[data-page-route="posapp"] .footer,
+body[data-page-route="posapp"] .page-footer {
+    display: none !important;
+}
