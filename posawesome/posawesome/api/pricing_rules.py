@@ -392,14 +392,27 @@ def reconcile_line_prices(cart_payload: dict | str | None = None):
 
     doc = _build_doc_context(ctx)
 
+    # Pre-populate items to provide context for cross-item pricing rules
+    # (e.g. buy item X, get discount on item Y)
+    doc.items = []
+    for raw_line in lines:
+        line = frappe._dict(raw_line)
+        args = _build_pricing_args(line, ctx)
+        # Ensure we have a document-like object
+        args.doctype = "Sales Invoice Item"
+        doc.items.append(args)
+
     updates: List[dict] = []
     freebies: Dict[Tuple[str, str], frappe._dict] = {}
 
     from erpnext.accounts.doctype.pricing_rule.pricing_rule import get_pricing_rule_for_item
 
-    for raw_line in lines:
+    for i, raw_line in enumerate(lines):
         line = frappe._dict(raw_line)
+        # We can reuse the args from doc.items, but _build_pricing_args creates a clean copy
+        # relevant for the specific calculation call.
         args = _build_pricing_args(line, ctx)
+        
         details = get_pricing_rule_for_item(args, doc=doc)
 
         applied_rules = []
@@ -424,20 +437,20 @@ def reconcile_line_prices(cart_payload: dict | str | None = None):
 
         _collect_freebies(freebies, details.get("free_item_data"))
 
-        doc.setdefault("items", []).append(
-            frappe._dict(
-                {
-                    "item_code": args.item_code,
-                    "qty": args.qty,
-                    "pricing_rules": ",".join(applied_rules),
-                    "is_free_item": 0,
-                    "rate": rate,
-                    "amount": rate * args.qty,
-                    "net_amount": rate * args.qty,
-                    "price_list_rate": price_list_rate,
-                }
-            )
-        )
+        # Update the item in the doc context with the calculated values
+        # This ensures that subsequent rules (and transaction level rules) see the correct state
+        if i < len(doc.items):
+            doc_item = doc.items[i]
+            doc_item.update({
+                "pricing_rules": ",".join(applied_rules),
+                "rate": rate,
+                "amount": rate * args.qty,
+                "net_amount": rate * args.qty,
+                "price_list_rate": price_list_rate,
+                "discount_amount": discount_amount,
+                "discount_percentage": discount_percentage,
+                "is_free_item": 0
+            })
 
     # Calculate totals for transaction-level pricing rules
     total = sum(flt(d.get("amount")) for d in doc.get("items"))
