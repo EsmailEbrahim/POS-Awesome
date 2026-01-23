@@ -122,8 +122,7 @@ export default {
 			cacheUsage: 0,
 			cacheUsageLoading: false,
 			cacheUsageDetails: { total: 0, indexedDB: 0, localStorage: 0 },
-
-			// Loading progress handled via utility
+			_sidebarObserver: null, // Store observer reference
 		};
 	},
 	computed: {
@@ -166,11 +165,11 @@ export default {
 		UpdatePrompt,
 	},
 	mounted() {
-		// Wait longer for Frappe to fully render
+		// Wait for Frappe to fully render then remove sidebar
 		setTimeout(() => {
 			this.remove_frappe_nav();
 			this.setup_sidebar_observer();
-		}, 800); // Increased to 800ms
+		}, 800);
 
 		// Rest of your initialization code...
 		window.addEventListener("resize", this.adjust_frappe_sidebar_offset);
@@ -179,6 +178,7 @@ export default {
 		this.setupNetworkListeners();
 		this.setupEventListeners();
 		this.handleRefreshCacheUsage();
+		
 		const customersStore = useCustomersStore();
 		const { loadProgress, customersLoaded } = storeToRefs(customersStore);
 		this.$watch(
@@ -197,6 +197,28 @@ export default {
 			},
 			{ immediate: true },
 		);
+	},
+	beforeUnmount() {
+		// Clean up event bus listeners
+		if (this.eventBus) {
+			this.eventBus.off("pending_invoices_changed");
+			this.eventBus.off("data-loaded");
+			this.eventBus.off("register_pos_profile");
+			this.eventBus.off("set_last_invoice");
+			this.eventBus.off("data-load-progress");
+			this.eventBus.off("print_last_invoice");
+			this.eventBus.off("sync_invoices");
+			this.eventBus.off("open_purchase_orders");
+		}
+		
+		// Remove resize listener
+		window.removeEventListener("resize", this.adjust_frappe_sidebar_offset);
+		
+		// CRITICAL FIX: Disconnect MutationObserver to prevent memory leak
+		if (this._sidebarObserver) {
+			this._sidebarObserver.disconnect();
+			this._sidebarObserver = null;
+		}
 	},
 	methods: {
 		setupNetworkListeners,
@@ -272,6 +294,7 @@ export default {
 				this.eventBus.on("data-loaded", (name) => {
 					markSourceLoaded(name);
 				});
+				
 				this.eventBus.on("data-load-progress", ({ name, progress }) => {
 					setSourceProgress(name, progress);
 				});
@@ -500,35 +523,44 @@ export default {
 		},
 
 		remove_frappe_nav() {
-			// Remove immediately without waiting for nextTick
-			$(".body-sidebar-container").remove();
-			$(".body-sidebar").remove();
-			$(".desk-sidebar").remove();
-			$(".app-sidebar").remove();
-			$(".layout-side-section").remove();
-			$(".page-head").remove();
-			$(".navbar.navbar-default.navbar-fixed-top").remove();
-			$(".sidebar-overlay").remove();
+			// Remove sidebar elements immediately
+			const selectors = [
+				".body-sidebar-container",
+				".body-sidebar",
+				".desk-sidebar",
+				".app-sidebar",
+				".layout-side-section",
+				".page-head",
+				".navbar.navbar-default.navbar-fixed-top",
+				".sidebar-overlay"
+			];
 			
-			// Force width to 0
+			selectors.forEach(selector => {
+				const elements = document.querySelectorAll(selector);
+				elements.forEach(el => el.remove());
+			});
+			
+			// Force sidebar width to zero
 			document.documentElement.style.setProperty("--posa-desk-sidebar-width", "0px");
 		},
 
 		setup_sidebar_observer() {
+			// PERFORMANCE FIX: Check added nodes directly instead of re-querying entire document
 			const observer = new MutationObserver((mutations) => {
-				mutations.forEach((mutation) => {
-					if (mutation.addedNodes.length) {
-						// Check if any sidebar element was added back
-						const sidebarExists = 
-							$(".body-sidebar-container").length > 0 ||
-							$(".body-sidebar:visible").length > 0 ||
-							$(".desk-sidebar:visible").length > 0;
-						
-						if (sidebarExists) {
-							this.remove_frappe_nav();
+				for (const mutation of mutations) {
+					for (const node of mutation.addedNodes) {
+						if (node.nodeType === Node.ELEMENT_NODE) {
+							// Check if the added node itself is a sidebar element or contains one
+							if (
+								node.matches('.body-sidebar-container, .body-sidebar, .desk-sidebar, .app-sidebar, .layout-side-section') ||
+								node.querySelector('.body-sidebar-container, .body-sidebar, .desk-sidebar, .app-sidebar, .layout-side-section')
+							) {
+								this.remove_frappe_nav();
+								return; // Exit after handling
+							}
 						}
 					}
-				});
+				}
 			});
 			
 			observer.observe(document.body, {
@@ -536,6 +568,7 @@ export default {
 				subtree: true
 			});
 			
+			// Store reference for cleanup
 			this._sidebarObserver = observer;
 		},
 
@@ -543,18 +576,6 @@ export default {
 			// Always return 0 since sidebar should be removed
 			document.documentElement.style.setProperty("--posa-desk-sidebar-width", "0px");
 		},
-	},
-	beforeUnmount() {
-		if (this.eventBus) {
-			this.eventBus.off("pending_invoices_changed");
-			this.eventBus.off("data-loaded");
-		}
-		window.removeEventListener("resize", this.adjust_frappe_sidebar_offset);
-	},
-	created: function () {
-		setTimeout(() => {
-			this.remove_frappe_nav();
-		}, 1000);
 	},
 };
 </script>
