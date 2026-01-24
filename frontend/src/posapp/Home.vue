@@ -86,6 +86,23 @@ import {
 } from "./composables/useNetwork.js";
 import { useRtl } from "./composables/useRtl.js";
 
+/**
+ * Frappe Desk UI selectors to hide in POS view.
+ * Used by: remove_frappe_nav(), pollForFrappeNav(), setup_sidebar_observer()
+ */
+const FRAPPE_NAV_SELECTORS = [
+	".body-sidebar-container",
+	".body-sidebar",
+	".desk-sidebar",
+	".app-sidebar",
+	".layout-side-section",
+	".page-head",
+	".navbar.navbar-default.navbar-fixed-top",
+	".sidebar-overlay",
+];
+
+const FRAPPE_NAV_SELECTOR_STRING = FRAPPE_NAV_SELECTORS.join(", ");
+
 export default {
 	setup() {
 		const { isRtl, rtlStyles, rtlClasses } = useRtl();
@@ -222,15 +239,7 @@ export default {
 			let attempts = 0;
 			const checkAndRemove = () => {
 				attempts++;
-				// Check if any sidebar elements exist
-				const selectors = [
-					".body-sidebar-container", 
-					".body-sidebar", 
-					".desk-sidebar", 
-					".app-sidebar", 
-					".layout-side-section"
-				];
-				const hasSidebar = selectors.some(sel => document.querySelector(sel));
+				const hasSidebar = FRAPPE_NAV_SELECTORS.some((sel) => document.querySelector(sel));
 				
 				if (hasSidebar || attempts >= maxAttempts) {
 					this.remove_frappe_nav();
@@ -543,53 +552,39 @@ export default {
 		},
 
 		remove_frappe_nav() {
-			// Remove sidebar elements immediately
-			const selectors = [
-				".body-sidebar-container",
-				".body-sidebar",
-				".desk-sidebar",
-				".app-sidebar",
-				".layout-side-section",
-				".page-head",
-				".navbar.navbar-default.navbar-fixed-top",
-				".sidebar-overlay"
-			];
-			
-			selectors.forEach(selector => {
+			FRAPPE_NAV_SELECTORS.forEach((selector) => {
 				const elements = document.querySelectorAll(selector);
-				elements.forEach(el => el.remove());
+				elements.forEach((el) => el.remove());
 			});
 			
-			// Force sidebar width to zero
 			document.documentElement.style.setProperty("--posa-desk-sidebar-width", "0px");
 		},
 
 		setup_sidebar_observer() {
-			const SIDEBAR_SELECTORS = '.body-sidebar-container, .body-sidebar, .desk-sidebar, .app-sidebar, .layout-side-section';
-			
+			// Disconnect existing observer if any
+			if (this._sidebarObserver) {
+				this._sidebarObserver.disconnect();
+			}
+
 			const observer = new MutationObserver((mutations) => {
 				for (const mutation of mutations) {
 					for (const node of mutation.addedNodes) {
 						if (node.nodeType === Node.ELEMENT_NODE) {
-							// Check if the added node itself is a sidebar element or contains one
-							if (
-								node.matches(SIDEBAR_SELECTORS) ||
-								node.querySelector(SIDEBAR_SELECTORS)
-							) {
+							if (node.matches(FRAPPE_NAV_SELECTOR_STRING) || 
+								node.querySelector(FRAPPE_NAV_SELECTOR_STRING)) {
 								this.remove_frappe_nav();
-								return; // Exit after handling
+								return;
 							}
 						}
 					}
 				}
 			});
-			
+
 			observer.observe(document.body, {
 				childList: true,
-				subtree: true
+				subtree: true,
 			});
 			
-			// Store reference for cleanup
 			this._sidebarObserver = observer;
 		},
 
