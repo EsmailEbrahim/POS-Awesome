@@ -17,8 +17,6 @@ import {
 	saveItemsBulk,
 	clearStoredItems,
 	setItemsLastSync,
-	clearStoredItems,
-	setItemsLastSync,
 	clearItemDetailsCache,
 } from "../../offline/index.js";
 import itemService from "../services/itemService.js";
