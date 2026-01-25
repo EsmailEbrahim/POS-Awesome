@@ -53,6 +53,18 @@ frappe.PosApp.posapp = class {
 		app.use(eventBus);
 		app.use(vuetify);
 		app.use(themePlugin, { vuetify });
+		
+		// Global Error Handler
+		app.config.errorHandler = (err, instance, info) => {
+			console.error("Global Error:", err, info);
+			const toastStore = useToastStore();
+			toastStore.show({
+				message: `An unexpected error occurred: ${err.message || err}`,
+				color: "error",
+				timeout: 5000,
+			});
+		};
+
 		app.mount(this.$el[0]);
 
 		// Initialize socket listeners
