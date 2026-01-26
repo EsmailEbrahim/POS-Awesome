@@ -613,7 +613,7 @@
 						block
 						color="warning"
 						variant="text"
-						@click="show_offers"
+						@click="uiStore.setActiveView('offers')"
 						class="action-btn-consistent"
 					>
 						{{ offersCount }} {{ __("Offers") }}
@@ -625,7 +625,7 @@
 						block
 						color="primary"
 						variant="text"
-						@click="show_coupons"
+						@click="uiStore.setActiveView('coupons')"
 						class="action-btn-consistent"
 						>{{ couponsCount }} {{ __("Coupons") }}</v-btn
 					>

@@ -10,8 +10,8 @@ This document serves as a detailed roadmap and tracking journal for transforming
 
 _Building the backbone for a scalable Single Page Application (SPA)._
 
-- [ ] **1.1 Implement Vue Router**
-    - **Current Status:** `Home.vue` uses `v-bind:is="page"` to switch components manually. `router/index.js` is empty. `Navbar.vue` emits `change-page`.
+- [x] **1.1 Implement Vue Router**
+    - **Current Status:** `router/index.js` is implemented and functional. `App.vue` uses `<router-view>`.
     - **Action Plan:**
         1.  **Define Routes** in `frontend/src/posapp/router/index.js`:
             ```javascript
@@ -81,8 +81,10 @@ _Building the backbone for a scalable Single Page Application (SPA)._
 
 _Removing "Event Soup" and centralizing business logic._
 
-- [x] **2.1 Remove Event Bus (`mitt`)**
-    - **Current Status:** `mitt` is used globally. Key events identified: `show_message`, `freeze/unfreeze`, `add_item`, `pending_invoices_changed`.
+- [x] **Phase 2.1: Remove Event Bus (View Switching)**
+  - **Goal**: Replace `mitt` event bus with Pinia stores for UI state (Views).
+  - **Status**: Completed
+  - **Details**: Refactored `Pos.vue`, `Navbar.vue`, `Invoice.vue`, `Payments.vue`, `ItemsSelector.vue` to use `uiStore.activeView` active state management.
     - **Action Plan:**
         1.  **Create `useToastStore` (Pinia)**:
             - Replace `eventBus.emit('show_message', ...)` with `toastStore.show(...)`.
@@ -275,4 +277,4 @@ _The ultimate reliability upgrade._
 | 2026-01-26 | Phase 5.1 Reliability               | Completed | Implemented global error handler in `posapp.js` using `toastStore`.                                                                  |
 | 2026-01-26 | Phase 1.2 Explicit Layouts          | Completed | Created `DefaultLayout.vue`, `App.vue`, and updated Router.                                                                          |
 | 2026-01-26 | Phase 1.3 Composition API           | Completed | Refactored `DefaultLayout.vue` to `<script setup>` and removed Options API usage.                                                    |
-| 2026-01-26 | Phase 2.1 Remove Event Bus          | In Progress| Refactored `show_message` to use `toastStore` across all components.                                                                 |
+| 2026-01-26 | Phase 2.1 Remove Event Bus          | In Progress| Refactored `show_message` to use `toastStore`. Refactoring `Pos.vue` and `Navbar.vue` to use `uiStore`.                                                             |

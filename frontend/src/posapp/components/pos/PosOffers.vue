@@ -133,7 +133,7 @@ export default {
 
 	methods: {
 		back_to_invoice() {
-			this.eventBus.emit("show_offers", "false");
+			this.uiStore.setActiveView("items");
 		},
 		async fetchGroupItems(group) {
 			try {

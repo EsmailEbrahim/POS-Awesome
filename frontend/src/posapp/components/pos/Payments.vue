@@ -858,13 +858,14 @@ export default {
 		const toastStore = useToastStore();
 		const { isRtl, rtlStyles, rtlClasses } = useRtl();
 		const { selectedCustomer, customerInfo, refreshToken } = storeToRefs(customersStore);
-		const { isFrozen, freezeTitle, freezeMessage } = storeToRefs(uiStore);
+		const { isFrozen, freezeTitle, freezeMessage, activeView } = storeToRefs(uiStore);
 		return {
 			invoiceStore,
 			selectedCustomer,
 			customerInfoFromStore: customerInfo,
 			customerRefreshToken: refreshToken,
 			uiStore,
+			activeView,
 			toastStore,
 			isFrozen,
 			freezeTitle,
@@ -2906,8 +2907,16 @@ export default {
 				this.is_credit_return = false;
 				this.return_valid_upto_date = null;
 			});
+
 			// Scroll to top when payment view is shown
-			this.eventBus.on("show_payment", this.handleShowPayment);
+			this.$watch(
+				() => this.activeView,
+				(view) => {
+					if (view === "payment") {
+						this.handleShowPayment("true");
+					}
+				},
+			);
 		});
 	},
 	// Lifecycle hook: beforeUnmount
@@ -2923,7 +2932,7 @@ export default {
 		this.eventBus.off("clear_invoice");
 		this.eventBus.off("network-online", this.syncPendingInvoices);
 		this.eventBus.off("server-online", this.syncPendingInvoices);
-		this.eventBus.off("show_payment", this.handleShowPayment);
+		// this.eventBus.off("show_payment", this.handleShowPayment); // Removed
 		this.clearBackgroundStatusCheck();
 	},
 	// Lifecycle hook: unmounted

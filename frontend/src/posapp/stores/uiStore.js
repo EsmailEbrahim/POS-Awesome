@@ -11,6 +11,13 @@ export const useUIStore = defineStore("ui", () => {
 	const freezeTitle = ref("");
 	const freezeMessage = ref("");
 
+	// Main POS View State (Items, Payment, Offers, Coupons)
+	const activeView = ref("items"); // 'items', 'payment', 'offers', 'coupons'
+
+	function setActiveView(view) {
+		activeView.value = view;
+	}
+
 	function setLoading(active, text = "Loading...") {
 		isLoading.value = active;
 		loadingText.value = text;
@@ -72,6 +79,8 @@ export const useUIStore = defineStore("ui", () => {
 		isFrozen,
 		freezeTitle,
 		freezeMessage,
+		activeView,
+		setActiveView,
 		posProfile,
 		stockSettings,
 		companyDoc,

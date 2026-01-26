@@ -13,7 +13,7 @@
 		<OpeningDialog v-if="dialog" :dialog="dialog"></OpeningDialog>
 		<v-row v-show="!dialog" dense class="ma-0 dynamic-main-row">
 			<v-col
-				v-show="!payment && !showOffers && !coupons"
+				v-show="activeView === 'items'"
 				xl="5"
 				lg="5"
 				md="5"
@@ -23,13 +23,37 @@
 			>
 				<ItemsSelector @add-item="handleAddItem"></ItemsSelector>
 			</v-col>
-			<v-col v-show="showOffers" xl="5" lg="5" md="5" sm="5" cols="12" class="pos dynamic-col">
+			<v-col
+				v-show="activeView === 'offers'"
+				xl="5"
+				lg="5"
+				md="5"
+				sm="5"
+				cols="12"
+				class="pos dynamic-col"
+			>
 				<PosOffers></PosOffers>
 			</v-col>
-			<v-col v-show="coupons" xl="5" lg="5" md="5" sm="5" cols="12" class="pos dynamic-col">
+			<v-col
+				v-show="activeView === 'coupons'"
+				xl="5"
+				lg="5"
+				md="5"
+				sm="5"
+				cols="12"
+				class="pos dynamic-col"
+			>
 				<PosCoupons></PosCoupons>
 			</v-col>
-			<v-col v-show="payment" xl="5" lg="5" md="5" sm="5" cols="12" class="pos dynamic-col">
+			<v-col
+				v-show="activeView === 'payment'"
+				xl="5"
+				lg="5"
+				md="5"
+				sm="5"
+				cols="12"
+				class="pos dynamic-col"
+			>
 				<Payments></Payments>
 			</v-col>
 
@@ -84,15 +108,13 @@ export default {
 		});
 		const offers = useOffers();
 		const uiStore = useUIStore();
-		return { ...responsive, ...rtl, ...shift, ...offers, uiStore };
+		const { activeView } = storeToRefs(uiStore);
+		return { ...responsive, ...rtl, ...shift, ...offers, uiStore, activeView };
 	},
 	data: function () {
 		return {
 			dialog: false,
-
-			payment: false,
-			showOffers: false,
-			coupons: false,
+			// View state moved to uiStore
 			itemsLoaded: false,
 			customersLoaded: false,
 		};
@@ -174,24 +196,10 @@ export default {
 				},
 				{ deep: true, immediate: true }
 			);
-			this.eventBus.on("show_payment", (data) => {
-				this.payment = data === "true";
-				this.showOffers = false;
-				this.coupons = false;
-			});
 			this.eventBus.on("open_shift_details", () => {
 				this.get_closing_data();
 			});
-			this.eventBus.on("show_offers", (data) => {
-				this.showOffers = data === "true";
-				this.payment = false;
-				this.coupons = false;
-			});
-			this.eventBus.on("show_coupons", (data) => {
-				this.coupons = data === "true";
-				this.showOffers = false;
-				this.payment = false;
-			});
+			// View switching events removed - handled by uiStore
 			this.eventBus.on("submit_closing_pos", (data) => {
 				this.submit_closing_pos(data);
 			});
@@ -208,8 +216,6 @@ export default {
 		this.eventBus.off("register_pos_profile");
 		this.eventBus.off("LoadPosProfile");
 		this.eventBus.off("open_shift_details");
-		this.eventBus.off("show_offers");
-		this.eventBus.off("show_coupons");
 		this.eventBus.off("submit_closing_pos");
 		this.eventBus.off("items_loaded");
 	},

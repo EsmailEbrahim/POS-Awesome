@@ -115,7 +115,7 @@ export default {
 
 	methods: {
 		back_to_invoice() {
-			this.eventBus.emit("show_coupons", "false");
+			this.uiStore.setActiveView("items");
 		},
 		add_coupon(new_coupon) {
 			if (!this.customer || !new_coupon) {

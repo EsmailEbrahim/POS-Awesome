@@ -60,7 +60,7 @@ export default {
 			if (typeof this.close_payments === "function") {
 				this.close_payments();
 			} else {
-				this.eventBus.emit("show_payment", "false");
+				this.uiStore.setActiveView("items");
 			}
 			return;
 		}

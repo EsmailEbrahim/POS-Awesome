@@ -365,7 +365,7 @@
 			@open-returns="open_returns"
 			@print-draft="print_draft_invoice"
 			@apply-offers="apply_offers_and_reload"
-			@show-payment="show_payment"
+			@show-payment="handleShowPaymentRequest"
 		/>
 	</div>
 </template>
@@ -403,7 +403,15 @@ export default {
 		const toastStore = useToastStore();
 		const uiStore = useUIStore();
 		const { selectedCustomer, refreshToken } = storeToRefs(customersStore);
-		return { invoiceStore, toastStore, selectedCustomer, customerRefreshToken: refreshToken, uiStore };
+		const { activeView } = storeToRefs(uiStore);
+		return {
+			invoiceStore,
+			toastStore,
+			selectedCustomer,
+			customerRefreshToken: refreshToken,
+			uiStore,
+			activeView,
+		};
 	},
 	data() {
 		return {
@@ -481,7 +489,7 @@ export default {
 			available_columns: [], // All available columns
 			show_column_selector: false, // Column selector dialog visibility
 			invoiceHeight: null,
-			paymentVisible: false, // Track current payment view state
+			// paymentVisible state moved to computed property from uiStore
 			confirm_payment_dialog: false,
 			payment_confirmation_resolver: null,
 			_busHandlers: {},
@@ -521,6 +529,9 @@ export default {
 			set(value) {
 				this.invoiceStore.setPackedItems(value);
 			},
+		},
+		paymentVisible() {
+			return this.activeView === "payment";
 		},
 		...invoiceComputed,
 	},
@@ -1584,8 +1595,13 @@ export default {
 		handleItemDragEnd() {
 			this.showDropFeedback(false);
 		},
-		handleShowPayment(data) {
-			this.paymentVisible = data === "true";
+		// handleShowPayment removed - state managed by uiStore/computed
+		handleShowPaymentRequest() {
+			this.uiStore.setActiveView("payment");
+		},
+		// Helper for shortcuts
+		show_payment() {
+			this.uiStore.setActiveView("payment");
 		},
 	},
 
@@ -1637,7 +1653,7 @@ export default {
 			set_new_line: this.handleSetNewLine,
 			reset_posting_date: this.handleResetPostingDate,
 			calc_uom: this.calc_uom,
-			show_payment: this.handleShowPayment,
+			// show_payment: this.handleShowPayment, // Removed
 		};
 
 		Object.entries(this._busHandlers).forEach(([eventName, handler]) => {
