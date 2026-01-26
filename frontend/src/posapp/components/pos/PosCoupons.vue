@@ -77,14 +77,16 @@
 /* global __, frappe */
 import { useCustomersStore } from "../../stores/customersStore.js";
 import { useToastStore } from "../../stores/toastStore.js";
+import { useUIStore } from "../../stores/uiStore.js";
 import { storeToRefs } from "pinia";
 
 export default {
 	setup() {
 		const customersStore = useCustomersStore();
 		const toastStore = useToastStore();
+		const uiStore = useUIStore();
 		const { selectedCustomer } = storeToRefs(customersStore);
-		return { selectedCustomer, toastStore };
+		return { selectedCustomer, toastStore, uiStore };
 	},
 	data: () => ({
 		loading: false,
@@ -241,11 +243,20 @@ export default {
 	},
 
 	created: function () {
+		this.$watch(
+			() => this.uiStore.posProfile,
+			(profile) => {
+				if (profile) this.pos_profile = profile;
+			},
+			{ deep: true, immediate: true }
+		);
+		/*
 		this.$nextTick(function () {
 			this.eventBus.on("register_pos_profile", (data) => {
 				this.pos_profile = data.pos_profile;
 			});
 		});
+		*/
 		this.eventBus.on("update_pos_coupons", (data) => {
 			this.updatePosCoupons(data);
 		});

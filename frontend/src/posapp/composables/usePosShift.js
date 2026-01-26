@@ -1,5 +1,6 @@
 import { ref, getCurrentInstance } from "vue";
 import { useToastStore } from "../stores/toastStore.js";
+import { useUIStore } from "../stores/uiStore.js";
 import {
 	initPromise,
 	checkDbHealth,
@@ -13,6 +14,7 @@ export function usePosShift(openDialog) {
 	const { proxy } = getCurrentInstance();
 	const eventBus = proxy?.eventBus;
 	const toastStore = useToastStore();
+	const uiStore = useUIStore();
 
 	const pos_profile = ref(null);
 	const pos_opening_shift = ref(null);
@@ -42,8 +44,11 @@ export function usePosShift(openDialog) {
 							},
 						});
 					}
-					eventBus?.emit("register_pos_profile", r.message);
-					eventBus?.emit("set_company", r.message.company);
+					// Update Store
+					uiStore.setRegisterData(r.message);
+
+					// Legacy emissions removed
+
 					try {
 						frappe.realtime.emit("pos_profile_registered");
 					} catch (e) {
@@ -60,8 +65,10 @@ export function usePosShift(openDialog) {
 					if (data) {
 						pos_profile.value = data.pos_profile;
 						pos_opening_shift.value = data.pos_opening_shift;
-						eventBus?.emit("register_pos_profile", data);
-						eventBus?.emit("set_company", data.company);
+
+						// Update Store
+						uiStore.setRegisterData(data);
+
 						try {
 							frappe.realtime.emit("pos_profile_registered");
 						} catch (e) {
@@ -78,8 +85,10 @@ export function usePosShift(openDialog) {
 				if (data) {
 					pos_profile.value = data.pos_profile;
 					pos_opening_shift.value = data.pos_opening_shift;
-					eventBus?.emit("register_pos_profile", data);
-					eventBus?.emit("set_company", data.company);
+
+					// Update Store
+					uiStore.setRegisterData(data);
+
 					try {
 						frappe.realtime.emit("pos_profile_registered");
 					} catch (e) {

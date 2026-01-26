@@ -254,13 +254,17 @@
 <script>
 /* global __, frappe */
 import format, { formatUtils } from "../../format";
+import { useInvoiceStore } from "../../stores/invoiceStore.js";
+import { useUIStore } from "../../stores/uiStore.js";
+import { storeToRefs } from "pinia";
 import { useToastStore } from "../../stores/toastStore";
 
 export default {
 	mixins: [format],
 	setup() {
-		const toastStore = useToastStore();
-		return { toastStore };
+		const invoiceStore = useInvoiceStore();
+		const uiStore = useUIStore();
+		return { invoiceStore, uiStore };
 	},
 	data: () => ({
 		invoicesDialog: false,
@@ -697,15 +701,20 @@ export default {
 			this.page = 1;
 			this.has_more_invoices = false;
 			this.searched_once = false;
+			this.has_more_invoices = false;
+			this.searched_once = false;
 		});
 
-		this.eventBus.on("register_pos_profile", (data) => {
-			this.pos_profile = data.pos_profile;
-		});
+		this.$watch(
+			() => this.uiStore.posProfile,
+			(profile) => {
+				if (profile) this.pos_profile = profile;
+			},
+			{ deep: true, immediate: true }
+		);
 	},
 	beforeUnmount() {
 		this.eventBus.off("open_returns");
-		this.eventBus.off("register_pos_profile");
 	},
 };
 </script>

@@ -768,6 +768,7 @@ import placeholderImage from "./placeholder-image.png";
 import Skeleton from "../ui/Skeleton.vue";
 import { useCustomersStore } from "../../stores/customersStore.js";
 import { useToastStore } from "../../stores/toastStore.js";
+import { useUIStore } from "../../stores/uiStore.js";
 import { storeToRefs } from "pinia";
 
 export default {
@@ -788,6 +789,7 @@ export default {
 
 		const customersStore = useCustomersStore();
 		const toastStore = useToastStore();
+		const uiStore = useUIStore();
 		const { selectedCustomer } = storeToRefs(customersStore);
 
 		return {
@@ -798,6 +800,7 @@ export default {
 			...itemsIntegration,
 			selectedCustomer,
 			toastStore,
+			uiStore,
 		};
 	},
 	components: {
@@ -5100,6 +5103,8 @@ export default {
 		});
 
 		// Event listeners
+		// Event listeners
+		/*
 		this.eventBus.on("register_pos_profile", async (data) => {
 			this.pos_profile = data.pos_profile;
 			this.stock_settings = data.stock_settings || {};
@@ -5118,6 +5123,33 @@ export default {
 			await this.initializeItems();
 			this.items_view = this.pos_profile.posa_default_card_view ? "card" : "list";
 		});
+		*/
+		
+		// Watch Store
+		this.$watch(
+			() => this.uiStore.posProfile,
+			async (newProfile) => {
+				if (newProfile && newProfile.name) {
+					this.pos_profile = newProfile;
+					// We might need stock settings from somewhere else if not in profile?
+					// Usually stock settings come with profile or separate call. 
+					// For now assuming profile has what we need or we fetch it.
+					// Actually the event passed `data` which had `pos_profile` AND `stock_settings`.
+					// We need to ensure we have stock settings.
+					
+					await this.initializeStore(this.pos_profile, this.customer, this.customer_price_list);
+					this.startItemWorker();
+					this.update_cur_items_details();
+					this.startBackgroundSyncScheduler();
+					
+					await this.ensureScaleBarcodeSettings(true);
+					this.get_items_groups();
+					await this.initializeItems();
+					this.items_view = this.pos_profile.posa_default_card_view ? "card" : "list";
+				}
+			},
+			{ deep: true, immediate: true }
+		);
 		this.eventBus.on("update_cur_items_details", () => {
 			this.update_cur_items_details();
 		});

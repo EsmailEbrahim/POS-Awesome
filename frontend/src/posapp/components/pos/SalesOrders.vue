@@ -83,9 +83,23 @@
 <script>
 /* global __, frappe */
 import format from "../../format";
+import { useUIStore } from "../../stores/uiStore.js";
 export default {
 	// props: ["draftsDialog"],
 	mixins: [format],
+	setup() {
+		const uiStore = useUIStore();
+		return { uiStore };
+	},
+	mounted() {
+		this.$watch(
+			() => this.uiStore.posProfile,
+			(profile) => {
+				if (profile) this.pos_profile = profile;
+			},
+			{ deep: true, immediate: true }
+		);
+	},
 	data: () => ({
 		draftsDialog: false,
 		singleSelect: true,
@@ -248,13 +262,10 @@ export default {
 		});
 	},
 	mounted() {
-		this.eventBus.on("register_pos_profile", (data) => {
-			this.pos_profile = data.pos_profile;
-		});
+		// Watcher handled in setup/mounted
 	},
 	beforeUnmount() {
 		this.eventBus.off("open_orders");
-		this.eventBus.off("register_pos_profile");
 	},
 };
 </script>

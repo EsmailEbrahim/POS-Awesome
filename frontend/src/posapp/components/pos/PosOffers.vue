@@ -92,15 +92,17 @@
 /* global __, frappe */
 import format from "../../format";
 import { useCustomersStore } from "../../stores/customersStore.js";
+import { useUIStore } from "../../stores/uiStore.js";
 import { useToastStore } from "../../stores/toastStore.js";
 import { storeToRefs } from "pinia";
 export default {
 	mixins: [format],
 	setup() {
 		const customersStore = useCustomersStore();
+		const uiStore = useUIStore();
 		const toastStore = useToastStore();
 		const { selectedCustomer } = storeToRefs(customersStore);
-		return { selectedCustomer, toastStore };
+		return { selectedCustomer, uiStore, toastStore };
 	},
 	data: () => ({
 		loading: false,
@@ -329,11 +331,21 @@ export default {
 	},
 
 	created: function () {
+		this.$watch(
+			() => this.uiStore.posProfile,
+			(profile) => {
+				if (profile) this.pos_profile = profile;
+			},
+			{ deep: true, immediate: true }
+		);
+		
+		/*
 		this.$nextTick(function () {
 			this.eventBus.on("register_pos_profile", (data) => {
 				this.pos_profile = data.pos_profile;
 			});
 		});
+		*/
 		this.eventBus.on("update_pos_offers", (data) => {
 			this.updatePosOffers(data);
 		});

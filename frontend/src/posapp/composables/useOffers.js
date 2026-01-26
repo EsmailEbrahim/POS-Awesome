@@ -1,9 +1,11 @@
 import { ref, getCurrentInstance } from "vue";
+import { useUIStore } from "../stores/uiStore.js";
 import { getCachedOffers, saveOffers } from "../../offline/index.js";
 
 export function useOffers() {
 	const { proxy } = getCurrentInstance();
-	const eventBus = proxy?.eventBus;
+	const eventBus = proxy?.eventBus; // Keep until all migrated? No, we are migrating offers now.
+	const uiStore = useUIStore();
 	const offers = ref([]);
 
 	function get_offers(profileName, posProfile) {
@@ -11,7 +13,8 @@ export function useOffers() {
 			const cached = getCachedOffers();
 			if (cached.length) {
 				offers.value = cached;
-				eventBus?.emit("set_offers", cached);
+				uiStore.setOffers(cached);
+				// eventBus?.emit("set_offers", cached);
 			}
 		}
 		return frappe
@@ -21,7 +24,8 @@ export function useOffers() {
 					console.info("LoadOffers");
 					saveOffers(r.message);
 					offers.value = r.message;
-					eventBus?.emit("set_offers", r.message);
+					uiStore.setOffers(r.message);
+					// eventBus?.emit("set_offers", r.message);
 				}
 			})
 			.catch((err) => {
@@ -29,7 +33,8 @@ export function useOffers() {
 				const cached = getCachedOffers();
 				if (cached.length) {
 					offers.value = cached;
-					eventBus?.emit("set_offers", cached);
+					uiStore.setOffers(cached);
+					// eventBus?.emit("set_offers", cached);
 				}
 			});
 	}

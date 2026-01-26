@@ -99,8 +99,7 @@
 
 				<v-list-item
 					v-if="posProfile.posa_allow_print_last_invoice"
-					@click="$emit('print-last-invoice')"
-					:disabled="!lastInvoiceId"
+					@click="printLastInvoice"
 					class="menu-item-compact secondary-action"
 				>
 					<template v-slot:prepend>
@@ -357,14 +356,19 @@ const FALLBACK_LANGUAGES = [
 	{ code: "pt", name: "Português", native_name: "Português" },
 ];
 
+import { useInvoicePrinting } from "../../composables/useInvoicePrinting";
+
 export default {
 	name: "NavbarMenu",
 	props: {
 		posProfile: { type: Object, default: () => ({}) },
-		lastInvoiceId: String,
 		manualOffline: Boolean,
 		networkOnline: Boolean,
 		serverOnline: Boolean,
+	},
+	setup() {
+		const { printLastInvoice } = useInvoicePrinting();
+		return { printLastInvoice };
 	},
 	data() {
 		return {
@@ -580,7 +584,6 @@ export default {
 	},
 	emits: [
 		"close-shift",
-		"print-last-invoice",
 		"sync-invoices",
 		"toggle-offline",
 		"clear-cache",

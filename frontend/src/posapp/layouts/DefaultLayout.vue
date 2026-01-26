@@ -53,6 +53,9 @@ import { loadingState, initLoadingSources, setSourceProgress, markSourceLoaded }
 import { useCustomersStore } from "../stores/customersStore.js";
 import { useSyncStore } from "../stores/syncStore.js";
 import { useToastStore } from "../stores/toastStore.js";
+import { useUIStore } from "../stores/uiStore.js";
+import { useGoToDoc, useNewTab } from "../composables/useGoToDoc";
+import { useRoute, useRouter } from "vue-router";
 import { storeToRefs } from "pinia";
 import {
 	getOpeningStorage,
@@ -115,12 +118,18 @@ const { get_closing_data } = usePosShift();
 const router = useRouter();
 const syncStore = useSyncStore();
 const customersStore = useCustomersStore();
-const toastStore = useToastStore(); // Add this
+const toastStore = useToastStore();
+const uiStore = useUIStore();
+
+// UI Store State
+const { posProfile, isLoading, loadingText, lastInvoiceId } = storeToRefs(uiStore);
+
+const route = useRoute();
 const { pendingInvoicesCount } = storeToRefs(syncStore);
 const { loadProgress, customersLoaded } = storeToRefs(customersStore);
 
 // State
-const posProfile = ref({});
+// const posProfile = ref({}); // Migrated to UI Store
 const lastInvoiceId = ref("");
 
 // Network status
@@ -351,17 +360,28 @@ const initializeData = async () => {
 const setupEventListeners = () => {
 	// Listen for POS profile registration
 	if (eventBus) {
+		// Event listener removed - using uiStore now. 
+		// Keeping legacy code for reference if needed during migration phases but commenting it out.
+		/*
 		eventBus.on("register_pos_profile", (data) => {
 			posProfile.value = data.pos_profile || {};
 			if (navigator.onLine) {
 				refreshTaxInclusiveSetting();
 			}
 		});
+		*/
+		
+		// Watch posProfile changes from store to refresh settings
+		watch(posProfile, (newProfile) => {
+			if (newProfile && newProfile.name && navigator.onLine) {
+				refreshTaxInclusiveSetting();
+			}
+		}, { deep: true });
 
 		// Track last submitted invoice id
-		eventBus.on("set_last_invoice", (invoiceId) => {
-			lastInvoiceId.value = invoiceId;
-		});
+		// eventBus.on("set_last_invoice", (invoiceId) => {
+		// 	uiStore.setLastInvoice(invoiceId);
+		// });
 
 		eventBus.on("data-loaded", (name) => {
 			markSourceLoaded(name);
@@ -372,9 +392,9 @@ const setupEventListeners = () => {
 		});
 
 		// Allow other components to trigger printing
-		eventBus.on("print_last_invoice", () => {
-			handlePrintLastInvoice();
-		});
+		// eventBus.on("print_last_invoice", () => {
+		// 	handlePrintLastInvoice();
+		// });
 
 		// Manual trigger to sync offline invoices
 		eventBus.on("sync_invoices", () => {
@@ -429,46 +449,6 @@ const handleCloseShift = () => {
     get_closing_data();
 };
 
-const handlePrintLastInvoice = () => {
-    if (!lastInvoiceId.value) {
-        return;
-    }
-
-    const pf = posProfile.value.print_format_for_online || posProfile.value.print_format;
-    const letter_head = posProfile.value.letter_head || 0;
-    const doctype = posProfile.value.create_pos_invoice_instead_of_sales_invoice
-        ? "POS Invoice"
-        : "Sales Invoice";
-    const debugPrint = isDebugPrintEnabled();
-    let url =
-        frappe.urllib.get_base_url() +
-        "/printview?doctype=" +
-        encodeURIComponent(doctype) +
-        "&name=" +
-        lastInvoiceId.value +
-        "&trigger_print=1" +
-        "&format=" +
-        pf +
-        "&no_letterhead=" +
-        letter_head;
-
-    url = appendDebugPrintParam(url, debugPrint);
-    const printOptions = {
-        allowOfflineFallback: isOffline(),
-        triggerPrint: "1",
-        debugPrint,
-        debugInfo: {
-            printFormat: pf,
-            templatePath: "online-printview",
-        },
-    };
-    if (posProfile.value.posa_silent_print) {
-        silentPrint(url, printOptions);
-    } else {
-        const printWindow = window.open(url, "Print");
-        watchPrintWindow(printWindow, printOptions);
-    }
-};
 
 const handleSyncInvoices = async () => {
     const pending = getPendingOfflineInvoiceCount();

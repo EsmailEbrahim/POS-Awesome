@@ -1,4 +1,5 @@
 /* global frappe, flt, get_currency_symbol */
+import { useUIStore } from "./stores/uiStore";
 // Utility functions for RTL number formatting (standalone)
 export const formatUtils = {
 	// Check if current language/layout is RTL
@@ -286,9 +287,27 @@ export default {
 			}
 		};
 
+		// Watch UI Store
+		try {
+			const uiStore = useUIStore();
+			this.$watch(
+				() => uiStore.posProfile,
+				(newVal) => {
+					if (newVal) {
+						updatePrecision(newVal);
+					}
+				},
+				{ deep: true, immediate: true }
+			);
+		} catch (e) {
+			console.warn("Failed to connect format.js to uiStore", e);
+		}
+
+		/*
 		if (this.eventBus && this.eventBus.on) {
 			this.eventBus.on("register_pos_profile", updatePrecision);
 			this.eventBus.on("payments_register_pos_profile", updatePrecision);
 		}
+		*/
 	},
 };

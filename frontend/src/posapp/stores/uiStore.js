@@ -28,14 +28,66 @@ export const useUIStore = defineStore("ui", () => {
 		freezeMessage.value = "";
 	}
 
+	// POS Profile & Settings
+	const posProfile = ref(null);
+	const stockSettings = ref({});
+	const companyDoc = ref(null);
+	const posOpeningShift = ref(null);
+
+	const currency = computed(() => posProfile.value?.currency || "");
+	const company = computed(() => posProfile.value?.company || "");
+
+	function setPosProfile(profile) {
+		posProfile.value = profile;
+	}
+
+	function setStockSettings(settings) {
+		stockSettings.value = settings || {};
+	}
+
+	function setCompanyDoc(doc) {
+		companyDoc.value = doc;
+	}
+
+	function setRegisterData(data) {
+		if (data.pos_profile) posProfile.value = data.pos_profile;
+		if (data.stock_settings) stockSettings.value = data.stock_settings;
+		if (data.company) companyDoc.value = data.company;
+		if (data.pos_opening_shift) posOpeningShift.value = data.pos_opening_shift;
+	}
+
+	const lastInvoiceId = ref(null);
+	function setLastInvoice(id) {
+		lastInvoiceId.value = id;
+	}
+
+	const offers = ref([]);
+	function setOffers(data) {
+		offers.value = data || [];
+	}
+
 	return {
 		isLoading,
 		loadingText,
 		isFrozen,
 		freezeTitle,
 		freezeMessage,
+		posProfile,
+		stockSettings,
+		companyDoc,
+		posOpeningShift,
+		lastInvoiceId,
+		offers,
+		currency,
+		company,
 		setLoading,
 		freeze,
 		unfreeze,
+		setPosProfile,
+		setStockSettings,
+		setCompanyDoc,
+		setRegisterData,
+		setLastInvoice,
+		setOffers
 	};
 });

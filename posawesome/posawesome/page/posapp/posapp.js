@@ -83,7 +83,7 @@ frappe.pages["posapp"].on_page_load = async function (wrapper) {
 										m.setTaxInclusiveSetting(posa_tax_inclusive);
 									}
 								})
-								.catch(() => {});
+								.catch(() => { });
 						} else {
 							console.error("Error fetching POS Profile or POS Profile not found.");
 						}
@@ -106,7 +106,7 @@ frappe.pages["posapp"].on_page_load = async function (wrapper) {
 								m.setTaxInclusiveSetting(val);
 							}
 						})
-						.catch(() => {});
+						.catch(() => { });
 				} catch (e) {
 					console.warn("Failed to parse cached tax inclusive value", e);
 				}
@@ -118,4 +118,10 @@ frappe.pages["posapp"].on_page_load = async function (wrapper) {
 
 		update_totals_based_on_tax_inclusive();
 	});
+};
+
+frappe.pages["posapp"].on_page_unload = function (wrapper) {
+	if (wrapper.page.$PosApp && typeof wrapper.page.$PosApp.unmount === "function") {
+		wrapper.page.$PosApp.unmount();
+	}
 };

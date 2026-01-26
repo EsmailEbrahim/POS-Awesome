@@ -54,12 +54,10 @@
 			<template #menu>
 				<NavbarMenu
 					:pos-profile="posProfile"
-					:last-invoice-id="lastInvoiceId"
 					:manual-offline="manualOffline"
 					:network-online="networkOnline"
 					:server-online="serverOnline"
 					@close-shift="openCloseShift"
-					@print-last-invoice="printLastInvoice"
 					@sync-invoices="syncPendingInvoices"
 					@toggle-offline="toggleManualOffline"
 					@clear-cache="clearCache"
@@ -192,7 +190,6 @@ export default {
 			type: Number,
 			default: 0,
 		},
-		lastInvoiceId: String,
 		networkOnline: Boolean,
 		serverOnline: Boolean,
 		serverConnecting: Boolean,
@@ -313,6 +310,15 @@ export default {
 		},
 
 		initializeNavbar() {
+			// Watch store for company changes
+			this.$watch(
+				() => this.uiStore.companyDoc,
+				(doc) => {
+					this.handleSetCompany(doc);
+				},
+				{ deep: true, immediate: true }
+			);
+
 			// Enhanced initialization with better reactivity handling
 			const updateCompanyInfo = () => {
 				let updated = false;
@@ -364,7 +370,6 @@ export default {
 		setupEventListeners() {
 			if (this.eventBus) {
 				this.eventBus.on("show_message", (data) => this.toastStore.show(data));
-				this.eventBus.on("set_company", this.handleSetCompany);
 				this.eventBus.on("invoice_submission_failed", this.handleInvoiceSubmissionFailed);
 			}
 		},
@@ -378,9 +383,6 @@ export default {
 
 		openCloseShift() {
 			this.$emit("close-shift");
-		},
-		printLastInvoice() {
-			this.$emit("print-last-invoice");
 		},
 		syncPendingInvoices() {
 			this.$emit("sync-invoices");
@@ -590,7 +592,6 @@ export default {
 		"nav-click",
 		"change-page",
 		"close-shift",
-		"print-last-invoice",
 		"sync-invoices",
 		"toggle-offline",
 		"toggle-theme",

@@ -221,12 +221,16 @@
 <script>
 import { isOffline, saveOfflineCustomer } from "../../../offline/index.js";
 import { useCustomersStore } from "../../stores/customersStore.js";
+import { useUIStore } from "../../stores/uiStore.js";
+import { storeToRefs } from "pinia";
 import { useToastStore } from "../../stores/toastStore.js";
 
 export default {
 	setup() {
-		const toastStore = useToastStore();
-		return { toastStore };
+		const customersStore = useCustomersStore();
+		const uiStore = useUIStore();
+		const { selectedCustomer } = storeToRefs(customersStore);
+		return { selectedCustomer, uiStore };
 	},
 	data: () => ({
 		customerDialog: false,
@@ -707,10 +711,22 @@ export default {
 				this.loyalty_points = data.loyalty_points;
 				this.loyalty_program = data.loyalty_program;
 				this.gender = data.gender;
-			} else {
-				this.country = (this.pos_profile && this.pos_profile.posa_default_country) || "Pakistan";
 			}
 		});
+
+		// Watch Store for POS Profile
+		this.$watch(
+			() => this.uiStore.posProfile,
+			(profile) => {
+				if (profile) {
+					this.pos_profile = profile;
+					this.country = (profile && profile.posa_default_country) || "Pakistan";
+				}
+			},
+			{ deep: true, immediate: true }
+		);
+
+		/*
 		this.eventBus.on("register_pos_profile", (data) => {
 			this.pos_profile = data.pos_profile;
 			this.country = (this.pos_profile && this.pos_profile.posa_default_country) || "Pakistan";
@@ -719,6 +735,7 @@ export default {
 			this.pos_profile = data.pos_profile;
 			this.country = (this.pos_profile && this.pos_profile.posa_default_country) || "Pakistan";
 		});
+		*/
 		this.getCustomerGroups();
 		this.getCustomerTerritorys();
 		this.getGenders();

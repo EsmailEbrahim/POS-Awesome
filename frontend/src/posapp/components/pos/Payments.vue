@@ -840,10 +840,10 @@ import {
 } from "../../plugins/print.js";
 import { useInvoiceStore } from "../../stores/invoiceStore.js";
 import { useCustomersStore } from "../../stores/customersStore.js";
+import { useUIStore } from "../../stores/uiStore.js";
 import { storeToRefs } from "pinia";
 import stockCoordinator from "../../utils/stockCoordinator.js";
 import { parseBooleanSetting } from "../../utils/stock.js";
-import { useUIStore } from "../../stores/uiStore.js";
 import { useToastStore } from "../../stores/toastStore.js";
 import invoiceService from "../../services/invoiceService.js";
 
@@ -855,18 +855,22 @@ export default {
 		const customersStore = useCustomersStore();
 		const uiStore = useUIStore();
 		const toastStore = useToastStore();
-		const { selectedCustomer, customerInfo } = storeToRefs(customersStore);
+		const { isRtl, rtlStyles, rtlClasses } = useRtl();
+		const { selectedCustomer, customerInfo, refreshToken } = storeToRefs(customersStore);
 		const { isFrozen, freezeTitle, freezeMessage } = storeToRefs(uiStore);
-
 		return {
 			invoiceStore,
 			selectedCustomer,
 			customerInfoFromStore: customerInfo,
+			customerRefreshToken: refreshToken,
 			uiStore,
 			toastStore,
 			isFrozen,
 			freezeTitle,
-			freezeMessage
+			freezeMessage,
+			isRtl,
+			rtlStyles,
+			rtlClasses,
 		};
 	},
 	data() {
@@ -1772,9 +1776,14 @@ export default {
 				this.customer_credit_dict = [];
 				this.redeem_customer_credit = false;
 				this.is_cashback = true;
+				if (this.invoiceStore.invoiceDoc) {
+					this.invoiceStore.invoiceDoc.docstatus = 1;
+				}
+				this.uiStore.setLastInvoice(this.invoice_doc.name);
+				// this.eventBus.emit("set_last_invoice", this.invoice_doc.name);
+				this.show_change_dialog = true;
 				this.is_credit_return = false;
 				this.sales_person = "";
-				this.eventBus.emit("set_last_invoice", this.invoice_doc.name);
 				this.toastStore.show( {
 					title:
 						this.invoiceType === "Order" && this.pos_profile.posa_create_only_sales_order
@@ -2825,13 +2834,29 @@ export default {
 					this.get_addresses();
 				}
 				this.get_sales_person_names();
+				this.get_sales_person_names();
 			});
+			/*
 			this.eventBus.on("register_pos_profile", (data) => {
 				this.pos_profile = data.pos_profile;
 				this.stock_settings = data.stock_settings || {};
 				this.get_mpesa_modes();
 				this.get_print_formats();
 			});
+			*/
+			// Watch Store
+			this.$watch(
+				() => this.uiStore.posProfile,
+				(profile) => {
+					if (profile) {
+						this.pos_profile = profile;
+						this.stock_settings = this.uiStore.stockSettings || {};
+						this.get_mpesa_modes();
+						this.get_print_formats();
+					}
+				},
+				{ deep: true, immediate: true }
+			);
 			this.eventBus.on("add_the_new_address", (data) => {
 				const normalized = this.normalizeAddress(data);
 				if (normalized) {
@@ -2913,9 +2938,6 @@ export default {
 </script>
 
 <style scoped>
-.v-text-field {
-	composes: pos-form-field;
-}
 
 /* Remove readonly styling */
 .v-text-field--readonly {

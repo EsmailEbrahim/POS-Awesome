@@ -854,10 +854,16 @@
 	</v-dialog>
 </template>
 
-<script>
+<script>/* global __ */
 import format from "../../format";
+import { useUIStore } from "../../stores/uiStore.js";
 export default {
+	name: "ClosingDialog",
 	mixins: [format],
+	setup() {
+		const uiStore = useUIStore();
+		return { uiStore };
+	},
 	data: () => ({
 		closingDialog: false,
 		itemsPerPage: 20,
@@ -1533,6 +1539,22 @@ export default {
 			this.dialog_data = data;
 			this.fetchOverview(data.pos_opening_shift);
 		});
+		
+		this.$watch(
+			() => this.uiStore.posProfile,
+			(profile) => {
+				if (profile) {
+					this.pos_profile = profile;
+					if (!this.pos_profile.hide_expected_amount) {
+						this.headers = [...this.baseHeaders, ...this.extendedHeaders];
+					} else {
+						this.headers = [...this.baseHeaders];
+					}
+				}
+			},
+			{ deep: true, immediate: true }
+		);
+		/*
 		this.eventBus.on("register_pos_profile", (data) => {
 			this.pos_profile = data.pos_profile;
 			if (!this.pos_profile.hide_expected_amount) {
@@ -1541,13 +1563,14 @@ export default {
 				this.headers = [...this.baseHeaders];
 			}
 		});
+		*/
 	},
 	mounted() {
 		window.addEventListener("keydown", this.handleKeydown);
 	},
 	beforeUnmount() {
 		this.eventBus.off("open_ClosingDialog");
-		this.eventBus.off("register_pos_profile");
+		// this.eventBus.off("register_pos_profile");
 		window.removeEventListener("keydown", this.handleKeydown);
 	},
 };

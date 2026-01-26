@@ -388,6 +388,7 @@ import shortcutMethods from "./invoiceShortcuts";
 import { useInvoiceStore } from "../../stores/invoiceStore.js";
 import { useCustomersStore } from "../../stores/customersStore.js";
 import { useToastStore } from "../../stores/toastStore.js";
+import { useUIStore } from "../../stores/uiStore.js";
 import { storeToRefs } from "pinia";
 import stockCoordinator from "../../utils/stockCoordinator.js";
 import { parseBooleanSetting } from "../../utils/stock.js";
@@ -400,8 +401,9 @@ export default {
 		const invoiceStore = useInvoiceStore();
 		const customersStore = useCustomersStore();
 		const toastStore = useToastStore();
+		const uiStore = useUIStore();
 		const { selectedCustomer, refreshToken } = storeToRefs(customersStore);
-		return { invoiceStore, toastStore, selectedCustomer, customerRefreshToken: refreshToken };
+		return { invoiceStore, toastStore, selectedCustomer, customerRefreshToken: refreshToken, uiStore };
 	},
 	data() {
 		return {
@@ -1593,15 +1595,41 @@ export default {
 		// Restore saved invoice height
 		this.loadInvoiceHeight();
 
+		// Watch UI Store for Profile
+		this.$watch(
+			() => this.uiStore.posProfile,
+			(profile) => {
+				if (profile && profile.name) {
+					this.handleRegisterPosProfile({
+						pos_profile: profile,
+						stock_settings: this.uiStore.stockSettings,
+						company: this.uiStore.companyDoc,
+						pos_opening_shift: this.uiStore.posOpeningShift,
+					});
+				}
+			},
+			{ deep: true, immediate: true }
+		);
+
+		this.$watch(
+			() => this.uiStore.offers,
+			(offers) => {
+				if (offers) {
+					this.handleSetOffers(offers);
+				}
+			},
+			{ deep: true, immediate: true }
+		);
+
 		this._busHandlers = {
 			"item-drag-start": this.handleItemDragStart,
 			"item-drag-end": this.handleItemDragEnd,
-			register_pos_profile: this.handleRegisterPosProfile,
+			// register_pos_profile: this.handleRegisterPosProfile, // Handled by store watcher
 			add_item: this.add_item,
 			clear_invoice: this.handleClearInvoice,
 			load_invoice: this.handleLoadInvoice,
 			load_order: this.handleLoadOrder,
-			set_offers: this.handleSetOffers,
+			// set_offers: this.handleSetOffers, // Handled by store watcher
 			update_invoice_offers: this.handleUpdateInvoiceOffers,
 			update_invoice_coupons: this.handleUpdateInvoiceCoupons,
 			set_all_items: this.handleSetAllItems,

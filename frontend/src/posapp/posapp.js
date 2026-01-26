@@ -41,21 +41,22 @@ frappe.PosApp.posapp = class {
 	constructor({ parent }) {
 		this.$parent = $(document);
 		this.page = parent?.page || parent;
+		this.app = null;
 		this.make_body();
 	}
 	make_body() {
 		this.$el = this.$parent.find(".main-section");
 		// Vuetify instance is now imported from plugins/vuetify.ts
-		const app = createApp(App);
-		app.component("VueDatePicker", VueDatePicker);
-		app.use(pinia);
-		app.use(router);
-		app.use(eventBus);
-		app.use(vuetify);
-		app.use(themePlugin, { vuetify });
+		this.app = createApp(App);
+		this.app.component("VueDatePicker", VueDatePicker);
+		this.app.use(pinia);
+		this.app.use(router);
+		this.app.use(eventBus);
+		this.app.use(vuetify);
+		this.app.use(themePlugin, { vuetify });
 
 		// Global Error Handler
-		app.config.errorHandler = (err, instance, info) => {
+		this.app.config.errorHandler = (err, instance, info) => {
 			console.error("Global Error:", err, info);
 			const toastStore = useToastStore();
 			toastStore.show({
@@ -65,7 +66,7 @@ frappe.PosApp.posapp = class {
 			});
 		};
 
-		app.mount(this.$el[0]);
+		this.app.mount(this.$el[0]);
 
 		// Initialize socket listeners
 		const socketStore = useSocketStore();
@@ -93,6 +94,13 @@ frappe.PosApp.posapp = class {
 					console.log("SW registered successfully", registration);
 				})
 				.catch((err) => console.error("SW registration failed", err));
+		}
+	}
+	unmount() {
+		if (this.app) {
+			this.app.unmount();
+			this.app = null;
+			console.info("POS App unmounted");
 		}
 	}
 	setup_header() { }

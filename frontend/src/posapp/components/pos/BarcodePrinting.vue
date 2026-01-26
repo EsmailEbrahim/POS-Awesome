@@ -225,13 +225,18 @@ import ItemsSelector from "./ItemsSelector.vue";
 import { useItemsStore } from "../../stores/itemsStore";
 import { useToastStore } from "../../stores/toastStore";
 import { mapStores } from "pinia";
+import draggable from "vuedraggable";
+import format from "../../format";
+import { useUIStore } from "../../stores/uiStore.js";
 
 export default {
 	name: "BarcodePrinting",
-	components: { ItemsSelector },
+	components: { ItemsSelector, draggable },
+	mixins: [format],
 	setup() {
 		const toastStore = useToastStore();
-		return { toastStore };
+		const uiStore = useUIStore();
+		return { toastStore, uiStore };
 	},
 	data() {
 		return {
@@ -726,12 +731,21 @@ export default {
 		},
 	},
 	created() {
+		this.$watch(
+			() => this.uiStore.posProfile,
+			(profile) => {
+				if (profile) this.pos_profile = profile || {};
+			},
+			{ deep: true, immediate: true }
+		);
+		/*
 		this.eventBus.on("register_pos_profile", (data) => {
 			this.pos_profile = data.pos_profile || {};
 		});
+		*/
 	},
 	beforeUnmount() {
-		this.eventBus.off("register_pos_profile");
+		// this.eventBus.off("register_pos_profile");
 	},
 };
 </script>

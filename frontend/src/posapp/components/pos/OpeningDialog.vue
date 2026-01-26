@@ -269,7 +269,6 @@ export default {
 				.then((r) => {
 					if (r.message) {
 						vm.eventBus.emit("register_pos_data", r.message);
-						vm.eventBus.emit("set_company", r.message.company);
 						try {
 							setOpeningStorage(r.message);
 						} catch (e) {

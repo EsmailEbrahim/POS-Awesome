@@ -518,6 +518,7 @@ import {
 } from "../../plugins/print.js";
 import { useRtl } from "../../composables/useRtl.js";
 import { useCustomersStore } from "../../stores/customersStore.js";
+import { useUIStore } from "../../stores/uiStore.js";
 import { storeToRefs } from "pinia";
 
 export default {
@@ -525,6 +526,7 @@ export default {
 	setup() {
 		const { isRtl, rtlStyles, rtlClasses } = useRtl();
 		const customersStore = useCustomersStore();
+		const uiStore = useUIStore();
 		const { selectedCustomer, refreshToken } = storeToRefs(customersStore);
 		return {
 			isRtl,
@@ -532,6 +534,7 @@ export default {
 			rtlClasses,
 			selectedCustomer,
 			customerRefreshToken: refreshToken,
+			uiStore,
 		};
 	},
 	data: function () {
@@ -725,8 +728,11 @@ export default {
 					this.pos_opening_shift = response.message.pos_opening_shift;
 					this.company = response.message.company.name;
 					this.companyCurrency = response.message.company.default_currency;
+
+					// Update Store
+					this.uiStore.setRegisterData(response.message);
+
 					vm.eventBus.emit("payments_register_pos_profile", response.message);
-					vm.eventBus.emit("set_company", response.message.company);
 					
 					this.set_payment_methods();
 					await this.loadPaymentMethodCurrencies(); // Now works with await
@@ -762,6 +768,10 @@ export default {
 						this.pos_opening_shift = cachedData.pos_opening_shift;
 						this.company = cachedData.company.name;
 						this.companyCurrency = cachedData.company?.default_currency;
+
+						// Update Store
+						this.uiStore.setRegisterData(cachedData);
+
 						vm.eventBus.emit("payments_register_pos_profile", cachedData);
 						vm.eventBus.emit("set_company", cachedData.company);
 						
@@ -787,6 +797,10 @@ export default {
 					this.pos_opening_shift = cachedData.pos_opening_shift;
 					this.company = cachedData.company.name;
 					this.companyCurrency = cachedData.company?.default_currency;
+
+					// Update Store
+					this.uiStore.setRegisterData(cachedData);
+
 					vm.eventBus.emit("payments_register_pos_profile", cachedData);
 					vm.eventBus.emit("set_company", cachedData.company);
 					

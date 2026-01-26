@@ -168,6 +168,7 @@ import Skeleton from "../ui/Skeleton.vue";
 import { useCustomersStore } from "../../stores/customersStore.js";
 import { useOnlineStatus } from "../../composables/useOnlineStatus.js";
 import { useToastStore } from "../../stores/toastStore.js";
+import { useUIStore } from "../../stores/uiStore.js";
 
 export default {
 	props: {
@@ -182,6 +183,7 @@ export default {
 		const eventBus = proxy?.eventBus;
 		const customersStore = useCustomersStore();
 		const toastStore = useToastStore();
+		const uiStore = useUIStore();
 		const {
 			customers,
 			filteredCustomers,
@@ -416,15 +418,16 @@ export default {
 		onMounted(async () => {
 			await customersStore.searchCustomers("");
 
-			registerBus("register_pos_profile", async (data) => {
-				customersStore.setPosProfile(data);
-				await customersStore.get_customer_names();
-			});
-
-			registerBus("payments_register_pos_profile", async (data) => {
-				customersStore.setPosProfile(data);
-				await customersStore.get_customer_names();
-			});
+			watch(
+				() => uiStore.posProfile,
+				async (profile) => {
+					if (profile) {
+						customersStore.setPosProfile(profile);
+						await customersStore.get_customer_names();
+					}
+				},
+				{ deep: true, immediate: true }
+			);
 
 			registerBus("set_customer", (customer) => {
 				customersStore.setSelectedCustomer(customer);

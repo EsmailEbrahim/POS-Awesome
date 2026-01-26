@@ -412,6 +412,7 @@
 <script>
 /* global __, frappe */
 import format, { formatUtils } from "../../format";
+import { useUIStore } from "../../stores/uiStore.js";
 import { useStockUtils } from "../../composables/useStockUtils";
 import { getOpeningStorage } from "../../../offline/index.js";
 import { useItemsStore } from "../../stores/itemsStore";
@@ -427,6 +428,7 @@ export default {
 		PurchasePaymentDialog,
 	},
 	setup() {
+		const uiStore = useUIStore();
 		const toastStore = useToastStore();
 		return { toastStore };
 	},
@@ -1029,15 +1031,19 @@ export default {
 		this.initialize();
 	},
 	mounted() {
-		this.eventBus.on("register_pos_profile", (data) => {
-			this.pos_profile = data.pos_profile || {};
-		});
+		this.$watch(
+			() => this.uiStore.posProfile,
+			(profile) => {
+				if (profile) this.pos_profile = profile || {};
+			},
+			{ deep: true, immediate: true }
+		);
 	},
 	beforeUnmount() {
 		if (this.itemsStore && this.pos_profile && this.pos_profile.selling_price_list) {
 			this.itemsStore.updatePriceList(this.pos_profile.selling_price_list);
 		}
-		this.eventBus.off("register_pos_profile");
+		// this.eventBus.off("register_pos_profile");
 	},
 };
 </script>

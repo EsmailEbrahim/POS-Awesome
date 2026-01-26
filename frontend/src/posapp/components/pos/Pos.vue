@@ -69,6 +69,7 @@ import { clearExpiredCustomerBalances } from "../../../offline/index.js";
 import { useResponsive } from "../../composables/useResponsive.js";
 import { useRtl } from "../../composables/useRtl.js";
 import { useCustomersStore } from "../../stores/customersStore.js";
+import { useUIStore } from "../../stores/uiStore.js";
 import { storeToRefs } from "pinia";
 
 export default {
@@ -82,7 +83,8 @@ export default {
 			}
 		});
 		const offers = useOffers();
-		return { ...responsive, ...rtl, ...shift, ...offers };
+		const uiStore = useUIStore();
+		return { ...responsive, ...rtl, ...shift, ...offers, uiStore };
 	},
 	data: function () {
 		return {
@@ -143,16 +145,35 @@ export default {
 				this.pos_profile = data.pos_profile;
 				this.get_offers(this.pos_profile.name, this.pos_profile);
 				this.pos_opening_shift = data.pos_opening_shift;
+
+				// Update Store
+				this.uiStore.setRegisterData(data);
+
+				// Legacy emit
 				this.eventBus.emit("register_pos_profile", data);
 				console.info("LoadPosProfile");
 			});
 			// When profile is registered directly from composables,
 			// ensure offers are fetched as well
+			/*
 			this.eventBus.on("register_pos_profile", (data) => {
 				if (data && data.pos_profile) {
 					this.get_offers(data.pos_profile.name, data.pos_profile);
 				}
 			});
+			*/
+
+			// Watch store for updates
+			this.$watch(
+				() => this.uiStore.posProfile,
+				(newProfile) => {
+					if (newProfile && newProfile.name) {
+						this.pos_profile = newProfile;
+						this.get_offers(newProfile.name, newProfile);
+					}
+				},
+				{ deep: true, immediate: true }
+			);
 			this.eventBus.on("show_payment", (data) => {
 				this.payment = data === "true";
 				this.showOffers = false;
