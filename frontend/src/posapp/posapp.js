@@ -98,6 +98,14 @@ frappe.PosApp.posapp = class {
 	}
 	unmount() {
 		if (this.app) {
+			// Clean up router to prevent global navigation interference
+			const router = this.app.config.globalProperties.$router;
+			if (router) {
+				// Remove all route guards and listeners
+				router.beforeEachCbs = [];
+				router.afterEachCbs = [];
+			}
+
 			this.app.unmount();
 			this.app = null;
 			console.info("POS App unmounted");

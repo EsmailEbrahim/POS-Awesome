@@ -41,7 +41,7 @@
 <script setup>
 /* global frappe, $ */
 import { ref, computed, onMounted, onBeforeUnmount, watch, getCurrentInstance, inject } from "vue";
-import { useRouter } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 // Note paths updated to be relative to layouts/ directory
 import Navbar from "../components/Navbar.vue";
 import ClosingDialog from "../components/pos/ClosingDialog.vue";
@@ -54,8 +54,6 @@ import { useCustomersStore } from "../stores/customersStore.js";
 import { useSyncStore } from "../stores/syncStore.js";
 import { useToastStore } from "../stores/toastStore.js";
 import { useUIStore } from "../stores/uiStore.js";
-import { useGoToDoc, useNewTab } from "../composables/useGoToDoc";
-import { useRoute, useRouter } from "vue-router";
 import { storeToRefs } from "pinia";
 import {
 	getOpeningStorage,
