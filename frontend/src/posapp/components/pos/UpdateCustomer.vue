@@ -229,8 +229,9 @@ export default {
 	setup() {
 		const customersStore = useCustomersStore();
 		const uiStore = useUIStore();
+		const toastStore = useToastStore();
 		const { selectedCustomer } = storeToRefs(customersStore);
-		return { selectedCustomer, uiStore };
+		return { selectedCustomer, uiStore, toastStore };
 	},
 	data: () => ({
 		customerDialog: false,
@@ -602,7 +603,7 @@ export default {
 
 			if (isOffline()) {
 				saveOfflineCustomer({ args: apiArgs });
-				vm.toastStore.show( { title: __("Customer saved offline"), color: "warning" });
+				vm.toastStore.show({ title: __("Customer saved offline"), color: "warning" });
 				args.name = this.customer_name;
 				await customersStore.addOrUpdateCustomer({
 					name: args.name,
@@ -625,7 +626,7 @@ export default {
 						if (vm.customer_id) {
 							text = __("Customer updated successfully.");
 						}
-						vm.toastStore.show( {
+						vm.toastStore.show({
 							title: text,
 							color: "success",
 						});
@@ -642,7 +643,7 @@ export default {
 						vm.close_dialog();
 					} else {
 						frappe.utils.play_sound("error");
-						vm.toastStore.show( {
+						vm.toastStore.show({
 							title: __("Customer creation failed."),
 							color: "error",
 						});
@@ -723,7 +724,7 @@ export default {
 					this.country = (profile && profile.posa_default_country) || "Pakistan";
 				}
 			},
-			{ deep: true, immediate: true }
+			{ deep: true, immediate: true },
 		);
 
 		/*
@@ -747,4 +748,3 @@ export default {
 </script>
 
 <style scoped></style>
-
