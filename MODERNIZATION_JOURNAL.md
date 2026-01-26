@@ -46,8 +46,8 @@ _Building the backbone for a scalable Single Page Application (SPA)._
             - Update sidebar items to include `to: '/url'` property.
             - Use `<v-list-item :to="item.to">` for navigation links.
 
-- [ ] **1.2 Explicit Layout System**
-    - **Current Status:** Layout logic currently resides mixed inside `Home.vue`.
+- [x] **1.2 Explicit Layout System**
+    - **Current Status:** `Home.vue` logic moved to `layouts/DefaultLayout.vue`. `App.vue` created as root.
     - **Action Plan:**
         1.  Create `frontend/src/posapp/layouts/DefaultLayout.vue`.
         2.  Move `<v-app>`, `<Navbar>`, `<AppLoadingOverlay>` from `Home.vue` to `DefaultLayout.vue`.
@@ -56,10 +56,10 @@ _Building the backbone for a scalable Single Page Application (SPA)._
         5.  Configure Router to use meta fields (e.g., `meta: { layout: 'default' }`) to select the layout.
 
 - [ ] **1.3 Migrate to Composition API (Script Setup)**
-    - **Current Status:** `Home.vue` and others use a mix of Options API (`data`, `methods`) and `setup()`.
+    - **Current Status:** `DefaultLayout.vue` (formerly `Home.vue`) uses Options API.
     - **Issues:** Hard to reuse logic, verbose code, poor TypeScript inference.
     - **Action Plan:**
-        1.  Refactor `Home.vue` to `<script setup>`.
+        1.  Refactor `DefaultLayout.vue` to `<script setup>`.
         2.  Convert `data()` to `ref/reactive`.
         3.  Convert `methods` to standard functions.
         4.  Convert `mounted` to `onMounted`.
@@ -274,3 +274,4 @@ _The ultimate reliability upgrade._
 | 2026-01-26 | Phase 3.2 Micro-Interactions        | Completed | Added page transitions to `Home.vue` and dialog transitions to `Invoice` and `CancelSaleDialog`.                                     |
 | 2026-01-26 | Phase 4 Performance                 | Completed | Verified Route Lazy Loading & Virtual Scrolling. Optimized `Home.vue` imports.                                                       |
 | 2026-01-26 | Phase 5.1 Reliability               | Completed | Implemented global error handler in `posapp.js` using `toastStore`.                                                                  |
+| 2026-01-26 | Phase 1.2 Explicit Layouts          | Completed | Created `DefaultLayout.vue`, `App.vue`, and updated Router.                                                                          |
