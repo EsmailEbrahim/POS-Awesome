@@ -1660,9 +1660,16 @@ export default {
 			{ deep: true }
 		);
 
+		this.$watch(
+			() => this.uiStore.draggedItem,
+			(item) => {
+				this.showDropFeedback(!!item);
+			}
+		);
+
 		this._busHandlers = {
-			"item-drag-start": this.handleItemDragStart,
-			"item-drag-end": this.handleItemDragEnd,
+			// "item-drag-start": this.handleItemDragStart, // Handled by watcher
+			// "item-drag-end": this.handleItemDragEnd, // Handled by watcher
 			// register_pos_profile: this.handleRegisterPosProfile, // Handled by store watcher
 			add_item: this.add_item,
 			clear_invoice: this.handleClearInvoice,

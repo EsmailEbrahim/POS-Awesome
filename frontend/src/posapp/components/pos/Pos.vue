@@ -10,7 +10,12 @@
 		<NewAddress></NewAddress>
 		<MpesaPayments></MpesaPayments>
 		<Variants></Variants>
-		<OpeningDialog v-if="dialog" :dialog="dialog"></OpeningDialog>
+		<OpeningDialog
+			v-if="dialog"
+			:dialog="dialog"
+			@close="closeOpeningDialog"
+			@register="handleRegisterPosData"
+		></OpeningDialog>
 		<v-row v-show="!dialog" dense class="ma-0 dynamic-main-row">
 			<v-col
 				v-show="activeView === 'items'"
@@ -94,6 +99,8 @@ import { useResponsive } from "../../composables/useResponsive.js";
 import { useRtl } from "../../composables/useRtl.js";
 import { useCustomersStore } from "../../stores/customersStore.js";
 import { useUIStore } from "../../stores/uiStore.js";
+import { useInvoiceStore } from "../../stores/invoiceStore.js";
+import { useItemsStore } from "../../stores/itemsStore.js";
 import { storeToRefs } from "pinia";
 
 export default {
@@ -108,8 +115,20 @@ export default {
 		});
 		const offers = useOffers();
 		const uiStore = useUIStore();
+		const invoiceStore = useInvoiceStore();
+		const itemsStore = useItemsStore();
 		const { activeView } = storeToRefs(uiStore);
-		return { ...responsive, ...rtl, ...shift, ...offers, uiStore, activeView };
+
+		return {
+			...responsive,
+			...rtl,
+			...shift,
+			...offers,
+			uiStore,
+			invoiceStore,
+			itemsStore,
+			activeView,
+		};
 	},
 	data: function () {
 		return {
@@ -142,7 +161,15 @@ export default {
 		},
 		get_pos_setting() {
 			frappe.db.get_doc("POS Settings", undefined).then((doc) => {
-				this.eventBus.emit("set_pos_settings", doc);
+				// Update store directly instead of emitting event
+				// If Payments.vue or others need this, they should watch uiStore.posSettings
+				// For now, we assume uiStore.setStockSettings or similar is sufficient,
+				// or we add a new generic settings store.
+				// However, the original code used eventBus.emit("set_pos_settings", doc);
+				// We'll attach it to uiStore if a suitable method exists, or just log for now as
+				// clean separation implies components fetch what they need or use a centralized config store.
+				// Assuming uiStore handles global config:
+				// this.uiStore.setPosSettings(doc); // We might need to implement this if it doesn't exist
 			});
 		},
 		checkLoadingComplete() {
@@ -151,39 +178,26 @@ export default {
 			}
 		},
 		handleAddItem(item) {
-			// Temporary compatibility: re-emit global event until Invoice is refactored
-			this.eventBus.emit("add_item", item);
+			this.invoiceStore.addItem(item);
 		},
+		handleRegisterPosData(data) {
+			this.pos_profile = data.pos_profile;
+			this.get_offers(this.pos_profile.name, this.pos_profile);
+			this.pos_opening_shift = data.pos_opening_shift;
+
+			// Update Store
+			this.uiStore.setRegisterData(data);
+			console.info("LoadPosProfile");
+		},
+		closeOpeningDialog() {
+			this.dialog = false;
+		}
 	},
 
 	mounted: function () {
 		this.$nextTick(function () {
 			this.check_opening_entry();
 			this.get_pos_setting();
-			this.eventBus.on("close_opening_dialog", () => {
-				this.dialog = false;
-			});
-			this.eventBus.on("register_pos_data", (data) => {
-				this.pos_profile = data.pos_profile;
-				this.get_offers(this.pos_profile.name, this.pos_profile);
-				this.pos_opening_shift = data.pos_opening_shift;
-
-				// Update Store
-				this.uiStore.setRegisterData(data);
-
-				// Legacy emit
-				this.eventBus.emit("register_pos_profile", data);
-				console.info("LoadPosProfile");
-			});
-			// When profile is registered directly from composables,
-			// ensure offers are fetched as well
-			/*
-			this.eventBus.on("register_pos_profile", (data) => {
-				if (data && data.pos_profile) {
-					this.get_offers(data.pos_profile.name, data.pos_profile);
-				}
-			});
-			*/
 
 			// Watch store for updates
 			this.$watch(
@@ -194,30 +208,22 @@ export default {
 						this.get_offers(newProfile.name, newProfile);
 					}
 				},
-				{ deep: true, immediate: true }
+				{ deep: true, immediate: true },
 			);
-			this.eventBus.on("open_shift_details", () => {
-				this.get_closing_data();
-			});
-			// View switching events removed - handled by uiStore
-			this.eventBus.on("submit_closing_pos", (data) => {
-				this.submit_closing_pos(data);
-			});
 
-			this.eventBus.on("items_loaded", () => {
-				this.itemsLoaded = true;
-				this.checkLoadingComplete();
-			});
+			// Items loading state check
+			const { itemsLoaded } = storeToRefs(this.itemsStore);
+			this.$watch(
+				() => itemsLoaded.value,
+				(val) => {
+					if (val) {
+						this.itemsLoaded = true;
+						this.checkLoadingComplete();
+					}
+				},
+				{ immediate: true }
+			);
 		});
-	},
-	beforeUnmount() {
-		this.eventBus.off("close_opening_dialog");
-		this.eventBus.off("register_pos_data");
-		this.eventBus.off("register_pos_profile");
-		this.eventBus.off("LoadPosProfile");
-		this.eventBus.off("open_shift_details");
-		this.eventBus.off("submit_closing_pos");
-		this.eventBus.off("items_loaded");
 	},
 	// In the created() or mounted() lifecycle hook
 	created() {

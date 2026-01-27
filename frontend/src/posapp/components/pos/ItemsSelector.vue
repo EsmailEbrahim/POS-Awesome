@@ -2356,7 +2356,7 @@ export default {
 					requestedQty,
 					this.pos_profile,
 					this.stock_settings,
-					this.eventBus,
+					null, // EventBus removed
 					this.blockSaleBeyondAvailableQty,
 					!suppressNegativeWarning,
 					true, // Skip server-side validation for instant add
@@ -2414,7 +2414,12 @@ export default {
 			});
 
 			attrsMeta = attrsMeta || {};
-			this.eventBus.emit("open_variants_model", item, variants, this.pos_profile, attrsMeta);
+			this.uiStore.openVariants({
+				item,
+				items: variants,
+				profile: this.pos_profile,
+				attrsMeta,
+			});
 		},
 
 		/**
@@ -4561,14 +4566,13 @@ export default {
 			// Set drag effect
 			event.dataTransfer.effectAllowed = "copy";
 
-			// Emit event to show drop feedback in ItemsTable
-			this.eventBus.emit("item-drag-start", item);
+			// Update store state for feedback
+			this.uiStore.setDraggedItem(item);
 		},
 		onDragEnd(event) {
 			this.isDragging = false;
-
-			// Emit event to hide drop feedback
-			this.eventBus.emit("item-drag-end");
+			// Reset store state
+			this.uiStore.setDraggedItem(null);
 		},
 		saveItemSettings() {
 			if (!this.localStorageAvailable) return;
@@ -5104,26 +5108,6 @@ export default {
 
 		// Event listeners
 		// Event listeners
-		/*
-		this.eventBus.on("register_pos_profile", async (data) => {
-			this.pos_profile = data.pos_profile;
-			this.stock_settings = data.stock_settings || {};
-			// Initialize Store with the new profile
-			if (this.pos_profile && this.pos_profile.name) {
-				await this.initializeStore(this.pos_profile, this.customer, this.customer_price_list);
-
-				// Start workers now that we have profile
-				this.startItemWorker();
-				this.update_cur_items_details();
-				this.startBackgroundSyncScheduler();
-			}
-			await this.ensureScaleBarcodeSettings(true);
-			this.get_items_groups();
-			// Legacy fallback
-			await this.initializeItems();
-			this.items_view = this.pos_profile.posa_default_card_view ? "card" : "list";
-		});
-		*/
 		
 		// Watch Store
 		this.$watch(
@@ -5171,9 +5155,15 @@ export default {
 			}
 			this.customer_price_list = data;
 		});
-		this.eventBus.on("focus_item_search", () => {
-			this.focusItemSearch();
-		});
+
+		// Trigger focus on item search
+		this.$watch(
+			() => this.uiStore.searchFocusTrigger,
+			() => {
+				this.focusItemSearch();
+			}
+		);
+
 		this.eventBus.on("select_top_item", () => {
 			this.selectTopItem();
 		});

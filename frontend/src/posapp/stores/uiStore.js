@@ -97,6 +97,56 @@ export const useUIStore = defineStore("ui", () => {
 		offers.value = data || [];
 	}
 
+	// Dialogs & Focus Triggers
+	const searchFocusTrigger = ref(0); // Increment to trigger focus
+	const newAddressDialog = ref(false);
+	const newAddressCustomer = ref(null);
+
+	const mpesaDialog = ref(false);
+	const mpesaData = ref(null);
+
+	const variantsDialog = ref(false);
+	const variantsData = ref(null);
+
+	function triggerItemSearchFocus() {
+		searchFocusTrigger.value++;
+	}
+
+	function openNewAddress(customer) {
+		newAddressCustomer.value = customer;
+		newAddressDialog.value = true;
+	}
+
+	function closeNewAddress() {
+		newAddressDialog.value = false;
+		newAddressCustomer.value = null;
+	}
+
+	function openMpesaPayments(data) {
+		mpesaData.value = data;
+		mpesaDialog.value = true;
+	}
+
+	function closeMpesaPayments() {
+		mpesaDialog.value = false;
+		mpesaData.value = null;
+	}
+
+	function openVariants(data) {
+		variantsData.value = data; // { item, items, profile, attrsMeta }
+		variantsDialog.value = true;
+	}
+
+	function closeVariants() {
+		variantsDialog.value = false;
+		variantsData.value = null;
+	}
+
+	const draggedItem = ref(null);
+	function setDraggedItem(item) {
+		draggedItem.value = item;
+	}
+
 	return {
 		isLoading,
 		loadingText,
@@ -129,6 +179,23 @@ export const useUIStore = defineStore("ui", () => {
 		setCompanyDoc,
 		setRegisterData,
 		setLastInvoice,
-		setOffers
+		setOffers,
+		// New additions
+		searchFocusTrigger,
+		triggerItemSearchFocus,
+		newAddressDialog,
+		newAddressCustomer,
+		openNewAddress,
+		closeNewAddress,
+		mpesaDialog,
+		mpesaData,
+		openMpesaPayments,
+		closeMpesaPayments,
+		variantsDialog,
+		variantsData,
+		openVariants,
+		closeVariants,
+		draggedItem,
+		setDraggedItem,
 	};
 });

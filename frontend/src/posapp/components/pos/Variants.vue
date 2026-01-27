@@ -1,6 +1,5 @@
-<template>
 	<v-row justify="center">
-		<v-dialog v-model="varaintsDialog" max-width="600px">
+		<v-dialog v-model="dialogVisible" max-width="600px">
 			<v-card min-height="500px">
 				<v-card-title>
 					<span class="text-h5 text-primary">Select Item</span>
@@ -86,9 +85,16 @@
 import { ensurePosProfile } from "../../../utils/pos_profile.js";
 import _ from "lodash";
 import placeholderImage from "./placeholder-image.png";
+import { useUIStore } from "../../stores/uiStore.js";
+import { useInvoiceStore } from "../../stores/invoiceStore.js";
 export default {
+	setup() {
+		const uiStore = useUIStore();
+		const invoiceStore = useInvoiceStore();
+		return { uiStore, invoiceStore };
+	},
 	data: () => ({
-		varaintsDialog: false,
+		// varaintsDialog: false, // Removed in favor of store state
 		parentItem: null,
 		items: null,
 		filters: {},
@@ -108,6 +114,14 @@ export default {
 		},
 		displayItems() {
 			return this.filterdItems.slice(0, this.displayCount);
+		},
+		dialogVisible: {
+			get() {
+				return this.uiStore.variantsDialog;
+			},
+			set(val) {
+				if (!val) this.uiStore.closeVariants();
+			},
 		},
 	},
 
@@ -146,11 +160,52 @@ export default {
 			},
 			deep: true,
 		},
+		// Watch for new data from store
+		"uiStore.variantsData": {
+			async handler(data) {
+				if (!data) return;
+				const { item, items, profile, attrsMeta } = data;
+				console.log("variantsData update", data);
+				
+				this.parentItem = item || null;
+				this.items = Array.isArray(items) ? items : [];
+				this.filters = {};
+				this.attributes_meta = attrsMeta || this.attributes_meta;
+
+				if (
+					!this.parentItem.attributes &&
+					this.attributes_meta &&
+					Object.keys(this.attributes_meta).length
+				) {
+					this.parentItem.attributes = Object.keys(this.attributes_meta).map((attr) => ({
+						attribute: attr,
+						values: this.attributes_meta[attr].map((v) => ({ attribute_value: v, abbr: v })),
+					}));
+				}
+
+				if (profile) {
+					this.pos_profile = profile;
+				} else {
+					this.pos_profile = await ensurePosProfile();
+				}
+
+				if (!this.items || this.items.length === 0) {
+					const parentCode = item.item_code || item.code || item.name;
+					await this.fetchVariants(parentCode, this.pos_profile);
+				}
+
+				this.$nextTick(() => {
+					this.filterdItems = this.variantsItems;
+					this.displayCount = 100;
+				});
+			},
+			deep: true,
+		}
 	},
 
 	methods: {
 		close_dialog() {
-			this.varaintsDialog = false;
+			this.uiStore.closeVariants();
 		},
 		formatCurrency(value) {
 			return this.$options.mixins[0].methods.formatCurrency.call(this, value, 2);
@@ -333,51 +388,21 @@ export default {
 			console.log("add_item called", item.item_code);
 			await this.fetchVariantRate(item);
 			const payload = { ...item, code: item.item_code };
-			console.log("emitting add_item", {
+			console.log("adding item to invoice", {
 				code: payload.code,
 				rate: payload.rate,
 			});
-			this.eventBus.emit("add_item", payload);
+			// Using store instead of event bus
+			this.invoiceStore.addItem(payload);
 			this.close_dialog();
 		},
 	},
 
-	created: function () {
-		this.eventBus.on("open_variants_model", async (item, items, profile, attrsMeta) => {
-			console.log("open_variants_model", { item, items, profile, attrsMeta });
-			this.varaintsDialog = true;
-			this.parentItem = item || null;
-			this.items = Array.isArray(items) ? items : [];
-			this.filters = {};
-			this.attributes_meta = attrsMeta || this.attributes_meta;
-			if (
-				!this.parentItem.attributes &&
-				this.attributes_meta &&
-				Object.keys(this.attributes_meta).length
-			) {
-				this.parentItem.attributes = Object.keys(this.attributes_meta).map((attr) => ({
-					attribute: attr,
-					values: this.attributes_meta[attr].map((v) => ({ attribute_value: v, abbr: v })),
-				}));
-			}
-			if (profile) {
-				this.pos_profile = profile;
-			} else {
-				this.pos_profile = await ensurePosProfile();
-			}
-			if (!this.items || this.items.length === 0) {
-				const parentCode = item.item_code || item.code || item.name;
-				await this.fetchVariants(parentCode, this.pos_profile);
-			}
-			this.$nextTick(() => {
-				this.filterdItems = this.variantsItems;
-				this.displayCount = 100;
-			});
-		});
+	created() {
+		// Event listeners removed - using store watchers
 	},
 	beforeUnmount() {
-		console.log("variants dialog destroyed");
-		this.eventBus.off("open_variants_model");
+		// Cleanup if needed
 	},
 };
 </script>

@@ -212,7 +212,7 @@ export default {
 
 	methods: {
 		close_opening_dialog() {
-			this.eventBus.emit("close_opening_dialog");
+			this.$emit("close");
 		},
 
 		async get_opening_dialog_data() {
@@ -268,13 +268,14 @@ export default {
 				})
 				.then((r) => {
 					if (r.message) {
-						vm.eventBus.emit("register_pos_data", r.message);
+						vm.$emit("register", r.message);
 						try {
 							setOpeningStorage(r.message);
 						} catch (e) {
 							console.error("Failed to cache opening data", e);
 						}
-						vm.close_opening_dialog();
+						// Close handles hiding the dialog, parent handles logic
+						vm.$emit("close");
 						vm.is_loading = false;
 					}
 				});
