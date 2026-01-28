@@ -769,6 +769,7 @@ import Skeleton from "../ui/Skeleton.vue";
 import { useCustomersStore } from "../../stores/customersStore.js";
 import { useToastStore } from "../../stores/toastStore.js";
 import { useUIStore } from "../../stores/uiStore.js";
+import { useInvoiceStore } from "../../stores/invoiceStore.js";
 import { storeToRefs } from "pinia";
 
 export default {
@@ -790,8 +791,8 @@ export default {
 		const customersStore = useCustomersStore();
 		const toastStore = useToastStore();
 		const uiStore = useUIStore();
+		const invoiceStore = useInvoiceStore();
 		const { selectedCustomer } = storeToRefs(customersStore);
-		const { invoiceStore } = itemsIntegration; // Ensure invoiceStore is available if destructured or accessed
 
 		return {
 			...responsive,
@@ -2429,15 +2430,26 @@ export default {
 		 */
 		async prepareItemForCart(item, requestedQty) {
 			// Ensure UOMs are initialized
+			if (!item.uom) {
+				item.uom = item.stock_uom;
+			}
 			if (!item.item_uoms || item.item_uoms.length === 0) {
-				await this.update_items_details([item]);
-				if (!item.item_uoms || item.item_uoms.length === 0) {
+				const cachedUoms = getItemUOMs(item.item_code);
+				if (cachedUoms.length > 0) {
+					item.item_uoms = cachedUoms;
+				} else {
 					item.item_uoms = [{ uom: item.stock_uom, conversion_factor: 1.0 }];
+				}
+				// Benchmark: avoid awaiting item detail fetch to keep click-to-add responsive.
+				if (this.pos_profile?.name) {
+					this.update_items_details([item]).catch((error) => {
+						console.error("Failed to refresh item details for cart", error);
+					});
 				}
 			}
 
 			// Handle multi-currency conversion
-			if (this.pos_profile.posa_allow_multi_currency) {
+			if (this.pos_profile?.posa_allow_multi_currency) {
 				this.applyCurrencyConversionToItem(item);
 
 				const companyCurrency = this.pos_profile.currency;
@@ -5157,13 +5169,7 @@ export default {
 		);
 
 		// Watch Invoice for Quantities
-		this.$watch(
-			() => this.invoiceStore.items,
-			() => {
-				this.handleCartQuantitiesUpdated();
-			},
-			{ deep: true },
-		);
+		this.eventBus.on("cart_quantities_updated", this.handleCartQuantitiesUpdated);
 
 		// Watch for Settings Toggle
 		this.$watch(

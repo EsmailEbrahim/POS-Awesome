@@ -1178,14 +1178,14 @@ export default {
 						: false;
 				const serverRemovedDiscount =
 					(!Number.isFinite(baseDiscount) || baseDiscount <= 0) &&
-						Number.isFinite(originalBaseDiscount)
+					Number.isFinite(originalBaseDiscount)
 						? originalBaseDiscount > 0
 						: false;
 				const serverRemovedPercentage =
 					(!Number.isFinite(discountPercentage) || discountPercentage <= 0) &&
-						Number.isFinite(originalBaseDiscount) &&
-						Number.isFinite(originalBasePriceList) &&
-						originalBasePriceList > 0
+					Number.isFinite(originalBaseDiscount) &&
+					Number.isFinite(originalBasePriceList) &&
+					originalBasePriceList > 0
 						? originalBaseDiscount >= originalBasePriceList - epsilon
 						: false;
 				const serverFullDiscount =
@@ -1196,8 +1196,8 @@ export default {
 						baseDiscount >= basePriceListRate - epsilon);
 				const fallbackFullDiscount =
 					Number.isFinite(originalBasePriceList) &&
-						originalBasePriceList > 0 &&
-						Number.isFinite(originalBaseDiscount)
+					originalBasePriceList > 0 &&
+					Number.isFinite(originalBaseDiscount)
 						? originalBaseDiscount >= originalBasePriceList - epsilon
 						: false;
 
@@ -1881,24 +1881,26 @@ export default {
 		// Always set these fields first
 		if (this.invoiceType === "Quotation") {
 			doc.doctype = "Quotation";
-		} else if (this.invoiceType === "Order" && this.pos_profile.posa_create_only_sales_order) {
+		} else if (this.invoiceType === "Order" && this.pos_profile?.posa_create_only_sales_order) {
 			doc.doctype = "Sales Order";
-		} else if (this.pos_profile.create_pos_invoice_instead_of_sales_invoice) {
+		} else if (this.pos_profile?.create_pos_invoice_instead_of_sales_invoice) {
 			doc.doctype = "POS Invoice";
 		} else {
 			doc.doctype = "Sales Invoice";
 		}
 		doc.is_pos = 1;
 		doc.ignore_pricing_rule = 0;
-		doc.company = doc.company || this.pos_profile.company;
-		doc.pos_profile = doc.pos_profile || this.pos_profile.name;
-		doc.posa_show_custom_name_marker_on_print = this.pos_profile.posa_show_custom_name_marker_on_print;
+		doc.company = doc.company || this.pos_profile?.company || null;
+		doc.pos_profile = doc.pos_profile || this.pos_profile?.name || null;
+		doc.posa_show_custom_name_marker_on_print =
+			this.pos_profile?.posa_show_custom_name_marker_on_print ?? null;
 
 		// Currency related fields
-		doc.currency = this.selected_currency || this.pos_profile.currency;
+		doc.currency = this.selected_currency || this.pos_profile?.currency || null;
 		doc.conversion_rate = (sourceDoc && sourceDoc.conversion_rate) || this.conversion_rate || 1;
 
-		const companyCurrency = (this.company && this.company.default_currency) || this.pos_profile.currency;
+		const companyCurrency =
+			(this.company && this.company.default_currency) || this.pos_profile?.currency || null;
 		const priceListCurrency = this.price_list_currency || companyCurrency;
 		const plcConversionRate = this._getPlcConversionRate();
 
@@ -1907,9 +1909,9 @@ export default {
 		doc.plc_conversion_rate = plcConversionRate;
 
 		// Other fields
-		doc.campaign = doc.campaign || this.pos_profile.campaign;
+		doc.campaign = doc.campaign || this.pos_profile?.campaign || null;
 		doc.selling_price_list = this.get_price_list();
-		doc.naming_series = doc.naming_series || this.pos_profile.naming_series;
+		doc.naming_series = doc.naming_series || this.pos_profile?.naming_series || null;
 		const customerDetails =
 			this.customer_info && typeof this.customer_info === "object" ? this.customer_info : {};
 		const resolvedCustomer = this.customer || customerDetails.customer || doc.customer || null;
@@ -2501,9 +2503,9 @@ export default {
 						this.toastStore.show({
 							title: __(
 								"Exchange rate date " +
-								this.exchange_rate_date +
-								" differs from posting date " +
-								posting_backend,
+									this.exchange_rate_date +
+									" differs from posting date " +
+									posting_backend,
 							),
 							color: "warning",
 						});
@@ -2547,9 +2549,9 @@ export default {
 						this.toastStore.show({
 							title: __(
 								"Exchange rate date " +
-								this.exchange_rate_date +
-								" differs from posting date " +
-								posting_backend,
+									this.exchange_rate_date +
+									" differs from posting date " +
+									posting_backend,
 							),
 							color: "warning",
 						});
@@ -2901,7 +2903,7 @@ export default {
 				coerce(item.same_item) ||
 				Boolean(
 					(typeof item.auto_free_source === "string" && item.auto_free_source) ||
-					(typeof item.free_item_source === "string" && item.free_item_source),
+						(typeof item.free_item_source === "string" && item.free_item_source),
 				);
 
 			if (expectsFree !== itemIsFree) {
@@ -3349,6 +3351,9 @@ export default {
 			console.log("Showing payment dialog with currency:", invoice_doc.currency);
 			if (typeof this.paymentVisible !== "undefined") {
 				this.paymentVisible = true;
+			}
+			if (this.uiStore?.setActiveView) {
+				this.uiStore.setActiveView("payment");
 			}
 			this.eventBus.emit("show_payment", "true");
 			this.eventBus.emit("send_invoice_doc_payment", invoice_doc);
