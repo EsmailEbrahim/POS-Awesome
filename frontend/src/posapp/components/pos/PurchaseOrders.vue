@@ -936,6 +936,7 @@ export default {
 		},
 		handlePaymentSubmit({ payments, print, print_format, print_invoice }) {
 			this.payments = payments;
+			this.paymentDialog = false;
 			this.submitPurchaseOrder(print, print_format, print_invoice);
 		},
 		async loadSupplierGroups() {
