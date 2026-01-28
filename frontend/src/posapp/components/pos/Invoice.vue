@@ -411,6 +411,7 @@ export default {
 			isOnline,
 			toastStore,
 			invoiceStore,
+			customersStore,
 			selectedCustomer,
 			customerRefreshToken,
 		};

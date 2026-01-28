@@ -841,8 +841,7 @@ export function useItemAddition() {
 				item.base_price_list_rate !== undefined
 					? item.base_price_list_rate
 					: item.rate * conversionRate;
-			new_item.base_rate =
-				item.base_rate !== undefined ? item.base_rate : item.rate * conversionRate;
+			new_item.base_rate = item.base_rate !== undefined ? item.base_rate : item.rate * conversionRate;
 			new_item.base_discount_amount = 0;
 		} else {
 			// In base currency, base rates = displayed rates
@@ -915,6 +914,9 @@ export function useItemAddition() {
 
 		// Always reset to default customer after invoice
 		context.customer = context.pos_profile.customer;
+		if (context.customersStore?.setSelectedCustomer) {
+			context.customersStore.setSelectedCustomer(context.pos_profile.customer || null);
+		}
 
 		context.eventBus.emit("set_customer_readonly", false);
 		context.invoiceType = context.pos_profile.posa_default_sales_order ? "Order" : "Invoice";
