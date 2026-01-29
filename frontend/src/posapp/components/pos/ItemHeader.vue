@@ -1,7 +1,10 @@
 <template>
 	<div class="sticky-header">
 		<v-row class="items">
-			<v-col class="pb-0" :cols="posProfile.posa_input_qty || posProfile.posa_new_line ? undefined : 12">
+			<v-col
+				class="pb-0"
+				:cols="posProfile.posa_input_qty || posProfile.posa_new_line ? undefined : 12"
+			>
 				<v-text-field
 					density="compact"
 					clearable
@@ -160,9 +163,9 @@ defineExpose({
 	position: sticky;
 	top: 0;
 	z-index: 5;
-	background: var(--surface-secondary, #ffffff);
+	background: rgb(var(--v-theme-surface));
 	padding: 12px 12px 0 12px;
-	border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+	border-bottom: 1px solid rgba(var(--v-theme-on-surface), 0.08);
 	margin-bottom: 0;
 }
 
@@ -180,6 +183,7 @@ defineExpose({
 	text-transform: none !important;
 	letter-spacing: normal !important;
 	font-weight: 500 !important;
+	background-color: transparent !important;
 }
 
 .last-sync-label {

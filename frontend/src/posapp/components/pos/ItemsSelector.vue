@@ -222,6 +222,15 @@ import {
 	scaleBarcodeMatches,
 } from "../../utils/scaleBarcode.js";
 import { getCardColumns, getCardGap, getCardPadding } from "../../utils/itemSelectorLayout.js";
+import {
+	getScanTimestamp,
+	sanitizeClipboardText,
+	isScanCandidate,
+	shouldResetScanOnInput,
+	isLikelyKeyboardScan,
+} from "../../utils/keyboardScan.js";
+import { normalizeBackgroundSyncInterval, shouldRunBackgroundSync } from "../../utils/backgroundSync.js";
+import { findItemIndexByCode, getNextHighlightedIndex } from "../../utils/itemHighlight.js";
 import { useCustomersStore } from "../../stores/customersStore.js";
 import { useToastStore } from "../../stores/toastStore.js";
 import { useUIStore } from "../../stores/uiStore.js";
@@ -2875,14 +2884,14 @@ export default {
 				return;
 			}
 
-			const sanitized = pastedText.replace(/\s+/g, "").trim();
+			const sanitized = sanitizeClipboardText(pastedText);
 
 			if (!sanitized) {
 				event.preventDefault();
 				return;
 			}
 
-			if (!/^\d+$/.test(sanitized) || sanitized.length < this.keyboardScanMinLength) {
+			if (!isScanCandidate(sanitized, this.keyboardScanMinLength)) {
 				return;
 			}
 
@@ -2904,17 +2913,7 @@ export default {
 
 			this.keyboardScanPendingValue = value;
 
-			if (!value) {
-				this.resetKeyboardScanDetection();
-				return;
-			}
-
-			if (!/^\d+$/.test(value)) {
-				this.resetKeyboardScanDetection();
-				return;
-			}
-
-			if (this.keyboardScanBuffer && value.length < this.keyboardScanBuffer.length) {
+			if (shouldResetScanOnInput(value, this.keyboardScanBuffer)) {
 				this.resetKeyboardScanDetection();
 			}
 		},
@@ -2950,8 +2949,7 @@ export default {
 				return;
 			}
 
-			const now =
-				typeof performance !== "undefined" && performance.now ? performance.now() : Date.now();
+			const now = getScanTimestamp();
 
 			if (this.keyboardScanLastTime && now - this.keyboardScanLastTime > this.keyboardScanMaxInterval) {
 				this.keyboardScanBuffer = "";
@@ -2987,11 +2985,18 @@ export default {
 
 			const code = (this.keyboardScanPendingValue || this.search_input || "").trim();
 
-			const now =
-				typeof performance !== "undefined" && performance.now ? performance.now() : Date.now();
+			const now = getScanTimestamp();
 			const duration = this.keyboardScanStartTime ? now - this.keyboardScanStartTime : 0;
 
-			if (this.isLikelyKeyboardScan(code, duration)) {
+			if (
+				isLikelyKeyboardScan({
+					code,
+					duration,
+					minLength: this.keyboardScanMinLength,
+					maxDuration: this.keyboardScanMaxDuration,
+					maxInterval: this.keyboardScanMaxInterval,
+				})
+			) {
 				this.resetKeyboardScanDetection();
 				if (code) {
 					this.onBarcodeScanned(code);
@@ -3000,30 +3005,6 @@ export default {
 			}
 
 			this.resetKeyboardScanDetection();
-		},
-		isLikelyKeyboardScan(code, duration) {
-			if (!code || !/^\d+$/.test(code)) {
-				return false;
-			}
-
-			if (code.length < this.keyboardScanMinLength) {
-				return false;
-			}
-
-			if (!duration || duration <= 0) {
-				return true;
-			}
-
-			if (
-				this.keyboardScanMaxDuration &&
-				typeof this.keyboardScanMaxDuration === "number" &&
-				duration > this.keyboardScanMaxDuration
-			) {
-				return false;
-			}
-
-			const averageInterval = duration / code.length;
-			return averageInterval <= this.keyboardScanMaxInterval;
 		},
 		resetKeyboardScanDetection() {
 			if (this.keyboardScanTimer) {
@@ -3046,9 +3027,7 @@ export default {
 			}
 
 			if (this.highlightedItemCode) {
-				const index = this.displayedItems.findIndex(
-					(item) => item && item.item_code === this.highlightedItemCode,
-				);
+				const index = findItemIndexByCode(this.displayedItems, this.highlightedItemCode);
 				if (index >= 0) {
 					this.highlightedIndex = index;
 					return;
@@ -3063,19 +3042,14 @@ export default {
 				return;
 			}
 
-			let nextIndex = this.highlightedIndex;
+			const nextIndex = getNextHighlightedIndex({
+				currentIndex: this.highlightedIndex,
+				itemsLength: this.displayedItems.length,
+				direction,
+			});
 			if (nextIndex < 0) {
-				nextIndex = direction > 0 ? 0 : this.displayedItems.length - 1;
-			} else {
-				nextIndex += direction;
-			}
-
-			if (nextIndex < 0) {
-				nextIndex = 0;
-			}
-
-			if (nextIndex >= this.displayedItems.length) {
-				nextIndex = this.displayedItems.length - 1;
+				this.clearHighlightedItem();
+				return;
 			}
 
 			const nextItem = this.displayedItems[nextIndex];
@@ -3707,7 +3681,7 @@ export default {
 			this.hide_zero_rate_items = this.temp_hide_zero_rate_items;
 			this.show_last_invoice_rate = this.temp_show_last_invoice_rate;
 			this.enable_background_sync = this.temp_enable_background_sync;
-			this.background_sync_interval = this.normalizeBackgroundSyncInterval(
+			this.background_sync_interval = normalizeBackgroundSyncInterval(
 				this.temp_background_sync_interval,
 			);
 			this.temp_background_sync_interval = this.background_sync_interval;
@@ -3792,7 +3766,7 @@ export default {
 				this.enable_background_sync = opts.enable_background_sync;
 			}
 			if (typeof opts.background_sync_interval === "number") {
-				this.background_sync_interval = this.normalizeBackgroundSyncInterval(
+				this.background_sync_interval = normalizeBackgroundSyncInterval(
 					opts.background_sync_interval,
 				);
 			}
@@ -3839,20 +3813,13 @@ export default {
 				this.background_sync_details_in_flight = false;
 			}
 		},
-		normalizeBackgroundSyncInterval(value) {
-			const parsed = parseInt(value, 10);
-			if (!Number.isFinite(parsed) || parsed <= 0) {
-				return 30;
-			}
-			return Math.max(10, parsed);
-		},
 		startBackgroundSyncScheduler() {
 			this.stopBackgroundSyncScheduler();
 			if (!this.enable_background_sync) {
 				return;
 			}
 
-			const intervalMs = this.normalizeBackgroundSyncInterval(this.background_sync_interval) * 1000;
+			const intervalMs = normalizeBackgroundSyncInterval(this.background_sync_interval) * 1000;
 			this.background_sync_timer = setInterval(() => {
 				this.performBackgroundSync({ source: "interval" });
 			}, intervalMs);
@@ -3881,26 +3848,16 @@ export default {
 
 			return null;
 		},
-		shouldRunBackgroundSync() {
-			if (!this.pos_profile || !this.pos_profile.name) {
-				return false;
-			}
-			if (!this.enable_background_sync) {
-				return false;
-			}
-			if (this.background_sync_in_flight) {
-				return false;
-			}
-			if (isOffline()) {
-				return false;
-			}
-			if (this.usesLimitSearch) {
-				return false;
-			}
-			return true;
-		},
 		async performBackgroundSync({ source = "manual" } = {}) {
-			if (!this.shouldRunBackgroundSync()) {
+			if (
+				!shouldRunBackgroundSync({
+					posProfile: this.pos_profile,
+					enableBackgroundSync: this.enable_background_sync,
+					backgroundSyncInFlight: this.background_sync_in_flight,
+					isOffline: isOffline(),
+					usesLimitSearch: this.usesLimitSearch,
+				})
+			) {
 				return;
 			}
 
