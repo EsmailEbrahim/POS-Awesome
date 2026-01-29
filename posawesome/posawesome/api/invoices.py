@@ -959,6 +959,9 @@ def submit_invoice(invoice, data, submit_in_background=False):
         invoice_name = created.get("name")
         invoice_doc = frappe.get_doc(doctype, invoice_name)
     else:
+        # Prevent TimestampMismatchError by relying on server-side timestamp
+        if "modified" in invoice:
+            del invoice["modified"]
         invoice_doc = frappe.get_doc(doctype, invoice_name)
         invoice_doc.update(invoice)
 

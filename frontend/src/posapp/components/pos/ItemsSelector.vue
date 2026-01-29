@@ -1841,7 +1841,7 @@ export default {
 							vm.markStorageUnavailable && vm.markStorageUnavailable();
 						}
 					}
-					releaseLoading();
+					// releaseLoading() removed - logic handled by refreshInFlight flag in finally block
 				});
 			} catch (err) {
 				if (err.name !== "AbortError") {

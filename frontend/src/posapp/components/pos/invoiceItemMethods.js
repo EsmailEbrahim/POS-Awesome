@@ -1178,14 +1178,14 @@ export default {
 						: false;
 				const serverRemovedDiscount =
 					(!Number.isFinite(baseDiscount) || baseDiscount <= 0) &&
-					Number.isFinite(originalBaseDiscount)
+						Number.isFinite(originalBaseDiscount)
 						? originalBaseDiscount > 0
 						: false;
 				const serverRemovedPercentage =
 					(!Number.isFinite(discountPercentage) || discountPercentage <= 0) &&
-					Number.isFinite(originalBaseDiscount) &&
-					Number.isFinite(originalBasePriceList) &&
-					originalBasePriceList > 0
+						Number.isFinite(originalBaseDiscount) &&
+						Number.isFinite(originalBasePriceList) &&
+						originalBasePriceList > 0
 						? originalBaseDiscount >= originalBasePriceList - epsilon
 						: false;
 				const serverFullDiscount =
@@ -1196,8 +1196,8 @@ export default {
 						baseDiscount >= basePriceListRate - epsilon);
 				const fallbackFullDiscount =
 					Number.isFinite(originalBasePriceList) &&
-					originalBasePriceList > 0 &&
-					Number.isFinite(originalBaseDiscount)
+						originalBasePriceList > 0 &&
+						Number.isFinite(originalBaseDiscount)
 						? originalBaseDiscount >= originalBasePriceList - epsilon
 						: false;
 
@@ -2507,9 +2507,9 @@ export default {
 						this.toastStore.show({
 							title: __(
 								"Exchange rate date " +
-									this.exchange_rate_date +
-									" differs from posting date " +
-									posting_backend,
+								this.exchange_rate_date +
+								" differs from posting date " +
+								posting_backend,
 							),
 							color: "warning",
 						});
@@ -2553,9 +2553,9 @@ export default {
 						this.toastStore.show({
 							title: __(
 								"Exchange rate date " +
-									this.exchange_rate_date +
-									" differs from posting date " +
-									posting_backend,
+								this.exchange_rate_date +
+								" differs from posting date " +
+								posting_backend,
 							),
 							color: "warning",
 						});
@@ -2907,7 +2907,7 @@ export default {
 				coerce(item.same_item) ||
 				Boolean(
 					(typeof item.auto_free_source === "string" && item.auto_free_source) ||
-						(typeof item.free_item_source === "string" && item.free_item_source),
+					(typeof item.free_item_source === "string" && item.free_item_source),
 				);
 
 			if (expectsFree !== itemIsFree) {
