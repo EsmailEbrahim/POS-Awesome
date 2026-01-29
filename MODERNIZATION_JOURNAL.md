@@ -216,51 +216,145 @@ _Stability and Confidence._
 
 # Phase 6: TypeScript Migration
 
-_The ultimate reliability upgrade._
+_The ultimate reliability upgrade. A strict, step-by-step path to type safety._
 
-## 📐 6.1 Setup & Configuration
+## 📐 6.1 Setup & Infrastructure
 
-- [ ] **Infrastructure Setup**
-    - **Goal:** Enable TypeScript in the build pipeline without breaking existing JS.
-    - **Action Plan:**
-        1.  **Install Dependencies:** `vue-tsc`, `typescript`, `@types/node`, `@vitejs/plugin-vue`.
-        2.  **Config:** Create `tsconfig.json` with `allowJs: true` to support incremental migration.
-        3.  **Linting:** Update ESLint config to parse TypeScript.
+> **Goal:** Enable TypeScript in the build pipeline without breaking existing JS files.
 
-## 🧱 6.2 Data Layer (The Foundation)
+- [ ] **6.1.1 Install Dependencies**
+    - Run: `yarn add -D typescript vue-tsc @types/node @vue/tsconfig @types/lodash`
+    - Verify `vite-plugin-checker` is installed (optional but recommended for dev feedback).
 
-- [ ] **Type Definitions**
-    - **Goal:** Define the "shape" of our data once and use it everywhere.
-    - **Files:** Create `frontend/src/posapp/types/`
-        - `index.ts` (Shared types)
-        - `models.ts` (Frappe DocTypes: `POSProfile`, `Item`, `Customer`, `Invoice`)
-- [ ] **API Migration**
-    - **Goal:** Ensure `api.call` returns typed promises.
-    - **Files:** `api.js` -> `api.ts`.
-    - **Services:** `itemService.js` -> `itemService.ts`, `authService.js` -> `authService.ts`.
+- [ ] **6.1.2 Configure TypeScript**
+    - Create `frontend/tsconfig.json`:
+      ```json
+      {
+        "extends": "@vue/tsconfig/tsconfig.dom.json",
+        "include": ["env.d.ts", "src/**/*", "src/**/*.vue"],
+        "exclude": ["src/**/__tests__/*"],
+        "compilerOptions": {
+          "composite": true,
+          "baseUrl": ".",
+          "paths": { "@/*": ["./src/*"] },
+          "allowJs": true,           // Critical for mixed codebase
+          "checkJs": false,          // Don't error on existing JS yet
+          "strict": true,            // Goal: strictly typed new files
+          "noImplicitAny": false     // Relaxed for initial migration
+        }
+      }
+      ```
+    - Create `frontend/env.d.ts`:
+      ```ts
+      /// <reference types="vite/client" />
+      declare module '*.vue' {
+        import type { DefineComponent } from 'vue'
+        const component: DefineComponent<{}, {}, any>
+        export default component
+      }
+      declare const frappe: any; // Temporary global
+      declare const __: (str: string) => string;
+      ```
 
-## 💾 6.3 State Management (Stores)
-
-- [ ] **Pinia Migration**
-    - **Goal:** Autocomplete for store state and actions.
-    - **Files:**
-        - `syncStore.js` -> `syncStore.ts`
-        - `toastStore.js` -> `toastStore.ts`
-        - `uiStore.js` -> `uiStore.ts`
-        - `itemsStore.js` -> `itemsStore.ts` (Major)
-        - `invoiceStore.js` -> `invoiceStore.ts` (Major)
-
-## 🧩 6.4 Component Migration Strategy
-
-- [ ] **Critical Components First**
-    - **Strategy:** Convert components with complex logic first to catch bugs.
-    - **Files:**
-        - `Home.vue` (Layout & Routing)
-        - `Pos.vue` (Main Logic Hub)
-        - `Invoice.vue` (Complex Form Logic)
-        - `ItemsTable.vue` (Props & Events)
+- [ ] **6.1.3 Update Build Scripts**
+    - Update `package.json` scripts:
+      ```json
+      "type-check": "vue-tsc --noEmit -p tsconfig.json --composite false",
+      "build": "run-p type-check \"vite build\""
+      ```
 
 ---
+
+## 🧱 6.2 Data Layer & Type Definitions
+
+> **Goal:** Define the "Truth" of our data structures.
+
+- [ ] **6.2.1 Create Type Directory**
+    - Create `frontend/src/posapp/types/`
+    - Create `frontend/src/posapp/types/frappe.d.ts` (Global Frappe types)
+
+- [ ] **6.2.2 Define Core Operations Models (`models.ts`)**
+    - **Inventory Item**:
+      ```ts
+      export interface Item {
+        item_code: string;
+        item_name: string;
+        description?: string;
+        stock_qty: number;
+        standard_rate: number;
+        // ... ad-hoc fields
+      }
+      ```
+    - **Cart Item (POS Item)**: Extension of Item with `qty`, `amount`, `posa_row_id`.
+    - **Invoice**: `InvoiceDoc` interface (matching `invoiceStore.invoiceDoc`).
+
+- [ ] **6.2.3 Define API Responses**
+    - Create `frontend/src/posapp/types/api.ts` for standardized API return types.
+
+---
+
+## 💾 6.3 State Management & Logic (Pinia First)
+
+> **Goal:** Type the brain of the application. Stores are the highest value targets.
+
+- [ ] **6.3.1 Migrate `toastStore` & `uiStore`** (Low hanging fruit)
+    - Rename `.js` to `.ts`.
+    - Add return types to actions/getters.
+
+- [ ] **6.3.2 Migrate `invoiceStore`** (Critical)
+    - Rename `invoiceStore.js` to `invoiceStore.ts`.
+    - Define `InvoiceState` interface.
+    - Explicitly type `invoiceDoc` ref: `ref<InvoiceDoc | null>(null)`.
+    - Type `itemsData`: `reactive(new Map<string, CartItem>())`.
+    - Fix `toNumber` utils validation with types.
+
+- [ ] **6.3.3 Migrate `customersStore`**
+    - Define `Customer` interface.
+    - Type the `focusCustomerSearch` actions.
+
+---
+
+## 🛠️ 6.4 Services & Utils
+
+- [ ] **6.4.1 Migrate `api.js`**
+    - Convert to `api.ts`.
+    - Generic wrapper: `call<T>(method: string, args?: any): Promise<T>`.
+
+- [ ] **6.4.2 Migrate `format.js`**
+    - Ensure currency formatters accept `number` and return `string`.
+
+---
+
+## 🧩 6.5 Component Migration Strategy
+
+> **Strategy:** Migrate "Leaf" components first (small, no dependencies), then move up to "Container" components.
+
+- [ ] **6.5.1 Primitive UI Components**
+    - `PostingDateRow.vue`
+    - `DeliveryCharges.vue`
+    - `MultiCurrencyRow.vue`
+    - **Action:** Add `<script setup lang="ts">`, define `Props` interface using `defineProps<Props>()`.
+
+- [ ] **6.5.2 Complex Components (The Big Ones)**
+    - `ItemsTable.vue`:
+        - Define `ItemsTableProps`.
+        - Type events: `defineEmits<{ (e: 'update:expanded', val: any[]): void }>()`.
+    - `Invoice.vue`:
+        - **Refactor First**: Move implementation of `invoiceItemMethods` into a composable `useInvoiceLogic.ts` (if heavily used).
+        - **Convert**: Switch to `<script setup lang="ts">`.
+        - Use `InstanceType<typeof Component>` for template refs (`customerComponent`, `itemsTable`).
+
+---
+
+## ✅ 6.6 Verification & Strictness (Final Polish)
+
+- [ ] **6.6.1 Enable Strict Mode**
+    - Change `noImplicitAny: true` in `tsconfig.json`.
+    - Resolve all red squiggles.
+
+- [ ] **6.6.2 CI/CD Integration**
+    - Ensure `yarn type-check` passes in GitHub Actions.
+
 
 ## 📝 Change Log / Progress
 
