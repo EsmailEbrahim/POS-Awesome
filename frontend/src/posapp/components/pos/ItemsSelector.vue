@@ -5140,8 +5140,7 @@ export default {
 	background-color: rgba(25, 118, 210, 0.32);
 }
 
-	transform: scale3d(1.05, 1.05, 1);
-}
+
 
 
 
