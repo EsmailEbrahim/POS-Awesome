@@ -232,7 +232,7 @@ _Taming the monoliths. Breaking down massive components for readability and main
 
 - [ ] **6.1.2 Extract Additional Logic (New)**
     - [x] `useScannerInput.js`: Hardware scanner events, keyboard pattern detection, scale barcode parsing.
-    - [ ] `useItemAvailability.js`: Logic for `stockCoordinator`, `syncItemsWithStockState`, `primeStockState`, `applyReservationToItem`.
+    - [x] `useItemAvailability.js`: Logic for `stockCoordinator`, `syncItemsWithStockState`, `primeStockState`, `applyReservationToItem`.
     - [ ] `useItemDetailFetcher.js`: `update_items_details`, `fetchItemDetails`, `refreshPricesForVisibleItems`.
     - [x] `useItemCurrency.js`: Price conversion, PLC to Company rate logic.
     - [ ] `useItemSelection.js`: `select_item`, `click_item_row`, `highlightedIndex` navigation, `fly` animation logic.

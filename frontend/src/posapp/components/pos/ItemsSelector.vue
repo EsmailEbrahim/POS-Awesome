@@ -201,7 +201,6 @@ import {
 	setItemsLastSync,
 	forceClearAllCache,
 } from "../../../offline/index.js";
-import stockCoordinator from "../../utils/stockCoordinator.js";
 import { useResponsive } from "../../composables/useResponsive.js";
 import { useRtl } from "../../composables/useRtl.js";
 import { useFlyAnimation } from "../../composables/useFlyAnimation.js";
@@ -211,6 +210,7 @@ import { useItemsIntegration } from "../../composables/useItemsIntegration.js";
 import { useItemSearch } from "../../composables/useItemSearch.js";
 import { useItemCurrency } from "../../composables/useItemCurrency.js";
 import { useScannerInput } from "../../composables/useScannerInput.js";
+import { useItemAvailability } from "../../composables/useItemAvailability.js";
 import { parseBooleanSetting, formatStockShortageError } from "../../utils/stock.js";
 import { playScanTone, closeScanAudioContext } from "../../utils/scannerAudio.js";
 import { getItemsTableHeaders } from "../../utils/itemsTableHeaders.js";
@@ -238,13 +238,7 @@ import {
 } from "../../utils/keyboardScan.js";
 import { normalizeBackgroundSyncInterval, shouldRunBackgroundSync } from "../../utils/backgroundSync.js";
 import { findItemIndexByCode, getNextHighlightedIndex } from "../../utils/itemHighlight.js";
-import {
-	ensureBarcodeIndex,
-	resetBarcodeIndex,
-	indexItemInBarcodeIndex,
-	replaceBarcodeIndex,
-	lookupItemInBarcodeIndex,
-} from "../../utils/barcodeIndex.js";
+import { useCustomersStore } from "../../stores/customersStore.js";
 import { useCustomersStore } from "../../stores/customersStore.js";
 import { useToastStore } from "../../stores/toastStore.js";
 import { useUIStore } from "../../stores/uiStore.js";
@@ -282,6 +276,7 @@ export default {
 		} = useItemSearch();
 
 		const scannerInput = useScannerInput();
+		const itemAvailability = useItemAvailability();
 
 		return {
 			...responsive,
@@ -312,6 +307,8 @@ export default {
 			cameraScannerActive: scannerInput.cameraScannerActive,
 			acknowledgeScanError: scannerInput.acknowledgeScanError,
 			onBarcodeScanned: scannerInput.onBarcodeScanned,
+			// Expose item availability
+			itemAvailability,
 		};
 	},
 	components: {
@@ -1840,266 +1837,7 @@ export default {
 			this.qty = 1;
 			this.focusItemSearch();
 		},
-		syncItemsWithStockState(codes = null, options = {}) {
-			const collections = [];
-			if (Array.isArray(this.items)) {
-				collections.push(this.items);
-			}
-			if (Array.isArray(this.displayedItems)) {
-				collections.push(this.displayedItems);
-			}
-			if (Array.isArray(this.filteredItems)) {
-				collections.push(this.filteredItems);
-			}
-			const codesSet = (() => {
-				if (codes === null) {
-					return null;
-				}
-				const iterable = Array.isArray(codes)
-					? codes
-					: codes instanceof Set || typeof codes[Symbol.iterator] === "function"
-						? Array.from(codes)
-						: [codes];
-				return new Set(
-					iterable
-						.map((code) => (code !== undefined && code !== null ? String(code).trim() : ""))
-						.filter(Boolean),
-				);
-			})();
-			collections.forEach((items) => {
-				stockCoordinator.applyAvailabilityToCollection(items, codesSet, options);
-			});
-			if (collections.length) {
-				this.$forceUpdate();
-			}
-		},
-		primeStockState(source = "items-selector") {
-			const allItems = Array.isArray(this.items) ? [...this.items] : [];
-			const extra = Array.isArray(this.displayedItems) ? this.displayedItems : [];
-			extra.forEach((item) => {
-				if (allItems.includes(item)) {
-					return;
-				}
-				allItems.push(item);
-			});
-			if (!allItems.length) {
-				return;
-			}
-			stockCoordinator.primeFromItems(allItems, { silent: true, source });
-			this.syncItemsWithStockState(
-				allItems
-					.map((item) =>
-						item && item.item_code !== undefined ? String(item.item_code).trim() : null,
-					)
-					.filter(Boolean),
-				{ updateBaseAvailable: false },
-			);
-		},
-		handleStockSnapshotUpdate(event = {}) {
-			const codes = Array.isArray(event.codes) ? event.codes : [];
-			if (!codes.length) {
-				return;
-			}
-			this.syncItemsWithStockState(codes, { updateBaseAvailable: false });
-		},
-		captureBaseAvailability(item, explicitActualQty = undefined) {
-			if (!item) {
-				return;
-			}
 
-			let resolvedBase = null;
-
-			if (typeof item.available_qty === "number" && !Number.isNaN(item.available_qty)) {
-				item._base_available_qty = item.available_qty;
-				resolvedBase = item.available_qty;
-			}
-
-			const hasExplicit = typeof explicitActualQty === "number" && !Number.isNaN(explicitActualQty);
-			if (hasExplicit) {
-				item._base_actual_qty = explicitActualQty;
-				resolvedBase = explicitActualQty;
-			} else if (typeof item.actual_qty === "number" && !Number.isNaN(item.actual_qty)) {
-				item._base_actual_qty = item.actual_qty;
-				resolvedBase = item.actual_qty;
-			}
-
-			if (resolvedBase !== null && item.item_code) {
-				stockCoordinator.updateBaseQuantities(
-					[
-						{
-							item_code: item.item_code,
-							actual_qty: resolvedBase,
-						},
-					],
-					{ silent: true, source: "items-selector" },
-				);
-			}
-		},
-		getBaseActualQty(item) {
-			if (!item) {
-				return null;
-			}
-
-			if (typeof item._base_actual_qty === "number" && !Number.isNaN(item._base_actual_qty)) {
-				return item._base_actual_qty;
-			}
-
-			if (typeof item.actual_qty === "number" && !Number.isNaN(item.actual_qty)) {
-				item._base_actual_qty = item.actual_qty;
-				return item.actual_qty;
-			}
-
-			if (typeof item.available_qty === "number" && !Number.isNaN(item.available_qty)) {
-				item._base_available_qty = item.available_qty;
-				item._base_actual_qty = item.available_qty;
-				return item.available_qty;
-			}
-
-			return null;
-		},
-		applyReservationToItem(item) {
-			if (!item || !item.item_code) {
-				return;
-			}
-
-			const codeKey = String(item.item_code).trim();
-			if (!codeKey) {
-				return;
-			}
-
-			if (this.getBaseActualQty(item) !== null) {
-				stockCoordinator.updateBaseQuantities(
-					[
-						{
-							item_code: codeKey,
-							actual_qty: item._base_actual_qty,
-						},
-					],
-					{ silent: true, source: "items-selector" },
-				);
-			}
-
-			stockCoordinator.applyAvailabilityToItem(item, { updateBaseAvailable: false });
-		},
-		recomputeAvailabilityForCodes(codes = []) {
-			if (!Array.isArray(codes) || !codes.length) {
-				return;
-			}
-
-			const normalizedCodes = codes
-				.filter((code) => code !== undefined && code !== null && String(code).trim())
-				.map((code) => String(code).trim());
-			if (!normalizedCodes.length) {
-				return;
-			}
-
-			const targetCodes = new Set(normalizedCodes);
-			this.syncItemsWithStockState(targetCodes, { updateBaseAvailable: false });
-			targetCodes.forEach((code) => {
-				const indexedItem = this.lookupItemByBarcode(code);
-				if (indexedItem) {
-					this.applyReservationToItem(indexedItem);
-				}
-			});
-		},
-		handleCartQuantitiesUpdated(totals = {}) {
-			const impacted = stockCoordinator.updateReservations(totals, {
-				source: "items-selector",
-			});
-			if (impacted.length) {
-				this.recomputeAvailabilityForCodes(impacted);
-			}
-		},
-		async handleInvoiceStockAdjusted(payload = {}) {
-			const collectedCodes = new Set();
-
-			const collectCode = (code) => {
-				if (code === undefined || code === null) {
-					return;
-				}
-				const normalized = String(code).trim();
-				if (normalized) {
-					collectedCodes.add(normalized);
-				}
-			};
-
-			const collectFromItems = (items) => {
-				if (!Array.isArray(items)) {
-					return;
-				}
-				items.forEach((entry) => {
-					if (!entry) {
-						return;
-					}
-					if (typeof entry === "string" || typeof entry === "number") {
-						collectCode(entry);
-					} else if (entry.item_code !== undefined) {
-						collectCode(entry.item_code);
-					}
-				});
-			};
-
-			if (Array.isArray(payload)) {
-				collectFromItems(payload);
-			} else if (payload && typeof payload === "object") {
-				collectFromItems(payload.items);
-				collectFromItems(payload.item_codes);
-				if (payload.item_code !== undefined) {
-					collectCode(payload.item_code);
-				}
-			} else {
-				collectCode(payload);
-			}
-
-			if (!collectedCodes.size) {
-				return;
-			}
-
-			const codes = Array.from(collectedCodes);
-			const targetCodes = new Set(codes);
-			const seenItems = new Set();
-			const candidates = [];
-
-			const considerItem = (item) => {
-				if (!item || !item.item_code) {
-					return;
-				}
-				const code = String(item.item_code).trim();
-				if (!code || !targetCodes.has(code)) {
-					return;
-				}
-				if (seenItems.has(item)) {
-					return;
-				}
-				seenItems.add(item);
-				candidates.push(item);
-			};
-
-			if (Array.isArray(this.items)) {
-				this.items.forEach(considerItem);
-			}
-
-			if (Array.isArray(this.displayedItems)) {
-				this.displayedItems.forEach(considerItem);
-			}
-
-			targetCodes.forEach((code) => {
-				const indexed = this.lookupItemByBarcode(code);
-				if (indexed) {
-					considerItem(indexed);
-				}
-			});
-
-			try {
-				if (candidates.length) {
-					await this.update_items_details(candidates, { forceRefresh: true });
-				}
-			} catch (error) {
-				console.error("Failed to refresh item details after invoice submission", error);
-			} finally {
-				this.recomputeAvailabilityForCodes(codes);
-			}
-		},
 		async update_items_details(items, options = {}) {
 			const { forceRefresh = false } = options;
 			const vm = this;
@@ -2157,7 +1895,7 @@ export default {
 						item.currency = det.currency;
 					}
 
-					vm.captureBaseAvailability(item, det.actual_qty);
+					vm.itemAvailability.captureBaseAvailability(item, det.actual_qty);
 					if (det.actual_qty !== undefined && det.actual_qty !== null) {
 						baseRecords.set(item.item_code, det.actual_qty);
 					}
@@ -2166,7 +1904,7 @@ export default {
 						item.original_currency = item.currency || vm.pos_profile.currency;
 					}
 
-					vm.indexItem(item);
+					vm.itemAvailability.indexItem(item);
 					vm.applyCurrencyConversionToItem(item);
 				}
 			});
@@ -2176,7 +1914,7 @@ export default {
 				const localQty = getLocalStock(item.item_code);
 				if (localQty !== null) {
 					item.actual_qty = localQty;
-					vm.captureBaseAvailability(item, localQty);
+					vm.itemAvailability.captureBaseAvailability(item, localQty);
 					baseRecords.set(item.item_code, localQty);
 				} else {
 					allCached = false;
@@ -2198,7 +1936,7 @@ export default {
 			if (isOffline() || allCached) {
 				vm.itemDetailsRetryCount = 0;
 				flushBaseRecords();
-				vm.recomputeAvailabilityForCodes(affectedCodes);
+				vm.itemAvailability.recomputeAvailabilityForCodes(affectedCodes);
 				return;
 			}
 
@@ -2209,7 +1947,7 @@ export default {
 			if (itemsToFetch.length === 0) {
 				vm.itemDetailsRetryCount = 0;
 				flushBaseRecords();
-				vm.recomputeAvailabilityForCodes(affectedCodes);
+				vm.itemAvailability.recomputeAvailabilityForCodes(affectedCodes);
 				return;
 			}
 
@@ -2264,11 +2002,11 @@ export default {
 
 					updatedItems.forEach(({ item, updates }) => {
 						Object.assign(item, updates);
-						vm.captureBaseAvailability(item, updates.actual_qty);
+						vm.itemAvailability.captureBaseAvailability(item, updates.actual_qty);
 						if (updates.actual_qty !== undefined && updates.actual_qty !== null) {
 							baseRecords.set(item.item_code, updates.actual_qty);
 						}
-						vm.indexItem(item);
+						vm.itemAvailability.indexItem(item);
 						vm.applyCurrencyConversionToItem(item);
 					});
 
@@ -2301,7 +2039,7 @@ export default {
 						const localQty = getLocalStock(item.item_code);
 						if (localQty !== null) {
 							item.actual_qty = localQty;
-							vm.captureBaseAvailability(item, localQty);
+							vm.itemAvailability.captureBaseAvailability(item, localQty);
 							baseRecords.set(item.item_code, localQty);
 						}
 						if (!item.item_uoms || item.item_uoms.length === 0) {
@@ -2330,7 +2068,7 @@ export default {
 			};
 
 			flushBaseRecords();
-			vm.recomputeAvailabilityForCodes(affectedCodes);
+			vm.itemAvailability.recomputeAvailabilityForCodes(affectedCodes);
 		},
 		update_cur_items_details() {
 			if (this.displayedItems && this.displayedItems.length > 0) {
@@ -3532,14 +3270,20 @@ export default {
 	async created() {
 		// Performance optimizations - non-reactive caches
 		this.searchCache = new Map();
-		this.barcodeIndex = new Map();
 		this.itemCache = new Map();
 		this.lastInvoiceRateCache = new Map();
 		this.formatCache = new Map();
 
 		console.log("ItemsSelector created - starting initialization with Pinia store");
 
-		this.stockUnsubscribe = stockCoordinator.subscribe(this.handleStockSnapshotUpdate);
+		// Initialize Availability Composable
+		this.itemAvailability.registerCallbacks({
+			getItems: () => this.items,
+			getDisplayedItems: () => this.displayedItems,
+			getFilteredItems: () => this.filteredItems,
+			updateItemsDetails: this.update_items_details,
+		});
+		this.itemAvailability.initAvailability();
 
 		// Initialize the Pinia store with existing POS profile data
 		if (this.pos_profile && this.pos_profile.name) {
@@ -3675,7 +3419,7 @@ export default {
 		);
 
 		// Watch Invoice for Quantities
-		this.eventBus.on("cart_quantities_updated", this.handleCartQuantitiesUpdated);
+		this.eventBus.on("cart_quantities_updated", this.itemAvailability.handleCartQuantitiesUpdated);
 
 		// Watch for Settings Toggle
 		this.$watch(
@@ -3733,7 +3477,7 @@ export default {
 			() => this.uiStore.lastStockAdjustment,
 			(val) => {
 				if (val) {
-					this.handleInvoiceStockAdjusted(val);
+					this.itemAvailability.handleInvoiceStockAdjusted(val);
 				}
 			},
 		);
