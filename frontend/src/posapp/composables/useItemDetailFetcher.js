@@ -11,7 +11,7 @@ import {
     isStockCacheReady,
     initializeStockCache,
     isOffline,
-} from "../../../offline/index.js";
+} from "../../offline/index.js";
 import { scheduleFrame } from "../../utils/perf.js";
 import { useItemAvailability } from "./useItemAvailability.js";
 
