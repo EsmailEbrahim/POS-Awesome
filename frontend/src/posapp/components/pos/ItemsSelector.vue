@@ -2692,6 +2692,7 @@ export default {
 	},
 
 	async created() {
+		const vm = this;
 		// Performance optimizations - non-reactive caches
 		this.searchCache = new Map();
 		this.itemCache = new Map();
