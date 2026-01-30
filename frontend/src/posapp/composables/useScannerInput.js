@@ -424,6 +424,14 @@ export function useScannerInput(options = {}) {
         if (scanAudioContext.value) {
             scanAudioContext.value.close().catch(() => { });
         }
+        if (document._scannerAttached && typeof onScan !== "undefined") {
+            try {
+                onScan.detachFrom(document);
+                document._scannerAttached = false;
+            } catch (error) {
+                console.warn("Scanner detach error:", error.message);
+            }
+        }
     });
 
     return {

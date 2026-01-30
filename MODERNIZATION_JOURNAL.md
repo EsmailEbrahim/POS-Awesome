@@ -232,10 +232,12 @@ _Taming the monoliths. Breaking down massive components for readability and main
 
 - [ ] **6.1.2 Extract Additional Logic (New)**
     - [x] `useScannerInput.js`: Hardware scanner events, keyboard pattern detection, scale barcode parsing.
-    - [ ] `useItemAvailability.js`: Complex stock & availability logic, interactions with `stockCoordinator`.
-    - [ ] `useItemDetailFetcher.js`: `update_items_details` logic, retry mechanisms, cache interactions.
+    - [ ] `useItemAvailability.js`: Logic for `stockCoordinator`, `syncItemsWithStockState`, `primeStockState`, `applyReservationToItem`.
+    - [ ] `useItemDetailFetcher.js`: `update_items_details`, `fetchItemDetails`, `refreshPricesForVisibleItems`.
     - [x] `useItemCurrency.js`: Price conversion, PLC to Company rate logic.
-    - [ ] `useItemSelection.js`: Keyboard navigation (arrow keys), item highlighting, scrolling.
+    - [ ] `useItemSelection.js`: `select_item`, `click_item_row`, `highlightedIndex` navigation, `fly` animation logic.
+    - [ ] `useItemSync.js`: `forceReloadItems`, `verifyServerItemCount`, `kickoffBackgroundSync`, `backgroundLoadItems`.
+    - [ ] `useItemAddition.js`: Consolidate `add_item`, `handleVariantItem`, `prepareItemForCart` into the existing variable or new composable.
 
 - [/] **6.1.2 Extract Sub-Components (UI)**
     - [x] `ItemCard.vue`: Extracted.

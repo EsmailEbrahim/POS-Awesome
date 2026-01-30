@@ -281,6 +281,8 @@ export default {
 			filterAndPaginate,
 		} = useItemSearch();
 
+		const scannerInput = useScannerInput();
+
 		return {
 			...responsive,
 			...rtl,
@@ -300,7 +302,16 @@ export default {
 			// Expose currency utils
 			itemCurrencyUtils: useItemCurrency(),
 			// Expose scanner input
-			scannerInput: useScannerInput(),
+			scannerInput,
+			// Expose scanner state and methods for Template/Options API
+			scannerLocked: scannerInput.scannerLocked,
+			scanErrorDialog: scannerInput.scanErrorDialog,
+			scanErrorMessage: scannerInput.scanErrorMessage,
+			scanErrorCode: scannerInput.scanErrorCode,
+			scanErrorDetails: scannerInput.scanErrorDetails,
+			cameraScannerActive: scannerInput.cameraScannerActive,
+			acknowledgeScanError: scannerInput.acknowledgeScanError,
+			onBarcodeScanned: scannerInput.onBarcodeScanned,
 		};
 	},
 	components: {
@@ -1627,14 +1638,14 @@ export default {
 		},
 		async enter_event(scannedCode) {
 			const searchTerm = scannedCode || this.first_search;
-			await this.ensureScaleBarcodeSettings();
+			await this.scannerInput.ensureScaleBarcodeSettings();
 			if (!this.displayedItems.length || !searchTerm) {
 				return;
 			}
 
 			// Derive the searchable code and detect scale barcode
 			const search = this.get_search(searchTerm);
-			const isScaleBarcode = this.scaleBarcodeMatches(searchTerm);
+			const isScaleBarcode = this.scannerInput.scaleBarcodeMatches(searchTerm);
 			this.search = search;
 
 			const qty = parseFloat(this.get_item_qty(searchTerm));
@@ -1786,10 +1797,10 @@ export default {
 		get_item_qty(first_search) {
 			const qtyVal = this.qty != null ? this.qty : 1;
 			let scal_qty = Math.abs(qtyVal);
-			const prefix = this.getScaleBarcodePrefix();
+			const prefix = this.scannerInput.getScaleBarcodePrefix();
 			const prefix_len = prefix.length;
 
-			if (this.scaleBarcodeMatches(first_search)) {
+			if (this.scannerInput.scaleBarcodeMatches(first_search)) {
 				// Determine item code length dynamically based on EAN-13 structure:
 				// prefix + item_code + 5 qty digits + 1 check digit
 				const item_code_len = first_search.length - prefix_len - 6;
@@ -1815,9 +1826,9 @@ export default {
 		},
 		get_search(first_search) {
 			if (!first_search) return "";
-			const prefix = this.getScaleBarcodePrefix();
+			const prefix = this.scannerInput.getScaleBarcodePrefix();
 			const prefix_len = prefix.length;
-			if (!this.scaleBarcodeMatches(first_search)) {
+			if (!this.scannerInput.scaleBarcodeMatches(first_search)) {
 				return first_search;
 			}
 			// Calculate item code length from total barcode length
@@ -3565,7 +3576,7 @@ export default {
 		// Load settings
 		this.loadItemSettings();
 		this.last_background_sync_time = getItemsLastSync();
-		await this.ensureScaleBarcodeSettings();
+		await this.scannerInput.ensureScaleBarcodeSettings();
 
 		// Initialize after memory is ready
 		memoryInitPromise.then(async () => {
@@ -3628,7 +3639,7 @@ export default {
 					this.update_cur_items_details();
 					this.startBackgroundSyncScheduler();
 
-					await this.ensureScaleBarcodeSettings(true);
+					await this.scannerInput.ensureScaleBarcodeSettings(true);
 					this.get_items_groups();
 					await this.initializeItems();
 					this.items_view = this.pos_profile.posa_default_card_view ? "card" : "list";
@@ -3795,7 +3806,7 @@ export default {
 
 		// Setup barcode scanner if enabled
 		if (this.pos_profile?.posa_enable_barcode_scanning) {
-			this.scan_barcoud();
+			// Scanner initialized by composable
 		}
 
 		// Apply the configured items per page on mount
@@ -3835,27 +3846,10 @@ export default {
 			this.cleanupBeforeDestroy();
 		}
 
-		// Detach scanner if it was attached
-		if (document._scannerAttached) {
-			try {
-				onScan.detachFrom(document);
-				document._scannerAttached = false;
-			} catch (error) {
-				console.warn("Scanner detach error:", error.message);
-			}
-		}
-
+		// Scanner & Audio context cleanup handled by useScannerInput
 		if (this.itemWorker) {
 			this.itemWorker.terminate();
-		}
-
-		if (this.scanAudioContext) {
-			try {
-				this.scanAudioContext.close();
-			} catch (error) {
-				console.warn("Scan audio context close failed:", error);
-			}
-			this.scanAudioContext = null;
+			this.itemWorker = null;
 		}
 
 		this.eventBus.off("update_currency");
