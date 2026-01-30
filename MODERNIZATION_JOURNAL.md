@@ -230,14 +230,15 @@ _Taming the monoliths. Breaking down massive components for readability and main
     - `useItemSync.js`: Implemented via `itemsStore.js` and `useItemsIntegration.js`.
     - `useKeyboardShortcuts.js`: Pending.
 
-- [ ] **6.1.2 Extract Additional Logic (New)**
+- [x] `6.1.2 Extract Additional Logic (New)`
     - [x] `useScannerInput.js`: Hardware scanner events, keyboard pattern detection, scale barcode parsing.
     - [x] `useItemAvailability.js`: Logic for `stockCoordinator`, `syncItemsWithStockState`, `primeStockState`, `applyReservationToItem`.
-    - [ ] `useItemDetailFetcher.js`: `update_items_details`, `fetchItemDetails`, `refreshPricesForVisibleItems`.
+    - [x] `useItemDetailFetcher.js`: `update_items_details`, `fetchItemDetails`, `refreshPricesForVisibleItems`.
     - [x] `useItemCurrency.js`: Price conversion, PLC to Company rate logic.
-    - [ ] `useItemSelection.js`: `select_item`, `click_item_row`, `highlightedIndex` navigation, `fly` animation logic.
-    - [ ] `useItemSync.js`: `forceReloadItems`, `verifyServerItemCount`, `kickoffBackgroundSync`, `backgroundLoadItems`.
+    - [x] `useItemSelection.js`: `select_item`, `click_item_row`, `highlightedIndex` navigation, `fly` animation logic.
+    - [x] `useItemSync.js`: `forceReloadItems`, `verifyServerItemCount`, `kickoffBackgroundSync`, `backgroundLoadItems`.
     - [ ] `useItemAddition.js`: Consolidate `add_item`, `handleVariantItem`, `prepareItemForCart` into the existing variable or new composable.
+    - [x] `Bug Fixes`: Resolved `417 Expectation Failed`, `vm is not defined`, and `replaceBarcodeIndex is not defined`.
 
 - [/] **6.1.2 Extract Sub-Components (UI)**
     - [x] `ItemCard.vue`: Extracted.
@@ -423,5 +424,6 @@ _The ultimate reliability upgrade. A strict, step-by-step path to type safety._
 | 2026-01-26 | Phase 1.3 Composition API           | Completed | Refactored `DefaultLayout.vue` to `<script setup>` and removed Options API usage.                                                    |
 | 2026-01-26 | Phase 2.1 Remove Event Bus          | Completed | RefactoredView switching, Customer Dialogs, Invoice/Order Loading to use Stores.                                                     |
 | 2026-01-28 | Phase 2.1 Final Cleanup             | Completed | Removed remaining EventBus usage in `Payments.vue` and `Invoice.vue` (view switching, clearing invoice, posting date).               |
-| 2026-01-30 | Phase 6.1 ItemsSelector Refactor    | In Progress | Extracted `useScannerInput.js`, `useItemAvailability.js`, `useItemCurrency.js`, `useItemDetailFetcher.js`. Removed legacy methods from `ItemsSelector.vue`. |
-| 2026-01-30 | Phase 6.1 Analysis                  | Updated     | Remaining: `useItemSelection.js` (list navigation) and `useItemSync.js` (background sync). |
+| 2026-01-30 | Phase 6.1 ItemsSelector Refactor    | In Progress | Extracted `useScannerInput.js`, `useItemAvailability.js`, `useItemCurrency.js`, `useItemDetailFetcher.js`, `useItemSelection.js`, `useItemSync.js`. |
+| 2026-01-30 | Bug Fixes                           | Completed   | Resolved `417 Expectation Failed`, `vm is not defined`, and `replaceBarcodeIndex is not defined` errors. |
+| 2026-01-30 | Phase 6.1 Conclusion                | Updated     | Logic extraction for `ItemsSelector.vue` is ~90% complete. Remaining: `useItemAddition.js`. |

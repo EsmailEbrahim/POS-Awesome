@@ -213,6 +213,7 @@ import { useScannerInput } from "../../composables/useScannerInput.js";
 import { useItemAvailability } from "../../composables/useItemAvailability.js";
 import { useItemDetailFetcher } from "../../composables/useItemDetailFetcher.js";
 import { useItemSelection } from "../../composables/useItemSelection.js";
+import { useItemSync } from "../../composables/useItemSync.js";
 import { parseBooleanSetting, formatStockShortageError } from "../../utils/stock.js";
 import { playScanTone, closeScanAudioContext } from "../../utils/scannerAudio.js";
 import { getItemsTableHeaders } from "../../utils/itemsTableHeaders.js";
@@ -322,6 +323,7 @@ export default {
 			itemAvailability,
 			itemDetailFetcher,
 			itemSelection,
+			itemSync,
 		};
 	},
 	components: {
@@ -1111,7 +1113,7 @@ export default {
 
 					const lastSync = getItemsLastSync();
 					const requestToken = ++this.items_request_token;
-					await this.backgroundLoadItems();
+					await this.itemSync.kickoffBackgroundSync();
 				}
 			} catch (err) {
 				console.error("Error checking item count:", err);
@@ -1185,58 +1187,14 @@ export default {
 				}
 
 				if (!this.usesLimitSearch && requestToken === this.items_request_token) {
-					this.kickoffBackgroundSync();
+					this.itemSync.kickoffBackgroundSync();
 				}
 			} catch (error) {
 				console.error("Failed to load items via store:", error);
 				frappe.msgprint(__("Failed to load items. Please try again."));
 			}
 		},
-		kickoffBackgroundSync() {
-			if (this.isBackgroundLoading || this.usesLimitSearch) {
-				return Promise.resolve([]);
-			}
 
-			const normalizedSearch = this.get_search(this.first_search || "").trim();
-
-			this.isBackgroundLoading = true;
-
-			return this.backgroundSyncItems({
-				groupFilter: this.item_group,
-				searchValue: normalizedSearch,
-			})
-				.then((appended) => {
-					if (Array.isArray(appended) && appended.length) {
-						this.eventBus.emit("set_all_items", this.items);
-					}
-					return appended;
-				})
-				.finally(() => {
-					this.finishBackgroundLoad();
-				});
-		},
-		finishBackgroundLoad() {
-			this.isBackgroundLoading = false;
-
-			const pendingSearch = this.pendingItemSearch;
-			this.pendingItemSearch = null;
-			if (pendingSearch) {
-				this.search_onchange(pendingSearch);
-				if (this.search_onchange.flush) {
-					this.search_onchange.flush();
-				}
-				return;
-			}
-
-			if (this.pendingGetItems) {
-				const { force_server: forceServer } = this.pendingGetItems;
-				this.pendingGetItems = null;
-				this.get_items(!!forceServer);
-			}
-		},
-		async backgroundLoadItems() {
-			return this.kickoffBackgroundSync();
-		},
 
 		get_items_groups() {
 			if (!this.pos_profile) {
@@ -2391,7 +2349,7 @@ export default {
 				this.scheduleLastInvoiceRateRefresh();
 			}
 			this.saveItemSettings();
-			this.startBackgroundSyncScheduler();
+			this.itemSync.startBackgroundSyncScheduler();
 			this.show_item_settings = false;
 		},
 		onDragStart(event, item) {
@@ -2481,80 +2439,8 @@ export default {
 			return parsed.toLocaleTimeString();
 		},
 
-		startBackgroundSyncScheduler() {
-			this.stopBackgroundSyncScheduler();
-			if (!this.enable_background_sync) {
-				return;
-			}
 
-			const intervalMs = normalizeBackgroundSyncInterval(this.background_sync_interval) * 1000;
-			this.background_sync_timer = setInterval(() => {
-				this.performBackgroundSync({ source: "interval" });
-			}, intervalMs);
 
-			this.performBackgroundSync({ source: "initial" });
-		},
-		stopBackgroundSyncScheduler() {
-			if (this.background_sync_timer) {
-				clearInterval(this.background_sync_timer);
-				this.background_sync_timer = null;
-			}
-		},
-		async ensureBackgroundSyncBaseline() {
-			const lastSync = getItemsLastSync();
-			if (lastSync) {
-				this.last_background_sync_time = lastSync;
-				return lastSync;
-			}
-
-			const serverTimestamp = await this.fetchServerItemsTimestamp();
-			if (serverTimestamp) {
-				setItemsLastSync(serverTimestamp);
-				this.last_background_sync_time = serverTimestamp;
-				return serverTimestamp;
-			}
-
-			return null;
-		},
-		async performBackgroundSync({ source = "manual" } = {}) {
-			if (
-				!shouldRunBackgroundSync({
-					posProfile: this.pos_profile,
-					enableBackgroundSync: this.enable_background_sync,
-					backgroundSyncInFlight: this.background_sync_in_flight,
-					isOffline: isOffline(),
-					usesLimitSearch: this.usesLimitSearch,
-				})
-			) {
-				return;
-			}
-
-			this.background_sync_in_flight = true;
-			try {
-				// PERF: use modified_after sync to avoid full catalog reloads.
-				// Benchmark note: keeps background sync payloads small even for large catalogs.
-				await this.ensureBackgroundSyncBaseline();
-				const { items: updatedItems } = await this.refreshModifiedItems();
-
-				if (updatedItems && updatedItems.length) {
-					await this.itemDetailFetcher.update_items_details(updatedItems, { forceRefresh: true });
-					this.eventBus.emit("set_all_items", this.items);
-				}
-
-				// Refresh cached quantities/prices for all items so non-visible items stay in sync.
-				await this.itemDetailFetcher.refreshAllItemDetailsInBatches(this.itemsPageLimit || 100);
-
-				if (this.displayedItems && this.displayedItems.length > 0) {
-					await this.itemDetailFetcher.update_items_details(this.displayedItems);
-				}
-
-				this.last_background_sync_time = new Date().toISOString();
-			} catch (error) {
-				console.error(`Background sync failed (${source})`, error);
-			} finally {
-				this.background_sync_in_flight = false;
-			}
-		},
 	},
 
 	computed: {
@@ -2765,6 +2651,56 @@ export default {
 			},
 		});
 
+		// Configure Item Sync with component context
+		this.itemSync.registerContext({
+			get pos_profile() {
+				return vm.pos_profile;
+			},
+			get enable_background_sync() {
+				return vm.enable_background_sync;
+			},
+			get background_sync_interval() {
+				return vm.background_sync_interval;
+			},
+			get usesLimitSearch() {
+				return vm.usesLimitSearch;
+			},
+			itemsPageLimit: this.itemsPageLimit,
+			refreshModifiedItems: () => this.refreshModifiedItems(),
+			backgroundSyncItems: (args) => {
+				const normalizedSearch = this.get_search(this.first_search || "").trim();
+				return this.backgroundSyncItems({
+					groupFilter: this.item_group,
+					searchValue: normalizedSearch,
+					...args,
+				});
+			},
+			get_items: (force) => this.get_items(force),
+			search_onchange: (val) => this.search_onchange(val),
+			itemDetailFetcher: this.itemDetailFetcher,
+			eventBus: this.eventBus,
+			fetchServerItemsTimestamp: () => this.itemSearch.fetchServerItemsTimestamp(),
+			getItems: () => this.items,
+			getDisplayedItems: () => this.displayedItems,
+			onBackgroundLoadFinished: () => {
+				const pendingSearch = this.pendingItemSearch;
+				this.pendingItemSearch = null;
+				if (pendingSearch) {
+					this.search_onchange(pendingSearch);
+					if (this.search_onchange.flush) {
+						this.search_onchange.flush();
+					}
+					return;
+				}
+
+				if (this.pendingGetItems) {
+					const { force_server: forceServer } = this.pendingGetItems;
+					this.pendingGetItems = null;
+					this.get_items(!!forceServer);
+				}
+			},
+		});
+
 		// Watch for highlighted index changes (triggered by keyboard nav in composable)
 		this.$watch(
 			() => this.itemSelection.highlightedIndex,
@@ -2791,7 +2727,7 @@ export default {
 				// Start workers now that we have profile
 				this.startItemWorker();
 				this.itemDetailFetcher.update_cur_items_details();
-				this.startBackgroundSyncScheduler();
+				this.itemSync.startBackgroundSyncScheduler();
 
 				console.log("Pinia store initialized successfully (from global state)");
 			}
@@ -2807,7 +2743,7 @@ export default {
 
 		// Load settings
 		this.loadItemSettings();
-		this.last_background_sync_time = getItemsLastSync();
+		this.itemSync.ensureBackgroundSyncBaseline();
 		await this.scannerInput.ensureScaleBarcodeSettings();
 
 		// Initialize after memory is ready
@@ -2854,7 +2790,7 @@ export default {
 			if (this.pos_profile && this.pos_profile.name) {
 				this.startItemWorker();
 				this.itemDetailFetcher.update_cur_items_details();
-				this.startBackgroundSyncScheduler();
+				this.itemSync.startBackgroundSyncScheduler();
 			}
 		});
 
@@ -2869,7 +2805,7 @@ export default {
 					await this.initializeStore(this.pos_profile, this.customer, this.customer_price_list);
 					this.startItemWorker();
 					this.itemDetailFetcher.update_cur_items_details();
-					this.startBackgroundSyncScheduler();
+					this.itemSync.startBackgroundSyncScheduler();
 
 					await this.scannerInput.ensureScaleBarcodeSettings(true);
 					this.get_items_groups();
