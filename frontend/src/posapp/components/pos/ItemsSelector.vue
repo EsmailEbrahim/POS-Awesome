@@ -2680,7 +2680,7 @@ export default {
 			search_onchange: (val) => this.search_onchange(val),
 			itemDetailFetcher: this.itemDetailFetcher,
 			eventBus: this.eventBus,
-			fetchServerItemsTimestamp: () => this.itemSearch.fetchServerItemsTimestamp(),
+			fetchServerItemsTimestamp: () => this.fetchServerItemsTimestamp(),
 			getItems: () => this.items,
 			getDisplayedItems: () => this.displayedItems,
 			onBackgroundLoadFinished: () => {
