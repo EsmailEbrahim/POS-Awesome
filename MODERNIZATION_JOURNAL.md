@@ -423,5 +423,5 @@ _The ultimate reliability upgrade. A strict, step-by-step path to type safety._
 | 2026-01-26 | Phase 1.3 Composition API           | Completed | Refactored `DefaultLayout.vue` to `<script setup>` and removed Options API usage.                                                    |
 | 2026-01-26 | Phase 2.1 Remove Event Bus          | Completed | RefactoredView switching, Customer Dialogs, Invoice/Order Loading to use Stores.                                                     |
 | 2026-01-28 | Phase 2.1 Final Cleanup             | Completed | Removed remaining EventBus usage in `Payments.vue` and `Invoice.vue` (view switching, clearing invoice, posting date).               |
-| 2026-01-30 | Phase 6.1 ItemsSelector Refactor    | In Progress | Extracted `ItemCard`, `ItemHeader`, `ItemActionToolbar`. Implemented `useItemSearch` and `useItemsIntegration`.                      |
-| 2026-01-30 | Phase 6.1 Analysis                  | Updated     | Identified additional composables: `useScannerInput`, `useItemAvailability`, `useItemDetailFetcher`, `useItemCurrency`, `useItemSelection`. |
+| 2026-01-30 | Phase 6.1 ItemsSelector Refactor    | In Progress | Extracted `useScannerInput.js`, `useItemAvailability.js`, `useItemCurrency.js`, `useItemDetailFetcher.js`. Removed legacy methods from `ItemsSelector.vue`. |
+| 2026-01-30 | Phase 6.1 Analysis                  | Updated     | Remaining: `useItemSelection.js` (list navigation) and `useItemSync.js` (background sync). |
