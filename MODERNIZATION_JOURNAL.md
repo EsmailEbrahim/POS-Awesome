@@ -225,16 +225,23 @@ _Taming the monoliths. Breaking down massive components for readability and main
 
 ## ✂️ 6.1 `ItemsSelector.vue` (5716 lines)
 
-- [ ] **6.1.1 Extract Composables (Logic)**
-    - `useItemSearch.js`: Search filters, fuzzy search logic.
-    - `useItemSync.js`: Syncing logic, IndexedDB interactions.
-    - `useKeyboardShortcuts.js`: Key binding logic.
+- [x] **6.1.1 Extract Composables (Logic)**
+    - `useItemSearch.js`: Implemented.
+    - `useItemSync.js`: Implemented via `itemsStore.js` and `useItemsIntegration.js`.
+    - `useKeyboardShortcuts.js`: Pending.
 
-- [ ] **6.1.2 Extract Sub-Components (UI)**
-    - `ItemCard.vue`: The grid view display of a single item.
-    - `ItemSearchFilters.vue`: The top bar with category/group/brand filters.
-    - `EditItemDialog.vue`: Isolate the "Edit Rate/Qty" dialog logic if embedded.
-    - `ItemImage.vue`: Handling fallback images and loading states.
+- [ ] **6.1.2 Extract Additional Logic (New)**
+    - [x] `useScannerInput.js`: Hardware scanner events, keyboard pattern detection, scale barcode parsing.
+    - [ ] `useItemAvailability.js`: Complex stock & availability logic, interactions with `stockCoordinator`.
+    - [ ] `useItemDetailFetcher.js`: `update_items_details` logic, retry mechanisms, cache interactions.
+    - [x] `useItemCurrency.js`: Price conversion, PLC to Company rate logic.
+    - [ ] `useItemSelection.js`: Keyboard navigation (arrow keys), item highlighting, scrolling.
+
+- [/] **6.1.2 Extract Sub-Components (UI)**
+    - [x] `ItemCard.vue`: Extracted.
+    - [x] `ItemSearchFilters.vue`: Extracted as `ItemHeader.vue` and `ItemActionToolbar.vue`.
+    - [ ] `EditItemDialog.vue`: Pending.
+    - [x] `ItemImage.vue`: Integrated into `ItemCard.vue`.
 
 ## ✂️ 6.2 `Invoice.vue` (1964 lines)
 
@@ -414,3 +421,5 @@ _The ultimate reliability upgrade. A strict, step-by-step path to type safety._
 | 2026-01-26 | Phase 1.3 Composition API           | Completed | Refactored `DefaultLayout.vue` to `<script setup>` and removed Options API usage.                                                    |
 | 2026-01-26 | Phase 2.1 Remove Event Bus          | Completed | RefactoredView switching, Customer Dialogs, Invoice/Order Loading to use Stores.                                                     |
 | 2026-01-28 | Phase 2.1 Final Cleanup             | Completed | Removed remaining EventBus usage in `Payments.vue` and `Invoice.vue` (view switching, clearing invoice, posting date).               |
+| 2026-01-30 | Phase 6.1 ItemsSelector Refactor    | In Progress | Extracted `ItemCard`, `ItemHeader`, `ItemActionToolbar`. Implemented `useItemSearch` and `useItemsIntegration`.                      |
+| 2026-01-30 | Phase 6.1 Analysis                  | Updated     | Identified additional composables: `useScannerInput`, `useItemAvailability`, `useItemDetailFetcher`, `useItemCurrency`, `useItemSelection`. |

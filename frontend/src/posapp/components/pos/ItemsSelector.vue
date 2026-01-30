@@ -209,6 +209,8 @@ import { withPerf, perfMarkStart, perfMarkEnd, scheduleFrame } from "../../utils
 import { useCartValidation } from "../../composables/useCartValidation.js";
 import { useItemsIntegration } from "../../composables/useItemsIntegration.js";
 import { useItemSearch } from "../../composables/useItemSearch.js";
+import { useItemCurrency } from "../../composables/useItemCurrency.js";
+import { useScannerInput } from "../../composables/useScannerInput.js";
 import { parseBooleanSetting, formatStockShortageError } from "../../utils/stock.js";
 import { playScanTone, closeScanAudioContext } from "../../utils/scannerAudio.js";
 import { getItemsTableHeaders } from "../../utils/itemsTableHeaders.js";
@@ -295,6 +297,10 @@ export default {
 			clearSearchCache,
 			fetchServerItemsTimestamp,
 			filterAndPaginate,
+			// Expose currency utils
+			itemCurrencyUtils: useItemCurrency(),
+			// Expose scanner input
+			scannerInput: useScannerInput(),
 		};
 	},
 	components: {
@@ -389,43 +395,12 @@ export default {
 		// pulling the entire catalog at once.
 		itemsPageLimit: 100,
 		// Track if the current search was triggered by a scanner
-		search_from_scanner: false,
-		currentPage: 0,
-		isOverflowing: false,
-		// Track background loading state and pending searches
-		isBackgroundLoading: false,
 		pendingItemSearch: null,
 		loadProgress: 0,
 		totalItemCount: 0,
-		scanErrorDialog: false,
-		scanErrorMessage: "",
-		scanErrorDetails: "",
-		scanErrorCode: "",
-		scaleBarcodeSettings: {
-			prefix: "",
-			prefix_included_or_not: 0,
-			no_of_prefix_characters: 0,
-		},
-		scaleBarcodeSettingsLoaded: false,
-		scannerLocked: false,
-		cameraScannerActive: false,
-		scanAudioContext: null,
-		pendingScanCode: "",
-		awaitingScanResult: false,
-		scanDebounceId: null,
-		scanQueuedCode: "",
+		// Scanner state managed by useScannerInput
 		refreshInFlight: false,
 		clearingSearch: false,
-		keyboardScanBuffer: "",
-		keyboardScanTimer: null,
-		keyboardScanLastTime: 0,
-		keyboardScanStartTime: 0,
-		keyboardScanPendingValue: "",
-		keyboardScanMinLength: 12,
-		// Require scanner-like speed to avoid triggering on manual typing
-		keyboardScanMaxInterval: 45,
-		keyboardScanMaxDuration: 250,
-		keyboardScanProcessingDelay: 100,
 		highlightedIndex: -1,
 		highlightedItemCode: null,
 		lastInvoiceRates: {},
@@ -654,71 +629,7 @@ export default {
 			}
 		},
 		// get_uoms, closeNewItemDialog, submitNewItem moved to NewItemDialog.vue
-		updateScaleBarcodeSettings(settings) {
-			const normalized = normalizeScaleBarcodeSettings(settings);
-			this.scaleBarcodeSettings = {
-				...this.scaleBarcodeSettings,
-				...normalized,
-			};
-			this.scaleBarcodeSettingsLoaded = true;
-			return this.scaleBarcodeSettings;
-		},
-		startItemWorker() {
-			// Avoid spawning duplicate workers which doubles script downloads and background threads
-			if (this.itemWorker || typeof Worker === "undefined") {
-				return;
-			}
 
-			try {
-				// Use the plain URL so the service worker can match the cached file
-				// even when offline. Using a query string causes cache lookups to fail
-				// which results in "Failed to fetch a worker script" errors.
-				const workerUrl = "/assets/posawesome/dist/js/posapp/workers/itemWorker.js";
-				this.itemWorker = new Worker(workerUrl, { type: "classic" });
-				this.itemWorker.onerror = function (event) {
-					console.error("Worker error:", event);
-					console.error("Message:", event.message);
-					console.error("Filename:", event.filename);
-					console.error("Line number:", event.lineno);
-				};
-			} catch (e) {
-				console.error("Failed to start item worker", e);
-				this.itemWorker = null;
-			}
-		},
-		async ensureScaleBarcodeSettings(force = false) {
-			if (!force && this.scaleBarcodeSettingsLoaded) {
-				return this.scaleBarcodeSettings;
-			}
-
-			try {
-				const res = await frappe.call({
-					method: "posawesome.posawesome.api.items.parse_scale_barcode",
-					args: { barcode: "" },
-				});
-
-				const settings = parseScaleBarcodeSettingsResponse(res);
-
-				if (settings) {
-					this.updateScaleBarcodeSettings(settings);
-				} else {
-					this.scaleBarcodeSettings = normalizeScaleBarcodeSettings();
-					this.scaleBarcodeSettingsLoaded = true;
-				}
-			} catch (error) {
-				console.error("Failed to load scale barcode settings", error);
-				this.scaleBarcodeSettings = normalizeScaleBarcodeSettings();
-				this.scaleBarcodeSettingsLoaded = true;
-			}
-
-			return this.scaleBarcodeSettings;
-		},
-		getScaleBarcodePrefix() {
-			return getScaleBarcodePrefix(this.scaleBarcodeSettings);
-		},
-		scaleBarcodeMatches(value) {
-			return scaleBarcodeMatches(this.scaleBarcodeSettings, value);
-		},
 
 		scheduleCardMetricsUpdate() {
 			if (this.metricsRaf) {
@@ -802,6 +713,29 @@ export default {
 					this.scrollThrottle = null;
 				}
 			});
+		},
+		startItemWorker() {
+			// Avoid spawning duplicate workers which doubles script downloads and background threads
+			if (this.itemWorker || typeof Worker === "undefined") {
+				return;
+			}
+
+			try {
+				// Use the plain URL so the service worker can match the cached file
+				// even when offline. Using a query string causes cache lookups to fail
+				// which results in "Failed to fetch a worker script" errors.
+				const workerUrl = "/assets/posawesome/dist/js/posapp/workers/itemWorker.js";
+				this.itemWorker = new Worker(workerUrl, { type: "classic" });
+				this.itemWorker.onerror = function (event) {
+					console.error("Worker error:", event);
+					console.error("Message:", event.message);
+					console.error("Filename:", event.filename);
+					console.error("Line number:", event.lineno);
+				};
+			} catch (e) {
+				console.error("Failed to start item worker", e);
+				this.itemWorker = null;
+			}
 		},
 		markStorageUnavailable(localOnly = false) {
 			if (localOnly) {
@@ -2425,120 +2359,18 @@ export default {
 
 		applyCurrencyConversionToItems() {
 			if (!this.items || !this.items.length) return;
-			this.items.forEach((it) => this.applyCurrencyConversionToItem(it));
+			this.itemCurrencyUtils.applyCurrencyConversionToItems(this.items, this);
 		},
 
 		_getPlcToCompanyRate(item) {
-			const companyCurrency = this.pos_profile.currency;
-			const priceListCurrency = this.price_list_currency || companyCurrency;
-			// Benchmark note: favor item-level plc_conversion_rate to avoid recomputing PLC->CC.
-			return (
-				item.plc_conversion_rate ??
-				(priceListCurrency === companyCurrency
-					? 1
-					: (this.exchange_rate || 1) * (this.conversion_rate || 1))
-			);
+			return this.itemCurrencyUtils.getPlcToCompanyRate(item, this);
 		},
 
 		applyCurrencyConversionToItem(item) {
-			if (!item) return;
-			const base = this.pos_profile.currency;
-
-			if (!item.original_rate) {
-				item.original_rate = item.rate;
-				item.original_currency = item.currency || base;
-			}
-
-			// original_rate is in price list currency
-			const price_list_rate = item.original_rate;
-
-			// Determine base rate using available conversion info (Price List -> Company)
-			const plc_to_cc_rate = this._getPlcToCompanyRate(item);
-			const base_rate = price_list_rate * plc_to_cc_rate;
-
-			item.base_rate = base_rate;
-			item.base_price_list_rate = base_rate;
-
-			// Determine selected rate using exchange rate (Price List -> Selected)
-			// item.original_currency is the Price List Currency
-			const priceListCurrency = this.price_list_currency || base;
-			const selectedCurrency = this.selected_currency;
-			// Benchmark note: when PLC === SC, keep the displayed rate in PLC to avoid CC bleed-through.
-			const converted_rate =
-				selectedCurrency === priceListCurrency
-					? price_list_rate
-					: item.original_currency === selectedCurrency
-						? price_list_rate
-						: price_list_rate * (this.exchange_rate || 1);
-
-			item.rate = this.flt(converted_rate, this.currency_precision);
-			item.currency = selectedCurrency;
-			item.price_list_rate = item.rate;
+			this.itemCurrencyUtils.applyCurrencyConversionToItem(item, this);
 		},
-		scan_barcoud() {
-			const vm = this;
-			try {
-				// Check if scanner is already attached to document
-				if (document._scannerAttached) {
-					return;
-				}
 
-				onScan.attachTo(document, {
-					suffixKeyCodes: [],
-					keyCodeMapper: function (oEvent) {
-						oEvent.stopImmediatePropagation();
-						oEvent.preventDefault();
-						return onScan.decodeKeyEvent(oEvent);
-					},
-					onScan: function (sCode) {
-						if (vm.scannerLocked) {
-							vm.playScanTone("error");
-							return;
-						}
-						vm.trigger_onscan(sCode);
-					},
-				});
-
-				// Mark document as having scanner attached
-				document._scannerAttached = true;
-			} catch (error) {
-				console.warn("Scanner initialization error:", error.message);
-			}
-		},
-		trigger_onscan(sCode) {
-			if (this.scannerLocked) {
-				this.playScanTone("error");
-				return;
-			}
-			// indicate this search came from a scanner
-			this.search_from_scanner = true;
-			// apply scanned code as search term
-			this.first_search = sCode;
-			this.search = sCode;
-			this.pendingScanCode = sCode;
-
-			this.$nextTick(() => {
-				if (this.displayedItems.length == 0) {
-					this.toastStore.show({
-						title: `No Item has this barcode "${sCode}"`,
-						color: "error",
-					});
-					this.showScanError({
-						message: `${this.__("Item not found")}: ${sCode}`,
-						code: sCode,
-						details: this.__("Please verify the barcode or search manually."),
-					});
-				} else {
-					this.enter_event(sCode);
-				}
-
-				// clear search field for next scan and refocus input
-				if (!this.scanErrorDialog) {
-					this.clearSearch();
-					this.focusItemSearch();
-				}
-			});
-		},
+		// clearSearch: Kept as is, but used by composable
 		clearSearch() {
 			this.resetKeyboardScanDetection();
 			if (this.clearingSearch) {
@@ -2668,105 +2500,7 @@ export default {
 			this.qty = null;
 		},
 
-		ensureScanAudioContext() {
-			if (typeof window === "undefined") {
-				return null;
-			}
-			if (!this.scanAudioContext) {
-				const AudioContext = window.AudioContext || window.webkitAudioContext;
-				if (!AudioContext) {
-					return null;
-				}
-				this.scanAudioContext = new AudioContext();
-			}
-			if (this.scanAudioContext?.state === "suspended") {
-				this.scanAudioContext.resume().catch(() => {});
-			}
-			return this.scanAudioContext;
-		},
-		playScanTone(type = "success") {
-			if (typeof window === "undefined") {
-				return;
-			}
-			try {
-				const ctx = this.ensureScanAudioContext();
-				if (!ctx) {
-					if (frappe?.utils?.play_sound) {
-						frappe.utils.play_sound(type === "success" ? "submit" : "error");
-					}
-					return;
-				}
-				const now = ctx.currentTime;
-				const duration = type === "success" ? 0.16 : 0.35;
-				const oscillator = ctx.createOscillator();
-				const gainNode = ctx.createGain();
-				oscillator.type = "sine";
-				oscillator.frequency.value = type === "success" ? 880 : 220;
-				gainNode.gain.setValueAtTime(type === "success" ? 0.18 : 0.28, now);
-				gainNode.gain.exponentialRampToValueAtTime(0.001, now + duration);
-				oscillator.connect(gainNode);
-				gainNode.connect(ctx.destination);
-				oscillator.start(now);
-				oscillator.stop(now + duration);
-			} catch (error) {
-				console.warn("Scan tone playback failed:", error);
-				if (frappe?.utils?.play_sound) {
-					frappe.utils.play_sound(type === "success" ? "submit" : "error");
-				}
-			}
-		},
-		showScanError({ message, code = "", details = "" } = {}) {
-			this.scanErrorMessage = message || this.__("Unable to add scanned item.");
-			this.scanErrorCode = code;
-			this.scanErrorDetails = details;
-			if (code) {
-				this.pendingScanCode = code;
-			}
-			this.awaitingScanResult = false;
-			this.search_from_scanner = false;
-			this.scanErrorDialog = true;
-			this.scannerLocked = true;
-			if (this.$refs.cameraScanner?.pauseForExternalLock) {
-				this.$refs.cameraScanner.pauseForExternalLock();
-			}
-			this.playScanTone("error");
-			if (frappe?.show_alert) {
-				frappe.show_alert(
-					{
-						message: this.scanErrorMessage,
-						indicator: "red",
-					},
-					5,
-				);
-			}
-		},
-		handleScanPipelineError(error, code = "") {
-			const normalizedCode = code || this.pendingScanCode || "";
-			console.error("Unexpected barcode processing error:", error);
-			const details =
-				error && typeof error.message === "string" && error.message.trim()
-					? error.message
-					: this.__("Please try again or enter the item manually.");
-			this.showScanError({
-				message: this.__("Unable to add scanned item."),
-				code: normalizedCode,
-				details,
-			});
-		},
-		acknowledgeScanError() {
-			this.scanErrorDialog = false;
-			this.scannerLocked = false;
-			this.scanErrorMessage = "";
-			this.scanErrorCode = "";
-			this.scanErrorDetails = "";
-			this.pendingScanCode = "";
-			this.awaitingScanResult = false;
-			if (this.$refs.cameraScanner?.resumeFromExternalLock) {
-				this.$refs.cameraScanner.resumeFromExternalLock();
-			}
-			this.clearSearch();
-			this.focusItemSearch();
-		},
+
 
 		onScannerOpened() {
 			this.cameraScannerActive = true;
@@ -2787,128 +2521,16 @@ export default {
 				this.$refs.cameraScanner.startScanning();
 			}
 		},
-		onBarcodeScanned(scannedCode) {
-			this.resetKeyboardScanDetection();
-			if (this.scannerLocked) {
-				this.playScanTone("error");
-				if (frappe?.show_alert) {
-					frappe.show_alert(
-						{
-							message: this.__("Acknowledge the error to resume scanning."),
-							indicator: "red",
-						},
-						3,
-					);
-				}
-				return;
-			}
-
-			if (this.search_onchange.cancel) {
-				this.search_onchange.cancel();
-			}
-
-			// Clear the search field immediately to allow for rapid scanning
-			this.search_input = "";
-
-			const runScanPipeline = async (code) => {
-				const mark = perfMarkStart("pos:scan-handler");
-				try {
-					console.log("Barcode scanned:", code);
-					this.pendingScanCode = code;
-
-					// mark this search as coming from a scanner
-					this.search_from_scanner = true;
-
-					// Show scanning feedback
-					if (this.eventBus?.emit) {
-						this.toastStore.show({
-							title: this.__("Scanning for: {0}", [code]),
-							summary: this.__("Scanning items"),
-							detail: code,
-							color: "info",
-							timeout: 2000,
-							groupId: "scanner-progress",
-						});
-					} else if (frappe?.show_alert) {
-						frappe.show_alert(
-							{
-								message: `Scanning for: ${code}`,
-								indicator: "blue",
-							},
-							2,
-						);
-					}
-
-					// Enhanced item search and submission logic
-					await this.processScannedItem(code);
-				} catch (error) {
-					this.handleScanPipelineError(error, code);
-				} finally {
-					perfMarkEnd("pos:scan-handler", mark);
-				}
-			};
-
-			if (this.scanDebounceId) {
-				clearTimeout(this.scanDebounceId);
-			}
-			this.scanQueuedCode = scannedCode;
-			this.scanDebounceId = setTimeout(() => {
-				this.scanDebounceId = null;
-				const code = this.scanQueuedCode || scannedCode;
-				this.scanQueuedCode = "";
-				scheduleFrame(() => {
-					const maybePromise = runScanPipeline(code);
-					if (maybePromise && typeof maybePromise.catch === "function") {
-						maybePromise.catch((error) => {
-							this.handleScanPipelineError(error, code);
-						});
-					}
-				});
-			}, 12);
-		},
 		handleSearchPaste(event) {
-			if (!event || !event.clipboardData) {
-				return;
+			if (this.scannerInput.handleSearchPaste) {
+				this.scannerInput.handleSearchPaste(event);
 			}
-
-			const pastedText = event.clipboardData.getData("text");
-			if (!pastedText) {
-				return;
-			}
-
-			const sanitized = sanitizeClipboardText(pastedText);
-
-			if (!sanitized) {
-				event.preventDefault();
-				return;
-			}
-
-			if (!isScanCandidate(sanitized, this.keyboardScanMinLength)) {
-				return;
-			}
-
-			event.preventDefault();
-
-			this.search_input = sanitized;
-
-			this.$nextTick(() => {
-				this.onBarcodeScanned(sanitized);
-			});
 		},
 		handleSearchInput(event) {
-			const value = normalizeSearchInputValue(event);
-
-			this.keyboardScanPendingValue = value;
-
-			if (shouldResetScanOnInput(value, this.keyboardScanBuffer)) {
-				this.resetKeyboardScanDetection();
-			}
+			// Handled by composable
 		},
 		handleSearchKeydown(event) {
-			if (!event) {
-				return;
-			}
-
+			if (!event) return;
 			const key = event.key || "";
 
 			if (key === "ArrowDown" || key === "ArrowUp") {
@@ -2917,85 +2539,15 @@ export default {
 				return;
 			}
 
-			if (key === "Enter" || key === "Escape") {
-				return;
-			}
-
-			if (event.metaKey || event.ctrlKey || event.altKey) {
-				this.resetKeyboardScanDetection();
-				return;
-			}
-
-			if (!/^\d$/.test(key)) {
-				this.resetKeyboardScanDetection();
-				return;
-			}
-
-			if (!isSearchFieldPrimedForScan(this.search_input)) {
-				this.resetKeyboardScanDetection();
-				return;
-			}
-
-			const now = getScanTimestamp();
-
-			if (this.keyboardScanLastTime && now - this.keyboardScanLastTime > this.keyboardScanMaxInterval) {
-				this.keyboardScanBuffer = "";
-				this.keyboardScanStartTime = now;
-			}
-
-			if (!this.keyboardScanBuffer) {
-				this.keyboardScanStartTime = now;
-			}
-
-			this.keyboardScanBuffer += key;
-			this.keyboardScanLastTime = now;
-
-			if (this.keyboardScanTimer) {
-				clearTimeout(this.keyboardScanTimer);
-			}
-
-			this.keyboardScanTimer = setTimeout(() => {
-				this.evaluateKeyboardScan();
-			}, this.keyboardScanProcessingDelay);
+			// Delegate other keys to scanner
+			const handled = this.scannerInput.handleSearchKeydown ? this.scannerInput.handleSearchKeydown(event) : false;
+			if (handled) return;
 		},
 		evaluateKeyboardScan() {
-			if (this.keyboardScanTimer) {
-				clearTimeout(this.keyboardScanTimer);
-				this.keyboardScanTimer = null;
-			}
-
-			const code = (this.keyboardScanPendingValue || this.search_input || "").trim();
-
-			const now = getScanTimestamp();
-			const duration = this.keyboardScanStartTime ? now - this.keyboardScanStartTime : 0;
-
-			if (
-				isLikelyKeyboardScan({
-					code,
-					duration,
-					minLength: this.keyboardScanMinLength,
-					maxDuration: this.keyboardScanMaxDuration,
-					maxInterval: this.keyboardScanMaxInterval,
-				})
-			) {
-				this.resetKeyboardScanDetection();
-				if (code) {
-					this.onBarcodeScanned(code);
-				}
-				return;
-			}
-
-			this.resetKeyboardScanDetection();
+			// Deprecated: Handled by useScannerInput
 		},
 		resetKeyboardScanDetection() {
-			if (this.keyboardScanTimer) {
-				clearTimeout(this.keyboardScanTimer);
-				this.keyboardScanTimer = null;
-			}
-			this.keyboardScanBuffer = "";
-			this.keyboardScanLastTime = 0;
-			this.keyboardScanStartTime = 0;
-			this.keyboardScanPendingValue = "";
+			// Deprecated: Handled by useScannerInput
 		},
 		clearHighlightedItem() {
 			this.highlightedIndex = -1;
