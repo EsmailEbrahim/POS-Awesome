@@ -120,83 +120,20 @@
 
 				<!-- Items Table Section (Main items list for invoice) -->
 				<div class="items-table-wrapper">
-					<!-- Column selector button moved outside the table -->
-					<div class="column-selector-container">
-						<v-text-field
-							ref="itemSearchField"
-							v-model="itemSearch"
-							density="compact"
-							variant="solo"
-							color="primary"
-							class="item-search-field pos-themed-input"
-							:label="__('Search items or barcode')"
-							prepend-inner-icon="mdi-magnify"
-							hide-details
-							clearable
-							autocomplete="off"
-						></v-text-field>
-						<v-btn
-							density="compact"
-							variant="text"
-							color="primary"
-							prepend-icon="mdi-cog-outline"
-							@click="toggleColumnSelection"
-							class="column-selector-btn"
-						>
-							{{ __("Columns") }}
-						</v-btn>
-						<v-dialog
-							v-model="show_column_selector"
-							max-width="500px"
-							transition="dialog-bottom-transition"
-						>
-							<v-card>
-								<v-card-title class="text-h6 pa-4 d-flex align-center">
-									<span>{{ __("Select Columns to Display") }}</span>
-									<v-spacer></v-spacer>
-									<v-btn
-										icon="mdi-close"
-										variant="text"
-										density="compact"
-										@click="show_column_selector = false"
-									></v-btn>
-								</v-card-title>
-								<v-divider></v-divider>
-								<v-card-text class="pa-4">
-									<v-row dense>
-										<v-col
-											cols="12"
-											v-for="column in available_columns.filter((col) => !col.required)"
-											:key="column.key"
-										>
-											<v-switch
-												v-model="temp_selected_columns"
-												:label="column.title"
-												:value="column.key"
-												hide-details
-												density="compact"
-												color="primary"
-												class="column-switch mb-1"
-												:disabled="column.required"
-											></v-switch>
-										</v-col>
-									</v-row>
-									<div class="text-caption mt-2">
-										{{ __("Required columns cannot be hidden") }}
-									</div>
-								</v-card-text>
-								<v-card-actions class="pa-4 pt-0">
-									<v-btn color="error" variant="text" @click="cancelColumnSelection">{{
-										__("Cancel")
-									}}</v-btn>
-									<v-spacer></v-spacer>
-									<v-btn color="primary" variant="tonal" @click="updateSelectedColumns">{{
-										__("Apply")
-									}}</v-btn>
-								</v-card-actions>
-							</v-card>
-						</v-dialog>
-					</div>
+					<!-- Refactored Action Toolbar -->
+					<InvoiceItemsActionToolbar
+						ref="actionToolbar"
+						:itemSearch="itemSearch"
+						:availableColumns="available_columns"
+						:selectedColumns="selected_columns"
+						@update:itemSearch="itemSearch = $event"
+						@update:selectedColumns="
+							(cols) => {
+								selected_columns = cols;
+								updateHeadersFromSelection();
+							}
+						"
+					/>
 
 					<!-- ItemsTable component with reorder event handler -->
 					<ItemsTable
@@ -233,77 +170,16 @@
 						@item-dropped="showDropFeedback(false)"
 						@view-packed="openPackedItems"
 					/>
-					<v-dialog
+					
+					<!-- Refactored Packed Items Dialog -->
+					<PackedItemsDialog
 						v-model="show_packed_dialog"
-						max-width="800px"
-						transition="dialog-bottom-transition"
-					>
-						<v-card>
-							<v-card-title class="d-flex align-center">
-								<span>{{ __("Packing List") }} ({{ packed_dialog_items.length }})</span>
-								<v-spacer></v-spacer>
-								<v-btn
-									icon="mdi-close"
-									variant="text"
-									density="compact"
-									@click="show_packed_dialog = false"
-								></v-btn>
-							</v-card-title>
-							<v-divider></v-divider>
-							<v-card-text>
-								<v-alert type="warning" density="compact" class="mb-2">
-									{{
-										__(
-											"For 'Product Bundle' items, Warehouse, Serial No and Batch No will be considered from the 'Packing List' table. If Warehouse and Batch No are same for all packing items for any 'Product Bundle' item, those values can be entered in the main Item table; values will be copied to 'Packing List' table.",
-										)
-									}}
-								</v-alert>
-								<v-data-table
-									:headers="packedItemsHeaders"
-									:items="packed_dialog_items"
-									class="elevation-1"
-									hide-default-footer
-									density="compact"
-								>
-									<template v-slot:item.index="{ index }">
-										{{ index + 1 }}
-									</template>
-									<template v-slot:item.qty="{ item }">
-										{{ formatFloat(item.qty) }}
-									</template>
-									<template v-slot:item.rate="{ item }">
-										<div class="currency-display">
-											<span class="currency-symbol">{{
-												currencySymbol(displayCurrency)
-											}}</span>
-											<span class="amount-value">{{ formatCurrency(item.rate) }}</span>
-										</div>
-									</template>
-									<template v-slot:item.warehouse="{ item }">
-										<v-text-field
-											v-model="item.warehouse"
-											hide-details
-											density="compact"
-										/>
-									</template>
-									<template v-slot:item.batch_no="{ item }">
-										<v-text-field
-											v-model="item.batch_no"
-											hide-details
-											density="compact"
-										/>
-									</template>
-									<template v-slot:item.serial_no="{ item }">
-										<v-text-field
-											v-model="item.serial_no"
-											hide-details
-											density="compact"
-										/>
-									</template>
-								</v-data-table>
-							</v-card-text>
-						</v-card>
-					</v-dialog>
+						:items="packed_dialog_items"
+						:displayCurrency="displayCurrency"
+						:formatFloat="formatFloat"
+						:formatCurrency="formatCurrency"
+						:currencySymbol="currencySymbol"
+					/>
 				</div>
 			</div>
 		</v-card>
@@ -375,6 +251,8 @@ import MultiCurrencyRow from "./MultiCurrencyRow.vue";
 import CancelSaleDialog from "./CancelSaleDialog.vue";
 import InvoiceSummary from "./InvoiceSummary.vue";
 import ItemsTable from "./ItemsTable.vue";
+import InvoiceItemsActionToolbar from "./InvoiceItemsActionToolbar.vue";
+import PackedItemsDialog from "./PackedItemsDialog.vue";
 import invoiceItemMethods from "./invoiceItemMethods";
 import invoiceComputed from "./invoiceComputed";
 import invoiceWatchers from "./invoiceWatchers";
@@ -453,17 +331,7 @@ export default {
 			invoice_posting_date: false, // Posting date dialog
 			posting_date_display: "", // Display value for date picker
 			items_headers: [],
-			packedItemsHeaders: [
-				{ title: __("No."), key: "index" },
-				{ title: __("Parent Item"), key: "parent_item" },
-				{ title: __("Item Code"), key: "item_code" },
-				{ title: __("Description"), key: "item_name" },
-				{ title: __("Qty"), key: "qty" },
-				{ title: __("Rate"), key: "rate" },
-				{ title: __("Warehouse"), key: "warehouse" },
-				{ title: __("Batch"), key: "batch_no" },
-				{ title: __("Serial"), key: "serial_no" },
-			],
+			// packedItemsHeaders removed as it is now in PackedItemsDialog
 			selected_currency: "", // Currently selected currency
 			exchange_rate: 1, // Current exchange rate
 			conversion_rate: 1, // Currency to company rate
@@ -480,9 +348,9 @@ export default {
 				rate: 0,
 			},
 			selected_columns: [], // Selected columns for items table
-			temp_selected_columns: [], // Temporary array for column selection
+			// temp_selected_columns removed
 			available_columns: [], // All available columns
-			show_column_selector: false, // Column selector dialog visibility
+			// show_column_selector removed
 			invoiceHeight: null,
 			// paymentVisible state moved to computed property from uiStore
 			confirm_payment_dialog: false,
@@ -499,6 +367,8 @@ export default {
 		InvoiceSummary,
 		CancelSaleDialog,
 		ItemsTable,
+		InvoiceItemsActionToolbar,
+		PackedItemsDialog,
 	},
 	computed: {
 		items: {

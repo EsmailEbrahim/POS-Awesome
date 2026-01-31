@@ -260,9 +260,14 @@ _Taming the monoliths. Breaking down massive components for readability and main
 
 ## ✂️ 6.2 `Invoice.vue` (1964 lines)
 
-- [ ] **6.2.1 Extract Composables**
-    - `useInvoiceCalculations.js`: Move complex tax/discount/total logic (already partially in `invoiceStore` but UI specific logic remains).
-    - [x] `useInvoiceShortcuts.js`: Keyboard shortcuts. (Implemented as `invoiceShortcuts.js`)
+- [x] **Analysis:** Identified component structure and dependencies.
+- [x] **Decomposition:**
+    - [x] `InvoiceItemsActionToolbar.vue`: Extracted search and column selector.
+    - [x] `PackedItemsDialog.vue`: Extracted packing list dialog.
+    - [ ] `CustomerSection` (Pending)
+    - [ ] `ActionButtons` (Pending)
+- [ ] **Store Integration:** Ensure `invoiceStore` handles business logic.
+- [ ] **Composition API Migration:** Convert main component to `<script setup>`.js`: Keyboard shortcuts. (Implemented as `invoiceShortcuts.js`)
 
 - [ ] **6.2.2 Decompose Sections**
     - `InvoiceHeader.vue`: Customer selection, mode toggles.
