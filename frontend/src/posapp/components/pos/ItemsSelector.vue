@@ -357,7 +357,18 @@ export default {
 			searchItemsByCode: searchItemsByCodeFn
 		} = useBarcodeIndexing();
 
+		const add_item = (item, options) => {
+			const vm = getValidVM();
+			if (!vm) return;
+			// Create a context object that inherits from the component instance
+			// and mixes in specific options for this operation
+			const context = Object.create(vm);
+			Object.assign(context, options || {});
+			return itemAddition.addItem(item, context);
+		};
+
 		return {
+			add_item,
 			...responsive,
 			...rtl,
 			fly,
