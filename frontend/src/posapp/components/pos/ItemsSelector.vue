@@ -163,6 +163,7 @@
 /* global frappe, __, setLocalStockCache, flt, onScan, get_currency_symbol, current_items, wordCount */
 import format from "../../format";
 import _ from "lodash";
+import { getCurrentInstance } from "vue";
 import CameraScanner from "./CameraScanner.vue";
 import { ensurePosProfile } from "../../../utils/pos_profile.js";
 import ItemActionToolbar from "./ItemActionToolbar.vue";
