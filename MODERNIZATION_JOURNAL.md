@@ -264,6 +264,8 @@ _Taming the monoliths. Breaking down massive components for readability and main
 - [x] **Decomposition:**
     - [x] `InvoiceItemsActionToolbar.vue`: Extracted search and column selector.
     - [x] `PackedItemsDialog.vue`: Extracted packing list dialog.
+    - [x] `InvoiceCustomerSection.vue`: Extracted to handle customer and invoice type selection.
+    - [x] `InvoiceActionButtons.vue`: Extracted from `InvoiceSummary.vue` to separate action button logic and presentation.
     - [ ] `CustomerSection` (Pending)
     - [ ] `ActionButtons` (Pending)
 - [ ] **Store Integration:** Ensure `invoiceStore` handles business logic.
