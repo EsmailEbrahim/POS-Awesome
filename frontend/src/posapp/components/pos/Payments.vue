@@ -34,86 +34,25 @@
 				<v-divider></v-divider>
 
 				<!-- Payment Inputs (All Payment Methods) -->
-				<div v-if="is_cashback && invoice_doc && Array.isArray(invoice_doc.payments)">
-					<v-row class="payments pa-1" v-for="payment in invoice_doc.payments" :key="payment.name">
-						<v-col cols="6" v-if="!is_mpesa_c2b_payment(payment)">
-							<v-text-field
-								density="compact"
-								variant="solo"
-								color="primary"
-								:label="frappe._(payment.mode_of_payment)"
-								class="sleek-field pos-themed-input"
-								hide-details
-								:model-value="formatCurrency(payment.amount)"
-								@change="handlePaymentAmountChange(payment, $event)"
-								:rules="[isNumber]"
-								:prefix="currencySymbol(invoice_doc.currency)"
-								@focus="set_rest_amount(payment.idx)"
-								:readonly="invoice_doc.is_return"
-							></v-text-field>
-						</v-col>
-						<v-col cols="6" v-if="!is_mpesa_c2b_payment(payment)">
-							<v-btn
-								block
-								color="primary"
-								theme="dark"
-								class="payment-method-btn"
-								@click="set_full_amount(payment.idx)"
-							>
-								{{ payment.mode_of_payment }}
-							</v-btn>
-						</v-col>
-
-						<!-- Cash Denomination Buttons -->
-						<v-col
-							cols="12"
-							v-if="
-								payment.default === 1 &&
-								isCashLikePayment(payment) &&
-								getVisibleDenominations(payment).length
-							"
-							class="py-0 px-2 mt-n1 mb-2"
-						>
-							<div class="d-flex flex-wrap gap-2">
-								<v-btn
-									v-for="d in getVisibleDenominations(payment)"
-									:key="d"
-									size="x-small"
-									class="mr-1 mb-1"
-									color="secondary"
-									variant="tonal"
-									@click="setPaymentToDenomination(payment, d)"
-								>
-									{{ formatCurrency(d) }}
-								</v-btn>
-							</div>
-						</v-col>
-
-						<!-- M-Pesa Payment Button (if payment is M-Pesa) -->
-						<v-col cols="12" v-if="is_mpesa_c2b_payment(payment)" class="pl-3">
-							<v-btn block color="success" theme="dark" @click="mpesa_c2b_dialog(payment)">
-								{{ __("Get Payments") }} {{ payment.mode_of_payment }}
-							</v-btn>
-						</v-col>
-
-						<!-- Request Payment for Phone Type -->
-						<v-col
-							cols="3"
-							v-if="payment.type === 'Phone' && payment.amount > 0 && request_payment_field"
-							class="pl-1"
-						>
-							<v-btn
-								block
-								color="success"
-								theme="dark"
-								:disabled="payment.amount === 0"
-								@click="request_payment(payment)"
-							>
-								{{ __("Request") }}
-							</v-btn>
-						</v-col>
-					</v-row>
-				</div>
+				<PaymentMethods
+					v-if="is_cashback && invoice_doc"
+					:payments="invoice_doc.payments"
+					:currency="invoice_doc.currency"
+					:isReturn="invoice_doc.is_return"
+					:requestPaymentField="request_payment_field"
+					:currencySymbol="currencySymbol"
+					:formatCurrency="formatCurrency"
+					:isNumber="isNumber"
+					:getVisibleDenominations="getVisibleDenominations"
+					:isCashLikePayment="isCashLikePayment"
+					:isMpesaC2bPayment="is_mpesa_c2b_payment"
+					@update-amount="handlePaymentAmountChange"
+					@set-full-amount="set_full_amount"
+					@set-denomination="setPaymentToDenomination"
+					@mpesa-dialog="mpesa_c2b_dialog"
+					@request-payment="request_payment"
+					@set-rest-amount="set_rest_amount"
+				/>
 
 				<!-- Loyalty Points Redemption -->
 				<v-row
@@ -669,6 +608,7 @@ import invoiceService from "../../services/invoiceService.js";
 import PaymentSummary from "./PaymentSummary.vue";
 import InvoiceTotals from "./InvoiceTotals.vue";
 import PaymentActionButtons from "./PaymentActionButtons.vue";
+import PaymentMethods from "./PaymentMethods.vue";
 
 export default {
 	// Using format mixin for shared formatting methods
@@ -677,6 +617,7 @@ export default {
 		PaymentSummary,
 		InvoiceTotals,
 		PaymentActionButtons,
+		PaymentMethods,
 	},
 	setup() {
 		const invoiceStore = useInvoiceStore();

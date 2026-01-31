@@ -270,6 +270,7 @@ _Taming the monoliths. Breaking down massive components for readability and main
     - [x] `PaymentSummary.vue`: Extracted from `Payments.vue` (Phase 1).
     - [x] `InvoiceTotals.vue`: Extracted from `Payments.vue` (Phase 1).
     - [x] `PaymentActionButtons.vue`: Extracted from `Payments.vue` (Phase 1).
+    - [x] `PaymentMethods.vue`: Extracted loop logic, amounts, and denominations (Phase 2).
     - [ ] `CustomerSection` (Pending)
     - [ ] `ActionButtons` (Pending)
 - [ ] **Store Integration:** Ensure `invoiceStore` handles business logic.
