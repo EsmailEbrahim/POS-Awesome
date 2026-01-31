@@ -103,11 +103,7 @@ _Removing "Event Soup" and centralizing business logic._
     - **Phase 2.2: Component Decomposition**
         - [x] Extract layout logic to `useItemSelectorLayout.js`
         - [x] Extract last invoice rate logic to `useLastInvoiceRate.js`
-        - [x] Extract storage safety logic to `useItemStorageSafety.js`
-            4.  **Refactor `pending_invoices_changed`**:
-                - [x] Create `syncStore` (Pinia) to manage pending invoices count.
-                - [x] Update `Payments.vue` to update store instead of emitting event.
-                - [x] Update `Home.vue` to use store state instead of event listener.
+        - [x] Extract storage safety logic to `useItemStorageSafety.js` 4. **Refactor `pending_invoices_changed`**: - [x] Create `syncStore` (Pinia) to manage pending invoices count. - [x] Update `Payments.vue` to update store instead of emitting event. - [x] Update `Home.vue` to use store state instead of event listener.
 
 - [x] **2.2 Centralize API Services**
     - **Current Status:** `frappe.call` is scattered. `Invoice.vue` & `invoiceItemMethods.js` contain ~20 raw calls. `customersStore.js` contains mixed API/Store logic.
@@ -291,40 +287,40 @@ _The ultimate reliability upgrade. A strict, step-by-step path to type safety._
 
 - [ ] **7.1.2 Configure TypeScript**
     - Create `frontend/tsconfig.json`:
-      ```json
-      {
-        "extends": "@vue/tsconfig/tsconfig.dom.json",
-        "include": ["env.d.ts", "src/**/*", "src/**/*.vue"],
-        "exclude": ["src/**/__tests__/*"],
-        "compilerOptions": {
-          "composite": true,
-          "baseUrl": ".",
-          "paths": { "@/*": ["./src/*"] },
-          "allowJs": true,           // Critical for mixed codebase
-          "checkJs": false,          // Don't error on existing JS yet
-          "strict": true,            // Goal: strictly typed new files
-          "noImplicitAny": false     // Relaxed for initial migration
+        ```json
+        {
+        	"extends": "@vue/tsconfig/tsconfig.dom.json",
+        	"include": ["env.d.ts", "src/**/*", "src/**/*.vue"],
+        	"exclude": ["src/**/__tests__/*"],
+        	"compilerOptions": {
+        		"composite": true,
+        		"baseUrl": ".",
+        		"paths": { "@/*": ["./src/*"] },
+        		"allowJs": true, // Critical for mixed codebase
+        		"checkJs": false, // Don't error on existing JS yet
+        		"strict": true, // Goal: strictly typed new files
+        		"noImplicitAny": false // Relaxed for initial migration
+        	}
         }
-      }
-      ```
+        ```
     - Create `frontend/env.d.ts`:
-      ```ts
-      /// <reference types="vite/client" />
-      declare module '*.vue' {
-        import type { DefineComponent } from 'vue'
-        const component: DefineComponent<{}, {}, any>
-        export default component
-      }
-      declare const frappe: any; // Temporary global
-      declare const __: (str: string) => string;
-      ```
+        ```ts
+        /// <reference types="vite/client" />
+        declare module "*.vue" {
+        	import type { DefineComponent } from "vue";
+        	const component: DefineComponent<{}, {}, any>;
+        	export default component;
+        }
+        declare const frappe: any; // Temporary global
+        declare const __: (str: string) => string;
+        ```
 
 - [ ] **7.1.3 Update Build Scripts**
     - Update `package.json` scripts:
-      ```json
-      "type-check": "vue-tsc --noEmit -p tsconfig.json --composite false",
-      "build": "run-p type-check \"vite build\""
-      ```
+        ```json
+        "type-check": "vue-tsc --noEmit -p tsconfig.json --composite false",
+        "build": "run-p type-check \"vite build\""
+        ```
 
 ---
 
@@ -338,16 +334,16 @@ _The ultimate reliability upgrade. A strict, step-by-step path to type safety._
 
 - [ ] **7.2.2 Define Core Operations Models (`models.ts`)**
     - **Inventory Item**:
-      ```ts
-      export interface Item {
-        item_code: string;
-        item_name: string;
-        description?: string;
-        stock_qty: number;
-        standard_rate: number;
-        // ... ad-hoc fields
-      }
-      ```
+        ```ts
+        export interface Item {
+        	item_code: string;
+        	item_name: string;
+        	description?: string;
+        	stock_qty: number;
+        	standard_rate: number;
+        	// ... ad-hoc fields
+        }
+        ```
     - **Cart Item (POS Item)**: Extension of Item with `qty`, `amount`, `posa_row_id`.
     - **Invoice**: `InvoiceDoc` interface (matching `invoiceStore.invoiceDoc`).
 
@@ -418,67 +414,24 @@ _The ultimate reliability upgrade. A strict, step-by-step path to type safety._
 - [ ] **7.6.2 CI/CD Integration**
     - Ensure `yarn type-check` passes in GitHub Actions.
 
-
 ## 📝 Change Log / Progress
 
-| Date       | Item                                | Status    | Notes                                                                                                                                |
-| ---------- | ----------------------------------- | --------- | ------------------------------------------------------------------------------------------------------------------------------------ |
-| 2026-01-25 | Journal Creation                    | Completed | Roadmap established.                                                                                                                 |
-| 2026-01-25 | Phase 2.1 Refactor                  | Completed | Created `toastStore`, `uiStore`, `socketStore` to replace Event Bus.                                                                 |
-| 2026-01-25 | Phase 2.2 Refactor                  | Completed | Created `api.js`, `authService.js`, `invoiceService.js` to centralize API calls.                                                     |
-| 2026-01-26 | Refactor `pending_invoices_changed` | Completed | Created `syncStore.js` and updated `Payments.vue` and `Home.vue` to use it.                                                          |
-| 2026-01-26 | Phase 2.2 Finalization              | Completed | Implemented `itemService.js` and refactored `itemsStore.js` & `invoiceOfferMethods.js`. cleanup `customer_changed` event assumption. |
-| 2026-01-26 | Phase 3.1 Design System             | Completed | Migrated Vuetify theme to `plugins/vuetify.ts` and updated `posapp.js`.                                                              |
-| 2026-01-26 | Phase 3.2 Micro-Interactions        | Completed | Added page transitions to `Home.vue` and dialog transitions to `Invoice` and `CancelSaleDialog`.                                     |
-| 2026-01-26 | Phase 4 Performance                 | Completed | Verified Route Lazy Loading & Virtual Scrolling. Optimized `Home.vue` imports.                                                       |
-| 2026-01-26 | Phase 5.1 Reliability               | Completed | Implemented global error handler in `posapp.js` using `toastStore`.                                                                  |
-| 2026-01-26 | Phase 1.2 Explicit Layouts          | Completed | Created `DefaultLayout.vue`, `App.vue`, and updated Router.                                                                          |
-| 2026-01-26 | Phase 1.3 Composition API           | Completed | Refactored `DefaultLayout.vue` to `<script setup>` and removed Options API usage.                                                    |
-| 2026-01-26 | Phase 2.1 Remove Event Bus          | Completed | RefactoredView switching, Customer Dialogs, Invoice/Order Loading to use Stores.                                                     |
-| 2026-01-28 | Phase 2.1 Final Cleanup             | Completed | Removed remaining EventBus usage in `Payments.vue` and `Invoice.vue` (view switching, clearing invoice, posting date).               |
+| Date       | Item                                | Status      | Notes                                                                                                                                               |
+| ---------- | ----------------------------------- | ----------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 2026-01-25 | Journal Creation                    | Completed   | Roadmap established.                                                                                                                                |
+| 2026-01-25 | Phase 2.1 Refactor                  | Completed   | Created `toastStore`, `uiStore`, `socketStore` to replace Event Bus.                                                                                |
+| 2026-01-25 | Phase 2.2 Refactor                  | Completed   | Created `api.js`, `authService.js`, `invoiceService.js` to centralize API calls.                                                                    |
+| 2026-01-26 | Refactor `pending_invoices_changed` | Completed   | Created `syncStore.js` and updated `Payments.vue` and `Home.vue` to use it.                                                                         |
+| 2026-01-26 | Phase 2.2 Finalization              | Completed   | Implemented `itemService.js` and refactored `itemsStore.js` & `invoiceOfferMethods.js`. cleanup `customer_changed` event assumption.                |
+| 2026-01-26 | Phase 3.1 Design System             | Completed   | Migrated Vuetify theme to `plugins/vuetify.ts` and updated `posapp.js`.                                                                             |
+| 2026-01-26 | Phase 3.2 Micro-Interactions        | Completed   | Added page transitions to `Home.vue` and dialog transitions to `Invoice` and `CancelSaleDialog`.                                                    |
+| 2026-01-26 | Phase 4 Performance                 | Completed   | Verified Route Lazy Loading & Virtual Scrolling. Optimized `Home.vue` imports.                                                                      |
+| 2026-01-26 | Phase 5.1 Reliability               | Completed   | Implemented global error handler in `posapp.js` using `toastStore`.                                                                                 |
+| 2026-01-26 | Phase 1.2 Explicit Layouts          | Completed   | Created `DefaultLayout.vue`, `App.vue`, and updated Router.                                                                                         |
+| 2026-01-26 | Phase 1.3 Composition API           | Completed   | Refactored `DefaultLayout.vue` to `<script setup>` and removed Options API usage.                                                                   |
+| 2026-01-26 | Phase 2.1 Remove Event Bus          | Completed   | RefactoredView switching, Customer Dialogs, Invoice/Order Loading to use Stores.                                                                    |
+| 2026-01-28 | Phase 2.1 Final Cleanup             | Completed   | Removed remaining EventBus usage in `Payments.vue` and `Invoice.vue` (view switching, clearing invoice, posting date).                              |
 | 2026-01-30 | Phase 6.1 ItemsSelector Refactor    | In Progress | Extracted `useScannerInput.js`, `useItemAvailability.js`, `useItemCurrency.js`, `useItemDetailFetcher.js`, `useItemSelection.js`, `useItemSync.js`. |
-| 2026-01-30 | Bug Fixes                           | Completed   | Resolved multiple runtime errors including `vm is not defined` and `playScanTone`. |
-| 2026-01-31 | Phase 6.1 Logic Consolidation       | Completed   | Extracted `useBarcodeIndexing`, `useItemStorageSafety`, `useItemSelectorLayout`. Consolidated `useItemAddition`. |
-| 2026-01-31 | Scan & Addition Debugging           | Completed   | Fixed item merge issues, scan handler registration, and adding items via Proxy wrapper. |
- 
-  
-         D i r e c t o r y :    
-         C : \ U s e r s \ a m 1 0 2 \ D o w n l o a d s \ P O S - A w e s o m e - V 1 5  
-  
-  
- M o d e                                   L a s t W r i t e T i m e                 L e n g t h  
- - - - -                                   - - - - - - - - - - - - -                 - - - - - -  
- d - - - - -                   1 6 - J a n - 2 6       9 : 1 7   A M                              
- d - - - - -                   1 6 - J a n - 2 6       9 : 1 7   A M                              
- d - - - - -                   2 9 - J a n - 2 6       5 : 5 3   P M                              
- d - - - - -                   1 6 - J a n - 2 6       9 : 1 7   A M                              
- d - - - - -                   2 2 - J a n - 2 6     1 1 : 1 2   A M                              
- d - - - - -                   2 9 - J a n - 2 6     1 2 : 2 9   P M                              
- d - - - - -                   1 9 - J a n - 2 6       4 : 0 0   P M                              
- d - - - - -                   1 6 - J a n - 2 6       9 : 1 7   A M                              
- d - - - - -                   1 6 - J a n - 2 6       9 : 1 7   A M                              
- - a - - - -                   1 6 - J a n - 2 6       9 : 1 7   A M                       4 2 6  
- - a - - - -                   1 6 - J a n - 2 6       9 : 1 7   A M                       2 9 5  
- - a - - - -                   1 9 - J a n - 2 6       5 : 2 1   P M                       2 5 8  
- - a - - - -                   1 6 - J a n - 2 6       9 : 1 7   A M                         7 6  
- - a - - - -                   1 6 - J a n - 2 6       9 : 1 7   A M                         6 8  
- - a - - - -                   1 6 - J a n - 2 6       9 : 1 7   A M                         3 3  
- - a - - - -                   1 6 - J a n - 2 6       9 : 1 7   A M                         3 3  
- - a - - - -                   1 6 - J a n - 2 6       9 : 1 7   A M                     7 7 1 3  
- - a - - - -                   1 9 - J a n - 2 6       4 : 0 0   P M                 1 4 8 2 7 3  
- - a - - - -                   1 6 - J a n - 2 6       9 : 1 7   A M                     6 3 7 3  
- - a - - - -                   1 6 - J a n - 2 6       9 : 1 7   A M                         6 8  
- - a - - - -                   1 6 - J a n - 2 6       9 : 1 7   A M                       8 5 2  
- - a - - - -                   1 6 - J a n - 2 6       9 : 1 7   A M                       4 2 7  
- - a - - - -                   1 6 - J a n - 2 6       9 : 1 7   A M                   3 5 4 5 2  
- - a - - - -                   3 1 - J a n - 2 6     1 2 : 4 0   P M                   2 3 3 1 8  
- - a - - - -                   1 9 - J a n - 2 6       3 : 4 3   P M                 2 4 1 0 7 1  
- - a - - - -                   2 2 - J a n - 2 6       9 : 3 6   A M                     2 6 1 3  
- - a - - - -                   1 6 - J a n - 2 6       9 : 1 7   A M                     2 1 3 1  
- - a - - - -                   2 6 - J a n - 2 6     1 0 : 0 2   A M                     9 7 1 3  
- - a - - - -                   1 6 - J a n - 2 6       9 : 1 7   A M                     2 7 7 7  
- - a - - - -                   1 6 - J a n - 2 6       9 : 1 7   A M                         6 3  
- - a - - - -                   1 6 - J a n - 2 6       9 : 1 7   A M                 3 0 0 7 5 8  
-  
-  
- 
+| 2026-01-30 | Bug Fixes                           | Completed   | Resolved multiple runtime errors including `vm is not defined` and `playScanTone`.                                                                  |
+| 2026-01-31 | Phase 6.1 Logic Consolidation       | Completed   | Extracted `useBarcodeIndexing`, `useItemStorageSafety`, `useItemSelectorLayout`. Consolidated `useItemAddition`.                                    |
+| 2026-01-31 | Scan & Addition Debugging           | Completed   | Fixed item merge issues, scan handler registration, and adding items via Proxy wrapper.                                                             |
