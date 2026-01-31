@@ -163,7 +163,7 @@
 /* global frappe, __, setLocalStockCache, flt, onScan, get_currency_symbol, current_items, wordCount */
 import format from "../../format";
 import _ from "lodash";
-import { getCurrentInstance, onMounted } from "vue";
+import { getCurrentInstance, onMounted, ref, computed } from "vue";
 import CameraScanner from "./CameraScanner.vue";
 import { ensurePosProfile } from "../../../utils/pos_profile.js";
 import ItemActionToolbar from "./ItemActionToolbar.vue";
@@ -396,10 +396,31 @@ export default {
 		};
 
 
+		// Define computed properties for settings needed by scan processor
+		const posProfile = itemsIntegration.posProfile;
+		const searchCache = ref(new Map());
+		
+		const float_precision = computed(() => {
+			const raw = posProfile.value?.currency_precision || itemsIntegration.posProfile.value?.float_precision;
+			return raw !== undefined ? raw : 2;
+		});
+		
+		const currency_precision = computed(() => posProfile.value?.currency_precision || 2);
+		
+		const hide_qty_decimals = computed(() => 
+			posProfile.value?.posa_hide_qty_decimals ? !!posProfile.value.posa_hide_qty_decimals : false
+		);
+
+		const blockSaleBeyondAvailableQty = computed(() => 
+			posProfile.value ? parseBooleanSetting(posProfile.value.posa_block_sale_beyond_available_qty) : false
+		);
+
+		const exchange_rate = computed(() => 1); // Default, update if needed from store
+
 		// Initialize useScanProcessor with context
 		const scanProcessor = useScanProcessor({
 			items: itemsIntegration.items,
-			pos_profile: itemsIntegration.pos_profile,
+			pos_profile: posProfile, // Corrected variable name
 			active_price_list: itemsIntegration.active_price_list,
 			customer_price_list: itemsIntegration.customer_price_list,
 			itemDetailFetcher,
@@ -413,20 +434,20 @@ export default {
 				resetBarcodeIndex
 			},
 			scannerInput,
-			searchCache: itemsIntegration.searchCache,
-			eventBus: itemsIntegration.eventBus,
+			searchCache, // Use local ref
+			eventBus: getValidVM()?.eventBus || { emit: () => {} }, // Fallback safely
 			format_number: getValidVM()?.format_number || ((v) => v),
-			float_precision: itemsIntegration.float_precision,
-			hide_qty_decimals: itemsIntegration.hide_qty_decimals,
-			blockSaleBeyondAvailableQty: itemsIntegration.blockSaleBeyondAvailableQty,
-			currency_precision: itemsIntegration.currency_precision,
-			exchange_rate: itemsIntegration.exchange_rate,
+			float_precision,
+			hide_qty_decimals,
+			blockSaleBeyondAvailableQty,
+			currency_precision,
+			exchange_rate,
 			format_currency: getValidVM()?.format_currency || ((v) => v),
 			ratePrecision: getValidVM()?.ratePrecision || (() => 2),
 			customer: itemsIntegration.customer,
 			// Callbacks or methods expected by processor
 			add_item_wrapper: add_item,
-			search_from_scanner_ref: itemsIntegration.search_from_scanner,
+			search_from_scanner_ref: scannerInput.search_from_scanner || ref(false), // scannerInput might have it, or create local
 			get_search: (code) => getValidVM()?.get_search ? getValidVM().get_search(code) : code,
 			get_item_qty: (code) => getValidVM()?.get_item_qty ? getValidVM().get_item_qty(code) : 1,
 			onItemAdded: () => {
@@ -437,8 +458,12 @@ export default {
 				}
 			},
 			onItemNotFound: (code) => {
-				itemsIntegration.first_search.value = code;
-				itemsIntegration.search.value = code;
+				// itemsIntegration might not expose these direct refs if they are wrapped in 'search' computed
+				// But let's try to set search value
+				if (getValidVM()) {
+					getValidVM().search = code;
+					getValidVM().first_search = code;
+				}
 			},
 			stock_settings: getValidVM()?.stock_settings, // might be undefined in setup, check lifecycle
 		});
