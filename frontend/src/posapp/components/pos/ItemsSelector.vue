@@ -498,9 +498,9 @@ export default {
 		refreshInFlight: false,
 		clearingSearch: false,
 
-		lastInvoiceRates: {},
-		// Use composable state
-		// lastInvoiceRateScheduler: null,
+		// lastInvoiceRates removed (moved to composable)
+		// lastInvoiceRateScheduler removed
+
 	}),
 
 	watch: {
@@ -511,7 +511,7 @@ export default {
 		},
 		customer: _.debounce(function () {
 			if (!this.customer) {
-				this.lastInvoiceRates = {};
+				this.clearLastInvoiceRateCache();
 			}
 			this.scheduleLastInvoiceRateRefresh();
 
@@ -2438,7 +2438,7 @@ export default {
 		this.formatCache = new Map();
 
 		// Initialize Composables
-		this.lastInvoiceRate = useLastInvoiceRate();
+	// this.lastInvoiceRate = useLastInvoiceRate(); // Initialized in setup()
 
 		console.log("ItemsSelector created - starting initialization with Pinia store");
 
