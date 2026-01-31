@@ -1111,3 +1111,4 @@ async function prepareItemForCart(item, requestedQty, context) {
 	}
 
 	return item;
+}
