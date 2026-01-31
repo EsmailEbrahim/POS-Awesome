@@ -214,6 +214,7 @@ import { useItemAvailability } from "../../composables/useItemAvailability.js";
 import { useItemDetailFetcher } from "../../composables/useItemDetailFetcher.js";
 import { useItemAddition } from "../../composables/useItemAddition.js";
 import { useItemSelection } from "../../composables/useItemSelection.js";
+import { useItemSelectorLayout } from "../../composables/useItemSelectorLayout.js";
 import { useItemSync } from "../../composables/useItemSync.js";
 import { parseBooleanSetting, formatStockShortageError } from "../../utils/stock.js";
 import { playScanTone, closeScanAudioContext } from "../../utils/scannerAudio.js";
@@ -293,11 +294,51 @@ export default {
 		const itemSelection = useItemSelection();
 		const itemSync = useItemSync();
 
+		const {
+			windowWidth,
+			isOverflowing,
+			itemsContainerRef,
+			cardColumns,
+			cardGap,
+			cardPadding,
+			cardRowHeight,
+			cardSlotHeight,
+			cardSlotWidth,
+			cardColumnWidth,
+			checkItemContainerOverflow,
+			scheduleCardMetricsUpdate,
+			onListScroll: handleListScroll,
+		} = useItemSelectorLayout({
+			resizeDebounce: 100,
+			loadVisibleItems: () => {
+				const vm = getCurrentInstance()?.proxy;
+				if (vm && vm.currentPage !== undefined) {
+					vm.currentPage += 1;
+					vm.loadVisibleItems();
+				}
+			},
+		});
+
 		return {
 			...responsive,
 			...rtl,
 			fly,
 			cartValidation,
+
+			// Layout
+			windowWidth,
+			isOverflowing,
+			itemsContainerRef,
+			cardColumns,
+			cardGap,
+			cardPadding,
+			cardRowHeight,
+			cardSlotHeight,
+			cardSlotWidth,
+			cardColumnWidth,
+			checkItemContainerOverflow,
+			scheduleCardMetricsUpdate,
+			handleListScroll,
 			...itemsIntegration,
 			selectedCustomer,
 			toastStore,
@@ -839,44 +880,11 @@ export default {
 			}
 		},
 		onListScroll(event) {
-			if (this.scrollThrottle) return;
-
-			this.scrollThrottle = requestAnimationFrame(() => {
-				try {
-					const el = event.target;
-					if (el.scrollTop + el.clientHeight >= el.scrollHeight - 50) {
-						this.currentPage += 1;
-						this.loadVisibleItems();
-					}
-				} catch (error) {
-					console.error("Error in list scroll handler:", error);
-				} finally {
-					this.scrollThrottle = null;
-				}
-			});
+			this.handleListScroll(event);
 		},
 
-		checkItemContainerOverflow() {
-			const el = this.getItemsContainerElement();
-			if (!el) {
-				this.isOverflowing = false;
-				return;
-			}
-
-			const containerHeight = parseFloat(getComputedStyle(el).getPropertyValue("--container-height"));
-			if (isNaN(containerHeight)) {
-				this.isOverflowing = false;
-				return;
-			}
-
-			const stickyHeader = el.closest(".dynamic-padding")?.querySelector(".sticky-header");
-			const headerHeight = stickyHeader ? stickyHeader.offsetHeight : 0;
-			const availableHeight = containerHeight - headerHeight;
-
-			el.style.maxHeight = `${availableHeight}px`;
-			this.isOverflowing = el.scrollHeight > availableHeight;
-			this.scheduleCardMetricsUpdate();
-		},
+		// checkItemContainerOverflow removed (handled by composable)
+		// scheduleCardMetricsUpdate removed (handled by composable)
 
 
 
@@ -2437,41 +2445,25 @@ export default {
 			return getItemsTableHeaders(this.context, this.pos_profile || {});
 		},
 		cardColumns() {
-			return getCardColumns(this.windowWidth);
+			return this.cardColumns; // Mapped to composable ref
 		},
 		cardGap() {
-			return getCardGap(this.windowWidth);
+			return this.cardGap; // Mapped to composable ref
 		},
 		cardPadding() {
-			return getCardPadding(this.windowWidth);
+			return this.cardPadding; // Mapped to composable ref
 		},
 		cardRowHeight() {
-			if (this.windowWidth <= 768) {
-				return 260;
-			}
-			if (this.windowWidth <= 1200) {
-				return 280;
-			}
-			return 300;
+			return this.cardRowHeight; // Mapped to composable ref
 		},
 		cardSlotHeight() {
-			return this.cardRowHeight + this.cardGap;
+			return this.cardSlotHeight; // Mapped to composable ref
 		},
 		cardSlotWidth() {
-			return this.cardColumnWidth + this.cardGap;
+			return this.cardSlotWidth; // Mapped to composable ref
 		},
 		cardColumnWidth() {
-			const columns = Math.max(1, this.cardColumns);
-			const containerWidth = this.cardContainerWidth || 0;
-			if (!containerWidth) {
-				return 240;
-			}
-
-			const gapTotal = this.cardGap * (columns - 1);
-			const paddingTotal = this.cardPadding * 2;
-			const available = Math.max(0, containerWidth - gapTotal - paddingTotal);
-			const width = Math.floor(available / columns);
-			return Math.max(180, width);
+			return this.cardColumnWidth; // Mapped to composable ref
 		},
 		displayedItems() {
 			// PERF: Avoid unnecessary array cloning ([...this.filteredItems]) as it creates garbage and O(N) cost on every render
