@@ -106,10 +106,10 @@ export default {
 
 	computed: {
 		couponsCount() {
-			return this.posa_coupons.length;
+			return (this.posa_coupons || []).length;
 		},
 		appliedCouponsCount() {
-			return this.posa_coupons.filter((el) => !!el.applied).length;
+			return (this.posa_coupons || []).filter((el) => !!el.applied).length;
 		},
 	},
 
@@ -119,15 +119,16 @@ export default {
 		},
 		add_coupon(new_coupon) {
 			if (!this.customer || !new_coupon) {
-				this.toastStore.show( {
+				this.toastStore.show({
 					title: __("Select a customer to use coupon"),
 					color: "error",
 				});
 				return;
 			}
-			const exist = this.posa_coupons.find((el) => el.coupon_code == new_coupon);
+			const coupons = this.posa_coupons || [];
+			const exist = coupons.find((el) => el.coupon_code == new_coupon);
 			if (exist) {
-				this.toastStore.show( {
+				this.toastStore.show({
 					title: __("This coupon already used !"),
 					color: "error",
 				});
@@ -145,13 +146,14 @@ export default {
 					if (r.message) {
 						const res = r.message;
 						if (res.msg != "Apply" || !res.coupon) {
-							vm.toastStore.show( {
+							vm.toastStore.show({
 								title: res.msg,
 								color: "error",
 							});
 						} else {
 							vm.new_coupon = null;
 							const coupon = res.coupon;
+							if (!vm.posa_coupons) vm.posa_coupons = [];
 							vm.posa_coupons.push({
 								coupon: coupon.name,
 								coupon_code: coupon.coupon_code,
@@ -186,6 +188,7 @@ export default {
 		},
 
 		updatePosCoupons(offers) {
+			if (!this.posa_coupons) return;
 			this.posa_coupons.forEach((coupon) => {
 				const offer = offers.find((el) => el.offer_applied && el.coupon == coupon.coupon);
 				if (offer) {
@@ -197,10 +200,11 @@ export default {
 		},
 
 		removeCoupon(reomove_list) {
+			if (!this.posa_coupons) return;
 			this.posa_coupons = this.posa_coupons.filter((coupon) => !reomove_list.includes(coupon.coupon));
 		},
 		updateInvoice() {
-			this.eventBus.emit("update_invoice_coupons", this.posa_coupons);
+			this.eventBus.emit("update_invoice_coupons", this.posa_coupons || []);
 		},
 		updateCounters() {
 			// update store

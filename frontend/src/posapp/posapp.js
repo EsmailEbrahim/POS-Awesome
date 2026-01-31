@@ -25,6 +25,22 @@ import { attachProfilerHelpers, initLongTaskObserver, isPerfEnabled } from "./ut
 
 attachProfilerHelpers();
 
+// Suppress known benign error from Frappe's shortcut.js (vendor)
+// This error occurs because POS view might not have the expected breadcrumb structure
+if (typeof window !== "undefined") {
+	window.addEventListener("error", (event) => {
+		if (
+			event.message &&
+			(event.message.includes("remove_last_divider") ||
+				(event.message.includes("offsetWidth") && event.filename && event.filename.includes("shortcut.js")))
+		) {
+			event.preventDefault();
+			console.warn("Suppressed known benign error in shortcut.js");
+			return true;
+		}
+	});
+}
+
 // Expose Dexie globally for libraries that expect a global Dexie instance
 if (typeof window !== "undefined" && !window.Dexie) {
 	window.Dexie = Dexie;
@@ -126,5 +142,5 @@ frappe.PosApp.posapp = class {
 			console.info("POS App unmounted");
 		}
 	}
-	setup_header() {}
+	setup_header() { }
 };

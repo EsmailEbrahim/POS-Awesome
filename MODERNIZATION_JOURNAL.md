@@ -243,13 +243,14 @@ _Taming the monoliths. Breaking down massive components for readability and main
     - [x] `useItemCurrency.js`: Price conversion, PLC to Company rate logic.
     - [x] `useItemSelection.js`: `select_item`, `click_item_row`, `highlightedIndex` navigation, `fly` animation logic.
     - [x] `useItemSync.js`: `forceReloadItems`, `verifyServerItemCount`, `kickoffBackgroundSync`, `backgroundLoadItems`.
-    - [x] `useItemAddition.js` (or `useItemActionHandlers.js`): Consolidate `add_item`, `addScannedItemToInvoice`, `handleVariantItem`, `prepareItemForCart`.
+    - [x] `useItemAddition.js`: Consolidated `addItem`, `removeItem`, `groupAndAddItem` and merge logic.
     - [x] `useLastInvoiceRate.js`: Fetching and caching historical rates per customer.
-    - [ ] `useItemSelectorLayout.js`: Grid metrics, overflow checking, virtual scroll synchronization, and container resizing.
-    - [ ] `useItemStorageSafety.js`: IndexedDB/LocalStorage health checks and `itemWorker` management.
-    - [ ] `useBarcodeIndexing.js`: High-performance barcode-to-item lookup index management.
+    - [x] `useItemSelectorLayout.js`: Grid metrics, overflow checking, virtual scroll synchronization, and container resizing.
+    - [x] `useItemStorageSafety.js`: IndexedDB/LocalStorage health checks and `itemWorker` management.
+    - [x] `useBarcodeIndexing.js`: High-performance barcode-to-item lookup index management.
+    - [ ] `useScanProcessor.js`: Consolidate `processScannedItem` and `addScannedItemToInvoice` (Scan Policy & Business Logic).
     - [ ] `useItemSearchTriggers.js`: Consolidate Search Keydown, Focus, Blur, and Clear logic (UI bridge).
-    - [x] `Bug Fixes`: Resolved `417 Expectation Failed`, `vm is not defined`, and `replaceBarcodeIndex is not defined`.
+    - [x] `Bug Fixes`: Resolved `417 Expectation Failed`, `vm is not defined`, `replaceBarcodeIndex is not defined`, `get_invoice_doc TypeError`, and `playScanTone TypeError`.
 
 - [/] **6.1.2 Extract Sub-Components (UI)**
     - [x] `ItemCard.vue`: Extracted.
@@ -436,5 +437,6 @@ _The ultimate reliability upgrade. A strict, step-by-step path to type safety._
 | 2026-01-26 | Phase 2.1 Remove Event Bus          | Completed | RefactoredView switching, Customer Dialogs, Invoice/Order Loading to use Stores.                                                     |
 | 2026-01-28 | Phase 2.1 Final Cleanup             | Completed | Removed remaining EventBus usage in `Payments.vue` and `Invoice.vue` (view switching, clearing invoice, posting date).               |
 | 2026-01-30 | Phase 6.1 ItemsSelector Refactor    | In Progress | Extracted `useScannerInput.js`, `useItemAvailability.js`, `useItemCurrency.js`, `useItemDetailFetcher.js`, `useItemSelection.js`, `useItemSync.js`. |
-| 2026-01-30 | Bug Fixes                           | Completed   | Resolved `417 Expectation Failed`, `vm is not defined`, and `replaceBarcodeIndex is not defined` errors. |
-| 2026-01-30 | Phase 6.1 Conclusion                | Updated     | Logic extraction for `ItemsSelector.vue` is ~90% complete. Remaining: `useItemAddition.js`. |
+| 2026-01-30 | Bug Fixes                           | Completed   | Resolved multiple runtime errors including `vm is not defined` and `playScanTone`. |
+| 2026-01-31 | Phase 6.1 Logic Consolidation       | Completed   | Extracted `useBarcodeIndexing`, `useItemStorageSafety`, `useItemSelectorLayout`. Consolidated `useItemAddition`. |
+| 2026-01-31 | Scan & Addition Debugging           | Completed   | Fixed item merge issues, scan handler registration, and adding items via Proxy wrapper. |
