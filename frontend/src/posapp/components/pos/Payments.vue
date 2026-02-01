@@ -200,12 +200,8 @@ import {
 	updateLocalStock,
 } from "../../../offline/index.js";
 
-import renderOfflineInvoiceHTML from "../../../offline_print_template";
 import {
-	appendDebugPrintParam,
 	isDebugPrintEnabled,
-	silentPrint,
-	watchPrintWindow,
 } from "../../plugins/print.js";
 import { useInvoiceStore } from "../../stores/invoiceStore.js";
 import { useCustomersStore } from "../../stores/customersStore.js";
@@ -230,6 +226,8 @@ import PaymentDialogs from "./PaymentDialogs.vue";
 import { usePaymentCalculations } from "../../composables/usePaymentCalculations.js";
 import { usePaymentSubmission } from "../../composables/usePaymentSubmission.js";
 import { useRedemptionLogic } from "../../composables/useRedemptionLogic.js";
+import { usePaymentPrinting } from "../../composables/usePaymentPrinting.js";
+import { usePaymentMethods } from "../../composables/usePaymentMethods.js";
 import { ref, computed, getCurrentInstance } from "vue";
 
 export default {
@@ -293,6 +291,69 @@ export default {
 				// We can expose a clear function or logic here if needed, 
 				// but for now let's just use the composable's logic
 			}
+		});
+
+		// Initialize printing composable
+		const {
+			loadPrintPage,
+			printOfflineInvoice,
+			openOfflineInvoicePreview,
+		} = usePaymentPrinting({
+			invoiceDoc: computed(() => invoiceStore.invoiceDoc),
+			posProfile: pos_profile,
+			invoiceType: invoiceType,
+		});
+
+		// Initialize Payment Methods
+		const {
+			mpesa_modes,
+			phone_dialog,
+			get_mpesa_modes,
+			is_mpesa_c2b_payment,
+			mpesa_c2b_dialog,
+			set_mpesa_payment,
+			set_full_amount,
+			set_rest_amount,
+			clear_all_amounts,
+			request_payment,
+		} = usePaymentMethods({
+			invoiceDoc: computed(() => invoiceStore.invoiceDoc),
+			posProfile: pos_profile,
+			diffPayment: diff_payment,
+			formatFloat: (val) => proxy.formatFloat(val, currency_precision.value),
+			stores: {
+				toastStore,
+				uiStore,
+			},
+			eventBus: proxy.eventBus,
+			onSubmit: (args, submitPrint) => {
+				// Call the exposed submitInvoice logic
+				// submitInvoice(print, callbacks)
+				// Here call the wrapper or composable function
+				submitInvoice(null, {
+					onPrint: (doc) => {
+						if (submitPrint) {
+							if (isOffline()) {
+								printOfflineInvoice(doc);
+							} else {
+								loadPrintPage();
+							}
+						}
+					},
+					onSuccess: () => {
+						eventBus.emit("focus_item_search");
+					}
+				});
+			},
+			setRedeemCustomerCredit: (val) => { redeem_customer_credit.value = val; },
+			customerCreditDict: customer_credit_dict,
+			redeemedCustomerCredit: redeemed_customer_credit,
+			isCashback: is_cashback,
+			// Getters for request_payment payload
+			getTotalChange: () => Math.max(-diff_payment.value, 0),
+			getPaidChange: () => paid_change.value,
+			getCreditChange: () => credit_change.value,
+			onBackToInvoice: () => eventBus.emit("change_active_view", "Invoice"),
 		});
 
 		// Initialize calculations composable
@@ -372,6 +433,21 @@ export default {
 			get_available_credit,
 			customer_info,
 			currency_precision,
+			// Printing
+			load_print_page: loadPrintPage,
+			print_offline_invoice: printOfflineInvoice,
+			open_offline_invoice_preview: openOfflineInvoicePreview,
+			// Payment Methods
+			mpesa_modes,
+			phone_dialog,
+			get_mpesa_modes,
+			is_mpesa_c2b_payment,
+			mpesa_c2b_dialog,
+			set_mpesa_payment,
+			set_full_amount,
+			set_rest_amount,
+			clear_all_amounts,
+			request_payment,
 			// Expose calculated properties from composable
 			...paymentCalculations,
 			// Expose submission logic
@@ -948,183 +1024,6 @@ export default {
 				this.backgroundStatusCheck = null;
 			}
 		},
-		// Set full amount for a payment method (or negative for returns)
-		set_full_amount(idx) {
-			const isReturn = this.invoice_doc.is_return || this.invoiceType === "Return";
-			let totalAmount = this.invoice_doc.rounded_total || this.invoice_doc.grand_total;
-
-			console.log("Setting full amount for payment method idx:", idx);
-			console.log("Current payments:", JSON.stringify(this.invoice_doc.payments));
-
-			// Reset all payment amounts first
-			this.invoice_doc.payments.forEach((payment) => {
-				payment.amount = 0;
-				if (payment.base_amount !== undefined) {
-					payment.base_amount = 0;
-				}
-			});
-
-			// Get the clicked payment method's name from the button text
-			const clickedButton = event?.target?.textContent?.trim();
-			console.log("Clicked button text:", clickedButton);
-
-			// Set amount only for clicked payment method
-			const clickedPayment = this.invoice_doc.payments.find(
-				(payment) => payment.mode_of_payment === clickedButton,
-			);
-
-			if (clickedPayment) {
-				console.log("Found clicked payment:", clickedPayment.mode_of_payment);
-				let amount = isReturn ? -Math.abs(totalAmount) : totalAmount;
-				clickedPayment.amount = amount;
-				if (clickedPayment.base_amount !== undefined) {
-					clickedPayment.base_amount = isReturn ? -Math.abs(amount) : amount;
-				}
-				console.log("Set amount for payment:", clickedPayment.mode_of_payment, "amount:", amount);
-			} else {
-				console.log("No payment found for button text:", clickedButton);
-			}
-
-			// Force Vue to update the view
-			this.$forceUpdate();
-		},
-		// Set remaining amount for a payment method when focused
-		set_rest_amount(idx) {
-			const isReturn = this.invoice_doc.is_return || this.invoiceType === "Return";
-			this.invoice_doc.payments.forEach((payment) => {
-				if (payment.idx === idx && payment.amount === 0 && this.diff_payment > 0) {
-					let amount = this.diff_payment;
-					if (isReturn) {
-						amount = -Math.abs(amount);
-					}
-					payment.amount = amount;
-					if (payment.base_amount !== undefined) {
-						payment.base_amount = isReturn ? -Math.abs(amount) : amount;
-					}
-				}
-			});
-		},
-		// Clear all payment amounts
-		clear_all_amounts() {
-			this.invoice_doc.payments.forEach((payment) => {
-				payment.amount = 0;
-			});
-		},
-		// Open print page for invoice
-		load_print_page() {
-			const print_format =
-				this.print_format ||
-				this.pos_profile.print_format_for_online ||
-				this.pos_profile.print_format;
-			const letter_head = this.pos_profile.letter_head || 0;
-			let doctype;
-			const debugPrint = isDebugPrintEnabled();
-
-			if (this.invoiceType === "Quotation") {
-				doctype = "Quotation";
-			} else if (this.invoiceType === "Order" && this.pos_profile.posa_create_only_sales_order) {
-				doctype = "Sales Order";
-			} else if (this.pos_profile.create_pos_invoice_instead_of_sales_invoice) {
-				doctype = "POS Invoice";
-			} else {
-				doctype = "Sales Invoice";
-			}
-			let url =
-				frappe.urllib.get_base_url() +
-				"/printview?doctype=" +
-				encodeURIComponent(doctype) +
-				"&name=" +
-				this.invoice_doc.name +
-				"&trigger_print=1" +
-				"&format=" +
-				print_format +
-				"&no_letterhead=" +
-				letter_head;
-			url = appendDebugPrintParam(url, debugPrint);
-			const printOptions = {
-				invoiceDoc: this.invoice_doc,
-				allowOfflineFallback: isOffline(),
-				triggerPrint: "1",
-				debugPrint,
-				debugInfo: {
-					printFormat: print_format,
-					templatePath: "online-printview",
-				},
-			};
-
-			if (this.pos_profile.posa_open_print_in_new_tab) {
-				if (isOffline()) {
-					this.open_offline_invoice_preview(this.invoice_doc, {
-						debugPrint,
-						printFormat: print_format,
-					});
-					return;
-				}
-				let newTabUrl =
-					frappe.urllib.get_base_url() +
-					"/printview?doctype=" +
-					encodeURIComponent(doctype) +
-					"&name=" +
-					this.invoice_doc.name +
-					"&trigger_print=0" +
-					"&format=" +
-					print_format;
-
-				if (this.pos_profile.letter_head) {
-					newTabUrl += "&letterhead=" + encodeURIComponent(this.pos_profile.letter_head);
-					newTabUrl += "&no_letterhead=0";
-				} else {
-					newTabUrl += "&no_letterhead=0";
-				}
-
-				newTabUrl = appendDebugPrintParam(newTabUrl, debugPrint);
-				// Android Share → Print is more reliable, so keep trigger_print=0 and skip auto-print.
-				const printWindow = window.open(newTabUrl, "_blank");
-				watchPrintWindow(printWindow, {
-					...printOptions,
-					triggerPrint: "0",
-					shouldPrint: false,
-				});
-				return;
-			}
-
-			if (this.pos_profile.posa_silent_print) {
-				silentPrint(url, printOptions);
-			} else {
-				const printWindow = window.open(url, "Print");
-				watchPrintWindow(printWindow, printOptions);
-			}
-		},
-		// Print invoice using a more detailed offline template
-		async print_offline_invoice(invoice) {
-			if (!invoice) return;
-			const html = await renderOfflineInvoiceHTML(invoice);
-			const win = window.open("", "_blank");
-			win.document.write(html);
-			win.document.close();
-			win.focus();
-			win.print();
-		},
-		// Open offline invoice preview without triggering auto-print (for new-tab mode)
-		async open_offline_invoice_preview(invoice, { debugPrint = false, printFormat = "" } = {}) {
-			if (!invoice) return;
-			const html = await renderOfflineInvoiceHTML(invoice);
-			const win = window.open("", "_blank");
-			if (!win) return;
-			win.document.write(html);
-			win.document.close();
-			win.focus();
-			if (debugPrint) {
-				console.log("[POSAwesome][Print Debug]", {
-					location: win.location?.href || null,
-					online: navigator.onLine,
-					trigger_print: "0",
-					print_format: printFormat || null,
-					template_path: "offline-fallback",
-					should_print: false,
-				});
-			}
-		},
 		// Keyboard shortcuts for payment submit (Alt+X) and submit+print (Alt+P)
 		handlePaymentShortcut(event) {
 			if (!this.paymentVisible) {
@@ -1248,166 +1147,6 @@ export default {
 					}
 				},
 			});
-		},
-		// Request payment for phone type
-		async request_payment() {
-			this.phone_dialog = false;
-			if (!this.invoice_doc.contact_mobile) {
-				this.toastStore.show({
-					title: __("Please set the customer's mobile number"),
-					color: "error",
-				});
-				this.eventBus.emit("open_edit_customer");
-				this.back_to_invoice();
-				return;
-			}
-
-			this.uiStore.freeze(__("Waiting for payment..."));
-
-			try {
-				this.invoice_doc.payments.forEach((payment) => {
-					payment.amount = this.flt(payment.amount);
-				});
-
-				const formData = {
-					...this.invoice_doc,
-					total_change: !this.invoice_doc.is_return ? Math.max(-this.diff_payment, 0) : 0,
-					paid_change: !this.invoice_doc.is_return ? this.paid_change : 0,
-					credit_change: -this.credit_change,
-					redeemed_customer_credit: this.redeemed_customer_credit,
-					customer_credit_dict: this.customer_credit_dict,
-					is_cashback: this.is_cashback,
-				};
-
-				const updateResponse = await frappe.call({
-					method: "posawesome.posawesome.api.invoices.update_invoice",
-					args: { data: formData },
-				});
-
-				if (updateResponse?.message) {
-					this.invoice_doc = updateResponse.message;
-				}
-
-				const paymentResponse = await frappe.call({
-					method: "posawesome.posawesome.api.payments.create_payment_request",
-					args: { doc: this.invoice_doc },
-				});
-
-				const payment_request_name = paymentResponse?.message?.name;
-				if (!payment_request_name) {
-					throw new Error("Payment request failed");
-				}
-
-				await new Promise((resolve, reject) => {
-					setTimeout(async () => {
-						try {
-							const { message } = await frappe.db.get_value(
-								"Payment Request",
-								payment_request_name,
-								["status", "grand_total"],
-							);
-
-							if (!message) {
-								this.toastStore.show({
-									title: __(
-										"Payment request status could not be retrieved. Please try again",
-									),
-									color: "error",
-								});
-								resolve();
-								return;
-							}
-
-							if (message.status !== "Paid") {
-								this.toastStore.show({
-									title: __(
-										"Payment Request took too long to respond. Please try requesting for payment again",
-									),
-									color: "error",
-								});
-								resolve();
-								return;
-							}
-
-							this.toastStore.show({
-								title: __("Payment of {0} received successfully.", [
-									this.formatCurrency(message.grand_total, this.invoice_doc.currency, 0),
-								]),
-								color: "success",
-							});
-
-							const doc = await frappe.db.get_doc(
-								this.invoice_doc.doctype,
-								this.invoice_doc.name,
-							);
-							this.invoice_doc = doc;
-							this.submit(null, true);
-							resolve();
-						} catch (error) {
-							reject(error);
-						}
-					}, 30000);
-				});
-			} catch (error) {
-				console.error("Payment request error:", error);
-				this.toastStore.show({
-					title: __(error.message || "Payment request failed"),
-					color: "error",
-				});
-			} finally {
-				this.uiStore.unfreeze();
-			}
-		},
-		// Get M-Pesa payment modes from backend
-		get_mpesa_modes() {
-			const vm = this;
-			frappe.call({
-				method: "posawesome.posawesome.api.m_pesa.get_mpesa_mode_of_payment",
-				args: { company: vm.pos_profile.company },
-				async: true,
-				callback: function (r) {
-					if (!r.exc) {
-						vm.mpesa_modes = r.message;
-					} else {
-						vm.mpesa_modes = [];
-					}
-				},
-			});
-		},
-		// Check if payment is M-Pesa C2B
-		is_mpesa_c2b_payment(payment) {
-			if (this.mpesa_modes.includes(payment.mode_of_payment) && payment.type === "Bank") {
-				payment.amount = 0;
-				return true;
-			} else {
-				return false;
-			}
-		},
-		// Open M-Pesa payment dialog
-		mpesa_c2b_dialog(payment) {
-			const data = {
-				company: this.pos_profile.company,
-				mode_of_payment: payment.mode_of_payment,
-				customer: this.invoice_doc.customer,
-			};
-			this.eventBus.emit("open_mpesa_payments", data);
-		},
-		// Set M-Pesa payment as customer credit
-		set_mpesa_payment(payment) {
-			this.pos_profile.use_customer_credit = true;
-			this.redeem_customer_credit = true;
-			const invoiceAmount = this.invoice_doc.rounded_total || this.invoice_doc.grand_total;
-			let amount =
-				payment.unallocated_amount > invoiceAmount ? invoiceAmount : payment.unallocated_amount;
-			amount = amount > 0 ? amount : 0;
-			const advance = {
-				type: "Advance",
-				credit_origin: payment.name,
-				total_credit: this.flt(payment.unallocated_amount),
-				credit_to_redeem: this.flt(amount),
-			};
-			this.clear_all_amounts();
-			this.customer_credit_dict.push(advance);
 		},
 		// Normalize address records returned from the server
 		normalizeAddress(address) {
