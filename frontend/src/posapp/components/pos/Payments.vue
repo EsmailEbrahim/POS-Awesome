@@ -252,6 +252,7 @@ export default {
 		const customersStore = useCustomersStore();
 		const uiStore = useUIStore();
 		const toastStore = useToastStore();
+		const syncStore = useSyncStore();
 		const { isRtl, rtlStyles, rtlClasses } = useRtl();
 		const { selectedCustomer, customerInfo, refreshToken } = storeToRefs(customersStore);
 		const { isFrozen, freezeTitle, freezeMessage, activeView } = storeToRefs(uiStore);
@@ -524,11 +525,11 @@ export default {
 			ensureReturnPaymentsAreNegative,
 			submitInvoice,
 			print_formats,
+			syncStore,
 		};
 	},
 	data() {
 		return {
-			syncStore: useSyncStore(),
 			// pos_settings moved to setup
 			is_return: false, // Is this a return invoice?
 			is_credit_sale: false, // Is this a credit sale?
