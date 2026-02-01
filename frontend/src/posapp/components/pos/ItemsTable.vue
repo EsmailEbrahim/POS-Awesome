@@ -720,6 +720,7 @@ export default {
 		responsiveHeaders() {
 			if (!this.headers || this.headers.length === 0) return [];
 
+			// PERF: Map headers to calculated widths to avoid re-calculation in template
 			return this.headers
 				.filter((header) => {
 					// Always show required columns
@@ -727,24 +728,25 @@ export default {
 						header.required ||
 						header.key === "item_name" ||
 						header.key === "qty" ||
-						header.key === "actions"
+						header.key === "actions" ||
+						header.key === "amount"
 					) {
 						return true;
 					}
 
-					// Hide columns based on container width
-					if (this.containerWidth < 500) {
-						// Ultra-compact: only essential columns
+					// Hide non-essential columns ONLY on very small screens.
+					// If the user explicitly selected a column in Invoice.vue, it will be in this.headers.
+					// We should only override that if the screen is too narrow to hold it.
+					if (this.containerWidth < 450) {
+						// Ultra-compact: only keep the most basic columns
 						return ["item_name", "qty", "amount", "actions"].includes(header.key);
-					} else if (this.containerWidth < 700) {
-						// Compact: essential + rate
-						return ["item_name", "qty", "rate", "amount", "actions"].includes(header.key);
-					} else if (this.containerWidth < 900) {
-						// Medium: hide advanced columns
-						return !["discount_value", "price_list_rate"].includes(header.key);
+					} else if (this.containerWidth < 650) {
+						// Compact: hide advanced discount/price list details but keep rate
+						return !["discount_value", "discount_amount", "price_list_rate", "uom", "posa_is_offer"].includes(header.key);
 					}
 
-					// Large: show all columns
+					// For Medium (650+) and Large screens, we respect the user's header selection from Invoice.vue
+					// without further filtering. This ensures that manually enabled columns actually show up.
 					return true;
 				})
 				.map((header) => ({
@@ -3352,10 +3354,12 @@ body[dir="rtl"] .number-field-rtl {
 	text-align: center;
 	font-weight: 600;
 	-moz-appearance: textfield;
+	appearance: textfield;
 }
 .pos-table__qty-input :deep(input::-webkit-outer-spin-button),
 .pos-table__qty-input :deep(input::-webkit-inner-spin-button) {
 	-webkit-appearance: none;
+	appearance: none;
 	margin: 0;
 }
 .pos-table__qty-input :deep(.v-input__control) {
