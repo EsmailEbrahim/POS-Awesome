@@ -316,11 +316,11 @@ _Taming the monoliths. Breaking down massive components for readability and main
 
 ## ✂️ 6.5 `ClosingDialog.vue` (1950 lines)
 
-- [ ] **6.5.1 Extract Sub-Components**
-    - `ShiftOverview.vue`: The top cards (Insights).
-    - `ShiftTotalsTable.vue`: The distribution tables (Currency, Returns, Change).
-    - `CashDrawerSnapshot.vue`: The expected cash table.
-    - `ClosingReconciliation.vue`: The input form for closing amounts.
+- [x] **6.5.1 Extract Sub-Components**
+    - [x] `ShiftOverview.vue`: The top cards (Insights).
+    - [x] `PaymentReconciliation.vue`: The reconciliation table.
+    - [x] `ClosingHeader.vue`: The header section.
+    - [x] **Composables**: Extracted `useClosingShift.js` and `useClosingSummary.js` for clean logic separation.
 
 ## ✂️ 6.6 Store Refactoring
 
@@ -500,4 +500,6 @@ _The ultimate reliability upgrade. A strict, step-by-step path to type safety._
 | 2026-02-01 | Phase 6.1 Logic Consolidation       | Completed   | Extracted `useBarcodeIndexing`, `useItemStorageSafety`, `useItemSelectorLayout`. Consolidated `useItemAddition`.                                    |
 | 2026-02-01 | Scan & Addition Debugging           | Completed   | Fixed item merge issues, scan handler registration, and adding items via Proxy wrapper.                                                             |
 | 2026-02-01 | Phase 6.2 Payments Refactoring      | Completed   | Decomposed `Payments.vue` into `PaymentMethods`, `PaymentSummary`, `InvoiceTotals`. Migrated logic to `usePayments.js` & `<script setup>`.          |
-| 2026-02-01 | Journal Update                      | Completed   | Verified codebase state. Phase 6.1 & 6.2 largely decomposed. `Pay.vue` and `ClosingDialog.vue` pending decomposition. Phase 7 not started.          |
+| 2026-02-01 | Phase 6.5 ClosingDialog Refactor    | Completed   | Decomposed into `ShiftOverview`, `PaymentReconciliation`, `ClosingHeader`. Stable and theme-aware.                                                  |
+| 2026-02-01 | Stabilization & Fixes               | Completed   | Fixed ClosingDialog Dark Mode, Shifts Submission Event flow, and Items Table toggle visibility.                                                     |
+| 2026-02-01 | Phase 7 initialization              | In Progress | Setting up TypeScript config and dependencies.                                                                                                      |
