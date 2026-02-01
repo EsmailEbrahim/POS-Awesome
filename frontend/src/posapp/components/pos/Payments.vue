@@ -309,6 +309,20 @@ export default {
 			printFormat: print_format,
 		});
 
+		// Initialize calculations composable
+		const paymentCalculations = usePaymentCalculations({
+			invoiceDoc: computed(() => invoiceStore.invoiceDoc),
+			posProfile: pos_profile,
+			currencyPrecision: currency_precision,
+			loyaltyAmount: loyalty_amount,
+			redeemedCustomerCredit: redeemed_customer_credit,
+			customerCreditDict: customer_credit_dict,
+			customerInfo: customer_info,
+			formatCurrency: (val, curr) => proxy.formatCurrency(val, curr),
+		});
+
+		const { diff_payment } = paymentCalculations;
+
 		// Initialize Payment Methods
 		const {
 			mpesa_modes,
@@ -399,19 +413,6 @@ export default {
 			eventBus: proxy.eventBus,
 		});
 
-		// Initialize calculations composable
-		const paymentCalculations = usePaymentCalculations({
-			invoiceDoc: computed(() => invoiceStore.invoiceDoc),
-			posProfile: pos_profile,
-			currencyPrecision: currency_precision,
-			loyaltyAmount: loyalty_amount,
-			redeemedCustomerCredit: redeemed_customer_credit,
-			customerCreditDict: customer_credit_dict,
-			customerInfo: customer_info,
-			formatCurrency: (val, curr) => proxy.formatCurrency(val, curr),
-		});
-
-		const { diff_payment } = paymentCalculations;
 
 		const {
 			validateDueDate,
