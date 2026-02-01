@@ -304,6 +304,7 @@ export default {
 			invoiceDoc: computed(() => invoiceStore.invoiceDoc),
 			posProfile: pos_profile,
 			invoiceType: invoiceType,
+			printFormat: print_format,
 		});
 
 		// Initialize Payment Methods
@@ -381,6 +382,9 @@ export default {
 			applyDuePreset,
 			applyCustomDays,
 			initializeReturnValidity,
+			updateReturnValidUpto,
+			formatDate,
+			formatDateDisplay,
 		} = useInvoiceDetails({
 			invoiceDoc: computed(() => invoiceStore.invoiceDoc),
 			posProfile: pos_profile,
@@ -1143,18 +1147,6 @@ export default {
 					}
 				},
 			});
-		},
-		updateReturnValidUpto(value) {
-			if (!this.returnValidityEnabled) {
-				return;
-			}
-			const formatted = this.formatDate(value);
-			this.return_valid_upto_date = this.formatDateDisplay(formatted);
-			if (this.invoice_doc) {
-				this.invoice_doc.posa_return_valid_upto = formatted;
-			} else {
-				this.invoiceStore.mergeInvoiceDoc({ posa_return_valid_upto: formatted });
-			}
 		},
 		// Format date to YYYY-MM-DD
 		formatDate(date) {

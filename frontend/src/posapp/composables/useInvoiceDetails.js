@@ -264,7 +264,36 @@ export function useInvoiceDetails(options) {
 
 		return_valid_upto_date.value = proposedDate;
 		doc.posa_return_valid_upto = proposedDate;
+
+		return_valid_upto_date.value = proposedDate;
+		doc.posa_return_valid_upto = proposedDate;
 	};
+
+	const updateReturnValidUpto = (value) => {
+		// Logic to check validity enabled if needed, or rely on caller?
+		// Legacy checked this.returnValidityEnabled. 
+		// We can check profile/settings here or assume caller checks.
+		// Let's check profile/settings to be safe.
+		const profile = unref(posProfile);
+		const settings = unref(posSettings);
+		const enabled = Boolean(
+			profile?.posa_enable_return_validity || settings?.posa_enable_return_validity
+		);
+
+		if (!enabled) return;
+
+		const formatted = formatDate(value); // YYYY-MM-DD
+		// update state
+		return_valid_upto_date.value = formatDateDisplay(formatted); 
+		
+		const doc = unref(invoiceDoc);
+		if (doc) {
+			doc.posa_return_valid_upto = formatted;
+		} else if (stores?.invoiceStore) {
+			stores.invoiceStore.mergeInvoiceDoc({ posa_return_valid_upto: formatted });
+		}
+	};
+
 
 	return {
 		addresses,
@@ -289,6 +318,10 @@ export function useInvoiceDetails(options) {
 		applyDuePreset,
 		applyCustomDays,
 		initializeReturnValidity,
+		initializeReturnValidity,
 		calculateReturnValidUntil,
+		updateReturnValidUpto,
+		formatDateDisplay, // Expose for template/legacy usage if needed
+		formatDate, // Expose for template/legacy usage if needed
 	};
 }

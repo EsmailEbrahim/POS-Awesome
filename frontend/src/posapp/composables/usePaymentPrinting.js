@@ -13,6 +13,7 @@ export function usePaymentPrinting(options) {
 		invoiceDoc,
 		posProfile,
 		invoiceType,
+		printFormat, // Optional override Ref
 	} = options;
 
 	const openOfflineInvoicePreview = async (invoice, { debugPrint = false, printFormat = "" } = {}) => {
@@ -51,10 +52,11 @@ export function usePaymentPrinting(options) {
 		const profile = unref(posProfile);
 		const type = unref(invoiceType);
 		
+		const pFormatOverride = unref(printFormat);
 		const print_format =
+			pFormatOverride ||
 			profile.print_format_for_online ||
 			profile.print_format;
-		// Note: Payments.vue accessed `this.print_format` local data first. 
 		// If we need that, we should pass it as a ref or just rely on profile.
 		// Assuming profile is sufficient or we pass a ref if specific override needed.
 		
