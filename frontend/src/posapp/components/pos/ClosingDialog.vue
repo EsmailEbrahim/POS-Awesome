@@ -74,7 +74,7 @@
 /* global __ */
 import format from "../../format";
 import { useUIStore } from "../../stores/uiStore.js";
-import { ref, inject, onMounted, onBeforeUnmount, watch } from "vue";
+import { ref, inject, onMounted, onBeforeUnmount, watch, unref } from "vue";
 import { useClosingShift } from "../../composables/useClosingShift";
 import { useClosingSummary } from "../../composables/useClosingSummary";
 
