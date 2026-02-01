@@ -6,6 +6,23 @@ This document serves as a detailed roadmap and tracking journal for transforming
 
 ---
 
+## 🛡️ Refactoring Protocol (Safety First)
+
+To prevent regressions and maintain stability during modernization, every refactor must follow these rules:
+
+1.  **Incremental Changes**: Avoid large, sweeping refactors. Break down tasks into the smallest possible functional units.
+2.  **Continuous Verification**: Reverity logic after _every_ change. Do not stack multiple changes without testing.
+3.  **Deep Inspection Checklist**: After each modification, specifically inspect and validate:
+    - **Proxies & Context**: Ensure `this` or `vm` references are correctly delegated.
+    - **Events**: Verify event emissions (`emit`) and listeners (`on`) are correctly mapped.
+    - **Methods & Props**: Check that naming conventions (snake_case vs camelCase) are handled.
+    - **Reactivity**: Ensure `ref`, `reactive`, and `computed` properties trigger updates as expected.
+    - **Stores**: Validate that Pinia store mutations and actions are correctly integrated.
+    - **Lifecycle**: Ensure hooks like `onMounted` or `onUnmounted` are utilized correctly.
+    - **Domain Logic**: Pay special attention to **Multi-Currency**, **Pricing**, and **Calculations**.
+
+---
+
 ## 🏗️ Phase 1: Architectural Foundation (Critical)
 
 _Building the backbone for a scalable Single Page Application (SPA)._
