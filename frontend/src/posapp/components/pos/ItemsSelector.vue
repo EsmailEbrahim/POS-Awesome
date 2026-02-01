@@ -358,11 +358,16 @@ export default {
 			searchItemsByCode: searchItemsByCodeFn
 		} = useBarcodeIndexing();
 
-		const add_item = (item, options) => {
+		const add_item = async (item, options = {}) => {
 			// In 'pos' context, we use the internal store logic directly
 			if (props.context === "pos") {
 				const vm = getValidVM();
 				if (!vm) return;
+
+				// 1. Determine requested quantity from options or component state
+				const requestedQty =
+					options.qty !== undefined ? options.qty : vm.qty != null ? Math.abs(vm.qty) : 1;
+
 				// Use a Proxy to create a robust context that delegates to the component instance
 				// but allows local overrides and method binding
 				const context = new Proxy(vm, {
@@ -374,6 +379,9 @@ export default {
 						// 2. Map specific missing methods/properties
 						if (prop === "update_items_details") {
 							return vm.itemDetailFetcher?.update_items_details;
+						}
+						if (prop === "itemCurrencyUtils") {
+							return vm.itemCurrencyUtils;
 						}
 						if (prop === "items") {
 							// Map 'items' to invoiceStore items for merge logic (ItemsSelector uses 'items' for search results)
@@ -415,7 +423,17 @@ export default {
 						return Reflect.set(target, prop, value, receiver);
 					},
 				});
-				return itemAddition.addItem(item, context);
+
+				// 3. Prepare item for cart (UOM, rate, qty)
+				await itemAddition.prepareItemForCart(item, requestedQty, context);
+
+				// 4. Add to cart
+				const result = await itemAddition.addItem(item, context);
+
+				// 5. Reset quantity in component
+				vm.qty = 1;
+
+				return result;
 			} else {
 				// In other contexts (e.g. Purchase Orders), we emit the event for the parent to handle
 				emit("add-item", item);
