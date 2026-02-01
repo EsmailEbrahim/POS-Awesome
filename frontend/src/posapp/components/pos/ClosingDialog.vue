@@ -225,6 +225,15 @@ export default {
 			fetchOverview,
 			submitDialog,
 			...summary,
+			// Expose formatters used in template
+			formatCurrency,
+			formatFloat,
+			formatCurrencyWithSymbol: summaryFormatters.formatCurrencyWithSymbol,
+			shouldShowCompanyEquivalent: summary.shouldShowCompanyEquivalent,
+			showExchangeRates: summary.showExchangeRates,
+			formatExchangeRates: summary.formatExchangeRates,
+			isCashMode: summary.isCashMode,
+			overpaymentDeductionForCurrency: summary.overpaymentDeductionForCurrency,
 			headers,
 			itemsPerPage: 20,
 		};
