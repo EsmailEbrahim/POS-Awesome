@@ -228,6 +228,7 @@ import PaymentOptions from "./PaymentOptions.vue";
 import PaymentSelectionFields from "./PaymentSelectionFields.vue";
 import PaymentDialogs from "./PaymentDialogs.vue";
 import { usePaymentCalculations } from "../../composables/usePaymentCalculations.js";
+import { usePaymentSubmission } from "../../composables/usePaymentSubmission.js";
 import { ref, computed, getCurrentInstance } from "vue";
 
 export default {
@@ -257,8 +258,10 @@ export default {
 
 		const { proxy } = getCurrentInstance();
 
-		// Component State migrated from data() for usePaymentCalculations
+		// Component State migrated from data() for usePaymentCalculations & usePaymentSubmission
 		const pos_profile = ref("");
+		const stock_settings = ref("");
+		const invoiceType = ref("Invoice");
 		const loyalty_amount = ref(0);
 		const redeemed_customer_credit = ref(0);
 		const customer_credit_dict = ref([]);
@@ -275,6 +278,18 @@ export default {
 			customerCreditDict: customer_credit_dict,
 			customerInfo: customer_info,
 			formatCurrency: (val, curr) => proxy.formatCurrency(val, curr),
+		});
+
+		const {
+			validateDueDate,
+			extractSubmissionErrorMessage,
+			formatStockErrors,
+		} = usePaymentSubmission({
+			invoiceDoc: computed(() => invoiceStore.invoiceDoc),
+			posProfile: pos_profile,
+			stockSettings: stock_settings,
+			invoiceType: invoiceType,
+			formatFloat: (val, prec) => proxy.formatFloat(val, prec),
 		});
 
 		return {
@@ -294,6 +309,8 @@ export default {
 			rtlClasses,
 			// Expose state for bi-directional binding in Options API
 			pos_profile,
+			stock_settings,
+			invoiceType,
 			loyalty_amount,
 			redeemed_customer_credit,
 			customer_credit_dict,
@@ -301,6 +318,10 @@ export default {
 			currency_precision,
 			// Expose calculated properties from composable
 			...paymentCalculations,
+			// Expose submission logic
+			validate_due_date: validateDueDate,
+			extractSubmissionErrorMessage,
+			formatStockErrors,
 		};
 	},
 	data() {
@@ -308,8 +329,6 @@ export default {
 			syncStore: useSyncStore(),
 			loading: false, // UI loading state
 			pos_settings: {}, // POS settings
-			stock_settings: "", // Stock settings
-			invoiceType: "Invoice", // Type of invoice
 			is_return: false, // Is this a return invoice?
 			credit_change: 0, // Change to be given as credit
 			paid_change: 0, // Change to be given as paid
@@ -625,56 +644,6 @@ export default {
 		},
 	},
 	methods: {
-		extractSubmissionErrorMessage(exc) {
-			if (!exc) {
-				return __("Unknown error");
-			}
-			if (exc?._server_messages) {
-				try {
-					const parsed = JSON.parse(exc._server_messages);
-					if (Array.isArray(parsed) && parsed.length) {
-						const first = parsed[0];
-						// Check if message is a JSON string containing errors (stock validation)
-						try {
-							const msgObj = JSON.parse(first);
-							if (msgObj.errors && Array.isArray(msgObj.errors)) {
-								return this.formatStockErrors(msgObj.errors);
-							}
-						} catch {
-							/* Not a JSON string */
-						}
-
-						if (typeof first === "string") {
-							return frappe.utils.strip_html(first);
-						}
-					}
-				} catch {
-					/* ignore parse issues */
-				}
-			}
-			if (exc?.message) {
-				try {
-					const parsed = JSON.parse(exc.message);
-					if (parsed.errors && Array.isArray(parsed.errors)) {
-						return this.formatStockErrors(parsed.errors);
-					}
-				} catch {
-					/* Not a JSON string */
-				}
-				return exc.message;
-			}
-			return exc.toString ? exc.toString() : __("Unknown error");
-		},
-		formatStockErrors(errors) {
-			const msg = errors
-				.map((e) => `${e.item_code} (${e.warehouse}) - ${this.formatFloat(e.available_qty)}`)
-				.join("\n");
-			const blocking = !this.stock_settings.allow_negative_stock || this.blockSaleBeyondAvailableQty;
-
-			return blocking
-				? __("Insufficient stock:\n{0}", [msg])
-				: __("Stock is lower than requested:\n{0}", [msg]);
-		},
 		// Go back to invoice view and reset customer readonly
 		back_to_invoice() {
 			this.uiStore.setActiveView("items");
@@ -1327,15 +1296,6 @@ export default {
 					template_path: "offline-fallback",
 					should_print: false,
 				});
-			}
-		},
-		// Validate due date (should not be in the past)
-		validate_due_date() {
-			const today = frappe.datetime.now_date();
-			const new_date = Date.parse(this.invoice_doc.due_date);
-			const parse_today = Date.parse(today);
-			if (new_date < parse_today) {
-				this.invoice_doc.due_date = today;
 			}
 		},
 		// Keyboard shortcuts for payment submit (Alt+X) and submit+print (Alt+P)
