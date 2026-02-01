@@ -90,7 +90,7 @@ import {
 	checkDbHealth,
 	setTaxTemplate,
 } from "../../../offline/index.js";
-import { getCurrentInstance, inject } from "vue";
+import { getCurrentInstance, inject, ref, onMounted, onBeforeUnmount } from "vue";
 import { usePosShift } from "../../composables/usePosShift.js";
 import { useOffers } from "../../composables/useOffers.js";
 // Import the cache cleanup function
@@ -106,18 +106,32 @@ import { storeToRefs } from "pinia";
 export default {
 	setup() {
 		const instance = getCurrentInstance();
+		const eventBus = inject("eventBus");
+		const dialog = ref(false);
 		const responsive = useResponsive();
 		const rtl = useRtl();
 		const shift = usePosShift(() => {
-			if (instance && instance.proxy) {
-				instance.proxy.dialog = true;
-			}
+			dialog.value = true;
 		});
 		const offers = useOffers();
 		const uiStore = useUIStore();
 		const invoiceStore = useInvoiceStore();
 		const itemsStore = useItemsStore();
 		const { activeView } = storeToRefs(uiStore);
+
+		onMounted(() => {
+			if (eventBus) {
+				eventBus.on("submit_closing_pos", (data) => {
+					shift.submit_closing_pos(data);
+				});
+			}
+		});
+
+		onBeforeUnmount(() => {
+			if (eventBus) {
+				eventBus.off("submit_closing_pos");
+			}
+		});
 
 		return {
 			...responsive,
@@ -128,12 +142,13 @@ export default {
 			invoiceStore,
 			itemsStore,
 			activeView,
+			eventBus,
+			dialog,
 		};
 	},
 	data: function () {
 		return {
-			dialog: false,
-			// View state moved to uiStore
+			// dialog moved to setup ref
 			itemsLoaded: false,
 			customersLoaded: false,
 		};
@@ -221,14 +236,6 @@ export default {
 				},
 				{ immediate: true },
 			);
-
-			// Listen for shift submission
-			const eventBus = inject("eventBus");
-			if (eventBus) {
-				eventBus.on("submit_closing_pos", (data) => {
-					this.submit_closing_pos(data);
-				});
-			}
 		});
 	},
 	// In the created() or mounted() lifecycle hook

@@ -1,4 +1,4 @@
-import { ref, getCurrentInstance } from "vue";
+import { ref, getCurrentInstance, inject } from "vue";
 import { useToastStore } from "../stores/toastStore.js";
 import { useUIStore } from "../stores/uiStore.js";
 import {
@@ -11,8 +11,9 @@ import {
 } from "../../offline/index.js";
 
 export function usePosShift(openDialog) {
-	const { proxy } = getCurrentInstance();
-	const eventBus = proxy?.eventBus;
+	const instance = getCurrentInstance();
+	const proxy = instance?.proxy;
+	const eventBus = proxy?.eventBus || inject("eventBus");
 	const toastStore = useToastStore();
 	const uiStore = useUIStore();
 
@@ -47,8 +48,6 @@ export function usePosShift(openDialog) {
 					// Update Store
 					uiStore.setRegisterData(r.message);
 
-					// Legacy emissions removed
-
 					try {
 						frappe.realtime.emit("pos_profile_registered");
 					} catch (e) {
@@ -61,6 +60,7 @@ export function usePosShift(openDialog) {
 						console.error("Failed to cache opening data", e);
 					}
 				} else {
+					console.info("No opening shift found, opening dialog");
 					const data = getOpeningStorage();
 					if (data) {
 						pos_profile.value = data.pos_profile;
@@ -80,7 +80,8 @@ export function usePosShift(openDialog) {
 					openDialog && openDialog();
 				}
 			})
-			.catch(() => {
+			.catch((err) => {
+				console.error("Error checking opening entry", err);
 				const data = getOpeningStorage();
 				if (data) {
 					pos_profile.value = data.pos_profile;
@@ -122,13 +123,16 @@ export function usePosShift(openDialog) {
 	}
 
 	function submit_closing_pos(data) {
+		console.log("Submitting closing shift", data);
 		frappe
 			.call("posawesome.posawesome.doctype.pos_closing_shift.pos_closing_shift.submit_closing_shift", {
-				closing_shift: data,
+				closing_shift: JSON.stringify(data),
 			})
 			.then((r) => {
+				console.log("Submit result", r);
 				if (r.message) {
 					pos_profile.value = null;
+					pos_opening_shift.value = null;
 					clearOpeningStorage();
 					toastStore.show({
 						title: `POS Shift Closed`,
@@ -136,6 +140,9 @@ export function usePosShift(openDialog) {
 					});
 					check_opening_entry();
 				}
+			})
+			.catch((err) => {
+				console.error("Failed to submit closing shift", err);
 			});
 	}
 
