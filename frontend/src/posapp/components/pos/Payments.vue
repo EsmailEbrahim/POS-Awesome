@@ -263,6 +263,13 @@ export default {
 		const stock_settings = ref("");
 		const invoiceType = ref("Invoice");
 		const loyalty_amount = ref(0);
+		const is_cashback = ref(true);
+		const paid_change = ref(0);
+		const credit_change = ref(0);
+		const loading = ref(false);
+		const show_change_dialog = ref(false);
+		const sales_person = ref("");
+		const is_credit_return = ref(false);
 		const redeemed_customer_credit = ref(0);
 		const customer_credit_dict = ref([]);
 		const customer_info = ref("");
@@ -280,16 +287,34 @@ export default {
 			formatCurrency: (val, curr) => proxy.formatCurrency(val, curr),
 		});
 
+		const { diff_payment } = paymentCalculations;
+
 		const {
 			validateDueDate,
 			extractSubmissionErrorMessage,
 			formatStockErrors,
+			ensureReturnPaymentsAreNegative,
+			submitInvoice,
 		} = usePaymentSubmission({
 			invoiceDoc: computed(() => invoiceStore.invoiceDoc),
 			posProfile: pos_profile,
 			stockSettings: stock_settings,
 			invoiceType: invoiceType,
+			isCashback: is_cashback,
+			paidChange: paid_change,
+			creditChange: credit_change,
+			redeemedCustomerCredit: redeemed_customer_credit,
+			customerCreditDict: customer_credit_dict,
+			diffPayment: diff_payment,
 			formatFloat: (val, prec) => proxy.formatFloat(val, prec),
+			stores: {
+				toastStore,
+				syncStore,
+				customersStore,
+				uiStore,
+				invoiceStore,
+			},
+			currencyPrecision: currency_precision,
 		});
 
 		return {
@@ -311,6 +336,13 @@ export default {
 			pos_profile,
 			stock_settings,
 			invoiceType,
+			is_cashback,
+			paid_change,
+			credit_change,
+			loading,
+			show_change_dialog,
+			sales_person,
+			is_credit_return,
 			loyalty_amount,
 			redeemed_customer_credit,
 			customer_credit_dict,
@@ -322,20 +354,17 @@ export default {
 			validate_due_date: validateDueDate,
 			extractSubmissionErrorMessage,
 			formatStockErrors,
+			ensureReturnPaymentsAreNegative,
+			submitInvoice,
 		};
 	},
 	data() {
 		return {
 			syncStore: useSyncStore(),
-			loading: false, // UI loading state
 			pos_settings: {}, // POS settings
 			is_return: false, // Is this a return invoice?
-			credit_change: 0, // Change to be given as credit
-			paid_change: 0, // Change to be given as paid
 			is_credit_sale: false, // Is this a credit sale?
 			is_write_off_change: false, // Write-off for change enabled
-			is_cashback: true, // Cashback enabled
-			is_credit_return: false, // Is this a credit return?
 			redeem_customer_credit: false, // Redeem customer credit?
 			paid_change_rules: [], // Validation rules for paid change
 			phone_dialog: false, // Show phone payment dialog
@@ -686,39 +715,6 @@ export default {
 				}
 			});
 		},
-		// Ensure all payments are negative for return invoices
-		ensureReturnPaymentsAreNegative() {
-			if (!this.invoice_doc || !this.invoice_doc.is_return || !this.is_cashback) {
-				return;
-			}
-			// Check if any payment amount is set
-			let hasPaymentSet = false;
-			this.invoice_doc.payments.forEach((payment) => {
-				if (Math.abs(payment.amount) > 0) {
-					hasPaymentSet = true;
-				}
-			});
-			// If no payment set, set the default one
-			if (!hasPaymentSet) {
-				const default_payment = this.invoice_doc.payments.find((payment) => payment.default === 1);
-				if (default_payment) {
-					const amount = this.invoice_doc.rounded_total || this.invoice_doc.grand_total;
-					default_payment.amount = -Math.abs(amount);
-					if (default_payment.base_amount !== undefined) {
-						default_payment.base_amount = -Math.abs(amount);
-					}
-				}
-			}
-			// Ensure all set payments are negative
-			this.invoice_doc.payments.forEach((payment) => {
-				if (payment.amount > 0) {
-					payment.amount = -Math.abs(payment.amount);
-				}
-				if (payment.base_amount !== undefined && payment.base_amount > 0) {
-					payment.base_amount = -Math.abs(payment.base_amount);
-				}
-			});
-		},
 		// Submit payment after validation
 		async submit(event, payment_received = false, print = false) {
 			this.loading = true;
@@ -861,217 +857,42 @@ export default {
 
 		// Submit invoice to backend after all validations
 		async submit_invoice(print) {
-			// For return invoices, ensure payments are negative one last time
-			if (this.invoice_doc.is_return) {
-				this.ensureReturnPaymentsAreNegative();
-			}
-			let totalPayedAmount = 0;
-			this.invoice_doc.payments.forEach((payment) => {
-				payment.amount = this.flt(payment.amount);
-				totalPayedAmount += payment.amount;
-			});
-			if (this.invoice_doc.is_return && totalPayedAmount === 0) {
-				this.invoice_doc.is_pos = 0;
-			}
-			if (this.customer_credit_dict.length) {
-				this.customer_credit_dict.forEach((row) => {
-					row.credit_to_redeem = this.flt(row.credit_to_redeem);
-				});
-			}
-			const changeLimit = !this.invoice_doc.is_return ? Math.max(-this.diff_payment, 0) : 0;
-			const paidChange = !this.invoice_doc.is_return
-				? this.flt(Math.min(this.paid_change, changeLimit), this.currency_precision)
-				: 0;
-			const creditChange = !this.invoice_doc.is_return
-				? this.flt(Math.max(changeLimit - paidChange, 0), this.currency_precision)
-				: 0;
-
-			if (this.invoice_doc) {
-				this.invoice_doc.paid_change = paidChange;
-				this.invoice_doc.credit_change = creditChange;
-			}
-
-			if (!this.invoice_doc.is_return) {
-				this.credit_change = creditChange ? -creditChange : 0;
-				this.paid_change = paidChange;
-			}
-
-			let data = {
-				total_change: changeLimit,
-				paid_change: paidChange,
-				credit_change: creditChange,
-				redeemed_customer_credit: this.redeemed_customer_credit,
-				customer_credit_dict: this.customer_credit_dict,
-				is_cashback: this.is_cashback,
-			};
-
-			if (isOffline()) {
-				try {
-					saveOfflineInvoice({ data: data, invoice: this.invoice_doc });
-					this.syncStore.updatePendingCount();
-					this.toastStore.show({
-						title: __("Invoice saved offline"),
-						color: "warning",
-					});
-					if (print) {
-						this.print_offline_invoice(this.invoice_doc);
-					}
-					if (this.customersStore?.setSelectedCustomer) {
-						this.customersStore.setSelectedCustomer(this.pos_profile?.customer || null);
-					}
-
-					this.finishSubmissionNavigation(true);
-					this.eventBus.emit("focus_item_search");
-					return;
-				} catch (error) {
-					this.toastStore.show({
-						title: __("Cannot Save Offline Invoice: ") + (error.message || __("Unknown error")),
-						color: "error",
-					});
-					return;
-				}
-			}
-
+			this.loading = true;
 			try {
-				const message = await invoiceService.submitInvoice(
-					data,
-					this.invoice_doc,
-					this.invoiceType,
-					this.pos_profile,
-				);
-
-				// Wrap result to match existing structure
-				const r = { message };
-
-				if (!r.message) {
-					if (
-						this.pos_profile?.posa_allow_submissions_in_background_job &&
-						this.eventBus &&
-						typeof this.eventBus.emit === "function"
-					) {
-						this.eventBus.emit("invoice_submission_failed", {
-							invoice: this.invoice_doc?.name,
-							reason: __("No response from server"),
-						});
-					}
-					this.toastStore.show({
-						title: __("Error submitting invoice: No response from server"),
-						color: "error",
-					});
-					return;
-				}
-
-				const docstatus = r.message?.docstatus;
-				const status = r.message?.status;
-				const responseInvoiceName = r.message?.name || this.invoice_doc?.name;
-				const backgroundReason =
-					r.message?.error || r.message?.exc || r.message?.exception || r.message?.message;
-
-				const wasSubmitted =
-					docstatus === 1 || status === 1 || (docstatus === undefined && status === undefined);
-
-				if (!wasSubmitted && backgroundReason) {
-					if (this.pos_profile?.posa_allow_submissions_in_background_job) {
-						if (this.eventBus && typeof this.eventBus.emit === "function") {
-							this.eventBus.emit("invoice_submission_failed", {
-								invoice: responseInvoiceName,
-								reason: backgroundReason,
-							});
+				await this.submitInvoice(print, {
+					onPrint: (doc) => {
+						if (print) {
+							// If online, load_print_page uses state, doesn't imply arg
+							// But here we rely on global/component state mostly.
+							// For offline, it calls print_offline_invoice
+							if (isOffline()) {
+								this.print_offline_invoice(doc);
+							} else {
+								this.load_print_page();
+							}
 						}
+					},
+					onSuccess: (message) => {
+						this.customer_credit_dict = [];
+						this.redeem_customer_credit = false;
+						this.is_cashback = true;
+						this.show_change_dialog = true;
+						this.is_credit_return = false;
+						this.sales_person = "";
+					},
+					onFinishNavigation: (clearInvoice) => {
+						this.finishSubmissionNavigation(clearInvoice);
+					},
+					onScheduleBackgroundCheck: (name, doctype) => {
+						this.scheduleBackgroundStatusCheck(name, doctype);
 					}
-
-					this.toastStore.show({
-						title: __("Error submitting invoice: {0}", [responseInvoiceName || ""]),
-						color: "error",
-						detail: backgroundReason,
-					});
-					this.finishSubmissionNavigation(true);
-					this.scheduleBackgroundStatusCheck(responseInvoiceName, r.message?.doctype);
-					return;
-				}
-
-				if (print) {
-					this.load_print_page();
-				}
-				this.customer_credit_dict = [];
-				this.redeem_customer_credit = false;
-				this.is_cashback = true;
-				if (this.invoiceStore.invoiceDoc) {
-					this.invoiceStore.invoiceDoc.docstatus = 1;
-				}
-				this.uiStore.setLastInvoice(this.invoice_doc.name);
-				// this.eventBus.emit("set_last_invoice", this.invoice_doc.name);
-				this.show_change_dialog = true;
-				this.is_credit_return = false;
-				this.sales_person = "";
-				this.toastStore.show({
-					title:
-						this.invoiceType === "Order" && this.pos_profile.posa_create_only_sales_order
-							? __("Sales Order {0} is Submitted", [r.message.name])
-							: this.invoiceType === "Quotation"
-								? __("Quotation {0} is Submitted", [r.message.name])
-								: __("Invoice {0} is Submitted", [r.message.name]),
-					color: "success",
 				});
-				frappe.utils.play_sound("submit");
-				const submittedItems = Array.isArray(this.invoice_doc.items) ? this.invoice_doc.items : [];
-				updateLocalStock(submittedItems);
-				stockCoordinator.applyInvoiceConsumption(submittedItems, {
-					source: "invoice",
-				});
-				const submittedCodes = submittedItems
-					.map((item) => (item ? item.item_code : null))
-					.filter((code) => code !== undefined && code !== null);
-				this.uiStore.setLastStockAdjustment({
-					items: submittedItems,
-					item_codes: submittedCodes,
-					timestamp: Date.now(),
-				});
-				this.finishSubmissionNavigation(true);
-				if (this.customersStore?.setSelectedCustomer) {
-					this.customersStore.setSelectedCustomer(this.pos_profile?.customer || null);
-				}
-				this.scheduleBackgroundStatusCheck(responseInvoiceName, r.message?.doctype);
-			} catch (exc) {
-				console.error("Error submitting invoice:", exc);
-				let errorMsg = this.extractSubmissionErrorMessage(exc);
-				if (errorMsg.includes("Amount must be negative")) {
-					this.toastStore.show({
-						title: __("Fixing payment amounts for return invoice..."),
-						color: "warning",
-					});
-					this.invoice_doc.payments.forEach((payment) => {
-						if (payment.amount > 0) {
-							payment.amount = -Math.abs(payment.amount);
-						}
-						if (payment.base_amount > 0) {
-							payment.base_amount = -Math.abs(payment.base_amount);
-						}
-					});
-					console.log("Retrying submission with fixed payment amounts");
-					setTimeout(() => {
-						this.submit_invoice(print);
-					}, 500);
-				} else {
-					if (
-						this.pos_profile?.posa_allow_submissions_in_background_job &&
-						this.eventBus &&
-						typeof this.eventBus.emit === "function"
-					) {
-						this.eventBus.emit("invoice_submission_failed", {
-							invoice: this.invoice_doc?.name,
-							reason: errorMsg,
-						});
-					}
-					this.toastStore.show({
-						title: __("Error submitting invoice: ") + errorMsg,
-						color: "error",
-					});
-					if (this.pos_profile?.posa_allow_submissions_in_background_job) {
-						this.finishSubmissionNavigation(true);
-						this.scheduleBackgroundStatusCheck(this.invoice_doc?.name, this.invoice_doc?.doctype);
-					}
-				}
+			} catch (error) {
+				// Error handled in composable (toasts shown)
+				// We just ensure loading is false
+				console.error("Submission failed propagate:", error);
+			} finally {
+				this.loading = false;
 			}
 		},
 		scheduleBackgroundStatusCheck(invoiceName, doctype) {
