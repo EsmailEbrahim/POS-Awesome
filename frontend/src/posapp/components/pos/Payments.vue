@@ -1400,7 +1400,9 @@ export default {
 					doctype: "Sales Invoice",
 				},
 				callback: (r) => {
-					this.print_formats = r.message;
+					// Ensure we map to strings if objects are returned
+					const formats = r.message || [];
+					this.print_formats = formats.map((pf) => (typeof pf === "object" && pf.name ? pf.name : pf));
 				},
 			});
 		},
