@@ -557,6 +557,7 @@
 /* global process */
 import _ from "lodash";
 import { logComponentRender } from "../../utils/perf.js";
+import { getCurrentInstance } from "vue";
 import { useInvoiceStore } from "../../stores/invoiceStore.js";
 import { parseBooleanSetting } from "../../utils/stock.js";
 import { loadItemSelectorSettings } from "../../utils/itemSelectorSettings.js";
@@ -567,8 +568,10 @@ export default {
 		CartItemRow,
 	},
 	setup() {
+		const { proxy } = getCurrentInstance();
+		const eventBus = proxy?.eventBus;
 		const invoiceStore = useInvoiceStore();
-		return { invoiceStore };
+		return { invoiceStore, eventBus };
 	},
 	props: {
 		headers: Array,
@@ -1154,31 +1157,19 @@ export default {
 				const dragData = JSON.parse(event.dataTransfer.getData("application/json"));
 
 				if (dragData.type === "item-from-selector") {
-					this.addItemDebounced(dragData.item);
+					// Using event bus to trigger logic-heavy add_item in Invoice.vue
+					if (this.eventBus) {
+						this.eventBus.emit("add_item", dragData.item);
+					} else {
+						// Fallback to prop if eventBus is missing
+						this.$emit("add-item", dragData.item);
+					}
 					this.$emit("item-dropped", false);
 				}
 			} catch (error) {
 				console.error("Error parsing drag data:", error);
 			}
 		},
-		addItem(newItem) {
-			// PERF: use cached merge lookup to avoid O(n) scans when many items are added rapidly
-			const cachedMatch = this.getMergeTarget(newItem);
-			const match = cachedMatch?.item;
-			if (match) {
-				match.qty += newItem.qty || 1;
-				match.amount = match.qty * match.rate;
-				this.refreshMergeCacheEntry(match, cachedMatch.index);
-				this.$forceUpdate();
-			} else {
-				this.items.push({ ...newItem });
-				const inserted = this.items[this.items.length - 1];
-				this.refreshMergeCacheEntry(inserted, this.items.length - 1);
-			}
-		},
-		addItemDebounced: _.debounce(function (item) {
-			this.addItem(item);
-		}, 50),
 		openNameDialog(item) {
 			this.editNameTarget = item;
 			this.editedName = item.item_name;

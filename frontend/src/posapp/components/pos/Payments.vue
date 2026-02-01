@@ -500,7 +500,7 @@
 		<!-- Action Buttons -->
 		<PaymentActionButtons
 			:loading="loading"
-			:validatePayment="vaildatPayment"
+			:validatePayment="validatePayment"
 			:highlightSubmit="highlightSubmit"
 			@submit="submit"
 			@submit-and-print="submit(undefined, false, true)"
@@ -897,7 +897,7 @@ export default {
 			return this.customer_credit_dict.reduce((total, row) => total + this.flt(row.total_credit), 0);
 		},
 		// Validate if payment can be submitted
-		vaildatPayment() {
+		validatePayment() {
 			if (!this.pos_profile.posa_allow_sales_order) {
 				return false;
 			}

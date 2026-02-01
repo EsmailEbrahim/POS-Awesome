@@ -379,6 +379,27 @@ export default {
 							// Map 'items' to invoiceStore items for merge logic (ItemsSelector uses 'items' for search results)
 							return vm.invoiceStore?.items || Reflect.get(target, "items", receiver);
 						}
+
+						// Specific methods expected by useItemAddition / useStockUtils
+						if (prop === "setBatchQty" || prop === "set_batch_qty") {
+							return (...args) => vm.eventBus.emit("set_batch_qty", ...args);
+						}
+						if (prop === "setSerialNo" || prop === "set_serial_no") {
+							return (...args) => vm.eventBus.emit("set_serial_no", ...args);
+						}
+						if (prop === "calc_uom" || prop === "calcUom") {
+							return (...args) => vm.eventBus.emit("calc_uom", ...args);
+						}
+						if (prop === "calc_stock_qty" || prop === "calcStockQty") {
+							return (...args) => vm.eventBus.emit("calc_stock_qty", ...args);
+						}
+						if (prop === "triggerBackgroundFlush") {
+							return (...args) => vm.eventBus.emit("trigger_background_flush", ...args);
+						}
+						if (prop === "forceUpdate") {
+							return () => vm.$forceUpdate?.();
+						}
+
 						// 3. Delegate to component instance
 						const value = Reflect.get(target, prop, receiver);
 						// Bind functions to the original VM to ensure 'this' context is correct

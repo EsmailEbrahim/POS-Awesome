@@ -575,8 +575,9 @@ export default {
 		handleItemDrop(item) {
 			console.log("Item dropped:", item);
 
-			// Use the existing add_item method to add the dropped item
-			this.invoiceStore.addItem(item);
+			// Use the logic-heavy addItem method (from invoiceItemMethods alias) 
+			// to handle bundles, merging, and stock checks.
+			this.addItem(item);
 		},
 
 		applyStockStateToInvoiceItems(codes = null) {

@@ -4788,6 +4788,20 @@ export default {
 			}
 		});
 
-		d.show();
+	d.show();
 	},
+
+	// --- Naming Aliases for Composable Compatibility ---
+	// These ensure that 'this.methodName' works regardless of whether 
+	// snake_case (legacy) or camelCase (composables) is used.
+	addItem(item, options) { return this.add_item(item, options); },
+	removeItem(item) { return this.remove_item(item); },
+	setBatchQty(item, value, update) { return this.set_batch_qty(item, value, update); },
+	setSerialNo(item) { return this.set_serial_no(item); },
+	calcUom(item, value) { return this.calc_uom(item, value); },
+	calcStockQty(item, value) { return this.calc_stock_qty(item, value); },
+	clearInvoice(options) { return this.clear_invoice(options); },
+	round_amount(amount) { return this.roundAmount(amount); },
+	updateItemDetail(item) { return this.update_item_detail(item); },
+	updateItemsDetails(items) { return this.update_items_details(items); },
 };

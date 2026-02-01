@@ -86,13 +86,16 @@
 import { ensurePosProfile } from "../../../utils/pos_profile.js";
 import _ from "lodash";
 import placeholderImage from "./placeholder-image.png";
+import { getCurrentInstance } from "vue";
 import { useUIStore } from "../../stores/uiStore.js";
 import { useInvoiceStore } from "../../stores/invoiceStore.js";
 export default {
 	setup() {
+		const { proxy } = getCurrentInstance();
+		const eventBus = proxy?.eventBus;
 		const uiStore = useUIStore();
 		const invoiceStore = useInvoiceStore();
-		return { uiStore, invoiceStore };
+		return { uiStore, invoiceStore, eventBus };
 	},
 	data: () => ({
 		// varaintsDialog: false, // Removed in favor of store state
@@ -393,8 +396,13 @@ export default {
 				code: payload.code,
 				rate: payload.rate,
 			});
-			// Using store instead of event bus
-			this.invoiceStore.addItem(payload);
+			// Using event bus to trigger logic-heavy add_item in Invoice.vue
+			if (this.eventBus) {
+				this.eventBus.emit("add_item", payload);
+			} else {
+				// Fallback to store if eventBus is missing (should not happen)
+				this.invoiceStore.addItem(payload);
+			}
 			this.close_dialog();
 		},
 	},
