@@ -507,4 +507,6 @@ _The ultimate reliability upgrade. A strict, step-by-step path to type safety._
 | 2026-02-01 | Phase 6.5 ClosingDialog Refactor    | Completed   | Decomposed into `ShiftOverview`, `PaymentReconciliation`, `ClosingHeader`. Stable and theme-aware.                                                  |
 | 2026-02-01 | Stabilization & Fixes               | Completed   | Fixed ClosingDialog Dark Mode, Shifts Submission Event flow, and Items Table toggle visibility.                                                     |
 | 2026-02-01 | Phase 7 initialization              | In Progress | Verified `tsconfig.json` and dependencies.                                                                                                          |
-| 2026-02-02 | Micro-Impl: useOnlineStatus         | Completed   | Migrated `useOnlineStatus.js` to TypeScript.                                                                                                        |
+| 2026-02-02 | Bug Fixes: Payment & Offers       | Completed   | Fixed `mode_of_payment` TypeError and Item Selector Offer reactivity via synchronous stock updates. |
+| 2026-02-02 | ItemsTable.vue Decomposition        | In Progress | Extracted Search, DragDrop, and ExpandedRow. Planning extraction of Responsive and Merge logic.      |
+| 2026-02-02 | Phase 7: TypeScript Migration      | In Progress | Migrated `useOnlineStatus.ts`, `api.ts`, `invoiceStore.ts`, and `customersStore.ts`.                 |
