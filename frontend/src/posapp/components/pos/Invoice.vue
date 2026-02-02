@@ -425,6 +425,14 @@ export default {
 	},
 
 	methods: {
+		formatDateForDisplay(date) {
+			if (!date) return "";
+			const parts = date.split("-");
+			if (parts.length === 3) {
+				return `${parts[2]}-${parts[1]}-${parts[0]}`;
+			}
+			return date;
+		},
 		confirmPaymentSubmission() {
 			this.confirm_payment_dialog = true;
 			return new Promise((resolve) => {
