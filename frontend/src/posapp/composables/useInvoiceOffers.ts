@@ -273,10 +273,24 @@ export function useInvoiceOffers() {
             const offers = sourceOffers.map((offer: any) => cache.get(offer.name)).filter((entry: any) => !!entry);
 
             // BREAK INFINITE LOOP: Compare current offers with previous ones
-            // We use a simple JSON stringify comparison for now as a robust check
-            const currentOffersDigest = JSON.stringify(offers.map(o => ({ n: o.name, ids: o.items, g: o.give_item_row_id })));
+            // We use a more granular digest that includes affected item quantities/rates
+            // This ensures we react to qty changes (e.g. from item selector) but break on identical results.
+            const currentOffersDigest = JSON.stringify(offers.map(o => {
+                const ids = Array.isArray(o.items) ? o.items : (typeof o.items === 'string' ? JSON.parse(o.items) : []);
+                const itemState = ids.map((id: string) => {
+                    const it = itemMap.get(id);
+                    // Include qty and rate to detect changes that affect benefit calculations
+                    return it ? `${id}:${it.qty}:${it.rate}` : id;
+                });
+                return {
+                    n: o.name,
+                    ids: itemState,
+                    g: o.give_item_row_id
+                };
+            }));
+
             if (currentOffersDigest === _lastAppliedOffersDigest.value) {
-                console.log("[useInvoiceOffers] handelOffers: No change in offers, skipping update.");
+                console.log("[useInvoiceOffers] handelOffers: No change in offers state, skipping update.");
                 return;
             }
             _lastAppliedOffersDigest.value = currentOffersDigest;
