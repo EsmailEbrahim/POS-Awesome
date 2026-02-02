@@ -276,6 +276,7 @@ export function useItemAddition() {
 		for (const [rowId, data] of currentUpdates) {
 			const item = context.invoiceStore.itemsData.get(rowId);
 			if (item) {
+				console.log("[useItemAddition] Merging item qty", { item_code: item.item_code, old_qty: item.qty, added: data.qty });
 				item.qty += data.qty;
 				if (context.calc_stock_qty) context.calc_stock_qty(item, item.qty);
 
@@ -292,6 +293,7 @@ export function useItemAddition() {
 
 		// 2. Process Additions
 		if (currentItems.length) {
+			console.log("[useItemAddition] Adding new items to store", { count: currentItems.length });
 			const addedItems = context.invoiceStore.addItems(currentItems, 0); // Prepend to top
 
 			addedItems.forEach((item, index) => {
@@ -1102,7 +1104,7 @@ async function prepareItemForCart(item, requestedQty, context) {
 
 	// Set final quantity
 	const hasBarcodeQty = item._barcode_qty;
-	
+
 	console.log("[useItemAddition] prepareItemForCart qty check", {
 		item_code: item.item_code,
 		initial_item_qty: item.qty,

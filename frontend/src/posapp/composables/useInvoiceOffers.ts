@@ -59,10 +59,11 @@ export function useInvoiceOffers() {
 
     // Private state for refresh logic
     const _offerRefreshPending = ref(false);
-    const _pendingOfferRowIds = ref(new Set<string>());
+    const _pendingOfferRowIds = ref<Set<string>>(new Set());
     const _pendingRemovedRowInfo = ref<Record<string, any>>({});
     let _offerRefreshHandle: any = null;
-    const _cachedOfferResults = ref(new Map());
+    const _lastAppliedOffersDigest = ref<string | null>(null);
+    const _cachedOfferResults = ref<Map<string, any>>(new Map());
 
     // Computed properties matching Invoice.vue context
     const Total = computed(() => invoiceStore.grossTotal);
@@ -107,11 +108,6 @@ export function useInvoiceOffers() {
     // Methods converted from invoiceOfferMethods.js
 
     const scheduleOfferRefresh = (changedRowIds: string[] = []) => {
-        if (isApplyingOffer.value) {
-            console.log("[useInvoiceOffers] scheduleOfferRefresh skipped: isApplyingOffer=true");
-            return;
-        }
-
         if (Array.isArray(changedRowIds)) {
             changedRowIds.forEach((rowId) => {
                 if (rowId) _pendingOfferRowIds.value.add(rowId);
@@ -278,6 +274,16 @@ export function useInvoiceOffers() {
             }
 
             const offers = sourceOffers.map((offer: any) => cache.get(offer.name)).filter((entry: any) => !!entry);
+
+            // BREAK INFINITE LOOP: Compare current offers with previous ones
+            // We use a simple JSON stringify comparison for now as a robust check
+            const currentOffersDigest = JSON.stringify(offers.map(o => ({ n: o.name, ids: o.items, g: o.give_item_row_id })));
+            if (currentOffersDigest === _lastAppliedOffersDigest.value) {
+                console.log("[useInvoiceOffers] handelOffers: No change in offers, skipping update.");
+                return;
+            }
+            _lastAppliedOffersDigest.value = currentOffersDigest;
+
             setItemGiveOffer(offers);
             await updateInvoiceOffers(offers);
 
@@ -765,8 +771,16 @@ export function useInvoiceOffers() {
             ApplyOnTotal(offer);
         }
         if (offer.offer === "Loyalty Point") {
-            toastStore.show({ title: __("Loyalty Point Offer Applied"), color: "success" });
+            // Already handled in its own way usually, but let's be consistent
         }
+
+        toastStore.show({
+            title: __("Offer Applied"),
+            message: __(offer.name),
+            color: "success",
+            timeout: 2000
+        });
+
         const newOffer = {
             offer_name: offer.name,
             row_id: offer.row_id,
@@ -903,6 +917,13 @@ export function useInvoiceOffers() {
             item.discount_amount = 0;
 
             if (update_item_detail_fn) update_item_detail_fn(item);
+        });
+
+        toastStore.show({
+            title: __("Offer Removed"),
+            message: __(offer.name),
+            color: "info",
+            timeout: 2000
         });
     };
 
