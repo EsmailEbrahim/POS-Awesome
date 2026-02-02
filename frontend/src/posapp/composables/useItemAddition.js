@@ -156,7 +156,9 @@ export function useItemAddition() {
 			context.packed_items = context.packed_items.filter((it) => it.bundle_id !== item.bundle_id);
 		}
 		// Remove from expanded if present
-		context.expanded = context.expanded.filter((id) => id !== item.posa_row_id);
+		if (Array.isArray(context.expanded)) {
+			context.expanded = context.expanded.filter((id) => id !== item.posa_row_id);
+		}
 		if (item?.posa_row_id && typeof context?.resetItemTaskCache === "function") {
 			context.resetItemTaskCache(item.posa_row_id);
 		}
@@ -639,6 +641,9 @@ export function useItemAddition() {
 
 						// Merge serial numbers immediately
 						if (new_item.serial_no_selected && new_item.serial_no_selected.length) {
+							if (!Array.isArray(cur_item.serial_no_selected)) {
+								cur_item.serial_no_selected = [];
+							}
 							new_item.serial_no_selected.forEach((sn) => {
 								if (!cur_item.serial_no_selected.includes(sn)) {
 									cur_item.serial_no_selected.push(sn);
@@ -664,6 +669,9 @@ export function useItemAddition() {
 				}
 				// Merge serial numbers if any
 				if (new_item.serial_no_selected && new_item.serial_no_selected.length) {
+					if (!Array.isArray(cur_item.serial_no_selected)) {
+						cur_item.serial_no_selected = [];
+					}
 					new_item.serial_no_selected.forEach((sn) => {
 						if (!cur_item.serial_no_selected.includes(sn)) {
 							cur_item.serial_no_selected.push(sn);
@@ -724,6 +732,9 @@ export function useItemAddition() {
 			}
 			// Serial number logic for existing item
 			if (item.has_serial_no && item.to_set_serial_no) {
+				if (!Array.isArray(cur_item.serial_no_selected)) {
+					cur_item.serial_no_selected = [];
+				}
 				if (cur_item.serial_no_selected.includes(item.to_set_serial_no)) {
 					toastStore.show({
 						title: __(`This Serial Number {0} has already been added!`, [item.to_set_serial_no]),
@@ -890,7 +901,9 @@ export function useItemAddition() {
 		// Expand row if batch/serial required
 		if ((!context.pos_profile.posa_auto_set_batch && new_item.has_batch_no) || new_item.has_serial_no) {
 			// Only store the row ID to keep expanded array consistent
-			context.expanded.push(new_item.posa_row_id);
+			if (Array.isArray(context.expanded)) {
+				context.expanded.push(new_item.posa_row_id);
+			}
 		}
 		return new_item;
 	};
