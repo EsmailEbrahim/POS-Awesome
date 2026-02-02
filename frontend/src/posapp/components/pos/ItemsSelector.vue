@@ -2659,7 +2659,9 @@ export default {
 
 	beforeUnmount() {
 		// Clear interval when component is destroyed
-		this.stopBackgroundSyncScheduler();
+		if (this.itemSync) {
+			this.itemSync.stopBackgroundSyncScheduler();
+		}
 
 		if (this.formatCache) {
 			this.formatCache.clear();

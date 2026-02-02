@@ -448,34 +448,7 @@
 	color: var(--pos-primary);
 }
 
-/* Force UOM Display to look like a box when not editing */
-.uom-display-mode :deep(.v-field) {
-	border-radius: 6px !important;
-	border: 1px solid var(--pos-primary-variant) !important;
-	background: var(--pos-primary-container) !important;
-	height: 32px !important;
-	min-height: 32px !important;
-	padding: 0 8px !important;
-	align-items: center !important;
-	box-shadow: none !important;
-}
 
-.uom-display-mode :deep(.v-field__outline) {
-	display: none !important;
-}
-
-.uom-display-mode :deep(.v-field__input) {
-	padding: 0 !important;
-	min-height: auto !important;
-	justify-content: center;
-	font-weight: 500;
-	color: var(--pos-primary-text) !important;
-	font-size: 0.9rem !important;
-}
-
-.uom-display-mode :deep(.v-field__append-inner) {
-	display: none !important;
-}
 
 /* =================================================================
    ELIMINATE UNWANTED VUETIFY TABLE SPACERS AND EMPTY ROWS

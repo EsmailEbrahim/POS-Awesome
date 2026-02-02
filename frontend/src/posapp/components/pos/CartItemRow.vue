@@ -123,9 +123,21 @@
 				>
 					<v-icon size="small">mdi-chevron-left</v-icon>
 				</v-btn>
+				
+				<div
+					v-if="!isEditingUom"
+					class="posa-cart-table__editor-display"
+					@click.stop="isEditingUom = true"
+					tabindex="0"
+					role="button"
+					:aria-label="__('Edit unit of measure')"
+				>
+					<span>{{ item.uom }}</span>
+				</div>
+
 				<v-select
+					v-else
 					ref="uomSelect"
-					:class="{ 'uom-display-mode': !isEditingUom }"
 					:model-value="item.uom"
 					@update:model-value="handleUomSelect"
 					:items="item.item_uoms"
@@ -135,9 +147,11 @@
 					variant="outlined"
 					class="posa-cart-table__editor-input uom-select"
 					hide-details
-					@focus="isEditingUom = true"
+					menu-icon=""
+					:autofocus="true"
 					@blur="isEditingUom = false"
 				></v-select>
+
 				<v-btn
 					size="x-small"
 					variant="flat"

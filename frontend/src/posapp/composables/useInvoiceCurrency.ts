@@ -234,6 +234,10 @@ export function useInvoiceCurrency() {
         flt,
         fetch_available_currencies,
         update_currency_and_rate,
+        update_currency: async (val: string) => {
+            if (val) selected_currency.value = val;
+            await update_currency_and_rate();
+        },
         update_item_rates,
         roundAmount,
         fetch_price_lists,
