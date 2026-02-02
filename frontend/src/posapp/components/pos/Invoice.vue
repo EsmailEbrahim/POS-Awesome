@@ -49,7 +49,7 @@
 					@update:selected_delivery_charge="
 						(val) => {
 							selected_delivery_charge = val;
-							update_delivery_charges();
+							update_delivery_charges(conversion_rate, currency_precision);
 						}
 					"
 				/>
@@ -116,7 +116,7 @@
 						@update:selectedColumns="
 							(cols) => {
 								selected_columns = cols;
-								updateHeadersFromSelection();
+								saveColumnPreferences();
 							}
 						"
 					/>
@@ -295,9 +295,6 @@ export default {
 			expanded: [], // Array of expanded row IDs
 			singleExpand: true, // Only one row expanded at a time
 			cancel_dialog: false, // Cancel dialog visibility
-			float_precision: 6, // Float precision for calculations
-			currency_precision: 6, // Currency precision for display
-			new_line: false, // Add new line for item
 			available_stock_cache: {},
 			item_detail_cache: {},
 			item_stock_cache: {},
@@ -305,18 +302,12 @@ export default {
 			stockUnsubscribe: null,
 			invoice_posting_date: false, // Posting date dialog
 			posting_date_display: "", // Display value for date picker
-			items_headers: [],
-			// packedItemsHeaders removed as it is now in PackedItemsDialog
 			_shortcutHandlers: {},
 			shortcutCycle: {
 				qty: 0,
 				uom: 0,
 				rate: 0,
 			},
-			selected_columns: [], // Selected columns for items table
-			// temp_selected_columns removed
-			available_columns: [], // All available columns
-			// show_column_selector removed
 			invoiceHeight: null,
 			// paymentVisible state moved to computed property from uiStore
 			confirm_payment_dialog: false,
@@ -389,30 +380,6 @@ export default {
 				this.invoiceStore.setAdditionalDiscountPercentage(val);
 			},
 		},
-		delivery_charges: {
-			get() {
-				return this.invoiceStore.deliveryCharges;
-			},
-			set(val) {
-				this.invoiceStore.setDeliveryCharges(val);
-			},
-		},
-		delivery_charges_rate: {
-			get() {
-				return this.invoiceStore.deliveryChargesRate;
-			},
-			set(val) {
-				this.invoiceStore.setDeliveryChargesRate(val);
-			},
-		},
-		selected_delivery_charge: {
-			get() {
-				return this.invoiceStore.selectedDeliveryCharge;
-			},
-			set(val) {
-				this.invoiceStore.setSelectedDeliveryCharge(val);
-			},
-		},
 		posting_date: {
 			get() {
 				return this.invoiceStore.postingDate;
@@ -470,46 +437,6 @@ export default {
 			this.$refs.invoiceSummary?.focusAdditionalDiscountField?.();
 		},
 
-		initializeItemsHeaders() {
-			// Define all available columns
-			this.available_columns = [
-				{ title: __("Name"), align: "start", sortable: true, key: "item_name", required: true },
-				{ title: __("QTY"), key: "qty", align: "center", required: true },
-				{ title: __("UOM"), key: "uom", align: "center", required: false },
-				{
-					title: __("Price List Rate"),
-					key: "price_list_rate",
-					align: "end",
-					required: false,
-					width: "120px",
-				},
-				{ title: __("Discount %"), key: "discount_value", align: "end", required: false },
-				{ title: __("Discount Amount"), key: "discount_amount", align: "end", required: false },
-				{ title: __("Rate"), key: "rate", align: "center", required: true },
-				{ title: __("Amount"), key: "amount", align: "center", required: true },
-				{ title: __("Offer?"), key: "posa_is_offer", align: "center", required: false },
-				{ title: __("Actions"), key: "actions", align: "center", required: true, sortable: false },
-			];
-
-			// Initialize selected columns if empty
-			if (!this.selected_columns || this.selected_columns.length === 0) {
-				// By default, select all required columns and those enabled in POS profile
-				this.selected_columns = this.available_columns
-					.filter((col) => {
-						if (col.required) return true;
-						if (col.key === "price_list_rate") return true;
-						if (col.key === "discount_value" && this.pos_profile.posa_display_discount_percentage)
-							return true;
-						if (col.key === "discount_amount" && this.pos_profile.posa_display_discount_amount)
-							return true;
-						return false;
-					})
-					.map((col) => col.key);
-			}
-
-			// Generate headers based on selected columns
-			this.updateHeadersFromSelection();
-		},
 		emitCartQuantities() {
 			const totals = {};
 			const normalizeNumber = (value) => {
@@ -646,65 +573,6 @@ export default {
 			this.packed_dialog_items = this.packed_items.filter((it) => it.bundle_id === bundle_id);
 			this.show_packed_dialog = true;
 		},
-		toggleColumnSelection() {
-			// Create a copy of selected columns for temporary editing
-			this.temp_selected_columns = [...this.selected_columns];
-			this.show_column_selector = true;
-		},
-
-		cancelColumnSelection() {
-			// Discard changes
-			this.show_column_selector = false;
-		},
-
-		updateHeadersFromSelection() {
-			// Generate headers based on selected columns (without closing dialog)
-			this.items_headers = this.available_columns.filter(
-				(col) => this.selected_columns.includes(col.key) || col.required,
-			);
-		},
-
-		updateSelectedColumns() {
-			// Apply the temporary selection
-			this.selected_columns = [...this.temp_selected_columns];
-
-			// Add required columns if they're not already included
-			const requiredKeys = this.available_columns.filter((col) => col.required).map((col) => col.key);
-
-			requiredKeys.forEach((key) => {
-				if (!this.selected_columns.includes(key)) {
-					this.selected_columns.push(key);
-				}
-			});
-
-			// Update headers
-			this.updateHeadersFromSelection();
-
-			// Save preferences
-			this.saveColumnPreferences();
-
-			// Close dialog
-			this.show_column_selector = false;
-		},
-
-		saveColumnPreferences() {
-			try {
-				localStorage.setItem("posawesome_selected_columns", JSON.stringify(this.selected_columns));
-			} catch (e) {
-				console.error("Failed to save column preferences:", e);
-			}
-		},
-
-		loadColumnPreferences() {
-			try {
-				const saved = localStorage.getItem("posawesome_selected_columns");
-				if (saved) {
-					this.selected_columns = JSON.parse(saved);
-				}
-			} catch (e) {
-				console.error("Failed to load column preferences:", e);
-			}
-		},
 
 		saveInvoiceHeight() {
 			if (this.$refs.invoiceCard) {
@@ -817,24 +685,6 @@ export default {
 			const searchText = queryText.toLowerCase();
 			return textOne.indexOf(searchText) > -1;
 		},
-		update_delivery_charges() {
-			if (this.selected_delivery_charge) {
-				this.base_delivery_charges_rate = this.selected_delivery_charge.rate;
-			} else {
-				this.base_delivery_charges_rate = 0;
-			}
-			this.update_delivery_charges_rate();
-		},
-		update_delivery_charges_rate() {
-			if (this.base_delivery_charges_rate) {
-				this.delivery_charges_rate = this.flt(
-					this.base_delivery_charges_rate / (this.conversion_rate || 1),
-					this.currency_precision,
-				);
-			} else {
-				this.delivery_charges_rate = 0;
-			}
-		},
 		updatePostingDate(date) {
 			if (!date) return;
 			this.posting_date = date;
@@ -891,116 +741,6 @@ export default {
 		},
 
 
-		async update_currency(currency) {
-			if (!currency) return;
-			this.selected_currency = currency;
-			await this.update_currency_and_rate(this.pos_profile, this.company);
-			await this.applyPricingRulesForCart(true);
-		},
-
-		update_exchange_rate() {
-			if (!this.exchange_rate || this.exchange_rate <= 0) {
-				this.exchange_rate = 1;
-			}
-
-			// Emit currency update
-			this.eventBus.emit("update_currency", {
-				currency: this.selected_currency || this.pos_profile.currency,
-				exchange_rate: this.exchange_rate,
-				conversion_rate: this.conversion_rate,
-			});
-
-			this.update_item_rates();
-		},
-
-		update_conversion_rate() {
-			if (!this.conversion_rate || this.conversion_rate <= 0) {
-				this.conversion_rate = 1;
-			}
-
-			this.sync_exchange_rate();
-		},
-
-		async update_item_rates() {
-			console.log("Updating item rates with exchange rate:", this.exchange_rate);
-
-			this.items.forEach((item) => {
-				// Set skip flag to avoid double calculations
-				item._skip_calc = true;
-
-				// First ensure base rates exist for all items
-				if (!item.base_rate) {
-					console.log(`Setting base rates for ${item.item_code} for the first time`);
-					const companyCurrency =
-						(this.company && this.company.default_currency) || this.pos_profile.currency;
-					const conversionRate = this.conversion_rate || 1;
-					if (this.selected_currency === companyCurrency) {
-						// When in base currency, base rates = displayed rates
-						item.base_rate = item.rate;
-						item.base_price_list_rate = item.price_list_rate;
-						item.base_discount_amount = item.discount_amount || 0;
-					} else {
-						// When in another currency, calculate base rates
-						item.base_rate = item.rate * conversionRate;
-						item.base_price_list_rate = item.price_list_rate * conversionRate;
-						item.base_discount_amount = (item.discount_amount || 0) * conversionRate;
-					}
-				}
-
-				// Currency conversion logic
-				const baseCurrency =
-					(this.company && this.company.default_currency) || this.pos_profile.currency;
-				const conversionRate = this.conversion_rate || 1;
-				if (this.selected_currency === baseCurrency) {
-					// When switching back to default currency, restore from base rates
-					console.log(`Restoring rates for ${item.item_code} from base rates`);
-					item.price_list_rate = item.base_price_list_rate;
-					item.rate = item.base_rate;
-					item.discount_amount = item.base_discount_amount;
-				} else {
-					// When switching to another currency, convert from base rates
-					console.log(`Converting rates for ${item.item_code} to ${this.selected_currency}`);
-
-					// Convert base currency values to the selected currency
-					const converted_price = this.flt(
-						item.base_price_list_rate / conversionRate,
-						this.currency_precision,
-					);
-					const converted_rate = this.flt(item.base_rate / conversionRate, this.currency_precision);
-					const converted_discount = this.flt(
-						item.base_discount_amount / conversionRate,
-						this.currency_precision,
-					);
-
-					// Ensure we don't set values to 0 if they're just very small
-					item.price_list_rate = converted_price < 0.000001 ? 0 : converted_price;
-					item.rate = converted_rate < 0.000001 ? 0 : converted_rate;
-					item.discount_amount = converted_discount < 0.000001 ? 0 : converted_discount;
-				}
-
-				// Always recalculate final amounts
-				item.amount = this.flt(item.qty * item.rate, this.currency_precision);
-				item.base_amount = this.flt(item.qty * item.base_rate, this.currency_precision);
-
-				console.log(`Updated rates for ${item.item_code}:`, {
-					price_list_rate: item.price_list_rate,
-					base_price_list_rate: item.base_price_list_rate,
-					rate: item.rate,
-					base_rate: item.base_rate,
-					discount: item.discount_amount,
-					base_discount: item.base_discount_amount,
-					amount: item.amount,
-					base_amount: item.base_amount,
-				});
-
-				// Apply any other pricing rules if needed
-				this.calc_item_price(item);
-			});
-
-			// Force UI update after all calculations
-			this.$forceUpdate();
-			await this.applyPricingRulesForCart(true);
-		},
 
 		formatCurrency(value, precision = null) {
 			const prec = precision != null ? precision : this.currency_precision;
@@ -1138,30 +878,11 @@ export default {
 			this.customer = data.pos_profile.customer;
 			this.pos_opening_shift = data.pos_opening_shift;
 			this.stock_settings = data.stock_settings;
-			const prec = parseInt(data.pos_profile.posa_decimal_precision);
-			if (!isNaN(prec)) {
-				this.float_precision = prec;
-				this.currency_precision = prec;
-			}
+
 			this.invoiceType = this.pos_profile.posa_default_sales_order ? "Order" : "Invoice";
-			this.initializeItemsHeaders();
 
-			if (this.pos_profile.posa_allow_multi_currency) {
-				this.fetch_available_currencies(this.pos_profile)
-					.then(async () => {
-						this.selected_currency = this.pos_profile.currency;
-						await this.update_currency_and_rate(this.pos_profile, this.company);
-					})
-					.catch((error) => {
-						console.error("Error initializing currencies:", error);
-						this.toastStore.show({
-							title: __("Error loading currencies"),
-							color: "error",
-						});
-					});
-			}
-
-			this.fetch_price_lists(this.pos_profile);
+			// Pricing list initialization
+			this.fetch_price_lists();
 			this.update_price_list();
 		},
 		handleClearInvoice() {
@@ -1234,7 +955,7 @@ export default {
 
 	mounted() {
 		this.setUpdateItemDetail(this.update_item_detail);
-		// Load saved column preferences
+		// Load saved column preferences via useInvoiceItems composable
 		this.loadColumnPreferences();
 		// Restore saved invoice height
 		this.loadInvoiceHeight();
