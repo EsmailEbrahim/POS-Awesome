@@ -54,15 +54,14 @@ export function useBatchSerial() {
 		}
 	};
 
-	// Set batch number for an item (and update batch data)
-	const setBatchQty = (item, value, update = true, context) => {
+	// Calculate batch availability and sort according to FIFO/Expiry
+	const getBatchAvailability = (item, context) => {
 		const existing_items = context.items.filter(
 			(element) => element.item_code == item.item_code && element.posa_row_id != item.posa_row_id,
 		);
 		const source_batches = Array.isArray(item.batch_no_data) ? item.batch_no_data : [];
 		const normalized_batch_data = source_batches
 			.map((batch, index) => {
-				// Benchmark note: fall back to available_qty when batch_qty is missing to skip empty batches.
 				const baseQty =
 					Number(batch.original_batch_qty ?? batch.batch_qty ?? batch.available_qty) || 0;
 				return {
@@ -81,11 +80,17 @@ export function useBatchSerial() {
 		existing_items.forEach((element) => {
 			if (!element.batch_no || !element.qty) return;
 			let qtyToAllocate = Number(element.qty) || 0;
+			if (element.qty < 0) return; // Don't subtract returns from availability? Or should we add them?
+			// Usually returns add back to stock. But simple logic: if qty > 0, it consumes stock.
+			// Returns (negative qty) technically free up stock, but for auto-selection we care about "taking" stock.
+
 			normalized_batch_data.forEach((batch) => {
 				if (qtyToAllocate <= 0) return;
 				if (batch.batch_no !== element.batch_no) return;
 				const available = Math.max(batch.remaining_qty, 0);
-				if (available <= 0) return;
+				// If available <= 0, we can still "use" it to show negative/overused?
+				// But here we want to calculate what's LEFT.
+				// If allocation exceeds available, it just eats it all.
 				const deduction = Math.min(available, qtyToAllocate);
 				batch.used_qty += deduction;
 				batch.remaining_qty -= deduction;
@@ -114,11 +119,19 @@ export function useBatchSerial() {
 				return -1;
 			} else if (b.manufacturing_date) {
 				return 1;
+			} else if (a.creation && b.creation) {
+				return new Date(a.creation) - new Date(b.creation);
 			} else {
-				return b.remaining_qty - a.remaining_qty;
+				return a._original_index - b._original_index;
 			}
 		});
 
+		return normalized_batch_data;
+	};
+
+	// Set batch number for an item (and update batch data)
+	const setBatchQty = (item, value, update = true, context) => {
+		const normalized_batch_data = getBatchAvailability(item, context);
 		const selectable_batches = normalized_batch_data.filter((batch) => batch.available_qty > 0);
 		const selection_pool = selectable_batches.length > 0 ? selectable_batches : normalized_batch_data;
 
@@ -177,15 +190,6 @@ export function useBatchSerial() {
 				// Calculate final amounts
 				item.amount = context.flt(item.qty * item.rate, context.currency_precision);
 				item.base_amount = context.flt(item.qty * item.base_rate, context.currency_precision);
-
-				console.log("Updated batch prices:", {
-					base_batch_price: item.base_batch_price,
-					batch_price: item.batch_price,
-					rate: item.rate,
-					base_rate: item.base_rate,
-					price_list_rate: item.price_list_rate,
-					exchange_rate: context.exchange_rate,
-				});
 			} else if (update && context.update_item_detail) {
 				item.batch_price = null;
 				item.base_batch_price = null;
@@ -223,5 +227,6 @@ export function useBatchSerial() {
 	return {
 		setSerialNo,
 		setBatchQty,
+		getBatchAvailability,
 	};
 }

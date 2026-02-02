@@ -218,6 +218,7 @@ import { useItemSelection } from "../../composables/useItemSelection.js";
 import { useItemSelectorLayout } from "../../composables/useItemSelectorLayout.js";
 import { useLastInvoiceRate } from "../../composables/useLastInvoiceRate.js";
 import { useItemSync } from "../../composables/useItemSync.js";
+import { useBatchSerial } from "../../composables/useBatchSerial.js";
 import { useItemStorageSafety } from "../../composables/useItemStorageSafety.js";
 import { parseBooleanSetting, formatStockShortageError } from "../../utils/stock.js";
 import { playScanTone, closeScanAudioContext } from "../../utils/scannerAudio.js";
@@ -290,7 +291,9 @@ export default {
 		const itemAvailability = useItemAvailability();
 		const itemDetailFetcher = useItemDetailFetcher();
 		const itemSelection = useItemSelection();
+
 		const itemSync = useItemSync();
+		const { setBatchQty, setSerialNo, getBatchAvailability } = useBatchSerial();
 
 		const {
 			windowWidth,
@@ -620,6 +623,11 @@ export default {
 			itemDetailFetcher,
 			itemSelection,
 			itemSync,
+			
+			// Batch/Serial methods
+			setBatchQty,
+			setSerialNo,
+			getBatchAvailability,
 			// Expose Scan Processor (replaces processScannedItem)
 			scanProcessor,
 			processScannedItem: scanProcessor.processScannedItem,

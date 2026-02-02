@@ -472,7 +472,68 @@ export function useItemAddition() {
 				item.batch_no = null;
 				if (context.setBatchQty) context.setBatchQty(new_item, new_item.batch_no, false);
 			}
-			if (shouldAutoSetBatch(context, new_item)) {
+			const extra_items = [];
+			if (shouldAutoSetBatch(context, new_item) && context.getBatchAvailability) {
+				// Get sorted availability (taking existing cart items into account)
+				const batches = context.getBatchAvailability(new_item, context);
+				// Filter for usable batches
+				const usable_batches = batches.filter(b => b.available_qty > 0);
+
+				// Standard Case: If no usable batches or only one needed/available
+				if (usable_batches.length === 0) {
+					// Fallback to standard behavior (likely picks first or none)
+					context.setBatchQty(new_item, null, false);
+				} else {
+					let remaining_qty = new_item.qty;
+					// If return invoice, logic is inverted? No, auto-batch usually for Sales.
+					// Assuming Sales Invoice for FIFO auto-pick.
+
+					const allocations = [];
+
+					for (const batch of usable_batches) {
+						if (remaining_qty <= 0) break;
+						const take = Math.min(remaining_qty, batch.available_qty);
+						allocations.push({ batch: batch.batch_no, qty: take });
+						remaining_qty -= take;
+					}
+
+					// If we still have remainder but ran out of batches, add it to the last allocation or a new one?
+					// Let's add it to the last one (it will go negative/over allocation)
+					if (remaining_qty > 0) {
+						if (allocations.length > 0) {
+							allocations[allocations.length - 1].qty += remaining_qty;
+						} else {
+							// No usable batches found? Just use standard logic
+							context.setBatchQty(new_item, null, false);
+						}
+					}
+
+					if (allocations.length > 0) {
+						// Apply first allocation to new_item
+						const first = allocations[0];
+						new_item.qty = first.qty;
+						context.setBatchQty(new_item, first.batch, false);
+
+						// Create items for rest
+						for (let i = 1; i < allocations.length; i++) {
+							const alloc = allocations[i];
+							// Clone new_item. Using getNewItem again is safer to ensure unique IDs
+							// But need to be careful not to double-process some things.
+							// Simple clone for splitting:
+							const split_item = getNewItem({ ...item, qty: alloc.qty }, context);
+							// Copy crucial flags from new_item if any changed
+							split_item.to_set_batch_no = null;
+							split_item.batch_no = alloc.batch;
+
+							// Need to explicitly set batch here because getNewItem resets logic
+							if (context.setBatchQty) context.setBatchQty(split_item, alloc.batch, false);
+
+							extra_items.push(split_item);
+						}
+					}
+				}
+			} else if (shouldAutoSetBatch(context, new_item)) {
+				// Fallback if getBatchAvailability is missing (should not happen after update)
 				context.setBatchQty(new_item, null, false);
 			}
 			// Make quantity negative for returns
@@ -568,6 +629,27 @@ export function useItemAddition() {
 						);
 					}
 					*/
+
+					// Handle extra items from batch splitting
+					if (extra_items && extra_items.length > 0) {
+						console.log("[useItemAddition] Adding split batch items", extra_items.length);
+						extra_items.forEach(split_item => {
+							context.items.unshift(split_item);
+							// Replicate basic setup for split items
+							refreshMergeCacheEntry(context, split_item, 0);
+							runAsyncTask(() => expandBundle(split_item, context), "expand_bundle");
+							if (context.triggerBackgroundFlush) context.triggerBackgroundFlush();
+
+							// Expanded logic for split items
+							if ((!context.pos_profile.posa_auto_set_batch && split_item.has_batch_no) || split_item.has_serial_no) {
+								nextTick(() => {
+									if (Array.isArray(context.expanded)) {
+										context.expanded.push(split_item.posa_row_id);
+									}
+								});
+							}
+						});
+					}
 
 					// Trigger background flush
 					if (context.triggerBackgroundFlush) context.triggerBackgroundFlush();
