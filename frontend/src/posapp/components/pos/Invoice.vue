@@ -224,7 +224,7 @@ import PaymentConfirmationDialog from "./PaymentConfirmationDialog.vue";
 import invoiceItemMethods from "./invoiceItemMethods";
 import invoiceComputed from "./invoiceComputed";
 import invoiceWatchers from "./invoiceWatchers";
-import offerMethods from "./invoiceOfferMethods";
+import { useInvoiceOffers } from "../../composables/useInvoiceOffers";
 import shortcutMethods from "./invoiceShortcuts";
 import { useInvoiceStore } from "../../stores/invoiceStore.js";
 import { useCustomersStore } from "../../stores/customersStore.js";
@@ -257,6 +257,7 @@ export default {
 		const invoiceType = ref("Invoice");
 		const currencyState = useInvoiceCurrency({}, {});
 		const itemActions = useInvoiceItems(invoiceType);
+		const offerLogic = useInvoiceOffers();
 
 		return {
 			uiStore,
@@ -270,6 +271,7 @@ export default {
 			invoiceType,
 			...currencyState,
 			...itemActions,
+			...offerLogic,
 		};
 	},
 	data() {
@@ -285,12 +287,7 @@ export default {
 			total_tax: 0,
 			packed_dialog_items: [], // Packed items displayed in dialog
 			show_packed_dialog: false, // Packing list dialog visibility
-			posOffers: [], // All available offers
-			posa_offers: [], // Offers applied to this invoice
-			posa_coupons: [], // Coupons applied
-			isApplyingOffer: false, // Flag to prevent offer watcher loops
-			allItems: [], // All items for offer logic
-			discount_percentage_offer_name: null, // Track which offer is applied
+
 			invoiceTypes: ["Invoice", "Order", "Quotation"], // Types of invoices
 			// invoiceType moved to setup
 			itemsPerPage: 1000, // Items per page in table
@@ -443,7 +440,7 @@ export default {
 			}
 		},
 		...shortcutMethods,
-		...offerMethods,
+
 		...invoiceItemMethods,
 		focusCustomerSearchField() {
 			const customerSection = this.$refs.customerSection;
@@ -1170,16 +1167,7 @@ export default {
 			this.new_order(data);
 			// this.eventBus.emit("set_pos_coupons", data.posa_coupons);
 		},
-		handleSetOffers(data) {
-			this.posOffers = data;
-		},
-		async handleUpdateInvoiceOffers(data) {
-			await this.updateInvoiceOffers(data);
-		},
-		handleUpdateInvoiceCoupons(data) {
-			this.posa_coupons = data;
-			this.handelOffers();
-		},
+
 		handleSetAllItems(data) {
 			this.allItems = data;
 			this.items.forEach((item) => {
@@ -1237,6 +1225,7 @@ export default {
 	},
 
 	mounted() {
+		this.setUpdateItemDetail(this.update_item_detail);
 		// Load saved column preferences
 		this.loadColumnPreferences();
 		// Restore saved invoice height
