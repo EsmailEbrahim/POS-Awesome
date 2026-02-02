@@ -233,9 +233,11 @@ import { useUIStore } from "../../stores/uiStore.js";
 import { storeToRefs } from "pinia";
 import stockCoordinator from "../../utils/stockCoordinator.js";
 import { parseBooleanSetting } from "../../utils/stock.js";
+import { ref } from "vue";
 import { isOffline } from "../../../offline/index.js";
 import { useOnlineStatus } from "../../composables/useOnlineStatus";
 import { useInvoiceCurrency } from "../../composables/useInvoiceCurrency";
+import { useInvoiceItems } from "../../composables/useInvoiceItems";
 
 export default {
 	name: "POSInvoice",
@@ -249,10 +251,11 @@ export default {
 		// But usually better to return the store or use storeToRefs
 		const { isOnline } = useOnlineStatus();
 
-		const { activeView } = storeToRefs(uiStore);
-		const { selectedCustomer, refreshToken: customerRefreshToken } = storeToRefs(customersStore);
 
+
+		const invoiceType = ref("Invoice");
 		const currencyState = useInvoiceCurrency({}, {});
+		const itemActions = useInvoiceItems(invoiceType);
 
 		return {
 			uiStore,
@@ -263,7 +266,9 @@ export default {
 			customersStore,
 			selectedCustomer,
 			customerRefreshToken,
+			invoiceType,
 			...currencyState,
+			...itemActions,
 		};
 	},
 	data() {
@@ -286,7 +291,7 @@ export default {
 			allItems: [], // All items for offer logic
 			discount_percentage_offer_name: null, // Track which offer is applied
 			invoiceTypes: ["Invoice", "Order", "Quotation"], // Types of invoices
-			invoiceType: "Invoice", // Current invoice type
+			// invoiceType moved to setup
 			itemsPerPage: 1000, // Items per page in table
 			itemSearch: "", // Search query for added items
 			expanded: [], // Array of expanded row IDs
@@ -829,35 +834,6 @@ export default {
 			this.posting_date = date;
 			this.invoiceStore.setPostingDate(date);
 			this.$forceUpdate();
-		},
-		shouldEnforceStockLimits(item) {
-			if (!item) {
-				return false;
-			}
-
-			if (item.is_stock_item === 0) {
-				if (!item.is_bundle) {
-					return false;
-				}
-
-				const bundleChildren = this.packed_items.filter((ch) => ch.bundle_id === item.bundle_id);
-				return bundleChildren.some((ch) => ch.is_stock_item !== 0);
-			}
-
-			return true;
-		},
-		updateBundleChildrenQty(item) {
-			if (!item || !item.is_bundle) {
-				return;
-			}
-
-			const multiplier = item.qty || 0;
-			this.packed_items
-				.filter((it) => it.bundle_id === item.bundle_id)
-				.forEach((ch) => {
-					ch.qty = multiplier * (ch.child_qty_per_bundle || 1);
-					this.calc_stock_qty(ch, ch.qty);
-				});
 		},
 		// Override setFormatedFloat for qty field to handle stock limits and return mode
 		setFormatedQty(item, field_name, precision, no_negative, value) {

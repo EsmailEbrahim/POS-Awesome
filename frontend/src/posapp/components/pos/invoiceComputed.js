@@ -136,12 +136,7 @@ export default {
 	isReturnInvoice() {
 		return this.invoiceType === "Return" || (this.invoice_doc && this.invoice_doc.is_return);
 	},
-	blockSaleBeyondAvailableQty() {
-		if (["Order", "Quotation"].includes(this.invoiceType)) {
-			return false;
-		}
-		return parseBooleanSetting(this.pos_profile?.posa_block_sale_beyond_available_qty);
-	},
+
 	// Table headers for item table (for another table if needed)
 	itemTableHeaders() {
 		return [
