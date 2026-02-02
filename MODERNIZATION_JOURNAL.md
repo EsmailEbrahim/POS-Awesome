@@ -452,13 +452,17 @@ _The ultimate reliability upgrade. A strict, step-by-step path to type safety._
 
 > **Strategy:** Migrate "Leaf" components first (small, no dependencies), then move up to "Container" components.
 
-- [x] **7.5.1 Primitive UI Components**
-    - `PostingDateRow.vue`
-    - `DeliveryCharges.vue`
-    - `MultiCurrencyRow.vue`
-    - **Action:** Add `<script setup lang="ts">`, define `Props` interface using `defineProps<Props>()`.
+- [ ] **7.5 Pre-TS Refactoring (Decomposition)**
+    - **Goal:** Break down large files (`ItemsTable.vue`, `Invoice.vue`) into smaller components and composables BEFORE migrating to TypeScript.
+    - **ItemsTable.vue Refactoring:**
+        - [ ] Extract `ItemsTableExpandedRow.vue` (The large expand panel).
+        - [ ] Extract `useItemsTableSearch.ts` (Search & Filter logic).
+        - [ ] Extract `useItemsTableDragDrop.ts` (Drag & Drop logic).
+    - **Invoice.vue Refactoring:**
+        - [ ] Extract `PaymentConfirmationDialog.vue`.
+        - [ ] Extract `useInvoiceActions.ts` (Payment & Save logic).
 
-- [ ] **7.5.2 Complex Components (The Big Ones)**
+- [ ] **7.6 Primitive UI Components (Migrated)**
     - `ItemsTable.vue`:
         - Define `ItemsTableProps`.
         - Type events: `defineEmits<{ (e: 'update:expanded', val: any[]): void }>()`.

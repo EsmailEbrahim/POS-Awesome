@@ -171,30 +171,11 @@
 		</v-card>
 
 		<!-- Payment Confirmation Dialog -->
-		<v-dialog v-model="confirm_payment_dialog" max-width="400" transition="dialog-bottom-transition">
-			<v-card>
-				<v-card-title class="text-h6">
-					{{ __("Open Payments?") }}
-				</v-card-title>
-				<v-card-text>
-					{{ __("Payments are not open. Do you want to open payments and submit?") }}
-				</v-card-text>
-				<v-card-actions>
-					<v-spacer></v-spacer>
-					<v-btn color="error" variant="text" @click="resolvePaymentConfirmation(false)">
-						{{ __("Cancel") }}
-					</v-btn>
-					<v-btn
-						ref="confirmPaymentBtn"
-						color="primary"
-						variant="text"
-						@click="resolvePaymentConfirmation(true)"
-					>
-						{{ __("Yes") }}
-					</v-btn>
-				</v-card-actions>
-			</v-card>
-		</v-dialog>
+		<PaymentConfirmationDialog
+			v-model="confirm_payment_dialog"
+			@confirm="resolvePaymentConfirmation(true)"
+			@cancel="resolvePaymentConfirmation(false)"
+		/>
 
 		<!-- Payment Section -->
 		<InvoiceSummary
@@ -239,6 +220,7 @@ import InvoiceSummary from "./InvoiceSummary.vue";
 import ItemsTable from "./ItemsTable.vue";
 import InvoiceItemsActionToolbar from "./InvoiceItemsActionToolbar.vue";
 import PackedItemsDialog from "./PackedItemsDialog.vue";
+import PaymentConfirmationDialog from "./PaymentConfirmationDialog.vue";
 import invoiceItemMethods from "./invoiceItemMethods";
 import invoiceComputed from "./invoiceComputed";
 import invoiceWatchers from "./invoiceWatchers";
@@ -253,6 +235,7 @@ import stockCoordinator from "../../utils/stockCoordinator.js";
 import { parseBooleanSetting } from "../../utils/stock.js";
 import { isOffline } from "../../../offline/index.js";
 import { useOnlineStatus } from "../../composables/useOnlineStatus";
+import { useInvoiceCurrency } from "../../composables/useInvoiceCurrency";
 
 export default {
 	name: "POSInvoice",
@@ -269,6 +252,8 @@ export default {
 		const { activeView } = storeToRefs(uiStore);
 		const { selectedCustomer, refreshToken: customerRefreshToken } = storeToRefs(customersStore);
 
+		const currencyState = useInvoiceCurrency({}, {});
+
 		return {
 			uiStore,
 			activeView,
@@ -278,6 +263,7 @@ export default {
 			customersStore,
 			selectedCustomer,
 			customerRefreshToken,
+			...currencyState,
 		};
 	},
 	data() {
@@ -318,15 +304,6 @@ export default {
 			posting_date_display: "", // Display value for date picker
 			items_headers: [],
 			// packedItemsHeaders removed as it is now in PackedItemsDialog
-			selected_currency: "", // Currently selected currency
-			exchange_rate: 1, // Current exchange rate
-			conversion_rate: 1, // Currency to company rate
-			exchange_rate_date: frappe.datetime.nowdate(), // Date of fetched exchange rate
-			company: null, // Company doc with default currency
-			available_currencies: [], // List of available currencies
-			price_lists: [], // Available selling price lists
-			selected_price_list: "", // Currently selected price list
-			price_list_currency: "", // Currency of the selected price list
 			_shortcutHandlers: {},
 			shortcutCycle: {
 				qty: 0,
@@ -355,6 +332,7 @@ export default {
 		ItemsTable,
 		InvoiceItemsActionToolbar,
 		PackedItemsDialog,
+		PaymentConfirmationDialog,
 	},
 	computed: {
 		items: {
@@ -929,100 +907,12 @@ export default {
 			}
 			return parsedValue;
 		},
-		async fetch_available_currencies() {
-			try {
-				console.log("Fetching available currencies...");
-				const r = await frappe.call({
-					method: "posawesome.posawesome.api.invoices.get_available_currencies",
-				});
 
-				if (r.message) {
-					console.log("Received currencies:", r.message);
-
-					// Get base currency for reference
-					const baseCurrency = this.pos_profile.currency;
-
-					// Create simple currency list with just names
-					this.available_currencies = r.message.map((currency) => {
-						return {
-							value: currency.name,
-							title: currency.name,
-						};
-					});
-
-					// Sort currencies - base currency first, then others alphabetically
-					this.available_currencies.sort((a, b) => {
-						if (a.value === baseCurrency) return -1;
-						if (b.value === baseCurrency) return 1;
-						return a.value.localeCompare(b.value);
-					});
-
-					// Set default currency if not already set
-					if (!this.selected_currency) {
-						this.selected_currency = baseCurrency;
-					}
-
-					return this.available_currencies;
-				}
-
-				return [];
-			} catch (error) {
-				console.error("Error fetching currencies:", error);
-				// Set default currency as fallback
-				const defaultCurrency = this.pos_profile.currency;
-				this.available_currencies = [
-					{
-						value: defaultCurrency,
-						title: defaultCurrency,
-					},
-				];
-				this.selected_currency = defaultCurrency;
-				return this.available_currencies;
-			}
-		},
-
-		async fetch_price_lists() {
-			if (this.pos_profile.posa_enable_price_list_dropdown) {
-				try {
-					const r = await frappe.call({
-						method: "posawesome.posawesome.api.utilities.get_selling_price_lists",
-					});
-					if (r && r.message) {
-						this.price_lists = r.message.map((pl) => pl.name);
-					}
-				} catch (error) {
-					console.error("Failed fetching price lists", error);
-					this.price_lists = [this.pos_profile.selling_price_list];
-				}
-			} else {
-				// Fallback to the price list defined in the POS Profile
-				this.price_lists = [this.pos_profile.selling_price_list];
-			}
-
-			if (!this.selected_price_list) {
-				this.selected_price_list = this.pos_profile.selling_price_list;
-			}
-
-			// Fetch and store currency for the applied price list
-			try {
-				const r = await frappe.call({
-					method: "posawesome.posawesome.api.invoices.get_price_list_currency",
-					args: { price_list: this.selected_price_list },
-				});
-				if (r && r.message) {
-					this.price_list_currency = r.message;
-				}
-			} catch (error) {
-				console.error("Failed fetching price list currency", error);
-			}
-
-			return this.price_lists;
-		},
 
 		async update_currency(currency) {
 			if (!currency) return;
 			this.selected_currency = currency;
-			await this.update_currency_and_rate();
+			await this.update_currency_and_rate(this.pos_profile, this.company);
 			await this.applyPricingRulesForCart(true);
 		},
 
@@ -1154,89 +1044,7 @@ export default {
 			return Number((_value || 0).toFixed(precision));
 		},
 
-		// Update currency and exchange rate when currency is changed
-		async update_currency_and_rate() {
-			if (!this.selected_currency) return;
 
-			const companyCurrency =
-				(this.company && this.company.default_currency) || this.pos_profile.currency;
-			const priceListCurrency = this.price_list_currency || companyCurrency;
-
-			try {
-				// Price list currency to selected currency rate
-				if (this.selected_currency === priceListCurrency) {
-					this.exchange_rate = 1;
-				} else {
-					const r = await frappe.call({
-						method: "posawesome.posawesome.api.invoices.fetch_exchange_rate_pair",
-						args: {
-							from_currency: priceListCurrency,
-							to_currency: this.selected_currency,
-						},
-					});
-					if (r && r.message) {
-						this.exchange_rate = r.message.exchange_rate;
-					}
-				}
-
-				// Selected currency to company currency rate
-				if (this.selected_currency === companyCurrency) {
-					this.conversion_rate = 1;
-					this.exchange_rate_date = this.formatDateForBackend(this.posting_date_display);
-				} else {
-					const r2 = await frappe.call({
-						method: "posawesome.posawesome.api.invoices.fetch_exchange_rate_pair",
-						args: {
-							from_currency: this.selected_currency,
-							to_currency: companyCurrency,
-						},
-					});
-					if (r2 && r2.message) {
-						this.conversion_rate = r2.message.exchange_rate;
-						this.exchange_rate_date = r2.message.date;
-						const posting_backend = this.formatDateForBackend(this.posting_date_display);
-						if (this.exchange_rate_date && posting_backend !== this.exchange_rate_date) {
-							this.toastStore.show({
-								title: __(
-									"Exchange rate date " +
-										this.exchange_rate_date +
-										" differs from posting date " +
-										posting_backend,
-								),
-								color: "warning",
-							});
-						}
-					}
-				}
-			} catch (error) {
-				console.error("Error updating currency:", error);
-				this.toastStore.show({
-					title: "Error updating currency",
-					color: "error",
-				});
-			}
-
-			this.sync_exchange_rate();
-
-			// If items already exist, update the invoice on the server so that
-			// the document currency and rates remain consistent
-			if (this.items.length) {
-				const doc = this.get_invoice_doc();
-				doc.currency = this.selected_currency;
-				doc.price_list_currency = priceListCurrency || this.pos_profile.currency;
-				doc.conversion_rate = this.conversion_rate;
-				doc.plc_conversion_rate = this._getPlcConversionRate();
-				try {
-					await this.update_invoice(doc);
-				} catch (error) {
-					console.error("Error updating invoice currency:", error);
-					this.toastStore.show({
-						title: "Error updating currency",
-						color: "error",
-					});
-				}
-			}
-		},
 
 		async update_exchange_rate_on_server() {
 			if (this.conversion_rate) {
@@ -1418,10 +1226,10 @@ export default {
 			this.initializeItemsHeaders();
 
 			if (this.pos_profile.posa_allow_multi_currency) {
-				this.fetch_available_currencies()
+				this.fetch_available_currencies(this.pos_profile)
 					.then(async () => {
 						this.selected_currency = this.pos_profile.currency;
-						await this.update_currency_and_rate();
+						await this.update_currency_and_rate(this.pos_profile, this.company);
 					})
 					.catch((error) => {
 						console.error("Error initializing currencies:", error);
@@ -1432,7 +1240,7 @@ export default {
 					});
 			}
 
-			this.fetch_price_lists();
+			this.fetch_price_lists(this.pos_profile);
 			this.update_price_list();
 		},
 		handleClearInvoice() {
@@ -1610,9 +1418,8 @@ export default {
 
 		this.stockUnsubscribe = stockCoordinator.subscribe(this.handleStockCoordinatorUpdate);
 
-		if (this.pos_profile.posa_allow_multi_currency) {
-			this.fetch_available_currencies();
-		}
+		// Removed multi-currency initialization from mounted hook.
+		// It's now handled within handleRegisterPosProfile.
 
 		this.emitCartQuantities();
 		this.$nextTick(() => {
