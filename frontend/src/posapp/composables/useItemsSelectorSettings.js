@@ -50,23 +50,35 @@ export const useItemsSelectorSettings = ({ getVM, itemSync }) => {
 		});
 	};
 
-	const applyItemSettings = () => {
+	const applyItemSettings = (payload) => {
 		const vm = getVm();
 		if (!vm) return;
-		vm.hide_qty_decimals = vm.temp_hide_qty_decimals;
-		vm.hide_zero_rate_items = vm.temp_hide_zero_rate_items;
-		vm.show_last_invoice_rate = vm.temp_show_last_invoice_rate;
-		vm.enable_background_sync = vm.temp_enable_background_sync;
-		vm.background_sync_interval = normalizeBackgroundSyncInterval(vm.temp_background_sync_interval);
+		const resolved = payload && typeof payload === "object" ? payload : {};
+		const getValue = (key, fallback) =>
+			Object.prototype.hasOwnProperty.call(resolved, key) ? resolved[key] : fallback;
+
+		vm.hide_qty_decimals = getValue("hide_qty_decimals", vm.temp_hide_qty_decimals);
+		vm.hide_zero_rate_items = getValue("hide_zero_rate_items", vm.temp_hide_zero_rate_items);
+		vm.show_last_invoice_rate = getValue("show_last_invoice_rate", vm.temp_show_last_invoice_rate);
+		vm.enable_background_sync = getValue("enable_background_sync", vm.temp_enable_background_sync);
+		vm.background_sync_interval = normalizeBackgroundSyncInterval(
+			getValue("background_sync_interval", vm.temp_background_sync_interval),
+		);
 		vm.temp_background_sync_interval = vm.background_sync_interval;
-		vm.enable_custom_items_per_page = vm.temp_enable_custom_items_per_page;
+		vm.enable_custom_items_per_page = getValue(
+			"enable_custom_items_per_page",
+			vm.temp_enable_custom_items_per_page,
+		);
+		const itemsPerPage = getValue("items_per_page", vm.temp_items_per_page);
 		if (vm.enable_custom_items_per_page) {
-			vm.items_per_page = parseInt(vm.temp_items_per_page) || 50;
+			vm.items_per_page = parseInt(itemsPerPage) || 50;
 		} else {
 			vm.items_per_page = 50;
 		}
 		vm.itemsPerPage = vm.items_per_page;
-		vm.pos_profile.posa_force_server_items = vm.temp_force_server_items ? 1 : 0;
+		vm.pos_profile.posa_force_server_items = getValue("force_server_items", vm.temp_force_server_items)
+			? 1
+			: 0;
 		savePosProfileSetting("posa_force_server_items", vm.pos_profile.posa_force_server_items);
 		if (!vm.show_last_invoice_rate) {
 			vm.clearLastInvoiceRateCache();
