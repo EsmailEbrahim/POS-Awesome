@@ -487,14 +487,6 @@ export default {
 
 			this.eventBus.emit("cart_quantities_updated", totals);
 		},
-		// Handle item dropped from ItemsSelector to ItemsTable
-		handleItemDrop(item) {
-			console.log("Item dropped:", item);
-
-			// Use the logic-heavy addItem method (from invoiceItemMethods alias) 
-			// to handle bundles, merging, and stock checks.
-			this.addItem(item);
-		},
 
 		applyStockStateToInvoiceItems(codes = null) {
 			const collections = [];
@@ -694,29 +686,6 @@ export default {
 
 
 
-		formatCurrency(value, precision = null) {
-			const prec = precision != null ? precision : this.currency_precision;
-			return this.$options.mixins[0].methods.formatCurrency.call(this, value, prec);
-		},
-
-		flt(value, precision = null) {
-			// Enhanced float handling for small numbers
-			if (precision === null) {
-				precision = this.float_precision;
-			}
-
-			const _value = Number(value);
-			if (isNaN(_value)) {
-				return 0;
-			}
-
-			// Handle very small numbers to prevent them from becoming 0
-			if (Math.abs(_value) < 0.000001) {
-				return _value;
-			}
-
-			return Number((_value || 0).toFixed(precision));
-		},
 
 
 
@@ -774,56 +743,11 @@ export default {
 			});
 
 			this.update_item_rates();
-			this.update_delivery_charges_rate();
-		},
-
-		// Add new rounding function
-		roundAmount(amount) {
-			// Respect POS Profile setting to disable rounding
-			if (this.pos_profile.disable_rounded_total) {
-				// Use configured precision without applying rounding
-				return this.flt(amount, this.currency_precision);
-			}
-			// If multi-currency is enabled and selected currency is different from base currency
-			const baseCurrency = this.price_list_currency || this.pos_profile.currency;
-			if (this.pos_profile.posa_allow_multi_currency && this.selected_currency !== baseCurrency) {
-				// For multi-currency, just keep 2 decimal places without rounding to nearest integer
-				return this.flt(amount, 2);
-			}
-			// For base currency or when multi-currency is disabled, round to nearest integer
-			return Math.round(amount);
+			this.update_delivery_charges(this.conversion_rate, this.currency_precision);
 		},
 
 
-		// Handle item reordering from drag and drop
-		handleItemReorder(reorderData) {
-			const { fromIndex, toIndex } = reorderData;
 
-			if (fromIndex === toIndex) return;
-
-			// Create a copy of the items array
-			const newItems = [...this.items];
-
-			// Remove the item from its original position
-			const [movedItem] = newItems.splice(fromIndex, 1);
-
-			// Insert the item at its new position
-			newItems.splice(toIndex, 0, movedItem);
-
-			// Update the items array
-			this.items = newItems;
-
-			// Show success feedback
-			this.toastStore.show({
-				title: __("Item order updated"),
-				color: "success",
-			});
-
-			// Optionally, you can also update the idx field for each item
-			this.items.forEach((item, index) => {
-				item.idx = index + 1;
-			});
-		},
 		handleRegisterPosProfile(data) {
 			this.pos_profile = data.pos_profile;
 			this.company = data.company || null;

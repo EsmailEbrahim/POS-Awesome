@@ -1435,15 +1435,6 @@ export default {
 				});
 			}
 		},
-		select_item(event, item) {
-			this.itemSelection.handleItemSelection(event, item);
-		},
-		selectTopItem() {
-			this.itemSelection.selectTopItem();
-		},
-		async click_item_row(event, { item }) {
-			await this.itemSelection.handleRowClick(event, { item });
-		},
 
 		/**
 		 * Handle variant item selection
@@ -1459,24 +1450,6 @@ export default {
 			return await this.itemAddition.prepareItemForCart(item, requestedQty, this);
 		},
 
-		esc_event() {
-			this.clearSearch();
-			this.qty = 1;
-			this.focusItemSearch();
-		},
-
-		applyCurrencyConversionToItems() {
-			if (!this.items || !this.items.length) return;
-			this.itemCurrencyUtils.applyCurrencyConversionToItems(this.items, this);
-		},
-
-		_getPlcToCompanyRate(item) {
-			return this.itemCurrencyUtils.getPlcToCompanyRate(item, this);
-		},
-
-		applyCurrencyConversionToItem(item) {
-			this.itemCurrencyUtils.applyCurrencyConversionToItem(item, this);
-		},
 
 		evaluateKeyboardScan() {
 			// Deprecated: Handled by useScannerInput
@@ -1484,80 +1457,7 @@ export default {
 		resetKeyboardScanDetection() {
 			// Deprecated: Handled by useScannerInput
 		},
-		clearHighlightedItem() {
-			this.itemSelection.clearHighlightedItem();
-		},
-		syncHighlightedItem() {
-			this.itemSelection.syncHighlightedItem();
-		},
-		navigateHighlightedItem(direction) {
-			this.itemSelection.navigateHighlightedItem(direction);
-		},
-		scrollHighlightedItemIntoView(index) {
-			this.$nextTick(() => {
-				if (this.items_view === "card") {
-					this.$refs.itemsContainer?.scrollToItem?.(index);
-					return;
-				}
-
-				const tableRef = this.$refs.itemsTable;
-				const scrollToIndex = tableRef?.scrollToIndex || tableRef?.$?.exposed?.scrollToIndex || null;
-				if (scrollToIndex) {
-					const scheduleScroll =
-						typeof requestAnimationFrame === "function"
-							? requestAnimationFrame
-							: (callback) => setTimeout(callback, 0);
-					scheduleScroll(() => {
-						scrollToIndex(index);
-					});
-					return;
-				}
-
-				const tableEl = tableRef?.getTableElement?.() || tableRef?.$el || tableRef;
-				const wrapper = tableEl?.querySelector?.(".v-table__wrapper");
-				const rows = tableEl?.querySelectorAll?.("tbody tr");
-				if (wrapper && rows && rows.length > 0) {
-					const targetRow = rows[index];
-					if (targetRow && typeof targetRow.offsetTop === "number") {
-						wrapper.scrollTop = Math.max(0, targetRow.offsetTop - wrapper.clientHeight / 2);
-						return;
-					}
-
-					const rowHeight = rows[0].getBoundingClientRect().height || 0;
-					if (rowHeight > 0) {
-						wrapper.scrollTop = rowHeight * index;
-						return;
-					}
-				}
-
-				if (rows && rows[index]) {
-					rows[index].scrollIntoView({ block: "nearest" });
-				}
-			});
-		},
-		isItemHighlighted(item) {
-			return this.itemSelection.isItemHighlighted(item);
-		},
-		getItemRowClass(item) {
-			return this.itemSelection.getItemRowClass(item);
-		},
-		getItemRowProps(item) {
-			return this.itemSelection.getItemRowProps(item);
-		},
-		resolveHighlightedItem(item) {
-			// Used internally by isItemHighlighted
-			return item;
-		},
-		async selectHighlightedItem() {
-			await this.itemSelection.selectHighlightedItem();
-		},
 		// Scan methods moved to useScanProcessor
-		processScannedItem(scannedCode) {
-			return this.scanProcessor.processScannedItem(scannedCode);
-		},
-		addScannedItemToInvoice(item, scannedCode, qty, price) {
-			return this.scanProcessor.addScannedItemToInvoice(item, scannedCode, qty, price);
-		},
 		handleItemNotFound(scannedCode) {
 			console.warn("Item not found for scanned code:", scannedCode);
 
@@ -1571,25 +1471,7 @@ export default {
 			this.scanErrorDetails = this.__("This barcode could not be matched to any item.");
 			this.playScanTone("error");
 		},
-		showMultipleItemsDialog(items, scannedCode) {
-			this.scanProcessor.showMultipleItemsDialog(items, scannedCode);
-		},
 
-		currencySymbol(currency) {
-			return get_currency_symbol(currency);
-		},
-		format_currency(value, currency, precision) {
-			const prec = typeof precision === "number" ? precision : this.currency_precision;
-			return this.formatCurrencyPlain(value, prec);
-		},
-		ratePrecision(value) {
-			const numericValue = typeof value === "string" ? parseFloat(value) : value;
-			return Number.isInteger(numericValue) ? 0 : this.currency_precision;
-		},
-		format_number(value, precision) {
-			const prec = typeof precision === "number" ? precision : this.float_precision;
-			return this.formatFloatPlain(value, prec);
-		},
 		hasDecimalPrecision(value) {
 			// Check if the value has any decimal precision when converted by exchange rate
 			if (this.exchange_rate && this.exchange_rate !== 1) {
