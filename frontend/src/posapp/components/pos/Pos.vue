@@ -189,7 +189,7 @@ export default {
 		},
 		checkLoadingComplete() {
 			if (this.itemsLoaded && this.customersLoaded) {
-				console.info("Loading completed");
+				// Loading complete logic
 			}
 		},
 		// handleAddItem removed as ItemsSelector handles pos addition internally
@@ -200,7 +200,6 @@ export default {
 
 			// Update Store
 			this.uiStore.setRegisterData(data);
-			console.info("LoadPosProfile");
 		},
 		closeOpeningDialog() {
 			this.dialog = false;

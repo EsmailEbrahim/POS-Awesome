@@ -384,13 +384,6 @@ export default {
 					requestedQty = Math.abs(parseFloat(requestedQty) || 1);
 				}
 
-				console.log("[ItemsSelector] add_item triggered", {
-					item_code: item.item_code,
-					requestedQty,
-					vm_qty: vm.qty,
-					options_qty: options.qty,
-				});
-
 				// Create a shallow copy to avoid mutating the reactive list
 				item = { ...item };
 
@@ -1302,8 +1295,6 @@ export default {
 
 		// Initialize Composables
 		// this.lastInvoiceRate = useLastInvoiceRate(); // Initialized in setup()
-
-		console.log("ItemsSelector created - starting initialization with Pinia store");
 
 		// Initialize Availability Composable
 		this.itemAvailability.registerCallbacks({

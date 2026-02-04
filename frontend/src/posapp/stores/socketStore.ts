@@ -7,13 +7,10 @@ export const useSocketStore = defineStore("socket", () => {
   function init() {
     if (typeof frappe === "undefined" || !frappe.realtime) return;
 
-    console.log("Initializing Socket Listeners");
-
     // Global listener for background submission errors
     frappe.realtime.on("pos_invoice_submit_error", (data: { message?: string; invoice?: string }) => {
       const message = data.message || "Unknown error";
       const invoice = data.invoice || "";
-      console.error(`Background Invoice Error [${invoice}]:`, message);
 
       if (typeof frappe.msgprint === "function") {
         frappe.msgprint({
@@ -34,7 +31,6 @@ export const useSocketStore = defineStore("socket", () => {
     // Global listener for successful background submission
     frappe.realtime.on("pos_invoice_processed", (data: { invoice?: string; name?: string }) => {
       const invoice = data.invoice || data.name;
-      console.log(`Background Invoice Processed: ${invoice}`);
 
       toastStore.show({
         title: __("Invoice Submitted"),

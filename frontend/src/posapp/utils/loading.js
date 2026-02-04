@@ -126,7 +126,6 @@ function completeLoading() {
 }
 
 export function markSourceLoaded(name) {
-	console.log(`Loading source marked as loaded: ${name}`);
 	setSourceProgress(name, 100);
 }
 
