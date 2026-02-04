@@ -223,6 +223,8 @@ import { useItemStorageSafety } from "../../composables/useItemStorageSafety.js"
 import { useItemsSelectorSearch } from "../../composables/useItemsSelectorSearch.js";
 import { useItemsSelectorSettings } from "../../composables/useItemsSelectorSettings.js";
 import { useItemsSelectorFocus } from "../../composables/useItemsSelectorFocus.js";
+import { useItemDisplay } from "../../composables/useItemDisplay.js";
+import { useItemsLoader } from "../../composables/useItemsLoader.js";
 import { parseBooleanSetting, formatStockShortageError } from "../../utils/stock.js";
 import { playScanTone, closeScanAudioContext } from "../../utils/scannerAudio.js";
 import { getItemsTableHeaders } from "../../utils/itemsTableHeaders.js";
@@ -290,6 +292,8 @@ export default {
 		const itemSelection = useItemSelection();
 
 		const itemSync = useItemSync();
+		const itemDisplay = useItemDisplay();
+		const itemsLoader = useItemsLoader();
 		const { setBatchQty, setSerialNo, getBatchAvailability } = useBatchSerial();
 
 		const {
@@ -678,6 +682,10 @@ export default {
 			replaceBarcodeIndex,
 			lookupItemByBarcode,
 			searchItemsByCodeFn,
+			itemDisplay,
+			...itemDisplay,
+			itemsLoader,
+			...itemsLoader,
 		};
 	},
 	components: {
@@ -1007,63 +1015,19 @@ export default {
 
 
 		async onVirtualRangeUpdate(_startIndex, _endIndex, _visibleStartIndex, visibleEndIndex) {
-			const total = this.displayedItems ? this.displayedItems.length : 0;
-			if (!total) {
-				this.scheduleCardMetricsUpdate();
-				return;
-			}
-
-			const threshold = Math.max(1, this.cardColumns * 2);
-			const nearEnd = visibleEndIndex >= total - threshold;
-
-			if (nearEnd && this.hasMoreCachedItems && !this.virtualScrollPending && !this.loading) {
-				this.virtualScrollPending = true;
-				try {
-					await this.appendCachedItemsPage();
-				} catch (error) {
-					console.warn("Failed to append cached items page", error);
-				} finally {
-					this.virtualScrollPending = false;
-					this.scheduleCardMetricsUpdate();
-				}
-			} else {
-				this.scheduleCardMetricsUpdate();
-			}
+			return await this.itemsLoader.onVirtualRangeUpdate(
+				_startIndex,
+				_endIndex,
+				_visibleStartIndex,
+				visibleEndIndex,
+			);
 		},
 
 		// Optimized scroll handler with throttling
 
 
 		async loadVisibleItems(reset = false) {
-			this.loadProgress = 0;
-			this.eventBus.emit("data-load-progress", { name: "items", progress: 0 });
-			await initPromise;
-			await this.ensureStorageHealth();
-
-			if (reset) {
-				this.currentPage = 0;
-				await this.loadItems({
-					searchValue: this.get_search(this.first_search),
-					groupFilter: this.item_group,
-					limit: this.usesLimitSearch ? this.limitSearchCap : undefined,
-				});
-			}
-
-			const pageItems = await this.appendCachedItemsPage();
-
-			if (Array.isArray(pageItems) && pageItems.length) {
-				this.eventBus.emit("set_all_items", this.items);
-				await this.update_items_details(pageItems);
-
-				this.loadProgress = this.totalItemCount
-					? Math.round((this.items.length / this.totalItemCount) * 100)
-					: 100;
-
-				this.eventBus.emit("data-load-progress", {
-					name: "items",
-					progress: this.loadProgress,
-				});
-			}
+			return await this.itemsLoader.loadVisibleItems(reset);
 		},
 		onListScroll(event) {
 			this.handleListScroll(event);
@@ -1098,63 +1062,7 @@ export default {
 
 
 
-		currencySymbol(currency) {
-			return get_currency_symbol(currency);
-		},
-		format_currency(value, currency, precision) {
-			const prec = typeof precision === "number" ? precision : this.currency_precision;
-			return this.formatCurrencyPlain(value, prec);
-		},
-		ratePrecision(value) {
-			const numericValue = typeof value === "string" ? parseFloat(value) : value;
-			return Number.isInteger(numericValue) ? 0 : this.currency_precision;
-		},
-		format_number(value, precision) {
-			const prec = typeof precision === "number" ? precision : this.float_precision;
-			return this.formatFloatPlain(value, prec);
-		},
 
-
-		hasDecimalPrecision(value) {
-			// Check if the value has any decimal precision when converted by exchange rate
-			if (this.exchange_rate && this.exchange_rate !== 1) {
-				let convertedValue = value * this.exchange_rate;
-				return !Number.isInteger(convertedValue);
-			}
-			return !Number.isInteger(value);
-		},
-
-		// Force load quantities for all visible items
-		forceLoadQuantities() {
-			if (this.displayedItems && this.displayedItems.length > 0) {
-				// Set default quantities if not available
-				this.displayedItems.forEach((item) => {
-					if (item.actual_qty === undefined || item.actual_qty === null) {
-						item.actual_qty = 0;
-					}
-				});
-				// Force update quantities from server
-				this.itemDetailFetcher.update_items_details(this.displayedItems);
-			}
-		},
-
-		// Ensure all items have quantities set
-		ensureAllItemsHaveQuantities() {
-			if (this.items && this.items.length > 0) {
-				this.items.forEach((item) => {
-					if (item.actual_qty === undefined || item.actual_qty === null) {
-						item.actual_qty = 0;
-					}
-				});
-			}
-			if (this.displayedItems && this.displayedItems.length > 0) {
-				this.displayedItems.forEach((item) => {
-					if (item.actual_qty === undefined || item.actual_qty === null) {
-						item.actual_qty = 0;
-					}
-				});
-			}
-		},
 
 		onDragStart(event, item) {
 			this.isDragging = true;
@@ -1183,36 +1091,6 @@ export default {
 	},
 
 	computed: {
-		memoizedFormatCurrency() {
-			return (value, currency, precision) => {
-				const prec = precision ?? this.currency_precision ?? 2;
-				// Handle null/undefined values by defaulting to 0, consistent with format_currency
-				const safeValue = value ?? 0;
-				const key = `c_${safeValue}_${currency}_${prec}`;
-				if (this.formatCache && this.formatCache.has(key)) return this.formatCache.get(key);
-				const result = this.format_currency(value, currency, precision);
-				if (this.formatCache) {
-					this.formatCache.set(key, result);
-					if (this.formatCache.size > 2000) this.formatCache.clear();
-				}
-				return result;
-			};
-		},
-		memoizedFormatNumber() {
-			return (value, precision) => {
-				const prec = precision ?? this.float_precision ?? 2;
-				// Handle null/undefined values by defaulting to 0, consistent with format_number
-				const safeValue = value ?? 0;
-				const key = `n_${safeValue}_${prec}`;
-				if (this.formatCache && this.formatCache.has(key)) return this.formatCache.get(key);
-				const result = this.format_number(value, precision);
-				if (this.formatCache) {
-					this.formatCache.set(key, result);
-					if (this.formatCache.size > 2000) this.formatCache.clear();
-				}
-				return result;
-			};
-		},
 		usesLimitSearch() {
 			const rawValue =
 				this.pos_profile?.pose_use_limit_search ?? this.pos_profile?.posa_use_limit_search;
@@ -1244,9 +1122,6 @@ export default {
 		},
 		blockSaleBeyondAvailableQty() {
 			return parseBooleanSetting(this.pos_profile?.posa_block_sale_beyond_available_qty);
-		},
-		headers() {
-			return getItemsTableHeaders(this.context, this.pos_profile || {});
 		},
 		displayedItems() {
 			// PERF: Avoid unnecessary array cloning ([...this.filteredItems]) as it creates garbage and O(N) cost on every render
@@ -1305,6 +1180,83 @@ export default {
 				this.itemDetailFetcher.update_items_details(items, options),
 		});
 		this.itemAvailability.initAvailability();
+
+		// Configure Item Display with component context
+		this.itemDisplay.registerContext({
+			get context() {
+				return vm.context;
+			},
+			get pos_profile() {
+				return vm.pos_profile;
+			},
+			get float_precision() {
+				return vm.float_precision;
+			},
+			get currency_precision() {
+				return vm.currency_precision;
+			},
+			get exchange_rate() {
+				return vm.exchange_rate;
+			},
+			formatCurrencyPlain: (v, p) => this.formatCurrencyPlain(v, p),
+			formatFloatPlain: (v, p) => this.formatFloatPlain(v, p),
+		});
+
+		// Configure Items Loader with component context
+		this.itemsLoader.registerContext({
+			get eventBus() {
+				return vm.eventBus;
+			},
+			get itemsStore() {
+				return vm.itemsStore;
+			},
+			get itemDetailFetcher() {
+				return vm.itemDetailFetcher;
+			},
+			get ensureStorageHealth() {
+				return vm.ensureStorageHealth;
+			},
+			get loadItems() {
+				return vm.loadItems;
+			},
+			get appendCachedItemsPage() {
+				return vm.appendCachedItemsPage;
+			},
+			get get_search() {
+				return vm.get_search;
+			},
+			get first_search() {
+				return vm.first_search;
+			},
+			get item_group() {
+				return vm.item_group;
+			},
+			get usesLimitSearch() {
+				return vm.usesLimitSearch;
+			},
+			get limitSearchCap() {
+				return vm.limitSearchCap;
+			},
+			get items() {
+				return vm.items;
+			},
+			get totalItemCount() {
+				return vm.totalItemCount;
+			},
+			get displayedItems() {
+				return vm.displayedItems;
+			},
+			get cardColumns() {
+				return vm.cardColumns;
+			},
+			get hasMoreCachedItems() {
+				return vm.hasMoreCachedItems;
+			},
+			get loading() {
+				return vm.loading;
+			},
+			scheduleCardMetricsUpdate: () => vm.scheduleCardMetricsUpdate(),
+		});
 
 		// Configure Item Detail Fetcher with component context (Late Binding)
 		this.itemDetailFetcher.registerContext({
