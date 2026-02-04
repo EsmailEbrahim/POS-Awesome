@@ -222,7 +222,7 @@ const props = defineProps({
 const emit = defineEmits(["add-item"]);
 
 // 1. Initialize Stores and Core Composables
-const instance = getCurrentInstance();
+const vmInstance = getCurrentInstance();
 const customersStore = useCustomersStore();
 const toastStore = useToastStore();
 const uiStore = useUIStore();
@@ -362,7 +362,6 @@ const syncStatus = computed(() => {
 });
 
 // 4. Initialization logic for Composables needing Context
-const instance = getCurrentInstance();
 
 // Settings context object for useItemsSelectorSettings
 const settingsContext = reactive({
@@ -390,9 +389,9 @@ const settingsContext = reactive({
 	itemSync,
 });
 
-const itemsSelectorSearch = useItemsSelectorSearch({ getVM: () => instance.proxy, scannerInput, itemSelection });
+const itemsSelectorSearch = useItemsSelectorSearch({ getVM: () => vmInstance.proxy, scannerInput, itemSelection });
 const itemsSelectorSettings = useItemsSelectorSettings({ getVM: () => settingsContext, itemSync });
-const itemsSelectorFocus = useItemsSelectorFocus({ getVM: () => instance.proxy, scannerInput, itemSelection });
+const itemsSelectorFocus = useItemsSelectorFocus({ getVM: () => vmInstance.proxy, scannerInput, itemSelection });
 
 const {
 	getLastInvoiceRate,
