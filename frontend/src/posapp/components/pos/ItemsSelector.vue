@@ -575,7 +575,24 @@ export default {
 			}
 		});
 
+
+		// Register context for itemSelection
+		itemSelection.registerContext({
+			addItem: add_item,
+			clearSearch: itemsSelectorSearch.clearSearch,
+			focusItemSearch: itemsSelectorFocus.focusItemSearch,
+			fly,
+			get flyConfig() {
+				return getValidVM()?.flyConfig;
+			},
+			get displayedItems() {
+				return getValidVM()?.displayedItems || [];
+			},
+		});
+
 		return {
+			select_item: itemSelection.handleItemSelection,
+			click_item_row: itemSelection.handleRowClick,
 			add_item,
 			...responsive,
 			...rtl,
