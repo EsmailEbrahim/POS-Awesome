@@ -675,10 +675,10 @@ const { rtlClasses } = rtl;
 
 // Proxy functions for template
 const esc_event = () => clearSearch();
-const onEnter = (e) => itemsSelectorSearch.handleEnter(e);
-const handleSearchKeydown = (e) => itemsSelectorSearch.handleSearchKeydown(e);
+const onEnter = (e) => itemsSelectorSearch.onEnter(e);
+const handleSearchKeydown = (e) => itemsSelectorFocus.handleSearchKeydown(e);
 const handleSearchInput = (val) => { search_input.value = val; };
-const handleSearchPaste = (e) => itemsSelectorSearch.handlePaste(e);
+const handleSearchPaste = (e) => itemsSelectorFocus.handleSearchPaste(e);
 const handleItemSearchFocus = () => itemsSelectorFocus.focusItemSearch();
 const clearQty = () => { qty.value = 1; };
 const startCameraScanning = () => { scannerInput.cameraScannerActive.value = true; };
