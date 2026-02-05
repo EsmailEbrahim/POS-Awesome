@@ -1,23 +1,21 @@
-/* global frappe */
-
 /**
  * Scanner audio feedback utility
  * Provides audio cues for successful and failed barcode scans
  */
 
-let scanAudioContext = null;
+let scanAudioContext: AudioContext | null = null;
 
 /**
  * Ensures an AudioContext is available for playing scan tones
- * @returns {AudioContext|null} The audio context or null if unavailable
+ * @returns The audio context or null if unavailable
  */
-export function ensureScanAudioContext() {
+export function ensureScanAudioContext(): AudioContext | null {
     if (typeof window === "undefined") {
         return null;
     }
 
     if (!scanAudioContext) {
-        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        const AudioContext = (window as any).AudioContext || (window as any).webkitAudioContext;
         if (!AudioContext) {
             return null;
         }
@@ -33,9 +31,9 @@ export function ensureScanAudioContext() {
 
 /**
  * Plays an audio tone to indicate scan success or failure
- * @param {"success"|"error"} type - Type of scan result
+ * @param type - Type of scan result
  */
-export function playScanTone(type = "success") {
+export function playScanTone(type: "success" | "error" = "success"): void {
     if (typeof window === "undefined") {
         return;
     }
@@ -76,7 +74,7 @@ export function playScanTone(type = "success") {
 /**
  * Closes the audio context and releases resources
  */
-export function closeScanAudioContext() {
+export function closeScanAudioContext(): void {
     if (scanAudioContext) {
         try {
             scanAudioContext.close();
