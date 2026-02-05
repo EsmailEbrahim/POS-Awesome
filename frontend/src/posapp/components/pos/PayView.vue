@@ -286,34 +286,10 @@ export default {
             }
         };
 
-        const { isSubmitting, processPayment } = usePosPaySubmission({
-            customerName: customer_name,
-            company,
-            posProfile: pos_profile,
-            posOpeningShift: pos_opening_shift,
-            exchangeRate,
-            invoiceTotalCurrency,
-            payment_methods,
-            selected_invoices,
-            selected_payments,
-            selected_mpesa_payments,
-            total_selected_invoices,
-            total_selected_payments,
-            total_selected_mpesa_payments,
-            total_payment_methods,
-            clearSelections,
-            load_print_page,
-            eventBus: proxy?.eventBus,
-            get_outstanding_invoices,
-            get_unallocated_payments,
-            get_draft_mpesa_payments_register,
-            set_mpesa_search_params
-        });
-
         // Computed Values
         const invoiceTotalCurrency = computed(() => {
             if (currency_filter.value && currency_filter.value !== "ALL") return currency_filter.value;
-            if (selected_invoices.value.length > 0) {
+            if (selected_invoices && selected_invoices.value.length > 0) {
                 const first = selected_invoices.value[0];
                 return first.party_account_currency || first.currency || pos_profile.value.currency;
             }
@@ -321,16 +297,17 @@ export default {
         });
 
         const paymentTotalCurrency = computed(() => {
-            if (selected_payments.value.length > 0) return selected_payments.value[0].currency || pos_profile.value.currency;
+            if (selected_payments && selected_payments.value.length > 0) return selected_payments.value[0].currency || pos_profile.value.currency;
             return pos_profile.value.currency;
         });
 
         const mpesaTotalCurrency = computed(() => {
-            if (selected_mpesa_payments.value.length > 0) return selected_mpesa_payments.value[0].currency || pos_profile.value.currency;
+            if (selected_mpesa_payments && selected_mpesa_payments.value.length > 0) return selected_mpesa_payments.value[0].currency || pos_profile.value.currency;
             return pos_profile.value.currency;
         });
 
-        const requiresExchangeRate = computed(() => invoiceTotalCurrency.value !== companyCurrency.value);
+        const companyCurrencyLocal = computed(() => companyCurrency.value || pos_profile.value?.currency || 'USD');
+        const requiresExchangeRate = computed(() => invoiceTotalCurrency.value !== companyCurrencyLocal.value);
 
         const total_outstanding_amount = computed(() => {
             if (!outstanding_invoices.value.length) return 0;
@@ -376,6 +353,8 @@ export default {
             );
         });
 
+        const getPaymentMethodCurrency = (mode) => payment_method_currencies.value[mode] || pos_profile.value.currency;
+
         const filtered_payment_methods = computed(() => {
             if (!payment_methods.value.length) return [];
             if (!selected_invoices.value.length) return payment_methods.value;
@@ -383,7 +362,29 @@ export default {
             return payment_methods.value.filter(m => getPaymentMethodCurrency(m.mode_of_payment) === target);
         });
 
-        const getPaymentMethodCurrency = (mode) => payment_method_currencies.value[mode] || pos_profile.value.currency;
+        const { isSubmitting, processPayment } = usePosPaySubmission({
+            customerName: customer_name,
+            company,
+            posProfile: pos_profile,
+            posOpeningShift: pos_opening_shift,
+            exchangeRate,
+            invoiceTotalCurrency,
+            payment_methods,
+            selected_invoices,
+            selected_payments,
+            selected_mpesa_payments,
+            total_selected_invoices,
+            total_selected_payments,
+            total_selected_mpesa_payments,
+            total_payment_methods,
+            clearSelections,
+            load_print_page,
+            eventBus: proxy?.eventBus,
+            get_outstanding_invoices,
+            get_unallocated_payments,
+            get_draft_mpesa_payments_register,
+            set_mpesa_search_params
+        });
 
         const fetchCompanyCurrency = async () => {
             if (!company.value) return;
@@ -411,7 +412,7 @@ export default {
                     method: "erpnext.setup.utils.get_exchange_rate",
                     args: {
                         from_currency: invoiceTotalCurrency.value,
-                        to_currency: companyCurrency.value,
+                        to_currency: companyCurrencyLocal.value,
                         transaction_date: frappe.datetime.nowdate(),
                         args: "for_selling"
                     }
