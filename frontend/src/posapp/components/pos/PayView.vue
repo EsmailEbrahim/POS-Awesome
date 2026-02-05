@@ -246,6 +246,7 @@ export default {
             get_outstanding_invoices,
             get_unallocated_payments,
             get_draft_mpesa_payments_register,
+            get_pos_profiles,
             autoReconcile,
             fetch_customer_details,
             set_mpesa_search_params
@@ -332,6 +333,14 @@ export default {
             if (pos_profile.value?.currency) currencies.add(pos_profile.value.currency);
             if (companyCurrency.value) currencies.add(companyCurrency.value);
             
+            // Add currencies from payment methods
+            if (pos_profile.value?.payments) {
+                pos_profile.value.payments.forEach(p => {
+                    const curr = payment_method_currencies.value[p.mode_of_payment];
+                    if (curr) currencies.add(curr);
+                });
+            }
+
             outstanding_invoices.value.forEach((inv) => {
                 currencies.add(inv.currency || pos_profile.value.currency);
             });
@@ -497,6 +506,7 @@ export default {
                         payment_methods_list.value = pos_profile.value.payments.map(p => p.mode_of_payment);
                     }
                 }
+                get_pos_profiles();
                 get_outstanding_invoices();
                 get_draft_mpesa_payments_register(payment_methods_list.value);
             } catch (e) {
@@ -601,6 +611,7 @@ export default {
             get_outstanding_invoices,
             get_unallocated_payments,
             get_draft_mpesa_payments_register,
+            get_pos_profiles,
             autoReconcile,
             fetch_customer_details,
             set_mpesa_search_params,

@@ -206,6 +206,19 @@ export function usePosPayData({ posProfile, company, customerName, toastStore, e
         }
     }
 
+    async function get_pos_profiles() {
+        try {
+            const r = await frappe.call("frappe.client.get_list", {
+                doctype: "POS Profile",
+                fields: ["name"],
+                limit_page_length: 100,
+            });
+            pos_profiles_list.value = r.message || [];
+        } catch (e) {
+            console.error("Failed to fetch POS profiles", e);
+        }
+    }
+
     return {
         outstanding_invoices,
         unallocated_payments,
@@ -222,6 +235,7 @@ export function usePosPayData({ posProfile, company, customerName, toastStore, e
         get_outstanding_invoices,
         get_unallocated_payments,
         get_draft_mpesa_payments_register,
+        get_pos_profiles,
         autoReconcile,
         fetch_customer_details,
         set_mpesa_search_params

@@ -60,6 +60,7 @@
 					@keydown.esc="$emit('esc')"
 					@focus="$emit('clear-qty')"
 					@click="$emit('clear-qty')"
+					@blur="$emit('blur-qty')"
 				></v-text-field>
 			</v-col>
 			<v-col cols="2" class="pb-0" v-if="posProfile.posa_new_line">
@@ -154,6 +155,7 @@ const emit = defineEmits([
 	"search-paste",
 	"focus",
 	"clear-qty",
+	"blur-qty",
 	"start-camera",
 	"open-new-item",
 	"toggle-settings",

@@ -49,6 +49,7 @@
 					@search-paste="handleSearchPaste"
 					@focus="handleItemSearchFocus"
 					@clear-qty="clearQty"
+					@blur-qty="onQtyBlur"
 					@start-camera="startCameraScanning"
 					@open-new-item="openNewItemDialog"
 					@toggle-settings="toggleItemSettings"
@@ -687,7 +688,12 @@ const handleSearchKeydown = (e) => itemsSelectorFocus.handleSearchKeydown(e);
 const handleSearchInput = (val) => { search_input.value = val; };
 const handleSearchPaste = (e) => itemsSelectorFocus.handleSearchPaste(e);
 const handleItemSearchFocus = () => itemsSelectorFocus.focusItemSearch();
-const clearQty = () => { qty.value = 1; };
+const clearQty = () => { qty.value = null; };
+const onQtyBlur = () => {
+    if (!qty.value || qty.value <= 0) {
+        qty.value = 1;
+    }
+};
 const startCameraScanning = () => { scannerInput.cameraScannerActive.value = true; };
 const forceReloadItems = () => itemsIntegration.refreshItems(true);
 const select_item = (e, item) => itemSelection.handleItemSelection(e, item);
@@ -729,7 +735,7 @@ defineExpose({
 	items_group, item_group, offersCount, couponsCount, virtualScrollBuffer, selected_currency,
 	getLastInvoiceRate, isItemHighlighted, isNegative, headerProps, getItemRowClass, getItemRowProps,
 	handleItemCreated, onBarcodeScanned, onScannerOpened, onScannerClosed, new_line,
-	clearSearchAndQty,
+	clearSearchAndQty, onQtyBlur,
 	hide_qty_decimals, hide_zero_rate_items, show_last_invoice_rate, enable_background_sync,
 	background_sync_interval, enable_custom_items_per_page, items_per_page, scannerLocked,
 	temp_hide_qty_decimals, temp_hide_zero_rate_items, temp_enable_custom_items_per_page,
