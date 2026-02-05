@@ -175,7 +175,7 @@ export function useInvoiceItems(invoiceType: Ref<string>) {
     };
 
     const handleItemDrop = (item: any) => {
-        addItem(item);
+        addItem(item, { invoiceStore, items: invoiceStore.items, pos_profile: pos_profile.value });
     };
 
     const handleItemReorder = (reorderData: { fromIndex: number; toIndex: number }) => {
