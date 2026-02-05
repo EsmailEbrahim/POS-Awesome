@@ -44,6 +44,7 @@
 					@enter="onEnter"
 					@search-keydown="handleSearchKeydown"
 					@clear-search="clearSearch"
+					@clear-search-and-qty="clearSearchAndQty"
 					@search-input="handleSearchInput"
 					@search-paste="handleSearchPaste"
 					@focus="handleItemSearchFocus"
@@ -491,6 +492,11 @@ const clearSearch = () => {
 	clearingSearch.value = false;
 };
 
+const clearSearchAndQty = () => {
+    clearSearch();
+    clearQty();
+};
+
 const onDragStart = (event, item) => {
 	isDragging.value = true;
 	event.dataTransfer.setData("application/json", JSON.stringify({ type: "item-from-selector", item }));
@@ -723,6 +729,7 @@ defineExpose({
 	items_group, item_group, offersCount, couponsCount, virtualScrollBuffer, selected_currency,
 	getLastInvoiceRate, isItemHighlighted, isNegative, headerProps, getItemRowClass, getItemRowProps,
 	handleItemCreated, onBarcodeScanned, onScannerOpened, onScannerClosed, new_line,
+	clearSearchAndQty,
 	hide_qty_decimals, hide_zero_rate_items, show_last_invoice_rate, enable_background_sync,
 	background_sync_interval, enable_custom_items_per_page, items_per_page, scannerLocked,
 	temp_hide_qty_decimals, temp_hide_zero_rate_items, temp_enable_custom_items_per_page,

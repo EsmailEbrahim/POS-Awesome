@@ -19,7 +19,8 @@
 					@keydown.esc="$emit('esc')"
 					@keydown.enter="$emit('enter')"
 					@keydown="$emit('search-keydown', $event)"
-					@click:clear="$emit('clear-search')"
+					@click:clear="$emit('clear-search-and-qty')"
+					@click="$emit('clear-search-and-qty')"
 					@input="$emit('search-input', $event.target.value)"
 					@paste="$emit('search-paste', $event)"
 					prepend-inner-icon="mdi-magnify"
@@ -58,6 +59,7 @@
 					@keydown.enter="$emit('enter')"
 					@keydown.esc="$emit('esc')"
 					@focus="$emit('clear-qty')"
+					@click="$emit('clear-qty')"
 				></v-text-field>
 			</v-col>
 			<v-col cols="2" class="pb-0" v-if="posProfile.posa_new_line">

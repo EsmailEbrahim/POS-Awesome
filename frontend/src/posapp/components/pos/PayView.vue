@@ -329,10 +329,13 @@ export default {
 
         const invoice_currencies = computed(() => {
             const currencies = new Set();
+            if (pos_profile.value?.currency) currencies.add(pos_profile.value.currency);
+            if (companyCurrency.value) currencies.add(companyCurrency.value);
+            
             outstanding_invoices.value.forEach((inv) => {
                 currencies.add(inv.currency || pos_profile.value.currency);
             });
-            return Array.from(currencies).sort();
+            return Array.from(currencies).filter(Boolean).sort();
         });
 
         const outstanding_by_currency = computed(() => {
