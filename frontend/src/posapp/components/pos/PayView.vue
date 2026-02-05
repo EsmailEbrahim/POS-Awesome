@@ -210,14 +210,22 @@ export default {
         ];
 
         // Formatting helpers
-        const formatCurrencyLocal = (val) => {
+        const formatCurrencyLocal = (val, precision) => {
             if (val === null || val === undefined) val = 0;
-            const currency = pos_profile.value?.currency || 'USD';
-            // Use the global frappe.format if available, or a fallback
-            if (typeof frappe !== 'undefined' && frappe.format) {
-                return frappe.format(val, { fieldtype: 'Currency', currency: currency });
+            let number = parseFloat(String(val).replace(/,/g, ""));
+            if (isNaN(number)) number = 0;
+
+            let prec = precision != null ? Number(precision) : 2;
+            if (typeof frappe !== 'undefined' && frappe.defaults) {
+                const defaultPrec = frappe.defaults.get_default("currency_precision");
+                if (defaultPrec != null) prec = Number(defaultPrec);
             }
-            return new Intl.NumberFormat('en-US', { style: 'currency', currency: currency }).format(val);
+
+            return number.toLocaleString('en-US', {
+                minimumFractionDigits: prec,
+                maximumFractionDigits: prec,
+                useGrouping: true,
+            });
         };
         const currencySymbol = (currency) => get_currency_symbol(currency || pos_profile.value?.currency);
 
