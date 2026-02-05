@@ -28,7 +28,7 @@
 						:is-invoice-selected="isInvoiceSelected"
 						:item-class="isSelected"
 						:currency-symbol="currencySymbol"
-						:format-currency="formatCurrency"
+						:format-currency="formatCurrencyLocal"
 						:headers="invoices_headers"
 						@search="get_outstanding_invoices"
 						@clear-selection="selected_invoices = []"
@@ -45,7 +45,7 @@
 						:loading="unallocated_payments_loading"
 						:headers="unallocated_payments_headers"
 						:currency-symbol="currencySymbol"
-						:format-currency="formatCurrency"
+						:format-currency="formatCurrencyLocal"
 						:payment-row-class="paymentRowClass"
 					/>
 
@@ -59,7 +59,7 @@
 						:pos-profile="pos_profile"
 						:headers="mpesa_payment_headers"
 						:currency-symbol="currencySymbol"
-						:format-currency="formatCurrency"
+						:format-currency="formatCurrencyLocal"
 						@search="get_draft_mpesa_payments_register(payment_methods_list)"
 					/>
 				</v-card>
@@ -88,7 +88,7 @@
 						:requires-exchange-rate="requiresExchangeRate"
 						:total-of-diff="total_of_diff"
 						:currency-symbol="currencySymbol"
-						:format-currency="formatCurrency"
+						:format-currency="formatCurrencyLocal"
 						:get-payment-method-currency="getPaymentMethodCurrency"
 						@validate-exchange-rate="validateExchangeRate"
 						@fetch-exchange-rate="fetchExchangeRate"
@@ -165,7 +165,7 @@ export default {
 
         // Core Data & State
         const dialog = ref(false);
-        const pos_profile = ref("");
+        const pos_profile = ref({});
         const pos_opening_shift = ref("");
         const customer_name = ref("");
         const company = ref("");
@@ -210,8 +210,16 @@ export default {
         ];
 
         // Formatting helpers
-        const formatCurrency = (val) => proxy?.formatCurrency ? proxy.formatCurrency(val, pos_profile.value.currency) : val;
-        const currencySymbol = (currency) => get_currency_symbol(currency || pos_profile.value.currency);
+        const formatCurrencyLocal = (val) => {
+            if (val === null || val === undefined) val = 0;
+            const currency = pos_profile.value?.currency || 'USD';
+            // Use the global frappe.format if available, or a fallback
+            if (typeof frappe !== 'undefined' && frappe.format) {
+                return frappe.format(val, { fieldtype: 'Currency', currency: currency });
+            }
+            return new Intl.NumberFormat('en-US', { style: 'currency', currency: currency }).format(val);
+        };
+        const currencySymbol = (currency) => get_currency_symbol(currency || pos_profile.value?.currency);
 
         // Initialize Composables
         const {
@@ -240,7 +248,7 @@ export default {
             toastStore,
             eventBus: proxy?.eventBus,
             currencySymbol,
-            formatCurrency
+            formatCurrency: formatCurrencyLocal
         });
 
         const {
@@ -284,7 +292,7 @@ export default {
             posProfile: pos_profile,
             posOpeningShift: pos_opening_shift,
             exchangeRate,
-            invoiceTotalCurrency: computed(() => invoiceTotalCurrency.value),
+            invoiceTotalCurrency,
             payment_methods,
             selected_invoices,
             selected_payments,
@@ -397,7 +405,7 @@ export default {
                 return;
             }
             exchangeRateLoading.value = true;
-            exchangeRateError = null;
+            exchangeRateError.value = null;
             try {
                 const r = await frappe.call({
                     method: "erpnext.setup.utils.get_exchange_rate",
@@ -410,7 +418,7 @@ export default {
                 });
                 exchangeRate.value = flt(r.message || 1);
             } catch (e) {
-                exchangeRateError = e.message;
+                exchangeRateError.value = e.message;
                 exchangeRate.value = 1;
             } finally {
                 exchangeRateLoading.value = false;
@@ -561,7 +569,7 @@ export default {
             invoices_headers,
             unallocated_payments_headers,
             mpesa_payment_headers,
-            formatCurrency,
+            formatCurrency: formatCurrencyLocal,
             currencySymbol,
             outstanding_invoices,
             unallocated_payments,
