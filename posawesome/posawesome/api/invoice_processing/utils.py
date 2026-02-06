@@ -143,4 +143,4 @@ def get_price_list_currency(price_list):
 
 @frappe.whitelist()
 def get_available_currencies():
-    return frappe.get_all("Currency", filters={"enabled": 1}, pluck="name")
+    return frappe.get_all("Currency", filters={"enabled": 1}, fields=["name"])
