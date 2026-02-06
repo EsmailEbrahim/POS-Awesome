@@ -259,6 +259,11 @@ export default {
 
 		const { proxy } = getCurrentInstance();
 
+		const is_return = ref(false);
+		const is_credit_sale = ref(false);
+		const is_write_off_change = ref(false);
+		const redeem_customer_credit = ref(false);
+
 		// Component State migrated from data() for usePaymentCalculations & usePaymentSubmission
 		const pos_profile = ref("");
 		const stock_settings = ref("");
@@ -444,6 +449,10 @@ export default {
 			currencyPrecision: currency_precision,
 		});
 
+		watch(() => uiStore.posProfile, (p) => { 
+			if (p) pos_profile.value = p; 
+		}, { immediate: true });
+
 		return {
 			invoiceStore,
 			customersStore,
@@ -471,6 +480,10 @@ export default {
 			sales_person,
 			is_credit_return,
 			loyalty_amount,
+			is_return,
+			is_credit_sale,
+			is_write_off_change,
+			redeem_customer_credit,
 			// Redemption
 			redeemed_customer_credit,
 			customer_credit_dict,
@@ -532,10 +545,11 @@ export default {
 	data() {
 		return {
 			// pos_settings moved to setup
-			is_return: false, // Is this a return invoice?
-			is_credit_sale: false, // Is this a credit sale?
-			is_write_off_change: false, // Write-off for change enabled
-			redeem_customer_credit: false, // Redeem customer credit?
+			is_write_off_change_data: false, // Renamed to avoid collision with setup ref
+			// is_return moved to setup
+			// is_credit_sale moved to setup
+			// is_write_off_change moved to setup
+			// redeem_customer_credit moved to setup
 			paid_change_rules: [], // Validation rules for paid change
 			// phone_dialog moved to usePaymentMethods
 			// custom_days_dialog moved to useInvoiceDetails
