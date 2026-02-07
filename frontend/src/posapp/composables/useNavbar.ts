@@ -1,6 +1,19 @@
 import { ref, computed, reactive } from "vue";
 import { getCacheUsageEstimate } from "../../offline/index.js";
 
+type CacheUsageEstimate = {
+	percentage?: number;
+	total?: number;
+	indexedDB?: number;
+	localStorage?: number;
+};
+
+type SyncTotals = {
+	pending: number;
+	synced: number;
+	drafted: number;
+};
+
 export function useNavbar() {
 	// State
 	const drawer = ref(false);
@@ -56,7 +69,8 @@ export function useNavbar() {
 	const updateCacheUsage = async () => {
 		cacheState.loading = true;
 		try {
-			const usageData = await getCacheUsageEstimate();
+			const usageData =
+				(await getCacheUsageEstimate()) as CacheUsageEstimate;
 			cacheState.usage = usageData.percentage || 0;
 			cacheState.details.total = usageData.total || 0;
 			cacheState.details.localStorage = usageData.localStorage || 0;
@@ -68,15 +82,15 @@ export function useNavbar() {
 		}
 	};
 
-	const updateSyncTotals = (totals) => {
+	const updateSyncTotals = (totals: Partial<SyncTotals>) => {
 		Object.assign(statusState.syncTotals, totals);
 	};
 
-	const updateNetworkStatus = (online) => {
+	const updateNetworkStatus = (online: boolean) => {
 		statusState.networkOnline = online;
 	};
 
-	const updateServerStatus = (online, connecting = false) => {
+	const updateServerStatus = (online: boolean, connecting = false) => {
 		statusState.serverOnline = online;
 		statusState.serverConnecting = connecting;
 	};

@@ -80,8 +80,8 @@ import {
 import {
 	setupNetworkListeners as initNetworkListeners,
 	checkNetworkConnectivity as utilsCheckNetworkConnectivity,
-} from "../composables/useNetwork.js";
-import { useRtl } from "../composables/useRtl.js";
+} from "../composables/useNetwork";
+import { useRtl } from "../composables/useRtl";
 import authService from "../services/authService.js";
 
 /**
@@ -361,7 +361,7 @@ const setupEventListeners = () => {
 				if (newProfile && newProfile.name) {
 					// Update customers store with profile
 					customersStore.setPosProfile(newProfile);
-					
+
 					if (navigator.onLine && !getIsManualOffline()) {
 						refreshTaxInclusiveSetting();
 						customersStore.get_customer_names();

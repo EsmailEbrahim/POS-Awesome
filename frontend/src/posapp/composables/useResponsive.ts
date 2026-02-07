@@ -8,7 +8,9 @@ export function useResponsive() {
 
 	const widthScale = computed(() => windowWidth.value / baseWidth.value);
 	const heightScale = computed(() => windowHeight.value / baseHeight.value);
-	const averageScale = computed(() => (widthScale.value + heightScale.value) / 2);
+	const averageScale = computed(
+		() => (widthScale.value + heightScale.value) / 2,
+	);
 
 	const dynamicSpacing = computed(() => {
 		const baseSpacing = {
@@ -52,7 +54,7 @@ export function useResponsive() {
 		};
 	});
 
-	let resizeRafId = null;
+	let resizeRafId: number | null = null;
 
 	const handleResize = () => {
 		// Debounce with requestAnimationFrame for better performance

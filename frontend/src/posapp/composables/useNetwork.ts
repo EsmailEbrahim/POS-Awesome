@@ -2,6 +2,30 @@
 import { isManualOffline } from "../../offline/index.js";
 /* global frappe */
 
+type NetworkVm = {
+	networkOnline: boolean;
+	serverOnline: boolean;
+	serverConnecting: boolean;
+	internetReachable: boolean;
+	isIpHost?: boolean;
+	checkNetworkConnectivity: () => Promise<void>;
+	checkFrappePing: () => Promise<boolean>;
+	checkCurrentOrigin: (
+		protocol: string,
+		hostname: string,
+		port?: string | number,
+	) => Promise<boolean>;
+	checkExternalConnectivity: () => Promise<boolean>;
+	checkWebSocketConnectivity: () => Promise<boolean>;
+	$forceUpdate: () => void;
+};
+
+declare global {
+	interface Window {
+		serverOnline?: boolean;
+	}
+}
+
 // Debounce variables for network stability
 let consecutiveFailures = 0;
 let consecutiveSuccesses = 0;
@@ -18,20 +42,24 @@ const MAX_INTERVAL = 120000; // Max 2 minutes
 const MIN_INTERVAL = 15000; // Min 15s
 
 // Persist last known good state
-function persistStatus(networkOnline, serverOnline) {
+function persistStatus(networkOnline: boolean, serverOnline: boolean) {
 	localStorage.setItem("networkOnline", JSON.stringify(networkOnline));
 	localStorage.setItem("serverOnline", JSON.stringify(serverOnline));
 }
 
 function getPersistedStatus() {
 	return {
-		networkOnline: JSON.parse(localStorage.getItem("networkOnline") || "true"),
-		serverOnline: JSON.parse(localStorage.getItem("serverOnline") || "true"),
+		networkOnline: JSON.parse(
+			localStorage.getItem("networkOnline") || "true",
+		),
+		serverOnline: JSON.parse(
+			localStorage.getItem("serverOnline") || "true",
+		),
 	};
 }
 
 // Manual retry function (to be called from UI)
-export function manualNetworkRetry(vm) {
+export function manualNetworkRetry(vm: NetworkVm) {
 	if (typeof vm.checkNetworkConnectivity === "function") {
 		vm.serverConnecting = true;
 		vm.$forceUpdate();
@@ -43,7 +71,7 @@ export function manualNetworkRetry(vm) {
 }
 
 // Enhanced periodic check with exponential backoff
-function scheduleNextCheck(vm) {
+function scheduleNextCheck(vm: NetworkVm) {
 	setTimeout(async () => {
 		if (isManualOffline()) {
 			vm.serverConnecting = false;
@@ -75,7 +103,7 @@ function scheduleNextCheck(vm) {
 	}, checkInterval);
 }
 
-export function setupNetworkListeners() {
+export function setupNetworkListeners(this: NetworkVm) {
 	// Listen for network status changes
 	window.addEventListener("online", () => {
 		if (isManualOffline()) return;
@@ -124,7 +152,7 @@ export function setupNetworkListeners() {
 	scheduleNextCheck(this);
 }
 
-export async function checkNetworkConnectivity() {
+export async function checkNetworkConnectivity(this: NetworkVm) {
 	try {
 		let isConnected = false;
 		let isInternetReachable = false;
@@ -147,7 +175,11 @@ export async function checkNetworkConnectivity() {
 			signal: AbortSignal.timeout(ORIGIN_TIMEOUT),
 		}).then((r) => r.status < 500);
 
-		const localCheck = Promise.any([deskRequest, staticRequest, originRequest]).catch(() => false);
+		const localCheck = Promise.any([
+			deskRequest,
+			staticRequest,
+			originRequest,
+		]).catch(() => false);
 
 		const externalCheck = (async () => {
 			try {
@@ -166,7 +198,10 @@ export async function checkNetworkConnectivity() {
 			}
 		})();
 
-		const [localResult, internetResult] = await Promise.all([localCheck, externalCheck]);
+		const [localResult, internetResult] = await Promise.all([
+			localCheck,
+			externalCheck,
+		]);
 		isConnected = localResult;
 		isInternetReachable = internetResult;
 
@@ -201,7 +236,9 @@ export async function checkNetworkConnectivity() {
 			}
 		}
 	} catch (error) {
-		console.warn("Network connectivity check failed:", error);
+		const resolvedError =
+			error instanceof Error ? error : new Error(String(error));
+		console.warn("Network connectivity check failed:", resolvedError);
 		consecutiveFailures++;
 		consecutiveSuccesses = 0;
 		if (consecutiveFailures >= FAILURE_THRESHOLD) {
@@ -215,7 +252,7 @@ export async function checkNetworkConnectivity() {
 	}
 }
 
-export function detectHostType(hostname) {
+export function detectHostType(hostname: string) {
 	const ipv4Regex =
 		/^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
 	const ipv6Regex = /^(?:[0-9a-fA-F]{1,4}:){7}[0-9a-fA-F]{1,4}$|^::1$|^::/;
@@ -227,7 +264,12 @@ export function detectHostType(hostname) {
 	);
 }
 
-export async function performConnectivityChecks(hostname, protocol, port) {
+export async function performConnectivityChecks(
+	this: NetworkVm,
+	hostname: string,
+	protocol: string,
+	port?: string | number,
+) {
 	const checks = [];
 	checks.push(this.checkFrappePing());
 	checks.push(this.checkCurrentOrigin(protocol, hostname, port));
@@ -242,14 +284,16 @@ export async function performConnectivityChecks(hostname, protocol, port) {
 
 	try {
 		const results = await Promise.allSettled(checks);
-		return results.some((result) => result.status === "fulfilled" && result.value === true);
+		return results.some(
+			(result) => result.status === "fulfilled" && result.value === true,
+		);
 	} catch (error) {
 		console.warn("All connectivity checks failed:", error);
 		return false;
 	}
 }
 
-export async function checkFrappePing() {
+export async function checkFrappePing(this: NetworkVm) {
 	try {
 		const controller = new AbortController();
 		const timeoutId = setTimeout(() => controller.abort(), 5000);
@@ -268,37 +312,45 @@ export async function checkFrappePing() {
 		clearTimeout(timeoutId);
 		return response.ok;
 	} catch (error) {
-		if (error.name !== "AbortError") {
+		if (error instanceof Error && error.name !== "AbortError") {
 			console.warn("Frappe ping check failed:", error);
 		}
 		return false;
 	}
 }
 
-export async function checkCurrentOrigin(protocol, hostname, port) {
+export async function checkCurrentOrigin(
+	this: NetworkVm,
+	protocol: string,
+	hostname: string,
+	port?: string | number,
+) {
 	try {
 		const controller = new AbortController();
 		const timeoutId = setTimeout(() => controller.abort(), 5000);
 		const baseUrl = `${protocol}//${hostname}${port ? ":" + port : ""}`;
-		const response = await fetch(`${baseUrl}/api/method/frappe.auth.get_logged_user`, {
-			method: "HEAD",
-			cache: "no-cache",
-			signal: controller.signal,
-			headers: {
-				"Cache-Control": "no-cache, no-store, must-revalidate",
+		const response = await fetch(
+			`${baseUrl}/api/method/frappe.auth.get_logged_user`,
+			{
+				method: "HEAD",
+				cache: "no-cache",
+				signal: controller.signal,
+				headers: {
+					"Cache-Control": "no-cache, no-store, must-revalidate",
+				},
 			},
-		});
+		);
 		clearTimeout(timeoutId);
 		return response.status < 500;
 	} catch (error) {
-		if (error.name !== "AbortError") {
+		if (error instanceof Error && error.name !== "AbortError") {
 			console.warn("Current origin check failed:", error);
 		}
 		return false;
 	}
 }
 
-export async function checkExternalConnectivity() {
+export async function checkExternalConnectivity(this: NetworkVm) {
 	try {
 		const controller = new AbortController();
 		const timeoutId = setTimeout(() => controller.abort(), 3000);
@@ -311,14 +363,14 @@ export async function checkExternalConnectivity() {
 		clearTimeout(timeoutId);
 		return true;
 	} catch (error) {
-		if (error.name !== "AbortError") {
+		if (error instanceof Error && error.name !== "AbortError") {
 			console.warn("External connectivity check failed:", error);
 		}
 		return false;
 	}
 }
 
-export async function checkWebSocketConnectivity() {
+export async function checkWebSocketConnectivity(this: NetworkVm) {
 	try {
 		if (frappe.realtime && frappe.realtime.socket) {
 			const socketState = frappe.realtime.socket.readyState;

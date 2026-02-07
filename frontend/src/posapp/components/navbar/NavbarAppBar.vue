@@ -214,7 +214,7 @@
 </template>
 
 <script>
-import { useRtl } from "../../composables/useRtl.js";
+import { useRtl } from "../../composables/useRtl";
 import posLogo from "../pos/pos.png";
 import NavbarInfoGadgets from "./NavbarInfoGadgets.vue";
 

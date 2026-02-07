@@ -1,19 +1,31 @@
 import { ref, computed } from "vue";
 
+const THEME_MODES = ["light", "dark", "automatic"] as const;
+type ThemeMode = (typeof THEME_MODES)[number];
+type ResolvedTheme = "light" | "dark";
+
+export type VuetifyInstance = {
+	theme?: {
+		global?: {
+			name: { value: string };
+		};
+	};
+};
+
 // Global theme state
 const isDarkMode = ref(false);
-const theme = ref("light");
+const theme = ref<ResolvedTheme>("light");
 
 // Theme preference storage key
 const THEME_STORAGE_KEY = "posawesome_theme_preference";
 
 // Global Vuetify instance reference (set during app initialization)
-let vuetifyInstance = null;
+let vuetifyInstance: VuetifyInstance | null = null;
 
 /**
  * Set the global Vuetify instance (called from the theme plugin)
  */
-export function setVuetifyInstance(vuetify) {
+export function setVuetifyInstance(vuetify: VuetifyInstance | null) {
 	vuetifyInstance = vuetify;
 }
 
@@ -22,16 +34,28 @@ export function setVuetifyInstance(vuetify) {
  * Provides centralized dark mode management across all components
  */
 export function useTheme() {
+	const normalizeTheme = (value: string | null): ThemeMode | null => {
+		if (value === "light" || value === "dark" || value === "automatic") {
+			return value;
+		}
+		return null;
+	};
+
 	// Initialize theme from DOM or localStorage
 	const initializeTheme = () => {
 		const root = document.documentElement;
-		const domTheme = root.getAttribute("data-theme-mode") || root.getAttribute("data-theme");
+		const domTheme = normalizeTheme(
+			root.getAttribute("data-theme-mode") ||
+				root.getAttribute("data-theme"),
+		);
 
 		if (domTheme) {
 			setTheme(domTheme === "automatic" ? getSystemTheme() : domTheme);
 		} else {
 			// Fallback to localStorage or system preference
-			const savedTheme = localStorage.getItem(THEME_STORAGE_KEY);
+			const savedTheme = normalizeTheme(
+				localStorage.getItem(THEME_STORAGE_KEY),
+			);
 			if (savedTheme) {
 				setTheme(savedTheme);
 			} else {
@@ -41,13 +65,16 @@ export function useTheme() {
 	};
 
 	// Get system theme preference
-	const getSystemTheme = () => {
-		return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+	const getSystemTheme = (): ResolvedTheme => {
+		return window.matchMedia("(prefers-color-scheme: dark)").matches
+			? "dark"
+			: "light";
 	};
 
 	// Set theme and update all systems
-	const setTheme = (newTheme) => {
-		const resolvedTheme = newTheme === "automatic" ? getSystemTheme() : newTheme;
+	const setTheme = (newTheme: ThemeMode) => {
+		const resolvedTheme =
+			newTheme === "automatic" ? getSystemTheme() : newTheme;
 
 		theme.value = resolvedTheme;
 		isDarkMode.value = resolvedTheme === "dark";
@@ -82,7 +109,7 @@ export function useTheme() {
 	};
 
 	// Update CSS custom properties for immediate theme changes
-	const updateCSSProperties = (themeName) => {
+	const updateCSSProperties = (themeName: ResolvedTheme) => {
 		const root = document.documentElement;
 
 		if (themeName === "dark") {
@@ -107,7 +134,10 @@ export function useTheme() {
 
 			root.style.setProperty("--pos-card-bg", "#1E1E1E");
 			root.style.setProperty("--pos-input-bg", "#2d2d2d");
-			root.style.setProperty("--pos-hover-bg", "rgba(255, 255, 255, 0.12)");
+			root.style.setProperty(
+				"--pos-hover-bg",
+				"rgba(255, 255, 255, 0.12)",
+			);
 		} else {
 			// Light theme CSS custom properties
 			root.style.setProperty("--pos-bg-primary", "#ffffff");
@@ -130,7 +160,10 @@ export function useTheme() {
 
 			root.style.setProperty("--pos-card-bg", "#ffffff");
 			root.style.setProperty("--pos-input-bg", "#f5f5f5");
-			root.style.setProperty("--pos-hover-bg", "rgba(25, 118, 210, 0.04)");
+			root.style.setProperty(
+				"--pos-hover-bg",
+				"rgba(25, 118, 210, 0.04)",
+			);
 		}
 
 		// Minimal DOM recalculation
@@ -149,7 +182,7 @@ export function useTheme() {
 	};
 
 	// Sync theme with Frappe system
-	const syncWithFrappe = (themeName) => {
+	const syncWithFrappe = (themeName: ThemeMode) => {
 		// Update Frappe UI if available
 		if (window.frappe?.ui?.set_theme) {
 			window.frappe.ui.set_theme(themeName);
@@ -159,7 +192,8 @@ export function useTheme() {
 		if (window.frappe?.xcall) {
 			window.frappe
 				.xcall("frappe.core.doctype.user.user.switch_theme", {
-					theme: themeName.charAt(0).toUpperCase() + themeName.slice(1),
+					theme:
+						themeName.charAt(0).toUpperCase() + themeName.slice(1),
 				})
 				.catch(() => {
 					// Ignore API errors - theme still works locally
@@ -171,7 +205,8 @@ export function useTheme() {
 	const setupSystemThemeWatcher = () => {
 		const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
 		mediaQuery.addEventListener("change", () => {
-			const currentMode = document.documentElement.getAttribute("data-theme-mode");
+			const currentMode =
+				document.documentElement.getAttribute("data-theme-mode");
 			if (currentMode === "automatic") {
 				setTheme("automatic");
 			}
@@ -184,10 +219,16 @@ export function useTheme() {
 			mutations.forEach((mutation) => {
 				if (mutation.type === "attributes") {
 					const root = document.documentElement;
-					const newTheme = root.getAttribute("data-theme-mode") || root.getAttribute("data-theme");
+					const newTheme = normalizeTheme(
+						root.getAttribute("data-theme-mode") ||
+							root.getAttribute("data-theme"),
+					);
 
 					if (newTheme && newTheme !== theme.value) {
-						const resolvedTheme = newTheme === "automatic" ? getSystemTheme() : newTheme;
+						const resolvedTheme =
+							newTheme === "automatic"
+								? getSystemTheme()
+								: newTheme;
 
 						if (resolvedTheme !== theme.value) {
 							theme.value = resolvedTheme;
@@ -216,7 +257,9 @@ export function useTheme() {
 			primary: isDarkMode.value ? "#00D4FF" : "#0097A7",
 			textPrimary: isDarkMode.value ? "#ffffff" : "#212121",
 			textSecondary: isDarkMode.value ? "#e0e0e0" : "#666666",
-			border: isDarkMode.value ? "rgba(255, 255, 255, 0.12)" : "rgba(0, 0, 0, 0.12)",
+			border: isDarkMode.value
+				? "rgba(255, 255, 255, 0.12)"
+				: "rgba(0, 0, 0, 0.12)",
 			cardBackground: isDarkMode.value ? "#1E1E1E" : "#ffffff",
 		};
 	});

@@ -15,21 +15,37 @@ export function useRtl() {
 	// Initialize RTL state from Frappe utils and document
 	onMounted(() => {
 		// Primary: Use Frappe's RTL detection (respects user language settings)
-		if (typeof frappe !== "undefined" && frappe.utils && typeof frappe.utils.is_rtl === "function") {
+		if (
+			typeof frappe !== "undefined" &&
+			frappe.utils &&
+			typeof frappe.utils.is_rtl === "function"
+		) {
 			isRtl.value = frappe.utils.is_rtl();
 		}
 
 		// Fallback: Check document/HTML direction attribute
 		if (!isRtl.value) {
-			const htmlDir = document.documentElement.dir || document.body.dir || "";
+			const htmlDir =
+				document.documentElement.dir || document.body.dir || "";
 			isRtl.value = htmlDir.toLowerCase() === "rtl";
 		}
 
 		// Additional check: Look for RTL language codes in document lang
 		if (!isRtl.value) {
 			const docLang = document.documentElement.lang || "";
-			const rtlLanguages = ["ar", "he", "fa", "ur", "ps", "sd", "ku", "dv"];
-			isRtl.value = rtlLanguages.some((lang) => docLang.toLowerCase().startsWith(lang));
+			const rtlLanguages = [
+				"ar",
+				"he",
+				"fa",
+				"ur",
+				"ps",
+				"sd",
+				"ku",
+				"dv",
+			];
+			isRtl.value = rtlLanguages.some((lang) =>
+				docLang.toLowerCase().startsWith(lang),
+			);
 		}
 	});
 
@@ -75,8 +91,13 @@ export function useRtl() {
 	};
 
 	// Helper for RTL-aware positioning
-	const getPositionStyle = (left = null, right = null, top = null, bottom = null) => {
-		const style = {};
+	const getPositionStyle = (
+		left: number | null = null,
+		right: number | null = null,
+		top: number | null = null,
+		bottom: number | null = null,
+	) => {
+		const style: Record<string, string> = {};
 
 		if (left !== null && right !== null) {
 			if (isRtl.value) {

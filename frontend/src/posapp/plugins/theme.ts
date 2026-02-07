@@ -1,7 +1,12 @@
-import { useTheme, setVuetifyInstance } from "../composables/useTheme.js";
+import type { App } from "vue";
+import {
+	useTheme,
+	setVuetifyInstance,
+	type VuetifyInstance,
+} from "../composables/useTheme";
 
 export default {
-	install(app, { vuetify }) {
+	install(app: App, { vuetify }: { vuetify?: VuetifyInstance } = {}) {
 		// Set the Vuetify instance for the theme composable
 		if (vuetify) {
 			setVuetifyInstance(vuetify);

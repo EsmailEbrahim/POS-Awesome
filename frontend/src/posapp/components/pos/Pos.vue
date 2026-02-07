@@ -26,7 +26,7 @@
 				cols="12"
 				class="pos dynamic-col"
 			>
-						<ItemsSelector context="pos" />
+				<ItemsSelector context="pos" />
 			</v-col>
 			<v-col
 				v-show="activeView === 'offers'"
@@ -95,8 +95,8 @@ import { usePosShift } from "../../composables/usePosShift.js";
 import { useOffers } from "../../composables/useOffers.js";
 // Import the cache cleanup function
 import { clearExpiredCustomerBalances } from "../../../offline/index.js";
-import { useResponsive } from "../../composables/useResponsive.js";
-import { useRtl } from "../../composables/useRtl.js";
+import { useResponsive } from "../../composables/useResponsive";
+import { useRtl } from "../../composables/useRtl";
 import { useCustomersStore } from "../../stores/customersStore.js";
 import { useUIStore } from "../../stores/uiStore.js";
 import { useInvoiceStore } from "../../stores/invoiceStore.js";

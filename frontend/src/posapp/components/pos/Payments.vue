@@ -222,7 +222,7 @@ import { useToastStore } from "../../stores/toastStore.js";
 import { useSyncStore } from "../../stores/syncStore.ts";
 
 // Composables
-import { useRtl } from "../../composables/useRtl.js";
+import { useRtl } from "../../composables/useRtl";
 import { usePaymentCalculations } from "../../composables/usePaymentCalculations";
 import { usePaymentSubmission } from "../../composables/usePaymentSubmission";
 import { useRedemptionLogic } from "../../composables/useRedemptionLogic";

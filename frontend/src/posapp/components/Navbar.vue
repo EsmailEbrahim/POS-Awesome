@@ -129,7 +129,7 @@ import posLogo from "./pos/pos.png";
 import { forceClearAllCache } from "../../offline/index.js";
 import { clearAllCaches } from "../../utils/clearAllCaches.js";
 import { isOffline } from "../../offline/index.js";
-import { useRtl } from "../composables/useRtl.js";
+import { useRtl } from "../composables/useRtl";
 
 const ServerUsageGadget = defineAsyncComponent(() => import("./navbar/ServerUsageGadget.vue"));
 const DatabaseUsageGadget = defineAsyncComponent(() => import("./navbar/DatabaseUsageGadget.vue"));
@@ -151,7 +151,7 @@ export default {
 		// Extract reactive refs
 		const { visible, text, color, timeout, history, unreadCount } = storeToRefs(toastStore);
 		const { isFrozen, freezeTitle, freezeMessage } = storeToRefs(uiStore);
-		
+
 		return {
 			isRtl,
 			rtlStyles,
@@ -166,7 +166,7 @@ export default {
 			unreadCount,
 			isFrozen,
 			freezeTitle,
-			freezeMessage
+			freezeMessage,
 		};
 	},
 	components: {
@@ -316,7 +316,7 @@ export default {
 				(doc) => {
 					this.handleSetCompany(doc);
 				},
-				{ deep: true, immediate: true }
+				{ deep: true, immediate: true },
 			);
 
 			// Enhanced initialization with better reactivity handling
@@ -563,11 +563,9 @@ export default {
 			// Show message already handled by toastStore.show above? No, above adds to history and shows snack.
 			// The original code did both: addBellNotification (history) and showMessage (snack).
 			// Our new toastStore.show does both. So one call is enough.
-
 		},
 
 		// Notification logic moved to toastStore
-
 
 		handleSetCompany(data) {
 			if (typeof data === "string") {

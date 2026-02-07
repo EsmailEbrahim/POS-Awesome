@@ -16,7 +16,7 @@ import "../../../posawesome/public/css/rtl.css";
 import "../style.css";
 import "./styles/theme.css";
 import eventBus from "./bus";
-import themePlugin from "./plugins/theme.js";
+import themePlugin from "./plugins/theme";
 import { pinia } from "./stores";
 import { useToastStore } from "./stores/toastStore";
 import { useSocketStore } from "./stores/socketStore";
@@ -24,15 +24,19 @@ import { createPosAppRouter } from "./router";
 import "../sw-updater.js"; // Initialize service worker auto-updater
 import App from "./App.vue";
 // @ts-ignore
-import { attachProfilerHelpers, initLongTaskObserver, isPerfEnabled } from "./utils/perf.js";
+import {
+	attachProfilerHelpers,
+	initLongTaskObserver,
+	isPerfEnabled,
+} from "./utils/perf.js";
 
 attachProfilerHelpers();
 
 declare global {
-  interface Window {
-    Dexie: any;
-    frappe: any;
-  }
+	interface Window {
+		Dexie: any;
+		frappe: any;
+	}
 }
 
 // Suppress known benign error from Frappe's shortcut.js (vendor)
@@ -42,7 +46,9 @@ if (typeof window !== "undefined") {
 		if (
 			event.message &&
 			(event.message.includes("remove_last_divider") ||
-				(event.message.includes("offsetWidth") && event.filename && event.filename.includes("shortcut.js")))
+				(event.message.includes("offsetWidth") &&
+					event.filename &&
+					event.filename.includes("shortcut.js")))
 		) {
 			event.preventDefault();
 			console.warn("Suppressed known benign error in shortcut.js");
@@ -64,12 +70,12 @@ if (typeof frappe === "undefined") {
 }
 
 frappe.PosApp.posapp = class {
-    $parent: any;
-    page: any;
-    app: any;
-    router: any;
-    routerHistory: any;
-    $el: any;
+	$parent: any;
+	page: any;
+	app: any;
+	router: any;
+	routerHistory: any;
+	$el: any;
 
 	constructor({ parent }: { parent: any }) {
 		this.$parent = $(document);
@@ -93,7 +99,11 @@ frappe.PosApp.posapp = class {
 		this.app.use(themePlugin, { vuetify });
 
 		// Global Error Handler
-		this.app.config.errorHandler = (err: any, instance: any, info: string) => {
+		this.app.config.errorHandler = (
+			err: any,
+			instance: any,
+			info: string,
+		) => {
 			console.error("Global Error:", err, info);
 			const toastStore = useToastStore();
 			toastStore.show({
@@ -121,7 +131,8 @@ frappe.PosApp.posapp = class {
 		}
 
 		if (
-			("serviceWorker" in navigator && window.location.protocol === "https:") ||
+			("serviceWorker" in navigator &&
+				window.location.protocol === "https:") ||
 			window.location.hostname === "localhost" ||
 			window.location.hostname === "127.0.0.1"
 		) {
@@ -143,7 +154,10 @@ frappe.PosApp.posapp = class {
 				this.router.afterEachCbs = [];
 			}
 
-			if (this.routerHistory && typeof this.routerHistory.destroy === "function") {
+			if (
+				this.routerHistory &&
+				typeof this.routerHistory.destroy === "function"
+			) {
 				this.routerHistory.destroy();
 			} else if (
 				this.router &&
@@ -162,5 +176,5 @@ frappe.PosApp.posapp = class {
 		}
 	}
 
-	setup_header() { }
+	setup_header() {}
 };
