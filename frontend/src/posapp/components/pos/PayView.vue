@@ -466,9 +466,10 @@ export default {
             if (!pos_profile.value?.payments?.length || !company.value) return;
             try {
                 const modes = pos_profile.value.payments.map(p => p.mode_of_payment).filter(Boolean);
+                // Call standard ERPNext method instead of missing custom method
                 const r = await frappe.call({
-                    method: "posawesome.posawesome.api.payment_entry.get_payment_methods_accounts",
-                    args: { company: company.value, mode_of_payments: JSON.stringify(modes) }
+                    method: "posawesome.posawesome.api.payment_processing.utils.get_mode_of_payment_accounts",
+                    args: { company: company.value, mode_of_payments: modes }
                 });
                 payment_method_currencies.value = { ...r.message };
             } catch (e) {

@@ -68,3 +68,16 @@ def set_paid_amount_and_received_amount(
             paid_amount = received_amount * conversion_rate
 
     return paid_amount, received_amount
+
+@frappe.whitelist()
+def get_mode_of_payment_accounts(company, mode_of_payments):
+    import json
+    if isinstance(mode_of_payments, str):
+        mode_of_payments = json.loads(mode_of_payments)
+    
+    currency_map = {}
+    for mode in mode_of_payments:
+        account = get_bank_cash_account(company, mode)
+        if account:
+            currency_map[mode] = account.get("account_currency")
+    return currency_map
