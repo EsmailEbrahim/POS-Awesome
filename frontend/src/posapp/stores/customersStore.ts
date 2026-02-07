@@ -371,8 +371,7 @@ export const useCustomersStore = defineStore("customers", () => {
 
 		let syncSince = getCustomersLastSync();
 		// Ensure syncSince is a valid ISO string or null.
-		// Some backends might choke on empty string or "null" string.
-		if (!syncSince || syncSince === "null") {
+		if (!syncSince || syncSince === "null" || syncSince === "undefined" || !syncSince.trim()) {
 			syncSince = null;
 		}
 

@@ -368,13 +368,19 @@ export function getItemsLastSync() {
 
 export function setCustomersLastSync(timestamp) {
     if (typeof localStorage !== "undefined") {
-        localStorage.setItem("posa_customers_last_sync", timestamp);
+        if (timestamp) {
+            localStorage.setItem("posa_customers_last_sync", timestamp);
+        } else {
+            localStorage.removeItem("posa_customers_last_sync");
+        }
     }
 }
 
 export function getCustomersLastSync() {
     if (typeof localStorage !== "undefined") {
-        return localStorage.getItem("posa_customers_last_sync");
+        const val = localStorage.getItem("posa_customers_last_sync");
+        if (val === "null" || val === "undefined") return null;
+        return val;
     }
     return null;
 }
