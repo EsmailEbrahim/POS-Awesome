@@ -1,4 +1,4 @@
-import { memory, persist, isOffline } from "./db.js";
+import { memory, persist, isOffline, db } from "./db.js";
 
 /* global frappe */
 
@@ -103,9 +103,9 @@ export async function getStoredCustomer(customerName) {
 	}
 }
 
-export function setCustomerStorage(customers) {
+export async function setCustomerStorage(customers) {
 	try {
-		memory.customer_storage = customers.map((c) => ({
+		const clean = customers.map((c) => ({
 			name: c.name,
 			customer_name: c.customer_name,
 			mobile_no: c.mobile_no,
@@ -113,8 +113,11 @@ export function setCustomerStorage(customers) {
 			primary_address: c.primary_address,
 			tax_id: c.tax_id,
 		}));
+
+		await db.table("customers").bulkPut(clean);
+		memory.customer_storage = clean;
 	} catch (e) {
-		console.error("Failed to trim customers for storage", e);
+		console.error("Failed to save customers to storage", e);
 		memory.customer_storage = [];
 	}
 	persist("customer_storage");

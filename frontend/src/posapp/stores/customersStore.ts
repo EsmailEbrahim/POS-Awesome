@@ -18,7 +18,6 @@ import {
 } from "../../offline/index.js";
 
 const PAGE_SIZE = 1000;
-
 function normalizeSearchTerm(term: string | null | undefined): string {
 	if (typeof term !== "string") {
 		return "";
@@ -362,11 +361,11 @@ export const useCustomersStore = defineStore("customers", () => {
 		if (!serializedProfile) {
 			return;
 		}
-		
+
 		await ensureDatabase();
 		const localCount = await getCustomerStorageCount();
 		console.log(`Checking local customer count: ${localCount}`);
-		
+
 		if (localCount > 0) {
 			customersLoaded.value = true;
 			await searchCustomers(searchTerm.value);
@@ -399,7 +398,7 @@ export const useCustomersStore = defineStore("customers", () => {
 			console.log("Fetching first page of customers...");
 			const rows: Customer[] = await fetchCustomerPage(null, syncSince, PAGE_SIZE);
 			console.log(`Fetched ${rows.length} customers in first page`);
-			
+
 			if (rows.length) {
 				await setCustomerStorage(rows);
 			}
