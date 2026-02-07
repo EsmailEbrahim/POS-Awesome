@@ -270,7 +270,7 @@ export async function performConnectivityChecks(
 	protocol: string,
 	port?: string | number,
 ) {
-	const checks = [];
+	const checks: Array<Promise<boolean>> = [];
 	checks.push(this.checkFrappePing());
 	checks.push(this.checkCurrentOrigin(protocol, hostname, port));
 
