@@ -263,7 +263,7 @@ export function saveTaxTemplate(name, doc) {
 	}
 }
 
-export function getCachedTaxTemplate(name) {
+export function getTaxTemplate(name) {
 	try {
 		const cache = memory.tax_template_cache || {};
 		return cache[name] || null;
@@ -319,6 +319,15 @@ export function setOpeningDialogStorage(data) {
 	} catch (e) {
 		console.error("Failed to set opening dialog storage", e);
 	}
+}
+
+export function getTaxInclusiveSetting() {
+	return !!memory.tax_inclusive;
+}
+
+export function setTaxInclusiveSetting(value) {
+	memory.tax_inclusive = !!value;
+	persist("tax_inclusive");
 }
 
 export function reduceCacheUsage() {

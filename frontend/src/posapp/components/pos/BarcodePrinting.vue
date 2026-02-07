@@ -82,7 +82,7 @@
 									@click="downloadPdf"
 									:disabled="!items.length"
 								>
-									<v-icon left class="mr-2">mdi-file-pdf-box</v-icon>
+									<v-icon start class="mr-2">mdi-file-pdf-box</v-icon>
 									{{ __("PDF") }}
 								</v-btn>
 								<v-btn
@@ -92,7 +92,7 @@
 									@click="printLabels"
 									:disabled="!items.length"
 								>
-									<v-icon left class="mr-2">mdi-printer</v-icon>
+									<v-icon start class="mr-2">mdi-printer</v-icon>
 									{{ __("Print") }}
 								</v-btn>
 							</v-col>

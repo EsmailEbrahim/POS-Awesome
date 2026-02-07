@@ -21,7 +21,7 @@
 					@keydown="$emit('search-keydown', $event)"
 					@click:clear="$emit('clear-search-and-qty')"
 					@click="$emit('clear-search-and-qty')"
-					@input="$emit('search-input', $event.target.value)"
+					@update:model-value="$emit('search-input', $event.target.value)"
 					@paste="$emit('search-paste', $event)"
 					prepend-inner-icon="mdi-magnify"
 					@focus="$emit('focus')"

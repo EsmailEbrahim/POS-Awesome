@@ -110,7 +110,7 @@
                         type="number"
                         step="0.01"
                         flat
-                        @input="$emit('validate-exchange-rate')"
+                        @update:model-value="$emit('validate-exchange-rate')"
                         :loading="exchangeRateLoading"
                         :error="!!exchangeRateError"
                         :hint="exchangeRateError"

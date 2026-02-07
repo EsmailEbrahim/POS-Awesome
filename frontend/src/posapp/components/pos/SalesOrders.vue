@@ -33,7 +33,7 @@
 						</v-row>
 						<v-row v-if="errorMessage">
 							<v-col cols="12" class="pt-0">
-								<v-alert type="error" dense border="start" class="mx-4">
+								<v-alert type="error" density="compact" border="start" class="mx-4">
 									{{ errorMessage }}
 								</v-alert>
 							</v-col>
