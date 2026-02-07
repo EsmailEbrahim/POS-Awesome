@@ -116,7 +116,7 @@ export const useCustomersStore = defineStore("customers", () => {
 	const isUpdateCustomerDialogOpen = ref(false);
 	const customerToUpdate = ref<Customer | null>(null);
 
-	const filteredCustomers = computed(() => (isCustomerBackgroundLoading.value ? [] : customers.value));
+	const filteredCustomers = computed(() => customers.value);
 
 	const isLoadComplete = computed(() => customersLoaded.value && loadProgress.value >= 100);
 
