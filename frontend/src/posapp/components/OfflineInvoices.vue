@@ -200,7 +200,7 @@ import {
 	getOfflineInvoices,
 	deleteOfflineInvoice,
 	getPendingOfflineInvoiceCount,
-} from "../../offline/index.js";
+} from "../../offline/index";
 
 defineOptions({
 	name: "OfflineInvoicesDialog",

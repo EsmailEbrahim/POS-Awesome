@@ -50,18 +50,14 @@ export default defineConfig({
 					dest: "libs",
 				},
 				{
-					src: "src/offline/*",
-					dest: "offline",
-				},
-				{
-					src: "src/sw.js",
+					src: "src/sw.ts",
 					dest: "../www",
 					transform(contents) {
 						return contents.replace(/__BUILD_VERSION__/g, buildVersion);
 					},
 				},
 				{
-					src: "src/loader.js",
+					src: "src/loader.ts",
 					dest: ".",
 					transform(contents) {
 						return contents.replace(/__BUILD_VERSION__/g, buildVersion);
@@ -82,7 +78,8 @@ export default defineConfig({
 		cssCodeSplit: false,
 		rollupOptions: {
 			input: {
-				posawesome: path.resolve(__dirname, "src/posawesome.bundle.js"),
+				posawesome: path.resolve(__dirname, "src/posawesome.bundle.ts"),
+				"offline/index": path.resolve(__dirname, "src/offline/index.ts"),
 			},
 			external: ["socket.io-client"],
 			output: {

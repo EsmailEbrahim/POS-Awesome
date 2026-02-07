@@ -10,7 +10,7 @@ export default [
 		ignores: [
 			"src/libs/**",
 			"src/lib/**",
-			"src/sw.js",
+			"src/sw.ts",
 			"src/posawesome.bundle.js",
 			"src/posawesome.bundle.*.js",
 			"**/*.d.ts",

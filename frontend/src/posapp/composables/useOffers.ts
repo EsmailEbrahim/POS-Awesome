@@ -1,6 +1,6 @@
 import { ref } from "vue";
 import { useUIStore } from "../stores/uiStore.js";
-import { getCachedOffers, saveOffers } from "../../offline/index.js";
+import { getCachedOffers, saveOffers } from "../../offline/index";
 
 declare const frappe: any;
 

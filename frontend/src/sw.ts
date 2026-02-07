@@ -1,4 +1,10 @@
-if (!self.define) {
+declare const workbox: any;
+declare const __BUILD_VERSION__: string;
+declare function importScripts(...urls: string[]): void;
+
+const swSelf: any = self;
+
+if (!swSelf.define) {
 	try {
 		importScripts("/assets/posawesome/dist/js/libs/workbox-sw.js");
 	} catch (e) {
@@ -6,10 +12,10 @@ if (!self.define) {
 	}
 }
 
-self.addEventListener("message", (event) => {
+swSelf.addEventListener("message", (event: any) => {
 	const payload = event.data || {};
 	if (payload.type === "SKIP_WAITING") {
-		self.skipWaiting();
+		swSelf.skipWaiting();
 		return;
 	}
 	if (payload.type === "CHECK_VERSION") {
@@ -27,17 +33,20 @@ self.addEventListener("message", (event) => {
 });
 
 // Force immediate activation and claim clients
-self.addEventListener("install", (event) => {
+swSelf.addEventListener("install", () => {
 	console.log(`SW installing with version: ${SW_REVISION}`);
-	self.skipWaiting();
+	swSelf.skipWaiting();
 });
 
-self.addEventListener("activate", (event) => {
+swSelf.addEventListener("activate", (event: any) => {
 	console.log(`SW activating with version: ${SW_REVISION}`);
 	event.waitUntil(
 		(async () => {
-			await self.clients.claim();
-			const clients = await self.clients.matchAll({ type: "window", includeUncontrolled: true });
+			await swSelf.clients.claim();
+			const clients = await swSelf.clients.matchAll({
+				type: "window",
+				includeUncontrolled: true,
+			});
 			const message = {
 				type: "SW_VERSION_INFO",
 				version: SW_REVISION,
@@ -56,14 +65,20 @@ const SW_REVISION = __BUILD_VERSION__;
 workbox.precaching.precacheAndRoute([
 	{ url: "/assets/posawesome/dist/js/posawesome.js", revision: SW_REVISION },
 	{ url: "/assets/posawesome/dist/js/posawesome.css", revision: SW_REVISION },
-	{ url: "/assets/posawesome/dist/js/offline/index.js", revision: SW_REVISION },
+	{
+		url: "/assets/posawesome/dist/js/offline/index.js",
+		revision: SW_REVISION,
+	},
 	{ url: "/manifest.json", revision: SW_REVISION },
 	{ url: "/offline.html", revision: SW_REVISION },
 ]);
 
 workbox.routing.registerRoute(
 	({ url }) => url.pathname.startsWith("/api/"),
-	new workbox.strategies.NetworkFirst({ cacheName: "api-cache", networkTimeoutSeconds: 3 }),
+	new workbox.strategies.NetworkFirst({
+		cacheName: "api-cache",
+		networkTimeoutSeconds: 3,
+	}),
 );
 
 workbox.routing.registerRoute(

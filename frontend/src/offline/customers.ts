@@ -1,6 +1,8 @@
-import { memory, persist, isOffline, db } from "./db.js";
+import { memory, persist, isOffline, db } from "./db";
 
-export function saveOfflineCustomer(entry) {
+type AnyRecord = Record<string, any>;
+
+export function saveOfflineCustomer(entry: AnyRecord) {
 	const key = "offline_customers";
 	const entries = memory.offline_customers;
 	// Serialize to avoid storing reactive objects that IndexedDB
@@ -17,7 +19,10 @@ export function saveOfflineCustomer(entry) {
 	persist(key);
 }
 
-export function updateOfflineInvoicesCustomer(oldName, newName) {
+export function updateOfflineInvoicesCustomer(
+	oldName: string,
+	newName: string,
+) {
 	let updated = false;
 	const invoices = memory.offline_invoices || [];
 	invoices.forEach((inv) => {
@@ -53,7 +58,7 @@ export async function syncOfflineCustomers() {
 		return { pending: customers.length, synced: 0 };
 	}
 
-	const failures = [];
+	const failures: AnyRecord[] = [];
 	let synced = 0;
 
 	for (const cust of customers) {
@@ -69,7 +74,10 @@ export async function syncOfflineCustomers() {
 				result.message.name &&
 				result.message.name !== cust.args.customer_name
 			) {
-				updateOfflineInvoicesCustomer(cust.args.customer_name, result.message.name);
+				updateOfflineInvoicesCustomer(
+					cust.args.customer_name,
+					result.message.name,
+				);
 			}
 		} catch (error) {
 			console.error("Failed to create customer", error);
@@ -91,7 +99,7 @@ export function getCustomerStorage() {
 	return memory.customer_storage || [];
 }
 
-export async function getStoredCustomer(customerName) {
+export async function getStoredCustomer(customerName: string) {
 	try {
 		const customers = getCustomerStorage();
 		return customers.find((c) => c.name === customerName) || null;
@@ -101,7 +109,7 @@ export async function getStoredCustomer(customerName) {
 	}
 }
 
-export async function setCustomerStorage(customers) {
+export async function setCustomerStorage(customers: AnyRecord[]) {
 	try {
 		const clean = customers.map((c) => ({
 			name: c.name,
@@ -121,7 +129,7 @@ export async function setCustomerStorage(customers) {
 	persist("customer_storage");
 }
 
-export function saveCustomerBalance(customer, balance) {
+export function saveCustomerBalance(customer: string, balance: number) {
 	try {
 		const cache = memory.customer_balance_cache;
 		cache[customer] = {
@@ -135,12 +143,13 @@ export function saveCustomerBalance(customer, balance) {
 	}
 }
 
-export function getCachedCustomerBalance(customer) {
+export function getCachedCustomerBalance(customer: string) {
 	try {
 		const cache = memory.customer_balance_cache || {};
 		const cachedData = cache[customer];
 		if (cachedData) {
-			const isValid = Date.now() - cachedData.timestamp < 24 * 60 * 60 * 1000;
+			const isValid =
+				Date.now() - cachedData.timestamp < 24 * 60 * 60 * 1000;
 			return isValid ? cachedData.balance : null;
 		}
 		return null;
@@ -163,11 +172,14 @@ export function clearExpiredCustomerBalances() {
 	try {
 		const cache = memory.customer_balance_cache || {};
 		const now = Date.now();
-		const validCache = {};
+		const validCache: AnyRecord = {};
 
 		Object.keys(cache).forEach((customer) => {
 			const cachedData = cache[customer];
-			if (cachedData && now - cachedData.timestamp < 24 * 60 * 60 * 1000) {
+			if (
+				cachedData &&
+				now - cachedData.timestamp < 24 * 60 * 60 * 1000
+			) {
 				validCache[customer] = cachedData;
 			}
 		});

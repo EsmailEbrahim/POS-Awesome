@@ -1,5 +1,5 @@
 import { ref, computed, reactive } from "vue";
-import { getCacheUsageEstimate } from "../../offline/index.js";
+import { getCacheUsageEstimate } from "../../offline/index";
 
 type CacheUsageEstimate = {
 	percentage?: number;

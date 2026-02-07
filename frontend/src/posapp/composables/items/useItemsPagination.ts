@@ -1,7 +1,7 @@
 import { ref } from "vue";
 import type { POSProfile } from "../../types/models";
 // @ts-ignore
-import { getStoredItemsCount } from "../../../offline/index.js";
+import { getStoredItemsCount } from "../../../offline/index";
 
 const DEFAULT_PAGE_SIZE = 200;
 const LARGE_CATALOG_THRESHOLD = 5000;

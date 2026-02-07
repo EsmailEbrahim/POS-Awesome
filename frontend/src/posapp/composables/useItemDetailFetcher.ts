@@ -11,7 +11,7 @@ import {
 	isStockCacheReady,
 	initializeStockCache,
 	isOffline,
-} from "../../offline/index.js";
+} from "../../offline/index";
 import { scheduleFrame } from "../utils/perf.js";
 
 declare const frappe: any;

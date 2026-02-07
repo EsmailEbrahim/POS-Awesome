@@ -2,7 +2,7 @@ import {
 	getPrintTemplate,
 	getTermsAndConditions,
 	memoryInitPromise,
-} from "./offline/index.js";
+} from "./offline/index";
 import nunjucks from "nunjucks";
 
 declare const frappe: any;

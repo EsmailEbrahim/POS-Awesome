@@ -1,7 +1,9 @@
-import { memory } from "./cache.js";
-import { persist, db, checkDbHealth } from "./core.js";
+import { memory } from "./db";
+import { persist, db, checkDbHealth } from "./core";
 
-export function saveItemUOMs(itemCode, uoms) {
+type AnyRecord = Record<string, any>;
+
+export function saveItemUOMs(itemCode: string, uoms: AnyRecord[]) {
 	try {
 		const cache = memory.uom_cache;
 		// Clone to avoid persisting reactive objects which cause
@@ -21,7 +23,7 @@ export function saveItemUOMs(itemCode, uoms) {
 	}
 }
 
-export function getItemUOMs(itemCode) {
+export function getItemUOMs(itemCode: string) {
 	try {
 		const cache = memory.uom_cache || {};
 		return cache[itemCode] || [];
@@ -30,7 +32,7 @@ export function getItemUOMs(itemCode) {
 	}
 }
 
-export function saveOffers(offers) {
+export function saveOffers(offers: AnyRecord[]) {
 	try {
 		memory.offers_cache = offers;
 		persist("offers_cache", memory.offers_cache);
@@ -48,7 +50,10 @@ export function getCachedOffers() {
 }
 
 // Price list rate storage using dedicated table
-export async function savePriceListItems(priceList, items) {
+export async function savePriceListItems(
+	priceList: string,
+	items: AnyRecord[],
+) {
 	try {
 		if (!priceList) return;
 		await checkDbHealth();
@@ -69,18 +74,29 @@ export async function savePriceListItems(priceList, items) {
 	}
 }
 
-export async function getCachedPriceListItems(priceList, ttl = 24 * 60 * 60 * 1000) {
+export async function getCachedPriceListItems(
+	priceList: string,
+	ttl = 24 * 60 * 60 * 1000,
+) {
 	try {
 		if (!priceList) return null;
 		await checkDbHealth();
 		if (!db.isOpen()) await db.open();
 		const now = Date.now();
-		const prices = await db.table("item_prices").where("price_list").equals(priceList).toArray();
+		const prices = await db
+			.table("item_prices")
+			.where("price_list")
+			.equals(priceList)
+			.toArray();
 		if (!prices.length) return null;
 		const valid = prices.filter((p) => now - p.timestamp < ttl);
 		if (!valid.length) return null;
 		const itemCodes = valid.map((p) => p.item_code);
-		const items = await db.table("items").where("item_code").anyOf(itemCodes).toArray();
+		const items = await db
+			.table("items")
+			.where("item_code")
+			.anyOf(itemCodes)
+			.toArray();
 		const map = new Map(items.map((it) => [it.item_code, it]));
 		const result = valid
 			.map((p) => {
@@ -88,10 +104,10 @@ export async function getCachedPriceListItems(priceList, ttl = 24 * 60 * 60 * 10
 				const price = p.price_list_rate ?? p.rate ?? 0;
 				return it
 					? {
-						...it,
-						rate: price,
-						price_list_rate: price,
-					}
+							...it,
+							rate: price,
+							price_list_rate: price,
+						}
 					: null;
 			})
 			.filter(Boolean);
@@ -102,12 +118,16 @@ export async function getCachedPriceListItems(priceList, ttl = 24 * 60 * 60 * 10
 	}
 }
 
-export async function clearPriceListCache(priceList = null) {
+export async function clearPriceListCache(priceList: string | null = null) {
 	try {
 		await checkDbHealth();
 		if (!db.isOpen()) await db.open();
 		if (priceList) {
-			await db.table("item_prices").where("price_list").equals(priceList).delete();
+			await db
+				.table("item_prices")
+				.where("price_list")
+				.equals(priceList)
+				.delete();
 		} else {
 			await db.table("item_prices").clear();
 		}
@@ -117,7 +137,11 @@ export async function clearPriceListCache(priceList = null) {
 }
 
 // Item details caching functions
-export function saveItemDetailsCache(profileName, priceList, items) {
+export function saveItemDetailsCache(
+	profileName: string,
+	priceList: string,
+	items: AnyRecord[],
+) {
 	try {
 		const cache = memory.item_details_cache || {};
 		const profileCache = cache[profileName] || {};
@@ -159,13 +183,18 @@ export function saveItemDetailsCache(profileName, priceList, items) {
 	}
 }
 
-export async function getCachedItemDetails(profileName, priceList, itemCodes, ttl = 15 * 60 * 1000) {
+export async function getCachedItemDetails(
+	profileName: string,
+	priceList: string,
+	itemCodes: string[],
+	ttl = 15 * 60 * 1000,
+) {
 	try {
 		const cache = memory.item_details_cache || {};
 		const priceCache = cache[profileName]?.[priceList] || {};
 		const now = Date.now();
-		const cached = [];
-		const missing = [];
+		const cached: AnyRecord[] = [];
+		const missing: string[] = [];
 		itemCodes.forEach((code) => {
 			const entry = priceCache[code];
 			if (entry && now - entry.timestamp < ttl) {
@@ -208,7 +237,7 @@ export function clearItemDetailsCache() {
 
 // Persistent item storage helpers
 
-export async function saveItemsBulk(items) {
+export async function saveItemsBulk(items: AnyRecord[]) {
 	try {
 		await checkDbHealth();
 		if (!db.isOpen()) await db.open();
@@ -226,7 +255,9 @@ export async function saveItemsBulk(items) {
 				: it.item_barcode
 					? [String(it.item_barcode)]
 					: [],
-			name_keywords: it.item_name ? it.item_name.toLowerCase().split(/\s+/).filter(Boolean) : [],
+			name_keywords: it.item_name
+				? it.item_name.toLowerCase().split(/\s+/).filter(Boolean)
+				: [],
 			serials: Array.isArray(it.serial_no_data)
 				? it.serial_no_data.map((s) => s.serial_no).filter(Boolean)
 				: [],
@@ -257,7 +288,17 @@ export async function getAllStoredItems() {
 	}
 }
 
-export async function searchStoredItems({ search = "", itemGroup = "", limit = 100, offset = 0 } = {}) {
+export async function searchStoredItems({
+	search = "",
+	itemGroup = "",
+	limit = 100,
+	offset = 0,
+}: {
+	search?: string;
+	itemGroup?: string;
+	limit?: number;
+	offset?: number;
+} = {}) {
 	try {
 		await checkDbHealth();
 		if (!db.isOpen()) await db.open();
@@ -265,7 +306,9 @@ export async function searchStoredItems({ search = "", itemGroup = "", limit = 1
 		const normalizedSearch = String(search || "")
 			.toLowerCase()
 			.trim();
-		const words = Array.from(new Set(normalizedSearch.split(/\s+/).filter(Boolean)));
+		const words = Array.from(
+			new Set(normalizedSearch.split(/\s+/).filter(Boolean)),
+		);
 		const primaryWord = words.reduce(
 			(longest, word) => (word.length > longest.length ? word : longest),
 			words[0] || "",
@@ -276,7 +319,7 @@ export async function searchStoredItems({ search = "", itemGroup = "", limit = 1
 				return true;
 			}
 
-			const searchable = [];
+			const searchable: string[] = [];
 			const pushValue = (value) => {
 				if (value === undefined || value === null) {
 					return;
@@ -296,7 +339,10 @@ export async function searchStoredItems({ search = "", itemGroup = "", limit = 1
 			pushValue(item.item_group);
 			pushValue(item.attributes);
 
-			const handleArray = (source, extractor) => {
+			const handleArray = (
+				source: any[],
+				extractor?: (entry: any) => unknown,
+			) => {
 				if (!Array.isArray(source)) {
 					return;
 				}
@@ -310,14 +356,19 @@ export async function searchStoredItems({ search = "", itemGroup = "", limit = 1
 			};
 
 			if (Array.isArray(item.item_barcode)) {
-				item.item_barcode.forEach((barcode) => pushValue(barcode && barcode.barcode));
+				item.item_barcode.forEach((barcode) =>
+					pushValue(barcode && barcode.barcode),
+				);
 			} else {
 				pushValue(item.item_barcode);
 			}
 
 			handleArray(item.barcodes);
 			handleArray(item.name_keywords);
-			handleArray(item.serial_no_data, (serial) => serial && serial.serial_no);
+			handleArray(
+				item.serial_no_data,
+				(serial) => serial && serial.serial_no,
+			);
 			handleArray(item.serials);
 			handleArray(item.batch_no_data, (batch) => batch && batch.batch_no);
 			handleArray(item.batches);
@@ -340,13 +391,18 @@ export async function searchStoredItems({ search = "", itemGroup = "", limit = 1
 				return false;
 			}
 
-			return words.every((word) => searchable.some((field) => field.includes(word)));
+			return words.every((word) =>
+				searchable.some((field) => field.includes(word)),
+			);
 		};
 
 		const applyItemGroupFilter = (collection) => {
 			if (itemGroup && itemGroup.toLowerCase() !== "all") {
 				const group = itemGroup.toLowerCase();
-				return collection.filter((it) => it.item_group && it.item_group.toLowerCase() === group);
+				return collection.filter(
+					(it) =>
+						it.item_group && it.item_group.toLowerCase() === group,
+				);
 			}
 			return collection;
 		};

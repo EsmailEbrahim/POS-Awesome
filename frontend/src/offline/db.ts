@@ -1,5 +1,7 @@
 import Dexie from "dexie/dist/dexie.mjs";
 
+type AnyRecord = Record<string, any>;
+
 // --- Dexie initialization ---------------------------------------------------
 export const db = new Dexie("posawesome_offline");
 
@@ -32,11 +34,12 @@ db.version(7).stores(BASE_SCHEMA);
 db.version(8).stores(BASE_SCHEMA);
 db.version(9).stores(BASE_SCHEMA);
 
-let persistWorker = null;
+let persistWorker: Worker | null = null;
 if (typeof Worker !== "undefined") {
 	try {
 		// Use the plain URL so the service worker cache matches when offline
-		const workerUrl = "/assets/posawesome/dist/js/posapp/workers/itemWorker.js";
+		const workerUrl =
+			"/assets/posawesome/dist/js/posapp/workers/itemWorker.js";
 		persistWorker = new Worker(workerUrl, { type: "classic" });
 	} catch (e) {
 		console.error("Failed to init persist worker", e);
@@ -44,7 +47,7 @@ if (typeof Worker !== "undefined") {
 	}
 }
 
-export const memory = {
+export const memory: AnyRecord = {
 	offline_invoices: [],
 	offline_customers: [],
 	offline_payments: [],
@@ -76,7 +79,7 @@ export const memory = {
 	cache_ready: false,
 };
 
-export const initPromise = new Promise((resolve) => {
+export const initPromise = new Promise<void>((resolve) => {
 	const init = async () => {
 		try {
 			await db.open();
@@ -93,7 +96,11 @@ export const initPromise = new Promise((resolve) => {
 							memory[key] = JSON.parse(ls);
 							continue;
 						} catch (err) {
-							console.error("Failed to parse localStorage for", key, err);
+							console.error(
+								"Failed to parse localStorage for",
+								key,
+								err,
+							);
 						}
 					}
 				}
@@ -112,7 +119,7 @@ export const initPromise = new Promise((resolve) => {
 	}
 });
 
-export function persist(key) {
+export function persist(key: string) {
 	if (persistWorker) {
 		let clean = memory[key];
 		try {
@@ -142,10 +149,16 @@ export function isOffline() {
 		return memory.manual_offline || false;
 	}
 
-	const { protocol, hostname, navigator } = window;
+	const {
+		location: { protocol, hostname },
+		navigator,
+	} = window;
 	const online = navigator.onLine;
 
-	const serverOnline = typeof window.serverOnline === "boolean" ? window.serverOnline : true;
+	const serverOnline =
+		typeof (window as AnyRecord).serverOnline === "boolean"
+			? (window as AnyRecord).serverOnline
+			: true;
 
 	const isIpAddress = /^(?:\d{1,3}\.){3}\d{1,3}$/.test(hostname);
 	const isLocalhost = hostname === "localhost" || hostname === "127.0.0.1";
@@ -231,35 +244,35 @@ export async function forceClearAllCache() {
 }
 
 export async function checkDbHealth() {
-    // Basic check to see if DB is accessible
-    try {
-        if (!db.isOpen()) await db.open();
-    } catch (e) {
-        console.error("DB Health Check Failed", e);
-    }
+	// Basic check to see if DB is accessible
+	try {
+		if (!db.isOpen()) await db.open();
+	} catch (e) {
+		console.error("DB Health Check Failed", e);
+	}
 }
 
 export function queueHealthCheck() {
-    const threshold = 1000;
-    return (
-        memory.offline_invoices.length > threshold ||
-        memory.offline_customers.length > threshold ||
-        memory.offline_payments.length > threshold
-    );
+	const threshold = 1000;
+	return (
+		memory.offline_invoices.length > threshold ||
+		memory.offline_customers.length > threshold ||
+		memory.offline_payments.length > threshold
+	);
 }
 
 export function purgeOldQueueEntries() {
-    const threshold = 1000;
-    const purge = (list) => {
-        if (list.length > threshold) {
-            // Keep the newest items
-            list.splice(0, list.length - threshold);
-        }
-    };
-    purge(memory.offline_invoices);
-    purge(memory.offline_customers);
-    purge(memory.offline_payments);
-    persist("offline_invoices");
-    persist("offline_customers");
-    persist("offline_payments");
+	const threshold = 1000;
+	const purge = (list: any[]) => {
+		if (list.length > threshold) {
+			// Keep the newest items
+			list.splice(0, list.length - threshold);
+		}
+	};
+	purge(memory.offline_invoices);
+	purge(memory.offline_customers);
+	purge(memory.offline_payments);
+	persist("offline_invoices");
+	persist("offline_customers");
+	persist("offline_payments");
 }

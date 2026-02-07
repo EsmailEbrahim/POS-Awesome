@@ -86,7 +86,7 @@ import { inject, ref, onMounted, onBeforeUnmount } from "vue";
 import { usePosShift } from "../../composables/usePosShift";
 import { useOffers } from "../../composables/useOffers";
 // Import the cache cleanup function
-import { clearExpiredCustomerBalances } from "../../../offline/index.js";
+import { clearExpiredCustomerBalances } from "../../../offline/index";
 import { useResponsive } from "../../composables/useResponsive";
 import { useRtl } from "../../composables/useRtl";
 import { useCustomersStore } from "../../stores/customersStore.js";

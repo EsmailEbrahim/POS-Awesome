@@ -123,7 +123,7 @@ import {
 	isOffline,
 	getPendingOfflinePaymentCount,
 	syncOfflinePayments,
-} from "../../../offline/index.js";
+} from "../../../offline/index";
 import {
 	isDebugPrintEnabled,
 	appendDebugPrintParam,

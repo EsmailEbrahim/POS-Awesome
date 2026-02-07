@@ -3,7 +3,7 @@ import {
 	setOpeningStorage,
 	setPrintTemplate,
 	setTermsAndConditions,
-} from "../offline/index.js";
+} from "../offline/index";
 
 declare const frappe: any;
 

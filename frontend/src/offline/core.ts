@@ -45,7 +45,9 @@ db.version(7)
 					? item.item_name.toLowerCase().split(/\s+/).filter(Boolean)
 					: [];
 				item.serials = Array.isArray(item.serial_no_data)
-					? item.serial_no_data.map((s) => s.serial_no).filter(Boolean)
+					? item.serial_no_data
+							.map((s) => s.serial_no)
+							.filter(Boolean)
 					: [];
 				item.batches = Array.isArray(item.batch_no_data)
 					? item.batch_no_data.map((b) => b.batch_no).filter(Boolean)
@@ -134,7 +136,9 @@ db.version(9)
 		]);
 
 		try {
-			await tx.table("settings").put({ key: "schema_signature", value: SCHEMA_SIGNATURE });
+			await tx
+				.table("settings")
+				.put({ key: "schema_signature", value: SCHEMA_SIGNATURE });
 		} catch (err) {
 			console.warn("Failed to persist schema signature", err);
 		}
@@ -165,7 +169,11 @@ export const KEY_TABLE_MAP = {
 	pos_last_sync_totals: "sync_state",
 };
 
-const LARGE_KEYS = new Set(["items", "item_details_cache", "local_stock_cache"]);
+const LARGE_KEYS = new Set([
+	"items",
+	"item_details_cache",
+	"local_stock_cache",
+]);
 
 export function tableForKey(key) {
 	return KEY_TABLE_MAP[key] || "keyval";
@@ -175,7 +183,9 @@ function isCorruptionError(err) {
 	if (!err) return false;
 	const msg = err.message ? err.message.toLowerCase() : "";
 	return (
-		["VersionError", "InvalidStateError", "NotFoundError"].includes(err.name) || msg.includes("corrupt")
+		["VersionError", "InvalidStateError", "NotFoundError"].includes(
+			err.name,
+		) || msg.includes("corrupt")
 	);
 }
 
@@ -202,8 +212,13 @@ async function ensureSchemaSignature() {
 				"rw",
 				cacheTables.map((tbl) => db.table(tbl)),
 				async () => {
-					await Promise.all(cacheTables.map((tbl) => db.table(tbl).clear()));
-					await settingsTable.put({ key: "schema_signature", value: SCHEMA_SIGNATURE });
+					await Promise.all(
+						cacheTables.map((tbl) => db.table(tbl).clear()),
+					);
+					await settingsTable.put({
+						key: "schema_signature",
+						value: SCHEMA_SIGNATURE,
+					});
 				},
 			);
 		}
@@ -229,7 +244,9 @@ export async function checkDbHealth() {
 		} catch (re) {
 			console.error("Failed to reopen IndexedDB", re);
 			if (isCorruptionError(re)) {
-				console.log("IndexedDB appears corrupted. Recreating database...");
+				console.log(
+					"IndexedDB appears corrupted. Recreating database...",
+				);
 				try {
 					await Dexie.delete("posawesome_offline");
 					await db.open();
@@ -244,14 +261,15 @@ export async function checkDbHealth() {
 	}
 }
 
-let persistWorker = null;
+let persistWorker: Worker | null = null;
 
 export function initPersistWorker() {
 	if (persistWorker || typeof Worker === "undefined") return;
 	try {
 		// Load the worker without a query string so the service worker
 		// can serve the cached version when offline.
-		const workerUrl = "/assets/posawesome/dist/js/posapp/workers/itemWorker.js";
+		const workerUrl =
+			"/assets/posawesome/dist/js/posapp/workers/itemWorker.js";
 		try {
 			persistWorker = new Worker(workerUrl, { type: "classic" });
 		} catch {
@@ -278,10 +296,10 @@ export function terminatePersistWorker() {
 initPersistWorker();
 
 // Persist queue for batching operations
-const persistQueue = {};
-let persistTimeout = null;
+const persistQueue: Record<string, unknown> = {};
+let persistTimeout: ReturnType<typeof setTimeout> | null = null;
 
-export function addToPersistQueue(key, value) {
+export function addToPersistQueue(key: string, value: unknown) {
 	persistQueue[key] = value;
 
 	if (!persistTimeout) {
@@ -300,7 +318,7 @@ function flushPersistQueue() {
 	persistTimeout = null;
 }
 
-export function persist(key, value) {
+export function persist(key: string, value?: unknown) {
 	// Run health check in background; ignore errors
 	checkDbHealth().catch(() => {});
 	if (persistWorker) {
@@ -320,7 +338,11 @@ export function persist(key, value) {
 			}
 		}
 		try {
-			persistWorker.postMessage({ type: "persist", key, value: cleanValue });
+			persistWorker.postMessage({
+				type: "persist",
+				key,
+				value: cleanValue,
+			});
 		} catch (e) {
 			console.error(`Failed to postMessage for ${key}`, e);
 		}
@@ -335,7 +357,11 @@ export function persist(key, value) {
 			.catch((e) => console.error(`Failed to persist ${key}`, e)),
 	);
 
-	if (typeof localStorage !== "undefined" && key !== "price_list_cache" && !LARGE_KEYS.has(key)) {
+	if (
+		typeof localStorage !== "undefined" &&
+		key !== "price_list_cache" &&
+		!LARGE_KEYS.has(key)
+	) {
 		try {
 			localStorage.setItem(`posa_${key}`, JSON.stringify(value));
 		} catch (err) {
@@ -344,7 +370,7 @@ export function persist(key, value) {
 	}
 }
 
-export const initPromise = new Promise((resolve) => {
+export const initPromise = new Promise<void>((resolve) => {
 	const init = async () => {
 		try {
 			await db.open();

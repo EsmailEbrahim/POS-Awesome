@@ -1,30 +1,38 @@
-import { memory, persist } from "./db.js";
+import { memory, persist } from "./db";
 
-export async function fetchItemStockQuantities(items, pos_profile, chunkSize = 100) {
-	const allItems = [];
+type AnyRecord = Record<string, any>;
+
+export async function fetchItemStockQuantities(
+	items: AnyRecord[],
+	pos_profile: AnyRecord,
+	chunkSize = 100,
+) {
+	const allItems: AnyRecord[] = [];
 	try {
 		for (let i = 0; i < items.length; i += chunkSize) {
 			const chunk = items.slice(i, i + chunkSize);
-			const response = await new Promise((resolve, reject) => {
-				frappe.call({
-					method: "posawesome.posawesome.api.items.get_items_details",
-					args: {
-						pos_profile: JSON.stringify(pos_profile),
-						items_data: JSON.stringify(chunk),
-					},
-					freeze: false,
-					callback: function (r) {
-						if (r.message) {
-							resolve(r.message);
-						} else {
-							reject(new Error("No response from server"));
-						}
-					},
-					error: function (err) {
-						reject(err);
-					},
-				});
-			});
+			const response = await new Promise<AnyRecord[]>(
+				(resolve, reject) => {
+					frappe.call({
+						method: "posawesome.posawesome.api.items.get_items_details",
+						args: {
+							pos_profile: JSON.stringify(pos_profile),
+							items_data: JSON.stringify(chunk),
+						},
+						freeze: false,
+						callback: function (r) {
+							if (r.message) {
+								resolve(r.message);
+							} else {
+								reject(new Error("No response from server"));
+							}
+						},
+						error: function (err) {
+							reject(err);
+						},
+					});
+				},
+			);
 			if (response) {
 				allItems.push(...response);
 			}
@@ -36,10 +44,15 @@ export async function fetchItemStockQuantities(items, pos_profile, chunkSize = 1
 	}
 }
 
-export async function initializeStockCache(items, pos_profile) {
+export async function initializeStockCache(
+	items: AnyRecord[],
+	pos_profile: AnyRecord,
+) {
 	try {
 		const existingCache = memory.local_stock_cache || {};
-		const missingItems = Array.isArray(items) ? items.filter((it) => !existingCache[it.item_code]) : [];
+		const missingItems = Array.isArray(items)
+			? items.filter((it) => !existingCache[it.item_code])
+			: [];
 
 		if (missingItems.length === 0) {
 			if (!memory.stock_cache_ready) {
@@ -47,13 +60,24 @@ export async function initializeStockCache(items, pos_profile) {
 				persist("stock_cache_ready");
 			}
 			console.debug("Stock cache already initialized");
-			console.info("Stock cache initialized with", Object.keys(existingCache).length, "items");
+			console.info(
+				"Stock cache initialized with",
+				Object.keys(existingCache).length,
+				"items",
+			);
 			return true;
 		}
 
-		console.info("Initializing stock cache for", missingItems.length, "new items");
+		console.info(
+			"Initializing stock cache for",
+			missingItems.length,
+			"new items",
+		);
 
-		const updatedItems = await fetchItemStockQuantities(missingItems, pos_profile);
+		const updatedItems = await fetchItemStockQuantities(
+			missingItems,
+			pos_profile,
+		);
 
 		if (updatedItems && updatedItems.length > 0) {
 			updatedItems.forEach((item) => {
@@ -69,7 +93,11 @@ export async function initializeStockCache(items, pos_profile) {
 			memory.stock_cache_ready = true;
 			persist("local_stock_cache");
 			persist("stock_cache_ready");
-			console.info("Stock cache initialized with", Object.keys(existingCache).length, "items");
+			console.info(
+				"Stock cache initialized with",
+				Object.keys(existingCache).length,
+				"items",
+			);
 			return true;
 		}
 		return false;
@@ -83,12 +111,12 @@ export function isStockCacheReady() {
 	return memory.stock_cache_ready || false;
 }
 
-export function setStockCacheReady(ready) {
+export function setStockCacheReady(ready: boolean) {
 	memory.stock_cache_ready = ready;
 	persist("stock_cache_ready");
 }
 
-export function updateLocalStock(items) {
+export function updateLocalStock(items: AnyRecord[]) {
 	try {
 		const stockCache = memory.local_stock_cache || {};
 
@@ -100,7 +128,10 @@ export function updateLocalStock(items) {
 			if (stockCache[key]) {
 				// Reduce quantity by sold amount
 				const soldQty = Math.abs(item.qty || 0);
-				stockCache[key].actual_qty = Math.max(0, stockCache[key].actual_qty - soldQty);
+				stockCache[key].actual_qty = Math.max(
+					0,
+					stockCache[key].actual_qty - soldQty,
+				);
 				stockCache[key].last_updated = new Date().toISOString();
 			}
 			// If item doesn't exist in cache, we don't create it
@@ -114,7 +145,7 @@ export function updateLocalStock(items) {
 	}
 }
 
-export function getLocalStock(itemCode) {
+export function getLocalStock(itemCode: string) {
 	try {
 		const stockCache = memory.local_stock_cache || {};
 		return stockCache[itemCode]?.actual_qty || null;
@@ -123,7 +154,7 @@ export function getLocalStock(itemCode) {
 	}
 }
 
-export function updateLocalStockCache(items) {
+export function updateLocalStockCache(items: AnyRecord[]) {
 	try {
 		const stockCache = memory.local_stock_cache || {};
 
@@ -150,7 +181,10 @@ export function clearLocalStockCache() {
 	persist("local_stock_cache");
 }
 
-export function updateLocalStockWithActualQuantities(invoiceItems, serverItems) {
+export function updateLocalStockWithActualQuantities(
+	invoiceItems: AnyRecord[],
+	serverItems: AnyRecord[],
+) {
 	try {
 		const stockCache = memory.local_stock_cache || {};
 
@@ -158,7 +192,9 @@ export function updateLocalStockWithActualQuantities(invoiceItems, serverItems) 
 			const key = invoiceItem.item_code;
 
 			// Find corresponding server item with actual quantity
-			const serverItem = serverItems.find((item) => item.item_code === invoiceItem.item_code);
+			const serverItem = serverItems.find(
+				(item) => item.item_code === invoiceItem.item_code,
+			);
 
 			if (serverItem && serverItem.actual_qty !== undefined) {
 				// Initialize or update cache with actual server quantity
@@ -175,7 +211,10 @@ export function updateLocalStockWithActualQuantities(invoiceItems, serverItems) 
 
 				// Now reduce quantity by sold amount
 				const soldQty = Math.abs(invoiceItem.qty || 0);
-				stockCache[key].actual_qty = Math.max(0, stockCache[key].actual_qty - soldQty);
+				stockCache[key].actual_qty = Math.max(
+					0,
+					stockCache[key].actual_qty - soldQty,
+				);
 			}
 		});
 
@@ -190,7 +229,7 @@ export function getLocalStockCache() {
 	return memory.local_stock_cache || {};
 }
 
-export function setLocalStockCache(cache) {
+export function setLocalStockCache(cache: AnyRecord) {
 	memory.local_stock_cache = cache || {};
 	persist("local_stock_cache");
 }

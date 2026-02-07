@@ -1,4 +1,4 @@
-import { memory, persist, db, checkDbHealth } from "./db.js";
+import { memory, persist, db, checkDbHealth } from "./db";
 
 // --- Generic getters and setters for cached data ----------------------------
 export async function getStoredItems() {
@@ -12,26 +12,42 @@ export async function getStoredItems() {
 	}
 }
 
-export async function searchStoredItems({ search = "", itemGroup = "", limit = 100, offset = 0 } = {}) {
+export async function searchStoredItems({
+	search = "",
+	itemGroup = "",
+	limit = 100,
+	offset = 0,
+} = {}) {
 	try {
 		await checkDbHealth();
 		if (!db.isOpen()) await db.open();
-		const normalizedGroup = typeof itemGroup === "string" ? itemGroup.trim() : "";
+		const normalizedGroup =
+			typeof itemGroup === "string" ? itemGroup.trim() : "";
 		let collection = db.table("items");
 		if (normalizedGroup && normalizedGroup.toLowerCase() !== "all") {
-			collection = collection.where("item_group").equalsIgnoreCase(normalizedGroup);
+			collection = collection
+				.where("item_group")
+				.equalsIgnoreCase(normalizedGroup);
 		}
-		const normalizedSearch = typeof search === "string" ? search.trim() : "";
+		const normalizedSearch =
+			typeof search === "string" ? search.trim() : "";
 		if (normalizedSearch) {
 			const term = normalizedSearch.toLowerCase();
 			const terms = term.split(/\s+/).filter(Boolean);
 
 			collection = collection.filter((it) => {
-				const nameMatch = it.item_name && terms.every((t) => it.item_name.toLowerCase().includes(t));
-				const codeMatch = it.item_code && it.item_code.toLowerCase().includes(term);
+				const nameMatch =
+					it.item_name &&
+					terms.every((t) => it.item_name.toLowerCase().includes(t));
+				const codeMatch =
+					it.item_code && it.item_code.toLowerCase().includes(term);
 				const barcodeMatch = Array.isArray(it.item_barcode)
-					? it.item_barcode.some((b) => b.barcode && b.barcode.toLowerCase() === term)
-					: it.item_barcode && String(it.item_barcode).toLowerCase().includes(term);
+					? it.item_barcode.some(
+							(b) =>
+								b.barcode && b.barcode.toLowerCase() === term,
+						)
+					: it.item_barcode &&
+						String(it.item_barcode).toLowerCase().includes(term);
 				return nameMatch || codeMatch || barcodeMatch;
 			});
 		}
@@ -147,7 +163,8 @@ export function getCachedPriceListItems(priceList) {
 		const cache = memory.price_list_cache || {};
 		const cachedData = cache[priceList];
 		if (cachedData) {
-			const isValid = Date.now() - cachedData.timestamp < 24 * 60 * 60 * 1000;
+			const isValid =
+				Date.now() - cachedData.timestamp < 24 * 60 * 60 * 1000;
 			return isValid ? cachedData.items : null;
 		}
 		return null;
@@ -204,13 +221,18 @@ export function saveItemDetailsCache(profileName, priceList, items) {
 	}
 }
 
-export async function getCachedItemDetails(profileName, priceList, itemCodes, ttl = 15 * 60 * 1000) {
+export async function getCachedItemDetails(
+	profileName: string,
+	priceList: string,
+	itemCodes: string[],
+	ttl = 15 * 60 * 1000,
+) {
 	try {
 		const cache = memory.item_details_cache || {};
 		const priceCache = cache[profileName]?.[priceList] || {};
 		const now = Date.now();
-		const cached = [];
-		const missing = [];
+		const cached: any[] = [];
+		const missing: string[] = [];
 		itemCodes.forEach((code) => {
 			const entry = priceCache[code];
 			if (entry && now - entry.timestamp < ttl) {
@@ -418,7 +440,11 @@ function sanitiseSnapshot(snapshot = []) {
 	}
 }
 
-export function savePricingRulesSnapshot(snapshot = [], context = null, staleAt = null) {
+export function savePricingRulesSnapshot(
+	snapshot = [],
+	context = null,
+	staleAt = null,
+) {
 	memory.pricing_rules_snapshot = sanitiseSnapshot(snapshot);
 	memory.pricing_rules_context = context || null;
 	memory.pricing_rules_last_sync = new Date().toISOString();
@@ -432,7 +458,9 @@ export function savePricingRulesSnapshot(snapshot = [], context = null, staleAt 
 
 export function getCachedPricingRulesSnapshot() {
 	return {
-		snapshot: Array.isArray(memory.pricing_rules_snapshot) ? memory.pricing_rules_snapshot : [],
+		snapshot: Array.isArray(memory.pricing_rules_snapshot)
+			? memory.pricing_rules_snapshot
+			: [],
 		context: memory.pricing_rules_context || null,
 		lastSync: memory.pricing_rules_last_sync || null,
 		staleAt: memory.pricing_rules_stale_at || null,

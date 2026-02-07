@@ -69,7 +69,7 @@ import {
 	getPendingOfflineInvoiceCount,
 	isOffline,
 	getLastSyncTotals,
-} from "../../offline/index.js";
+} from "../../offline/index";
 import {
 	setupNetworkListeners as initNetworkListeners,
 	checkNetworkConnectivity as utilsCheckNetworkConnectivity,
@@ -524,7 +524,7 @@ const refreshTaxInclusiveSetting = async () => {
 			} catch (err) {
 				console.warn("Failed to cache tax inclusive setting", err);
 			}
-			import("../../offline/index.js")
+			import("../../offline/index")
 				.then((m) => {
 					if (m && m.setTaxInclusiveSetting) {
 						m.setTaxInclusiveSetting(val);

@@ -1,7 +1,7 @@
-import { memory } from "./cache.js";
-import { persist } from "./core.js";
+import { memory } from "./db";
+import { persist } from "./core";
 
-export function saveItemGroups(groups) {
+export function saveItemGroups(groups: unknown[]) {
 	try {
 		let clean;
 		try {

@@ -1,4 +1,4 @@
-import { getTaxTemplate, getTaxInclusiveSetting, isOffline } from "../../../../offline/index.js";
+import { getTaxTemplate, getTaxInclusiveSetting, isOffline } from "../../../../offline/index";
 import { _getPlcConversionRate } from "./currency";
 
 declare const flt: (_value: unknown, _precision?: number) => number;

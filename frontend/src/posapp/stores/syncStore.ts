@@ -3,7 +3,7 @@ import {
 	getPendingOfflineInvoiceCount,
 	syncOfflineInvoices,
 	isOffline,
-} from "../../offline/index.js";
+} from "../../offline/index";
 import { useToastStore } from "./toastStore.js";
 
 export const useSyncStore = defineStore("sync", {

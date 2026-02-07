@@ -102,7 +102,7 @@
 <script>
 import format from "../../format";
 import { useUIStore } from "../../stores/uiStore.js";
-import { getOpeningStorage } from "../../../offline/index.js";
+import { getOpeningStorage } from "../../../offline/index";
 import { useItemsStore } from "../../stores/itemsStore";
 import { useToastStore } from "../../stores/toastStore";
 import { usePurchaseOrder } from "../../composables/usePurchaseOrder";

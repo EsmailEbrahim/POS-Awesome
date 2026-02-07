@@ -1,1 +1,1 @@
-export * from "./offline/index.js";
+export * from "./offline/index";

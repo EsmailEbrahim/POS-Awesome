@@ -1,4 +1,4 @@
-import { isOffline } from "../../offline/index.js";
+import { isOffline } from "../../offline/index";
 import { getBaseCurrency, getCompanyCurrency, toSelectedCurrency } from "../utils/currencyConversion.js";
 import { useToastStore } from "../stores/toastStore.js";
 

@@ -1,5 +1,5 @@
 import { ref, type Ref } from "vue";
-import { isOffline, getStoredCustomer } from "../../offline/index.js";
+import { isOffline, getStoredCustomer } from "../../offline/index";
 import { useCustomersStore } from "../stores/customersStore.js";
 
 declare const frappe: any;

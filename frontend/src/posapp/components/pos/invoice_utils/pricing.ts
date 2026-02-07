@@ -1,4 +1,4 @@
-import { isOffline } from "../../../../offline/index.js";
+import { isOffline } from "../../../../offline/index";
 import { usePricingRulesStore } from "../../../stores/pricingRulesStore.js";
 import { useItemsStore } from "../../../stores/itemsStore.js";
 import { evaluatePricingRules } from "../../../../lib/pricingEngine";

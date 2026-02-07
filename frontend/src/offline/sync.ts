@@ -1,6 +1,13 @@
-import { memory, resetOfflineState, setLastSyncTotals, MAX_QUEUE_ITEMS, reduceCacheUsage } from "./cache.js";
-import { persist } from "./core.js";
-import { updateLocalStock } from "./stock.js";
+// @ts-nocheck
+import {
+	memory,
+	resetOfflineState,
+	setLastSyncTotals,
+	MAX_QUEUE_ITEMS,
+	reduceCacheUsage,
+} from "./cache";
+import { persist } from "./core";
+import { updateLocalStock } from "./stock";
 
 // Flag to avoid concurrent invoice syncs which can cause duplicate submissions
 let invoiceSyncInProgress = false;
@@ -20,7 +27,11 @@ function getOfflineTimestamp(entry) {
 
 export function saveOfflineInvoice(entry) {
 	// Validate that invoice has items before saving
-	if (!entry.invoice || !Array.isArray(entry.invoice.items) || !entry.invoice.items.length) {
+	if (
+		!entry.invoice ||
+		!Array.isArray(entry.invoice.items) ||
+		!entry.invoice.items.length
+	) {
 		throw new Error("Cart is empty. Add items before saving.");
 	}
 
@@ -30,7 +41,8 @@ export function saveOfflineInvoice(entry) {
 	// and other non-serializable properties. IndexedDB only
 	// supports structured cloneable data, so reactive proxies
 	// cause a DataCloneError without this step.
-	const { offline_created_at, posting_date, posting_time } = getOfflineTimestamp(entry);
+	const { offline_created_at, posting_date, posting_time } =
+		getOfflineTimestamp(entry);
 
 	let cleanEntry;
 	try {
@@ -74,7 +86,8 @@ export function isOffline() {
 	const { protocol, hostname, navigator } = window;
 	const online = navigator.onLine;
 
-	const serverOnline = typeof window.serverOnline === "boolean" ? window.serverOnline : true;
+	const serverOnline =
+		typeof window.serverOnline === "boolean" ? window.serverOnline : true;
 
 	const isIpAddress = /^(?:\d{1,3}\.){3}\d{1,3}$/.test(hostname);
 	const isLocalhost = hostname === "localhost" || hostname === "127.0.0.1";
@@ -101,7 +114,11 @@ export function clearOfflineInvoices() {
 }
 
 export function deleteOfflineInvoice(index) {
-	if (Array.isArray(memory.offline_invoices) && index >= 0 && index < memory.offline_invoices.length) {
+	if (
+		Array.isArray(memory.offline_invoices) &&
+		index >= 0 &&
+		index < memory.offline_invoices.length
+	) {
 		memory.offline_invoices.splice(index, 1);
 		persist("offline_invoices", memory.offline_invoices);
 	}
@@ -119,10 +136,13 @@ export function saveOfflinePayment(entry) {
 	if (entry?.args?.payload?.pos_profile) {
 		const profile = entry.args.payload.pos_profile;
 		entry.args.payload.pos_profile = {
-			posa_use_pos_awesome_payments: profile.posa_use_pos_awesome_payments,
+			posa_use_pos_awesome_payments:
+				profile.posa_use_pos_awesome_payments,
 			posa_allow_make_new_payments: profile.posa_allow_make_new_payments,
-			posa_allow_reconcile_payments: profile.posa_allow_reconcile_payments,
-			posa_allow_mpesa_reconcile_payments: profile.posa_allow_mpesa_reconcile_payments,
+			posa_allow_reconcile_payments:
+				profile.posa_allow_reconcile_payments,
+			posa_allow_mpesa_reconcile_payments:
+				profile.posa_allow_mpesa_reconcile_payments,
 			posa_force_server_items: profile.posa_force_server_items,
 			cost_center: profile.cost_center,
 			posa_cash_mode_of_payment: profile.posa_cash_mode_of_payment,
@@ -154,7 +174,11 @@ export function clearOfflinePayments() {
 }
 
 export function deleteOfflinePayment(index) {
-	if (Array.isArray(memory.offline_payments) && index >= 0 && index < memory.offline_payments.length) {
+	if (
+		Array.isArray(memory.offline_payments) &&
+		index >= 0 &&
+		index < memory.offline_payments.length
+	) {
 		memory.offline_payments.splice(index, 1);
 		persist("offline_payments", memory.offline_payments);
 	}
@@ -215,7 +239,11 @@ export function clearOfflineCustomers() {
 export async function syncOfflineInvoices() {
 	// Prevent concurrent syncs which can lead to duplicate submissions
 	if (invoiceSyncInProgress) {
-		return { pending: getPendingOfflineInvoiceCount(), synced: 0, drafted: 0 };
+		return {
+			pending: getPendingOfflineInvoiceCount(),
+			synced: 0,
+			drafted: 0,
+		};
 	}
 	invoiceSyncInProgress = true;
 	try {
@@ -243,7 +271,8 @@ export async function syncOfflineInvoices() {
 			try {
 				const invoicePayload = {
 					...inv.invoice,
-					posting_date: inv.invoice?.posting_date || inv.offline_created_at,
+					posting_date:
+						inv.invoice?.posting_date || inv.offline_created_at,
 					posting_time: inv.invoice?.posting_time,
 					set_posting_time: 1,
 				};
@@ -257,7 +286,10 @@ export async function syncOfflineInvoices() {
 				});
 				synced++;
 			} catch (error) {
-				console.error("Failed to submit invoice, saving as draft", error);
+				console.error(
+					"Failed to submit invoice, saving as draft",
+					error,
+				);
 				try {
 					await frappe.call({
 						method: "posawesome.posawesome.api.invoices.update_invoice",
@@ -327,7 +359,10 @@ export async function syncOfflineCustomers() {
 				result.message.name &&
 				result.message.name !== cust.args.customer_name
 			) {
-				updateOfflineInvoicesCustomer(cust.args.customer_name, result.message.name);
+				updateOfflineInvoicesCustomer(
+					cust.args.customer_name,
+					result.message.name,
+				);
 			}
 		} catch (error) {
 			console.error("Failed to create customer", error);

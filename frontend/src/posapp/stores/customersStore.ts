@@ -15,7 +15,7 @@ import {
 	getCustomerStorageCount,
 	clearCustomerStorage,
 	isOffline,
-} from "../../offline/index.js";
+} from "../../offline/index";
 
 const PAGE_SIZE = 1000;
 function normalizeSearchTerm(term: string | null | undefined): string {

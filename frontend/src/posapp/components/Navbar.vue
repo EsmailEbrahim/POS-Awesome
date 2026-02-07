@@ -125,9 +125,9 @@ import CacheUsageMeter from "./navbar/CacheUsageMeter.vue";
 import AboutDialog from "./navbar/AboutDialog.vue";
 import OfflineInvoices from "./OfflineInvoices.vue";
 import posLogo from "./pos/pos.png";
-import { forceClearAllCache } from "../../offline/index.js";
+import { forceClearAllCache } from "../../offline/index";
 import { clearAllCaches } from "../../utils/clearAllCaches";
-import { isOffline } from "../../offline/index.js";
+import { isOffline } from "../../offline/index";
 import { useRtl } from "../composables/useRtl";
 
 const ServerUsageGadget = defineAsyncComponent(() => import("./navbar/ServerUsageGadget.vue"));

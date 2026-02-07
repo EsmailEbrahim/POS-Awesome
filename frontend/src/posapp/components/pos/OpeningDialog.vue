@@ -140,7 +140,7 @@ import {
 	setOpeningStorage,
 	initPromise,
 	checkDbHealth,
-} from "../../../offline/index.js";
+} from "../../../offline/index";
 
 defineOptions({
 	name: "OpeningDialog",

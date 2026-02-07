@@ -1,4 +1,4 @@
-import { clearPriceListCache } from "../../../offline/index.js";
+import { clearPriceListCache } from "../../../offline/index";
 import { useCustomersStore } from "../../stores/customersStore.js";
 
 interface WatcherItem {

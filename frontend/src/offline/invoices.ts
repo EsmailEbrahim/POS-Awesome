@@ -1,20 +1,23 @@
-import { memory, persist, isOffline } from "./db.js";
-import { syncOfflineCustomers } from "./customers.js";
-import { updateLocalStock } from "./stock.js";
-import { reduceCacheUsage } from "./cache.js";
+import { memory, persist, isOffline } from "./db";
+import { syncOfflineCustomers } from "./customers";
+import { updateLocalStock } from "./stock";
+import { reduceCacheUsage } from "./cache";
+
+type AnyRecord = Record<string, any>;
 
 // Flag to avoid concurrent invoice syncs which can cause duplicate submissions
 let invoiceSyncInProgress = false;
 
 // Validate stock for offline invoice
-export function validateStockForOfflineInvoice(items) {
-	const allowNegativeStock = memory.pos_opening_storage?.stock_settings?.allow_negative_stock;
+export function validateStockForOfflineInvoice(items: AnyRecord[]) {
+	const allowNegativeStock =
+		memory.pos_opening_storage?.stock_settings?.allow_negative_stock;
 	if (allowNegativeStock) {
 		return { isValid: true, invalidItems: [], errorMessage: "" };
 	}
 
 	const stockCache = memory.local_stock_cache || {};
-	const invalidItems = [];
+	const invalidItems: AnyRecord[] = [];
 
 	items.forEach((item) => {
 		const itemCode = item.item_code;
@@ -35,12 +38,17 @@ export function validateStockForOfflineInvoice(items) {
 	let errorMessage = "";
 	if (invalidItems.length === 1) {
 		const item = invalidItems[0];
-		errorMessage = `Not enough stock for ${item.item_name}. You need ${item.requested_qty} but only ${item.available_qty} available.`;
+		if (item) {
+			errorMessage = `Not enough stock for ${item.item_name}. You need ${item.requested_qty} but only ${item.available_qty} available.`;
+		}
 	} else if (invalidItems.length > 1) {
 		errorMessage =
 			"Insufficient stock for multiple items:\n" +
 			invalidItems
-				.map((item) => `• ${item.item_name}: Need ${item.requested_qty}, Have ${item.available_qty}`)
+				.map(
+					(item) =>
+						`• ${item.item_name}: Need ${item.requested_qty}, Have ${item.available_qty}`,
+				)
 				.join("\n");
 	}
 
@@ -51,9 +59,13 @@ export function validateStockForOfflineInvoice(items) {
 	};
 }
 
-export function saveOfflineInvoice(entry) {
+export function saveOfflineInvoice(entry: AnyRecord) {
 	// Validate that invoice has items before saving
-	if (!entry.invoice || !Array.isArray(entry.invoice.items) || !entry.invoice.items.length) {
+	if (
+		!entry.invoice ||
+		!Array.isArray(entry.invoice.items) ||
+		!entry.invoice.items.length
+	) {
 		throw new Error("Cart is empty. Add items before saving.");
 	}
 
@@ -95,8 +107,12 @@ export function clearOfflineInvoices() {
 	persist("offline_invoices");
 }
 
-export function deleteOfflineInvoice(index) {
-	if (Array.isArray(memory.offline_invoices) && index >= 0 && index < memory.offline_invoices.length) {
+export function deleteOfflineInvoice(index: number) {
+	if (
+		Array.isArray(memory.offline_invoices) &&
+		index >= 0 &&
+		index < memory.offline_invoices.length
+	) {
 		memory.offline_invoices.splice(index, 1);
 		persist("offline_invoices");
 	}
@@ -121,7 +137,11 @@ export function resetOfflineState() {
 	persist("pos_last_sync_totals");
 }
 
-export function setLastSyncTotals(totals) {
+export function setLastSyncTotals(totals: {
+	pending: number;
+	synced: number;
+	drafted: number;
+}) {
 	memory.pos_last_sync_totals = totals;
 	persist("pos_last_sync_totals");
 }
@@ -134,7 +154,11 @@ export function getLastSyncTotals() {
 export async function syncOfflineInvoices() {
 	// Prevent concurrent syncs which can lead to duplicate submissions
 	if (invoiceSyncInProgress) {
-		return { pending: getPendingOfflineInvoiceCount(), synced: 0, drafted: 0 };
+		return {
+			pending: getPendingOfflineInvoiceCount(),
+			synced: 0,
+			drafted: 0,
+		};
 	}
 	invoiceSyncInProgress = true;
 	try {
@@ -154,7 +178,7 @@ export async function syncOfflineInvoices() {
 			return { pending: invoices.length, synced: 0, drafted: 0 };
 		}
 
-		const failures = [];
+		const failures: AnyRecord[] = [];
 		let synced = 0;
 		let drafted = 0;
 
@@ -169,7 +193,10 @@ export async function syncOfflineInvoices() {
 				});
 				synced++;
 			} catch (error) {
-				console.error("Failed to submit invoice, saving as draft", error);
+				console.error(
+					"Failed to submit invoice, saving as draft",
+					error,
+				);
 				try {
 					await frappe.call({
 						method: "posawesome.posawesome.api.invoices.update_invoice",

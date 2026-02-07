@@ -13,7 +13,7 @@ import {
 	getAllStoredItems,
 	searchStoredItems,
 	getCachedPriceListItems,
-} from "../../offline/index.js";
+} from "../../offline/index";
 
 // Composables
 import { useItemsCache } from "../composables/items/useItemsCache";

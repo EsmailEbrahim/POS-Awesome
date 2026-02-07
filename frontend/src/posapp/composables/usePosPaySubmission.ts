@@ -1,5 +1,5 @@
 import { ref, type Ref } from "vue";
-import { isOffline, saveOfflinePayment } from "../../offline/index.js";
+import { isOffline, saveOfflinePayment } from "../../offline/index";
 
 declare const frappe: any;
 declare const __: (_text: string, _args?: any[]) => string;

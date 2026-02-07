@@ -1,4 +1,4 @@
-import { isOffline } from "../../../../offline/index.js";
+import { isOffline } from "../../../../offline/index";
 import { _logPriceListDebug, _buildPriceListSnapshot } from "./currency";
 import {
 	_normalizeReturnDocTotals,

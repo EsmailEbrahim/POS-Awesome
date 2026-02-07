@@ -1,4 +1,4 @@
-import { isOffline, saveCustomerBalance, getCachedCustomerBalance } from "../../../../offline/index.js";
+import { isOffline, saveCustomerBalance, getCachedCustomerBalance } from "../../../../offline/index";
 import { useDiscounts } from "../../../composables/useDiscounts";
 
 declare const __: (_text: string, _args?: any[]) => string;

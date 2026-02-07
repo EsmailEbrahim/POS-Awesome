@@ -1,4 +1,4 @@
-import { getStoredCustomer, getCachedPriceListItems } from "../../../../offline/index.js";
+import { getStoredCustomer, getCachedPriceListItems } from "../../../../offline/index";
 
 declare const frappe: any;
 

@@ -228,7 +228,7 @@ import { usePaymentPrinting } from "../../composables/usePaymentPrinting";
 import { usePaymentMethods } from "../../composables/usePaymentMethods";
 import { useInvoiceDetails } from "../../composables/useInvoiceDetails";
 import { useFormat } from "../../format";
-import { isOffline } from "../../../offline/index.js";
+import { isOffline } from "../../../offline/index";
 
 // Components
 import PaymentSummary from "./PaymentSummary.vue";

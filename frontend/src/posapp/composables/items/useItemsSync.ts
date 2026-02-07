@@ -8,7 +8,7 @@ import {
 	setItemsLastSync,
 	getItemsLastSync,
 	saveItemDetailsCache,
-} from "../../../offline/index.js";
+} from "../../../offline/index";
 
 export interface BackgroundSyncState {
 	running: boolean;

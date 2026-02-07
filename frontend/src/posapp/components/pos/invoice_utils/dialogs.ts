@@ -1,4 +1,4 @@
-import { isOffline } from "../../../../offline/index.js";
+import { isOffline } from "../../../../offline/index";
 
 declare const __: (_text: string, _args?: any[]) => string;
 declare const frappe: any;

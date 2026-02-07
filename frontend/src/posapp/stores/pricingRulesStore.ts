@@ -6,7 +6,7 @@ import {
 	savePricingRulesSnapshot,
 	getCachedPricingRulesSnapshot,
 	clearPricingRulesSnapshot,
-} from "../../offline/index.js";
+} from "../../offline/index";
 
 const HOURS_STALE = 24;
 

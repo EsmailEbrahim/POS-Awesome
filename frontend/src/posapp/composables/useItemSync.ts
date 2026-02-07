@@ -3,7 +3,7 @@ import {
     getItemsLastSync,
     setItemsLastSync,
     isOffline,
-} from "../../offline/index.js";
+} from "../../offline/index";
 import { normalizeBackgroundSyncInterval, shouldRunBackgroundSync } from "../utils/backgroundSync.js";
 
 /**

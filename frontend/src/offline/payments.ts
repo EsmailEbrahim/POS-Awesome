@@ -1,7 +1,9 @@
-import { memory, persist, isOffline } from "./db.js";
-import { syncOfflineCustomers } from "./customers.js";
+import { memory, persist, isOffline } from "./db";
+import { syncOfflineCustomers } from "./customers";
 
-export function saveOfflinePayment(entry) {
+type AnyRecord = Record<string, any>;
+
+export function saveOfflinePayment(entry: AnyRecord) {
 	const key = "offline_payments";
 	const entries = memory.offline_payments;
 	// Strip down POS Profile to essential fields to avoid
@@ -9,10 +11,13 @@ export function saveOfflinePayment(entry) {
 	if (entry?.args?.payload?.pos_profile) {
 		const profile = entry.args.payload.pos_profile;
 		entry.args.payload.pos_profile = {
-			posa_use_pos_awesome_payments: profile.posa_use_pos_awesome_payments,
+			posa_use_pos_awesome_payments:
+				profile.posa_use_pos_awesome_payments,
 			posa_allow_make_new_payments: profile.posa_allow_make_new_payments,
-			posa_allow_reconcile_payments: profile.posa_allow_reconcile_payments,
-			posa_allow_mpesa_reconcile_payments: profile.posa_allow_mpesa_reconcile_payments,
+			posa_allow_reconcile_payments:
+				profile.posa_allow_reconcile_payments,
+			posa_allow_mpesa_reconcile_payments:
+				profile.posa_allow_mpesa_reconcile_payments,
 			cost_center: profile.cost_center,
 			posa_cash_mode_of_payment: profile.posa_cash_mode_of_payment,
 			name: profile.name,
@@ -39,8 +44,12 @@ export function clearOfflinePayments() {
 	persist("offline_payments");
 }
 
-export function deleteOfflinePayment(index) {
-	if (Array.isArray(memory.offline_payments) && index >= 0 && index < memory.offline_payments.length) {
+export function deleteOfflinePayment(index: number) {
+	if (
+		Array.isArray(memory.offline_payments) &&
+		index >= 0 &&
+		index < memory.offline_payments.length
+	) {
 		memory.offline_payments.splice(index, 1);
 		persist("offline_payments");
 	}
@@ -61,7 +70,7 @@ export async function syncOfflinePayments() {
 		return { pending: payments.length, synced: 0 };
 	}
 
-	const failures = [];
+	const failures: AnyRecord[] = [];
 	let synced = 0;
 
 	for (const pay of payments) {

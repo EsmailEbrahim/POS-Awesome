@@ -5,7 +5,7 @@ import {
 	isStockCacheReady,
 	getItemsLastSync,
 	clearItemDetailsCache,
-} from "../../../offline/index.js";
+} from "../../../offline/index";
 import type { Item } from "../../types/models";
 
 export interface CacheHealth {

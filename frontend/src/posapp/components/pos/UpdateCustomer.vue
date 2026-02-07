@@ -219,7 +219,7 @@
 </template>
 
 <script>
-import { isOffline, saveOfflineCustomer } from "../../../offline/index.js";
+import { isOffline, saveOfflineCustomer } from "../../../offline/index";
 import { useCustomersStore } from "../../stores/customersStore.js";
 import { useUIStore } from "../../stores/uiStore.js";
 import { storeToRefs } from "pinia";
