@@ -225,6 +225,8 @@ export function useItemsIntegration(options = {}) {
 
 	// Return interface compatible with existing component
 	return {
+		itemsStore,
+
 		// Store state (reactive)
 		items,
 		filteredItems,

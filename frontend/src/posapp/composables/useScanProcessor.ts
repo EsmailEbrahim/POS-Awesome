@@ -26,7 +26,7 @@ export interface ScanProcessorContext {
 		lookupItemByBarcode: (_barcode: string) => any;
 		replaceBarcodeIndex: (_items: any[]) => void;
 		indexItem: (_item: any) => void;
-		searchItemsByCode: (_code: string) => any[];
+		searchItemsByCode: (_items: any, _code: string) => any[];
 		resetBarcodeIndex: () => void;
 	};
 	scannerInput: any;
