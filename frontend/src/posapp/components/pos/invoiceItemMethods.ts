@@ -16,10 +16,25 @@ import * as Dialogs from "./invoice_utils/dialogs.js";
 import * as Stock from "./invoice_utils/stock.js";
 import * as Discounts from "./invoice_utils/discounts.js";
 
+interface InvoiceItemMethodsVm {
+	applyPricingRulesForCart: (_force?: boolean) => void;
+	flushBackgroundUpdates?: () => void;
+	add_item: (_item: unknown, _options?: unknown) => unknown;
+	remove_item: (_item: unknown) => unknown;
+	set_batch_qty: (_item: unknown, _value: unknown, _update?: unknown) => unknown;
+	set_serial_no: (_item: unknown) => unknown;
+	calc_uom: (_item: unknown, _value: unknown) => unknown;
+	calc_stock_qty: (_item: unknown, _value: unknown) => unknown;
+	clear_invoice: (_options?: unknown) => unknown;
+	roundAmount: (_amount: unknown) => unknown;
+	update_item_detail: (_item: unknown) => unknown;
+	update_items_details: (_items: unknown[]) => unknown;
+}
+
 // Keep offline imports if needed for re-export or mixin usage?
 // No, utils handle it.
 
-export default {
+const invoiceItemMethods: Record<string, unknown> & ThisType<InvoiceItemMethodsVm> = {
 	...Tasks,
 	...Cache,
 	...Currency,
@@ -341,11 +356,11 @@ export default {
 	},
 
 	// Debounced Methods
-	schedulePricingRuleApplication: debounce(function (force = false) {
+	schedulePricingRuleApplication: debounce(function (this: InvoiceItemMethodsVm, force = false) {
 		this.applyPricingRulesForCart(force);
 	}, 150),
 
-	triggerBackgroundFlush: debounce(function () {
+	triggerBackgroundFlush: debounce(function (this: InvoiceItemMethodsVm) {
 		// flushBackgroundUpdates was added to ItemUpdates?
 		// Wait, I updated ItemUpdates but flushBackgroundUpdates might not be there if I missed it.
 		// It's called ItemUpdates.flushBackgroundUpdates?
@@ -386,3 +401,5 @@ export default {
 		return this.update_items_details(items);
 	},
 };
+
+export default invoiceItemMethods;

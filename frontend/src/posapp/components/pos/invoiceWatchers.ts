@@ -1,9 +1,56 @@
 import { clearPriceListCache } from "../../../offline/index.js";
 import { useCustomersStore } from "../../stores/customersStore.js";
 
-export default {
+interface WatcherItem {
+	posa_row_id?: string | number;
+	_detailSynced?: boolean;
+	[key: string]: unknown;
+}
+
+interface InvoiceWatchersVm {
+	customer?: string | null;
+	customer_info?: Record<string, unknown>;
+	items: WatcherItem[];
+	packed_items: WatcherItem[];
+	discount_percentage_offer_name?: string | null;
+	eventBus: { emit: (_event: string, _payload?: unknown) => void };
+	invoiceType?: string;
+	additional_discount?: number;
+	additional_discount_percentage?: number;
+	pos_profile: {
+		posa_use_percentage_discount?: boolean;
+		selling_price_list?: string;
+		posa_allow_multi_currency?: boolean;
+	};
+	Total?: number;
+	isReturnInvoice?: boolean;
+	posting_date?: string;
+	posting_date_display?: string;
+	selected_price_list?: string;
+	price_list_currency?: string;
+	available_stock_cache?: Record<string, unknown>;
+	exchange_rate?: number;
+	close_payments: () => void;
+	fetch_customer_details: () => void;
+	fetch_customer_balance: () => void;
+	set_delivery_charges: () => void;
+	sync_invoice_customer_details: (_details?: Record<string, unknown>) => void;
+	update_item_detail: (_item: WatcherItem) => void;
+	emitCartQuantities?: () => void;
+	scheduleOfferRefresh?: () => void;
+	formatDateForDisplay: (_value: string) => string;
+	formatDateForBackend: (_value: string) => string;
+	get_effective_price_list?: () => string;
+	apply_cached_price_list: (_priceList?: string) => void;
+	update_currency: (_currency: string) => void;
+	clearItemDetailCache?: () => void;
+	clearItemStockCache?: () => void;
+	update_item_rates: () => void;
+}
+
+const invoiceWatchers: Record<string, unknown> & ThisType<InvoiceWatchersVm> = {
 	// Watch for customer change and update related data
-	customer(newValue, oldValue) {
+	customer(newValue: unknown, oldValue: unknown) {
 		if (newValue === oldValue) {
 			return;
 		}
@@ -23,10 +70,10 @@ export default {
 		this.sync_invoice_customer_details(this.customer_info);
 	},
 	// Watch for expanded row change and update item detail
-	expanded(data_value) {
+	expanded(data_value: Array<string | number>) {
 		if (data_value.length > 0) {
 			const expandedId = data_value[0];
-			const item = this.items.find((it) => it.posa_row_id === expandedId);
+			const item = this.items.find((it: WatcherItem) => it.posa_row_id === expandedId);
 			if (item) {
 				this.update_item_detail(item);
 			}
@@ -41,7 +88,7 @@ export default {
 
 	// Optimized watcher: Track store version instead of deep watching items array
 	"invoiceStore.metadata.changeVersion": {
-		handler() {
+		handler(this: InvoiceWatchersVm) {
 			// This covers both items and packed_items changes if they modify the store
 			if (typeof this.emitCartQuantities === "function") {
 				// emitCartQuantities is usually debounced internally or cheap enough
@@ -96,17 +143,17 @@ export default {
 	},
 	// Keep display date in sync with posting_date
 	posting_date: {
-		handler(newVal) {
+		handler(this: InvoiceWatchersVm, newVal: string) {
 			this.posting_date_display = this.formatDateForDisplay(newVal);
 		},
 		immediate: true,
 	},
 	// Update posting_date when user changes the display value
-	posting_date_display(newVal) {
+	posting_date_display(newVal: string) {
 		this.posting_date = this.formatDateForBackend(newVal);
 	},
 
-	selected_price_list(newVal) {
+	selected_price_list(newVal: string) {
 		// Clear cached price list items to avoid mixing rates
 		clearPriceListCache();
 
@@ -130,7 +177,7 @@ export default {
 			frappe.call({
 				method: "posawesome.posawesome.api.invoices.get_price_list_currency",
 				args: { price_list: applied },
-				callback: (r) => {
+				callback: (r: { message?: string }) => {
 					if (r.message) {
 						// Store price list currency for later use
 						this.price_list_currency = r.message;
@@ -178,3 +225,5 @@ export default {
 		}
 	},
 };
+
+export default invoiceWatchers;

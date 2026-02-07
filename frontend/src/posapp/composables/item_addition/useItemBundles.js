@@ -1,5 +1,5 @@
 import { useBundles } from "../useBundles.js";
-import { useStockUtils } from "../useStockUtils.js";
+import { useStockUtils } from "../useStockUtils";
 
 export function useItemBundles() {
 	const { getBundleComponents } = useBundles();

@@ -1,11 +1,50 @@
 import { ref, watch, onUnmounted } from "vue";
-import _ from "lodash";
+import { debounce } from "lodash";
 import { isOffline } from "../../offline/index.js";
+
+type MaybeRefLike<T> = T | { value: T } | (() => T);
+
+type LastInvoiceRow = {
+	item_code: string;
+	rate?: number;
+	currency?: string;
+	invoice?: string;
+	uom?: string;
+	posting_date?: string;
+};
+
+type LastInvoiceRate = {
+	rate?: number;
+	currency?: string;
+	invoice?: string;
+	uom?: string;
+	posting_date?: string;
+};
+
+type LastInvoiceRatesMap = Record<string, LastInvoiceRate>;
+
+interface UseLastInvoiceRateContext {
+	pos_profile?: MaybeRefLike<{ company?: string } | null>;
+	customer?: MaybeRefLike<any>;
+	displayedItems?: MaybeRefLike<Array<{ item_code?: string }>>;
+	show_last_invoice_rate?: MaybeRefLike<boolean>;
+	autoRefresh?: boolean;
+}
+
+const unwrapValue = <T>(source: MaybeRefLike<T> | undefined): T | undefined => {
+	if (typeof source === "function") {
+		return (source as () => T)();
+	}
+	if (source && typeof source === "object" && "value" in source) {
+		return (source as { value: T }).value;
+	}
+	return source as T | undefined;
+};
 
 /**
  * Manages fetching and caching of last invoice rates for items per customer.
  */
-export function useLastInvoiceRate(context = {}) {
+export function useLastInvoiceRate(context: UseLastInvoiceRateContext = {}) {
 	const {
 		pos_profile, // reactive ref or object
 		customer, // reactive ref or getter
@@ -14,26 +53,23 @@ export function useLastInvoiceRate(context = {}) {
 	} = context;
 
 	// State
-	const lastInvoiceRates = ref({});
-	const lastInvoiceRateCache = new Map();
+	const lastInvoiceRates = ref<LastInvoiceRatesMap>({});
+	const lastInvoiceRateCache = new Map<any, Map<string, LastInvoiceRate>>();
 	const lastInvoiceRateLoading = ref(false);
 
-	let lastInvoiceRateScheduler = null;
+	let lastInvoiceRateScheduler: ReturnType<typeof debounce> | null = null;
 
-	const fetchLastInvoiceRates = async (itemCodes = []) => {
+	const fetchLastInvoiceRates = async (itemCodes: string[] = []) => {
 		// Unwrap values if refs are passed
-		const showRate =
-			typeof show_last_invoice_rate === "function"
-				? show_last_invoice_rate()
-				: (show_last_invoice_rate?.value ?? show_last_invoice_rate);
+		const showRate = Boolean(unwrapValue(show_last_invoice_rate));
 		if (!showRate) {
 			lastInvoiceRates.value = {};
 			return lastInvoiceRates.value;
 		}
 
-		const cust = typeof customer === "function" ? customer() : (customer?.value ?? customer);
+		const cust = unwrapValue(customer);
 		// Handle selectedCustomer ref if passed
-		const activeCustomer = cust?.value || cust;
+		const activeCustomer = (cust as any)?.value || cust;
 
 		if (!activeCustomer) {
 			lastInvoiceRates.value = {};
@@ -59,7 +95,8 @@ export function useLastInvoiceRate(context = {}) {
 
 		lastInvoiceRateLoading.value = true;
 		try {
-			const company = pos_profile?.company || pos_profile?.value?.company;
+			const profile = unwrapValue(pos_profile);
+			const company = profile?.company;
 			const res = await frappe.call({
 				method: "posawesome.posawesome.api.invoices.get_last_invoice_rates",
 				args: {
@@ -69,9 +106,9 @@ export function useLastInvoiceRate(context = {}) {
 				},
 			});
 
-			const rows = (res && res.message) || [];
+			const rows: LastInvoiceRow[] = (res && res.message) || [];
 			const updatedCache = new Map(cachedForCustomer);
-			rows.forEach((row) => {
+			rows.forEach((row: LastInvoiceRow) => {
 				if (row && row.item_code) {
 					updatedCache.set(row.item_code, {
 						rate: row.rate,
@@ -97,35 +134,26 @@ export function useLastInvoiceRate(context = {}) {
 	};
 
 	const refreshLastInvoiceRatesForVisibleItems = async () => {
-		const showRate =
-			typeof show_last_invoice_rate === "function"
-				? show_last_invoice_rate()
-				: (show_last_invoice_rate?.value ?? show_last_invoice_rate);
+		const showRate = Boolean(unwrapValue(show_last_invoice_rate));
 
 		if (!showRate) {
 			lastInvoiceRates.value = {};
 			return lastInvoiceRates.value;
 		}
 
-		const items =
-			typeof displayedItems === "function"
-				? displayedItems()
-				: (displayedItems?.value ?? displayedItems);
+		const items = unwrapValue(displayedItems) || [];
 
 		if (!items || !items.length) {
 			lastInvoiceRates.value = {};
 			return lastInvoiceRates.value;
 		}
 
-		const itemCodes = items.map((it) => it.item_code).filter(Boolean);
+		const itemCodes = items.map((it) => it?.item_code).filter(Boolean) as string[];
 		return fetchLastInvoiceRates(itemCodes);
 	};
 
 	const scheduleLastInvoiceRateRefresh = () => {
-		const showRate =
-			typeof show_last_invoice_rate === "function"
-				? show_last_invoice_rate()
-				: (show_last_invoice_rate?.value ?? show_last_invoice_rate);
+		const showRate = Boolean(unwrapValue(show_last_invoice_rate));
 
 		if (!showRate) {
 			lastInvoiceRates.value = {};
@@ -133,7 +161,7 @@ export function useLastInvoiceRate(context = {}) {
 		}
 
 		if (!lastInvoiceRateScheduler) {
-			lastInvoiceRateScheduler = _.debounce(() => {
+			lastInvoiceRateScheduler = debounce(() => {
 				refreshLastInvoiceRatesForVisibleItems();
 			}, 200);
 		}
@@ -141,11 +169,8 @@ export function useLastInvoiceRate(context = {}) {
 		lastInvoiceRateScheduler();
 	};
 
-	const getLastInvoiceRate = (item) => {
-		const showRate =
-			typeof show_last_invoice_rate === "function"
-				? show_last_invoice_rate()
-				: (show_last_invoice_rate?.value ?? show_last_invoice_rate);
+	const getLastInvoiceRate = (item: { item_code?: string } | null | undefined) => {
+		const showRate = Boolean(unwrapValue(show_last_invoice_rate));
 
 		if (!showRate) {
 			return null;
@@ -173,13 +198,13 @@ export function useLastInvoiceRate(context = {}) {
 	// Auto-schedule refresh when displayed items change, if configured in context
 	if (context.autoRefresh) {
 		watch(
-			() => (typeof displayedItems === "function" ? displayedItems() : displayedItems?.value),
+			() => unwrapValue(displayedItems),
 			() => {
 				scheduleLastInvoiceRateRefresh();
 			},
 		);
 		watch(
-			() => (typeof customer === "function" ? customer() : customer?.value),
+			() => unwrapValue(customer),
 			() => {
 				scheduleLastInvoiceRateRefresh();
 			},

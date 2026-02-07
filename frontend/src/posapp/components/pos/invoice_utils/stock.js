@@ -1,5 +1,5 @@
 import { parseBooleanSetting } from "../../../utils/stock";
-import { useStockUtils } from "../../../composables/useStockUtils.js";
+import { useStockUtils } from "../../../composables/useStockUtils";
 import { useBatchSerial } from "../../../composables/useBatchSerial.js";
 
 const { calcStockQty, calcUom } = useStockUtils();
@@ -14,7 +14,7 @@ export function calc_stock_qty(context, item, value) {
 	// In original code:
 	// calcStockQty(item, value, this);
 	// So if calcStockQty in composable expects context as 3rd arg, we should pass it.
-	// Based on imports in invoiceItemMethods.js: const { calcStockQty } = useStockUtils();
+	// Based on imports in invoiceItemMethods.ts: const { calcStockQty } = useStockUtils();
 	// It seems it was imported.
 
 	if (context.update_qty_limits) {

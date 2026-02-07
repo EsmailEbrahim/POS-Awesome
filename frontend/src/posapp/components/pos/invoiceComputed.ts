@@ -1,11 +1,44 @@
 import { perfMarkStart, perfMarkEnd } from "../../utils/perf";
 
-export default {
+type InvoiceItem = {
+	qty?: number;
+	rate?: number;
+	discount_amount?: number;
+	[key: string]: unknown;
+};
+
+type StoreMetric = number | { value?: number };
+
+interface InvoiceComputedVm {
+	invoiceStore?: {
+		totalQty?: StoreMetric;
+		grossTotal?: StoreMetric;
+		discountTotal?: StoreMetric;
+	};
+	items: InvoiceItem[];
+	flt: (_value: unknown, _precision?: number) => number;
+	float_precision: number;
+	currency_precision: number;
+	additional_discount: number;
+	delivery_charges_rate: number;
+	posting_date: string;
+	selected_currency?: string;
+	pos_profile: { currency: string };
+	invoiceType?: string;
+	invoice_doc?: { is_return?: boolean };
+	displayCurrency?: string;
+	isReturnInvoice: boolean;
+}
+
+const resolveMetric = (metric?: StoreMetric): number | undefined =>
+	typeof metric === "number" ? metric : metric?.value;
+
+const invoiceComputed: Record<string, unknown> & ThisType<InvoiceComputedVm> = {
 	// Calculate total quantity of all items
 	total_qty() {
 		const mark = perfMarkStart("pos:totals-total_qty");
 		const store = this.invoiceStore;
-		const storeValue = store?.totalQty?.value ?? store?.totalQty;
+		const storeValue = resolveMetric(store?.totalQty);
 		let qty;
 
 		if (typeof storeValue === "number" && !Number.isNaN(storeValue)) {
@@ -25,7 +58,7 @@ export default {
 	Total() {
 		const mark = perfMarkStart("pos:totals-gross");
 		const store = this.invoiceStore;
-		const storeValue = store?.grossTotal?.value ?? store?.grossTotal;
+		const storeValue = resolveMetric(store?.grossTotal);
 		let sum;
 
 		if (typeof storeValue === "number" && !Number.isNaN(storeValue)) {
@@ -48,7 +81,7 @@ export default {
 	subtotal() {
 		const mark = perfMarkStart("pos:totals-subtotal");
 		const store = this.invoiceStore;
-		const storeValue = store?.grossTotal?.value ?? store?.grossTotal;
+		const storeValue = resolveMetric(store?.grossTotal);
 		let sum = typeof storeValue === "number" && !Number.isNaN(storeValue) ? storeValue : 0;
 
 		if (!(typeof storeValue === "number" && !Number.isNaN(storeValue))) {
@@ -82,7 +115,7 @@ export default {
 	total_items_discount_amount() {
 		const mark = perfMarkStart("pos:totals-discount");
 		const store = this.invoiceStore;
-		const storeValue = store?.discountTotal?.value ?? store?.discountTotal;
+		const storeValue = resolveMetric(store?.discountTotal);
 		let sum;
 
 		if (typeof storeValue === "number" && !Number.isNaN(storeValue)) {
@@ -102,7 +135,7 @@ export default {
 	},
 	// Format posting_date for display as DD-MM-YYYY
 	formatted_posting_date: {
-		get() {
+		get(this: InvoiceComputedVm) {
 			if (!this.posting_date) return "";
 			const parts = this.posting_date.split("-");
 			if (parts.length === 3) {
@@ -110,7 +143,7 @@ export default {
 			}
 			return this.posting_date;
 		},
-		set(val) {
+		set(this: InvoiceComputedVm, val: string) {
 			const parts = val.split("-");
 			if (parts.length === 3) {
 				this.posting_date = `${parts[2]}-${parts[1]}-${parts[0]}`;
@@ -166,3 +199,5 @@ export default {
 		];
 	},
 };
+
+export default invoiceComputed;

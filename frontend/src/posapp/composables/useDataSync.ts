@@ -1,16 +1,21 @@
 import { ref, onMounted, onUnmounted, computed } from "vue";
 import { useItemsStore } from "../stores/itemsStore";
 
+type SyncHistoryEntry = {
+	time: number;
+	size: number;
+};
+
 export function useDataSync(intervalSeconds = 30) {
 	const itemsStore = useItemsStore();
-	const lastSyncTime = ref(null);
+	const lastSyncTime = ref<Date | null>(null);
 	const lastSyncSize = ref(0);
 	const totalSyncSize = ref(0);
-	const syncHistory = ref([]); // Store { time: timestamp, size: bytes }
+	const syncHistory = ref<SyncHistoryEntry[]>([]); // Store { time: timestamp, size: bytes }
 	const isSyncing = ref(false);
-	let timer = null;
+	let timer: ReturnType<typeof setInterval> | null = null;
 
-	const formatBytes = (bytes, decimals = 2) => {
+	const formatBytes = (bytes: number, decimals = 2) => {
 		if (bytes === 0) return "0 B";
 		const k = 1024;
 		const dm = decimals < 0 ? 0 : decimals;
@@ -36,6 +41,7 @@ export function useDataSync(intervalSeconds = 30) {
 		// (total / duration) * 1 hour
 
 		const firstEntry = recentHistory[0];
+		if (!firstEntry) return formatBytes(0);
 		const duration = now - firstEntry.time;
 
 		// Avoid division by zero or tiny duration
@@ -57,7 +63,8 @@ export function useDataSync(intervalSeconds = 30) {
 
 		isSyncing.value = true;
 		try {
-			const { size } = await itemsStore.refreshModifiedItems();
+			const result = await itemsStore.refreshModifiedItems();
+			const size = Number(result?.size || 0);
 
 			const now = Date.now();
 			lastSyncTime.value = new Date();
@@ -68,7 +75,7 @@ export function useDataSync(intervalSeconds = 30) {
 
 			// Cleanup old history (older than 1 hour)
 			const oneHourAgo = now - 60 * 60 * 1000;
-			if (syncHistory.value.length > 0 && syncHistory.value[0].time < oneHourAgo) {
+			if (syncHistory.value.length > 0 && syncHistory.value[0] && syncHistory.value[0].time < oneHourAgo) {
 				syncHistory.value = syncHistory.value.filter((entry) => entry.time > oneHourAgo);
 			}
 		} catch (error) {

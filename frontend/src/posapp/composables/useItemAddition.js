@@ -2,7 +2,7 @@ import _ from "lodash";
 import { withPerf } from "../utils/perf.js";
 import { parseBooleanSetting } from "../utils/stock.js";
 import { useToastStore } from "../stores/toastStore.js";
-import { useStockUtils } from "./useStockUtils.js";
+import { useStockUtils } from "./useStockUtils";
 
 // Imported composables
 import { useItemTasks } from "./item_addition/useItemTasks.js";

@@ -1,19 +1,54 @@
-const isAltOnly = (event) => event.altKey && !event.ctrlKey && !event.metaKey;
-const consumeEvent = (event) => {
+const isAltOnly = (event: KeyboardEvent) => event.altKey && !event.ctrlKey && !event.metaKey;
+const consumeEvent = (event: KeyboardEvent) => {
 	event.preventDefault();
 	event.stopPropagation();
 };
-const isDigit = (event, digit) =>
+const isDigit = (event: KeyboardEvent, digit: number) =>
 	event.key === String(digit) || event.code === `Digit${digit}` || event.code === `Numpad${digit}`;
-const isBackquote = (event) => event.key === "`" || event.code === "Backquote";
-const isLetter = (event, letter) => {
+const isBackquote = (event: KeyboardEvent) => event.key === "`" || event.code === "Backquote";
+const isLetter = (event: KeyboardEvent, letter: string) => {
 	const normalized = letter.toLowerCase();
 	const keyValue = event.key?.toLowerCase?.();
 	return keyValue === normalized || event.code === `Key${letter.toUpperCase()}`;
 };
 
-export default {
-	async handleInvoiceShortcut(event) {
+type ShortcutField = "qty" | "uom" | "rate";
+
+interface InvoiceShortcutsVm {
+	toastStore: { show: (_payload: { title: string; color: string }) => void };
+	eventBus: { emit: (_event: string, _payload?: unknown) => void };
+	uiStore: {
+		setActiveView: (_view: string) => void;
+		triggerItemSearchFocus: () => void;
+		selectTopItem: () => void;
+		toggleItemSettings: () => void;
+	};
+	$refs: {
+		customerComponent?: { openNewCustomer?: () => void; selectFirstCustomer?: () => void };
+		deliveryChargesComponent?: { focusDeliveryCharges?: () => void };
+		postingDateComponent?: { focusPostingDate?: () => void };
+		itemSearchField?: { focus?: () => void; $el?: { querySelector?: (_s: string) => { focus?: () => void } } };
+		itemsTable?: { focusItemField?: (_index: number, _field: ShortcutField) => void };
+	};
+	items?: Array<Record<string, unknown>>;
+	paymentVisible?: boolean;
+	cancel_dialog?: boolean;
+	shortcutCycle?: Record<ShortcutField, number>;
+	close_payments?: () => void;
+	focusCustomerSearchField?: () => void;
+	get_draft_orders?: () => void;
+	open_returns?: () => void;
+	show_payment?: () => Promise<void> | void;
+	focusAdditionalDiscountField?: () => void;
+	remove_item?: (_item: Record<string, unknown>) => void;
+	get_draft_invoices?: () => void;
+	save_and_clear_invoice?: () => void;
+	confirmPaymentSubmission: () => Promise<boolean>;
+	focusItemTableField: (_field: ShortcutField) => void;
+}
+
+const invoiceShortcuts: Record<string, unknown> & ThisType<InvoiceShortcutsVm> = {
+	async handleInvoiceShortcut(event: KeyboardEvent) {
 		if (event.defaultPrevented) {
 			return;
 		}
@@ -219,7 +254,7 @@ export default {
 		}
 	},
 
-	focusItemTableField(field) {
+	focusItemTableField(field: ShortcutField) {
 		const count = this.items?.length || 0;
 		if (!count) {
 			return;
@@ -237,3 +272,5 @@ export default {
 		this.$refs.itemsTable?.focusItemField?.(index, field);
 	},
 };
+
+export default invoiceShortcuts;

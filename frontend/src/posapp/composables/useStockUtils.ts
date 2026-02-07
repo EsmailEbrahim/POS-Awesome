@@ -5,7 +5,7 @@ import { useToastStore } from "../stores/toastStore.js";
 export function useStockUtils() {
 	const toastStore = useToastStore();
 	// Calculate UOM conversion and update item rates
-	const calcUom = async (item, value, context) => {
+	const calcUom = async (item: any, value: any, context: any) => {
 		if (!item || !value) return;
 		item.uom = value;
 
@@ -46,7 +46,7 @@ export function useStockUtils() {
 
 		// Try to fetch rate for this UOM from price list
 		const priceList = context.get_price_list ? context.get_price_list() : null;
-		let uomRate = null;
+		let uomRate: number | null = null;
 		if (priceList && context.getCachedPriceListItems) {
 			const cached = context.getCachedPriceListItems(priceList) || [];
 			const match = cached.find((p) => p.item_code === item.item_code && p.uom === new_uom.uom);
@@ -67,8 +67,8 @@ export function useStockUtils() {
 				if (r.message) {
 					uomRate = parseFloat(r.message);
 				}
-			} catch (e) {
-				console.error("Failed to fetch UOM price", e);
+			} catch (error) {
+				console.error("Failed to fetch UOM price", error);
 			}
 		}
 
@@ -237,7 +237,7 @@ export function useStockUtils() {
 					: 0;
 			} else if (offer && offer.discount_type === "Discount Percentage") {
 				// For percentage discount, recalculate from original price but with new conversion factor
-				let updated_base_price;
+				let updated_base_price: number;
 				if (item.original_base_price_list_rate) {
 					updated_base_price = context.flt(
 						item.original_base_price_list_rate * item.conversion_factor,
@@ -312,7 +312,7 @@ export function useStockUtils() {
 	};
 
 	// Calculate stock quantity for an item
-	const calcStockQty = (item, value) => {
+	const calcStockQty = (item: any, value: number) => {
 		item.stock_qty = item.conversion_factor * value;
 	};
 
