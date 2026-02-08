@@ -21,6 +21,10 @@ import { pinia } from "./stores";
 import { useToastStore } from "./stores/toastStore";
 import { useSocketStore } from "./stores/socketStore";
 import { createPosAppRouter } from "./router";
+import {
+	installGlobalErrorHandlers,
+	isBenignGlobalError,
+} from "./utils/errorReporting";
 import "../sw-updater"; // Initialize service worker auto-updater
 import App from "./App.vue";
 // @ts-ignore
@@ -31,24 +35,6 @@ import {
 } from "./utils/perf.js";
 
 attachProfilerHelpers();
-
-// Suppress known benign error from Frappe's shortcut.js (vendor)
-// This error occurs because POS view might not have the expected breadcrumb structure
-if (typeof window !== "undefined") {
-	window.addEventListener("error", (event) => {
-		if (
-			event.message &&
-			(event.message.includes("remove_last_divider") ||
-				(event.message.includes("offsetWidth") &&
-					event.filename &&
-					event.filename.includes("shortcut.js")))
-		) {
-			event.preventDefault();
-			console.warn("Suppressed known benign error in shortcut.js");
-			return true;
-		}
-	});
-}
 
 // Expose Dexie globally for libraries that expect a global Dexie instance
 if (typeof window !== "undefined" && !(window as any).Dexie) {
@@ -91,20 +77,23 @@ frappe.PosApp.posapp = class {
 		this.app.use(vuetify);
 		this.app.use(themePlugin, { vuetify });
 
-		// Global Error Handler
 		this.app.config.errorHandler = (
 			err: any,
-			instance: any,
+			_instance: any,
 			info: string,
 		) => {
-			console.error("Global Error:", err, info);
-			const toastStore = useToastStore();
-			toastStore.show({
-				message: `An unexpected error occurred: ${err.message || err}`,
-				color: "error",
-				timeout: 5000,
-			});
+			if (!isBenignGlobalError(err)) {
+				console.error("Global Error:", err, info);
+				const toastStore = useToastStore();
+				toastStore.show({
+					message: `An unexpected error occurred: ${err?.message || err}`,
+					color: "error",
+					timeout: 5000,
+				});
+			}
 		};
+
+		installGlobalErrorHandlers(this.app);
 
 		this.app.mount(this.$el[0]);
 
