@@ -38,6 +38,7 @@ interface InvoiceWatchersVm {
 	update_item_detail: (_item: WatcherItem) => void;
 	emitCartQuantities?: () => void;
 	scheduleOfferRefresh?: () => void;
+	schedulePricingRuleApplication?: (_force?: boolean) => void;
 	formatDateForDisplay: (_value: string) => string;
 	formatDateForBackend: (_value: string) => string;
 	get_effective_price_list?: () => string;
@@ -73,7 +74,9 @@ const invoiceWatchers: Record<string, unknown> & ThisType<InvoiceWatchersVm> = {
 	expanded(data_value: Array<string | number>) {
 		if (data_value.length > 0) {
 			const expandedId = data_value[0];
-			const item = this.items.find((it: WatcherItem) => it.posa_row_id === expandedId);
+			const item = this.items.find(
+				(it: WatcherItem) => it.posa_row_id === expandedId,
+			);
 			if (item) {
 				this.update_item_detail(item);
 			}
@@ -95,9 +98,10 @@ const invoiceWatchers: Record<string, unknown> & ThisType<InvoiceWatchersVm> = {
 				this.emitCartQuantities();
 			}
 
-			// Offer refresh is now handled explicitly by actions (addItem/updateItem)
-			// or via the background sync mechanism.
-			// If we need a catch-all, we could schedule it here, but avoiding it prevents double-work.
+			if (typeof this.schedulePricingRuleApplication === "function") {
+				this.schedulePricingRuleApplication();
+			}
+
 			if (typeof this.scheduleOfferRefresh === "function") {
 				this.scheduleOfferRefresh();
 			}
@@ -127,7 +131,8 @@ const invoiceWatchers: Record<string, unknown> & ThisType<InvoiceWatchersVm> = {
 					: 0;
 
 			if (baseTotal) {
-				let computedPercentage = (this.additional_discount / baseTotal) * 100;
+				let computedPercentage =
+					(this.additional_discount / baseTotal) * 100;
 
 				if (this.isReturnInvoice) {
 					computedPercentage = -Math.abs(computedPercentage);
@@ -167,9 +172,12 @@ const invoiceWatchers: Record<string, unknown> & ThisType<InvoiceWatchersVm> = {
 		}
 
 		const price_list =
-			effectivePriceList === this.pos_profile.selling_price_list ? null : effectivePriceList;
+			effectivePriceList === this.pos_profile.selling_price_list
+				? null
+				: effectivePriceList;
 		this.eventBus.emit("update_customer_price_list", price_list);
-		const applied = effectivePriceList || this.pos_profile.selling_price_list;
+		const applied =
+			effectivePriceList || this.pos_profile.selling_price_list;
 		this.apply_cached_price_list(applied);
 
 		// If multi-currency is enabled, sync currency with the price list currency
