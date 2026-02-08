@@ -32,7 +32,8 @@ export function useItemCreation() {
 
 		// Initialize flag for tracking manual rate changes
 		new_item._manual_rate_set = new_item._manual_rate_set || false;
-		new_item._manual_rate_set_from_uom = new_item._manual_rate_set_from_uom || false;
+		new_item._manual_rate_set_from_uom =
+			new_item._manual_rate_set_from_uom || false;
 
 		// Set negative quantity for return invoices
 		if (context.isReturnInvoice && item.qty > 0) {
@@ -54,13 +55,19 @@ export function useItemCreation() {
 				item.base_price_list_rate !== undefined
 					? item.base_price_list_rate
 					: item.rate * conversionRate;
-			new_item.base_rate = item.base_rate !== undefined ? item.base_rate : item.rate * conversionRate;
+			new_item.base_rate =
+				item.base_rate !== undefined
+					? item.base_rate
+					: item.rate * conversionRate;
 			new_item.base_discount_amount = 0;
 		} else {
 			// In base currency, base rates = displayed rates
 			new_item.base_price_list_rate =
-				item.base_price_list_rate !== undefined ? item.base_price_list_rate : item.rate;
-			new_item.base_rate = item.base_rate !== undefined ? item.base_rate : item.rate;
+				item.base_price_list_rate !== undefined
+					? item.base_price_list_rate
+					: item.rate;
+			new_item.base_rate =
+				item.base_rate !== undefined ? item.base_rate : item.rate;
 			new_item.base_discount_amount = 0;
 		}
 
@@ -69,7 +76,10 @@ export function useItemCreation() {
 		// Ensure item_uoms is initialized
 		new_item.item_uoms = item.item_uoms || [];
 		if (new_item.item_uoms.length === 0 && new_item.stock_uom) {
-			new_item.item_uoms.push({ uom: new_item.stock_uom, conversion_factor: 1 });
+			new_item.item_uoms.push({
+				uom: new_item.stock_uom,
+				conversion_factor: 1,
+			});
 		}
 		new_item.actual_batch_qty = "";
 		new_item.batch_no_expiry_date = item.batch_no_expiry_date || null;
@@ -85,13 +95,19 @@ export function useItemCreation() {
 		new_item.bundle_id = null;
 		new_item.posa_notes = "";
 		new_item.posa_delivery_date = "";
-		new_item.posa_row_id = context.makeid ? context.makeid(20) : Math.random().toString(36).substr(2, 20);
+		new_item.posa_row_id = context.makeid
+			? context.makeid(20)
+			: Math.random().toString(36).substr(2, 20);
 		if (new_item.has_serial_no && !new_item.serial_no_selected) {
 			new_item.serial_no_selected = [];
 			new_item.serial_no_selected_count = 0;
 		}
 		// Expand row if batch/serial required
-		if ((!context.pos_profile.posa_auto_set_batch && new_item.has_batch_no) || new_item.has_serial_no) {
+		if (
+			(!context?.pos_profile?.posa_auto_set_batch &&
+				new_item.has_batch_no) ||
+			new_item.has_serial_no
+		) {
 			// Only store the row ID to keep expanded array consistent
 			if (Array.isArray(context.expanded)) {
 				context.expanded.push(new_item.posa_row_id);
@@ -104,8 +120,17 @@ export function useItemCreation() {
 	 * Prepare item for adding to cart (UOMs, currency conversion, etc.)
 	 * Returns the prepared item (modified in place mostly, but best to return it)
 	 */
-	async function prepareItemForCart(item: any, requestedQty: number, context: any) {
-		const { pos_profile, itemCurrencyUtils, itemDetailFetcher, hide_qty_decimals } = context;
+	async function prepareItemForCart(
+		item: any,
+		requestedQty: number,
+		context: any,
+	) {
+		const {
+			pos_profile,
+			itemCurrencyUtils,
+			itemDetailFetcher,
+			hide_qty_decimals,
+		} = context;
 
 		// Ensure UOMs are initialized
 		if (!item.uom) {
@@ -118,18 +143,27 @@ export function useItemCreation() {
 				if (cachedUoms.length > 0) {
 					item.item_uoms = cachedUoms;
 				} else {
-					item.item_uoms = [{ uom: item.stock_uom, conversion_factor: 1.0 }];
+					item.item_uoms = [
+						{ uom: item.stock_uom, conversion_factor: 1.0 },
+					];
 				}
 			} else {
 				// Fallback
-				item.item_uoms = [{ uom: item.stock_uom, conversion_factor: 1.0 }];
+				item.item_uoms = [
+					{ uom: item.stock_uom, conversion_factor: 1.0 },
+				];
 			}
 
 			// Benchmark: avoid awaiting item detail fetch to keep click-to-add responsive.
 			if (pos_profile?.name && itemDetailFetcher) {
-				itemDetailFetcher.update_items_details([item]).catch((error) => {
-					console.error("Failed to refresh item details for cart", error);
-				});
+				itemDetailFetcher
+					.update_items_details([item])
+					.catch((error) => {
+						console.error(
+							"Failed to refresh item details for cart",
+							error,
+						);
+					});
 			}
 		}
 
@@ -140,7 +174,10 @@ export function useItemCreation() {
 
 			const companyCurrency = pos_profile.currency;
 			// _getPlcToCompanyRate logic
-			const plcToCompanyRate = itemCurrencyUtils.getPlcToCompanyRate(item, context);
+			const plcToCompanyRate = itemCurrencyUtils.getPlcToCompanyRate(
+				item,
+				context,
+			);
 			const base_rate =
 				item.original_currency === companyCurrency
 					? item.original_rate
@@ -166,7 +203,9 @@ export function useItemCreation() {
 				qtyVal = Math.trunc(qtyVal);
 			}
 			item.qty = qtyVal;
-			console.log("[useItemAddition] qty updated", { item_qty: item.qty });
+			console.log("[useItemAddition] qty updated", {
+				item_qty: item.qty,
+			});
 		}
 
 		return item;
@@ -177,7 +216,14 @@ export function useItemCreation() {
 	 */
 	async function handleVariantItem(item: any, context: any) {
 		if (!context) return;
-		const { items, pos_profile, active_price_list, customer, toastStore, uiStore } = context;
+		const {
+			items,
+			pos_profile,
+			active_price_list,
+			customer,
+			toastStore,
+			uiStore,
+		} = context;
 
 		let variants = items.filter((it) => it.variant_of == item.item_code);
 		let attrsMeta = {};
