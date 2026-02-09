@@ -1,4 +1,7 @@
-import { getStoredCustomer, getCachedPriceListItems } from "../../../../offline/index";
+import {
+	getStoredCustomer,
+	getCachedPriceListItems,
+} from "../../../../offline/index";
 
 declare const frappe: any;
 
@@ -19,8 +22,20 @@ export async function fetch_customer_details(context: any) {
 
 		if (r?.message) {
 			context.customer_info = r.message;
+			const resolvedPriceList =
+				context.customer_info.customer_price_list ||
+				context.customer_info.customer_group_price_list ||
+				context.pos_profile?.selling_price_list ||
+				"";
+			if (
+				resolvedPriceList &&
+				context.selected_price_list !== resolvedPriceList
+			) {
+				context.selected_price_list = resolvedPriceList;
+			}
 			if (context.customer_info.customer_price_list) {
-				context.price_list_currency = context.customer_info.price_list_currency;
+				context.price_list_currency =
+					context.customer_info.price_list_currency;
 			} else {
 				context.price_list_currency = context.pos_profile.currency;
 			}
@@ -28,7 +43,8 @@ export async function fetch_customer_details(context: any) {
 			// If we have items with default rates (rate=0 or rate not set), re-apply price list
 			// Or if we need to enforce customer price list
 			if (context.items.length > 0) {
-				if (context.update_items_details) await context.update_items_details(context.items);
+				if (context.update_items_details)
+					await context.update_items_details(context.items);
 			}
 		}
 	} catch (error) {
@@ -38,7 +54,8 @@ export async function fetch_customer_details(context: any) {
 
 export function get_effective_price_list(context: any) {
 	if (context.selected_price_list) return context.selected_price_list;
-	if (context.customer_info?.customer_price_list) return context.customer_info.customer_price_list;
+	if (context.customer_info?.customer_price_list)
+		return context.customer_info.customer_price_list;
 	return context.pos_profile?.selling_price_list;
 }
 
@@ -51,31 +68,43 @@ export async function update_price_list(context: any) {
 		context.apply_cached_price_list(get_price_list(context));
 	}
 	// Trigger re-pricing/server sync
-	if (context.schedulePricingRuleApplication) context.schedulePricingRuleApplication(true);
+	if (context.schedulePricingRuleApplication)
+		context.schedulePricingRuleApplication(true);
 }
 
-export function sync_invoice_customer_details(context: any, details: any = null) {
+export function sync_invoice_customer_details(
+	context: any,
+	details: any = null,
+) {
 	if (!details) {
 		details = context.customer_info;
 	}
 	if (!details) return;
 
 	if (context.invoice_doc) {
-		if (details.customer_address) context.invoice_doc.customer_address = details.customer_address;
-		if (details.territory) context.invoice_doc.territory = details.territory;
-		if (details.contact_person) context.invoice_doc.contact_person = details.contact_person;
-		if (details.shipping_address) context.invoice_doc.shipping_address_name = details.shipping_address;
+		if (details.customer_address)
+			context.invoice_doc.customer_address = details.customer_address;
+		if (details.territory)
+			context.invoice_doc.territory = details.territory;
+		if (details.contact_person)
+			context.invoice_doc.contact_person = details.contact_person;
+		if (details.shipping_address)
+			context.invoice_doc.shipping_address_name =
+				details.shipping_address;
 	}
 }
 
-export function _applyPriceListRate(context: any, item: any, newRate: number, priceCurrency: string) {
+export function _applyPriceListRate(
+	context: any,
+	item: any,
+	newRate: number,
+	priceCurrency: string,
+) {
 	if (!item) return;
 
 	if (context._computePriceConversion) {
-		const { price_list_rate, base_price_list_rate } = context._computePriceConversion(
-			newRate,
-			priceCurrency,
-		);
+		const { price_list_rate, base_price_list_rate } =
+			context._computePriceConversion(newRate, priceCurrency);
 
 		item.price_list_rate = price_list_rate;
 		item.base_price_list_rate = base_price_list_rate;
@@ -87,8 +116,14 @@ export function _applyPriceListRate(context: any, item: any, newRate: number, pr
 	}
 }
 
-export function _computePriceConversion(context: any, rate: number, _priceCurrency: string) {
-	const plcConversionRate = context._getPlcConversionRate ? context._getPlcConversionRate() : 1;
+export function _computePriceConversion(
+	context: any,
+	rate: number,
+	_priceCurrency: string,
+) {
+	const plcConversionRate = context._getPlcConversionRate
+		? context._getPlcConversionRate()
+		: 1;
 	const base_price_list_rate = rate * plcConversionRate;
 
 	return {
@@ -106,7 +141,12 @@ export function apply_cached_price_list(context: any, price_list: string) {
 		if (!item || !item.item_code) return;
 		const rateInfo = itemsMap[item.item_code];
 		if (rateInfo) {
-			_applyPriceListRate(context, item, rateInfo.price_list_rate, rateInfo.currency);
+			_applyPriceListRate(
+				context,
+				item,
+				rateInfo.price_list_rate,
+				rateInfo.currency,
+			);
 		}
 	});
 }

@@ -826,8 +826,19 @@ export const useItemsStore = defineStore("items", () => {
 		items.value.forEach((item) => {
 			const priceItem = priceMap.get(item.item_code);
 			if (priceItem) {
-				item.rate = priceItem.price_list_rate || priceItem.rate || 0;
-				item.price_list_rate = item.rate;
+				const nextRate =
+					priceItem.price_list_rate || priceItem.rate || 0;
+				const nextCurrency =
+					priceItem.currency ||
+					item.original_currency ||
+					item.currency ||
+					posProfile.value?.currency;
+
+				item.rate = nextRate;
+				item.price_list_rate = nextRate;
+				item.original_rate = nextRate;
+				item.original_currency = nextCurrency;
+				item.currency = nextCurrency;
 			}
 		});
 

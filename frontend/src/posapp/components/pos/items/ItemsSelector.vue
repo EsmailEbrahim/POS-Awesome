@@ -558,6 +558,28 @@ const onDragEnd = () => {
 	uiStore.setDraggedItem(null);
 };
 
+const resolveIncomingPriceList = (incomingPriceList: unknown) => {
+	const normalized = typeof incomingPriceList === "string" ? incomingPriceList.trim() : "";
+	if (normalized) {
+		return normalized;
+	}
+	return pos_profile.value?.selling_price_list || "";
+};
+
+const syncSelectorPriceList = async (incomingPriceList: unknown) => {
+	const nextPriceList = resolveIncomingPriceList(incomingPriceList);
+	if (!nextPriceList) {
+		return;
+	}
+
+	if (itemsIntegration.active_price_list.value !== nextPriceList) {
+		await itemsIntegration.updatePriceList(nextPriceList);
+	}
+
+	await itemsIntegration.get_items(true);
+	itemDetailFetcher.update_cur_items_details();
+};
+
 const formatBackgroundSyncTime = () => {
 	const lastSync = itemSync.last_background_sync_time?.value;
 	if (!lastSync) return __("Never");
@@ -672,6 +694,9 @@ onMounted(async () => {
 				selected_currency.value = data.currency;
 			}
 		});
+		eventBus.on("update_customer_price_list", (priceList) => {
+			syncSelectorPriceList(priceList);
+		});
 	}
 
 	// Watch UI Profile for initialization (Source of Truth)
@@ -738,6 +763,7 @@ onBeforeUnmount(() => {
 	if (itemWorker.value) itemWorker.value.terminate();
 	if (eventBus) {
 		eventBus.off("update_currency");
+		eventBus.off("update_customer_price_list");
 	}
 	window.removeEventListener("resize", checkItemContainerOverflow);
 });
@@ -749,6 +775,7 @@ watch(search_input, (val) => {
 });
 
 watch(selectedCustomer, () => {
+	itemsIntegration.customer.value = selectedCustomer.value || null;
 	clearLastInvoiceRateCache();
 	scheduleLastInvoiceRateRefresh();
 });
