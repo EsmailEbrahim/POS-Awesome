@@ -573,7 +573,7 @@ const updateCreditChange = (rawValue) => {
 
 	const remainingPaidChange = flt(changeLimit - requestedCredit, currency_precision.value);
 
-	credit_change.value = requestedCredit ? -requestedCredit : 0;
+	credit_change.value = requestedCredit;
 	paid_change.value = remainingPaidChange;
 
 	if (invoice_doc.value) {
@@ -810,7 +810,7 @@ watch(paid_change, (newVal) => {
 		paid_change_rules.value = ["Paid change can not be greater than total change!"];
 	} else {
 		paid_change_rules.value = [];
-		credit_change.value = flt(newVal - changeLimit, currency_precision.value);
+		credit_change.value = flt(changeLimit - newVal, currency_precision.value);
 	}
 
 	const effectivePaid = Math.min(paid_change.value, changeLimit);
@@ -981,6 +981,9 @@ onMounted(() => {
 	if (eventBus) {
 		eventBus.on("send_invoice_doc_payment", (doc) => {
 			invoiceStore.setInvoiceDoc(doc);
+			paid_change.value = flt(doc.paid_change || 0, currency_precision.value);
+			credit_change.value = flt(doc.credit_change || 0, currency_precision.value);
+			last_payment_change_was_cash.value = null;
 			const default_payment = doc.payments.find((payment) => payment.default === 1);
 			const hasReturnPayments = doc.payments.some(
 				(payment) => Math.abs(flt(payment.amount || 0, currency_precision.value)) > 0,

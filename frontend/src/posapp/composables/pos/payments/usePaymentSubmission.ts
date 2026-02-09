@@ -388,12 +388,51 @@ export function usePaymentSubmission(options: PaymentSubmissionOptions) {
 
 		const diff = unref(diff_payment) || 0;
 		const changeLimit = !doc.is_return ? Math.max(-diff, 0) : 0;
-		const pChange = !doc.is_return
+		let pChange = !doc.is_return
 			? formatFloat(Math.min(unref(paidChange) || 0, changeLimit), prec)
 			: 0;
-		const cChange = !doc.is_return
+		let cChange = !doc.is_return
 			? formatFloat(Math.max(changeLimit - pChange, 0), prec)
 			: 0;
+
+		if (
+			!doc.is_return &&
+			changeLimit > 0 &&
+			pChange <= 0 &&
+			Array.isArray(doc.payments)
+		) {
+			const configuredCashMop = String(
+				profile?.posa_cash_mode_of_payment || "",
+			).toLowerCase();
+			const paidRows = doc.payments.filter(
+				(payment: any) => formatFloat(payment?.amount || 0, prec) > 0,
+			);
+			const hasCashPaid = paidRows.some((payment: any) => {
+				const mode = String(
+					payment?.mode_of_payment || "",
+				).toLowerCase();
+				const type = String(payment?.type || "").toLowerCase();
+				if (type === "cash") return true;
+				if (configuredCashMop && mode === configuredCashMop)
+					return true;
+				return mode.includes("cash");
+			});
+			const hasNonCashPaid = paidRows.some((payment: any) => {
+				const mode = String(
+					payment?.mode_of_payment || "",
+				).toLowerCase();
+				const type = String(payment?.type || "").toLowerCase();
+				if (type === "cash") return false;
+				if (configuredCashMop && mode === configuredCashMop)
+					return false;
+				return !mode.includes("cash");
+			});
+
+			if (hasNonCashPaid && !hasCashPaid) {
+				pChange = formatFloat(changeLimit, prec);
+				cChange = 0;
+			}
+		}
 
 		if (doc) {
 			doc.paid_change = pChange;
@@ -401,7 +440,7 @@ export function usePaymentSubmission(options: PaymentSubmissionOptions) {
 		}
 
 		if (!doc.is_return) {
-			if (creditChange) creditChange.value = cChange ? -cChange : 0;
+			if (creditChange) creditChange.value = cChange;
 			if (paidChange) paidChange.value = pChange;
 		}
 
