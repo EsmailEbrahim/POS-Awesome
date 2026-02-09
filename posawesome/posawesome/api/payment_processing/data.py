@@ -189,7 +189,13 @@ def get_outstanding_invoices(customer=None, company=None, currency=None, pos_pro
 
 
 @frappe.whitelist()
-def get_unallocated_payments(customer, company, currency, mode_of_payment=None):
+def get_unallocated_payments(
+    customer,
+    company,
+    currency=None,
+    mode_of_payment=None,
+    include_all_currencies=False,
+):
     filters = {
         "party": customer,
         "company": company,
@@ -197,8 +203,9 @@ def get_unallocated_payments(customer, company, currency, mode_of_payment=None):
         "party_type": "Customer",
         "payment_type": "Receive",
         "unallocated_amount": [">", 0],
-        "paid_from_account_currency": currency,
     }
+    if currency and not include_all_currencies:
+        filters["paid_from_account_currency"] = currency
     if mode_of_payment:
         filters.update({"mode_of_payment": mode_of_payment})
     unallocated_payment = frappe.get_all(
@@ -216,6 +223,31 @@ def get_unallocated_payments(customer, company, currency, mode_of_payment=None):
         ],
         order_by="posting_date asc",
     )
+
+    # Keep POSPay parity with ERPNext reconciliation tool: if strict currency
+    # filter produced no rows, fallback to all currencies for visibility.
+    if (
+        not include_all_currencies
+        and currency
+        and not unallocated_payment
+    ):
+        fallback_filters = dict(filters)
+        fallback_filters.pop("paid_from_account_currency", None)
+        unallocated_payment = frappe.get_all(
+            "Payment Entry",
+            filters=fallback_filters,
+            fields=[
+                "name",
+                "paid_amount",
+                "party_name as customer_name",
+                "received_amount",
+                "posting_date",
+                "unallocated_amount",
+                "mode_of_payment",
+                "paid_from_account_currency as currency",
+            ],
+            order_by="posting_date asc",
+        )
     for payment in unallocated_payment:
         payment["voucher_type"] = "Payment Entry"
         payment["is_credit_note"] = 0
