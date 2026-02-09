@@ -327,7 +327,10 @@ def auto_reconcile_customer_invoices(customer, company, currency=None, pos_profi
             )
             continue
 
-        unallocated_before = flt(pe_doc.get("unallocated_amount"))
+        # ERPNext payment reconciliation can allocate Payment Entries that are
+        # advances against Sales Orders even when PE.unallocated_amount is zero.
+        # So prefer the fetched reconciliation amount from payment row.
+        unallocated_before = flt(payment.get("unallocated_amount")) or flt(pe_doc.get("unallocated_amount"))
         if unallocated_before <= 0:
             skipped_payments.append(
                 _("Payment Entry {0} has no unallocated amount remaining.").format(payment_name)
@@ -352,16 +355,16 @@ def auto_reconcile_customer_invoices(customer, company, currency=None, pos_profi
 
             entry_list.append(
                 frappe._dict(
-                    {
-                        "voucher_type": "Payment Entry",
-                        "voucher_no": payment_name,
-                        "voucher_detail_no": None,
-                        "against_voucher_type": invoice.get("voucher_type") or "Sales Invoice",
-                        "against_voucher": invoice.get("voucher_no"),
-                        "account": pe_doc.paid_from,
-                        "party_type": "Customer",
-                        "party": customer,
-                        "dr_or_cr": "credit_in_account_currency",
+                        {
+                            "voucher_type": "Payment Entry",
+                            "voucher_no": payment_name,
+                            "voucher_detail_no": payment.get("reference_row"),
+                            "against_voucher_type": invoice.get("voucher_type") or "Sales Invoice",
+                            "against_voucher": invoice.get("voucher_no"),
+                            "account": payment.get("account") or pe_doc.paid_from,
+                            "party_type": "Customer",
+                            "party": customer,
+                            "dr_or_cr": "credit_in_account_currency",
                         "unreconciled_amount": unallocated_before,
                         "unadjusted_amount": unallocated_before,
                         "allocated_amount": allocation,
@@ -406,9 +409,7 @@ def auto_reconcile_customer_invoices(customer, company, currency=None, pos_profi
             )
             continue
 
-        pe_doc.reload()
-        unallocated_after = flt(pe_doc.get("unallocated_amount"))
-        allocated_amount = flt(unallocated_before - unallocated_after)
+        allocated_amount = flt(unallocated_before - remaining_amount)
 
         if allocated_amount <= 0:
             _restore_outstandings(invoice_allocations)
