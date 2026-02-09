@@ -21,6 +21,7 @@ interface InvoiceWatchersVm {
 		posa_use_percentage_discount?: boolean;
 		selling_price_list?: string;
 		posa_allow_multi_currency?: boolean;
+		currency?: string;
 	};
 	Total?: number;
 	isReturnInvoice?: boolean;
@@ -30,6 +31,8 @@ interface InvoiceWatchersVm {
 	price_list_currency?: string;
 	available_stock_cache?: Record<string, unknown>;
 	exchange_rate?: number;
+	selected_currency?: string;
+	conversion_rate?: number;
 	close_payments: () => void;
 	fetch_customer_details: () => void;
 	fetch_customer_balance: () => void;
@@ -220,6 +223,13 @@ const invoiceWatchers: Record<string, unknown> & ThisType<InvoiceWatchersVm> = {
 	// Reactively update item prices when currency changes
 	selected_currency() {
 		clearPriceListCache();
+		if (this.eventBus) {
+			this.eventBus.emit("update_currency", {
+				currency: this.selected_currency || this.pos_profile?.currency,
+				exchange_rate: this.exchange_rate,
+				conversion_rate: this.conversion_rate,
+			});
+		}
 		if (this.items && this.items.length) {
 			this.update_item_rates();
 		}

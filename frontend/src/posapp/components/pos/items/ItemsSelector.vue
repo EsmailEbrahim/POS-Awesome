@@ -690,6 +690,10 @@ onMounted(async () => {
 
 	if (eventBus) {
 		eventBus.on("update_currency", (data) => {
+			if (typeof data === "string" && data) {
+				selected_currency.value = data;
+				return;
+			}
 			if (data && data.currency) {
 				selected_currency.value = data.currency;
 			}
