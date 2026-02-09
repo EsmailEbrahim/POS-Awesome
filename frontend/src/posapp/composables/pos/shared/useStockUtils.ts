@@ -11,6 +11,8 @@ export function useStockUtils() {
 	// Calculate UOM conversion and update item rates
 	const calcUom = async (item: any, value: any, context: any) => {
 		if (!item || !value) return;
+		item._uom_calc_token = Number(item._uom_calc_token || 0) + 1;
+		const activeUomCalcToken = item._uom_calc_token;
 		item.uom = value;
 
 		let new_uom = item.item_uoms.find((element) => element.uom == value);
@@ -53,6 +55,17 @@ export function useStockUtils() {
 			? context.get_price_list()
 			: null;
 		let uomRate: number | null = null;
+		const hasPriceList = priceList !== null && priceList !== undefined;
+		const uomPriceCache: Map<string, number | null> =
+			context._uomPriceCache instanceof Map
+				? context._uomPriceCache
+				: (context._uomPriceCache = new Map());
+		const uomPriceCacheKey = `${hasPriceList ? String(priceList) : ""}::${String(item.item_code || "")}::${String(new_uom.uom || "")}`;
+
+		if (uomPriceCache.has(uomPriceCacheKey)) {
+			uomRate = uomPriceCache.get(uomPriceCacheKey) ?? null;
+		}
+
 		if (priceList && context.getCachedPriceListItems) {
 			const cached = context.getCachedPriceListItems(priceList) || [];
 			const match = cached.find(
@@ -60,9 +73,14 @@ export function useStockUtils() {
 			);
 			if (match) {
 				uomRate = match.price_list_rate ?? match.rate ?? 0;
+				uomPriceCache.set(uomPriceCacheKey, uomRate);
 			}
 		}
-		if (!uomRate && typeof isOffline === "function" && !isOffline()) {
+		if (
+			uomRate === null &&
+			typeof isOffline === "function" &&
+			!isOffline()
+		) {
 			try {
 				const r = await frappe.call({
 					method: "posawesome.posawesome.api.items.get_price_for_uom",
@@ -74,10 +92,18 @@ export function useStockUtils() {
 				});
 				if (r.message) {
 					uomRate = parseFloat(r.message);
+					uomPriceCache.set(uomPriceCacheKey, uomRate);
+				} else {
+					uomPriceCache.set(uomPriceCacheKey, null);
 				}
 			} catch (error) {
 				console.error("Failed to fetch UOM price", error);
+				uomPriceCache.set(uomPriceCacheKey, null);
 			}
+		}
+
+		if (activeUomCalcToken !== item._uom_calc_token) {
+			return;
 		}
 
 		if (uomRate) {
