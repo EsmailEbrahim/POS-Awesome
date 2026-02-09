@@ -168,6 +168,17 @@ def get_customer_info(customer):
         "Customer Group", customer.customer_group, "default_price_list"
     )
 
+    effective_price_list = (
+        res.get("customer_price_list")
+        or res.get("customer_group_price_list")
+    )
+    if effective_price_list:
+        res["price_list_currency"] = frappe.get_value(
+            "Price List", effective_price_list, "currency"
+        )
+    else:
+        res["price_list_currency"] = None
+
     if customer.loyalty_program:
         lp_details = get_loyalty_program_details_with_points(
             customer.name,

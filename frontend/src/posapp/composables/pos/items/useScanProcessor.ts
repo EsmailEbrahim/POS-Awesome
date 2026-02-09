@@ -51,6 +51,8 @@ export interface ScanProcessorContext {
 	onItemAdded?: () => void;
 	onItemNotFound?: (_code: string) => void;
 	stock_settings: Ref<any>;
+	selected_currency?: Ref<string>;
+	conversion_rate?: Ref<number> | ComputedRef<number>;
 	// Callback for search focus or clear
 	get_search?: (_code: string) => string;
 	get_item_qty?: (_code: string) => string;
@@ -247,10 +249,21 @@ export function useScanProcessor(context: ScanProcessorContext) {
 		if (effectivePrice !== null && !Number.isNaN(effectivePrice)) {
 			const parsedPrice = parseFloat(String(effectivePrice));
 			if (!Number.isNaN(parsedPrice)) {
+				const selectedCurrency = context.selected_currency?.value;
+				const companyCurrency = pos_profile.value?.currency;
+				const conversionRate =
+					Number(context.conversion_rate?.value || 1) || 1;
+				const basePrice =
+					selectedCurrency &&
+					companyCurrency &&
+					selectedCurrency !== companyCurrency
+						? parsedPrice * conversionRate
+						: parsedPrice;
+
 				newItem.rate = parsedPrice;
 				newItem.price_list_rate = parsedPrice;
-				newItem.base_rate = parsedPrice;
-				newItem.base_price_list_rate = parsedPrice;
+				newItem.base_rate = basePrice;
+				newItem.base_price_list_rate = basePrice;
 				newItem._manual_rate_set = true;
 				newItem.skip_force_update = true;
 			}

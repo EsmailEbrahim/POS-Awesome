@@ -499,6 +499,14 @@ export default {
 			this.$forceUpdate();
 		},
 
+		update_exchange_rate() {
+			this.sync_exchange_rate();
+		},
+
+		update_conversion_rate() {
+			this.sync_exchange_rate();
+		},
+
 		async update_exchange_rate_on_server() {
 			if (this.conversion_rate) {
 				if (!this.items.length) {

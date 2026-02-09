@@ -148,7 +148,7 @@ export function usePaymentMethods(options: PaymentMethodsOptions) {
 					// ideally we would use exchange rate but for now using simple ratio or 1 if not available
 					// This logic might need refinement if multi-currency is heavy used
 					const conversion_rate = doc.conversion_rate || 1;
-					other.base_amount = flt(newAmount / conversion_rate);
+					other.base_amount = flt(newAmount * conversion_rate);
 				}
 
 				remaining_excess = flt(remaining_excess - reduction);

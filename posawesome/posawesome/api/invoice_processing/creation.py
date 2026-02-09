@@ -143,10 +143,14 @@ def update_invoice(data):
                 item.update(locked)
         invoice_doc.calculate_taxes_and_totals()
 
+    company_currency = (
+        frappe.get_cached_value("Company", invoice_doc.company, "default_currency")
+        or invoice_doc.currency
+    )
+
     # Ensure selected currency is preserved after set_missing_values
     if selected_currency:
         invoice_doc.currency = selected_currency
-        company_currency = frappe.get_cached_value("Company", invoice_doc.company, "default_currency")
     price_list_currency = price_list_currency or company_currency
 
     conversion_rate = 1

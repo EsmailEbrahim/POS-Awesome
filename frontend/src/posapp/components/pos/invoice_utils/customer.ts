@@ -33,9 +33,12 @@ export async function fetch_customer_details(context: any) {
 			) {
 				context.selected_price_list = resolvedPriceList;
 			}
-			if (context.customer_info.customer_price_list) {
+			if (context.customer_info.price_list_currency) {
 				context.price_list_currency =
 					context.customer_info.price_list_currency;
+			} else if (resolvedPriceList) {
+				context.price_list_currency =
+					context.price_list_currency || context.pos_profile.currency;
 			} else {
 				context.price_list_currency = context.pos_profile.currency;
 			}
@@ -119,15 +122,33 @@ export function _applyPriceListRate(
 export function _computePriceConversion(
 	context: any,
 	rate: number,
-	_priceCurrency: string,
+	priceCurrency: string,
 ) {
-	const plcConversionRate = context._getPlcConversionRate
-		? context._getPlcConversionRate()
-		: 1;
-	const base_price_list_rate = rate * plcConversionRate;
+	const companyCurrency =
+		(context.company && context.company.default_currency) ||
+		context.pos_profile.currency;
+	const selectedCurrency = context.selected_currency || companyCurrency;
+	const priceListCurrency = context.price_list_currency || companyCurrency;
+
+	let sourceToCompanyRate = 1;
+	if (priceCurrency === companyCurrency) {
+		sourceToCompanyRate = 1;
+	} else if (priceCurrency === selectedCurrency) {
+		sourceToCompanyRate = context.conversion_rate || 1;
+	} else if (priceCurrency === priceListCurrency) {
+		sourceToCompanyRate = context._getPlcConversionRate
+			? context._getPlcConversionRate()
+			: 1;
+	}
+
+	const base_price_list_rate = rate * sourceToCompanyRate;
+	const price_list_rate =
+		selectedCurrency === companyCurrency
+			? base_price_list_rate
+			: base_price_list_rate / (context.conversion_rate || 1);
 
 	return {
-		price_list_rate: rate,
+		price_list_rate,
 		base_price_list_rate: base_price_list_rate,
 	};
 }

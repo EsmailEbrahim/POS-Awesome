@@ -70,8 +70,8 @@ export function get_invoice_doc(context: any) {
 	doc.currency =
 		context.selected_currency || context.pos_profile?.currency || null;
 	doc.conversion_rate =
-		(sourceDoc && sourceDoc.conversion_rate) ||
 		context.conversion_rate ||
+		(sourceDoc && sourceDoc.conversion_rate) ||
 		1;
 
 	// Use actual price list currency if available

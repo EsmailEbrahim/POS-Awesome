@@ -243,6 +243,8 @@ const __ = (window as any).__;
 
 const eventBus = inject("eventBus") as any;
 const selected_currency = ref("");
+const selected_exchange_rate = ref(1);
+const selected_conversion_rate = ref(1);
 const isInitialized = ref(false);
 const initTimeout = ref(null);
 const initError = ref(null);
@@ -517,7 +519,9 @@ const scanProcessor = useScanProcessor({
 	hide_qty_decimals: computed(() => !!pos_profile.value?.posa_hide_qty_decimals),
 	blockSaleBeyondAvailableQty,
 	currency_precision: computed(() => pos_profile.value?.currency_precision || 2),
-	exchange_rate: computed(() => 1),
+	exchange_rate: computed(() => selected_exchange_rate.value),
+	selected_currency,
+	conversion_rate: selected_conversion_rate,
 	format_currency: itemDisplay.format_currency,
 	ratePrecision: itemDisplay.ratePrecision,
 	customer: selectedCustomer,
@@ -630,7 +634,7 @@ onMounted(async () => {
 			return pos_profile.value?.currency_precision || 2;
 		},
 		get exchange_rate() {
-			return 1;
+			return selected_exchange_rate.value;
 		},
 	});
 
@@ -696,6 +700,12 @@ onMounted(async () => {
 			}
 			if (data && data.currency) {
 				selected_currency.value = data.currency;
+				if (data.exchange_rate) {
+					selected_exchange_rate.value = Number(data.exchange_rate) || 1;
+				}
+				if (data.conversion_rate) {
+					selected_conversion_rate.value = Number(data.conversion_rate) || 1;
+				}
 			}
 		});
 		eventBus.on("update_customer_price_list", (priceList) => {
@@ -725,6 +735,8 @@ onMounted(async () => {
 
 					// Set local currency ref
 					selected_currency.value = newProfile.currency || "";
+					selected_exchange_rate.value = 1;
+					selected_conversion_rate.value = 1;
 
 					await itemsIntegration.initializeStore(
 						newProfile as any,
