@@ -3,6 +3,7 @@ from frappe import _
 from frappe.utils import nowdate, getdate, flt
 from erpnext.accounts.party import get_party_account
 from erpnext.accounts.utils import get_outstanding_invoices as get_erpnext_outstanding_invoices
+from erpnext.controllers.accounts_controller import get_advance_payment_entries_for_regional
 
 @frappe.whitelist()
 def get_outstanding_invoices(customer=None, company=None, currency=None, pos_profile=None,
@@ -100,6 +101,9 @@ def get_unallocated_payments(
     mode_of_payment=None,
     include_all_currencies=False,
 ):
+    customer_name = frappe.get_cached_value("Customer", customer, "customer_name")
+    party_account = get_party_account("Customer", customer, company)
+
     filters = {
         "party": customer,
         "company": company,
@@ -158,7 +162,64 @@ def get_unallocated_payments(
         payment["voucher_type"] = "Payment Entry"
         payment["is_credit_note"] = 0
 
-    party_account = get_party_account("Customer", customer, company)
+    # ERPNext-style reconciliation fetch (includes advances linked to Sales Order,
+    # not only Payment Entries with unallocated_amount > 0).
+    condition = frappe._dict(
+        {
+            "company": company,
+            "get_payments": True,
+        }
+    )
+    regional_entries = get_advance_payment_entries_for_regional(
+        "Customer",
+        customer,
+        [party_account],
+        "Sales Order",
+        against_all_orders=True,
+        condition=condition,
+    )
+
+    existing_keys = {(row.get("voucher_type"), row.get("name")) for row in unallocated_payment}
+    for row in regional_entries or []:
+        reference_type = row.get("reference_type")
+        reference_name = row.get("reference_name")
+        amount = flt(row.get("amount"))
+
+        if not reference_type or not reference_name or amount <= 0:
+            continue
+
+        key = (reference_type, reference_name)
+        if key in existing_keys:
+            continue
+
+        mode_of_payment_label = row.get("mode_of_payment")
+        if reference_type == "Sales Invoice":
+            mode_of_payment_label = _("Credit Note")
+        elif reference_type == "Journal Entry":
+            mode_of_payment_label = _("Journal Entry")
+
+        unallocated_payment.append(
+            {
+                "name": reference_name,
+                "paid_amount": amount,
+                "received_amount": amount,
+                "customer_name": customer_name,
+                "posting_date": row.get("posting_date"),
+                "unallocated_amount": amount,
+                "mode_of_payment": mode_of_payment_label,
+                "currency": row.get("currency") or currency,
+                "voucher_type": reference_type,
+                "is_credit_note": 1 if reference_type == "Sales Invoice" else 0,
+                "reference_row": row.get("reference_row"),
+                "account": row.get("account") or party_account,
+                "remarks": row.get("remarks"),
+                "cost_center": row.get("cost_center"),
+                "exchange_rate": flt(row.get("exchange_rate")) or 1,
+                "is_advance": row.get("is_advance"),
+            }
+        )
+        existing_keys.add(key)
+
     journal_conditions = [
         "je.docstatus = 1",
         "je.company = %(company)s",
@@ -201,10 +262,13 @@ def get_unallocated_payments(
         as_dict=True,
     )
 
-    customer_name = frappe.get_cached_value("Customer", customer, "customer_name")
     for journal in journal_entries:
         amount = flt(journal.get("unallocated_amount"))
         if amount <= 0:
+            continue
+
+        key = ("Journal Entry", journal.get("name"))
+        if key in existing_keys:
             continue
 
         unallocated_payment.append(
@@ -227,6 +291,7 @@ def get_unallocated_payments(
                 "is_advance": journal.get("is_advance"),
             }
         )
+        existing_keys.add(key)
 
     credit_notes = frappe.get_all(
         "Sales Invoice",
