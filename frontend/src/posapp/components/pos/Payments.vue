@@ -130,6 +130,7 @@
 				<PaymentOptions
 					:invoice-doc="invoice_doc"
 					:pos-profile="pos_profile"
+					:diff-payment="diff_payment"
 					:credit-change="credit_change"
 					:is-write-off-change="is_write_off_change"
 					:is-credit-sale="is_credit_sale"

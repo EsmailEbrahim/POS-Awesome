@@ -4,7 +4,7 @@
 		<v-row class="pa-1" align="start" no-gutters>
 			<v-col
 				cols="6"
-				v-if="posProfile.posa_allow_write_off_change && creditChange > 0 && !invoiceDoc.is_return"
+				v-if="posProfile.posa_allow_write_off_change && diffPayment > 0 && !invoiceDoc.is_return"
 			>
 				<v-switch
 					:model-value="isWriteOffChange"
@@ -102,6 +102,10 @@ defineProps({
 		default: () => ({}),
 	},
 	creditChange: {
+		type: Number,
+		default: 0,
+	},
+	diffPayment: {
 		type: Number,
 		default: 0,
 	},
