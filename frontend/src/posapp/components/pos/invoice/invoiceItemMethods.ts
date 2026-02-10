@@ -33,6 +33,8 @@ interface InvoiceItemMethodsVm {
 	roundAmount: (_amount: unknown) => unknown;
 	update_item_detail: (_item: unknown) => unknown;
 	update_items_details: (_items: unknown[]) => unknown;
+	forceUpdate: () => void;
+	$forceUpdate?: () => void;
 }
 
 // Keep offline imports if needed for re-export or mixin usage?
@@ -419,6 +421,11 @@ const invoiceItemMethods: Record<string, unknown> &
 	},
 	updateItemsDetails(items) {
 		return this.update_items_details(items);
+	},
+	forceUpdate() {
+		if (typeof this.$forceUpdate === "function") {
+			this.$forceUpdate();
+		}
 	},
 };
 

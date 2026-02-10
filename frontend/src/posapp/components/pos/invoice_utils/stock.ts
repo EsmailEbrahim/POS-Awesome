@@ -190,7 +190,7 @@ export function calc_uom(context: any, item: any, value: any) {
 	if (!item) return;
 	const task = () => calcUom(item, value, context);
 	if (context.queueItemTask) {
-		return context.queueItemTask(item, "calc_uom", task);
+		return context.queueItemTask(item, "calc_uom", task, { force: true });
 	}
 	return task();
 }

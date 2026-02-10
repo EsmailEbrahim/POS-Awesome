@@ -2,6 +2,23 @@ declare const __: (_text: string, _args?: any[]) => string;
 declare const frappe: any;
 
 export async function validate(context: any) {
+	// Await any pending tasks for items (UOM calculation, detail updates, etc.)
+	if (context._itemTaskCache instanceof Map && context.getItemTaskPromise) {
+		const allTasks: Promise<unknown>[] = [];
+		for (const rowId of context._itemTaskCache.keys()) {
+			const bucket = context._itemTaskCache.get(rowId) || {};
+			Object.values(bucket).forEach((promise) => {
+				if (promise instanceof Promise) {
+					allTasks.push(promise);
+				}
+			});
+		}
+		if (allTasks.length > 0) {
+			console.log(`[Validation] Awaiting ${allTasks.length} pending item tasks...`);
+			await Promise.allSettled(allTasks);
+		}
+	}
+
 	// For all returns, check if amounts are negative
 	if (context.isReturnInvoice) {
 		// Check if quantities are negative
