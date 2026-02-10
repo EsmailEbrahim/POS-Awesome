@@ -81,13 +81,6 @@ export const useInvoiceStore = defineStore("invoice", () => {
 		totalQty.value = tQty;
 		grossTotal.value = tGross;
 		discountTotal.value = tDisc;
-
-		console.log("[invoiceStore] recalculateTotals DONE", {
-			totalQty: tQty,
-			grossTotal: tGross,
-			discountTotal: tDisc,
-			itemsCount: itemsData.size
-		});
 	};
 
 	// Throttled update trigger

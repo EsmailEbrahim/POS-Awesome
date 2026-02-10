@@ -197,8 +197,7 @@ export function _applyPricingToLine(
 		return;
 	}
 
-	const manualFromUom = item._manual_rate_set_from_uom === true;
-	const manualOverride = item._manual_rate_set === true && !manualFromUom;
+	const manualOverride = item._manual_rate_set === true;
 	const allowRateUpdate =
 		!item.locked_price && !item.posa_offer_applied && !manualOverride;
 	const rawDocQty = Number.parseFloat(item.qty || 0);
@@ -261,9 +260,9 @@ export function _applyPricingToLine(
 		item.base_discount_amount = normalizedBaseDiscount;
 		item.price_list_rate = context.flt
 			? context.flt(
-					context._fromBaseCurrency(baseRate),
-					context.currency_precision,
-				)
+				context._fromBaseCurrency(baseRate),
+				context.currency_precision,
+			)
 			: context._fromBaseCurrency(baseRate);
 		item.rate = context.flt
 			? context.flt(convertedRate, context.currency_precision)
@@ -276,9 +275,9 @@ export function _applyPricingToLine(
 			: 0;
 		item.discount_percentage = baseRate
 			? context.flt(
-					Math.abs(rawDiscountPercentage),
-					context.float_precision,
-				)
+				Math.abs(rawDiscountPercentage),
+				context.float_precision,
+			)
 			: 0;
 		item.amount = context.flt
 			? context.flt(item.rate * item.qty, context.currency_precision)
@@ -675,7 +674,7 @@ export async function _applyServerPricingRules(context: any, ctx: any = {}) {
 				entry.base_price_list_rate ?? entry.price_list_rate,
 			),
 			fallbackSnapshot?.base_price_list_rate ??
-				fallbackSnapshot?.price_list_rate,
+			fallbackSnapshot?.price_list_rate,
 			true,
 		);
 		let displayPriceListRate = resolveWithFallback(
@@ -689,7 +688,7 @@ export async function _applyServerPricingRules(context: any, ctx: any = {}) {
 				entry.base_discount_amount ?? entry.discount_amount,
 			),
 			fallbackSnapshot?.base_discount_amount ??
-				fallbackSnapshot?.discount_amount,
+			fallbackSnapshot?.discount_amount,
 			true,
 		);
 		let discountAmount = resolveWithFallback(
@@ -821,14 +820,6 @@ export async function _applyServerPricingRules(context: any, ctx: any = {}) {
 				update.discount_percentage ?? item.discount_percentage ?? 0,
 			) || 0;
 
-		const manualFromUom = item._manual_rate_set_from_uom === true;
-		const isConvertedUom =
-			manualFromUom &&
-			(item.uom !== item.stock_uom ||
-				Number(item.conversion_factor || 1) !== 1);
-		const manualLocked =
-			item._manual_rate_set === true &&
-			(!manualFromUom || isConvertedUom);
 		const priceLocked = item.locked_price === true;
 		const offerApplied =
 			item.posa_offer_applied === true ||
@@ -836,7 +827,7 @@ export async function _applyServerPricingRules(context: any, ctx: any = {}) {
 			item.posa_offer_applied === "1";
 
 		let allowServerRateUpdate =
-			!manualLocked && !priceLocked && !offerApplied;
+			item._manual_rate_set !== true && !priceLocked && !offerApplied;
 
 		if (allowServerRateUpdate) {
 			const parentKey = item.posa_row_id || item.name || targetId || null;
@@ -871,20 +862,20 @@ export async function _applyServerPricingRules(context: any, ctx: any = {}) {
 				!Number.isFinite(basePriceListRate) || basePriceListRate <= 0;
 			const serverRemovedPriceList =
 				zeroPriceListFromServer &&
-				Number.isFinite(originalBasePriceList)
+					Number.isFinite(originalBasePriceList)
 					? originalBasePriceList > 0
 					: false;
 			const serverRemovedDiscount =
 				(!Number.isFinite(baseDiscount) || baseDiscount <= 0) &&
-				Number.isFinite(originalBaseDiscount)
+					Number.isFinite(originalBaseDiscount)
 					? originalBaseDiscount > 0
 					: false;
 			const serverRemovedPercentage =
 				(!Number.isFinite(discountPercentage) ||
 					discountPercentage <= 0) &&
-				Number.isFinite(originalBaseDiscount) &&
-				Number.isFinite(originalBasePriceList) &&
-				originalBasePriceList > 0
+					Number.isFinite(originalBaseDiscount) &&
+					Number.isFinite(originalBasePriceList) &&
+					originalBasePriceList > 0
 					? originalBaseDiscount >= originalBasePriceList - epsilon
 					: false;
 			const serverFullDiscount =
@@ -895,8 +886,8 @@ export async function _applyServerPricingRules(context: any, ctx: any = {}) {
 					baseDiscount >= basePriceListRate - epsilon);
 			const fallbackFullDiscount =
 				Number.isFinite(originalBasePriceList) &&
-				originalBasePriceList > 0 &&
-				Number.isFinite(originalBaseDiscount)
+					originalBasePriceList > 0 &&
+					Number.isFinite(originalBaseDiscount)
 					? originalBaseDiscount >= originalBasePriceList - epsilon
 					: false;
 

@@ -73,15 +73,8 @@ export async function update_items_details(context: any, items: any[]) {
 						updated_item.price_list_currency ||
 						item.price_list_currency ||
 						context.selected_currency;
-					const manualFromUom =
-						item._manual_rate_set_from_uom === true;
-					const isConvertedUom =
-						manualFromUom &&
-						(item.uom !== item.stock_uom ||
-							Number(item.conversion_factor || 1) !== 1);
 					const manualLocked =
-						item._manual_rate_set === true &&
-						(!manualFromUom || isConvertedUom);
+						item._manual_rate_set === true;
 					const shouldOverrideRate =
 						!item.locked_price &&
 						!item.posa_offer_applied &&
@@ -483,7 +476,7 @@ export function _doesManualOverrideMatchItem(
 			typeof item.auto_free_source === "string" && item.auto_free_source
 				? item.auto_free_source
 				: typeof item.free_item_source === "string" &&
-					  item.free_item_source
+					item.free_item_source
 					? item.free_item_source
 					: null;
 		if (itemSource && itemSource !== auto_free_source) return false;
@@ -605,8 +598,8 @@ export function _buildManualOverrideKeyFromItem(context: any, item: any) {
 
 	const idx =
 		item.idx !== undefined &&
-		item.idx !== null &&
-		!Number.isNaN(Number(item.idx))
+			item.idx !== null &&
+			!Number.isNaN(Number(item.idx))
 			? Number(item.idx)
 			: null;
 
@@ -721,9 +714,9 @@ export function _restoreManualSnapshots(
 			) {
 				item.amount = context.flt
 					? context.flt(
-							item.qty * item.rate,
-							context.currency_precision,
-						)
+						item.qty * item.rate,
+						context.currency_precision,
+					)
 					: item.qty * item.rate;
 			}
 
@@ -735,9 +728,9 @@ export function _restoreManualSnapshots(
 			) {
 				item.base_amount = context.flt
 					? context.flt(
-							item.qty * item.base_rate,
-							context.currency_precision,
-						)
+						item.qty * item.base_rate,
+						context.currency_precision,
+					)
 					: item.qty * item.base_rate;
 			}
 		}
