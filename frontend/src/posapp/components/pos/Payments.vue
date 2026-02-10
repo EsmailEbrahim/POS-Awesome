@@ -472,6 +472,7 @@ const { ensureReturnPaymentsAreNegative, validateSubmission, submitInvoice } = u
 	posProfile: pos_profile,
 	stockSettings: stock_settings,
 	invoiceType: invoiceType,
+	is_write_off_change: is_write_off_change,
 	isCashback: is_cashback,
 	paidChange: paid_change,
 	creditChange: credit_change,

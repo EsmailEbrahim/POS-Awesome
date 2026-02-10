@@ -32,6 +32,63 @@ import json
 from frappe.utils import money_in_words
 from frappe.utils.background_jobs import enqueue
 
+
+def _resolve_write_off_limit(pos_profile_doc):
+    if not pos_profile_doc:
+        return None
+
+    candidate_fields = (
+        "posa_max_write_off_amount",
+        "max_write_off_amount",
+        "write_off_amount",
+        "posa_write_off_limit",
+    )
+
+    for fieldname in candidate_fields:
+        raw_value = pos_profile_doc.get(fieldname)
+        if raw_value in (None, ""):
+            continue
+        limit = flt(raw_value)
+        if limit > 0:
+            return limit
+
+    return None
+
+
+def _apply_write_off_settings(invoice_doc, data):
+    enable_write_off = cint(data.get("is_write_off_change"))
+
+    if invoice_doc.is_return or not enable_write_off:
+        invoice_doc.write_off_amount = 0
+        invoice_doc.base_write_off_amount = 0
+        return
+
+    requested_write_off = flt(data.get("write_off_amount") or invoice_doc.get("write_off_amount"))
+    if requested_write_off <= 0:
+        invoice_doc.write_off_amount = 0
+        invoice_doc.base_write_off_amount = 0
+        return
+
+    invoice_total = abs(flt(invoice_doc.rounded_total or invoice_doc.grand_total))
+    effective_write_off = min(requested_write_off, invoice_total)
+
+    profile_doc = None
+    if invoice_doc.pos_profile and frappe.db.exists("POS Profile", invoice_doc.pos_profile):
+        profile_doc = frappe.get_cached_doc("POS Profile", invoice_doc.pos_profile)
+
+    write_off_limit = _resolve_write_off_limit(profile_doc)
+    if write_off_limit is not None:
+        effective_write_off = min(effective_write_off, write_off_limit)
+
+    precision_write_off = invoice_doc.precision("write_off_amount") or 2
+    precision_base_write_off = invoice_doc.precision("base_write_off_amount") or 2
+    conversion_rate = flt(invoice_doc.get("conversion_rate") or 1)
+
+    invoice_doc.write_off_amount = flt(effective_write_off, precision_write_off)
+    invoice_doc.base_write_off_amount = flt(
+        effective_write_off * conversion_rate, precision_base_write_off
+    )
+
 @frappe.whitelist()
 def update_invoice(data):
     currency_cache = {}
@@ -354,6 +411,8 @@ def submit_invoice(invoice, data, submit_in_background=False):
 
     _validate_stock_on_invoice(invoice_doc)
 
+    _apply_write_off_settings(invoice_doc, data)
+
     invoice_doc.flags.ignore_permissions = True
     frappe.flags.ignore_account_permission = True
     invoice_doc.posa_is_printed = 1
@@ -424,6 +483,8 @@ def submit_in_background_job(kwargs):
             invoice_doc.validate_credit_limit()
 
         invoice_doc.remarks = _build_invoice_remarks(invoice_doc)
+
+        _apply_write_off_settings(invoice_doc, data)
 
         if invoice_doc.redeem_loyalty_points and not invoice_doc.loyalty_program:
             invoice_doc.loyalty_program = frappe.db.get_value(

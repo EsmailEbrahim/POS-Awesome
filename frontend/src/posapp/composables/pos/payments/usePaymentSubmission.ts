@@ -15,6 +15,7 @@ export interface PaymentSubmissionOptions {
 	posProfile: Ref<any>;
 	stockSettings: Ref<any>;
 	invoiceType: Ref<string>;
+	is_write_off_change?: Ref<boolean>;
 	formatFloat: (_val: any, _prec?: number) => number;
 	currencyPrecision?: Ref<number>;
 	isCashback?: Ref<boolean>;
@@ -126,6 +127,55 @@ export function usePaymentSubmission(options: PaymentSubmissionOptions) {
 		return exc.toString ? exc.toString() : __("Unknown error");
 	};
 
+	const getWriteOffLimit = (profile: any): number | null => {
+		if (!profile) return null;
+		const possibleLimitFields = [
+			"posa_max_write_off_amount",
+			"max_write_off_amount",
+			"write_off_amount",
+			"posa_write_off_limit",
+		];
+
+		for (const field of possibleLimitFields) {
+			const rawValue = profile?.[field];
+			if (
+				rawValue === undefined ||
+				rawValue === null ||
+				rawValue === ""
+			) {
+				continue;
+			}
+			const parsed = formatFloat(rawValue);
+			if (parsed > 0) {
+				return parsed;
+			}
+		}
+
+		return null;
+	};
+
+	const getEffectiveWriteOffAmount = (
+		doc: any,
+		profile: any,
+		diffAmount: number,
+	): number => {
+		if (!doc || doc.is_return || !unref(options.is_write_off_change)) {
+			return 0;
+		}
+
+		const outstanding = Math.max(formatFloat(diffAmount), 0);
+		if (outstanding <= 0) {
+			return 0;
+		}
+
+		const writeOffLimit = getWriteOffLimit(profile);
+		if (writeOffLimit === null) {
+			return formatFloat(outstanding);
+		}
+
+		return formatFloat(Math.min(outstanding, writeOffLimit));
+	};
+
 	const validateDueDate = () => {
 		const doc = unref(invoiceDoc);
 		if (!doc || !doc.due_date) return;
@@ -152,6 +202,8 @@ export function usePaymentSubmission(options: PaymentSubmissionOptions) {
 			customerCreditDict,
 			diff_payment,
 		} = options;
+		const diff = unref(diff_payment) || 0;
+		const writeOffAmount = getEffectiveWriteOffAmount(doc, profile, diff);
 
 		// 1. Ensure return payments are negative
 		if (doc.is_return) {
@@ -177,13 +229,21 @@ export function usePaymentSubmission(options: PaymentSubmissionOptions) {
 			doc.rounded_total || doc.grand_total,
 			prec,
 		);
+		const payable_after_write_off = formatFloat(
+			Math.max(invoice_total - writeOffAmount, 0),
+			prec,
+		);
+		current_total_payments = formatFloat(
+			current_total_payments + writeOffAmount,
+			prec,
+		);
 
 		// 2. Validate total payments
 		if (
 			!unref(options.is_credit_sale) &&
 			!doc.is_return &&
 			current_total_payments <= 0 &&
-			invoice_total > 0
+			payable_after_write_off > 0
 		) {
 			throw new Error(__("Please enter payment amount"));
 		}
@@ -206,8 +266,8 @@ export function usePaymentSubmission(options: PaymentSubmissionOptions) {
 			if (has_cash_payment && cash_amount > 0) {
 				if (
 					!profile.posa_allow_partial_payment &&
-					cash_amount < invoice_total &&
-					invoice_total > 0
+					cash_amount < payable_after_write_off &&
+					payable_after_write_off > 0
 				) {
 					throw new Error(
 						__(
@@ -219,8 +279,8 @@ export function usePaymentSubmission(options: PaymentSubmissionOptions) {
 
 			if (
 				!profile.posa_allow_partial_payment &&
-				current_total_payments < invoice_total &&
-				invoice_total > 0
+				current_total_payments < payable_after_write_off &&
+				payable_after_write_off > 0
 			) {
 				throw new Error(__("The amount paid is not complete"));
 			}
@@ -247,7 +307,6 @@ export function usePaymentSubmission(options: PaymentSubmissionOptions) {
 		}
 
 		// 5. Validate paid_change
-		const diff = unref(diff_payment) || 0;
 		const changeLimit = Math.max(-diff, 0);
 		const pChange = unref(paidChange) || 0;
 		if (pChange > changeLimit + 0.001) {
@@ -387,6 +446,7 @@ export function usePaymentSubmission(options: PaymentSubmissionOptions) {
 		}
 
 		const diff = unref(diff_payment) || 0;
+		const writeOffAmount = getEffectiveWriteOffAmount(doc, profile, diff);
 		const changeLimit = !doc.is_return ? Math.max(-diff, 0) : 0;
 		let pChange = !doc.is_return
 			? formatFloat(Math.min(unref(paidChange) || 0, changeLimit), prec)
@@ -435,6 +495,11 @@ export function usePaymentSubmission(options: PaymentSubmissionOptions) {
 		}
 
 		if (doc) {
+			doc.write_off_amount = writeOffAmount;
+			doc.base_write_off_amount = formatFloat(
+				writeOffAmount * (doc.conversion_rate || 1),
+				prec,
+			);
 			doc.paid_change = pChange;
 			doc.credit_change = cChange;
 		}
@@ -448,6 +513,8 @@ export function usePaymentSubmission(options: PaymentSubmissionOptions) {
 			total_change: changeLimit,
 			paid_change: pChange,
 			credit_change: cChange,
+			is_write_off_change: unref(options.is_write_off_change) ? 1 : 0,
+			write_off_amount: writeOffAmount,
 			redeemed_customer_credit: unref(redeemedCustomerCredit),
 			customer_credit_dict: unref(customerCreditDict),
 			is_cashback: unref(isCashback),
