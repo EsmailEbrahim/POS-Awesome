@@ -601,7 +601,8 @@ export default {
 			try {
 				await this.updateStore.checkForUpdates(true);
 				if (this.updateStore.isUpdateReady) {
-					this.showNotification("Update available", "info");
+					this.updateStore.clearDismissed();
+					this.updateStore.resetSnooze();
 				} else {
 					this.showNotification("You are up to date", "success");
 				}

@@ -184,7 +184,7 @@ export const useUpdateStore = defineStore("update", {
 		},
 		formattedAvailableBranch(state: UpdateState): string | null {
 			return state.availableBranch
-				? `branch: ${state.availableBranch}`
+				? `current branch: ${state.availableBranch}`
 				: null;
 		},
 	},
@@ -380,6 +380,17 @@ export const useUpdateStore = defineStore("update", {
 					window.sessionStorage,
 					SNOOZE_STORAGE_KEY,
 				);
+			}
+		},
+		clearDismissed() {
+			if (!this.dismissedVersion && !this.dismissedUntil) {
+				return;
+			}
+			this.dismissedVersion = null;
+			this.dismissedUntil = null;
+			if (hasBrowserContext) {
+				safeStorageRemove(window.localStorage, DISMISSED_VERSION_KEY);
+				safeStorageRemove(window.sessionStorage, SNOOZE_STORAGE_KEY);
 			}
 		},
 		shouldCheckNow(force = false) {

@@ -275,6 +275,22 @@ def _get_commit_details(app_path: str, ref: str) -> Dict[str, str]:
         return {}
 
 
+def _get_current_branch(app_path: str) -> str:
+    try:
+        branch = (
+            subprocess.check_output(
+                ["git", "rev-parse", "--abbrev-ref", "HEAD"],
+                cwd=app_path,
+                stderr=subprocess.DEVNULL,
+            )
+            .decode("utf-8")
+            .strip()
+        )
+        return branch
+    except Exception:
+        return ""
+
+
 @frappe.whitelist()
 def get_remote_update_info() -> Dict[str, Any]:
     """Return remote branch heads and latest commit info (public repo)."""
@@ -294,18 +310,20 @@ def get_remote_update_info() -> Dict[str, Any]:
     _fetch_remote(app_path)
     heads = _get_remote_heads(app_path)
     data["remote_heads"] = heads
+    current_branch = _get_current_branch(app_path)
+    if current_branch:
+        data["current_branch"] = current_branch
 
     current_hash = base.get("commit_hash") if base else None
-    if heads and current_hash:
-        different = {b: h for b, h in heads.items() if h != current_hash}
-        data["remote_ahead"] = different
-        # Pick a sample branch for message (first in sorted order)
-        if different:
-            sample_branch = sorted(different.keys())[0]
-            ref = f"origin/{sample_branch}"
+    if heads and current_hash and current_branch:
+        remote_head = heads.get(current_branch)
+        if remote_head and remote_head != current_hash:
+            different = {current_branch: remote_head}
+            data["remote_ahead"] = different
+            ref = f"origin/{current_branch}"
             details = _get_commit_details(app_path, ref)
             if details:
-                data["remote_sample_branch"] = sample_branch
+                data["remote_sample_branch"] = current_branch
                 data["remote_sample"] = details
 
     return data
