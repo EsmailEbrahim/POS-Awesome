@@ -41,7 +41,6 @@ if (typeof window !== "undefined" && !(window as any).Dexie) {
 	(window as any).Dexie = Dexie;
 }
 
-// Ensure frappe is available
 if (typeof frappe === "undefined") {
 	console.error("Frappe is not defined");
 } else {
