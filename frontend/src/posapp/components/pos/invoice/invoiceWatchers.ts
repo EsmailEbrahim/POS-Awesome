@@ -54,6 +54,48 @@ interface InvoiceWatchersVm {
 	update_item_rates: () => void;
 }
 
+const applyReturnDiscountProration = (context: InvoiceWatchersVm) => {
+	const shouldProrate =
+		context.isReturnInvoice &&
+		!context.pos_profile?.posa_use_percentage_discount &&
+		context.return_doc &&
+		typeof context.return_doc === "object";
+
+	if (!shouldProrate) return;
+
+	const returnDoc = context.return_doc as Record<string, unknown>;
+	const originalDiscount = Math.abs(
+		Number(returnDoc.discount_amount || 0),
+	);
+	const originalTotal = Math.abs(
+		Number(
+			returnDoc.total ??
+				returnDoc.net_total ??
+				returnDoc.grand_total ??
+				0,
+		),
+	);
+	const returnTotal = Math.abs(Number(context.Total || 0));
+
+	if (!originalDiscount || !originalTotal || !returnTotal) return;
+
+	const ratio = Math.min(1, returnTotal / originalTotal);
+	const prorated = -Math.abs(originalDiscount * ratio);
+	const current = Number(context.additional_discount || 0);
+	if (Math.abs(current - prorated) > 0.0001) {
+		console.log("[POSA][Returns] Auto-prorate discount", {
+			originalDiscount,
+			originalTotal,
+			returnTotal,
+			ratio,
+			prorated,
+		});
+		context.additional_discount = prorated;
+		context.discount_amount = prorated;
+		context.additional_discount_percentage = 0;
+	}
+};
+
 const invoiceWatchers: Record<string, unknown> & ThisType<InvoiceWatchersVm> = {
 	// Watch for customer change and update related data
 	customer(newValue: unknown, oldValue: unknown) {
@@ -109,50 +151,11 @@ const invoiceWatchers: Record<string, unknown> & ThisType<InvoiceWatchersVm> = {
 			if (typeof this.scheduleOfferRefresh === "function") {
 				this.scheduleOfferRefresh();
 			}
-
-			const shouldProrate =
-				this.isReturnInvoice &&
-				!this.pos_profile?.posa_use_percentage_discount &&
-				this.return_doc &&
-				typeof this.return_doc === "object";
-
-			if (shouldProrate) {
-				const returnDoc = this.return_doc as Record<string, unknown>;
-				const originalDiscount = Math.abs(
-					Number(returnDoc.discount_amount || 0),
-				);
-				const originalTotal = Math.abs(
-					Number(
-						returnDoc.total ??
-							returnDoc.net_total ??
-							returnDoc.grand_total ??
-							0,
-					),
-				);
-				const returnTotal = Math.abs(Number(this.Total || 0));
-
-				if (originalDiscount && originalTotal && returnTotal) {
-					const ratio = Math.min(1, returnTotal / originalTotal);
-					const prorated = -Math.abs(originalDiscount * ratio);
-					const current = Number(this.additional_discount || 0);
-					if (Math.abs(current - prorated) > 0.0001) {
-						console.log(
-							"[POSA][Returns] Auto-prorate discount",
-							{
-								originalDiscount,
-								originalTotal,
-								returnTotal,
-								ratio,
-								prorated,
-							},
-						);
-						this.additional_discount = prorated;
-						this.discount_amount = prorated;
-						this.additional_discount_percentage = 0;
-					}
-				}
-			}
+			applyReturnDiscountProration(this);
 		},
+	},
+	Total(this: InvoiceWatchersVm) {
+		applyReturnDiscountProration(this);
 	},
 
 	// Keep a shallow watcher on packed_items just in case (for non-store flows)
