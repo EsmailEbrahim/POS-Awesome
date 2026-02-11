@@ -321,6 +321,8 @@ export default {
 				uom: 0,
 				rate: 0,
 			},
+			return_discount_base_total: 0,
+			return_discount_base_amount: 0,
 			_busHandlers: {},
 		};
 	},
@@ -407,17 +409,12 @@ export default {
 			}
 
 			const originalDiscount = Math.abs(
-				Number(this.return_doc.discount_amount || 0),
+				Number(this.return_discount_base_amount || 0),
 			);
 			if (!originalDiscount) return null;
 
 			const originalTotal = Math.abs(
-				Number(
-					this.return_doc.total ??
-						this.return_doc.net_total ??
-						this.return_doc.grand_total ??
-						0,
-				),
+				Number(this.return_discount_base_total || 0),
 			);
 			if (!originalTotal) return null;
 
@@ -501,15 +498,10 @@ export default {
 			}
 
 			const originalDiscount = Math.abs(
-				Number(this.return_doc.discount_amount || 0),
+				Number(this.return_discount_base_amount || 0),
 			);
 			const originalTotal = Math.abs(
-				Number(
-					this.return_doc.total ??
-						this.return_doc.net_total ??
-						this.return_doc.grand_total ??
-						0,
-				),
+				Number(this.return_discount_base_total || 0),
 			);
 			const returnTotal = Math.abs(Number(this.Total || 0));
 
@@ -721,6 +713,17 @@ export default {
 			if (data.return_doc) {
 				this.return_doc = data.return_doc;
 				this.invoice_doc.return_against = data.return_doc.name;
+				this.return_discount_base_amount = Math.abs(
+					Number(data.return_doc.discount_amount || 0),
+				);
+				this.return_discount_base_total = Math.abs(
+					Number(
+						data.return_doc.total ??
+							data.return_doc.net_total ??
+							data.return_doc.grand_total ??
+							0,
+					),
+				);
 				console.log("[POSA][Returns] Loaded return doc", {
 					return_against: data.return_doc.name,
 					is_percentage:
@@ -732,6 +735,8 @@ export default {
 						data.return_doc.total ??
 						data.return_doc.net_total ??
 						data.return_doc.grand_total,
+					base_total: this.return_discount_base_total,
+					base_discount: this.return_discount_base_amount,
 				});
 
 				if (this.pos_profile?.posa_use_percentage_discount) {

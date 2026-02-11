@@ -824,11 +824,12 @@ export function applyReturnDiscountProration(context: any) {
 
 	const returnDoc = context.return_doc;
 	const originalDiscount = Math.abs(
-		Number(returnDoc.discount_amount || 0),
+		Number(context.return_discount_base_amount || returnDoc.discount_amount || 0),
 	);
 	const originalTotal = Math.abs(
 		Number(
-			returnDoc.total ??
+			context.return_discount_base_total ??
+				returnDoc.total ??
 				returnDoc.net_total ??
 				returnDoc.grand_total ??
 				0,
