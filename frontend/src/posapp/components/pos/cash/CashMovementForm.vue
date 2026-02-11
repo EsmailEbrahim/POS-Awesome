@@ -64,12 +64,12 @@
 					@update:search="onTargetSearch"
 					@focus="loadTargetAccounts('')"
 					no-filter
-					clearable
+					:clearable="!targetAccountLocked"
 					hide-no-data
 					variant="outlined"
 					density="compact"
-					:label="__('Back Office Cash Account (Optional Override)')"
-					:disabled="submitting || !enabled"
+					:label="targetAccountLocked ? __('Back Office Cash Account') : __('Back Office Cash Account (Optional Override)')"
+					:disabled="submitting || !enabled || targetAccountLocked"
 				/>
 			</v-col>
 			<v-col cols="12">
@@ -116,6 +116,7 @@ const __ = window.__ || ((text: string, _args?: any[]) => text);
 const props = defineProps<{
 	context: any;
 	submitting: boolean;
+	resetToken?: number;
 }>();
 
 const emit = defineEmits<{
@@ -139,6 +140,7 @@ let targetSearchTimer: ReturnType<typeof setTimeout> | null = null;
 const enabled = computed(() => !!props.context?.enable_cash_movement);
 const allowExpense = computed(() => !!props.context?.allow_pos_expense);
 const allowDeposit = computed(() => !!props.context?.allow_cash_deposit);
+const targetAccountLocked = computed(() => !!props.context?.back_office_cash_account);
 const movementTypes = computed(() => {
 	const types: Array<{ title: string; value: MovementType }> = [];
 	if (allowExpense.value) {
@@ -246,6 +248,11 @@ async function loadExpenseAccounts(searchText = "") {
 
 async function loadTargetAccounts(searchText = "") {
 	if (!enabled.value || !allowDeposit.value) return;
+	if (targetAccountLocked.value) {
+		targetAccountOptions.value = [];
+		ensureOptionExists(targetAccountOptions.value, targetAccount.value);
+		return;
+	}
 	targetAccountLoading.value = true;
 	try {
 		const results = await fetchAccountOptions(searchText, "cash");
@@ -285,4 +292,24 @@ function onSubmit(type: MovementType) {
 		targetAccount: targetAccount.value,
 	});
 }
+
+function resetFormState() {
+	amount.value = 0;
+	remarks.value = "";
+	expenseAccount.value = props.context?.default_expense_account || "";
+	targetAccount.value = props.context?.back_office_cash_account || "";
+
+	const allowed = movementTypes.value;
+	if (allowed.length > 0) {
+		const first = allowed[0];
+		movementType.value = first ? first.value : null;
+	}
+}
+
+watch(
+	() => props.resetToken,
+	() => {
+		resetFormState();
+	},
+);
 </script>

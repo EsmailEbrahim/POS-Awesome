@@ -33,7 +33,12 @@
 
 		<v-row dense>
 			<v-col cols="12" md="5">
-				<CashMovementForm :context="context" :submitting="submitting" @submit="handleSubmit" />
+				<CashMovementForm
+					:context="context"
+					:submitting="submitting"
+					:reset-token="formResetToken"
+					@submit="handleSubmit"
+				/>
 			</v-col>
 			<v-col cols="12" md="7">
 				<CashMovementHistory
@@ -93,6 +98,7 @@ const syncingOffline = ref(false);
 const pendingOfflineCount = ref(0);
 const historyStatus = ref("submitted");
 const historyMovementType = ref("Expense");
+const formResetToken = ref(0);
 const errorMessage = computed(() => error.value);
 
 const posProfileName = computed(() => uiStore.posProfile?.name || "");
@@ -163,6 +169,7 @@ async function handleSubmit(payload: any) {
 				title: __("Cash movement saved offline"),
 				color: "warning",
 			});
+			formResetToken.value += 1;
 			refreshPendingOfflineCount();
 			return;
 		}
@@ -180,6 +187,7 @@ async function handleSubmit(payload: any) {
 		toastStore.show({ title: __("Cash movement submitted"), color: "success" });
 		historyStatus.value = "submitted";
 		historyMovementType.value = payload.movementType || "";
+		formResetToken.value += 1;
 		await refreshHistory();
 	} catch (err: any) {
 		toastStore.show({ title: err?.message || __("Failed to submit cash movement"), color: "error" });
