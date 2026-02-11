@@ -73,6 +73,9 @@ doctype_js = {
 # after_install = "posawesome.install.after_install"
 # before_uninstall = "posawesome.uninstall.before_uninstall"
 after_uninstall = "posawesome.uninstall.after_uninstall"
+after_migrate = [
+    "posawesome.patches.add_pos_cash_movement_settings.execute",
+]
 
 # Desk Notifications
 # ------------------
@@ -175,6 +178,12 @@ fixtures = [
                     "POS Invoice-posa_pos_opening_shift",
                     "Item Barcode-posa_uom",
                     "POS Profile-posa_pos_awesome_settings",
+                    "POS Profile-posa_section_pricing_controls",
+                    "POS Profile-posa_section_sales_returns",
+                    "POS Profile-posa_section_sales_purchase",
+                    "POS Profile-posa_section_inventory_controls",
+                    "POS Profile-posa_section_print_delivery",
+                    "POS Profile-posa_section_cash_movement",
                     "POS Profile-posa_allow_delete",
                     "POS Profile-posa_allow_user_to_edit_rate",
                     "POS Profile-posa_allow_user_to_edit_additional_discount",
@@ -302,6 +311,15 @@ fixtures = [
                     "POS Profile-posa_language",
                     "POS Profile-posa_enable_return_validity",
                     "POS Profile-posa_return_validity_days",
+                    "POS Profile-posa_enable_cash_movement",
+                    "POS Profile-posa_allow_pos_expense",
+                    "POS Profile-posa_allow_cash_deposit",
+                    "POS Profile-posa_default_expense_account",
+                    "POS Profile-posa_back_office_cash_account",
+                    "POS Profile-posa_allow_cancel_submitted_cash_movement",
+                    "POS Profile-posa_allow_delete_cancelled_cash_movement",
+                    "POS Profile-posa_require_cash_movement_remarks",
+                    "POS Profile-posa_cash_movement_max_amount",
                     "POS Settings-posa_enable_return_validity",
                     "POS Settings-posa_return_validity_days",
                     "POS Invoice-posa_return_valid_upto",

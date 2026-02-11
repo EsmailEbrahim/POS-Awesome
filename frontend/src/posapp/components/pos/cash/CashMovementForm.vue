@@ -1,0 +1,315 @@
+<template>
+	<v-card class="pa-4 pos-themed-card">
+		<div class="text-h6 mb-1">{{ __("Cash Movement") }}</div>
+		<div class="text-body-2 text-grey mb-4">
+			{{ __("Book expense or deposit from active shift.") }}
+		</div>
+
+		<v-alert
+			v-if="enabled && !allowExpense && !allowDeposit"
+			type="warning"
+			variant="tonal"
+			density="compact"
+			class="mb-3"
+		>
+			{{ __("No cash movement type is allowed for this POS Profile.") }}
+		</v-alert>
+
+		<v-row dense>
+			<v-col cols="12" md="4">
+				<v-select
+					v-model="movementType"
+					:items="movementTypes"
+					variant="outlined"
+					density="compact"
+					:label="__('Movement Type')"
+					:disabled="submitting || !enabled || movementTypes.length === 0"
+				/>
+			</v-col>
+			<v-col cols="12" md="4">
+				<v-text-field
+					v-model.number="amount"
+					type="number"
+					min="0"
+					step="0.01"
+					variant="outlined"
+					density="compact"
+					:label="__('Amount')"
+					:disabled="submitting || !enabled"
+				/>
+			</v-col>
+			<v-col cols="12" md="4" v-if="movementType === 'Expense'">
+				<v-autocomplete
+					v-model="expenseAccount"
+					:items="expenseAccountOptions"
+					:loading="expenseAccountLoading"
+					:search="expenseAccountSearch"
+					@update:search="onExpenseSearch"
+					@focus="loadExpenseAccounts('')"
+					no-filter
+					clearable
+					hide-no-data
+					variant="outlined"
+					density="compact"
+					:label="__('Expense Account (Optional Override)')"
+					:disabled="submitting || !enabled"
+				/>
+			</v-col>
+			<v-col cols="12" md="4" v-if="movementType === 'Deposit'">
+				<v-autocomplete
+					v-model="targetAccount"
+					:items="targetAccountOptions"
+					:loading="targetAccountLoading"
+					:search="targetAccountSearch"
+					@update:search="onTargetSearch"
+					@focus="loadTargetAccounts('')"
+					no-filter
+					:clearable="!targetAccountLocked"
+					hide-no-data
+					variant="outlined"
+					density="compact"
+					:label="targetAccountLocked ? __('Back Office Cash Account') : __('Back Office Cash Account (Optional Override)')"
+					:disabled="submitting || !enabled || targetAccountLocked"
+				/>
+			</v-col>
+			<v-col cols="12">
+				<v-textarea
+					v-model="remarks"
+					variant="outlined"
+					density="compact"
+					rows="2"
+					auto-grow
+					:label="__('Remarks')"
+					:disabled="submitting || !enabled"
+				/>
+			</v-col>
+			<v-col cols="12" class="d-flex ga-2">
+				<v-btn
+					color="primary"
+					:disabled="submitting || !enabled || !allowExpense || movementType !== 'Expense'"
+					:loading="submitting && movementType === 'Expense'"
+					@click="onSubmit('Expense')"
+				>
+					{{ __("Submit Expense") }}
+				</v-btn>
+				<v-btn
+					color="secondary"
+					:disabled="submitting || !enabled || !allowDeposit || movementType !== 'Deposit'"
+					:loading="submitting && movementType === 'Deposit'"
+					@click="onSubmit('Deposit')"
+				>
+					{{ __("Submit Deposit") }}
+				</v-btn>
+			</v-col>
+		</v-row>
+	</v-card>
+</template>
+
+<script setup lang="ts">
+import { computed, ref, watch } from "vue";
+
+type MovementType = "Expense" | "Deposit";
+type AccountSearchType = "expense" | "cash";
+
+const __ = window.__ || ((text: string, _args?: any[]) => text);
+
+const props = defineProps<{
+	context: any;
+	submitting: boolean;
+	resetToken?: number;
+}>();
+
+const emit = defineEmits<{
+	(e: "submit", payload: any): void;
+}>();
+
+const movementType = ref<MovementType | null>("Expense");
+const amount = ref<number>(0);
+const remarks = ref<string>("");
+const expenseAccount = ref<string>("");
+const targetAccount = ref<string>("");
+const expenseAccountOptions = ref<string[]>([]);
+const targetAccountOptions = ref<string[]>([]);
+const expenseAccountSearch = ref("");
+const targetAccountSearch = ref("");
+const expenseAccountLoading = ref(false);
+const targetAccountLoading = ref(false);
+let expenseSearchTimer: ReturnType<typeof setTimeout> | null = null;
+let targetSearchTimer: ReturnType<typeof setTimeout> | null = null;
+
+const enabled = computed(() => !!props.context?.enable_cash_movement);
+const allowExpense = computed(() => !!props.context?.allow_pos_expense);
+const allowDeposit = computed(() => !!props.context?.allow_cash_deposit);
+const targetAccountLocked = computed(() => !!props.context?.back_office_cash_account);
+const movementTypes = computed(() => {
+	const types: Array<{ title: string; value: MovementType }> = [];
+	if (allowExpense.value) {
+		types.push({ title: __("Expense"), value: "Expense" });
+	}
+	if (allowDeposit.value) {
+		types.push({ title: __("Deposit"), value: "Deposit" });
+	}
+	return types;
+});
+
+watch(
+	() => props.context,
+	async (newContext) => {
+		if (!newContext) return;
+		expenseAccount.value = newContext.default_expense_account || "";
+		targetAccount.value = newContext.back_office_cash_account || "";
+		if (expenseAccount.value) {
+			ensureOptionExists(expenseAccountOptions.value, expenseAccount.value);
+		}
+		if (targetAccount.value) {
+			ensureOptionExists(targetAccountOptions.value, targetAccount.value);
+		}
+		await Promise.all([loadExpenseAccounts(""), loadTargetAccounts("")]);
+	},
+	{ immediate: true, deep: true },
+);
+
+watch(
+	movementTypes,
+	(types) => {
+		const selectedIsAllowed = types.some((type) => type.value === movementType.value);
+		if (!selectedIsAllowed && types.length) {
+			const firstType = types[0];
+			movementType.value = firstType ? firstType.value : null;
+		}
+	},
+	{ immediate: true },
+);
+
+function ensureOptionExists(options: string[], value: string) {
+	if (!value) return;
+	if (!options.includes(value)) {
+		options.unshift(value);
+	}
+}
+
+function normalizeSearchResults(rows: any[]): string[] {
+	const result: string[] = [];
+	for (const row of rows || []) {
+		let value = "";
+		if (typeof row === "string") {
+			value = row;
+		} else if (Array.isArray(row) && row.length) {
+			value = String(row[0] || "");
+		} else if (row?.value) {
+			value = String(row.value);
+		} else if (row?.name) {
+			value = String(row.name);
+		}
+		if (value && !result.includes(value)) {
+			result.push(value);
+		}
+	}
+	return result;
+}
+
+async function fetchAccountOptions(searchText: string, type: AccountSearchType): Promise<string[]> {
+	const company = props.context?.company;
+	const filters: Record<string, any> = {
+		is_group: 0,
+	};
+	if (company) {
+		filters.company = company;
+	}
+	if (type === "expense") {
+		filters.root_type = "Expense";
+	} else {
+		filters.account_type = "Cash";
+	}
+
+	const response = await frappe.call({
+		method: "frappe.desk.search.search_link",
+		args: {
+			doctype: "Account",
+			txt: searchText || "",
+			page_length: 20,
+			filters,
+		},
+	});
+	return normalizeSearchResults(response?.message || []);
+}
+
+async function loadExpenseAccounts(searchText = "") {
+	if (!enabled.value || !allowExpense.value) return;
+	expenseAccountLoading.value = true;
+	try {
+		const results = await fetchAccountOptions(searchText, "expense");
+		expenseAccountOptions.value = results;
+		ensureOptionExists(expenseAccountOptions.value, expenseAccount.value);
+	} finally {
+		expenseAccountLoading.value = false;
+	}
+}
+
+async function loadTargetAccounts(searchText = "") {
+	if (!enabled.value || !allowDeposit.value) return;
+	if (targetAccountLocked.value) {
+		targetAccountOptions.value = [];
+		ensureOptionExists(targetAccountOptions.value, targetAccount.value);
+		return;
+	}
+	targetAccountLoading.value = true;
+	try {
+		const results = await fetchAccountOptions(searchText, "cash");
+		targetAccountOptions.value = results;
+		ensureOptionExists(targetAccountOptions.value, targetAccount.value);
+	} finally {
+		targetAccountLoading.value = false;
+	}
+}
+
+function onExpenseSearch(value: string) {
+	expenseAccountSearch.value = value || "";
+	if (expenseSearchTimer) {
+		clearTimeout(expenseSearchTimer);
+	}
+	expenseSearchTimer = setTimeout(() => {
+		loadExpenseAccounts(expenseAccountSearch.value);
+	}, 250);
+}
+
+function onTargetSearch(value: string) {
+	targetAccountSearch.value = value || "";
+	if (targetSearchTimer) {
+		clearTimeout(targetSearchTimer);
+	}
+	targetSearchTimer = setTimeout(() => {
+		loadTargetAccounts(targetAccountSearch.value);
+	}, 250);
+}
+
+function onSubmit(type: MovementType) {
+	emit("submit", {
+		movementType: type,
+		amount: amount.value,
+		remarks: remarks.value,
+		expenseAccount: expenseAccount.value,
+		targetAccount: targetAccount.value,
+	});
+}
+
+function resetFormState() {
+	amount.value = 0;
+	remarks.value = "";
+	expenseAccount.value = props.context?.default_expense_account || "";
+	targetAccount.value = props.context?.back_office_cash_account || "";
+
+	const allowed = movementTypes.value;
+	if (allowed.length > 0) {
+		const first = allowed[0];
+		movementType.value = first ? first.value : null;
+	}
+}
+
+watch(
+	() => props.resetToken,
+	() => {
+		resetFormState();
+	},
+);
+</script>
