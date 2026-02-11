@@ -7,31 +7,37 @@ SECTION_FIELDS = [
         "fieldname": "posa_section_pricing_controls",
         "label": "Pricing and Discount Controls",
         "fieldtype": "Section Break",
+        "collapsible": 1,
     },
     {
         "fieldname": "posa_section_sales_returns",
         "label": "Sales and Return Controls",
         "fieldtype": "Section Break",
+        "collapsible": 1,
     },
     {
         "fieldname": "posa_section_sales_purchase",
         "label": "Sales and Purchase Flows",
         "fieldtype": "Section Break",
+        "collapsible": 1,
     },
     {
         "fieldname": "posa_section_inventory_controls",
         "label": "Inventory and Item Controls",
         "fieldtype": "Section Break",
+        "collapsible": 1,
     },
     {
         "fieldname": "posa_section_print_delivery",
         "label": "Printing and Delivery",
         "fieldtype": "Section Break",
+        "collapsible": 1,
     },
     {
         "fieldname": "posa_section_cash_movement",
         "label": "Cash Movement",
         "fieldtype": "Section Break",
+        "collapsible": 1,
     },
 ]
 
@@ -72,6 +78,7 @@ ORDERED_CHAIN = [
     "posa_apply_customer_discount",
     "posa_allow_write_off_change",
     "hide_expected_amount",
+    "posa_column_break_112",
     "posa_section_sales_purchase",
     "posa_allow_sales_order",
     "custom_allow_select_sales_order",
@@ -91,6 +98,8 @@ ORDERED_CHAIN = [
     "posa_search_batch_no",
     "posa_search_serial_no",
     "posa_block_sale_beyond_available_qty",
+    "posa_allow_line_item_name_override",
+    "posa_show_custom_name_marker_on_print",
     "posa_allow_zero_rated_items",
     "posa_input_qty",
     "posa_new_line",
@@ -162,6 +171,7 @@ def _ensure_section_fields():
                 {
                     "label": field["label"],
                     "fieldtype": "Section Break",
+                    "collapsible": 1,
                 },
                 update_modified=False,
             )

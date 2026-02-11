@@ -7843,6 +7843,7 @@
 		"fieldname": "posa_section_pricing_controls",
 		"fieldtype": "Section Break",
 		"label": "Pricing and Discount Controls",
+		"collapsible": 1,
 		"insert_after": "posa_allow_user_to_edit_item_discount",
 		"name": "POS Profile-posa_section_pricing_controls"
 	},
@@ -7852,6 +7853,7 @@
 		"fieldname": "posa_section_sales_returns",
 		"fieldtype": "Section Break",
 		"label": "Sales and Return Controls",
+		"collapsible": 1,
 		"insert_after": "posa_force_price_from_customer_price_list",
 		"name": "POS Profile-posa_section_sales_returns"
 	},
@@ -7861,7 +7863,8 @@
 		"fieldname": "posa_section_sales_purchase",
 		"fieldtype": "Section Break",
 		"label": "Sales and Purchase Flows",
-		"insert_after": "hide_expected_amount",
+		"collapsible": 1,
+		"insert_after": "posa_column_break_112",
 		"name": "POS Profile-posa_section_sales_purchase"
 	},
 	{
@@ -7870,6 +7873,7 @@
 		"fieldname": "posa_section_inventory_controls",
 		"fieldtype": "Section Break",
 		"label": "Inventory and Item Controls",
+		"collapsible": 1,
 		"insert_after": "posa_allow_create_purchase_suppliers",
 		"name": "POS Profile-posa_section_inventory_controls"
 	},
@@ -7879,6 +7883,7 @@
 		"fieldname": "posa_section_print_delivery",
 		"fieldtype": "Section Break",
 		"label": "Printing and Delivery",
+		"collapsible": 1,
 		"insert_after": "posa_new_line",
 		"name": "POS Profile-posa_section_print_delivery"
 	},
@@ -7888,6 +7893,7 @@
 		"fieldname": "posa_section_cash_movement",
 		"fieldtype": "Section Break",
 		"label": "Cash Movement",
+		"collapsible": 1,
 		"insert_after": "posa_print_format_rules",
 		"name": "POS Profile-posa_section_cash_movement"
 	}

@@ -3,6 +3,16 @@
 Last Updated: 2026-02-11  
 Scope: Re-organize `POS Profile` form into clear sections to reduce clutter and improve admin usability.
 
+## Execution Progress
+
+- [x] Added dedicated section break fields for POS Profile organization
+- [x] Included `Cash Movement` section and all related profile fields
+- [x] Registered and wired section-reorganization patch in migration flow
+- [x] Enforced `collapsible` behavior for new section breaks
+- [x] Fixed ordering chain gaps (`posa_column_break_112`, `posa_allow_line_item_name_override`, `posa_show_custom_name_marker_on_print`) to prevent mixed sections
+- [ ] Validate final UI layout on site after migrate + cache clear
+- [ ] Confirm each section opens/collapses as expected in POS Profile form
+
 ## 0. New Feature Coverage (Explicit)
 
 This plan **does include** the newly added `POS Cash Movement` feature.  
