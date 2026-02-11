@@ -63,6 +63,28 @@
 							class="summary-field"
 						/>
 					</v-col>
+					<v-col
+						cols="12"
+						v-if="
+							return_discount_meta &&
+							!pos_profile.posa_use_percentage_discount &&
+							!isFullReturnDiscount(return_discount_meta.ratio)
+						"
+					>
+						<v-alert
+							density="compact"
+							type="info"
+							variant="tonal"
+							class="summary-field"
+						>
+							{{ __("Prorated return discount") }}:
+							{{ formatRatio(return_discount_meta.ratio) }} —
+							{{ __("Original") }}:
+							{{ formatCurrency(return_discount_meta.original_discount) }},
+							{{ __("Applied") }}:
+							{{ formatCurrency(return_discount_meta.prorated_discount) }}
+						</v-alert>
+					</v-col>
 
 					<!-- Items Discount -->
 					<v-col cols="6">
@@ -145,6 +167,7 @@ const props = defineProps({
 	currencySymbol: Function,
 	discount_percentage_offer_name: [String, Number],
 	isNumber: Function,
+	return_discount_meta: Object,
 });
 
 const emit = defineEmits([
@@ -230,6 +253,17 @@ function handleAdditionalDiscountPercentageFocus() {
 
 function handleAdditionalDiscountPercentageBlur() {
 	isEditingAdditionalDiscountPercentage.value = false;
+}
+
+function formatRatio(value) {
+	const ratio = Number.isFinite(Number(value)) ? Number(value) : 0;
+	const percent = Math.round(ratio * 10000) / 100;
+	return `${percent}%`;
+}
+
+function isFullReturnDiscount(value) {
+	const ratio = Number.isFinite(Number(value)) ? Number(value) : 0;
+	return Math.abs(ratio - 1) < 0.0001;
 }
 
 async function handleSaveAndClear() {

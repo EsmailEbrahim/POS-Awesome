@@ -256,13 +256,26 @@ export async function load_invoice(
 		);
 		context.delivery_charges_rate = data.posa_delivery_charges_rate;
 	}
-	const docDiscountAmount = flt(data.discount_amount);
+	let docDiscountAmount = flt(data.discount_amount);
 	const docDiscountPercentage =
 		data.additional_discount_percentage !== undefined &&
 		data.additional_discount_percentage !== null
 			? flt(data.additional_discount_percentage)
 			: 0;
 	const docIsReturn = Boolean(data.is_return);
+	if (docIsReturn && !usePercentageDiscount && docDiscountAmount > 0) {
+		docDiscountAmount = -Math.abs(docDiscountAmount);
+	}
+	if (docIsReturn) {
+		console.log("[POSA][Returns] Loader discount sync", {
+			usePercentageDiscount,
+			docDiscountAmount,
+			docDiscountPercentage,
+			docTotal: data.total,
+			docNetTotal: data.net_total,
+			docGrandTotal: data.grand_total,
+		});
+	}
 
 	const { updateDiscountAmount } = useDiscounts();
 

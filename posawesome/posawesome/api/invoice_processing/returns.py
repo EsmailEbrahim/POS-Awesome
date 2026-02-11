@@ -229,6 +229,8 @@ def get_invoice_for_return(invoice_name, pos_profile=None, doctype="Sales Invoic
         "customer": invoice_doc.customer,
         "customer_name": invoice_doc.customer_name,
         "grand_total": invoice_doc.grand_total,
+        "total": invoice_doc.total,
+        "net_total": invoice_doc.net_total,
         "currency": invoice_doc.currency,
         "discount_amount": invoice_doc.discount_amount,
         "additional_discount_percentage": invoice_doc.additional_discount_percentage,

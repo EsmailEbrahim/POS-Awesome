@@ -18,6 +18,39 @@ export function useInvoiceHandlers(
 	update_item_detail: (_item: any) => void,
 	primeInvoiceStockState: () => void,
 ) {
+	const calcProratedReturnDiscount = (returnDoc: any, itemList: any[]) => {
+		if (!returnDoc) return 0;
+
+		const originalDiscount = Math.abs(
+			Number(returnDoc.discount_amount || 0),
+		);
+		if (!originalDiscount) return 0;
+
+		const originalTotal = Math.abs(
+			Number(
+				returnDoc.total ??
+					returnDoc.net_total ??
+					returnDoc.grand_total ??
+					0,
+			),
+		);
+		if (!originalTotal) return 0;
+
+		const returnTotal = Array.isArray(itemList)
+			? itemList.reduce((sum: number, item: any) => {
+					const qty = Math.abs(Number(item?.qty || 0));
+					const rate = Number(item?.rate || 0);
+					return sum + qty * rate;
+				}, 0)
+			: 0;
+
+		if (!returnTotal) return 0;
+
+		const ratio = Math.min(1, returnTotal / originalTotal);
+		const prorated = originalDiscount * ratio;
+		return -Math.abs(prorated);
+	};
+
 	const handleRegisterPosProfile = (data: any) => {
 		pos_profile.value = data.pos_profile;
 		company.value = data.company || null;
@@ -55,10 +88,18 @@ export function useInvoiceHandlers(
 			});
 		}
 		if (data.return_doc) {
-			discount_amount.value = data.return_doc.discount_amount || 0;
-			additional_discount.value = data.return_doc.discount_amount || 0;
 			return_doc.value = data.return_doc;
 			invoice_doc.value.return_against = data.return_doc.name;
+
+			if (!pos_profile.value?.posa_use_percentage_discount) {
+				const prorated = calcProratedReturnDiscount(
+					data.return_doc,
+					items.value,
+				);
+				discount_amount.value = prorated;
+				additional_discount.value = prorated;
+				additional_discount_percentage.value = 0;
+			}
 		} else {
 			discount_amount.value = 0;
 			additional_discount.value = 0;

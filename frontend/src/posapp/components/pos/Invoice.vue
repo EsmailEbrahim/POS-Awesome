@@ -192,6 +192,7 @@
 			:currencySymbol="currencySymbol"
 			:discount_percentage_offer_name="discount_percentage_offer_name"
 			:isNumber="isNumber"
+			:return_discount_meta="return_discount_meta"
 			@update:additional_discount="(val) => (additional_discount = val)"
 			@update:additional_discount_percentage="(val) => (additional_discount_percentage = val)"
 			@update_discount_umount="update_discount_umount"
@@ -396,6 +397,42 @@ export default {
 				this.invoiceStore.setPostingDate(val);
 			},
 		},
+		return_discount_meta() {
+			if (
+				!this.isReturnInvoice ||
+				!this.return_doc ||
+				this.pos_profile?.posa_use_percentage_discount
+			) {
+				return null;
+			}
+
+			const originalDiscount = Math.abs(
+				Number(this.return_doc.discount_amount || 0),
+			);
+			if (!originalDiscount) return null;
+
+			const originalTotal = Math.abs(
+				Number(
+					this.return_doc.total ??
+						this.return_doc.net_total ??
+						this.return_doc.grand_total ??
+						0,
+				),
+			);
+			if (!originalTotal) return null;
+
+			const returnTotal = Math.abs(Number(this.Total || 0));
+			if (!returnTotal) return null;
+
+			const ratio = Math.min(1, returnTotal / originalTotal);
+			const prorated = originalDiscount * ratio;
+
+			return {
+				ratio,
+				original_discount: originalDiscount,
+				prorated_discount: prorated,
+			};
+		},
 		...invoiceComputed,
 	},
 
@@ -585,6 +622,39 @@ export default {
 			this.new_order(data);
 		},
 
+		calcProratedReturnDiscount(returnDoc) {
+			if (!returnDoc) return 0;
+
+			const originalDiscount = Math.abs(
+				Number(returnDoc.discount_amount || 0),
+			);
+			if (!originalDiscount) return 0;
+
+			const originalTotal = Math.abs(
+				Number(
+					returnDoc.total ??
+						returnDoc.net_total ??
+						returnDoc.grand_total ??
+						0,
+				),
+			);
+			if (!originalTotal) return 0;
+
+			const returnTotal = Math.abs(Number(this.Total || 0));
+			if (!returnTotal) return 0;
+
+			const ratio = Math.min(1, returnTotal / originalTotal);
+			const prorated = originalDiscount * ratio;
+			console.log("[POSA][Returns] Prorate discount", {
+				originalDiscount,
+				originalTotal,
+				returnTotal,
+				ratio,
+				prorated,
+			});
+			return -Math.abs(prorated);
+		},
+
 		handleSetAllItems(data) {
 			this.allItems = data;
 			this.items.forEach((item) => {
@@ -606,10 +676,38 @@ export default {
 				});
 			}
 			if (data.return_doc) {
-				this.discount_amount = data.return_doc.discount_amount || 0;
-				this.additional_discount = data.return_doc.discount_amount || 0;
 				this.return_doc = data.return_doc;
 				this.invoice_doc.return_against = data.return_doc.name;
+				console.log("[POSA][Returns] Loaded return doc", {
+					return_against: data.return_doc.name,
+					is_percentage:
+						!!this.pos_profile?.posa_use_percentage_discount,
+					discount_amount: data.return_doc.discount_amount,
+					discount_percentage:
+						data.return_doc.additional_discount_percentage,
+					original_total:
+						data.return_doc.total ??
+						data.return_doc.net_total ??
+						data.return_doc.grand_total,
+				});
+
+				if (this.pos_profile?.posa_use_percentage_discount) {
+					if (
+						data.return_doc.additional_discount_percentage !==
+						undefined
+					) {
+						this.additional_discount_percentage =
+							data.return_doc.additional_discount_percentage || 0;
+					}
+					this.update_discount_umount();
+				} else {
+					const prorated = this.calcProratedReturnDiscount(
+						data.return_doc,
+					);
+					this.discount_amount = prorated;
+					this.additional_discount = prorated;
+					this.additional_discount_percentage = 0;
+				}
 			} else {
 				this.discount_amount = 0;
 				this.additional_discount = 0;

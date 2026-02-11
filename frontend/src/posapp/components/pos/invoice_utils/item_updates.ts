@@ -785,6 +785,10 @@ export function _normalizeReturnDocTotals(context: any, doc: any) {
 	if (doc.base_rounded_total > 0)
 		doc.base_rounded_total = negate(doc.base_rounded_total);
 	if (doc.base_total > 0) doc.base_total = negate(doc.base_total);
+	if (doc.discount_amount > 0)
+		doc.discount_amount = negate(doc.discount_amount);
+	if (doc.base_discount_amount > 0)
+		doc.base_discount_amount = negate(doc.base_discount_amount);
 
 	if (Array.isArray(doc.items)) {
 		doc.items.forEach((item) => {
