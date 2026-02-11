@@ -20,7 +20,7 @@
 				<div class="text-body-2">
 					{{ __("Reload to apply the latest changes. Your current session will be refreshed.") }}
 				</div>
-				<div class="update-details" v-if="detail || branch">
+				<div class="update-details" v-if="detail || branch || commits.length">
 					<div v-if="detail" class="detail-row">
 						<v-icon size="16" class="detail-icon">mdi-text-box-outline</v-icon>
 						<span>{{ detail }}</span>
@@ -29,6 +29,21 @@
 						<v-icon size="16" class="detail-icon">mdi-source-branch</v-icon>
 						<span>{{ branch }}</span>
 					</div>
+					<div v-if="commits.length" class="detail-row">
+						<v-icon size="16" class="detail-icon">mdi-source-commit</v-icon>
+						<span>{{ commits.length }} {{ __("commits") }}</span>
+					</div>
+					<ul v-if="commits.length" class="commit-list">
+						<li v-for="(commit, index) in commits" :key="commit.commit_hash || index">
+							<span class="commit-hash" v-if="commit.commit_short">
+								{{ commit.commit_short }}
+							</span>
+							<span class="commit-message">{{ commit.commit_message || commit.commit_hash }}</span>
+							<span class="commit-date" v-if="commit.commit_date">
+								{{ commit.commit_date }}
+							</span>
+						</li>
+					</ul>
 				</div>
 			</v-card-text>
 			<v-card-actions class="update-actions">
@@ -68,6 +83,7 @@ watch(
 const label = computed(() => updateStore.formattedAvailableVersion);
 const detail = computed(() => updateStore.formattedAvailableDetails);
 const branch = computed(() => updateStore.formattedAvailableBranch);
+const commits = computed(() => updateStore.formattedAvailableCommits);
 
 function dismiss() {
 	updateStore.dismissUpdate();
@@ -118,6 +134,41 @@ function dismiss() {
 	font-size: 12px;
 }
 
+.commit-list {
+	margin: 0;
+	padding-left: 18px;
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+}
+
+.commit-list li {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 6px;
+	color: rgba(15, 23, 42, 0.75);
+}
+
+.commit-hash {
+	font-family: "JetBrains Mono", "SFMono-Regular", "Consolas", "Liberation Mono", monospace;
+	font-size: 11px;
+	padding: 2px 6px;
+	border-radius: 6px;
+	background: rgba(15, 23, 42, 0.08);
+	color: rgba(15, 23, 42, 0.7);
+}
+
+.commit-message {
+	flex: 1;
+	min-width: 160px;
+}
+
+.commit-date {
+	font-size: 11px;
+	color: rgba(15, 23, 42, 0.55);
+}
+
 .detail-row {
 	display: flex;
 	align-items: center;
@@ -156,6 +207,19 @@ function dismiss() {
 }
 
 :deep(.v-theme--dark) .detail-icon {
+	color: rgba(226, 232, 240, 0.6);
+}
+
+:deep(.v-theme--dark) .commit-list li {
+	color: rgba(226, 232, 240, 0.75);
+}
+
+:deep(.v-theme--dark) .commit-hash {
+	background: rgba(226, 232, 240, 0.12);
+	color: rgba(226, 232, 240, 0.75);
+}
+
+:deep(.v-theme--dark) .commit-date {
 	color: rgba(226, 232, 240, 0.6);
 }
 </style>

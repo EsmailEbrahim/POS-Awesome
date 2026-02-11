@@ -123,6 +123,12 @@ export interface UpdateState {
 	availableCommit: string | null;
 	availableCommitDate: string | null;
 	availableBranch: string | null;
+	availableCommits: Array<{
+		commit_hash: string;
+		commit_short?: string;
+		commit_message?: string;
+		commit_date?: string;
+	}>;
 	reloadAction: (() => void) | null;
 	reloading: boolean;
 }
@@ -140,6 +146,7 @@ export const useUpdateStore = defineStore("update", {
 		availableCommit: null,
 		availableCommitDate: null,
 		availableBranch: null,
+		availableCommits: [],
 		reloadAction: null,
 		reloading: false,
 	}),
@@ -186,6 +193,9 @@ export const useUpdateStore = defineStore("update", {
 			return state.availableBranch
 				? `current branch: ${state.availableBranch}`
 				: null;
+		},
+		formattedAvailableCommits(state: UpdateState) {
+			return state.availableCommits || [];
 		},
 	},
 	actions: {
@@ -307,12 +317,13 @@ export const useUpdateStore = defineStore("update", {
 			if (timestampChanged) {
 				updates.availableTimestamp = timestamp;
 			}
-			if (versionChanged) {
-				updates.availableMessage = null;
-				updates.availableCommit = null;
-				updates.availableCommitDate = null;
-				updates.availableBranch = null;
-			}
+				if (versionChanged) {
+					updates.availableMessage = null;
+					updates.availableCommit = null;
+					updates.availableCommitDate = null;
+					updates.availableBranch = null;
+					updates.availableCommits = [];
+				}
 			if (!currentVersion) {
 				updates.currentVersion = normalized;
 			}
@@ -437,6 +448,8 @@ export const useUpdateStore = defineStore("update", {
 							sample.commit_message?.trim() || null;
 						this.availableCommitDate =
 							sample.commit_date || null;
+						this.availableCommits =
+							r?.message?.remote_commits || [];
 						this.availableVersion =
 							this.availableCommit || buildVersion;
 						return;

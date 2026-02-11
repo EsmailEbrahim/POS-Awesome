@@ -275,6 +275,41 @@ def _get_commit_details(app_path: str, ref: str) -> Dict[str, str]:
         return {}
 
 
+def _get_commit_list(app_path: str, range_ref: str, limit: int = 20) -> List[Dict[str, str]]:
+    try:
+        output = (
+            subprocess.check_output(
+                [
+                    "git",
+                    "log",
+                    range_ref,
+                    f"--max-count={limit}",
+                    "--pretty=%H%x1f%h%x1f%s%x1f%cI",
+                ],
+                cwd=app_path,
+                stderr=subprocess.DEVNULL,
+            )
+            .decode("utf-8")
+            .strip()
+        )
+        commits: List[Dict[str, str]] = []
+        for line in output.splitlines():
+            parts = line.split("\x1f")
+            if len(parts) != 4:
+                continue
+            full_hash, short_hash, subject, commit_date = parts
+            commits.append(
+                {
+                    "commit_hash": full_hash,
+                    "commit_short": short_hash,
+                    "commit_message": subject,
+                    "commit_date": commit_date,
+                }
+            )
+        return commits
+    except Exception:
+        return []
+
 def _get_current_branch(app_path: str) -> str:
     try:
         branch = (
@@ -324,6 +359,9 @@ def get_remote_update_info() -> Dict[str, Any]:
             if details:
                 data["remote_sample_branch"] = current_branch
                 data["remote_sample"] = details
+            data["remote_commits"] = _get_commit_list(
+                app_path, f"{current_hash}..{ref}"
+            )
 
     return data
 
