@@ -10,7 +10,7 @@ from .permissions import (
     ensure_owner_or_manager,
     is_manager,
 )
-from .posting import cancel_journal_entry, create_journal_entry
+from .posting import create_journal_entry
 from .queries import get_shift_movements, get_submitted_expenses as query_submitted_expenses
 from .validation import (
     ensure_no_duplicate_client_request,
@@ -180,7 +180,6 @@ def cancel_cash_movement(name):
     ensure_feature_enabled(profile_doc)
     ensure_cancel_allowed(profile_doc)
 
-    cancel_journal_entry(movement_doc.journal_entry)
     movement_doc.flags.ignore_permissions = True
     movement_doc.cancel()
     return {"name": movement_doc.name, "docstatus": movement_doc.docstatus}
