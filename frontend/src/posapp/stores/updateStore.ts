@@ -107,7 +107,6 @@ function formatTimestamp(timestamp: number | null): string | null {
 			return formatter.format(date);
 		}
 	} catch {
-		// Swallow and fall back
 	}
 	return date.toISOString();
 }
