@@ -1,4 +1,5 @@
 declare const __BUILD_VERSION__: string;
+import { resolvePosAppNormalizedPath } from "./loader-utils";
 
 const POSAPP_BASE_PATH = "/app/posapp";
 const bundlePath = `/assets/posawesome/dist/js/posawesome.js?v=${__BUILD_VERSION__}`;
@@ -15,17 +16,12 @@ function normalizePosAppPath(): boolean {
 	}
 
 	const { pathname, search, hash } = window.location;
-	if (!pathname.toLowerCase().startsWith(`${POSAPP_BASE_PATH}/`)) {
+	const normalizedPath = resolvePosAppNormalizedPath(pathname, POSAPP_BASE_PATH);
+	if (!normalizedPath) {
 		return false;
 	}
 
-	// Frappe route resolution is stable on /app/posapp; deeper URLs can bypass page boot.
-	const normalizedPath = pathname.replace(/\/+$/, "");
-	if (normalizedPath === POSAPP_BASE_PATH) {
-		return false;
-	}
-
-	window.location.replace(`${POSAPP_BASE_PATH}${search || ""}${hash || ""}`);
+	window.location.replace(`${normalizedPath}${search || ""}${hash || ""}`);
 	return true;
 }
 
