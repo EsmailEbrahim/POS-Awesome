@@ -7,6 +7,27 @@ frappe.pages["posapp"].on_page_load = async function (wrapper) {
 	});
 	const pageRef = (wrapper && wrapper.page) || page;
 	const BOOT_RETRY_KEY = "posa_boot_retry_once";
+	const detectBootFailureCode = (error) => {
+		const message =
+			(error && error.message ? String(error.message) : String(error || ""))
+				.toLowerCase()
+				.trim();
+
+		if (message.includes("timed out waiting for frappe.posapp.posapp")) {
+			return "posa_boot_timeout";
+		}
+		if (
+			message.includes("failed to fetch dynamically imported module") ||
+			message.includes("loading chunk") ||
+			message.includes("chunkloaderror")
+		) {
+			return "posa_bundle_load_failed";
+		}
+		if (message.includes("networkerror")) {
+			return "posa_network_error";
+		}
+		return "posa_boot_unknown";
+	};
 
 	const waitForPosApp = (timeoutMs = 15000) => {
 		return new Promise((resolve, reject) => {
@@ -27,7 +48,16 @@ frappe.pages["posapp"].on_page_load = async function (wrapper) {
 	};
 
 	const handleBootstrapFailure = (error) => {
-		console.error("POS App bootstrap failed", error);
+		const failureCode = detectBootFailureCode(error);
+		const failureDetail =
+			error && error.message ? String(error.message) : String(error || "");
+		console.error("POS App bootstrap failed", {
+			failureCode,
+			failureDetail,
+			error,
+			pathname: window.location.pathname,
+			search: window.location.search,
+		});
 		let alreadyRetried = false;
 		try {
 			alreadyRetried = window.sessionStorage.getItem(BOOT_RETRY_KEY) === "1";
@@ -55,7 +85,7 @@ frappe.pages["posapp"].on_page_load = async function (wrapper) {
 			title: "POS Awesome",
 			indicator: "red",
 			message:
-				"POS app failed to start. Please clear browser cache or refresh assets, then reload /app/posapp.",
+				`POS app failed to start (${failureCode}). Please clear browser cache or refresh assets, then reload /app/posapp.`,
 		});
 	};
 
