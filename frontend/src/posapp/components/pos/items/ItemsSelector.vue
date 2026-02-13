@@ -358,12 +358,12 @@ const displayedItems = computed(() => {
 const debounce_qty = computed({
 	get() {
 		if (qty.value === null) return "";
-		return hide_qty_decimals.value ? Math.trunc(qty.value) : qty.value;
+		return hide_qty_decimals.value ? Math.round(qty.value) : qty.value;
 	},
 	set(value) {
 		let parsed: number | null = parseFloat(String(value).replace(/,/g, ""));
 		if (isNaN(parsed)) parsed = null;
-		if (hide_qty_decimals.value && parsed != null) parsed = Math.trunc(parsed);
+		if (hide_qty_decimals.value && parsed != null) parsed = Math.round(parsed);
 		qty.value = parsed as any;
 	},
 });
