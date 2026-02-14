@@ -41,6 +41,29 @@ export function useBatchSerial() {
 	const setSerialNo = (item: any, context: any) => {
 		if (!item?.has_serial_no) return;
 
+		const syncQtyFromSelection = () => {
+			const selectedCount = Array.isArray(item.serial_no_selected)
+				? item.serial_no_selected.length
+				: 0;
+			item.serial_no_selected_count = selectedCount;
+
+			// Do not force quantity to zero when no serial is selected.
+			// Keep user-entered qty intact until serials are explicitly chosen.
+			if (selectedCount <= 0) {
+				return;
+			}
+
+			const currentQty = Number(item.qty);
+			const currentAbsQty = Number.isFinite(currentQty)
+				? Math.abs(currentQty)
+				: 0;
+			const sign = Number.isFinite(currentQty) && currentQty < 0 ? -1 : 1;
+			if (currentAbsQty !== selectedCount) {
+				item.qty = sign * selectedCount;
+				if (context?.forceUpdate) context.forceUpdate();
+			}
+		};
+
 		const filteredSerials = applySerialBatchFilter(item);
 		const currentSelection = normalizeSerialSelection(item);
 		const hasSerialDataset = filteredSerials.length > 0;
@@ -49,11 +72,7 @@ export function useBatchSerial() {
 		// serial rows yet (or rows are temporarily unavailable after refresh).
 		if (!hasSerialDataset) {
 			item.serial_no = currentSelection.join("\n");
-			item.serial_no_selected_count = currentSelection.length;
-			if (item.serial_no_selected_count != item.stock_qty) {
-				item.qty = item.serial_no_selected_count;
-				if (context?.forceUpdate) context.forceUpdate();
-			}
+			syncQtyFromSelection();
 			return;
 		}
 
@@ -78,11 +97,7 @@ export function useBatchSerial() {
 		}
 
 		item.serial_no = item.serial_no_selected.join("\n");
-		item.serial_no_selected_count = item.serial_no_selected.length;
-		if (item.serial_no_selected_count != item.stock_qty) {
-			item.qty = item.serial_no_selected_count;
-			if (context?.forceUpdate) context.forceUpdate();
-		}
+		syncQtyFromSelection();
 	};
 
 	// Calculate batch availability and sort according to FIFO/Expiry
@@ -95,7 +110,7 @@ export function useBatchSerial() {
 		const source_batches = Array.isArray(item.batch_no_data)
 			? item.batch_no_data
 			: [];
-		const normalized_batch_data: any[] = source_batches
+		let normalized_batch_data: any[] = source_batches
 			.map((batch, index) => {
 				const baseQty =
 					Number(
@@ -140,6 +155,10 @@ export function useBatchSerial() {
 			});
 		});
 
+		normalized_batch_data = normalized_batch_data.filter(
+			(batch) => !batch.is_expired,
+		);
+
 		normalized_batch_data.sort((a, b) => {
 			const aExpired = a.is_expired;
 			const bExpired = b.is_expired;
@@ -174,6 +193,18 @@ export function useBatchSerial() {
 			} else {
 				return a._original_index - b._original_index;
 			}
+		});
+
+		console.debug("[POS BatchFlow] Calculated batch availability", {
+			item_code: item?.item_code,
+			row_id: item?.posa_row_id,
+			batches: normalized_batch_data.map((batch) => ({
+				batch_no: batch.batch_no,
+				available_qty: batch.available_qty,
+				remaining_qty: batch.remaining_qty,
+				used_qty: batch.used_qty,
+				is_expired: batch.is_expired,
+			})),
 		});
 
 		return normalized_batch_data;
@@ -216,6 +247,13 @@ export function useBatchSerial() {
 			item.actual_batch_qty = batch_to_use.available_qty;
 			item.batch_no_expiry_date = batch_to_use.expiry_date;
 			item.batch_no_is_expired = batch_to_use.is_expired;
+			console.debug("[POS BatchFlow] Selected batch for line", {
+				item_code: item?.item_code,
+				row_id: item?.posa_row_id,
+				batch_no: item.batch_no,
+				available_qty: batch_to_use.available_qty,
+				update,
+			});
 
 			const hasPriceListRate =
 				item.price_list_rate !== undefined &&
