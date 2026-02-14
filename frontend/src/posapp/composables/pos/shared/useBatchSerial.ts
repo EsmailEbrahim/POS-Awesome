@@ -41,6 +41,29 @@ export function useBatchSerial() {
 	const setSerialNo = (item: any, context: any) => {
 		if (!item?.has_serial_no) return;
 
+		const syncQtyFromSelection = () => {
+			const selectedCount = Array.isArray(item.serial_no_selected)
+				? item.serial_no_selected.length
+				: 0;
+			item.serial_no_selected_count = selectedCount;
+
+			// Do not force quantity to zero when no serial is selected.
+			// Keep user-entered qty intact until serials are explicitly chosen.
+			if (selectedCount <= 0) {
+				return;
+			}
+
+			const currentQty = Number(item.qty);
+			const currentAbsQty = Number.isFinite(currentQty)
+				? Math.abs(currentQty)
+				: 0;
+			const sign = Number.isFinite(currentQty) && currentQty < 0 ? -1 : 1;
+			if (currentAbsQty !== selectedCount) {
+				item.qty = sign * selectedCount;
+				if (context?.forceUpdate) context.forceUpdate();
+			}
+		};
+
 		const filteredSerials = applySerialBatchFilter(item);
 		const currentSelection = normalizeSerialSelection(item);
 		const hasSerialDataset = filteredSerials.length > 0;
@@ -49,11 +72,7 @@ export function useBatchSerial() {
 		// serial rows yet (or rows are temporarily unavailable after refresh).
 		if (!hasSerialDataset) {
 			item.serial_no = currentSelection.join("\n");
-			item.serial_no_selected_count = currentSelection.length;
-			if (item.serial_no_selected_count != item.stock_qty) {
-				item.qty = item.serial_no_selected_count;
-				if (context?.forceUpdate) context.forceUpdate();
-			}
+			syncQtyFromSelection();
 			return;
 		}
 
@@ -78,11 +97,7 @@ export function useBatchSerial() {
 		}
 
 		item.serial_no = item.serial_no_selected.join("\n");
-		item.serial_no_selected_count = item.serial_no_selected.length;
-		if (item.serial_no_selected_count != item.stock_qty) {
-			item.qty = item.serial_no_selected_count;
-			if (context?.forceUpdate) context.forceUpdate();
-		}
+		syncQtyFromSelection();
 	};
 
 	// Calculate batch availability and sort according to FIFO/Expiry

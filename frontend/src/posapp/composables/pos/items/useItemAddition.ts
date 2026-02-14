@@ -37,6 +37,101 @@ export function useItemAddition() {
 
 	const { expandBundle } = useItemBundles() as any;
 
+	const getRequestedSerialQty = (item: any) => {
+		const parsedQty = Number(item?.qty);
+		const absQty = Number.isFinite(parsedQty) ? Math.abs(Math.trunc(parsedQty)) : 0;
+		return Math.max(absQty, 1);
+	};
+
+	const collectUsedSerials = (item: any, context: any) => {
+		const used = new Set<string>();
+		const lines = Array.isArray(context?.items) ? context.items : [];
+
+		lines.forEach((line: any) => {
+			if (!line || line.posa_row_id === item?.posa_row_id) return;
+			if (line.item_code !== item?.item_code) return;
+			if (item?.has_batch_no && item?.batch_no && line.batch_no && line.batch_no !== item.batch_no) {
+				return;
+			}
+
+			if (Array.isArray(line.serial_no_selected)) {
+				line.serial_no_selected.forEach((serial: any) => {
+					const normalized = String(serial || "").trim();
+					if (normalized) used.add(normalized);
+				});
+				return;
+			}
+
+			if (line.serial_no) {
+				String(line.serial_no)
+					.split("\n")
+					.map((serial) => String(serial || "").trim())
+					.filter(Boolean)
+					.forEach((serial) => used.add(serial));
+			}
+		});
+
+		return used;
+	};
+
+	const autoAssignSerials = (item: any, context: any) => {
+		if (!item?.has_serial_no) return;
+
+		const serialRows = Array.isArray(item.serial_no_data) ? item.serial_no_data : [];
+		if (!serialRows.length) {
+			if (context.setSerialNo) context.setSerialNo(item);
+			return;
+		}
+
+		if (!Array.isArray(item.serial_no_selected)) {
+			item.serial_no_selected = [];
+		}
+
+		let candidateRows = serialRows.filter((row: any) => row?.serial_no);
+		if (item.has_batch_no && item.batch_no) {
+			candidateRows = candidateRows.filter(
+				(row: any) => !row?.batch_no || row.batch_no === item.batch_no,
+			);
+		}
+
+		const targetQty = getRequestedSerialQty(item);
+		if (item.serial_no_selected.length >= targetQty) {
+			if (context.setSerialNo) context.setSerialNo(item);
+			return;
+		}
+
+		const usedSerials = collectUsedSerials(item, context);
+		item.serial_no_selected.forEach((serial: any) => {
+			const normalized = String(serial || "").trim();
+			if (normalized) usedSerials.add(normalized);
+		});
+
+		const availableSerialRows = candidateRows.filter((row: any) => {
+			const serialNo = String(row?.serial_no || "").trim();
+			return serialNo && !usedSerials.has(serialNo);
+		});
+
+		const needed = targetQty - item.serial_no_selected.length;
+		const pickedRows = availableSerialRows.slice(0, needed);
+		if (pickedRows.length) {
+			pickedRows.forEach((row: any) => {
+				item.serial_no_selected.push(String(row.serial_no));
+			});
+
+			if (!item.batch_no) {
+				const batchFromSerial = pickedRows.find((row: any) => row?.batch_no)?.batch_no;
+				if (batchFromSerial) {
+					item.batch_no = batchFromSerial;
+					if (context.setBatchQty) {
+						context.setBatchQty(item, batchFromSerial, false);
+					}
+				}
+			}
+		}
+
+		if (context.setSerialNo) context.setSerialNo(item);
+	};
+
 	// Remove item from invoice
 	const removeItem = (item, context) => {
 		if (context.invoiceStore) {
@@ -349,6 +444,11 @@ export function useItemAddition() {
 				if (context.isReturnInvoice) {
 					new_item.qty = -Math.abs(new_item.qty || 1);
 				}
+
+				if (new_item.has_serial_no) {
+					autoAssignSerials(new_item, context);
+				}
+
 				// Apply UOM conversion immediately if barcode specifies a different UOM
 				if (
 					context.calc_uom &&
@@ -551,6 +651,7 @@ export function useItemAddition() {
 					}
 
 					if (context.setSerialNo) context.setSerialNo(cur_item);
+					if (cur_item.has_serial_no) autoAssignSerials(cur_item, context);
 
 					if (
 						context.calc_uom &&
@@ -624,6 +725,7 @@ export function useItemAddition() {
 				}
 
 				if (context.setSerialNo) context.setSerialNo(cur_item);
+				if (cur_item.has_serial_no) autoAssignSerials(cur_item, context);
 
 				// Recalculate rates if UOM differs from stock UOM
 				if (
