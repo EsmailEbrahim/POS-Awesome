@@ -213,6 +213,16 @@
 				</v-card-title>
 				<v-card-text class="pt-4">
 					<div class="text-subtitle-1 mb-2">{{ pendingAddItem.item_name }}</div>
+					<v-select
+						v-if="pendingAddItem && getItemUomOptions(pendingAddItem).length > 1"
+						v-model="pendingAddItem.uom"
+						:items="getItemUomOptions(pendingAddItem)"
+						:label="__('UOM')"
+						variant="outlined"
+						density="compact"
+						class="mb-2 pos-themed-input"
+						@update:modelValue="onPendingUomChange"
+					></v-select>
 					<v-text-field
 						v-model.number="addItemQty"
 						:label="__('Quantity')"
@@ -428,6 +438,10 @@ export default {
 
 			this.addItemDialog = false;
 			this.pendingAddItem = null;
+		},
+		onPendingUomChange() {
+			if (!this.pendingAddItem) return;
+			this.onItemUomChange(this.pendingAddItem);
 		},
 		removeItem(item) {
 			this.items = this.items.filter((i) => i.item_code !== item.item_code);
