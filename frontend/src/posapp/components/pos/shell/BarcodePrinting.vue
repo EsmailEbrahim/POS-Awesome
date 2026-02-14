@@ -3,19 +3,9 @@
 		<v-row class="h-100 ma-0">
 			<!-- Left Column: Item Selector -->
 			<v-col cols="12" md="5" class="h-100 pa-0 border-e d-flex flex-column">
-				<div class="px-2 pt-2">
-					<v-switch
-						v-model="showOnlyBarcodeItems"
-						:label="__('Show only items with barcode')"
-						density="compact"
-						color="primary"
-						hide-details
-						class="mb-2"
-					></v-switch>
-				</div>
 				<ItemsSelector
 					context="barcode"
-					:showOnlyBarcodeItems="showOnlyBarcodeItems"
+					:showOnlyBarcodeItems="true"
 					class="flex-grow-1"
 					@add-item="onAddItem"
 				/>
@@ -213,6 +203,16 @@
 				</v-card-title>
 				<v-card-text class="pt-4">
 					<div class="text-subtitle-1 mb-2">{{ pendingAddItem.item_name }}</div>
+					<div
+						v-if="
+							pendingAddItem &&
+							pendingAddItem.barcode &&
+							String(pendingAddItem.barcode).length < 8
+						"
+						class="text-caption text-medium-emphasis mb-2"
+					>
+						{{ __("If this is a scaled item, please enter weight in grams.") }}
+					</div>
 					<v-select
 						v-if="pendingAddItem && getItemUomOptions(pendingAddItem).length > 1"
 						v-model="pendingAddItem.uom"
@@ -262,11 +262,11 @@ export default {
 	data() {
 		return {
 			items: [],
+			nextRowId: 1,
 			pageFormat: "A4",
 			pageFormatOptions: ["A4"],
 			gridCols: 3,
 			gridRows: 7,
-			showOnlyBarcodeItems: false,
 			includePrice: true,
 			includeBatchSerial: false,
 			editingQtyValue: "",
@@ -390,6 +390,7 @@ export default {
 					title: __("Item '{0}' has no barcode", [item.item_name]),
 					color: "warning",
 				});
+				return;
 			}
 
 			// Open Quantity Dialog before adding
@@ -398,6 +399,7 @@ export default {
 			}
 
 			this.pendingAddItem = {
+				_row_id: this.nextRowId++,
 				item_code: item.item_code,
 				item_name: item.item_name,
 				barcode: barcode || "",
@@ -439,6 +441,11 @@ export default {
 			this.onItemUomChange(this.pendingAddItem);
 		},
 		removeItem(item) {
+			if (item && item._row_id != null) {
+				this.items = this.items.filter((i) => i._row_id !== item._row_id);
+				return;
+			}
+			// Fallback for legacy rows without _row_id
 			this.items = this.items.filter((i) => i.item_code !== item.item_code);
 		},
 		getItemUomOptions(item) {
