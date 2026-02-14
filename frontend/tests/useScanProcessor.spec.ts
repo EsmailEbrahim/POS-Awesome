@@ -94,8 +94,11 @@ describe("useScanProcessor serial scan handling", () => {
 				item_code: "ITEM-LOCAL",
 				item_name: "Local Item",
 				has_serial_no: 1,
-				has_batch_no: 0,
-				serial_no_data: [{ serial_no: "SER-LOCAL-001" }],
+				has_batch_no: 1,
+				serial_no_data: [
+					{ serial_no: "SER-LOCAL-001", batch_no: "BATCH-LOCAL-1" },
+				],
+				batch_no_data: [{ batch_no: "BATCH-LOCAL-1", batch_qty: 2 }],
 				available_qty: 5,
 				rate: 10,
 				price_list_rate: 10,
@@ -111,6 +114,7 @@ describe("useScanProcessor serial scan handling", () => {
 		const addedItem = ctx.itemAddition.addItem.mock.calls[0][0];
 		expect(addedItem.item_code).toBe("ITEM-LOCAL");
 		expect(addedItem.to_set_serial_no).toBe("SER-LOCAL-001");
+		expect(addedItem.to_set_batch_no).toBe("BATCH-LOCAL-1");
 	});
 
 	it("resolves serial scan via server, fetches item by resolved item_code, and auto-sets serial", async () => {
@@ -166,4 +170,3 @@ describe("useScanProcessor serial scan handling", () => {
 		expect(addedItem.to_set_serial_no).toBe("SER-SERVER-002");
 	});
 });
-

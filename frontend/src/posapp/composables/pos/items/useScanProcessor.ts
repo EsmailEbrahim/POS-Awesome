@@ -157,6 +157,9 @@ export function useScanProcessor(context: ScanProcessorContext) {
 			);
 			if (serialMatch?.serial_no) {
 				serialNo = String(serialMatch.serial_no);
+				if (!batchNo && serialMatch?.batch_no) {
+					batchNo = String(serialMatch.batch_no);
+				}
 			}
 		}
 
