@@ -37,7 +37,7 @@ def execute():
             "label": "Customer Display",
             "fieldtype": "Section Break",
             "collapsible": 1,
-            "insert_after": "posa_print_format_rules",
+            "insert_after": "posa_cash_movement_max_amount",
         },
         {
             "fieldname": "posa_enable_customer_display",

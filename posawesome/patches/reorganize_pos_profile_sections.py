@@ -39,6 +39,12 @@ SECTION_FIELDS = [
         "fieldtype": "Section Break",
         "collapsible": 1,
     },
+    {
+        "fieldname": "posa_section_customer_display",
+        "label": "Customer Display",
+        "fieldtype": "Section Break",
+        "collapsible": 1,
+    },
 ]
 
 
@@ -126,6 +132,9 @@ ORDERED_CHAIN = [
     "posa_allow_delete_cancelled_cash_movement",
     "posa_require_cash_movement_remarks",
     "posa_cash_movement_max_amount",
+    "posa_section_customer_display",
+    "posa_enable_customer_display",
+    "posa_auto_open_customer_display",
     "pos_awesome_payments",
     "posa_use_pos_awesome_payments",
     "posa_allow_partial_payment",
