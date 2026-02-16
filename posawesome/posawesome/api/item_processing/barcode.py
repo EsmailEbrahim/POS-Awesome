@@ -2,6 +2,23 @@ import frappe
 from frappe.utils import cint, cstr, flt
 from typing import Any, Dict, Optional
 
+
+SCALE_BARCODE_SETTINGS_FIELDS = (
+    "prefix",
+    "prefix_included_or_not",
+    "no_of_prefix_characters",
+    "item_code_starting_digit",
+    "item_code_total_digits",
+    "weight_starting_digit",
+    "weight_total_digits",
+    "weight_decimals",
+    "price_included_in_barcode_or_not",
+    "price_starting_digit",
+    "price_total_digit",
+    "price_decimals",
+)
+
+
 def _get_scale_barcode_settings():
     """Return the Scale Barcode Settings single document if it exists."""
 
@@ -12,6 +29,109 @@ def _get_scale_barcode_settings():
     except Exception:
         frappe.log_error("Unable to load Scale Barcode Settings", "POS Awesome")
         return None
+
+
+def _get_scale_settings_metadata(settings) -> Dict[str, Any]:
+    """Return a normalized dictionary for the scale barcode settings."""
+
+    if not settings:
+        return {}
+
+    metadata = {
+        "prefix": cstr(getattr(settings, "prefix", "") or "").strip(),
+        "prefix_included_or_not": cint(getattr(settings, "prefix_included_or_not", 0)),
+        "no_of_prefix_characters": cint(getattr(settings, "no_of_prefix_characters", 0)),
+        "item_code_starting_digit": cint(getattr(settings, "item_code_starting_digit", 0)),
+        "item_code_total_digits": cint(getattr(settings, "item_code_total_digits", 0)),
+        "weight_starting_digit": cint(getattr(settings, "weight_starting_digit", 0)),
+        "weight_total_digits": cint(getattr(settings, "weight_total_digits", 0)),
+        "weight_decimals": cint(getattr(settings, "weight_decimals", 0)),
+        "price_included_in_barcode_or_not": cint(getattr(settings, "price_included_in_barcode_or_not", 0)),
+        "price_starting_digit": cint(getattr(settings, "price_starting_digit", 0)),
+        "price_total_digit": cint(getattr(settings, "price_total_digit", 0)),
+        "price_decimals": cint(getattr(settings, "price_decimals", 0)),
+    }
+    return metadata
+
+
+def _segment_end(start: int, digits: int, decimals: int = 0) -> int:
+    if not start or not digits:
+        return 0
+    return start + digits + max(decimals, 0) - 1
+
+
+def _replace_segment(target_chars, start_index: int, value: str):
+    """Replace a contiguous segment in ``target_chars``."""
+
+    needed_len = start_index + len(value)
+    if len(target_chars) < needed_len:
+        target_chars.extend(["0"] * (needed_len - len(target_chars)))
+    for idx, ch in enumerate(value):
+        target_chars[start_index + idx] = ch
+
+
+def _normalize_numeric_code(value: str, length: int) -> str:
+    digits_only = "".join(ch for ch in cstr(value or "") if ch.isdigit())
+    if not digits_only:
+        return ""
+    if len(digits_only) > length:
+        digits_only = digits_only[-length:]
+    return digits_only.zfill(length)
+
+
+def _encode_value_segments(value: float, digits: int, decimals: int, label: str):
+    total_digits = max(digits, 0) + max(decimals, 0)
+    if total_digits <= 0:
+        return "", ""
+
+    scaled_value = int(round(max(flt(value), 0) * (10 ** max(decimals, 0))))
+    max_value = (10**total_digits) - 1
+    if scaled_value > max_value:
+        frappe.throw(f"{label} exceeds barcode capacity for configured scale settings.")
+
+    encoded = str(scaled_value).zfill(total_digits)
+    return encoded[:digits], encoded[digits:]
+
+
+def _calculate_ean13_check_digit(code12: str) -> str:
+    if len(code12) != 12 or not code12.isdigit():
+        return ""
+    total = 0
+    for idx, ch in enumerate(code12):
+        digit = int(ch)
+        if (idx + 1) % 2 == 0:
+            total += digit * 3
+        else:
+            total += digit
+    return str((10 - (total % 10)) % 10)
+
+
+def _get_required_barcode_length(metadata: Dict[str, Any]) -> int:
+    required_len = _segment_end(
+        cint(metadata.get("item_code_starting_digit")),
+        cint(metadata.get("item_code_total_digits")),
+    )
+    required_len = max(
+        required_len,
+        _segment_end(
+            cint(metadata.get("weight_starting_digit")),
+            cint(metadata.get("weight_total_digits")),
+            cint(metadata.get("weight_decimals")),
+        ),
+    )
+    if cint(metadata.get("price_included_in_barcode_or_not")):
+        required_len = max(
+            required_len,
+            _segment_end(
+                cint(metadata.get("price_starting_digit")),
+                cint(metadata.get("price_total_digit")),
+                cint(metadata.get("price_decimals")),
+            ),
+        )
+    prefix_len = cint(metadata.get("no_of_prefix_characters"))
+    if cint(metadata.get("prefix_included_or_not")) and prefix_len:
+        required_len = max(required_len, prefix_len)
+    return max(required_len, 0)
 
 
 def _extract_numeric_segment(barcode: str, start: int, length: int, decimals: int = 0):
@@ -104,14 +224,7 @@ def parse_scale_barcode(barcode: str):
     """Public API to parse a scale barcode and return decoded data."""
 
     settings = _get_scale_barcode_settings()
-    metadata: Optional[Dict[str, Any]] = None
-
-    if settings:
-        metadata = {
-            "prefix": cstr(getattr(settings, "prefix", "") or "").strip(),
-            "prefix_included_or_not": cint(getattr(settings, "prefix_included_or_not", 0)),
-            "no_of_prefix_characters": cint(getattr(settings, "no_of_prefix_characters", 0)),
-        }
+    metadata: Optional[Dict[str, Any]] = _get_scale_settings_metadata(settings) if settings else None
 
     data = _parse_scale_barcode_data(barcode)
 
@@ -122,6 +235,107 @@ def parse_scale_barcode(barcode: str):
         data["settings"] = metadata
 
     return data
+
+
+@frappe.whitelist()
+def build_scale_barcode(
+    barcode_template: Optional[str] = None,
+    item_code: Optional[str] = None,
+    qty: Optional[float] = None,
+    weight_grams: Optional[float] = None,
+    price: Optional[float] = None,
+):
+    """Build a scale barcode using Scale Barcode Settings."""
+
+    settings = _get_scale_barcode_settings()
+    if not settings:
+        return None
+
+    metadata = _get_scale_settings_metadata(settings)
+    item_start = cint(metadata.get("item_code_starting_digit"))
+    item_digits = cint(metadata.get("item_code_total_digits"))
+    weight_start = cint(metadata.get("weight_starting_digit"))
+    weight_digits = cint(metadata.get("weight_total_digits"))
+    weight_decimals = cint(metadata.get("weight_decimals"))
+
+    if not (item_start and item_digits and weight_start and weight_digits):
+        frappe.throw("Scale Barcode Settings are incomplete. Please configure item and weight segments.")
+
+    template_value = cstr(barcode_template or "").strip()
+    parsed_template = _parse_scale_barcode_data(template_value) if template_value else None
+    required_len = _get_required_barcode_length(metadata)
+    if template_value:
+        chars = list(template_value)
+    else:
+        base_len = max(required_len, 12)
+        chars = ["0"] * base_len
+
+    if len(chars) < required_len:
+        chars.extend(["0"] * (required_len - len(chars)))
+
+    prefix = cstr(metadata.get("prefix") or "").strip()
+    prefix_len = cint(metadata.get("no_of_prefix_characters")) or len(prefix)
+    if prefix:
+        normalized_prefix = (prefix + ("0" * max(prefix_len, 0)))[: max(prefix_len, 0)]
+        if normalized_prefix:
+            _replace_segment(chars, 0, normalized_prefix)
+
+    item_code_source = (
+        cstr((parsed_template or {}).get("item_code") or "").strip()
+        or cstr(item_code or "").strip()
+    )
+    if not item_code_source and len(chars) >= (item_start - 1 + item_digits):
+        item_code_source = "".join(chars[item_start - 1 : item_start - 1 + item_digits])
+    if not item_code_source:
+        frappe.throw("Unable to determine item code segment for scale barcode generation.")
+
+    normalized_item_code = _normalize_numeric_code(item_code_source, item_digits)
+    if not normalized_item_code:
+        frappe.throw("Scale barcode item code must contain numeric digits or use a valid template barcode.")
+    _replace_segment(chars, item_start - 1, normalized_item_code)
+
+    qty_value = None
+    if weight_grams is not None and cstr(weight_grams) != "":
+        qty_value = flt(weight_grams) / 1000
+    elif qty is not None and cstr(qty) != "":
+        qty_value = flt(qty)
+    elif parsed_template and parsed_template.get("qty") is not None:
+        qty_value = flt(parsed_template.get("qty"))
+    else:
+        qty_value = 0
+
+    qty_whole, qty_decimal = _encode_value_segments(qty_value, weight_digits, weight_decimals, "Weight")
+    _replace_segment(chars, weight_start - 1, qty_whole + qty_decimal)
+
+    if cint(metadata.get("price_included_in_barcode_or_not")):
+        price_start = cint(metadata.get("price_starting_digit"))
+        price_digits = cint(metadata.get("price_total_digit"))
+        price_decimals = cint(metadata.get("price_decimals"))
+        if price_start and price_digits and price is not None and cstr(price) != "":
+            price_whole, price_decimal = _encode_value_segments(
+                flt(price),
+                price_digits,
+                price_decimals,
+                "Price",
+            )
+            _replace_segment(chars, price_start - 1, price_whole + price_decimal)
+
+    barcode = "".join(chars)
+    if barcode.isdigit():
+        if len(barcode) == 12:
+            barcode = barcode + _calculate_ean13_check_digit(barcode)
+        elif len(barcode) == 13:
+            barcode = barcode[:12] + _calculate_ean13_check_digit(barcode[:12])
+
+    parsed_barcode = _parse_scale_barcode_data(barcode)
+    result = {
+        "barcode": barcode,
+        "item_code": (parsed_barcode or {}).get("item_code") or normalized_item_code,
+        "qty": (parsed_barcode or {}).get("qty") if parsed_barcode else qty_value,
+        "price": (parsed_barcode or {}).get("price") if parsed_barcode else None,
+        "settings": metadata,
+    }
+    return result
 
 
 @frappe.whitelist()

@@ -180,6 +180,22 @@
 								<div v-if="item.barcode">{{ item.barcode }}</div>
 								<div v-else class="text-error text-caption">{{ __("No Barcode") }}</div>
 							</template>
+							<template v-slot:item.grams="{ item }">
+								<v-text-field
+									v-if="shouldShowScaleGramsInput(item)"
+									v-model.number="item.scale_grams"
+									density="compact"
+									variant="outlined"
+									hide-details
+									type="number"
+									min="1"
+									step="1"
+									class="pos-themed-input"
+									@blur="onItemScaleGramsChange(item)"
+									@keydown.enter.prevent="onItemScaleGramsChange(item)"
+								></v-text-field>
+								<span v-else class="text-caption text-medium-emphasis">-</span>
+							</template>
 							<template v-slot:item.actions="{ item }">
 								<v-btn
 									icon="mdi-delete"
@@ -225,7 +241,11 @@
 					></v-select>
 					<v-text-field
 						v-model.number="addItemQty"
-						:label="__('Quantity')"
+						:label="
+							pendingAddItem && shouldShowScaleGramsInput(pendingAddItem)
+								? __('Labels')
+								: __('Quantity')
+						"
 						type="number"
 						min="1"
 						step="1"
@@ -233,9 +253,32 @@
 						autofocus
 						@keydown.enter="confirmAddItem"
 					></v-text-field>
+					<v-text-field
+						v-if="pendingAddItem && shouldShowScaleGramsInput(pendingAddItem)"
+						v-model.number="pendingScaleGrams"
+						:label="__('Weight (grams)')"
+						type="number"
+						min="1"
+						step="1"
+						variant="outlined"
+						class="mt-2"
+						@update:modelValue="onPendingScaleGramsInput"
+						@blur="syncPendingScaleBarcode"
+						@keydown.enter.prevent="syncPendingScaleBarcode"
+					></v-text-field>
+					<div
+						v-if="
+							pendingAddItem &&
+							shouldShowScaleGramsInput(pendingAddItem) &&
+							pendingAddItem.barcode
+						"
+						class="text-caption text-medium-emphasis mt-1"
+					>
+						{{ __("Generated scale barcode: {0}", [pendingAddItem.barcode]) }}
+					</div>
 				</v-card-text>
 				<v-card-actions class="justify-end">
-					<v-btn variant="text" @click="addItemDialog = false">{{ __("Cancel") }}</v-btn>
+					<v-btn variant="text" @click="closeAddItemDialog">{{ __("Cancel") }}</v-btn>
 					<v-btn color="primary" variant="elevated" @click="confirmAddItem">{{ __("Add") }}</v-btn>
 				</v-card-actions>
 			</v-card>
@@ -275,18 +318,23 @@ export default {
 			addItemDialog: false,
 			addItemQty: 1,
 			pendingAddItem: null,
+			pendingScaleGrams: null,
+			scaleBarcodeSettings: null,
+			scaleBarcodeSettingsLoaded: false,
+			pendingScaleBarcodeTimer: null,
 		};
 	},
 	computed: {
 		...mapStores(useItemsStore),
 		headers() {
 			return [
-				{ title: __("Item Code"), key: "item_code", width: "20%" },
-				{ title: __("Item Name"), key: "item_name", width: "26%" },
-				{ title: __("UOM"), key: "uom", width: "14%" },
+				{ title: __("Item Code"), key: "item_code", width: "16%" },
+				{ title: __("Item Name"), key: "item_name", width: "24%" },
+				{ title: __("UOM"), key: "uom", width: "12%" },
 				{ title: __("Barcode"), key: "barcode", width: "20%" },
-				{ title: __("Quantity"), key: "qty", align: "center", width: "20%" },
-				{ title: "", key: "actions", align: "center", sortable: false, width: "10%" },
+				{ title: __("Grams"), key: "grams", width: "12%" },
+				{ title: __("Quantity"), key: "qty", align: "center", width: "12%" },
+				{ title: "", key: "actions", align: "center", sortable: false, width: "4%" },
 			];
 		},
 	},
@@ -316,6 +364,188 @@ export default {
 				.replace(/>/g, "&gt;")
 				.replace(/"/g, "&quot;")
 				.replace(/'/g, "&#39;");
+		},
+		normalizeScaleGrams(value) {
+			const parsed = Number(value);
+			if (!Number.isFinite(parsed) || parsed <= 0) return null;
+			return Math.round(parsed);
+		},
+		isKgUom(uom) {
+			const value = String(uom || "").trim().toLowerCase();
+			return value === "kg" || value === "kgs" || value === "kilogram" || value === "kilograms";
+		},
+		isScaleSettingsConfigured() {
+			const settings = this.scaleBarcodeSettings || {};
+			return Boolean(
+				Number(settings.item_code_starting_digit) > 0 &&
+					Number(settings.item_code_total_digits) > 0 &&
+					Number(settings.weight_starting_digit) > 0 &&
+					Number(settings.weight_total_digits) > 0,
+			);
+		},
+		getScaleRequiredLength(settings = this.scaleBarcodeSettings || {}) {
+			const toNum = (v) => Number(v) || 0;
+			const itemEnd = toNum(settings.item_code_starting_digit) + toNum(settings.item_code_total_digits) - 1;
+			const weightEnd =
+				toNum(settings.weight_starting_digit) +
+				toNum(settings.weight_total_digits) +
+				toNum(settings.weight_decimals) -
+				1;
+			let priceEnd = 0;
+			if (toNum(settings.price_included_in_barcode_or_not)) {
+				priceEnd =
+					toNum(settings.price_starting_digit) +
+					toNum(settings.price_total_digit) +
+					toNum(settings.price_decimals) -
+					1;
+			}
+			return Math.max(itemEnd, weightEnd, priceEnd, 0);
+		},
+		isPotentialScaleTemplate(barcode, settings = this.scaleBarcodeSettings || {}) {
+			const value = String(barcode || "").trim();
+			if (!value || !this.isScaleSettingsConfigured()) return false;
+			const prefix = String(settings.prefix || "").trim();
+			if (prefix && !value.startsWith(prefix)) return false;
+			const requiredLen = this.getScaleRequiredLength(settings);
+			return value.length >= requiredLen;
+		},
+		async ensureScaleBarcodeSettings(force = false) {
+			if (!force && this.scaleBarcodeSettingsLoaded && this.scaleBarcodeSettings) {
+				return this.scaleBarcodeSettings;
+			}
+			try {
+				const res = await frappe.call({
+					method: "posawesome.posawesome.api.items.parse_scale_barcode",
+					args: { barcode: "" },
+				});
+				const settings =
+					(res && res.message && res.message.settings) || (res && res.message) || null;
+				if (settings && typeof settings === "object") {
+					this.scaleBarcodeSettings = settings;
+				}
+			} catch (error) {
+				console.warn("Failed to load scale barcode settings for printing", error);
+				this.scaleBarcodeSettings = null;
+			} finally {
+				this.scaleBarcodeSettingsLoaded = true;
+			}
+			return this.scaleBarcodeSettings;
+		},
+		shouldShowScaleGramsInput(item) {
+			if (!item || !this.isKgUom(item.uom)) return false;
+			if (!this.isScaleSettingsConfigured()) return false;
+			const templateBarcode =
+				item._scale_template_barcode ||
+				item._scanned_scale_barcode ||
+				item._scanned_barcode ||
+				item.barcode;
+			return Boolean(
+				item._is_scale_barcode ||
+					this.isScaleBarcodePayload(item) ||
+					this.isPotentialScaleTemplate(templateBarcode),
+			);
+		},
+		async generateScaleBarcodeForItem(item, grams, { silent = false } = {}) {
+			if (!item) return false;
+			const normalizedGrams = this.normalizeScaleGrams(grams);
+			if (!normalizedGrams) return false;
+
+			await this.ensureScaleBarcodeSettings();
+			if (!this.isScaleSettingsConfigured()) {
+				if (!silent) {
+					this.toastStore.show({
+						title: __("Scale barcode settings are not configured"),
+						color: "warning",
+					});
+				}
+				return false;
+			}
+
+			const templateBarcode =
+				item._scale_template_barcode ||
+				item._scanned_scale_barcode ||
+				item._scanned_barcode ||
+				item.barcode ||
+				"";
+
+			try {
+				const res = await frappe.call({
+					method: "posawesome.posawesome.api.items.build_scale_barcode",
+					args: {
+						barcode_template: templateBarcode,
+						item_code: item.item_code,
+						weight_grams: normalizedGrams,
+						price: this.includePrice ? item.price : null,
+					},
+				});
+				const generated = res && res.message ? res.message : null;
+				if (!generated || !generated.barcode) {
+					if (!silent) {
+						this.toastStore.show({
+							title: __("Unable to generate scale barcode"),
+							color: "warning",
+						});
+					}
+					return false;
+				}
+				item._is_scale_barcode = true;
+				item._scale_template_barcode = templateBarcode || generated.barcode;
+				item._scanned_barcode = generated.barcode;
+				item._scale_qty = Number(generated.qty || normalizedGrams / 1000);
+				item.scale_grams = normalizedGrams;
+				item.barcode = String(generated.barcode);
+				return true;
+			} catch (error) {
+				console.warn("Scale barcode generation failed", error);
+				if (!silent) {
+					this.toastStore.show({
+						title: __("Failed to generate scale barcode"),
+						color: "error",
+					});
+				}
+				return false;
+			}
+		},
+		onPendingScaleGramsInput() {
+			if (this.pendingScaleBarcodeTimer) {
+				clearTimeout(this.pendingScaleBarcodeTimer);
+			}
+			this.pendingScaleBarcodeTimer = setTimeout(() => {
+				this.syncPendingScaleBarcode(true);
+			}, 250);
+		},
+		async syncPendingScaleBarcode(silent = false) {
+			if (!this.pendingAddItem || !this.shouldShowScaleGramsInput(this.pendingAddItem)) {
+				return false;
+			}
+			const grams = this.normalizeScaleGrams(this.pendingScaleGrams);
+			if (!grams) {
+				return false;
+			}
+			this.pendingScaleGrams = grams;
+			return this.generateScaleBarcodeForItem(this.pendingAddItem, grams, { silent });
+		},
+		async onItemScaleGramsChange(item) {
+			if (!this.shouldShowScaleGramsInput(item)) return;
+			const grams = this.normalizeScaleGrams(item.scale_grams);
+			if (!grams) {
+				this.toastStore.show({
+					title: __("Enter a valid grams value"),
+					color: "warning",
+				});
+				return;
+			}
+			await this.generateScaleBarcodeForItem(item, grams);
+		},
+		closeAddItemDialog() {
+			if (this.pendingScaleBarcodeTimer) {
+				clearTimeout(this.pendingScaleBarcodeTimer);
+				this.pendingScaleBarcodeTimer = null;
+			}
+			this.addItemDialog = false;
+			this.pendingAddItem = null;
+			this.pendingScaleGrams = null;
+			this.addItemQty = 1;
 		},
 		isScaleBarcodePayload(item) {
 			if (!item || typeof item !== "object") return false;
@@ -362,6 +592,7 @@ export default {
 					: this.itemsStore && this.itemsStore.posProfile
 						? this.itemsStore.posProfile
 						: {};
+			await this.ensureScaleBarcodeSettings();
 
 			// 1. Try to find barcode in the passed item object
 			const scannedScaleBarcode = this.extractScaleScannedBarcode(item);
@@ -454,8 +685,16 @@ export default {
 				defaultUom = itemUoms[0].uom;
 			}
 
-			const isScaleBarcode = this.isScaleBarcodePayload(item);
+			const isScaleBarcode =
+				this.isScaleBarcodePayload(item) ||
+				this.isPotentialScaleTemplate(scannedScaleBarcode || barcode);
 			const initialLabelQty = isScaleBarcode ? 1 : this.normalizeLabelQty(item.qty);
+			const initialScaleGrams = this.normalizeScaleGrams(
+				item.scale_grams ||
+					(item._scale_qty !== undefined && item._scale_qty !== null
+						? Number(item._scale_qty) * 1000
+						: null),
+			);
 
 			this.pendingAddItem = {
 				_row_id: this.nextRowId++,
@@ -469,14 +708,41 @@ export default {
 				uom: defaultUom || "",
 				_is_scale_barcode: isScaleBarcode,
 				_scanned_barcode: scannedScaleBarcode,
+				_scale_template_barcode: scannedScaleBarcode || String(barcode || "").trim(),
+				scale_grams: initialScaleGrams,
 			};
 			this.addItemQty = initialLabelQty;
+			this.pendingScaleGrams =
+				initialScaleGrams || (isScaleBarcode && this.isKgUom(defaultUom) ? 1000 : null);
 			this.addItemDialog = true;
+
+			if (
+				this.pendingAddItem &&
+				this.pendingScaleGrams &&
+				this.shouldShowScaleGramsInput(this.pendingAddItem)
+			) {
+				await this.syncPendingScaleBarcode(true);
+			}
 		},
-		confirmAddItem() {
+		async confirmAddItem() {
 			if (!this.pendingAddItem) return;
 
 			const item = this.pendingAddItem;
+			if (this.shouldShowScaleGramsInput(item)) {
+				const grams = this.normalizeScaleGrams(this.pendingScaleGrams);
+				if (!grams) {
+					this.toastStore.show({
+						title: __("Enter valid grams for scale barcode"),
+						color: "warning",
+					});
+					return;
+				}
+				const generated = await this.generateScaleBarcodeForItem(item, grams);
+				if (!generated) {
+					return;
+				}
+			}
+
 			const qty = this.normalizeLabelQty(this.addItemQty);
 			const normalizedBarcode = String(item.barcode || "").trim();
 
@@ -494,12 +760,18 @@ export default {
 				this.items.unshift(item);
 			}
 
-			this.addItemDialog = false;
-			this.pendingAddItem = null;
+			this.closeAddItemDialog();
 		},
-		onPendingUomChange() {
+		async onPendingUomChange() {
 			if (!this.pendingAddItem) return;
-			this.onItemUomChange(this.pendingAddItem);
+			await this.onItemUomChange(this.pendingAddItem);
+			if (this.shouldShowScaleGramsInput(this.pendingAddItem)) {
+				if (!this.pendingScaleGrams) {
+					this.pendingScaleGrams =
+						this.normalizeScaleGrams(this.pendingAddItem.scale_grams) || 1000;
+				}
+				await this.syncPendingScaleBarcode(true);
+			}
 		},
 		removeItem(item) {
 			if (item && item._row_id != null) {
@@ -537,7 +809,14 @@ export default {
 			if (Array.isArray(item.barcodes) && item.barcodes.length > 0) return item.barcodes[0];
 			return "";
 		},
-		onItemUomChange(item) {
+		async onItemUomChange(item) {
+			if (this.shouldShowScaleGramsInput(item)) {
+				const grams = this.normalizeScaleGrams(item.scale_grams) || 1000;
+				item.scale_grams = grams;
+				await this.generateScaleBarcodeForItem(item, grams, { silent: true });
+				return;
+			}
+
 			if (item._is_scale_barcode && item._scanned_barcode) {
 				item.barcode = String(item._scanned_barcode);
 				return;
@@ -891,6 +1170,7 @@ export default {
 			},
 			{ deep: true, immediate: true },
 		);
+		this.ensureScaleBarcodeSettings();
 		/*
 		this.eventBus.on("register_pos_profile", (data) => {
 			this.pos_profile = data.pos_profile || {};
@@ -898,6 +1178,10 @@ export default {
 		*/
 	},
 	beforeUnmount() {
+		if (this.pendingScaleBarcodeTimer) {
+			clearTimeout(this.pendingScaleBarcodeTimer);
+			this.pendingScaleBarcodeTimer = null;
+		}
 		// this.eventBus.off("register_pos_profile");
 	},
 };
