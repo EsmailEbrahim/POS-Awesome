@@ -1,6 +1,8 @@
 import { parseBooleanSetting } from "./stock";
 
 export const CUSTOMER_DISPLAY_ROUTE = "/app/posapp/customer-display";
+export const CUSTOMER_DISPLAY_ROOT_ROUTE = "/app/posapp";
+export const CUSTOMER_DISPLAY_MODE_PARAM = "customer_display";
 export const CUSTOMER_DISPLAY_CHANNEL_SESSION_KEY =
 	"posa_customer_display_channel_id";
 export const CUSTOMER_DISPLAY_AUTO_OPEN_PREFIX =
@@ -103,12 +105,22 @@ export const getOrCreateCustomerDisplayChannelId = () => {
 };
 
 export const buildCustomerDisplayUrl = (channelId: string) => {
+	const query = new URLSearchParams();
+	query.set(CUSTOMER_DISPLAY_MODE_PARAM, "1");
+	query.set("channel", channelId);
+
 	if (typeof window === "undefined") {
-		return `${CUSTOMER_DISPLAY_ROUTE}?channel=${encodeURIComponent(channelId)}`;
+		return `${CUSTOMER_DISPLAY_ROOT_ROUTE}?${query.toString()}`;
 	}
-	const url = new URL(CUSTOMER_DISPLAY_ROUTE, window.location.origin);
-	url.searchParams.set("channel", channelId);
+	const url = new URL(CUSTOMER_DISPLAY_ROOT_ROUTE, window.location.origin);
+	url.search = query.toString();
 	return url.toString();
+};
+
+export const isStandaloneCustomerDisplayMode = () => {
+	if (typeof window === "undefined") return false;
+	const params = new URLSearchParams(window.location.search);
+	return parseBooleanSetting(params.get(CUSTOMER_DISPLAY_MODE_PARAM));
 };
 
 export const isCustomerDisplayEnabled = (posProfile: any) =>

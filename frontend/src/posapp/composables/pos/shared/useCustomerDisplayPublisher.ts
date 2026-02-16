@@ -26,6 +26,10 @@ interface UseCustomerDisplayPublisherOptions {
 	eventBus?: any;
 }
 
+const CUSTOMER_DISPLAY_WINDOW_NAME = "POSA_CUSTOMER_DISPLAY_WINDOW";
+const CUSTOMER_DISPLAY_WINDOW_FEATURES =
+	"popup=yes,width=1280,height=820,left=80,top=60,resizable=yes,scrollbars=yes";
+
 const toNumber = (value: any) => {
 	const parsed = Number(value);
 	return Number.isFinite(parsed) ? parsed : 0;
@@ -147,7 +151,11 @@ export function useCustomerDisplayPublisher({
 		}
 
 		const url = buildCustomerDisplayUrl(channelId);
-		const displayWindow = window.open(url, "_blank", "noopener");
+		const displayWindow = window.open(
+			url,
+			CUSTOMER_DISPLAY_WINDOW_NAME,
+			CUSTOMER_DISPLAY_WINDOW_FEATURES,
+		);
 		if (!displayWindow) {
 			frappe?.show_alert?.(
 				{
@@ -159,6 +167,12 @@ export function useCustomerDisplayPublisher({
 				6,
 			);
 			return null;
+		}
+
+		try {
+			displayWindow.focus?.();
+		} catch {
+			// Ignore focus errors when browser restricts window interactions.
 		}
 
 		schedulePublish();
@@ -179,8 +193,10 @@ export function useCustomerDisplayPublisher({
 		if (!isEnabled.value || !shouldAutoOpen.value || hasAutoOpened()) {
 			return;
 		}
-		openCustomerDisplay();
-		markAutoOpenDone();
+		const openedWindow = openCustomerDisplay();
+		if (openedWindow) {
+			markAutoOpenDone();
+		}
 	};
 
 	const handleOpenRequest = () => {

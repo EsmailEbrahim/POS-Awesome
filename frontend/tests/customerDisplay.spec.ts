@@ -75,7 +75,9 @@ describe("customerDisplay utils", () => {
 
 	it("builds customer display url with channel query", () => {
 		const url = buildCustomerDisplayUrl("cd_abc123");
-		expect(url).toBe("http://localhost/app/posapp/customer-display?channel=cd_abc123");
+		expect(url).toBe(
+			"http://localhost/app/posapp?customer_display=1&channel=cd_abc123",
+		);
 	});
 
 	it("stores and reads last snapshot via transport", () => {

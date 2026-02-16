@@ -63,7 +63,17 @@ declare const __: (_text: string, _args?: any[]) => string;
 
 const route = useRoute();
 
-const channelId = computed(() => String(route.query.channel || "").trim());
+const getChannelFromLocation = () => {
+	if (typeof window === "undefined") return "";
+	const params = new URLSearchParams(window.location.search);
+	return String(params.get("channel") || "").trim();
+};
+
+const channelId = computed(() => {
+	const fromRoute = String(route.query.channel || "").trim();
+	if (fromRoute) return fromRoute;
+	return getChannelFromLocation();
+});
 
 const emptySnapshot = (): CustomerDisplaySnapshot => ({
 	channel_id: "",
