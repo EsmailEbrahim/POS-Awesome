@@ -1,5 +1,12 @@
 <template>
-	<router-view v-slot="{ Component, route }">
+	<template v-if="standaloneCustomerDisplayMode">
+		<CustomerDisplayLayout>
+			<transition name="fade-page" mode="out-in">
+				<CustomerDisplay class="mx-4 md-4" />
+			</transition>
+		</CustomerDisplayLayout>
+	</template>
+	<router-view v-else v-slot="{ Component, route }">
 		<component :is="layoutComponent" :key="layoutName">
 			<transition name="fade-page" mode="out-in">
 				<component :is="Component" class="mx-4 md-4" />
@@ -11,16 +18,31 @@
 <script setup>
 import { computed, defineAsyncComponent } from "vue";
 import { useRoute } from "vue-router";
+import {
+	isStandaloneCustomerDisplayMode,
+} from "./utils/customerDisplay";
 
 const route = useRoute();
 
 const DefaultLayout = defineAsyncComponent(() => import("./layouts/DefaultLayout.vue"));
+const CustomerDisplayLayout = defineAsyncComponent(
+	() => import("./layouts/CustomerDisplayLayout.vue"),
+);
+const CustomerDisplay = defineAsyncComponent(
+	() => import("./components/customer_display/CustomerDisplay.vue"),
+);
+
+const standaloneCustomerDisplayMode = computed(() =>
+	isStandaloneCustomerDisplayMode(),
+);
 
 const layoutComponent = computed(() => {
 	const layout = route.meta.layout || "default";
 	switch (layout) {
 		case "default":
 			return DefaultLayout;
+		case "display":
+			return CustomerDisplayLayout;
 		default:
 			return DefaultLayout;
 	}
