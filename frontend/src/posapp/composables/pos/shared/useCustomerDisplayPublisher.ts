@@ -35,6 +35,11 @@ const toNumber = (value: any) => {
 	return Number.isFinite(parsed) ? parsed : 0;
 };
 
+const toFiniteOrNull = (value: any) => {
+	const parsed = Number(value);
+	return Number.isFinite(parsed) ? parsed : null;
+};
+
 const toText = (value: any) => {
 	if (value === undefined || value === null) return "";
 	return String(value).trim();
@@ -43,10 +48,7 @@ const toText = (value: any) => {
 const toLineItem = (item: any, index: number): CustomerDisplayLineItem => {
 	const qty = toNumber(item?.qty);
 	const rate = toNumber(item?.rate);
-	const fallbackAmount = qty * rate;
-	const amount = Number.isFinite(Number(item?.amount))
-		? Number(item.amount)
-		: fallbackAmount;
+	const amount = qty * rate;
 
 	return {
 		id:
@@ -97,7 +99,15 @@ export function useCustomerDisplayPublisher({
 	const buildSnapshot = (): CustomerDisplaySnapshot => {
 		const items = (invoiceStore.items || []).map(toLineItem);
 		const total_qty = items.reduce((sum, row) => sum + row.qty, 0);
-		const total_amount = items.reduce((sum, row) => sum + row.amount, 0);
+		const item_total = items.reduce((sum, row) => sum + row.amount, 0);
+		const additional_discount = toNumber(invoiceStore.additionalDiscount);
+		const delivery_charges = toNumber(invoiceStore.deliveryChargesRate);
+		const is_return = Boolean(invoiceStore.invoiceDoc?.is_return);
+		const gross_total = is_return ? Math.abs(item_total) : item_total;
+		const subtotal = is_return
+			? gross_total + additional_discount + delivery_charges
+			: gross_total - additional_discount + delivery_charges;
+		const total_amount = toFiniteOrNull(subtotal) ?? item_total;
 		const customer_name = getCustomerName(
 			invoiceStore.invoiceDoc,
 			customersStore.customerInfo,
@@ -224,6 +234,18 @@ export function useCustomerDisplayPublisher({
 
 	watch(
 		() => invoiceStore.metadata.changeVersion,
+		() => {
+			schedulePublish();
+		},
+	);
+
+	watch(
+		() => [
+			invoiceStore.additionalDiscount,
+			invoiceStore.additionalDiscountPercentage,
+			invoiceStore.deliveryChargesRate,
+			invoiceStore.invoiceDoc?.is_return,
+		],
 		() => {
 			schedulePublish();
 		},

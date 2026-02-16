@@ -129,7 +129,9 @@ onBeforeUnmount(() => {
 const rows = computed(() => snapshot.value.items || []);
 const itemCount = computed(() => rows.value.length);
 const totalAmount = computed(() =>
-	rows.value.reduce((sum, row) => sum + Number(row.amount || 0), 0),
+	Number.isFinite(Number(snapshot.value.total_amount))
+		? Number(snapshot.value.total_amount)
+		: rows.value.reduce((sum, row) => sum + Number(row.amount || 0), 0),
 );
 
 const customerLabel = computed(() =>
