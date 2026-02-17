@@ -1,7 +1,14 @@
 import frappe
 
 
-def get_shift_movements(pos_opening_shift, movement_type=None, status=None, limit_start=0, limit_page_length=50):
+def get_shift_movements(
+    pos_opening_shift,
+    movement_type=None,
+    status=None,
+    search_text=None,
+    limit_start=0,
+    limit_page_length=50,
+):
     filters = {"pos_opening_shift": pos_opening_shift}
     if movement_type:
         filters["movement_type"] = movement_type
@@ -15,9 +22,26 @@ def get_shift_movements(pos_opening_shift, movement_type=None, status=None, limi
         elif normalized == "draft":
             filters["docstatus"] = 0
 
+    query = (search_text or "").strip()
+    or_filters = None
+    if query:
+        like_query = f"%{query}%"
+        or_filters = [
+            {"name": ["like", like_query]},
+            {"against_name": ["like", like_query]},
+            {"remarks": ["like", like_query]},
+            {"source_account": ["like", like_query]},
+            {"target_account": ["like", like_query]},
+            {"expense_account": ["like", like_query]},
+            {"journal_entry": ["like", like_query]},
+            {"user": ["like", like_query]},
+            {"posting_date": ["like", like_query]},
+        ]
+
     return frappe.get_all(
         "POS Cash Movement",
         filters=filters,
+        or_filters=or_filters,
         fields=[
             "name",
             "posting_date",

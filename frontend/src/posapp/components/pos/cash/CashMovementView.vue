@@ -51,6 +51,7 @@
 					:allow-delete="!!context?.allow_delete_cancelled_cash_movement"
 					:selected-status="historyStatus"
 					:selected-movement-type="historyMovementType"
+					:selected-search-text="historySearchText"
 					:pending-offline-count="pendingOfflineCount"
 					@refresh="refreshHistory"
 					@duplicate="handleDuplicate"
@@ -102,6 +103,7 @@ const syncingOffline = ref(false);
 const pendingOfflineCount = ref(0);
 const historyStatus = ref("");
 const historyMovementType = ref("");
+const historySearchText = ref("");
 const prefillToken = ref(0);
 const prefillData = ref<any>(null);
 const formResetToken = ref(0);
@@ -127,6 +129,7 @@ async function refreshHistory() {
 	await loadHistory(openingShiftName.value, {
 		status: historyStatus.value,
 		movementType: historyMovementType.value,
+		searchText: historySearchText.value,
 	});
 }
 
@@ -134,9 +137,10 @@ function refreshPendingOfflineCount() {
 	pendingOfflineCount.value = getPendingOfflineCashMovementCount();
 }
 
-async function handleFilterChange(payload: { status: string; movementType: string }) {
+async function handleFilterChange(payload: { status: string; movementType: string; searchText: string }) {
 	historyStatus.value = payload?.status || "";
 	historyMovementType.value = payload?.movementType || "";
+	historySearchText.value = payload?.searchText || "";
 	await refreshHistory();
 }
 

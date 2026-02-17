@@ -160,6 +160,16 @@ class TestCashMovementQueries(unittest.TestCase):
         self.assertNotIn("docstatus", kwargs["filters"])
         self.assertIn("against_name", kwargs["fields"])
 
+    @patch("posawesome.posawesome.api.cash_movement.queries.frappe.get_all")
+    def test_get_shift_movements_applies_text_search_or_filters(self, mock_get_all):
+        mock_get_all.return_value = []
+
+        queries.get_shift_movements("POS-OPEN-1", search_text="walk")
+
+        _, kwargs = mock_get_all.call_args
+        self.assertIn("or_filters", kwargs)
+        self.assertTrue(kwargs["or_filters"])
+
 
 if __name__ == "__main__":
     unittest.main()

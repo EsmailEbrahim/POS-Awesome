@@ -103,6 +103,7 @@ describe("cash movement history loading", () => {
 		await loadHistory("POS-OPEN-1", {
 			status: "",
 			movementType: "",
+			searchText: "walk-in",
 		});
 
 		expect(historySpy).toHaveBeenCalledWith(
@@ -110,6 +111,7 @@ describe("cash movement history loading", () => {
 				pos_opening_shift: "POS-OPEN-1",
 				status: "",
 				movement_type: "",
+				search_text: "walk-in",
 			}),
 		);
 

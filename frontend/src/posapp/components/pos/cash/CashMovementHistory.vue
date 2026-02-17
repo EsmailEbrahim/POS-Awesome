@@ -22,6 +22,25 @@
 
 		<v-row dense class="mb-2">
 			<v-col cols="12" md="4">
+				<v-text-field
+					:model-value="selectedSearchText"
+					variant="outlined"
+					density="compact"
+					clearable
+					hide-details
+					prepend-inner-icon="mdi-magnify"
+					:label="__('Search')"
+					:disabled="loading"
+					@update:model-value="
+						$emit('filter-change', {
+							status: selectedStatus,
+							movementType: selectedMovementType,
+							searchText: $event || '',
+						})
+					"
+				/>
+			</v-col>
+			<v-col cols="12" md="4">
 				<v-select
 					:model-value="selectedStatus"
 					:items="statusFilters"
@@ -29,7 +48,13 @@
 					density="compact"
 					:label="__('Status')"
 					:disabled="loading"
-					@update:model-value="$emit('filter-change', { status: $event, movementType: selectedMovementType })"
+					@update:model-value="
+						$emit('filter-change', {
+							status: $event,
+							movementType: selectedMovementType,
+							searchText: selectedSearchText,
+						})
+					"
 				/>
 			</v-col>
 			<v-col cols="12" md="4">
@@ -40,7 +65,13 @@
 					density="compact"
 					:label="__('Movement Type')"
 					:disabled="loading"
-					@update:model-value="$emit('filter-change', { status: selectedStatus, movementType: $event })"
+					@update:model-value="
+						$emit('filter-change', {
+							status: selectedStatus,
+							movementType: $event,
+							searchText: selectedSearchText,
+						})
+					"
 				/>
 			</v-col>
 		</v-row>
@@ -53,6 +84,9 @@
 			density="compact"
 			class="elevation-0"
 		>
+			<template #item.posting_date="{ item }">
+				{{ formatPostingDate(item.posting_date) }}
+			</template>
 			<template #item.docstatus="{ item }">
 				<v-chip size="small" :color="statusColor(item.docstatus)">
 					{{ statusLabel(item.docstatus) }}
@@ -104,6 +138,7 @@ const props = defineProps<{
 	allowDelete: boolean;
 	selectedStatus: string;
 	selectedMovementType: string;
+	selectedSearchText: string;
 	pendingOfflineCount: number;
 }>();
 
@@ -112,7 +147,7 @@ defineEmits<{
 	(e: "duplicate", row: any): void;
 	(e: "cancel", row: any): void;
 	(e: "delete", row: any): void;
-	(e: "filter-change", payload: { status: string; movementType: string }): void;
+	(e: "filter-change", payload: { status: string; movementType: string; searchText: string }): void;
 }>();
 
 const statusFilters = [
@@ -151,5 +186,24 @@ function statusColor(docstatus: number) {
 	if (docstatus === 1) return "success";
 	if (docstatus === 2) return "warning";
 	return "grey";
+}
+
+function formatPostingDate(value: string) {
+	const dateText = String(value || "").trim();
+	if (!dateText) return "";
+	const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(dateText);
+	if (match) {
+		const year = match[1] || "";
+		const month = match[2] || "";
+		const day = match[3] || "";
+		return `${day}-${month}-${year}`;
+	}
+
+	const parsed = new Date(dateText);
+	if (Number.isNaN(parsed.getTime())) return dateText;
+	const dd = String(parsed.getDate()).padStart(2, "0");
+	const mm = String(parsed.getMonth() + 1).padStart(2, "0");
+	const yyyy = String(parsed.getFullYear());
+	return `${dd}-${mm}-${yyyy}`;
 }
 </script>

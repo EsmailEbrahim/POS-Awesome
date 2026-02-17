@@ -22,6 +22,7 @@ const cashMovementService = {
 		pos_opening_shift: string;
 		movement_type?: string;
 		status?: string;
+		search_text?: string;
 		limit_start?: number;
 		limit_page_length?: number;
 	}) {

@@ -31,7 +31,8 @@ export function useCashMovement() {
 		{
 			movementType,
 			status = "",
-		}: { movementType?: string; status?: string } = {},
+			searchText = "",
+		}: { movementType?: string; status?: string; searchText?: string } = {},
 	) {
 		loading.value = true;
 		try {
@@ -39,6 +40,7 @@ export function useCashMovement() {
 				pos_opening_shift: posOpeningShiftName,
 				movement_type: movementType,
 				status,
+				search_text: searchText,
 				limit_start: 0,
 				limit_page_length: 200,
 			});

@@ -160,6 +160,7 @@ def get_shift_cash_movements(
     pos_opening_shift,
     movement_type=None,
     status="submitted",
+    search_text=None,
     limit_start=0,
     limit_page_length=50,
 ):
@@ -168,6 +169,7 @@ def get_shift_cash_movements(
         pos_opening_shift=pos_opening_shift,
         movement_type=movement_type,
         status=status,
+        search_text=search_text,
         limit_start=limit_start,
         limit_page_length=limit_page_length,
     )
