@@ -16,6 +16,7 @@
   "user",
   "movement_type",
   "amount",
+  "against_name",
   "section_break_3",
   "source_account",
   "target_account",
@@ -90,6 +91,12 @@
    "label": "Amount",
    "options": "Company:company:default_currency",
    "reqd": 1
+  },
+  {
+   "fieldname": "against_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Against Name"
   },
   {
    "fieldname": "section_break_3",

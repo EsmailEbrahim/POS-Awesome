@@ -96,8 +96,8 @@ const {
 const contextLoaded = ref(false);
 const syncingOffline = ref(false);
 const pendingOfflineCount = ref(0);
-const historyStatus = ref("submitted");
-const historyMovementType = ref("Expense");
+const historyStatus = ref("");
+const historyMovementType = ref("");
 const formResetToken = ref(0);
 const errorMessage = computed(() => error.value);
 
@@ -119,8 +119,8 @@ async function refreshHistory() {
 		return;
 	}
 	await loadHistory(openingShiftName.value, {
-		status: historyStatus.value || undefined,
-		movementType: historyMovementType.value || undefined,
+		status: historyStatus.value,
+		movementType: historyMovementType.value,
 	});
 }
 
@@ -147,6 +147,7 @@ async function handleSubmit(payload: any) {
 			pos_profile: posProfileName.value,
 			pos_opening_shift: openingShiftName.value,
 			amount: payload.amount,
+			against_name: payload.againstName,
 			remarks: payload.remarks,
 			expense_account: payload.expenseAccount,
 			target_account: payload.targetAccount,
@@ -177,6 +178,7 @@ async function handleSubmit(payload: any) {
 		await submitMovement({
 			movementType: payload.movementType,
 			amount: payload.amount,
+			againstName: payload.againstName,
 			remarks: payload.remarks,
 			expenseAccount: payload.expenseAccount,
 			targetAccount: payload.targetAccount,
@@ -185,8 +187,6 @@ async function handleSubmit(payload: any) {
 			clientRequestId: requestPayload.client_request_id,
 		});
 		toastStore.show({ title: __("Cash movement submitted"), color: "success" });
-		historyStatus.value = "submitted";
-		historyMovementType.value = payload.movementType || "";
 		formResetToken.value += 1;
 		await refreshHistory();
 	} catch (err: any) {

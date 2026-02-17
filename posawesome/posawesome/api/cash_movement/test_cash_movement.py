@@ -107,6 +107,16 @@ class TestCashMovementQueries(unittest.TestCase):
         self.assertEqual(kwargs["filters"]["docstatus"], 2)
         self.assertEqual(kwargs["filters"]["pos_opening_shift"], "POS-OPEN-1")
 
+    @patch("posawesome.posawesome.api.cash_movement.queries.frappe.get_all")
+    def test_get_shift_movements_without_status_returns_all_docstatuses(self, mock_get_all):
+        mock_get_all.return_value = []
+
+        queries.get_shift_movements("POS-OPEN-1", status="")
+
+        _, kwargs = mock_get_all.call_args
+        self.assertNotIn("docstatus", kwargs["filters"])
+        self.assertIn("against_name", kwargs["fields"])
+
 
 if __name__ == "__main__":
     unittest.main()

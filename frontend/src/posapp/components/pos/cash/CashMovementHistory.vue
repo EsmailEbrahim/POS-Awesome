@@ -2,7 +2,7 @@
 	<v-card class="pa-4 pos-themed-card">
 		<div class="d-flex align-center justify-space-between mb-3">
 			<div>
-				<div class="text-h6">{{ __("Submitted Cash Movements") }}</div>
+				<div class="text-h6">{{ __("Cash Movements") }}</div>
 				<div class="text-body-2 text-grey">{{ __("Latest entries for current shift") }}</div>
 			</div>
 			<div class="d-flex align-center ga-2">
@@ -106,10 +106,10 @@ defineEmits<{
 }>();
 
 const statusFilters = [
+	{ title: __("All"), value: "" },
 	{ title: __("Submitted"), value: "submitted" },
 	{ title: __("Cancelled"), value: "cancelled" },
 	{ title: __("Draft"), value: "draft" },
-	{ title: __("All"), value: "" },
 ];
 
 const movementTypeFilters = [
@@ -122,6 +122,7 @@ const headers: any[] = [
 	{ title: __("Date"), key: "posting_date" },
 	{ title: __("Type"), key: "movement_type" },
 	{ title: __("Amount"), key: "amount", align: "end" },
+	{ title: __("Against Name"), key: "against_name" },
 	{ title: __("Source"), key: "source_account" },
 	{ title: __("Target"), key: "target_account" },
 	{ title: __("Remarks"), key: "remarks" },

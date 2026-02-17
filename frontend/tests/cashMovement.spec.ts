@@ -7,6 +7,7 @@ vi.mock("../src/posapp/services/api", () => ({
 }));
 
 import cashMovementService from "../src/posapp/services/cashMovementService";
+import { useCashMovement } from "../src/posapp/composables/pos/cash/useCashMovement";
 import { useCashMovementValidation } from "../src/posapp/composables/pos/cash/useCashMovementValidation";
 import api from "../src/posapp/services/api";
 
@@ -82,5 +83,29 @@ describe("cash movement service methods", () => {
 			"posawesome.posawesome.api.cash_movement.service.cancel_cash_movement",
 			{ name: "POS-CM-.26.-00001" },
 		);
+	});
+});
+
+describe("cash movement history loading", () => {
+	it("uses empty status filter to fetch all statuses", async () => {
+		const historySpy = vi
+			.spyOn(cashMovementService, "getShiftMovements")
+			.mockResolvedValueOnce([]);
+
+		const { loadHistory } = useCashMovement();
+		await loadHistory("POS-OPEN-1", {
+			status: "",
+			movementType: "",
+		});
+
+		expect(historySpy).toHaveBeenCalledWith(
+			expect.objectContaining({
+				pos_opening_shift: "POS-OPEN-1",
+				status: "",
+				movement_type: "",
+			}),
+		);
+
+		historySpy.mockRestore();
 	});
 });

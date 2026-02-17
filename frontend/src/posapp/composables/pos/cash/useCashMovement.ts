@@ -30,7 +30,7 @@ export function useCashMovement() {
 		posOpeningShiftName: string,
 		{
 			movementType,
-			status = "submitted",
+			status = "",
 		}: { movementType?: string; status?: string } = {},
 	) {
 		loading.value = true;
@@ -51,6 +51,7 @@ export function useCashMovement() {
 	async function submitMovement(args: {
 		movementType: "Expense" | "Deposit";
 		amount: number;
+		againstName?: string;
 		remarks: string;
 		posProfileName: string;
 		posOpeningShiftName: string;
@@ -77,6 +78,7 @@ export function useCashMovement() {
 				pos_profile: args.posProfileName,
 				pos_opening_shift: args.posOpeningShiftName,
 				amount: args.amount,
+				against_name: args.againstName,
 				remarks: args.remarks,
 				expense_account: args.expenseAccount,
 				target_account: args.targetAccount,

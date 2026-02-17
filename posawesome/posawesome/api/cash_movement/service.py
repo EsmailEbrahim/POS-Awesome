@@ -48,6 +48,7 @@ def _create_cash_movement(payload, movement_type):
 
     amount = validate_amount(data.get("amount"), profile_doc)
     remarks = (data.get("remarks") or "").strip()
+    against_name = (data.get("against_name") or "").strip()
     validate_remarks(remarks, profile_doc)
 
     existing = ensure_no_duplicate_client_request(data.get("client_request_id"))
@@ -73,6 +74,7 @@ def _create_cash_movement(payload, movement_type):
             "user": frappe.session.user,
             "movement_type": movement_type,
             "amount": amount,
+            "against_name": against_name,
             "source_account": source_account,
             "target_account": target_account,
             "expense_account": expense_account,

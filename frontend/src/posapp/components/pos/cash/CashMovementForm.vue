@@ -36,6 +36,18 @@
 					density="compact"
 					:label="__('Amount')"
 					:disabled="submitting || !enabled"
+					@focus="onAmountFocus"
+					@blur="onAmountBlur"
+					@update:model-value="onAmountInput"
+				/>
+			</v-col>
+			<v-col cols="12" md="4">
+				<v-text-field
+					v-model="againstName"
+					variant="outlined"
+					density="compact"
+					:label="__('Against Name')"
+					:disabled="submitting || !enabled"
 				/>
 			</v-col>
 			<v-col cols="12" md="4" v-if="movementType === 'Expense'">
@@ -124,8 +136,9 @@ const emit = defineEmits<{
 }>();
 
 const movementType = ref<MovementType | null>("Expense");
-const amount = ref<number>(0);
+const amount = ref<number | string | null>(0);
 const remarks = ref<string>("");
+const againstName = ref<string>("");
 const expenseAccount = ref<string>("");
 const targetAccount = ref<string>("");
 const expenseAccountOptions = ref<string[]>([]);
@@ -136,6 +149,8 @@ const expenseAccountLoading = ref(false);
 const targetAccountLoading = ref(false);
 let expenseSearchTimer: ReturnType<typeof setTimeout> | null = null;
 let targetSearchTimer: ReturnType<typeof setTimeout> | null = null;
+let previousAmount = 0;
+let amountEdited = false;
 
 const enabled = computed(() => !!props.context?.enable_cash_movement);
 const allowExpense = computed(() => !!props.context?.allow_pos_expense);
@@ -286,15 +301,36 @@ function onTargetSearch(value: string) {
 function onSubmit(type: MovementType) {
 	emit("submit", {
 		movementType: type,
-		amount: amount.value,
+		amount: Number(amount.value || 0),
+		againstName: againstName.value,
 		remarks: remarks.value,
 		expenseAccount: expenseAccount.value,
 		targetAccount: targetAccount.value,
 	});
 }
 
+function onAmountFocus() {
+	previousAmount = Number.isFinite(Number(amount.value)) ? Number(amount.value) : 0;
+	amountEdited = false;
+	amount.value = null;
+}
+
+function onAmountInput(value: number | string | null) {
+	if (!amountEdited && (value === null || value === undefined || value === "")) {
+		return;
+	}
+	amountEdited = true;
+}
+
+function onAmountBlur() {
+	if (!amountEdited && (amount.value === null || amount.value === undefined || amount.value === "")) {
+		amount.value = previousAmount;
+	}
+}
+
 function resetFormState() {
 	amount.value = 0;
+	againstName.value = "";
 	remarks.value = "";
 	expenseAccount.value = props.context?.default_expense_account || "";
 	targetAccount.value = props.context?.back_office_cash_account || "";

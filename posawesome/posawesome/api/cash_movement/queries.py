@@ -27,6 +27,7 @@ def get_shift_movements(pos_opening_shift, movement_type=None, status=None, limi
             "user",
             "movement_type",
             "amount",
+            "against_name",
             "source_account",
             "target_account",
             "expense_account",
