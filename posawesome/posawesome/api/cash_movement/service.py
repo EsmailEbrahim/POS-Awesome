@@ -1,6 +1,6 @@
 import frappe
 from frappe import _
-from frappe.utils import nowdate
+from frappe.utils import getdate, nowdate
 
 from .permissions import (
     ensure_cancel_allowed,
@@ -13,6 +13,7 @@ from .permissions import (
 from .posting import create_journal_entry
 from .queries import get_shift_movements, get_submitted_expenses as query_submitted_expenses
 from .validation import (
+    extract_allowed_accounts,
     ensure_no_duplicate_client_request,
     get_opening_shift,
     get_pos_profile,
@@ -48,13 +49,14 @@ def _create_cash_movement(payload, movement_type):
 
     amount = validate_amount(data.get("amount"), profile_doc)
     remarks = (data.get("remarks") or "").strip()
+    against_name = (data.get("against_name") or "").strip()
     validate_remarks(remarks, profile_doc)
 
     existing = ensure_no_duplicate_client_request(data.get("client_request_id"))
     if existing:
         return existing.as_dict()
 
-    source_account = resolve_source_cash_account(profile_doc)
+    source_account = resolve_source_cash_account(data, profile_doc)
     target_account, expense_account = resolve_target_account(data, profile_doc, movement_type)
 
     validate_account_company(source_account, profile_doc.company, _("Source account"))
@@ -73,6 +75,7 @@ def _create_cash_movement(payload, movement_type):
             "user": frappe.session.user,
             "movement_type": movement_type,
             "amount": amount,
+            "against_name": against_name,
             "source_account": source_account,
             "target_account": target_account,
             "expense_account": expense_account,
@@ -108,6 +111,13 @@ def get_cash_movement_context(pos_profile=None, pos_opening_shift=None):
         frappe.throw(_("POS Profile is required."))
 
     profile_doc = get_pos_profile(profile_name)
+    allowed_expense_accounts = extract_allowed_accounts(profile_doc.get("posa_allowed_expense_accounts"))
+    allowed_source_accounts = extract_allowed_accounts(profile_doc.get("posa_allowed_source_accounts"))
+    default_source_account = None
+    try:
+        default_source_account = resolve_source_cash_account({}, profile_doc)
+    except Exception:
+        default_source_account = None
 
     return {
         "pos_profile": profile_doc.name,
@@ -125,6 +135,10 @@ def get_cash_movement_context(pos_profile=None, pos_opening_shift=None):
         "require_cash_movement_remarks": bool(profile_doc.get("posa_require_cash_movement_remarks")),
         "cash_movement_max_amount": profile_doc.get("posa_cash_movement_max_amount"),
         "default_expense_account": profile_doc.get("posa_default_expense_account"),
+        "allowed_expense_accounts": allowed_expense_accounts,
+        "default_source_account": default_source_account,
+        "allow_source_account_override": bool(profile_doc.get("posa_allow_source_account_override")),
+        "allowed_source_accounts": allowed_source_accounts,
         "back_office_cash_account": profile_doc.get("posa_back_office_cash_account"),
         "cash_mode_of_payment": profile_doc.get("posa_cash_mode_of_payment"),
         "cost_center": profile_doc.get("cost_center"),
@@ -146,6 +160,7 @@ def get_shift_cash_movements(
     pos_opening_shift,
     movement_type=None,
     status="submitted",
+    search_text=None,
     limit_start=0,
     limit_page_length=50,
 ):
@@ -154,6 +169,7 @@ def get_shift_cash_movements(
         pos_opening_shift=pos_opening_shift,
         movement_type=movement_type,
         status=status,
+        search_text=search_text,
         limit_start=limit_start,
         limit_page_length=limit_page_length,
     )
@@ -198,3 +214,33 @@ def delete_cash_movement(name):
 
     movement_doc.delete(ignore_permissions=True)
     return {"deleted": name}
+
+
+@frappe.whitelist()
+def duplicate_cash_movement(name, posting_date=None):
+    movement_doc = frappe.get_doc("POS Cash Movement", name)
+    ensure_owner_or_manager(movement_doc)
+    if movement_doc.docstatus not in (1, 2):
+        frappe.throw(_("Only submitted or cancelled cash movements can be duplicated."))
+
+    payload = {
+        "pos_profile": movement_doc.pos_profile,
+        "pos_opening_shift": movement_doc.pos_opening_shift,
+        "amount": movement_doc.amount,
+        "against_name": movement_doc.get("against_name"),
+        "source_account": movement_doc.source_account,
+        "remarks": movement_doc.remarks,
+    }
+
+    if movement_doc.movement_type == "Expense":
+        payload["expense_account"] = movement_doc.expense_account
+    else:
+        payload["target_account"] = movement_doc.target_account
+
+    if posting_date:
+        try:
+            payload["posting_date"] = str(getdate(posting_date))
+        except Exception:
+            frappe.throw(_("Invalid posting date."))
+
+    return _create_cash_movement(payload, movement_doc.movement_type)

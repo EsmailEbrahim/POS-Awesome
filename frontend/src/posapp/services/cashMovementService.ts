@@ -22,6 +22,7 @@ const cashMovementService = {
 		pos_opening_shift: string;
 		movement_type?: string;
 		status?: string;
+		search_text?: string;
 		limit_start?: number;
 		limit_page_length?: number;
 	}) {
@@ -38,6 +39,10 @@ const cashMovementService = {
 
 	cancel(name: string) {
 		return api.call(`${baseMethod}.cancel_cash_movement`, { name });
+	},
+
+	duplicate(name: string, posting_date?: string) {
+		return api.call(`${baseMethod}.duplicate_cash_movement`, { name, posting_date });
 	},
 
 	remove(name: string) {

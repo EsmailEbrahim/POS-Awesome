@@ -37,6 +37,8 @@
 					:context="context"
 					:submitting="submitting"
 					:reset-token="formResetToken"
+					:prefill-token="prefillToken"
+					:prefill-data="prefillData"
 					@submit="handleSubmit"
 				/>
 			</v-col>
@@ -49,14 +51,17 @@
 					:allow-delete="!!context?.allow_delete_cancelled_cash_movement"
 					:selected-status="historyStatus"
 					:selected-movement-type="historyMovementType"
+					:selected-search-text="historySearchText"
 					:pending-offline-count="pendingOfflineCount"
 					@refresh="refreshHistory"
+					@duplicate="handleDuplicate"
 					@cancel="handleCancel"
 					@delete="handleDelete"
 					@filter-change="handleFilterChange"
 				/>
 			</v-col>
 		</v-row>
+
 	</div>
 </template>
 
@@ -96,8 +101,11 @@ const {
 const contextLoaded = ref(false);
 const syncingOffline = ref(false);
 const pendingOfflineCount = ref(0);
-const historyStatus = ref("submitted");
-const historyMovementType = ref("Expense");
+const historyStatus = ref("");
+const historyMovementType = ref("");
+const historySearchText = ref("");
+const prefillToken = ref(0);
+const prefillData = ref<any>(null);
 const formResetToken = ref(0);
 const errorMessage = computed(() => error.value);
 
@@ -119,8 +127,9 @@ async function refreshHistory() {
 		return;
 	}
 	await loadHistory(openingShiftName.value, {
-		status: historyStatus.value || undefined,
-		movementType: historyMovementType.value || undefined,
+		status: historyStatus.value,
+		movementType: historyMovementType.value,
+		searchText: historySearchText.value,
 	});
 }
 
@@ -128,9 +137,10 @@ function refreshPendingOfflineCount() {
 	pendingOfflineCount.value = getPendingOfflineCashMovementCount();
 }
 
-async function handleFilterChange(payload: { status: string; movementType: string }) {
+async function handleFilterChange(payload: { status: string; movementType: string; searchText: string }) {
 	historyStatus.value = payload?.status || "";
 	historyMovementType.value = payload?.movementType || "";
+	historySearchText.value = payload?.searchText || "";
 	await refreshHistory();
 }
 
@@ -146,7 +156,10 @@ async function handleSubmit(payload: any) {
 		const requestPayload = {
 			pos_profile: posProfileName.value,
 			pos_opening_shift: openingShiftName.value,
+			posting_date: payload.postingDate,
 			amount: payload.amount,
+			against_name: payload.againstName,
+			source_account: payload.sourceAccount,
 			remarks: payload.remarks,
 			expense_account: payload.expenseAccount,
 			target_account: payload.targetAccount,
@@ -177,6 +190,9 @@ async function handleSubmit(payload: any) {
 		await submitMovement({
 			movementType: payload.movementType,
 			amount: payload.amount,
+			againstName: payload.againstName,
+			postingDate: payload.postingDate,
+			sourceAccount: payload.sourceAccount,
 			remarks: payload.remarks,
 			expenseAccount: payload.expenseAccount,
 			targetAccount: payload.targetAccount,
@@ -185,13 +201,27 @@ async function handleSubmit(payload: any) {
 			clientRequestId: requestPayload.client_request_id,
 		});
 		toastStore.show({ title: __("Cash movement submitted"), color: "success" });
-		historyStatus.value = "submitted";
-		historyMovementType.value = payload.movementType || "";
 		formResetToken.value += 1;
 		await refreshHistory();
 	} catch (err: any) {
 		toastStore.show({ title: err?.message || __("Failed to submit cash movement"), color: "error" });
 	}
+}
+
+function handleDuplicate(row: any) {
+	if (!row?.name) return;
+	prefillData.value = {
+		movement_type: row.movement_type,
+		amount: row.amount,
+		posting_date: row.posting_date,
+		against_name: row.against_name,
+		source_account: row.source_account,
+		remarks: row.remarks,
+		expense_account: row.expense_account,
+		target_account: row.target_account,
+	};
+	prefillToken.value += 1;
+	toastStore.show({ title: __("Data loaded in form. Review and submit."), color: "info" });
 }
 
 async function handleCancel(row: any) {

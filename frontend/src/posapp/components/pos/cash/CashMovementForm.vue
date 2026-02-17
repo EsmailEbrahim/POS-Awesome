@@ -1,6 +1,19 @@
 <template>
 	<v-card class="pa-4 pos-themed-card">
-		<div class="text-h6 mb-1">{{ __("Cash Movement") }}</div>
+		<div class="d-flex flex-wrap align-center justify-space-between ga-3 mb-1">
+			<div class="text-h6">{{ __("Cash Movement") }}</div>
+			<div style="min-width: 190px; max-width: 220px; width: 100%;">
+				<v-text-field
+					v-model="postingDate"
+					type="date"
+					variant="outlined"
+					density="compact"
+					hide-details
+					:label="__('Posting Date')"
+					:disabled="submitting || !enabled"
+				/>
+			</div>
+		</div>
 		<div class="text-body-2 text-grey mb-4">
 			{{ __("Book expense or deposit from active shift.") }}
 		</div>
@@ -16,6 +29,15 @@
 		</v-alert>
 
 		<v-row dense>
+			<v-col cols="12" md="4">
+				<v-text-field
+					v-model="againstName"
+					variant="outlined"
+					density="compact"
+					:label="__('Against Name')"
+					:disabled="submitting || !enabled"
+				/>
+			</v-col>
 			<v-col cols="12" md="4">
 				<v-select
 					v-model="movementType"
@@ -35,6 +57,26 @@
 					variant="outlined"
 					density="compact"
 					:label="__('Amount')"
+					:disabled="submitting || !enabled"
+					@focus="onAmountFocus"
+					@blur="onAmountBlur"
+					@update:model-value="onAmountInput"
+				/>
+			</v-col>
+			<v-col cols="12" md="4" v-if="allowSourceAccountOverride">
+				<v-autocomplete
+					v-model="sourceAccount"
+					:items="sourceAccountOptions"
+					:loading="sourceAccountLoading"
+					:search="sourceAccountSearch"
+					@update:search="onSourceSearch"
+					@focus="loadSourceAccounts('')"
+					no-filter
+					clearable
+					hide-no-data
+					variant="outlined"
+					density="compact"
+					:label="__('Source Cash Account (Optional Override)')"
 					:disabled="submitting || !enabled"
 				/>
 			</v-col>
@@ -117,6 +159,8 @@ const props = defineProps<{
 	context: any;
 	submitting: boolean;
 	resetToken?: number;
+	prefillToken?: number;
+	prefillData?: any;
 }>();
 
 const emit = defineEmits<{
@@ -124,23 +168,39 @@ const emit = defineEmits<{
 }>();
 
 const movementType = ref<MovementType | null>("Expense");
-const amount = ref<number>(0);
+const amount = ref<number | string | null>(0);
+const postingDate = ref<string>(getTodayDate());
 const remarks = ref<string>("");
+const againstName = ref<string>("");
+const sourceAccount = ref<string>("");
 const expenseAccount = ref<string>("");
 const targetAccount = ref<string>("");
+const sourceAccountOptions = ref<string[]>([]);
 const expenseAccountOptions = ref<string[]>([]);
 const targetAccountOptions = ref<string[]>([]);
+const sourceAccountSearch = ref("");
 const expenseAccountSearch = ref("");
 const targetAccountSearch = ref("");
+const sourceAccountLoading = ref(false);
 const expenseAccountLoading = ref(false);
 const targetAccountLoading = ref(false);
+let sourceSearchTimer: ReturnType<typeof setTimeout> | null = null;
 let expenseSearchTimer: ReturnType<typeof setTimeout> | null = null;
 let targetSearchTimer: ReturnType<typeof setTimeout> | null = null;
+let previousAmount = 0;
+let amountEdited = false;
 
 const enabled = computed(() => !!props.context?.enable_cash_movement);
 const allowExpense = computed(() => !!props.context?.allow_pos_expense);
 const allowDeposit = computed(() => !!props.context?.allow_cash_deposit);
+const allowSourceAccountOverride = computed(() => !!props.context?.allow_source_account_override);
 const targetAccountLocked = computed(() => !!props.context?.back_office_cash_account);
+const allowedExpenseAccounts = computed(() =>
+	normalizeAllowedAccountList(props.context?.allowed_expense_accounts),
+);
+const allowedSourceAccounts = computed(() =>
+	normalizeAllowedAccountList(props.context?.allowed_source_accounts),
+);
 const movementTypes = computed(() => {
 	const types: Array<{ title: string; value: MovementType }> = [];
 	if (allowExpense.value) {
@@ -156,15 +216,19 @@ watch(
 	() => props.context,
 	async (newContext) => {
 		if (!newContext) return;
-		expenseAccount.value = newContext.default_expense_account || "";
+		sourceAccount.value = resolveInitialSourceAccount(newContext);
+		expenseAccount.value = resolveInitialExpenseAccount(newContext);
 		targetAccount.value = newContext.back_office_cash_account || "";
+		if (sourceAccount.value) {
+			ensureOptionExists(sourceAccountOptions.value, sourceAccount.value);
+		}
 		if (expenseAccount.value) {
 			ensureOptionExists(expenseAccountOptions.value, expenseAccount.value);
 		}
 		if (targetAccount.value) {
 			ensureOptionExists(targetAccountOptions.value, targetAccount.value);
 		}
-		await Promise.all([loadExpenseAccounts(""), loadTargetAccounts("")]);
+		await Promise.all([loadSourceAccounts(""), loadExpenseAccounts(""), loadTargetAccounts("")]);
 	},
 	{ immediate: true, deep: true },
 );
@@ -186,6 +250,39 @@ function ensureOptionExists(options: string[], value: string) {
 	if (!options.includes(value)) {
 		options.unshift(value);
 	}
+}
+
+function normalizeAllowedAccountList(values: any): string[] {
+	const result: string[] = [];
+	for (const value of values || []) {
+		const account = String(value || "").trim();
+		if (account && !result.includes(account)) {
+			result.push(account);
+		}
+	}
+	return result;
+}
+
+function filterAllowedAccounts(allowedAccounts: string[], searchText: string): string[] {
+	const query = (searchText || "").trim().toLowerCase();
+	if (!query) {
+		return [...allowedAccounts];
+	}
+	return allowedAccounts.filter((account) => account.toLowerCase().includes(query));
+}
+
+function resolveInitialExpenseAccount(context: any) {
+	const allowed = normalizeAllowedAccountList(context?.allowed_expense_accounts);
+	const preferred = String(context?.default_expense_account || "");
+	if (allowed.length > 0 && preferred && !allowed.includes(preferred)) {
+		return allowed[0] || "";
+	}
+	return preferred;
+}
+
+function resolveInitialSourceAccount(context: any) {
+	const preferred = String(context?.default_source_account || "");
+	return preferred;
 }
 
 function normalizeSearchResults(rows: any[]): string[] {
@@ -236,6 +333,11 @@ async function fetchAccountOptions(searchText: string, type: AccountSearchType):
 
 async function loadExpenseAccounts(searchText = "") {
 	if (!enabled.value || !allowExpense.value) return;
+	if (allowedExpenseAccounts.value.length > 0) {
+		expenseAccountOptions.value = filterAllowedAccounts(allowedExpenseAccounts.value, searchText);
+		ensureOptionExists(expenseAccountOptions.value, expenseAccount.value);
+		return;
+	}
 	expenseAccountLoading.value = true;
 	try {
 		const results = await fetchAccountOptions(searchText, "expense");
@@ -243,6 +345,23 @@ async function loadExpenseAccounts(searchText = "") {
 		ensureOptionExists(expenseAccountOptions.value, expenseAccount.value);
 	} finally {
 		expenseAccountLoading.value = false;
+	}
+}
+
+async function loadSourceAccounts(searchText = "") {
+	if (!enabled.value || !allowSourceAccountOverride.value) return;
+	if (allowedSourceAccounts.value.length > 0) {
+		sourceAccountOptions.value = filterAllowedAccounts(allowedSourceAccounts.value, searchText);
+		ensureOptionExists(sourceAccountOptions.value, sourceAccount.value);
+		return;
+	}
+	sourceAccountLoading.value = true;
+	try {
+		const results = await fetchAccountOptions(searchText, "cash");
+		sourceAccountOptions.value = results;
+		ensureOptionExists(sourceAccountOptions.value, sourceAccount.value);
+	} finally {
+		sourceAccountLoading.value = false;
 	}
 }
 
@@ -261,6 +380,16 @@ async function loadTargetAccounts(searchText = "") {
 	} finally {
 		targetAccountLoading.value = false;
 	}
+}
+
+function onSourceSearch(value: string) {
+	sourceAccountSearch.value = value || "";
+	if (sourceSearchTimer) {
+		clearTimeout(sourceSearchTimer);
+	}
+	sourceSearchTimer = setTimeout(() => {
+		loadSourceAccounts(sourceAccountSearch.value);
+	}, 250);
 }
 
 function onExpenseSearch(value: string) {
@@ -286,17 +415,42 @@ function onTargetSearch(value: string) {
 function onSubmit(type: MovementType) {
 	emit("submit", {
 		movementType: type,
-		amount: amount.value,
+		amount: Number(amount.value || 0),
+		againstName: againstName.value,
+		postingDate: postingDate.value,
+		sourceAccount: sourceAccount.value,
 		remarks: remarks.value,
 		expenseAccount: expenseAccount.value,
 		targetAccount: targetAccount.value,
 	});
 }
 
+function onAmountFocus() {
+	previousAmount = Number.isFinite(Number(amount.value)) ? Number(amount.value) : 0;
+	amountEdited = false;
+	amount.value = null;
+}
+
+function onAmountInput(value: number | string | null) {
+	if (!amountEdited && (value === null || value === undefined || value === "")) {
+		return;
+	}
+	amountEdited = true;
+}
+
+function onAmountBlur() {
+	if (!amountEdited && (amount.value === null || amount.value === undefined || amount.value === "")) {
+		amount.value = previousAmount;
+	}
+}
+
 function resetFormState() {
 	amount.value = 0;
+	postingDate.value = getTodayDate();
+	againstName.value = "";
 	remarks.value = "";
-	expenseAccount.value = props.context?.default_expense_account || "";
+	sourceAccount.value = resolveInitialSourceAccount(props.context);
+	expenseAccount.value = resolveInitialExpenseAccount(props.context);
 	targetAccount.value = props.context?.back_office_cash_account || "";
 
 	const allowed = movementTypes.value;
@@ -306,10 +460,46 @@ function resetFormState() {
 	}
 }
 
+function applyPrefillData(data: any) {
+	if (!data) return;
+
+	const nextMovementType = data.movementType || data.movement_type;
+	if (nextMovementType === "Expense" || nextMovementType === "Deposit") {
+		movementType.value = nextMovementType;
+	}
+
+	const nextAmount = Number(data.amount);
+	if (Number.isFinite(nextAmount) && nextAmount > 0) {
+		amount.value = nextAmount;
+	}
+
+	postingDate.value = String(data.postingDate || data.posting_date || getTodayDate()).slice(0, 10);
+	againstName.value = String(data.againstName || data.against_name || "");
+	remarks.value = String(data.remarks || "");
+	sourceAccount.value = String(data.sourceAccount || data.source_account || "");
+	expenseAccount.value = String(data.expenseAccount || data.expense_account || "");
+	targetAccount.value = String(data.targetAccount || data.target_account || "");
+
+	ensureOptionExists(sourceAccountOptions.value, sourceAccount.value);
+	ensureOptionExists(expenseAccountOptions.value, expenseAccount.value);
+	ensureOptionExists(targetAccountOptions.value, targetAccount.value);
+}
+
+function getTodayDate() {
+	return new Date().toISOString().slice(0, 10);
+}
+
 watch(
 	() => props.resetToken,
 	() => {
 		resetFormState();
+	},
+);
+
+watch(
+	() => props.prefillToken,
+	() => {
+		applyPrefillData(props.prefillData);
 	},
 );
 </script>

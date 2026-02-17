@@ -7,6 +7,7 @@ vi.mock("../src/posapp/services/api", () => ({
 }));
 
 import cashMovementService from "../src/posapp/services/cashMovementService";
+import { useCashMovement } from "../src/posapp/composables/pos/cash/useCashMovement";
 import { useCashMovementValidation } from "../src/posapp/composables/pos/cash/useCashMovementValidation";
 import api from "../src/posapp/services/api";
 
@@ -62,10 +63,12 @@ describe("cash movement service methods", () => {
 		call.mockResolvedValueOnce({ ok: 1 });
 		call.mockResolvedValueOnce({ ok: 1 });
 		call.mockResolvedValueOnce({ ok: 1 });
+		call.mockResolvedValueOnce({ ok: 1 });
 
 		await cashMovementService.createExpense({ amount: 50 });
 		await cashMovementService.createDeposit({ amount: 75 });
 		await cashMovementService.cancel("POS-CM-.26.-00001");
+		await cashMovementService.duplicate("POS-CM-.26.-00001", "2026-02-17");
 
 		expect(call).toHaveBeenNthCalledWith(
 			1,
@@ -82,5 +85,36 @@ describe("cash movement service methods", () => {
 			"posawesome.posawesome.api.cash_movement.service.cancel_cash_movement",
 			{ name: "POS-CM-.26.-00001" },
 		);
+		expect(call).toHaveBeenNthCalledWith(
+			4,
+			"posawesome.posawesome.api.cash_movement.service.duplicate_cash_movement",
+			{ name: "POS-CM-.26.-00001", posting_date: "2026-02-17" },
+		);
+	});
+});
+
+describe("cash movement history loading", () => {
+	it("uses empty status filter to fetch all statuses", async () => {
+		const historySpy = vi
+			.spyOn(cashMovementService, "getShiftMovements")
+			.mockResolvedValueOnce([]);
+
+		const { loadHistory } = useCashMovement();
+		await loadHistory("POS-OPEN-1", {
+			status: "",
+			movementType: "",
+			searchText: "walk-in",
+		});
+
+		expect(historySpy).toHaveBeenCalledWith(
+			expect.objectContaining({
+				pos_opening_shift: "POS-OPEN-1",
+				status: "",
+				movement_type: "",
+				search_text: "walk-in",
+			}),
+		);
+
+		historySpy.mockRestore();
 	});
 });
