@@ -28,6 +28,32 @@ def _coerce_non_negative_int(value, default=0):
     return max(parsed, 0)
 
 
+def _coerce_bool(value, default=False):
+    if value is None:
+        return default
+
+    if isinstance(value, bool):
+        return value
+
+    if isinstance(value, (int, float)):
+        return bool(value)
+
+    if isinstance(value, str):
+        lowered = value.strip().lower()
+        if not lowered:
+            return default
+        if lowered in {"1", "true", "yes", "y", "on", "t"}:
+            return True
+        if lowered in {"0", "false", "no", "n", "off", "f"}:
+            return False
+        try:
+            return bool(int(lowered))
+        except Exception:
+            return default
+
+    return default
+
+
 @frappe.whitelist()
 def get_outstanding_invoices(customer=None, company=None, currency=None, pos_profile=None,
                              include_all_currencies=False, page_start=0, page_length=None):
@@ -42,9 +68,7 @@ def get_outstanding_invoices(customer=None, company=None, currency=None, pos_pro
         company = _coerce_text_filter(company, _("Company"))
         currency = _coerce_text_filter(currency, _("Currency"))
         pos_profile = _coerce_text_filter(pos_profile, _("POS Profile"))
-        include_all_currencies = bool(
-            _coerce_non_negative_int(include_all_currencies, default=0)
-        )
+        include_all_currencies = _coerce_bool(include_all_currencies, default=False)
 
         if not customer or not company:
             return []
@@ -144,9 +168,7 @@ def get_unallocated_payments(
     company = _coerce_text_filter(company, _("Company"))
     currency = _coerce_text_filter(currency, _("Currency"))
     mode_of_payment = _coerce_text_filter(mode_of_payment, _("Mode of Payment"))
-    include_all_currencies = bool(
-        _coerce_non_negative_int(include_all_currencies, default=0)
-    )
+    include_all_currencies = _coerce_bool(include_all_currencies, default=False)
 
     if not customer or not company:
         return []
