@@ -137,7 +137,7 @@
 					class="posa-cart-table__editor-btn uom-arrow"
 					@click.stop="changeUom(-1)"
 					:aria-label="__('Previous unit of measure')"
-					:disabled="!item.item_uoms || item.item_uoms.length <= 1"
+					:disabled="disableUomEdit || !item.item_uoms || item.item_uoms.length <= 1"
 				>
 					<v-icon size="small">mdi-chevron-left</v-icon>
 				</v-btn>
@@ -145,7 +145,7 @@
 				<div
 					v-if="!isEditingUom"
 					class="posa-cart-table__editor-display"
-					@click.stop="isEditingUom = true"
+					@click.stop="openUomEdit"
 					tabindex="0"
 					role="button"
 					:aria-label="__('Edit unit of measure')"
@@ -167,6 +167,7 @@
 					hide-details
 					menu-icon=""
 					:autofocus="true"
+					:disabled="disableUomEdit"
 					@blur="isEditingUom = false"
 				></v-select>
 
@@ -176,7 +177,7 @@
 					class="posa-cart-table__editor-btn uom-arrow"
 					@click.stop="changeUom(1)"
 					:aria-label="__('Next unit of measure')"
-					:disabled="!item.item_uoms || item.item_uoms.length <= 1"
+					:disabled="disableUomEdit || !item.item_uoms || item.item_uoms.length <= 1"
 				>
 					<v-icon size="small">mdi-chevron-right</v-icon>
 				</v-btn>
@@ -465,12 +466,15 @@ const disableInput = computed(
 		(props.item.is_free_item || props.item.posa_is_offer || props.item.posa_is_replace),
 );
 
+const disableUomEdit = computed(
+	() =>
+		!!props.item.posa_is_replace,
+);
+
 const disableRateEdit = computed(
 	() =>
 		!props.posProfile.posa_allow_user_to_edit_rate ||
 		!!props.item.posa_is_replace ||
-		!!props.item.posa_is_offer ||
-		!!props.item.is_free_item ||
 		!!props.item.posa_offer_applied,
 );
 
@@ -482,11 +486,17 @@ const disableDiscountEdit = computed(
 );
 
 function openQtyEdit() {
+	if (disableInput.value) return;
 	isEditingQty.value = true;
 	editingQtyValue.value = "";
 	nextTick(() => {
 		qtyInput.value?.focus();
 	});
+}
+
+function openUomEdit() {
+	if (disableUomEdit.value) return;
+	isEditingUom.value = true;
 }
 
 function closeQtyEdit() {
@@ -507,6 +517,7 @@ function handleMinusClick() {
 }
 
 function changeUom(direction) {
+	if (disableUomEdit.value) return;
 	const uoms = props.item.item_uoms.map((u) => u.uom);
 	const currentIndex = uoms.indexOf(props.item.uom);
 	let newIndex = currentIndex + direction;
@@ -530,6 +541,7 @@ function changeUom(direction) {
 }
 
 function handleUomSelect(newUom) {
+	if (disableUomEdit.value) return;
 	console.log("[CartItemRow] handleUomSelect", {
 		item: props.item.item_code,
 		old_uom: props.item.uom,

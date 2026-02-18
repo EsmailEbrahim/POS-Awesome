@@ -1340,6 +1340,20 @@ export function useInvoiceOffers() {
 				? (baseDiscount / basePrice) * 100
 				: 0;
 		}
+		new_item._offer_constraints = {
+			max_qty: givenQty,
+			fixed_uom: new_item.uom || new_item.stock_uom || "",
+			discount_type: offerDiscountType,
+			min_base_rate: parseFiniteNumber(new_item.base_rate, 0),
+			max_base_discount_amount: parseFiniteNumber(
+				new_item.base_discount_amount,
+				0,
+			),
+			max_discount_percentage: parseFiniteNumber(
+				new_item.discount_percentage,
+				0,
+			),
+		};
 
 		if (update_item_detail_fn) {
 			update_item_detail_fn(new_item);
