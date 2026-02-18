@@ -3,7 +3,6 @@
 # For license information, please see license.txt
 
 from __future__ import unicode_literals
-import json
 
 import frappe
 from frappe.utils import cstr, flt, getdate, nowdate
@@ -82,6 +81,17 @@ def get_offers(profile):
         )
         or []
     )
+
+    for offer in data:
+        # Ensure deterministic identifier for frontend offer lifecycle logic.
+        offer["row_id"] = cstr(offer.get("row_id") or offer.get("name"))
+        offer["offer_applied"] = flt(offer.get("offer_applied") or 0)
+        offer["auto"] = flt(offer.get("auto") or 0)
+        offer["min_qty"] = flt(offer.get("min_qty") or 0)
+        offer["max_qty"] = flt(offer.get("max_qty") or 0)
+        offer["min_amt"] = flt(offer.get("min_amt") or 0)
+        offer["max_amt"] = flt(offer.get("max_amt") or 0)
+        offer = _normalize_discount_fields(offer)
 
     promotional_scheme_offers = _get_promotional_scheme_offers(pos_profile) or []
 
