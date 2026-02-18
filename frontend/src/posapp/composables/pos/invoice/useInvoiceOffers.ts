@@ -298,17 +298,24 @@ export function useInvoiceOffers() {
 			const offers = sourceOffers
 				.map((offer: any) => cache.get(offer.name))
 				.filter((entry: any) => !!entry);
+			const effectiveOffers = offers.filter((offer: any) =>
+				shouldProcessOfferInAutoRefresh(offer),
+			);
 
 			offerDebugLog(
 				"[useInvoiceOffers] Evaluation complete. Derived offers:",
 				offers.length,
+			);
+			offerDebugLog(
+				"[useInvoiceOffers] Effective offers for application:",
+				effectiveOffers.length,
 			);
 
 			// BREAK INFINITE LOOP: Compare current offers with previous ones
 			// We use a more granular digest that includes affected item quantities/rates AND the resulting benefits
 			// This ensures we react to qty changes (e.g. from item selector) but break on identical results.
 			const currentOffersDigest = JSON.stringify(
-				offers.map((o) => {
+				effectiveOffers.map((o) => {
 					const ids = Array.isArray(o.items)
 						? o.items
 						: typeof o.items === "string"
@@ -352,8 +359,8 @@ export function useInvoiceOffers() {
 
 			_lastAppliedOffersDigest.value = currentOffersDigest;
 
-			setItemGiveOffer(offers);
-			await updateInvoiceOffers(offers);
+			setItemGiveOffer(effectiveOffers);
+			await updateInvoiceOffers(effectiveOffers);
 		} catch (error) {
 			console.error("Failed to process offers:", error);
 		}
@@ -620,6 +627,25 @@ export function useInvoiceOffers() {
 			offer.coupon = null;
 			return true;
 		}
+	};
+
+	const isOfferAutoEnabled = (offer: any) => {
+		const raw = offer?.auto;
+		if (typeof raw === "string") {
+			const normalized = raw.trim().toLowerCase();
+			return normalized === "1" || normalized === "true" || normalized === "yes";
+		}
+		return raw === 1 || raw === true;
+	};
+
+	const shouldProcessOfferInAutoRefresh = (offer: any) => {
+		if (!offer) return false;
+		if (isOfferAutoEnabled(offer)) return true;
+		return posa_offers.value.some(
+			(invoiceOffer: any) =>
+				invoiceOffer &&
+				String(invoiceOffer.row_id || "") === String(offer.row_id || ""),
+		);
 	};
 
 	const calculateOfferQty = (offer: any) => {

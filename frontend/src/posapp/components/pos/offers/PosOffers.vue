@@ -327,7 +327,7 @@ export default {
 			if (newCustomer === oldCustomer) {
 				return;
 			}
-			this.offers = [];
+			this.pos_offers = [];
 		},
 	},
 
@@ -336,6 +336,15 @@ export default {
 			() => this.uiStore.posProfile,
 			(profile) => {
 				if (profile) this.pos_profile = profile;
+			},
+			{ deep: true, immediate: true },
+		);
+		this.$watch(
+			() => this.uiStore.offers,
+			(offers) => {
+				if (Array.isArray(offers)) {
+					this.updatePosOffers(offers);
+				}
 			},
 			{ deep: true, immediate: true },
 		);
