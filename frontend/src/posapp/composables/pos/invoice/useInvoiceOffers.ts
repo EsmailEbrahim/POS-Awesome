@@ -64,6 +64,7 @@ export function useInvoiceOffers() {
 	let _offerRefreshHandle: any = null;
 	const _lastAppliedOffersDigest = ref<string | null>(null);
 	const _cachedOfferResults = ref<Map<string, any>>(new Map());
+	const _manuallySuppressedAutoOffers = ref<Set<string>>(new Set());
 
 	// Computed properties matching Invoice.vue context
 	const Total = computed(() => invoiceStore.grossTotal);
@@ -78,6 +79,8 @@ export function useInvoiceOffers() {
 		}
 		return result;
 	};
+
+	const normalizeOfferRowId = (value: any) => String(value ?? "").trim();
 
 	// Methods converted from invoiceOfferMethods.js
 
@@ -237,6 +240,7 @@ export function useInvoiceOffers() {
 				uiStore.setApplicableOffers([]);
 				updatePosOffers([]);
 				_cachedOfferResults.value.clear();
+				_manuallySuppressedAutoOffers.value.clear();
 				return;
 			}
 
@@ -302,6 +306,7 @@ export function useInvoiceOffers() {
 				.map((offer: any) => cache.get(offer.name))
 				.filter((entry: any) => !!entry);
 			setItemGiveOffer(offers);
+			pruneManualSuppression(offers);
 			bus.emit("update_pos_offers", offers);
 			uiStore.setApplicableOffers(offers);
 			const effectiveOffers = offers.filter((offer: any) =>
@@ -365,7 +370,7 @@ export function useInvoiceOffers() {
 
 			_lastAppliedOffersDigest.value = currentOffersDigest;
 
-			await updateInvoiceOffers(effectiveOffers);
+			await updateInvoiceOffers(effectiveOffers, { origin: "auto" });
 		} catch (error) {
 			console.error("Failed to process offers:", error);
 		}
@@ -634,6 +639,40 @@ export function useInvoiceOffers() {
 		}
 	};
 
+	const pruneManualSuppression = (availableOffers: any[]) => {
+		if (!_manuallySuppressedAutoOffers.value.size) return;
+		const availableIds = new Set(
+			(Array.isArray(availableOffers) ? availableOffers : [])
+				.map((offer: any) => normalizeOfferRowId(offer?.row_id))
+				.filter(Boolean),
+		);
+		for (const rowId of Array.from(_manuallySuppressedAutoOffers.value)) {
+			if (!availableIds.has(rowId)) {
+				_manuallySuppressedAutoOffers.value.delete(rowId);
+			}
+		}
+	};
+
+	const syncManualAutoOfferSuppression = (selectedOffers: any[]) => {
+		const selectedIds = new Set(
+			(Array.isArray(selectedOffers) ? selectedOffers : [])
+				.map((offer: any) => normalizeOfferRowId(offer?.row_id))
+				.filter(Boolean),
+		);
+
+		posa_offers.value.forEach((invoiceOffer: any) => {
+			const rowId = normalizeOfferRowId(invoiceOffer?.row_id);
+			if (!rowId) return;
+			if (!selectedIds.has(rowId)) {
+				_manuallySuppressedAutoOffers.value.add(rowId);
+			}
+		});
+
+		selectedIds.forEach((rowId) => {
+			_manuallySuppressedAutoOffers.value.delete(rowId);
+		});
+	};
+
 	const isOfferAutoEnabled = (offer: any) => {
 		const raw = offer?.auto;
 		if (typeof raw === "string") {
@@ -645,7 +684,12 @@ export function useInvoiceOffers() {
 
 	const shouldProcessOfferInAutoRefresh = (offer: any) => {
 		if (!offer) return false;
-		if (isOfferAutoEnabled(offer)) return true;
+		const rowId = normalizeOfferRowId(offer?.row_id);
+		const isSuppressed =
+			!!rowId && _manuallySuppressedAutoOffers.value.has(rowId);
+		if (isOfferAutoEnabled(offer)) {
+			return !isSuppressed;
+		}
 		return posa_offers.value.some(
 			(invoiceOffer: any) =>
 				invoiceOffer &&
@@ -812,7 +856,14 @@ export function useInvoiceOffers() {
 		posOffers.value = Array.isArray(offers) ? offers : [];
 	};
 
-	const updateInvoiceOffers = async (offers: any[]) => {
+	const updateInvoiceOffers = async (
+		offers: any[],
+		options: { origin?: "auto" | "manual" } = {},
+	) => {
+		const origin = options?.origin || "manual";
+		if (origin === "manual") {
+			syncManualAutoOfferSuppression(offers);
+		}
 		if (isApplyingOffer.value) return;
 		isApplyingOffer.value = true;
 		try {
@@ -1594,7 +1645,8 @@ export function useInvoiceOffers() {
 
 		handleSetOffers,
 		handelOffers,
-		handleUpdateInvoiceOffers: updateInvoiceOffers,
+		handleUpdateInvoiceOffers: (offers: any[]) =>
+			updateInvoiceOffers(offers, { origin: "manual" }),
 		handleUpdateInvoiceCoupons,
 		handleSetAllItems,
 		scheduleOfferRefresh,
