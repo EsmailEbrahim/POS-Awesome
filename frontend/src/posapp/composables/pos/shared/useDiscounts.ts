@@ -30,6 +30,34 @@ export function useDiscounts() {
 		item._manual_rate_set_from_uom = snapshot._manual_rate_set_from_uom;
 	};
 
+	const applyOfferRateFloor = (item: any, context: any, minBaseRate: number) => {
+		const safeMinBaseRate = context.flt(
+			Math.max(minBaseRate, 0),
+			context.currency_precision,
+		);
+		const safeBasePriceListRate = context.flt(
+			Math.max(Number(item.base_price_list_rate || 0), 0),
+			context.currency_precision,
+		);
+		const safeBaseDiscount = context.flt(
+			Math.max(safeBasePriceListRate - safeMinBaseRate, 0),
+			context.currency_precision,
+		);
+
+		item.base_rate = safeMinBaseRate;
+		item.rate = toSelectedCurrency(context, safeMinBaseRate);
+		item.base_discount_amount = safeBaseDiscount;
+		item.discount_amount = toSelectedCurrency(context, safeBaseDiscount);
+		item.discount_percentage = safeBasePriceListRate
+			? context.flt(
+					(safeBaseDiscount / safeBasePriceListRate) * 100,
+					context.float_precision,
+				)
+			: 0;
+		item._manual_rate_set = true;
+		item._manual_rate_set_from_uom = false;
+	};
+
 	const enforceOfferPriceLimits = (
 		item: any,
 		fieldId: string,
@@ -76,6 +104,23 @@ export function useDiscounts() {
 			minBaseRate >= 0 &&
 			Number(item.base_rate || 0) < minBaseRate - epsilon
 		) {
+			if (fieldId === "rate") {
+				applyOfferRateFloor(item, context, minBaseRate);
+				toastStore.show({
+					title: __("Rate adjusted to maximum allowed discount"),
+					detail: __(
+						"Minimum allowed rate for this offer item is {0}.",
+						[
+							flt(
+								toSelectedCurrency(context, minBaseRate),
+								context.currency_precision,
+							),
+						],
+					),
+					color: "error",
+				});
+				return false;
+			}
 			violationMessage = __(
 				"Minimum allowed rate for this offer item is {0}.",
 				[flt(toSelectedCurrency(context, minBaseRate), context.currency_precision)],
