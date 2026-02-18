@@ -339,6 +339,15 @@ export default {
 			},
 			{ deep: true, immediate: true },
 		);
+		this.$watch(
+			() => this.uiStore.applicableOffers,
+			(offers) => {
+				if (Array.isArray(offers)) {
+					this.updatePosOffers(offers);
+				}
+			},
+			{ deep: true, immediate: true },
+		);
 
 		/*
 		this.$nextTick(function () {

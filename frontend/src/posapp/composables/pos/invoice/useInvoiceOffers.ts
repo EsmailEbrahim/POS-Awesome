@@ -234,6 +234,7 @@ export function useInvoiceOffers() {
 			if (!sourceOffers.length) {
 				offerDebugLog("[useInvoiceOffers] No source offers available");
 				bus.emit("update_pos_offers", []);
+				uiStore.setApplicableOffers([]);
 				updatePosOffers([]);
 				_cachedOfferResults.value.clear();
 				return;
@@ -301,6 +302,7 @@ export function useInvoiceOffers() {
 				.map((offer: any) => cache.get(offer.name))
 				.filter((entry: any) => !!entry);
 			bus.emit("update_pos_offers", offers);
+			uiStore.setApplicableOffers(offers);
 			const effectiveOffers = offers.filter((offer: any) =>
 				shouldProcessOfferInAutoRefresh(offer),
 			);
