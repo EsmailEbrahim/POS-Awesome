@@ -64,7 +64,7 @@ export function useDiscounts() {
 		context: any,
 		previousState: any,
 	) => {
-		if (!item?.posa_is_offer || !item?._offer_constraints) {
+		if (!item?._offer_constraints) {
 			return false;
 		}
 

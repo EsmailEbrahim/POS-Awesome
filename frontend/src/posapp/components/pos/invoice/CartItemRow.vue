@@ -474,8 +474,7 @@ const disableUomEdit = computed(
 const disableRateEdit = computed(
 	() =>
 		!props.posProfile.posa_allow_user_to_edit_rate ||
-		!!props.item.posa_is_replace ||
-		!!props.item.posa_offer_applied,
+		!!props.item.posa_is_replace,
 );
 
 const disableDiscountEdit = computed(

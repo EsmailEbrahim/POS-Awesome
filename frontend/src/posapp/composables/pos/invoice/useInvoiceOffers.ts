@@ -1420,6 +1420,20 @@ export function useInvoiceOffers() {
 					? (baseDiscount / basePrice) * 100
 					: 0;
 			}
+			item._offer_constraints = {
+				max_qty: null,
+				fixed_uom: "",
+				discount_type: offerDiscountType,
+				min_base_rate: parseFiniteNumber(item.base_rate, 0),
+				max_base_discount_amount: parseFiniteNumber(
+					item.base_discount_amount,
+					0,
+				),
+				max_discount_percentage: parseFiniteNumber(
+					item.discount_percentage,
+					0,
+				),
+			};
 
 			if (update_item_detail_fn) update_item_detail_fn(item);
 		});
@@ -1472,6 +1486,7 @@ export function useInvoiceOffers() {
 			item.discount_percentage = 0;
 			item.discount_amount = 0;
 			item.base_discount_amount = 0;
+			item._offer_constraints = null;
 
 			if (update_item_detail_fn) update_item_detail_fn(item);
 		});
