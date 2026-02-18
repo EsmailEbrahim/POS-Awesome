@@ -81,6 +81,16 @@ export function useInvoiceOffers() {
 	};
 
 	const normalizeOfferRowId = (value: any) => String(value ?? "").trim();
+	const getOfferRowId = (offer: any) =>
+		normalizeOfferRowId(offer?.row_id || offer?.name);
+	const ensureOfferIdentity = (offer: any) => {
+		if (!offer || typeof offer !== "object") return offer;
+		const rowId = getOfferRowId(offer);
+		if (rowId) {
+			offer.row_id = rowId;
+		}
+		return offer;
+	};
 
 	// Methods converted from invoiceOfferMethods.js
 
@@ -200,16 +210,33 @@ export function useInvoiceOffers() {
 		return brand;
 	};
 
+	const parseArrayField = (value: any) => {
+		if (Array.isArray(value)) return value;
+		if (typeof value === "string") {
+			try {
+				const parsed = JSON.parse(value);
+				return Array.isArray(parsed) ? parsed : [];
+			} catch (_error) {
+				return [];
+			}
+		}
+		return [];
+	};
+
 	const checkOfferIsAppley = (item: any, offer: any) => {
 		let applied = false;
-		const item_offers = item.posa_offers
-			? JSON.parse(item.posa_offers)
-			: [];
+		const item_offers = parseArrayField(item?.posa_offers);
+		const offerRowId = getOfferRowId(offer);
+		if (!offerRowId) return false;
 		for (const row_id of item_offers) {
 			const exist_offer = posa_offers.value.find(
-				(el: any) => row_id == el.row_id,
+				(el: any) =>
+					normalizeOfferRowId(row_id) === getOfferRowId(el),
 			);
-			if (exist_offer && exist_offer.offer_name == offer.name) {
+			if (
+				exist_offer &&
+				getOfferRowId(exist_offer) === offerRowId
+			) {
 				applied = true;
 				break;
 			}
@@ -231,9 +258,10 @@ export function useInvoiceOffers() {
 			changedRowIds,
 		});
 		try {
-			const sourceOffers = Array.isArray(posOffers.value)
+			const sourceOffers = (Array.isArray(posOffers.value)
 				? posOffers.value
-				: [];
+				: []
+			).map((offer: any) => ensureOfferIdentity(offer));
 			if (!sourceOffers.length) {
 				offerDebugLog("[useInvoiceOffers] No source offers available");
 				bus.emit("update_pos_offers", []);
@@ -327,11 +355,7 @@ export function useInvoiceOffers() {
 			// This ensures we react to qty changes (e.g. from item selector) but break on identical results.
 			const currentOffersDigest = JSON.stringify(
 				effectiveOffers.map((o) => {
-					const ids = Array.isArray(o.items)
-						? o.items
-						: typeof o.items === "string"
-							? JSON.parse(o.items)
-							: [];
+					const ids = parseArrayField(o?.items);
 					const itemState = ids.map((id: string) => {
 						const it = itemMap.get(id);
 						// Include qty and rate to detect changes that affect benefit calculations
@@ -547,24 +571,26 @@ export function useInvoiceOffers() {
 	};
 
 	const getCheapestItem = (offer: any) => {
-		let itemsRowID = [];
-		if (typeof offer.items === "string") {
-			itemsRowID = JSON.parse(offer.items);
-		} else {
-			itemsRowID = offer.items;
-		}
+		const itemsRowID = parseArrayField(offer?.items);
 		const itemsList: any[] = [];
 		itemsRowID.forEach((row_id: string) => {
 			const it = getItemFromRowID(row_id);
 			if (it) itemsList.push(it);
 		});
-		if (itemsList.length === 0) return null;
-		return itemsList.reduce((res, obj) => {
-			return !obj.posa_is_replace &&
-				!obj.posa_is_offer &&
-				obj.price_list_rate < res.price_list_rate
-				? obj
-				: res;
+		const eligibleItems = itemsList.filter(
+			(entry: any) => entry && !entry.posa_is_replace && !entry.posa_is_offer,
+		);
+		if (eligibleItems.length === 0) return null;
+		return eligibleItems.reduce((res, obj) => {
+			const resRate = parseFiniteNumber(
+				res?.price_list_rate ?? res?.rate,
+				Number.POSITIVE_INFINITY,
+			);
+			const objRate = parseFiniteNumber(
+				obj?.price_list_rate ?? obj?.rate,
+				Number.POSITIVE_INFINITY,
+			);
+			return objRate < resRate ? obj : res;
 		});
 	};
 
@@ -643,7 +669,7 @@ export function useInvoiceOffers() {
 		if (!_manuallySuppressedAutoOffers.value.size) return;
 		const availableIds = new Set(
 			(Array.isArray(availableOffers) ? availableOffers : [])
-				.map((offer: any) => normalizeOfferRowId(offer?.row_id))
+				.map((offer: any) => getOfferRowId(offer))
 				.filter(Boolean),
 		);
 		for (const rowId of Array.from(_manuallySuppressedAutoOffers.value)) {
@@ -656,12 +682,12 @@ export function useInvoiceOffers() {
 	const syncManualAutoOfferSuppression = (selectedOffers: any[]) => {
 		const selectedIds = new Set(
 			(Array.isArray(selectedOffers) ? selectedOffers : [])
-				.map((offer: any) => normalizeOfferRowId(offer?.row_id))
+				.map((offer: any) => getOfferRowId(offer))
 				.filter(Boolean),
 		);
 
 		posa_offers.value.forEach((invoiceOffer: any) => {
-			const rowId = normalizeOfferRowId(invoiceOffer?.row_id);
+			const rowId = getOfferRowId(invoiceOffer);
 			if (!rowId) return;
 			if (!selectedIds.has(rowId)) {
 				_manuallySuppressedAutoOffers.value.add(rowId);
@@ -684,7 +710,7 @@ export function useInvoiceOffers() {
 
 	const shouldProcessOfferInAutoRefresh = (offer: any) => {
 		if (!offer) return false;
-		const rowId = normalizeOfferRowId(offer?.row_id);
+		const rowId = getOfferRowId(offer);
 		const isSuppressed =
 			!!rowId && _manuallySuppressedAutoOffers.value.has(rowId);
 		if (isOfferAutoEnabled(offer)) {
@@ -693,7 +719,7 @@ export function useInvoiceOffers() {
 		return posa_offers.value.some(
 			(invoiceOffer: any) =>
 				invoiceOffer &&
-				String(invoiceOffer.row_id || "") === String(offer.row_id || ""),
+				getOfferRowId(invoiceOffer) === rowId,
 		);
 	};
 
@@ -703,10 +729,7 @@ export function useInvoiceOffers() {
 
 		let transaction_qty = 0;
 		if (offer.items) {
-			const itemsRowID =
-				typeof offer.items === "string"
-					? JSON.parse(offer.items)
-					: offer.items;
+			const itemsRowID = parseArrayField(offer.items);
 			if (Array.isArray(itemsRowID)) {
 				itemsRowID.forEach((row_id) => {
 					const row_item = getItemFromRowID(row_id);
@@ -853,7 +876,9 @@ export function useInvoiceOffers() {
 	};
 
 	const updatePosOffers = (offers: any[]) => {
-		posOffers.value = Array.isArray(offers) ? offers : [];
+		posOffers.value = (Array.isArray(offers) ? offers : []).map(
+			(offer: any) => ensureOfferIdentity(offer),
+		);
 	};
 
 	const updateInvoiceOffers = async (
@@ -867,21 +892,26 @@ export function useInvoiceOffers() {
 		if (isApplyingOffer.value) return;
 		isApplyingOffer.value = true;
 		try {
-			// Logic copying from invoiceOfferMethods.js lines 708+
-			posa_offers.value.forEach((invoiceOffer) => {
+			// Remove stale applied offers first. Iterate on a snapshot to avoid
+			// skipping entries while mutating posa_offers.
+			const appliedOffersSnapshot = [...posa_offers.value];
+			appliedOffersSnapshot.forEach((invoiceOffer) => {
+				const invoiceOfferRowId = getOfferRowId(invoiceOffer);
 				const existOffer = offers.find(
-					(offer) => invoiceOffer.row_id == offer.row_id,
+					(offer) => getOfferRowId(offer) === invoiceOfferRowId,
 				);
 				if (!existOffer) {
 					removeApplyOffer(invoiceOffer);
 				}
 			});
 			for (const offer of offers) {
+				ensureOfferIdentity(offer);
+				const offerRowId = getOfferRowId(offer);
 				const existOffer = posa_offers.value.find(
-					(invoiceOffer) => invoiceOffer.row_id == offer.row_id,
+					(invoiceOffer) => getOfferRowId(invoiceOffer) === offerRowId,
 				);
 				if (existOffer) {
-					existOffer.items = JSON.stringify(offer.items);
+					existOffer.items = JSON.stringify(parseArrayField(offer.items));
 					// Logic for Give Product replacement
 					if (
 						existOffer.offer === "Give Product" &&
@@ -914,29 +944,12 @@ export function useInvoiceOffers() {
 
 						// ... (omitted complex logic replacement for brevity, trust user to verify or complete?)
 						// I must try to include it.
-						let updated_item_offers: any[] = [];
-						if (Array.isArray(offer.items)) {
-							updated_item_offers = offer.items.filter(
-								(row_id: any) =>
-									row_id != item_to_remove.posa_row_id,
-							);
-						} else if (typeof offer.items === "string") {
-							try {
-								const parsed = JSON.parse(offer.items);
-								if (Array.isArray(parsed)) {
-									updated_item_offers = parsed.filter(
-										(row_id: any) =>
-											row_id !=
-											item_to_remove.posa_row_id,
-									);
-								}
-							} catch (error) {
-								console.warn(
-									"Invalid offer items payload",
-									error,
-								);
-							}
-						}
+						const updated_item_offers = parseArrayField(
+							offer.items,
+						).filter(
+							(row_id: any) =>
+								row_id != item_to_remove.posa_row_id,
+						);
 						offer.items = updated_item_offers;
 
 						const isItem = invoiceStore.itemsData.has(
@@ -983,10 +996,12 @@ export function useInvoiceOffers() {
 	};
 
 	const removeApplyOffer = (invoiceOffer: any) => {
+		ensureOfferIdentity(invoiceOffer);
+		const invoiceOfferRowId = getOfferRowId(invoiceOffer);
 		if (invoiceOffer.offer === "Item Price") {
 			RemoveOnPrice(invoiceOffer);
 			const index = posa_offers.value.findIndex(
-				(el) => el.row_id === invoiceOffer.row_id,
+				(el) => getOfferRowId(el) === invoiceOfferRowId,
 			);
 			if (index > -1) posa_offers.value.splice(index, 1);
 		}
@@ -996,7 +1011,7 @@ export function useInvoiceOffers() {
 				(item) => item.posa_row_id == invoiceOffer.give_item_row_id,
 			);
 			const index = posa_offers.value.findIndex(
-				(el) => el.row_id === invoiceOffer.row_id,
+				(el) => getOfferRowId(el) === invoiceOfferRowId,
 			);
 			if (index > -1) posa_offers.value.splice(index, 1);
 			if (item_to_remove) {
@@ -1017,13 +1032,13 @@ export function useInvoiceOffers() {
 		if (invoiceOffer.offer === "Grand Total") {
 			RemoveOnTotal(invoiceOffer);
 			const index = posa_offers.value.findIndex(
-				(el) => el.row_id === invoiceOffer.row_id,
+				(el) => getOfferRowId(el) === invoiceOfferRowId,
 			);
 			if (index > -1) posa_offers.value.splice(index, 1);
 		}
 		if (invoiceOffer.offer === "Loyalty Point") {
 			const index = posa_offers.value.findIndex(
-				(el) => el.row_id === invoiceOffer.row_id,
+				(el) => getOfferRowId(el) === invoiceOfferRowId,
 			);
 			if (index > -1) posa_offers.value.splice(index, 1);
 		}
@@ -1031,6 +1046,7 @@ export function useInvoiceOffers() {
 	};
 
 	const applyNewOffer = async (offer: any) => {
+		ensureOfferIdentity(offer);
 		let appliedSuccessfully = true;
 
 		if (offer.offer === "Item Price") {
@@ -1067,10 +1083,10 @@ export function useInvoiceOffers() {
 
 		const newOffer = {
 			offer_name: offer.name,
-			row_id: offer.row_id,
+			row_id: getOfferRowId(offer),
 			apply_on: offer.apply_on,
 			offer: offer.offer,
-			items: JSON.stringify(offer.items),
+			items: JSON.stringify(parseArrayField(offer.items)),
 			give_item: offer.give_item,
 			give_item_row_id: offer.give_item_row_id,
 			offer_applied: offer.offer_applied,
@@ -1148,16 +1164,7 @@ export function useInvoiceOffers() {
 
 	const parseOfferItemRowIds = (offer: any) => {
 		if (!offer) return [];
-		if (Array.isArray(offer.items)) return offer.items;
-		if (typeof offer.items === "string") {
-			try {
-				const parsed = JSON.parse(offer.items);
-				return Array.isArray(parsed) ? parsed : [];
-			} catch (_error) {
-				return [];
-			}
-		}
-		return [];
+		return parseArrayField(offer.items);
 	};
 
 	const resolveGiveProductItemCode = (
@@ -1416,11 +1423,7 @@ export function useInvoiceOffers() {
 
 	const ApplyOnPrice = (offer: any) => {
 		const combined = [...items.value, ...packed_items.value];
-		const offerItems = Array.isArray(offer.items)
-			? offer.items
-			: typeof offer.items === "string"
-				? JSON.parse(offer.items)
-				: [];
+		const offerItems = parseArrayField(offer?.items);
 
 		combined.forEach((item) => {
 			if (!item || !offerItems.includes(item.posa_row_id)) return;
@@ -1492,11 +1495,7 @@ export function useInvoiceOffers() {
 
 	const RemoveOnPrice = (offer: any) => {
 		const combined = [...items.value, ...packed_items.value];
-		const offerItems = Array.isArray(offer.items)
-			? offer.items
-			: typeof offer.items === "string"
-				? JSON.parse(offer.items)
-				: [];
+		const offerItems = parseArrayField(offer?.items);
 
 		combined.forEach((item) => {
 			if (!item || !offerItems.includes(item.posa_row_id)) return;
@@ -1576,19 +1575,15 @@ export function useInvoiceOffers() {
 
 	const addOfferToItems = (offer: any) => {
 		const combined = [...items.value, ...packed_items.value];
-		const offerItems = Array.isArray(offer.items)
-			? offer.items
-			: typeof offer.items === "string"
-				? JSON.parse(offer.items)
-				: [];
+		const offerItems = parseArrayField(offer?.items);
+		const offerRowId = getOfferRowId(offer);
+		if (!offerRowId) return;
 
 		combined.forEach((item) => {
 			if (!item || !offerItems.includes(item.posa_row_id)) return;
-			const itemOffers = item.posa_offers
-				? JSON.parse(item.posa_offers)
-				: [];
-			if (!itemOffers.includes(offer.row_id)) {
-				itemOffers.push(offer.row_id);
+			const itemOffers = parseArrayField(item?.posa_offers);
+			if (!itemOffers.includes(offerRowId)) {
+				itemOffers.push(offerRowId);
 				item.posa_offers = JSON.stringify(itemOffers);
 			}
 		});
@@ -1596,10 +1591,12 @@ export function useInvoiceOffers() {
 
 	const deleteOfferFromItems = (offer: any) => {
 		const combined = [...items.value, ...packed_items.value];
+		const offerRowId = getOfferRowId(offer);
+		if (!offerRowId) return;
 		combined.forEach((item) => {
 			if (!item || !item.posa_offers) return;
-			const itemOffers = JSON.parse(item.posa_offers);
-			const index = itemOffers.indexOf(offer.row_id);
+			const itemOffers = parseArrayField(item.posa_offers);
+			const index = itemOffers.indexOf(offerRowId);
 			if (index > -1) {
 				itemOffers.splice(index, 1);
 				item.posa_offers = JSON.stringify(itemOffers);
@@ -1609,7 +1606,9 @@ export function useInvoiceOffers() {
 
 	// Handlers for Invoice.vue
 	const handleSetOffers = (data: any) => {
-		posOffers.value = data;
+		posOffers.value = (Array.isArray(data) ? data : []).map((offer: any) =>
+			ensureOfferIdentity(offer),
+		);
 	};
 
 	const handleUpdateInvoiceCoupons = (data: any) => {
