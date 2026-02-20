@@ -334,6 +334,13 @@ export function useItemAddition() {
 	const addItem = withPerf(
 		"pos:add-item",
 		async function addItemMeasured(item, context) {
+			const currentInvoiceType =
+				typeof context?.invoiceType === "string"
+					? context.invoiceType
+					: context?.invoiceType?.value;
+			const deferStockValidationToPayment =
+				currentInvoiceType === "Order" || currentInvoiceType === "Quotation";
+
 			const blockSale = parseBooleanSetting(
 				context.pos_profile?.posa_block_sale_beyond_available_qty,
 			);
@@ -344,6 +351,7 @@ export function useItemAddition() {
 
 			if (
 				!context.isReturnInvoice &&
+				!deferStockValidationToPayment &&
 				blockSale &&
 				item.is_stock_item &&
 				item.actual_qty <= 0 &&
@@ -368,7 +376,12 @@ export function useItemAddition() {
 				return;
 			}
 
-			if (!context.isReturnInvoice && blockSale && !allowNegativeStock) {
+			if (
+				!context.isReturnInvoice &&
+				!deferStockValidationToPayment &&
+				blockSale &&
+				!allowNegativeStock
+			) {
 				const existingItem =
 					findMergeTarget(context, item, false)?.item ||
 					context.items.find(
