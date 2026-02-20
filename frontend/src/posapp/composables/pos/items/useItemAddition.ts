@@ -903,15 +903,15 @@ export function useItemAddition() {
 		} else {
 			context.items = [];
 			context.packed_items = [];
+		}
 
-			if (!preserveStickies) {
-				context.discount_amount = 0;
-				context.additional_discount = 0;
-				context.additional_discount_percentage = 0;
-				context.base_delivery_charges_rate = 0;
-				context.delivery_charges_rate = 0;
-				context.selected_delivery_charge = null;
-			}
+		if (!preserveStickies) {
+			context.discount_amount = 0;
+			context.additional_discount = 0;
+			context.additional_discount_percentage = 0;
+			context.base_delivery_charges_rate = 0;
+			context.delivery_charges_rate = 0;
+			context.selected_delivery_charge = null;
 		}
 
 		context.posa_offers = [];
