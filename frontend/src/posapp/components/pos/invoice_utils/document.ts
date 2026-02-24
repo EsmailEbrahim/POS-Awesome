@@ -7,6 +7,31 @@ import { _getPlcConversionRate } from "./currency";
 
 declare const flt: (_value: unknown, _precision?: number) => number;
 
+function normalizeBackendDate(context: any, value: any): string | null {
+	if (value === null || typeof value === "undefined" || value === "") {
+		return null;
+	}
+
+	const candidate =
+		value && typeof value === "object" && "value" in value ? value.value : value;
+	if (!candidate) {
+		return null;
+	}
+
+	return context.formatDateForBackend
+		? context.formatDateForBackend(candidate)
+		: candidate;
+}
+
+function resolveOrderDeliveryDate(context: any, sourceDoc: any): string | null {
+	return normalizeBackendDate(
+		context,
+		sourceDoc?.posa_delivery_date ||
+			sourceDoc?.delivery_date ||
+			context.new_delivery_date,
+	);
+}
+
 /**
  * Document Utils
  * Handles creation of backend-compatible invoice documents from current state.
@@ -287,6 +312,15 @@ export function get_invoice_doc(context: any) {
 		? context.formatDateForBackend(context.posting_date_display)
 		: context.posting_date_display;
 
+	// Sales Order/Quotation require delivery dates at validation time.
+	if (doc.doctype === "Sales Order" || doc.doctype === "Quotation") {
+		const orderDeliveryDate = resolveOrderDeliveryDate(context, sourceDoc);
+		doc.posa_delivery_date = orderDeliveryDate;
+		if (orderDeliveryDate) {
+			doc.delivery_date = orderDeliveryDate;
+		}
+	}
+
 	// Add flags to ensure proper rate handling
 	doc.ignore_pricing_rule = 0;
 
@@ -353,11 +387,26 @@ export function get_invoice_items(context: any) {
 	const items_list: any[] = [];
 	const isReturn = context.isReturnInvoice;
 	const omitFreebies = !isOffline();
+	const requiresDeliveryDate =
+		context.invoiceType === "Order" ||
+		context.invoiceType === "Quotation" ||
+		context.invoice_doc?.doctype === "Sales Order" ||
+		context.invoice_doc?.doctype === "Quotation";
+	const parentDeliveryDate = requiresDeliveryDate
+		? resolveOrderDeliveryDate(context, context.invoice_doc || {})
+		: null;
 
 	context.items.forEach((item) => {
 		if (omitFreebies && item && item.auto_free_source) {
 			return;
 		}
+		const itemDeliveryDate = normalizeBackendDate(
+			context,
+			item.posa_delivery_date ||
+				(requiresDeliveryDate
+					? item.delivery_date || parentDeliveryDate
+					: item.delivery_date),
+		);
 		const new_item = {
 			item_code: item.item_code,
 			// Retain the item name for offline invoices
@@ -389,10 +438,12 @@ export function get_invoice_items(context: any) {
 			discount_percentage: flt(item.discount_percentage),
 			batch_no: item.batch_no,
 			posa_notes: item.posa_notes,
-			posa_delivery_date: context.formatDateForBackend
-				? context.formatDateForBackend(item.posa_delivery_date)
-				: item.posa_delivery_date,
+			posa_delivery_date: itemDeliveryDate,
 		};
+
+		if (requiresDeliveryDate && itemDeliveryDate) {
+			new_item.delivery_date = itemDeliveryDate;
+		}
 
 		// Handle currency conversion for rates and amounts
 		const companyCurrency = context.pos_profile.currency;
