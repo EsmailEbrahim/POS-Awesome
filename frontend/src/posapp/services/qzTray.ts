@@ -149,7 +149,11 @@ export function getSavedPrinterName() {
 
 export function savePrinterName(name: string) {
 	try {
-		localStorage.setItem(PRINTER_STORAGE_KEY, name || "");
+		if (name) {
+			localStorage.setItem(PRINTER_STORAGE_KEY, name);
+		} else {
+			localStorage.removeItem(PRINTER_STORAGE_KEY);
+		}
 	} catch {
 		// ignore localStorage errors
 	}
@@ -157,9 +161,7 @@ export function savePrinterName(name: string) {
 
 export function setSelectedQzPrinter(name: string) {
 	selectedQzPrinter.value = name || "";
-	if (name) {
-		savePrinterName(name);
-	}
+	savePrinterName(name);
 }
 
 export async function connectQzTray(): Promise<boolean> {

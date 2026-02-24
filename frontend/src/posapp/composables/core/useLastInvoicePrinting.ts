@@ -106,7 +106,25 @@ export function useLastInvoicePrinting() {
 					shouldPrint: false,
 					showSessionMessage: false,
 				});
+				return;
 			}
+			console.warn(
+				"Popup blocked while opening print preview tab, falling back to browser print",
+			);
+			frappe?.show_alert?.(
+				{
+					message:
+						"Popup blocked while opening print preview. Continuing with browser print.",
+					indicator: "orange",
+				},
+				5,
+			);
+			const fallbackPrintWindow = window.open(url, "Print");
+			if (fallbackPrintWindow) {
+				watchPrintWindow(fallbackPrintWindow, printOptions);
+				return;
+			}
+			silentPrint(url, printOptions);
 			return;
 		}
 

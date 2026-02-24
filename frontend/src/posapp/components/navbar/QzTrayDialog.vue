@@ -173,14 +173,27 @@ function notify(title: string, color = "info") {
 }
 
 async function handleConnect(showNotification = true) {
-	const connected = await connectQzTray();
-	if (!connected) {
+	try {
+		const connected = await connectQzTray();
+		if (!connected) {
+			if (showNotification) {
+				notify("Could not connect to QZ Tray.", "warning");
+			}
+			return;
+		}
+		await refreshPrinters(false);
+	} catch (error: any) {
+		console.error("Failed to connect to QZ Tray", error);
 		if (showNotification) {
-			notify("Could not connect to QZ Tray.", "warning");
+			notify(
+				error?.message
+					? `Could not connect to QZ Tray. ${error.message}`
+					: "Could not connect to QZ Tray.",
+				"warning",
+			);
 		}
 		return;
 	}
-	await refreshPrinters(false);
 	if (showNotification) {
 		notify("Connected to QZ Tray.", "success");
 	}
@@ -202,6 +215,14 @@ async function refreshPrinters(showNotification = true) {
 				notify("No printers found. Make sure QZ Tray is running.", "warning");
 			}
 		}
+	} catch (error: any) {
+		console.error("Failed to discover QZ printers", error);
+		notify(
+			error?.message
+				? `Failed to discover printers. Check QZ Tray. ${error.message}`
+				: "Failed to discover printers. Check QZ Tray.",
+			"warning",
+		);
 	} finally {
 		loadingPrinters.value = false;
 	}
@@ -227,11 +248,17 @@ async function handleGenerateCertificate() {
 async function handleDownloadCertificate() {
 	try {
 		const result = await getQzCertificateDownload();
-		const blob = new Blob([result.pem || ""], { type: "application/x-pem-file" });
+		const pem = typeof result?.pem === "string" ? result.pem.trim() : "";
+		const company = typeof result?.company === "string" ? result.company.trim() : "";
+		if (!pem || !company) {
+			notify("Failed to download certificate. Certificate payload is incomplete.", "error");
+			return;
+		}
+		const blob = new Blob([pem], { type: "application/x-pem-file" });
 		const url = URL.createObjectURL(blob);
 		const anchor = document.createElement("a");
 		anchor.href = url;
-		anchor.download = getQzCertificateFilename(result.company);
+		anchor.download = getQzCertificateFilename(company);
 		document.body.appendChild(anchor);
 		anchor.click();
 		document.body.removeChild(anchor);
@@ -251,7 +278,7 @@ watch(
 		if (!qzConnected.value) {
 			await handleConnect(false);
 		}
-		if (!qzPrinters.value.length) {
+		if (qzConnected.value && !qzPrinters.value.length) {
 			await refreshPrinters(false);
 		}
 	},
