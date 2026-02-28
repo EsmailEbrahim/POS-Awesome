@@ -32,44 +32,46 @@
 					{{ __("Invoices saved as POS Invoices") }}
 				</v-alert>
 				<div class="invoice-sections">
-					<v-card flat class="invoice-section-card pos-themed-card">
-						<div class="invoice-section-heading">
-							<h3 class="invoice-section-heading__title">{{ __("Customer Details") }}</h3>
-						</div>
-						<InvoiceCustomerSection
-							ref="customerSection"
-							:pos_profile="pos_profile"
-							:invoiceTypes="invoiceTypes"
-							v-model="invoiceType"
-						/>
-					</v-card>
+					<div class="invoice-top-grid">
+						<v-card flat class="invoice-section-card pos-themed-card">
+							<div class="invoice-section-heading">
+								<h3 class="invoice-section-heading__title">{{ __("Customer Details") }}</h3>
+							</div>
+							<InvoiceCustomerSection
+								ref="customerSection"
+								:pos_profile="pos_profile"
+								:invoiceTypes="invoiceTypes"
+								v-model="invoiceType"
+							/>
+						</v-card>
 
-					<v-card
-						v-if="pos_profile.posa_use_delivery_charges"
-						flat
-						class="invoice-section-card pos-themed-card"
-					>
-						<div class="invoice-section-heading">
-							<h3 class="invoice-section-heading__title">{{ __("Delivery Charges") }}</h3>
-						</div>
-						<DeliveryCharges
-							ref="deliveryChargesComponent"
-							:pos_profile="pos_profile"
-							:delivery_charges="delivery_charges"
-							:selected_delivery_charge="selected_delivery_charge"
-							:delivery_charges_rate="delivery_charges_rate"
-							:deliveryChargesFilter="deliveryChargesFilter"
-							:formatCurrency="formatCurrency"
-							:currencySymbol="currencySymbol"
-							:readonly="readonly"
-							@update:selected_delivery_charge="
-								(val) => {
-									selected_delivery_charge = val;
-									update_delivery_charges(conversion_rate, currency_precision);
-								}
-							"
-						/>
-					</v-card>
+						<v-card
+							v-if="pos_profile.posa_use_delivery_charges"
+							flat
+							class="invoice-section-card pos-themed-card"
+						>
+							<div class="invoice-section-heading">
+								<h3 class="invoice-section-heading__title">{{ __("Delivery Charges") }}</h3>
+							</div>
+							<DeliveryCharges
+								ref="deliveryChargesComponent"
+								:pos_profile="pos_profile"
+								:delivery_charges="delivery_charges"
+								:selected_delivery_charge="selected_delivery_charge"
+								:delivery_charges_rate="delivery_charges_rate"
+								:deliveryChargesFilter="deliveryChargesFilter"
+								:formatCurrency="formatCurrency"
+								:currencySymbol="currencySymbol"
+								:readonly="readonly"
+								@update:selected_delivery_charge="
+									(val) => {
+										selected_delivery_charge = val;
+										update_delivery_charges(conversion_rate, currency_precision);
+									}
+								"
+							/>
+						</v-card>
+					</div>
 
 					<div class="invoice-meta-grid">
 						<v-card
@@ -1093,6 +1095,13 @@ export default {
 	align-items: stretch;
 }
 
+.invoice-top-grid {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: var(--dynamic-sm);
+	flex: 0 0 auto;
+}
+
 .invoice-meta-grid {
 	display: grid;
 	grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1162,6 +1171,10 @@ export default {
 		grid-template-columns: 1fr;
 	}
 
+	.invoice-top-grid {
+		grid-template-columns: 1fr;
+	}
+
 	.invoice-sections {
 		overflow: visible;
 	}
@@ -1203,6 +1216,10 @@ export default {
 	}
 
 	.invoice-meta-grid {
+		grid-template-columns: 1fr;
+	}
+
+	.invoice-top-grid {
 		grid-template-columns: 1fr;
 	}
 
