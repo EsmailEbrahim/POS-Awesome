@@ -21,7 +21,6 @@
 				<div :class="['payment-sections', { 'payment-sections--dialog': dialogMode }]">
 					<section class="payment-section payment-section--summary">
 						<div class="payment-section__header">
-							<p class="payment-section__eyebrow">{{ __("Overview") }}</p>
 							<h3 class="payment-section__title">{{ __("Payment Summary") }}</h3>
 						</div>
 						<PaymentSummary
@@ -47,7 +46,6 @@
 						class="payment-section payment-section--methods"
 					>
 						<div class="payment-section__header">
-							<p class="payment-section__eyebrow">{{ __("Collection") }}</p>
 							<h3 class="payment-section__title">{{ __("Payment Methods") }}</h3>
 						</div>
 						<PaymentMethods
@@ -72,7 +70,6 @@
 
 					<section class="payment-section payment-section--adjustments">
 						<div class="payment-section__header">
-							<p class="payment-section__eyebrow">{{ __("Adjustments") }}</p>
 							<h3 class="payment-section__title">{{ __("Redemption and Totals") }}</h3>
 						</div>
 						<PaymentRedemption
@@ -98,7 +95,6 @@
 							:formatCurrency="formatCurrency"
 						/>
 						<div class="payment-section__subsection">
-							<p class="payment-section__eyebrow">{{ __("Order") }}</p>
 							<h3 class="payment-section__title payment-section__title--subsection">
 								{{ __("Fulfillment Details") }}
 							</h3>
@@ -142,7 +138,6 @@
 
 					<section class="payment-section payment-section--settlement">
 						<div class="payment-section__header">
-							<p class="payment-section__eyebrow">{{ __("Settlement") }}</p>
 							<h3 class="payment-section__title">{{ __("Credit and Output") }}</h3>
 						</div>
 						<PaymentOptions
@@ -157,6 +152,7 @@
 							:new-credit-due-date="new_credit_due_date"
 							:credit-due-days="credit_due_days"
 							:credit-due-presets="credit_due_presets"
+							:write-off-amount="invoice_doc.write_off_amount || Math.max(diff_payment, 0)"
 							:redeem-customer-credit="redeem_customer_credit"
 							@update:is-write-off-change="is_write_off_change = $event"
 							@update:is-credit-sale="is_credit_sale = $event"
@@ -169,6 +165,7 @@
 								}
 							"
 							@update:credit-due-days="credit_due_days = $event"
+							@update:write-off-amount="handleWriteOffAmountUpdate"
 							@apply-due-preset="applyDuePreset"
 							@update:redeem-customer-credit="redeem_customer_credit = $event"
 							@get-available-credit="get_available_credit"
@@ -189,7 +186,6 @@
 
 				<section class="payment-section payment-section--meta">
 					<div class="payment-section__header">
-						<p class="payment-section__eyebrow">{{ __("Output") }}</p>
 						<h3 class="payment-section__title">{{ __("Sales Person and Print") }}</h3>
 					</div>
 					<PaymentSelectionFields
@@ -616,6 +612,22 @@ const handleShowPayment = () => {
 const handleCreditChangeUpdate = (value) => {
 	setFormatedCurrency(credit_change, "value", null, false, value);
 	updateCreditChange(credit_change.value);
+};
+
+const handleWriteOffAmountUpdate = (value) => {
+	if (!invoice_doc.value) return;
+
+	let nextAmount = flt(value || 0, currency_precision.value);
+	const maxAmount = Math.max(diff_payment.value || 0, 0);
+
+	if (nextAmount < 0) {
+		nextAmount = 0;
+	}
+	if (nextAmount > maxAmount) {
+		nextAmount = maxAmount;
+	}
+
+	invoice_doc.value.write_off_amount = nextAmount;
 };
 
 const handleRedemptionFormattedCurrency = (data) => {
@@ -1297,7 +1309,7 @@ onBeforeUnmount(() => {
 .payment-section__header {
 	display: flex;
 	flex-direction: column;
-	gap: var(--pos-space-1);
+	gap: 0;
 }
 
 .payment-section__subsection {
@@ -1306,15 +1318,6 @@ onBeforeUnmount(() => {
 	gap: 2px;
 	padding-top: var(--pos-space-1);
 	border-top: 1px solid var(--pos-border-light);
-}
-
-.payment-section__eyebrow {
-	margin: 0;
-	font-size: 0.72rem;
-	font-weight: 700;
-	letter-spacing: 0.08em;
-	text-transform: uppercase;
-	color: var(--pos-text-secondary);
 }
 
 .payment-section__title {

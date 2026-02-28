@@ -66,6 +66,8 @@
 						format="dd-MM-yyyy"
 						:min-date="new Date()"
 						auto-apply
+						teleport
+						placeholder="Due Date"
 						class="sleek-field pos-themed-input"
 						@update:model-value="$emit('update:newCreditDueDate', $event)"
 					/>
@@ -102,9 +104,22 @@
 					<p>{{ $frappe._("Credit redemption details are shown below in this section.") }}</p>
 				</div>
 
-				<div v-else-if="isWriteOffChange" class="payment-options-panel__note">
-					<h4>{{ $frappe._("Write Off Active") }}</h4>
-					<p>{{ $frappe._("The remaining difference amount will be written off on submission.") }}</p>
+				<div v-else-if="isWriteOffChange" class="payment-options-panel__content">
+					<v-text-field
+						class="sleek-field"
+						density="compact"
+						variant="solo"
+						type="number"
+						min="0"
+						:max="Math.max(diffPayment, 0)"
+						:model-value="writeOffAmountDisplay"
+						:label="$frappe._('Write Off Amount')"
+						hide-details
+						@update:model-value="$emit('update:writeOffAmount', $event)"
+					></v-text-field>
+					<p class="payment-options-panel__helper">
+						{{ $frappe._("This amount will be written off on submission.") }}
+					</p>
 				</div>
 
 				<div v-else-if="invoiceDoc.is_return && isCreditReturn" class="payment-options-panel__note">
@@ -173,6 +188,10 @@ const props = defineProps({
 		type: Array,
 		default: () => [7, 14, 30],
 	},
+	writeOffAmount: {
+		type: [Number, String],
+		default: 0,
+	},
 	redeemCustomerCredit: {
 		type: Boolean,
 		default: false,
@@ -186,6 +205,7 @@ const emit = defineEmits([
 	"update:isCreditReturn",
 	"update:newCreditDueDate",
 	"update:creditDueDays",
+	"update:writeOffAmount",
 	"update:redeemCustomerCredit",
 	"apply-due-preset",
 	"get-available-credit",
@@ -207,6 +227,14 @@ const handleRedeemCustomerCreditUpdate = (val) => {
 	emit("update:redeemCustomerCredit", val);
 	emit("get-available-credit", val);
 };
+
+const writeOffAmountDisplay = computed(() => {
+	if (props.writeOffAmount === null || props.writeOffAmount === undefined || props.writeOffAmount === "") {
+		return Math.max(props.diffPayment || 0, 0);
+	}
+
+	return props.writeOffAmount;
+});
 </script>
 
 <style scoped>
@@ -263,6 +291,13 @@ const handleRedeemCustomerCreditUpdate = (val) => {
 
 .payment-options-panel__note p,
 .payment-options-panel__empty {
+	margin: 0;
+	font-size: 0.82rem;
+	line-height: 1.45;
+	color: var(--pos-text-secondary);
+}
+
+.payment-options-panel__helper {
 	margin: 0;
 	font-size: 0.82rem;
 	line-height: 1.45;

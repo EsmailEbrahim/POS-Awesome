@@ -7,6 +7,7 @@
 				model-type="format"
 				format="dd-MM-yyyy"
 				auto-apply
+				teleport
 				:placeholder="placeholderText"
 				class="sleek-field posting-date-input pos-themed-input"
 				@update:model-value="onUpdate"
@@ -136,6 +137,7 @@ defineExpose({
 :deep(.dp__menu) {
 	background-color: var(--pos-card-bg) !important;
 	color: var(--pos-text-primary) !important;
+	z-index: 4000 !important;
 }
 
 /* Ensure calendar numbers remain visible across themes */
