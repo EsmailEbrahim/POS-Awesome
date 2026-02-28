@@ -1,12 +1,11 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
-	<div class="payment-shell">
+	<div :class="['payment-shell', { 'payment-shell--dialog': dialogMode }]">
 		<v-card
 			:class="[
 				'selection mx-auto my-0 pos-themed-card payment-card',
 				dialogMode ? 'payment-card--dialog' : 'mt-3',
 			]"
-			:style="{ maxHeight: paymentCardHeight, height: paymentCardHeight }"
 		>
 			<v-progress-linear
 				:active="loading"
@@ -18,195 +17,198 @@
 			<div
 				ref="paymentContainer"
 				class="overflow-y-auto payment-scroll"
-				:style="{ maxHeight: paymentScrollHeight }"
 			>
-				<section class="payment-section payment-section--summary">
-					<div class="payment-section__header">
-						<p class="payment-section__eyebrow">{{ __("Overview") }}</p>
-						<h3 class="payment-section__title">{{ __("Payment Summary") }}</h3>
-					</div>
-					<PaymentSummary
-						:invoice_doc="invoice_doc"
-						:total_payments_display="total_payments_display"
-						:diff_payment_display="diff_payment_display"
-						:diff_label="diff_label"
-						:change_due="change_due"
-						:paid_change="paid_change"
-						:credit_change="credit_change"
-						:paid_change_rules="paid_change_rules"
-						:currencySymbol="currencySymbol"
-						:formatCurrency="formatCurrency"
-						@show-paid-amount="showPaidAmount"
-						@show-diff-payment="showDiffPayment"
-						@show-paid-change="showPaidChange"
-						@update-credit-change="handleCreditChangeUpdate"
-					/>
-				</section>
+				<div :class="['payment-sections', { 'payment-sections--dialog': dialogMode }]">
+					<section class="payment-section payment-section--summary">
+						<div class="payment-section__header">
+							<p class="payment-section__eyebrow">{{ __("Overview") }}</p>
+							<h3 class="payment-section__title">{{ __("Payment Summary") }}</h3>
+						</div>
+						<PaymentSummary
+							:invoice_doc="invoice_doc"
+							:total_payments_display="total_payments_display"
+							:diff_payment_display="diff_payment_display"
+							:diff_label="diff_label"
+							:change_due="change_due"
+							:paid_change="paid_change"
+							:credit_change="credit_change"
+							:paid_change_rules="paid_change_rules"
+							:currencySymbol="currencySymbol"
+							:formatCurrency="formatCurrency"
+							@show-paid-amount="showPaidAmount"
+							@show-diff-payment="showDiffPayment"
+							@show-paid-change="showPaidChange"
+							@update-credit-change="handleCreditChangeUpdate"
+						/>
+					</section>
 
-				<section v-if="is_cashback && invoice_doc" class="payment-section">
-					<div class="payment-section__header">
-						<p class="payment-section__eyebrow">{{ __("Collection") }}</p>
-						<h3 class="payment-section__title">{{ __("Payment Methods") }}</h3>
-					</div>
-					<PaymentMethods
-						:payments="invoice_doc.payments"
-						:currency="invoice_doc.currency"
-						:isReturn="invoice_doc.is_return"
-						:requestPaymentField="request_payment_field"
-						:currencySymbol="currencySymbol"
-						:formatCurrency="formatCurrency"
-						:isNumber="isNumber"
-						:getVisibleDenominations="getVisibleDenominations"
-						:isCashLikePayment="isCashLikePayment"
-						:isMpesaC2bPayment="is_mpesa_c2b_payment"
-						@update-amount="handlePaymentAmountChange"
-						@set-full-amount="set_full_amount"
-						@set-denomination="setPaymentToDenomination"
-						@mpesa-dialog="mpesa_c2b_dialog"
-						@request-payment="request_payment"
-						@set-rest-amount="set_rest_amount"
-					/>
-				</section>
+					<section v-if="is_cashback && invoice_doc" class="payment-section payment-section--methods">
+						<div class="payment-section__header">
+							<p class="payment-section__eyebrow">{{ __("Collection") }}</p>
+							<h3 class="payment-section__title">{{ __("Payment Methods") }}</h3>
+						</div>
+						<PaymentMethods
+							:payments="invoice_doc.payments"
+							:currency="invoice_doc.currency"
+							:isReturn="invoice_doc.is_return"
+							:requestPaymentField="request_payment_field"
+							:currencySymbol="currencySymbol"
+							:formatCurrency="formatCurrency"
+							:isNumber="isNumber"
+							:getVisibleDenominations="getVisibleDenominations"
+							:isCashLikePayment="isCashLikePayment"
+							:isMpesaC2bPayment="is_mpesa_c2b_payment"
+							@update-amount="handlePaymentAmountChange"
+							@set-full-amount="set_full_amount"
+							@set-denomination="setPaymentToDenomination"
+							@mpesa-dialog="mpesa_c2b_dialog"
+							@request-payment="request_payment"
+							@set-rest-amount="set_rest_amount"
+						/>
+					</section>
 
-				<section class="payment-section">
-					<div class="payment-section__header">
-						<p class="payment-section__eyebrow">{{ __("Adjustments") }}</p>
-						<h3 class="payment-section__title">{{ __("Redemption and Totals") }}</h3>
-					</div>
-					<PaymentRedemption
-						:invoice-doc="invoice_doc"
-						:customer-info="customer_info"
-						:pos-profile="pos_profile"
-						:available-points-amount="available_points_amount"
-						:loyalty-amount="loyalty_amount"
-						:available-customer-credit="available_customer_credit"
-						:redeem-customer-credit="redeem_customer_credit"
-						:redeemed-customer-credit="redeemed_customer_credit"
-						:format-currency="formatCurrency"
-						:format-float="formatFloat"
-						:currency-symbol="currencySymbol"
-						@set-formatted-currency="handleRedemptionFormattedCurrency"
-					/>
-					<InvoiceTotals
-						:invoice_doc="invoice_doc"
-						:displayCurrency="displayCurrency"
-						:diff_payment="diff_payment"
-						:diff_label="diff_label"
-						:currencySymbol="currencySymbol"
-						:formatCurrency="formatCurrency"
-					/>
-				</section>
+					<section class="payment-section">
+						<div class="payment-section__header">
+							<p class="payment-section__eyebrow">{{ __("Adjustments") }}</p>
+							<h3 class="payment-section__title">{{ __("Redemption and Totals") }}</h3>
+						</div>
+						<PaymentRedemption
+							:invoice-doc="invoice_doc"
+							:customer-info="customer_info"
+							:pos-profile="pos_profile"
+							:available-points-amount="available_points_amount"
+							:loyalty-amount="loyalty_amount"
+							:available-customer-credit="available_customer_credit"
+							:redeem-customer-credit="redeem_customer_credit"
+							:redeemed-customer-credit="redeemed_customer_credit"
+							:format-currency="formatCurrency"
+							:format-float="formatFloat"
+							:currency-symbol="currencySymbol"
+							@set-formatted-currency="handleRedemptionFormattedCurrency"
+						/>
+						<InvoiceTotals
+							:invoice_doc="invoice_doc"
+							:displayCurrency="displayCurrency"
+							:diff_payment="diff_payment"
+							:diff_label="diff_label"
+							:currencySymbol="currencySymbol"
+							:formatCurrency="formatCurrency"
+						/>
+					</section>
 
-				<section class="payment-section">
-					<div class="payment-section__header">
-						<p class="payment-section__eyebrow">{{ __("Order") }}</p>
-						<h3 class="payment-section__title">{{ __("Fulfillment Details") }}</h3>
-					</div>
-					<PaymentAdditionalInfo
-						:invoice-doc="invoice_doc"
-						:pos-profile="pos_profile"
-						:invoice-type="invoiceType"
-						:return-validity-enabled="returnValidityEnabled"
-						:return-validity-min-date="returnValidityMinDate"
-						:addresses="addresses"
-						:new-delivery-date="new_delivery_date"
-						:return-valid-upto-date="return_valid_upto_date"
-						:address-filter="addressFilter"
-						@update:new-delivery-date="
-							(val) => {
-								new_delivery_date = val;
-								update_delivery_date();
-							}
-						"
-						@update:return-valid-upto-date="
-							(val) => {
-								return_valid_upto_date = val;
-								updateReturnValidUpto();
-							}
-						"
-						@new-address="new_address"
-					/>
-					<PaymentPurchaseOrder
-						:invoice-doc="invoice_doc"
-						:pos-profile="pos_profile"
-						:new-po-date="new_po_date"
-						@update:new-po-date="
-							(val) => {
-								new_po_date = val;
-								update_po_date();
-							}
-						"
-					/>
-				</section>
+					<section class="payment-section">
+						<div class="payment-section__header">
+							<p class="payment-section__eyebrow">{{ __("Order") }}</p>
+							<h3 class="payment-section__title">{{ __("Fulfillment Details") }}</h3>
+						</div>
+						<PaymentAdditionalInfo
+							:invoice-doc="invoice_doc"
+							:pos-profile="pos_profile"
+							:invoice-type="invoiceType"
+							:return-validity-enabled="returnValidityEnabled"
+							:return-validity-min-date="returnValidityMinDate"
+							:addresses="addresses"
+							:new-delivery-date="new_delivery_date"
+							:return-valid-upto-date="return_valid_upto_date"
+							:address-filter="addressFilter"
+							@update:new-delivery-date="
+								(val) => {
+									new_delivery_date = val;
+									update_delivery_date();
+								}
+							"
+							@update:return-valid-upto-date="
+								(val) => {
+									return_valid_upto_date = val;
+									updateReturnValidUpto();
+								}
+							"
+							@new-address="new_address"
+						/>
+						<PaymentPurchaseOrder
+							:invoice-doc="invoice_doc"
+							:pos-profile="pos_profile"
+							:new-po-date="new_po_date"
+							@update:new-po-date="
+								(val) => {
+									new_po_date = val;
+									update_po_date();
+								}
+							"
+						/>
+					</section>
 
-				<section class="payment-section">
-					<div class="payment-section__header">
-						<p class="payment-section__eyebrow">{{ __("Settlement") }}</p>
-						<h3 class="payment-section__title">{{ __("Credit and Output") }}</h3>
-					</div>
-					<PaymentOptions
-						:invoice-doc="invoice_doc"
-						:pos-profile="pos_profile"
-						:diff-payment="diff_payment"
-						:credit-change="credit_change"
-						:is-write-off-change="is_write_off_change"
-						:is-credit-sale="is_credit_sale"
-						:is-cashback="is_cashback"
-						:is-credit-return="is_credit_return"
-						:new-credit-due-date="new_credit_due_date"
-						:credit-due-days="credit_due_days"
-						:credit-due-presets="credit_due_presets"
-						:redeem-customer-credit="redeem_customer_credit"
-						@update:is-write-off-change="is_write_off_change = $event"
-						@update:is-credit-sale="is_credit_sale = $event"
-						@update:is-cashback="is_cashback = $event"
-						@update:is-credit-return="is_credit_return = $event"
-						@update:new-credit-due-date="
-							(val) => {
-								new_credit_due_date = val;
-								update_credit_due_date();
-							}
-						"
-						@update:credit-due-days="credit_due_days = $event"
-						@apply-due-preset="applyDuePreset"
-						@update:redeem-customer-credit="redeem_customer_credit = $event"
-						@get-available-credit="get_available_credit"
-					/>
-					<PaymentCustomerCreditDetails
-						:invoice-doc="invoice_doc"
-						:available-customer-credit="available_customer_credit"
-						:redeem-customer-credit="redeem_customer_credit"
-						:customer-credit-dict="customer_credit_dict"
-						:credit-source-label="creditSourceLabel"
-						:format-currency="formatCurrency"
-						:currency-symbol="currencySymbol"
-						@set-formatted-currency="
-							(data) => setFormatedCurrency(data.target, data.field, null, false, data.value)
-						"
-					/>
-					<PaymentSelectionFields
-						:sales-persons="sales_persons"
-						:sales-person="sales_person"
-						:readonly="readonly"
-						:print-formats="print_formats"
-						:print-format="print_format"
-						@update:sales-person="sales_person = $event"
-						@update:print-format="print_format = $event"
-					/>
-				</section>
+					<section class="payment-section">
+						<div class="payment-section__header">
+							<p class="payment-section__eyebrow">{{ __("Settlement") }}</p>
+							<h3 class="payment-section__title">{{ __("Credit and Output") }}</h3>
+						</div>
+						<PaymentOptions
+							:invoice-doc="invoice_doc"
+							:pos-profile="pos_profile"
+							:diff-payment="diff_payment"
+							:credit-change="credit_change"
+							:is-write-off-change="is_write_off_change"
+							:is-credit-sale="is_credit_sale"
+							:is-cashback="is_cashback"
+							:is-credit-return="is_credit_return"
+							:new-credit-due-date="new_credit_due_date"
+							:credit-due-days="credit_due_days"
+							:credit-due-presets="credit_due_presets"
+							:redeem-customer-credit="redeem_customer_credit"
+							@update:is-write-off-change="is_write_off_change = $event"
+							@update:is-credit-sale="is_credit_sale = $event"
+							@update:is-cashback="is_cashback = $event"
+							@update:is-credit-return="is_credit_return = $event"
+							@update:new-credit-due-date="
+								(val) => {
+									new_credit_due_date = val;
+									update_credit_due_date();
+								}
+							"
+							@update:credit-due-days="credit_due_days = $event"
+							@apply-due-preset="applyDuePreset"
+							@update:redeem-customer-credit="redeem_customer_credit = $event"
+							@get-available-credit="get_available_credit"
+						/>
+						<PaymentCustomerCreditDetails
+							:invoice-doc="invoice_doc"
+							:available-customer-credit="available_customer_credit"
+							:redeem-customer-credit="redeem_customer_credit"
+							:customer-credit-dict="customer_credit_dict"
+							:credit-source-label="creditSourceLabel"
+							:format-currency="formatCurrency"
+							:currency-symbol="currencySymbol"
+							@set-formatted-currency="
+								(data) => setFormatedCurrency(data.target, data.field, null, false, data.value)
+							"
+						/>
+						<PaymentSelectionFields
+							:sales-persons="sales_persons"
+							:sales-person="sales_person"
+							:readonly="readonly"
+							:print-formats="print_formats"
+							:print-format="print_format"
+							@update:sales-person="sales_person = $event"
+							@update:print-format="print_format = $event"
+						/>
+					</section>
+				</div>
 			</div>
 		</v-card>
 
-		<!-- Action Buttons -->
-		<PaymentActionButtons
-			ref="submitButton"
-			:loading="loading"
-			:validatePayment="validatePayment"
-			:highlightSubmit="highlightSubmit"
-			@submit="submit"
-			@submit-and-print="submit(undefined, false, true)"
-			@cancel="back_to_invoice"
-		/>
+		<div :class="['payment-footer', { 'payment-footer--dialog': dialogMode }]">
+			<PaymentActionButtons
+				ref="submitButton"
+				:loading="loading"
+				:validatePayment="validatePayment"
+				:highlightSubmit="highlightSubmit"
+				:compact="dialogMode"
+				@submit="submit"
+				@submit-and-print="submit(undefined, false, true)"
+				@cancel="back_to_invoice"
+			/>
+		</div>
 		<!-- Dialogs Section (Custom Days, Phone Payment) -->
 		<PaymentDialogs
 			:custom-days-dialog="custom_days_dialog"
@@ -325,8 +327,6 @@ const invoice_doc = computed({
 
 const displayCurrency = computed(() => (invoice_doc.value ? invoice_doc.value.currency : ""));
 const isPaymentOpen = computed(() => activeView.value === "payment" || paymentDialogOpen.value);
-const paymentCardHeight = computed(() => (props.dialogMode ? "78vh" : "68vh"));
-const paymentScrollHeight = computed(() => (props.dialogMode ? "calc(78vh - 8px)" : "67vh"));
 
 const validatePayment = computed(() => {
 	const profile = pos_profile.value;
@@ -1194,8 +1194,25 @@ onBeforeUnmount(() => {
 	padding: 0;
 }
 
+.payment-shell--dialog {
+	height: calc(100vh - 48px);
+	display: flex;
+	flex-direction: column;
+	gap: var(--pos-space-2);
+}
+
 .payment-card {
 	padding: var(--pos-space-2);
+}
+
+.payment-card--dialog {
+	flex: 1 1 auto;
+	min-height: 0;
+	height: auto;
+	max-height: none;
+	margin-top: 0;
+	display: flex;
+	flex-direction: column;
 }
 
 .payment-scroll {
@@ -1203,6 +1220,21 @@ onBeforeUnmount(() => {
 	display: flex;
 	flex-direction: column;
 	gap: var(--pos-space-3);
+	flex: 1 1 auto;
+	min-height: 0;
+}
+
+.payment-sections {
+	display: flex;
+	flex-direction: column;
+	gap: var(--pos-space-3);
+}
+
+.payment-sections--dialog {
+	display: grid;
+	grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+	gap: var(--pos-space-2);
+	align-items: start;
 }
 
 .payment-section {
@@ -1213,6 +1245,16 @@ onBeforeUnmount(() => {
 	display: flex;
 	flex-direction: column;
 	gap: var(--pos-space-3);
+}
+
+.payment-sections--dialog .payment-section {
+	padding: 10px;
+	gap: 10px;
+}
+
+.payment-sections--dialog .payment-section--summary,
+.payment-sections--dialog .payment-section--methods {
+	grid-column: span 1;
 }
 
 .payment-section--summary {
@@ -1252,6 +1294,75 @@ onBeforeUnmount(() => {
 
 :deep(.payment-section .v-field) {
 	border-radius: var(--pos-radius-sm);
+}
+
+.payment-footer {
+	flex: 0 0 auto;
+}
+
+.payment-footer--dialog {
+	margin-top: 0;
+}
+
+:deep(.payment-footer--dialog .cards) {
+	margin-top: 0 !important;
+}
+
+:deep(.payment-footer--dialog .v-btn) {
+	min-height: 42px;
+}
+
+:deep(.payment-shell--dialog .payment-methods) {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: var(--pos-space-2);
+}
+
+:deep(.payment-shell--dialog .payment-method-card) {
+	padding: 10px;
+	gap: 10px;
+}
+
+:deep(.payment-shell--dialog .payment-summary-grid),
+:deep(.payment-shell--dialog .invoice-totals-grid),
+:deep(.payment-shell--dialog .payments),
+:deep(.payment-shell--dialog .selection-fields .v-row) {
+	row-gap: 6px;
+}
+
+:deep(.payment-shell--dialog .selection-fields p) {
+	display: none;
+}
+
+:deep(.payment-shell--dialog .payment-summary-grid .v-col),
+:deep(.payment-shell--dialog .invoice-totals-grid .v-col),
+:deep(.payment-shell--dialog .payments .v-col),
+:deep(.payment-shell--dialog .selection-fields .v-col) {
+	padding-top: 2px;
+	padding-bottom: 2px;
+}
+
+:deep(.payment-shell--dialog .payment-section .v-field__input) {
+	min-height: 34px;
+	padding-top: 4px;
+	padding-bottom: 4px;
+}
+
+:deep(.payment-shell--dialog .payment-section .v-label) {
+	font-size: 0.78rem;
+}
+
+:deep(.payment-shell--dialog .payment-section .v-input) {
+	font-size: 0.86rem;
+}
+
+:deep(.payment-shell--dialog .v-switch) {
+	margin-top: 0;
+	margin-bottom: 0;
+}
+
+:deep(.payment-shell--dialog .v-switch .v-label) {
+	font-size: 0.82rem;
 }
 
 .submit-btn {
@@ -1312,9 +1423,21 @@ onBeforeUnmount(() => {
 		padding: var(--pos-space-1);
 	}
 
+	.payment-shell--dialog {
+		height: auto;
+	}
+
 	.payment-scroll {
 		padding: var(--pos-space-2);
 		gap: var(--pos-space-2);
+	}
+
+	.payment-sections--dialog {
+		grid-template-columns: 1fr;
+	}
+
+	:deep(.payment-shell--dialog .payment-methods) {
+		grid-template-columns: 1fr;
 	}
 
 	.payment-section {

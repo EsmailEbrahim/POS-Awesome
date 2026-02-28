@@ -19,8 +19,10 @@
 		<v-dialog
 			v-if="usePaymentDialog"
 			v-model="paymentDialogOpen"
-			max-width="1280"
+			width="96vw"
+			max-width="1480"
 			scrim="rgba(15, 23, 42, 0.55)"
+			class="payment-dialog"
 			@update:model-value="handlePaymentDialogUpdate"
 		>
 			<Payments dialog-mode />
@@ -294,6 +296,12 @@ export default {
 	},
 };
 </script>
+
+<style scoped>
+.payment-dialog :deep(.v-overlay__content) {
+	max-height: calc(100vh - 24px);
+}
+</style>
 
 <style scoped>
 .dynamic-container {

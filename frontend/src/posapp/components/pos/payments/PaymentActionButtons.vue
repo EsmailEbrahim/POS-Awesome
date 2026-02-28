@@ -1,5 +1,5 @@
 <template>
-	<v-card flat class="cards mb-0 mt-3 pa-0">
+	<v-card flat :class="['cards mb-0 mt-3 pa-0', { compact }]">
 		<v-row align="start" no-gutters>
 			<v-col cols="6">
 				<v-btn
@@ -51,9 +51,21 @@ defineProps({
 	loading: Boolean,
 	validatePayment: Boolean,
 	highlightSubmit: Boolean,
+	compact: Boolean,
 });
 
 defineEmits(["submit", "submit-and-print", "cancel"]);
 
 const __ = window.__;
 </script>
+
+<style scoped>
+.cards {
+	background: transparent !important;
+}
+
+.compact :deep(.v-btn),
+:deep(.compact .v-btn) {
+	min-height: 42px;
+}
+</style>
