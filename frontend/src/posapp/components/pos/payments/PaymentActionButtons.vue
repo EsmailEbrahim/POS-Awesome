@@ -8,7 +8,7 @@
 					size="large"
 					color="primary"
 					theme="dark"
-					class="submit-btn payment-footer-btn"
+					class="payment-submit-btn payment-footer-btn"
 					@click="$emit('submit')"
 					:loading="loading"
 					:disabled="loading || validatePayment"

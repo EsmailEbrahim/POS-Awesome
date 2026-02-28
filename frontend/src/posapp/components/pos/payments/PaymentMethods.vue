@@ -33,7 +33,7 @@
 						block
 						color="primary"
 						variant="flat"
-						class="payment-method-btn"
+						class="payment-method-action-btn"
 						@click="$emit('set-full-amount', payment)"
 					>
 						{{ payment.mode_of_payment }}
@@ -69,7 +69,7 @@
 						block
 						color="success"
 						variant="flat"
-						class="payment-method-btn payment-method-btn--success"
+						class="payment-method-action-btn payment-method-action-btn--success"
 						@click="$emit('mpesa-dialog', payment)"
 					>
 						{{ __("Get Payments") }}
@@ -85,7 +85,7 @@
 						block
 						color="success"
 						variant="tonal"
-						class="payment-method-btn payment-method-btn--secondary"
+						class="payment-method-action-btn payment-method-action-btn--secondary"
 						:disabled="payment.amount === 0"
 						@click="$emit('request-payment', payment)"
 					>
@@ -175,7 +175,7 @@ const __ = window.__;
 	white-space: nowrap;
 }
 
-.payment-method-btn {
+.payment-method-action-btn {
 	min-height: 44px;
 	border-radius: var(--pos-radius-sm);
 	font-weight: 700;
@@ -187,26 +187,26 @@ const __ = window.__;
 		transform 0.18s ease !important;
 }
 
-.payment-method-btn:hover,
-.payment-method-btn:focus,
-.payment-method-btn:focus-visible,
-.payment-method-btn:active {
+.payment-method-action-btn:hover,
+.payment-method-action-btn:focus,
+.payment-method-action-btn:focus-visible,
+.payment-method-action-btn:active {
 	filter: brightness(0.94);
 	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.18) !important;
 	transform: translateY(-1px);
 }
 
-.payment-method-btn:active {
+.payment-method-action-btn:active {
 	transform: translateY(0);
 }
 
-.payment-method-btn :deep(.v-btn__overlay),
-.payment-method-btn :deep(.v-btn__underlay) {
+.payment-method-action-btn :deep(.v-btn__overlay),
+.payment-method-action-btn :deep(.v-btn__underlay) {
 	opacity: 0 !important;
 	background: transparent !important;
 }
 
-.payment-method-btn--success {
+.payment-method-action-btn--success {
 	background: rgb(var(--v-theme-success));
 	color: #ffffff;
 }

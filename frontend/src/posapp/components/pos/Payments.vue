@@ -1406,52 +1406,9 @@ onBeforeUnmount(() => {
 	font-size: 0.82rem;
 }
 
-.submit-btn {
-	position: relative;
-}
-
-.submit-btn:hover,
-.submit-btn:focus,
-.submit-btn:focus-visible,
-.submit-btn:active {
-	filter: brightness(0.94);
-	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.18) !important;
-	color: rgb(var(--v-theme-on-primary)) !important;
-}
-
-.submit-btn:focus-visible {
-	outline: 2px solid rgb(var(--v-theme-primary));
-	outline-offset: 2px;
-}
-
-.submit-btn::before,
-.submit-btn:hover::before,
-.submit-btn:focus::before,
-.submit-btn:focus-visible::before,
-.submit-btn:active::before {
-	opacity: 0 !important;
-}
-
 .submit-highlight {
 	box-shadow: 0 0 0 4px rgb(var(--v-theme-primary));
 	transition: box-shadow 0.3s ease-in-out;
-}
-
-.payment-method-btn:hover,
-.payment-method-btn:focus,
-.payment-method-btn:focus-visible,
-.payment-method-btn:active {
-	filter: brightness(0.94);
-	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.18) !important;
-	color: rgb(var(--v-theme-on-primary)) !important;
-}
-
-.payment-method-btn::before,
-.payment-method-btn:hover::before,
-.payment-method-btn:focus::before,
-.payment-method-btn:focus-visible::before,
-.payment-method-btn:active::before {
-	opacity: 0 !important;
 }
 
 .pos-themed-card {
