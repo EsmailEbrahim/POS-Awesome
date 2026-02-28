@@ -12,39 +12,98 @@ const filterByScope = (collection: any, scope: unknown) => {
 	return collection.filter((it: any) => isMatchingScope(it, scope));
 };
 
-const deriveItemSearchFields = (item: any) => {
-	const safeItem = item || {};
+type ItemBarcodeEntry = {
+	barcode?: string | null;
+};
+
+type ItemSerialEntry = {
+	serial_no?: string | null;
+};
+
+type ItemBatchEntry = {
+	batch_no?: string | null;
+};
+
+type SearchableItem = Record<string, any> & {
+	item_name?: string | null;
+	item_barcode?: string | ItemBarcodeEntry[] | null;
+	barcodes?: unknown[];
+	name_keywords?: unknown[];
+	serial_no_data?: ItemSerialEntry[] | null;
+	serials?: unknown[];
+	batch_no_data?: ItemBatchEntry[] | null;
+	batches?: unknown[];
+};
+
+const deriveItemSearchFields = (item: SearchableItem | null | undefined) => {
+	const safeItem: SearchableItem = item || {};
+
+	const getBarcodes = (): string[] => {
+		if (Array.isArray(safeItem.item_barcode)) {
+			return safeItem.item_barcode
+				.map((barcodeEntry) => barcodeEntry?.barcode)
+				.filter((barcode): barcode is string => Boolean(barcode));
+		}
+		if (safeItem.item_barcode) {
+			return [String(safeItem.item_barcode)];
+		}
+		if (Array.isArray(safeItem.barcodes)) {
+			return safeItem.barcodes
+				.map((barcode) => String(barcode))
+				.filter(Boolean);
+		}
+		return [];
+	};
+
+	const getNameKeywords = (): string[] => {
+		if (safeItem.item_name) {
+			return String(safeItem.item_name)
+				.toLowerCase()
+				.split(/\s+/)
+				.filter(Boolean);
+		}
+		if (Array.isArray(safeItem.name_keywords)) {
+			return safeItem.name_keywords
+				.map((keyword) => String(keyword))
+				.filter(Boolean);
+		}
+		return [];
+	};
+
+	const getSerials = (): string[] => {
+		if (Array.isArray(safeItem.serial_no_data)) {
+			return safeItem.serial_no_data
+				.map((serialEntry) => serialEntry?.serial_no)
+				.filter((serial): serial is string => Boolean(serial));
+		}
+		if (Array.isArray(safeItem.serials)) {
+			return safeItem.serials
+				.map((serial) => String(serial))
+				.filter(Boolean);
+		}
+		return [];
+	};
+
+	const getBatches = (): string[] => {
+		if (Array.isArray(safeItem.batch_no_data)) {
+			return safeItem.batch_no_data
+				.map((batchEntry) => batchEntry?.batch_no)
+				.filter((batch): batch is string => Boolean(batch));
+		}
+		if (Array.isArray(safeItem.batches)) {
+			return safeItem.batches
+				.map((batch) => String(batch))
+				.filter(Boolean);
+		}
+		return [];
+	};
+
 	return {
 		...safeItem,
-		barcodes: Array.isArray(safeItem.item_barcode)
-			? safeItem.item_barcode.map((b: any) => b?.barcode).filter(Boolean)
-			: safeItem.item_barcode
-				? [String(safeItem.item_barcode)]
-				: Array.isArray(safeItem.barcodes)
-					? safeItem.barcodes.filter(Boolean)
-					: [],
-		name_keywords: safeItem.item_name
-			? String(safeItem.item_name)
-					.toLowerCase()
-					.split(/\s+/)
-					.filter(Boolean)
-			: Array.isArray(safeItem.name_keywords)
-				? safeItem.name_keywords.filter(Boolean)
-				: [],
-		serials: Array.isArray(safeItem.serial_no_data)
-			? safeItem.serial_no_data
-					.map((s: any) => s?.serial_no)
-					.filter(Boolean)
-			: Array.isArray(safeItem.serials)
-				? safeItem.serials.filter(Boolean)
-				: [],
-		batches: Array.isArray(safeItem.batch_no_data)
-			? safeItem.batch_no_data
-					.map((b: any) => b?.batch_no)
-					.filter(Boolean)
-			: Array.isArray(safeItem.batches)
-				? safeItem.batches.filter(Boolean)
-				: [],
+		barcodes: getBarcodes(),
+		name_keywords: getNameKeywords(),
+		serials: getSerials(),
+		batches: getBatches(),
 	};
 };
 
