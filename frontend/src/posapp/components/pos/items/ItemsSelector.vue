@@ -1141,6 +1141,9 @@ defineExpose({
 .selector-header-card {
 	padding: 0;
 	overflow: hidden;
+	position: sticky;
+	top: 0;
+	z-index: 8;
 }
 
 .selector-results-card {

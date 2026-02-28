@@ -1,6 +1,6 @@
 <template>
 	<!-- Main Invoice Wrapper -->
-	<div class="pa-0">
+	<div class="pa-0 invoice-shell">
 		<!-- Cancel Sale Confirmation Dialog -->
 		<CancelSaleDialog v-model="cancel_dialog" @confirm="cancel_invoice" />
 
@@ -13,7 +13,11 @@
 				resize: 'vertical',
 				overflow: 'auto',
 			}"
-			:class="['cards my-0 py-0 mt-3 resizable', 'pos-themed-card', { 'return-mode': isReturnInvoice }]"
+			:class="[
+				'cards my-0 py-0 mt-3 resizable invoice-main-card',
+				'pos-themed-card',
+				{ 'return-mode': isReturnInvoice },
+			]"
 			@mouseup="saveInvoiceHeight($refs.invoiceCard)"
 			@touchend="saveInvoiceHeight($refs.invoiceCard)"
 		>
@@ -979,6 +983,19 @@ export default {
 	background-color: var(--pos-surface-muted) !important;
 }
 
+.invoice-shell {
+	display: flex;
+	flex-direction: column;
+	gap: var(--dynamic-sm);
+	min-height: 0;
+}
+
+.invoice-main-card {
+	display: flex;
+	flex-direction: column;
+	overflow: hidden !important;
+}
+
 /* Style for selected checkbox button */
 .v-checkbox-btn.v-selected {
 	background-color: var(--submit-start) !important;
@@ -1041,6 +1058,9 @@ export default {
 	display: flex;
 	flex-direction: column;
 	gap: var(--dynamic-sm);
+	flex: 1 1 auto;
+	min-height: 0;
+	overflow: hidden;
 }
 
 .invoice-status-alert {
@@ -1051,6 +1071,9 @@ export default {
 	display: flex;
 	flex-direction: column;
 	gap: var(--dynamic-sm);
+	flex: 1 1 auto;
+	min-height: 0;
+	overflow: hidden;
 }
 
 .invoice-meta-grid {
@@ -1069,6 +1092,10 @@ export default {
 
 .invoice-items-card {
 	padding-bottom: var(--dynamic-xs);
+	display: flex;
+	flex-direction: column;
+	flex: 1 1 auto;
+	min-height: 0;
 }
 
 /* Responsive breakpoints */
@@ -1168,6 +1195,24 @@ export default {
 	width: calc(100% + 2 * var(--dynamic-sm));
 	max-width: calc(100% + 2 * var(--dynamic-sm));
 	box-sizing: border-box;
+	display: flex;
+	flex-direction: column;
+	flex: 1 1 auto;
+	min-height: 0;
+}
+
+:deep(.items-table-wrapper .column-selector-container) {
+	position: sticky;
+	top: 0;
+	z-index: 3;
+	background: var(--pos-card-bg);
+}
+
+:deep(.items-table-wrapper .posa-items-table-container) {
+	flex: 1 1 auto;
+	min-height: 0;
+	height: 100% !important;
+	max-height: 100% !important;
 }
 
 /* New styles for improved column switches */
