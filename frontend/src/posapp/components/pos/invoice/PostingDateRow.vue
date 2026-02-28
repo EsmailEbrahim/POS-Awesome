@@ -1,6 +1,6 @@
 <template>
 	<v-row align="center" class="items px-3 py-2 mt-0" v-if="pos_profile.posa_allow_change_posting_date">
-		<v-col cols="12" sm="4" class="pb-2">
+		<v-col cols="12" sm="6" class="pb-2">
 			<VueDatePicker
 				ref="postingDatePicker"
 				v-model="internal_posting_date_display"
@@ -17,7 +17,7 @@
 			v-if="pos_profile.posa_enable_price_list_dropdown"
 			cols="12"
 			sm="6"
-			class="pb-2 d-flex align-center"
+			class="pb-2 d-flex align-center posting-meta-col"
 		>
 			<v-select
 				density="comfortable"
@@ -38,8 +38,8 @@
 		<v-col
 			v-else-if="pos_profile.posa_show_customer_balance"
 			cols="12"
-			sm="8"
-			class="pb-2 d-flex align-center"
+			sm="6"
+			class="pb-2 d-flex align-center posting-meta-col"
 		>
 			<div class="balance-field">
 				<strong>{{ __("Customer Balance") }}:</strong>
@@ -138,6 +138,15 @@ defineExpose({
 	background-color: var(--pos-card-bg) !important;
 	color: var(--pos-text-primary) !important;
 	z-index: 4000 !important;
+}
+
+.posting-meta-col {
+	justify-content: flex-end;
+}
+
+.balance-field {
+	margin-left: auto;
+	text-align: right;
 }
 
 /* Ensure calendar numbers remain visible across themes */
