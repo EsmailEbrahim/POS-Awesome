@@ -439,10 +439,64 @@ export function getOpeningStorage() {
 	return memory.pos_opening_storage || null;
 }
 
+function cloneOpeningData(data: any) {
+	try {
+		return JSON.parse(JSON.stringify(data));
+	} catch (e) {
+		console.error("Failed to clone opening data", e);
+		return null;
+	}
+}
+
+async function persistOpeningEntities(data: any) {
+	if (!data) {
+		return;
+	}
+	try {
+		await checkDbHealth();
+		if (!db.isOpen()) await db.open();
+
+		const profile = data?.pos_profile;
+		if (profile?.name) {
+			await db.table("pos_profiles").put(profile);
+		}
+
+		const openingShift = data?.pos_opening_shift;
+		if (openingShift?.name) {
+			await db.table("opening_shifts").put({
+				...openingShift,
+				pos_profile:
+					openingShift?.pos_profile || profile?.name || "",
+			});
+		}
+	} catch (e) {
+		console.error("Failed to persist opening entities", e);
+	}
+}
+
+async function clearPersistedOpeningShift(data: any) {
+	const openingShiftName = data?.pos_opening_shift?.name;
+	if (!openingShiftName) {
+		return;
+	}
+	try {
+		await checkDbHealth();
+		if (!db.isOpen()) await db.open();
+		await db.table("opening_shifts").delete(openingShiftName);
+	} catch (e) {
+		console.error("Failed to clear opening shift storage", e);
+	}
+}
+
 export function setOpeningStorage(data) {
 	try {
-		memory.pos_opening_storage = JSON.parse(JSON.stringify(data));
+		const cleanData = cloneOpeningData(data);
+		if (!cleanData) {
+			return;
+		}
+		memory.pos_opening_storage = cleanData;
 		persist("pos_opening_storage");
+		void persistOpeningEntities(cleanData);
 	} catch (e) {
 		console.error("Failed to set opening storage", e);
 	}
@@ -450,8 +504,10 @@ export function setOpeningStorage(data) {
 
 export function clearOpeningStorage() {
 	try {
+		const previousOpeningData = cloneOpeningData(memory.pos_opening_storage);
 		memory.pos_opening_storage = null;
 		persist("pos_opening_storage");
+		void clearPersistedOpeningShift(previousOpeningData);
 	} catch (e) {
 		console.error("Failed to clear opening storage", e);
 	}
