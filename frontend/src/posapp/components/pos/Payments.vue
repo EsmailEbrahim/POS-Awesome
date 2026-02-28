@@ -2,8 +2,11 @@
 <template>
 	<div class="payment-shell">
 		<v-card
-			class="selection mx-auto my-0 mt-3 pos-themed-card payment-card"
-			style="max-height: 68vh; height: 68vh"
+			:class="[
+				'selection mx-auto my-0 pos-themed-card payment-card',
+				dialogMode ? 'payment-card--dialog' : 'mt-3',
+			]"
+			:style="{ maxHeight: paymentCardHeight, height: paymentCardHeight }"
 		>
 			<v-progress-linear
 				:active="loading"
@@ -12,7 +15,11 @@
 				location="top"
 				color="info"
 			></v-progress-linear>
-			<div ref="paymentContainer" class="overflow-y-auto payment-scroll" style="max-height: 67vh">
+			<div
+				ref="paymentContainer"
+				class="overflow-y-auto payment-scroll"
+				:style="{ maxHeight: paymentScrollHeight }"
+			>
 				<section class="payment-section payment-section--summary">
 					<div class="payment-section__header">
 						<p class="payment-section__eyebrow">{{ __("Overview") }}</p>
@@ -249,6 +256,13 @@ import PaymentOptions from "./payments/PaymentOptions.vue";
 import PaymentSelectionFields from "./payments/PaymentSelectionFields.vue";
 import PaymentDialogs from "./payments/PaymentDialogs.vue";
 
+const props = defineProps({
+	dialogMode: {
+		type: Boolean,
+		default: false,
+	},
+});
+
 const { proxy } = getCurrentInstance();
 const eventBus = proxy.eventBus;
 const __ = window.__;
@@ -271,7 +285,7 @@ const {
 } = useFormat();
 
 const { selectedCustomer, customerInfo } = storeToRefs(customersStore);
-const { activeView } = storeToRefs(uiStore);
+const { activeView, paymentDialogOpen } = storeToRefs(uiStore);
 
 // State
 const is_return = ref(false);
@@ -310,6 +324,9 @@ const invoice_doc = computed({
 });
 
 const displayCurrency = computed(() => (invoice_doc.value ? invoice_doc.value.currency : ""));
+const isPaymentOpen = computed(() => activeView.value === "payment" || paymentDialogOpen.value);
+const paymentCardHeight = computed(() => (props.dialogMode ? "78vh" : "68vh"));
+const paymentScrollHeight = computed(() => (props.dialogMode ? "calc(78vh - 8px)" : "67vh"));
 
 const validatePayment = computed(() => {
 	const profile = pos_profile.value;
@@ -537,7 +554,12 @@ const releaseActiveFocus = () => {
 const back_to_invoice = () => {
 	releaseActiveFocus();
 	paymentVisible.value = false;
-	uiStore.setActiveView("items");
+	if (paymentDialogOpen.value) {
+		uiStore.closePaymentDialog();
+	}
+	if (activeView.value === "payment") {
+		uiStore.setActiveView("items");
+	}
 	nextTick(() => {
 		uiStore.triggerItemSearchFocus();
 		if (eventBus && typeof eventBus.emit === "function") {
@@ -982,8 +1004,8 @@ watch(
 	},
 );
 
-watch(activeView, (newVal) => {
-	if (newVal === "payment") {
+watch(isPaymentOpen, (isOpen) => {
+	if (isOpen) {
 		handleShowPayment();
 	} else {
 		releaseActiveFocus();
@@ -1130,7 +1152,7 @@ onMounted(() => {
 		});
 	}
 
-	if (activeView.value === "payment") {
+	if (isPaymentOpen.value) {
 		handleShowPayment("true");
 	}
 });

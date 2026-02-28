@@ -369,7 +369,7 @@ export default {
 			},
 		},
 		paymentVisible() {
-			return this.activeView === "payment";
+			return this.activeView === "payment" || this.uiStore.paymentDialogOpen;
 		},
 		discount_amount: {
 			get() {

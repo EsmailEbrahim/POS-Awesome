@@ -16,6 +16,15 @@
 			@close="closeOpeningDialog"
 			@register="handleRegisterPosData"
 		></OpeningDialog>
+		<v-dialog
+			v-if="usePaymentDialog"
+			v-model="paymentDialogOpen"
+			max-width="1280"
+			scrim="rgba(15, 23, 42, 0.55)"
+			@update:model-value="handlePaymentDialogUpdate"
+		>
+			<Payments dialog-mode />
+		</v-dialog>
 		<v-row v-show="!dialog" dense class="ma-0 dynamic-main-row">
 			<v-col
 				v-show="activeView === 'items'"
@@ -51,7 +60,7 @@
 				<PosCoupons></PosCoupons>
 			</v-col>
 			<v-col
-				v-show="activeView === 'payment'"
+				v-show="activeView === 'payment' && !usePaymentDialog"
 				xl="5"
 				lg="5"
 				md="5"
@@ -82,7 +91,7 @@ import NewAddress from "../customer/NewAddress.vue";
 import Variants from "../items/Variants.vue";
 import Returns from "../flows/Returns.vue";
 import MpesaPayments from "../payments/Mpesa-Payments.vue";
-import { inject, ref, onMounted, onBeforeUnmount } from "vue";
+import { inject, ref, onMounted, onBeforeUnmount, computed, watch, nextTick } from "vue";
 import { usePosShift } from "../../../composables/pos/shared/usePosShift";
 import { useOffers } from "../../../composables/pos/shared/useOffers";
 // Import the cache cleanup function
@@ -109,7 +118,18 @@ export default {
 		const uiStore = useUIStore();
 		const invoiceStore = useInvoiceStore();
 		const itemsStore = useItemsStore();
-		const { activeView, posProfile } = storeToRefs(uiStore);
+		const { activeView, posProfile, paymentDialogOpen } = storeToRefs(uiStore);
+		const usePaymentDialog = computed(() => responsive.windowWidth.value >= 992);
+
+		const handlePaymentDialogUpdate = (value) => {
+			if (value || !usePaymentDialog.value) {
+				return;
+			}
+			uiStore.closePaymentDialog();
+			nextTick(() => {
+				uiStore.triggerItemSearchFocus();
+			});
+		};
 
 		useCustomerDisplayPublisher({
 			posProfile,
@@ -130,6 +150,19 @@ export default {
 			}
 		});
 
+		watch(usePaymentDialog, (enabled) => {
+			if (enabled && activeView.value === "payment") {
+				uiStore.openPaymentDialog();
+				uiStore.setActiveView("items");
+				return;
+			}
+
+			if (!enabled && paymentDialogOpen.value) {
+				uiStore.closePaymentDialog();
+				uiStore.setActiveView("payment");
+			}
+		});
+
 		return {
 			...responsive,
 			...rtl,
@@ -139,6 +172,9 @@ export default {
 			invoiceStore,
 			itemsStore,
 			activeView,
+			paymentDialogOpen,
+			usePaymentDialog,
+			handlePaymentDialogUpdate,
 			eventBus,
 			dialog,
 		};
