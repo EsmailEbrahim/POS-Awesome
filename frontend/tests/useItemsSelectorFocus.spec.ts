@@ -63,4 +63,31 @@ describe("useItemsSelectorFocus", () => {
 		expect(vm.queueManualScanFocus).toHaveBeenCalledTimes(1);
 		expect(vm._focusSpy).not.toHaveBeenCalled();
 	});
+
+	it("starts the camera scanner through the component ref", () => {
+		const startScanning = vi.fn();
+		const vm = createVm({
+			$refs: {
+				itemHeader: {
+					debounce_search: {
+						value: {
+							focus: vi.fn(),
+						},
+					},
+				},
+				cameraScanner: {
+					startScanning,
+				},
+			},
+		});
+		const focusApi = useItemsSelectorFocus({
+			getVM: () => vm,
+			scannerInput: { playScanTone: vi.fn() },
+			itemSelection: { handleSearchKeydown: vi.fn(() => false) },
+		});
+
+		focusApi.startCameraScanning();
+
+		expect(startScanning).toHaveBeenCalledTimes(1);
+	});
 });
