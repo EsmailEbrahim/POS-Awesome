@@ -986,7 +986,7 @@ const onQtyBlur = () => {
 	}
 };
 const startCameraScanning = () => {
-	scannerInput.cameraScannerActive.value = true;
+	itemsSelectorFocus.startCameraScanning();
 };
 const forceReloadItems = () => itemsIntegration.get_items(true);
 const cancelItemDetailsRequest = () => itemDetailFetcher.cancelItemDetailsRequest();

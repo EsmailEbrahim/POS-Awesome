@@ -29,16 +29,17 @@
 			<v-card-text class="pa-0">
 				<div v-if="!cameraPermissionDenied">
 					<!-- Scanner container -->
-					<div class="scanner-container" v-if="isScanning && scannerDialog">
+					<div class="scanner-container" v-if="scannerDialog">
 						<qrcode-stream
 							:formats="readerFormats"
 							:torch="torchActive"
-							:camera="cameraConfig"
+							:constraints="cameraConstraints"
+							:paused="!isScanning"
 							:track="trackFunctionOptions"
 							@detect="onDetect"
 							@error="onError"
 							@camera-on="onCameraReady"
-							@camera-off="isScanning = false"
+							@camera-off="onCameraOff"
 							style="width: 100%; height: 400px; object-fit: cover"
 						>
 							<!-- Overlay -->
@@ -97,7 +98,7 @@
 				<div class="d-flex flex-wrap gap-2">
 					<!-- Flashlight toggle -->
 					<v-btn
-						v-if="isScanning && cameras.length > 0"
+						v-if="isScanning && torchSupported"
 						@click="toggleTorch"
 						:color="torchActive ? 'warning' : 'default'"
 						variant="outlined"
@@ -242,6 +243,8 @@ import { ref, computed, watch, onMounted, onBeforeUnmount, nextTick } from "vue"
 import { QrcodeStream } from "vue-qrcode-reader";
 import opencvProcessor from "../../../utils/opencvProcessor";
 
+const __ = typeof window !== "undefined" && window.__ ? window.__ : (text) => text;
+
 const props = defineProps({
 	scanType: {
 		type: String,
@@ -266,6 +269,8 @@ const isScanning = ref(false);
 const torchActive = ref(false);
 const selectedDeviceId = ref(null);
 const cameras = ref([]);
+const cameraCapabilities = ref({});
+const useBasicConstraints = ref(false);
 
 // OpenCV controls
 const openCVEnabled = ref(true);
@@ -279,34 +284,31 @@ let dialogCloseTimeoutId = null;
 const scannerLockedExternally = ref(false);
 
 // Computed
-const cameraConfig = computed(() => {
-	const baseConstraints = {
-		audio: false,
-		video: {
-			width: { ideal: 1920, min: 1280 },
-			height: { ideal: 1080, min: 720 },
-			aspectRatio: { ideal: 16 / 9 },
-			facingMode: "environment",
-			focusMode: "continuous",
-			advanced: [
-				{ focusMode: "continuous" },
-				{ exposureMode: "continuous" },
-				{ whiteBalanceMode: "continuous" },
-				{ brightness: { ideal: 0.6 } },
-				{ contrast: { ideal: 1.4 } },
-				{ saturation: { ideal: 0.9 } },
-				{ sharpness: { ideal: 1.3 } },
-			],
-		},
-	};
+const cameraConstraints = computed(() => {
+	const constraints = useBasicConstraints.value
+		? {
+				width: { ideal: 1280 },
+				height: { ideal: 720 },
+				facingMode: { ideal: "environment" },
+			}
+		: {
+				width: { ideal: 1920, min: 640 },
+				height: { ideal: 1080, min: 480 },
+				aspectRatio: { ideal: 16 / 9 },
+				facingMode: { ideal: "environment" },
+			};
+
 	if (selectedDeviceId.value) {
 		return {
-			...baseConstraints,
-			video: { ...baseConstraints.video, deviceId: { exact: selectedDeviceId.value } },
+			...constraints,
+			deviceId: { exact: selectedDeviceId.value },
 		};
 	}
-	return baseConstraints;
+
+	return constraints;
 });
+
+const torchSupported = computed(() => Boolean(cameraCapabilities.value?.torch));
 
 const readerFormats = computed(() => {
 	const availableFormats = [
@@ -390,18 +392,24 @@ const startScanning = async () => {
 	scanResult.value = "";
 	scanFormat.value = "";
 	cameraPermissionDenied.value = false;
-	isScanning.value = true;
+	cameraCapabilities.value = {};
+	torchActive.value = false;
+	useBasicConstraints.value = false;
 	await nextTick();
 	await listCameras();
+	isScanning.value = true;
 };
 
-const onCameraReady = () => {
+const onCameraReady = (capabilities = {}) => {
+	cameraCapabilities.value = capabilities || {};
+	errorMessage.value = "";
+	cameraPermissionDenied.value = false;
 	isScanning.value = true;
-	try {
-		console.log("Camera ready with enhanced settings for barcode scanning");
-	} catch (e) {
-		console.warn("Could not apply enhanced camera settings:", e);
-	}
+	console.log("Camera ready for scanning", {
+		deviceId: selectedDeviceId.value,
+		torch: Boolean(cameraCapabilities.value?.torch),
+		basicMode: useBasicConstraints.value,
+	});
 };
 
 const stopScanning = () => {
@@ -417,7 +425,14 @@ const stopScanning = () => {
 	scanFormat.value = "";
 	errorMessage.value = "";
 	torchActive.value = false;
+	cameraCapabilities.value = {};
+	useBasicConstraints.value = false;
 	emit("scanner-closed");
+};
+
+const onCameraOff = () => {
+	torchActive.value = false;
+	isScanning.value = false;
 };
 
 const handleScannedCode = (rawValue, formatLabel = "", options = {}) => {
@@ -496,6 +511,18 @@ const onError = (error) => {
 		errorMessage.value = __(
 			"No camera found on this device. Please ensure your device has a working camera.",
 		);
+	} else if (error.name === "NotReadableError") {
+		errorMessage.value = __(
+			"Camera is busy or blocked by another app/tab. Close other camera apps and try again.",
+		);
+	} else if (error.name === "StreamLoadTimeoutError") {
+		errorMessage.value = __(
+			"Camera started but the video stream did not load in time. Please try again.",
+		);
+	} else if (error.name === "InsecureContextError") {
+		errorMessage.value = __(
+			"Secure context (HTTPS or localhost) is required for camera access.",
+		);
 	} else if (error.name === "NotSupportedError") {
 		errorMessage.value = __(
 			"Secure context (HTTPS) required for camera access. Please use HTTPS to access the camera.",
@@ -518,8 +545,14 @@ const onError = (error) => {
 const tryFallbackCamera = async () => {
 	console.log("Trying fallback camera settings...");
 	try {
+		if (useBasicConstraints.value) {
+			throw new Error("Fallback constraints already active");
+		}
+		useBasicConstraints.value = true;
 		openCVEnabled.value = false; // reduce processing for weak devices
+		isScanning.value = false;
 		await nextTick();
+		if (!scannerDialog.value) return;
 		isScanning.value = true;
 		if (typeof frappe !== "undefined" && frappe.show_alert) {
 			frappe.show_alert(
@@ -535,6 +568,7 @@ const tryFallbackCamera = async () => {
 		errorMessage.value = __(
 			"Unable to access camera even with basic settings. Please check your camera permissions and device compatibility.",
 		);
+		isScanning.value = false;
 	}
 };
 
@@ -547,10 +581,8 @@ const switchCamera = async () => {
 		const currentIndex = cameras.value.findIndex((cam) => cam.deviceId === selectedDeviceId.value);
 		const nextIndex = (currentIndex + 1) % cameras.value.length;
 		selectedDeviceId.value = cameras.value[nextIndex].deviceId;
-
-		isScanning.value = false;
-		await nextTick();
-		isScanning.value = true;
+		torchActive.value = false;
+		errorMessage.value = "";
 
 		if (typeof frappe !== "undefined" && frappe.show_alert) {
 			frappe.show_alert(
@@ -579,9 +611,6 @@ const toggleOpenCVProcessing = async () => {
 		}
 	}
 
-	isScanning.value = false;
-	await nextTick();
-	isScanning.value = true;
 	openCVLoading.value = false;
 
 	if (typeof frappe !== "undefined" && frappe.show_alert) {
