@@ -644,6 +644,60 @@ const buildProfilePaymentLines = () => {
 		}));
 };
 
+const syncPreferredPaymentToCurrentTotal = (doc = invoice_doc.value) => {
+	if (!doc || !Array.isArray(doc.payments) || !doc.payments.length || is_credit_sale.value) {
+		return null;
+	}
+
+	const payments = doc.payments.filter((payment) => payment?.mode_of_payment);
+	if (!payments.length) {
+		return null;
+	}
+
+	const preferredPayment =
+		payments.find((payment) => payment.default === 1 || payment.default === true) ||
+		payments.find((payment) => isCashLikePayment(payment)) ||
+		payments[0];
+
+	if (!preferredPayment) {
+		return null;
+	}
+
+	const otherMeaningfulPayments = payments.filter((payment) => {
+		if (payment === preferredPayment) {
+			return false;
+		}
+		return Math.abs(flt(payment.amount || 0, currency_precision.value)) > 0.0001;
+	});
+
+	if (otherMeaningfulPayments.length) {
+		return preferredPayment;
+	}
+
+	const total = flt(doc.rounded_total || doc.grand_total, currency_precision.value);
+	const normalizedTotal = doc.is_return ? -Math.abs(total) : Math.abs(total);
+	const conversionRate = flt(doc.conversion_rate || 1, currency_precision.value);
+
+	payments.forEach((payment) => {
+		if (payment !== preferredPayment) {
+			payment.amount = 0;
+			if (payment.base_amount !== undefined) {
+				payment.base_amount = 0;
+			}
+		}
+	});
+
+	preferredPayment.amount = normalizedTotal;
+	if (preferredPayment.base_amount !== undefined) {
+		preferredPayment.base_amount = flt(
+			normalizedTotal * conversionRate,
+			currency_precision.value,
+		);
+	}
+
+	return preferredPayment;
+};
+
 const ensurePaymentLinesInitialized = (doc = invoice_doc.value) => {
 	if (!doc) {
 		return null;
@@ -665,6 +719,8 @@ const ensurePaymentLinesInitialized = (doc = invoice_doc.value) => {
 	if (doc.is_return) {
 		ensureReturnPaymentsAreNegative();
 	}
+
+	syncPreferredPaymentToCurrentTotal(doc);
 
 	return initializedPayment;
 };
