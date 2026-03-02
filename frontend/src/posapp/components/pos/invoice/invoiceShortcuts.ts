@@ -3,6 +3,7 @@ const isAltOnly = (event: KeyboardEvent) =>
 const consumeEvent = (event: KeyboardEvent) => {
 	event.preventDefault();
 	event.stopPropagation();
+	event.stopImmediatePropagation?.();
 };
 const isDigit = (event: KeyboardEvent, digit: number) =>
 	event.key === String(digit) ||

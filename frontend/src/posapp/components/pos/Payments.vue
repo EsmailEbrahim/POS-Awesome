@@ -325,6 +325,7 @@ const paymentContainer = ref(null);
 const submitButton = ref(null);
 const _shortcutHandlers = ref({});
 const readonly = ref(false); // Add missing readonly ref
+const submissionInFlight = ref(false);
 
 // Computed Properties
 const invoice_doc = computed({
@@ -623,6 +624,23 @@ const finishSubmissionNavigation = (clearInvoice = false) => {
 	}
 };
 
+const restorePaymentLinesAfterFailedSubmit = () => {
+	const doc = invoice_doc.value;
+	if (!doc || !Array.isArray(doc.payments) || !doc.payments.length) {
+		return;
+	}
+
+	initializePaymentLinesForDialog(
+		doc,
+		currency_precision.value,
+		isCashLikePayment,
+	);
+
+	if (doc.is_return) {
+		ensureReturnPaymentsAreNegative();
+	}
+};
+
 const handleShowPayment = () => {
 	paymentVisible.value = true;
 	nextTick(() => {
@@ -809,27 +827,20 @@ const scheduleBackgroundStatusCheck = (invoiceName, doctype) => {
 
 // Submission Wrapper
 const submit = async (_event, payment_received = false, print = false) => {
-	loading.value = true;
-	try {
-		await validateSubmission(payment_received);
-		await submitInvoiceWrapper(print);
-	} catch (error) {
-		console.error("Submission error:", error);
-		if (error.message) {
-			toastStore.show({
-				title: error.message,
-				color: "error",
-			});
-			frappe.utils.play_sound("error");
-		}
-	} finally {
-		loading.value = false;
-	}
+	await submitInvoiceWrapper(print, undefined, {
+		paymentReceived: payment_received,
+	});
 };
 
-const submitInvoiceWrapper = async (print) => {
+const submitInvoiceWrapper = async (print, callbackOverrides = {}, options = {}) => {
+	if (submissionInFlight.value) {
+		return;
+	}
+
+	submissionInFlight.value = true;
 	loading.value = true;
 	try {
+		await validateSubmission(options.paymentReceived || false);
 		await submitInvoice(print, {
 			onPrint: (doc) => {
 				if (print) {
@@ -854,16 +865,28 @@ const submitInvoiceWrapper = async (print) => {
 			onScheduleBackgroundCheck: (name, doctype) => {
 				scheduleBackgroundStatusCheck(name, doctype);
 			},
+			...callbackOverrides,
 		});
 	} catch (error) {
 		console.error("Submission failed propagate:", error);
+		restorePaymentLinesAfterFailedSubmit();
+
+		if (error?.message) {
+			toastStore.show({
+				title: error.message,
+				color: "error",
+			});
+			frappe.utils.play_sound("error");
+		}
 	} finally {
 		loading.value = false;
+		submissionInFlight.value = false;
 	}
 };
 
 // Keyboard Shortcuts
 const handlePaymentShortcut = (event) => {
+	if (event.defaultPrevented || submissionInFlight.value || loading.value) return;
 	if (!paymentVisible.value) return;
 
 	const isAltOnly = event.altKey && !event.ctrlKey && !event.metaKey;
@@ -884,7 +907,7 @@ const handlePaymentShortcut = (event) => {
 };
 
 const handleSubmitPaymentShortcut = ({ print = false } = {}) => {
-	if (!paymentVisible.value) return;
+	if (!paymentVisible.value || submissionInFlight.value || loading.value) return;
 	nextTick(() => {
 		submit(null, false, print);
 	});
