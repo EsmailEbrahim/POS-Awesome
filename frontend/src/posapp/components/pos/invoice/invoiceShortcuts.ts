@@ -23,7 +23,11 @@ type ShortcutField = "qty" | "uom" | "rate";
 
 interface InvoiceShortcutsVm {
 	toastStore: { show: (_payload: { title: string; color: string }) => void };
-	eventBus: { emit: (_event: string, _payload?: unknown) => void };
+	eventBus: {
+		emit: (_event: string, _payload?: unknown) => void;
+		on?: (_event: string, _handler: (_payload?: unknown) => void) => void;
+		off?: (_event: string, _handler: (_payload?: unknown) => void) => void;
+	};
 	uiStore: {
 		setActiveView: (_view: string) => void;
 		triggerItemSearchFocus: () => void;
@@ -61,10 +65,32 @@ interface InvoiceShortcutsVm {
 	save_and_clear_invoice?: () => void;
 	confirmPaymentSubmission: () => Promise<boolean>;
 	focusItemTableField: (_field: ShortcutField) => void;
+	waitForPaymentUiReady: () => Promise<void>;
 }
 
 const invoiceShortcuts: Record<string, unknown> & ThisType<InvoiceShortcutsVm> =
 	{
+		waitForPaymentUiReady() {
+			return new Promise<void>((resolve) => {
+				const handler = () => {
+					cleanup();
+					resolve();
+				};
+				const cleanup = () => {
+					if (timeoutId) {
+						clearTimeout(timeoutId);
+					}
+					this.eventBus.off?.("payment_ui_ready", handler);
+				};
+				const timeoutId = setTimeout(() => {
+					cleanup();
+					resolve();
+				}, 1500);
+
+				this.eventBus.on?.("payment_ui_ready", handler);
+			});
+		},
+
 		async handleInvoiceShortcut(event: KeyboardEvent) {
 			if (event.defaultPrevented) {
 				return;
@@ -270,7 +296,9 @@ const invoiceShortcuts: Record<string, unknown> & ThisType<InvoiceShortcutsVm> =
 					if (!shouldSubmit) {
 						return;
 					}
+					const paymentUiReady = this.waitForPaymentUiReady();
 					await this.show_payment?.();
+					await paymentUiReady;
 					if (this.paymentVisible) {
 						this.eventBus.emit("submit_payment_shortcut", {
 							print: shouldPrint,

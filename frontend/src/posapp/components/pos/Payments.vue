@@ -746,6 +746,9 @@ const handleShowPayment = () => {
 				el.focus();
 				highlightSubmit.value = true;
 			}
+			if (eventBus && typeof eventBus.emit === "function") {
+				eventBus.emit("payment_ui_ready");
+			}
 		}, 100);
 	});
 };
