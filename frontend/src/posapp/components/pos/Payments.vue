@@ -250,6 +250,7 @@ import { usePaymentMethods } from "../../composables/pos/payments/usePaymentMeth
 import { useInvoiceDetails } from "../../composables/pos/invoice/useInvoiceDetails";
 import { useFormat } from "../../format";
 import { isOffline } from "../../../offline/index";
+import { initializePaymentLinesForDialog } from "../../utils/paymentInitialization";
 
 // Components
 import PaymentSummary from "./payments/PaymentSummary.vue";
@@ -324,6 +325,8 @@ const paymentContainer = ref(null);
 const submitButton = ref(null);
 const _shortcutHandlers = ref({});
 const readonly = ref(false); // Add missing readonly ref
+const submissionInFlight = ref(false);
+const queuedShortcutSubmit = ref(null);
 
 // Computed Properties
 const invoice_doc = computed({
@@ -607,11 +610,10 @@ const finishSubmissionNavigation = (clearInvoice = false) => {
 	back_to_invoice();
 	if (clearInvoice) {
 		addresses.value = [];
+		invoiceStore.clear();
+		invoiceStore.resetPostingDate();
 		if (eventBus && typeof eventBus.emit === "function") {
 			eventBus.emit("clear_invoice");
-		} else {
-			invoiceStore.clear();
-			invoiceStore.resetPostingDate();
 		}
 
 		if (submittedType === "Quotation") {
@@ -621,6 +623,117 @@ const finishSubmissionNavigation = (clearInvoice = false) => {
 			}
 		}
 	}
+};
+
+const buildProfilePaymentLines = () => {
+	const profilePayments = Array.isArray(pos_profile.value?.payments)
+		? pos_profile.value.payments
+		: [];
+
+	return profilePayments
+		.filter((payment) => payment?.mode_of_payment)
+		.map((payment, index) => ({
+			mode_of_payment: payment.mode_of_payment,
+			amount: 0,
+			base_amount: 0,
+			account: payment.account,
+			type: payment.type,
+			default:
+				payment.default === 1 || payment.default === true || index === 0
+					? 1
+					: 0,
+		}));
+};
+
+const syncPreferredPaymentToCurrentTotal = (doc = invoice_doc.value) => {
+	if (!doc || !Array.isArray(doc.payments) || !doc.payments.length || is_credit_sale.value) {
+		return null;
+	}
+
+	const payments = doc.payments.filter((payment) => payment?.mode_of_payment);
+	if (!payments.length) {
+		return null;
+	}
+
+	const preferredPayment =
+		payments.find((payment) => payment.default === 1 || payment.default === true) ||
+		payments.find((payment) => isCashLikePayment(payment)) ||
+		payments[0];
+
+	if (!preferredPayment) {
+		return null;
+	}
+
+	const otherMeaningfulPayments = payments.filter((payment) => {
+		if (payment === preferredPayment) {
+			return false;
+		}
+		return Math.abs(flt(payment.amount || 0, currency_precision.value)) > 0.0001;
+	});
+
+	if (otherMeaningfulPayments.length) {
+		return preferredPayment;
+	}
+
+	const total = flt(doc.rounded_total || doc.grand_total, currency_precision.value);
+	const normalizedTotal = doc.is_return ? -Math.abs(total) : Math.abs(total);
+	const conversionRate = flt(doc.conversion_rate || 1, currency_precision.value);
+
+	payments.forEach((payment) => {
+		if (payment !== preferredPayment) {
+			payment.amount = 0;
+			if (payment.base_amount !== undefined) {
+				payment.base_amount = 0;
+			}
+		}
+	});
+
+	preferredPayment.amount = normalizedTotal;
+	if (preferredPayment.base_amount !== undefined) {
+		preferredPayment.base_amount = flt(
+			normalizedTotal * conversionRate,
+			currency_precision.value,
+		);
+	}
+
+	return preferredPayment;
+};
+
+const ensurePaymentLinesInitialized = (doc = invoice_doc.value) => {
+	if (!doc) {
+		return null;
+	}
+
+	if (!Array.isArray(doc.payments) || !doc.payments.length) {
+		const fallbackPayments = buildProfilePaymentLines();
+		if (fallbackPayments.length) {
+			doc.payments = fallbackPayments;
+		}
+	}
+
+	const initializedPayment = initializePaymentLinesForDialog(
+		doc,
+		currency_precision.value,
+		isCashLikePayment,
+	);
+
+	if (doc.is_return) {
+		ensureReturnPaymentsAreNegative();
+	}
+
+	syncPreferredPaymentToCurrentTotal(doc);
+
+	return initializedPayment;
+};
+
+const restorePaymentLinesAfterFailedSubmit = () => {
+	const doc = invoice_doc.value;
+	if (!doc) {
+		return;
+	}
+
+	ensurePaymentLinesInitialized(doc);
+	is_credit_sale.value = false;
 };
 
 const handleShowPayment = () => {
@@ -633,6 +746,14 @@ const handleShowPayment = () => {
 				el.scrollIntoView({ behavior: "smooth", block: "center" });
 				el.focus();
 				highlightSubmit.value = true;
+			}
+			if (eventBus && typeof eventBus.emit === "function") {
+				eventBus.emit("payment_ui_ready");
+			}
+			if (queuedShortcutSubmit.value) {
+				const payload = queuedShortcutSubmit.value;
+				queuedShortcutSubmit.value = null;
+				handleSubmitPaymentShortcut(payload || {});
 			}
 		}, 100);
 	});
@@ -809,27 +930,20 @@ const scheduleBackgroundStatusCheck = (invoiceName, doctype) => {
 
 // Submission Wrapper
 const submit = async (_event, payment_received = false, print = false) => {
-	loading.value = true;
-	try {
-		await validateSubmission(payment_received);
-		await submitInvoiceWrapper(print);
-	} catch (error) {
-		console.error("Submission error:", error);
-		if (error.message) {
-			toastStore.show({
-				title: error.message,
-				color: "error",
-			});
-			frappe.utils.play_sound("error");
-		}
-	} finally {
-		loading.value = false;
-	}
+	await submitInvoiceWrapper(print, undefined, {
+		paymentReceived: payment_received,
+	});
 };
 
-const submitInvoiceWrapper = async (print) => {
+const submitInvoiceWrapper = async (print, callbackOverrides = {}, options = {}) => {
+	if (submissionInFlight.value) {
+		return;
+	}
+
+	submissionInFlight.value = true;
 	loading.value = true;
 	try {
+		await validateSubmission(options.paymentReceived || false);
 		await submitInvoice(print, {
 			onPrint: (doc) => {
 				if (print) {
@@ -854,16 +968,29 @@ const submitInvoiceWrapper = async (print) => {
 			onScheduleBackgroundCheck: (name, doctype) => {
 				scheduleBackgroundStatusCheck(name, doctype);
 			},
+			...callbackOverrides,
 		});
 	} catch (error) {
 		console.error("Submission failed propagate:", error);
+		restorePaymentLinesAfterFailedSubmit();
+
+		if (error?.message) {
+			toastStore.show({
+				title: error.message,
+				color: "error",
+			});
+			frappe.utils.play_sound("error");
+		}
 	} finally {
 		loading.value = false;
+		submissionInFlight.value = false;
 	}
 };
 
 // Keyboard Shortcuts
 const handlePaymentShortcut = (event) => {
+	if (event.defaultPrevented || submissionInFlight.value || loading.value) return;
+	if (event.repeat) return;
 	if (!paymentVisible.value) return;
 
 	const isAltOnly = event.altKey && !event.ctrlKey && !event.metaKey;
@@ -884,10 +1011,26 @@ const handlePaymentShortcut = (event) => {
 };
 
 const handleSubmitPaymentShortcut = ({ print = false } = {}) => {
-	if (!paymentVisible.value) return;
+	if (!paymentVisible.value || submissionInFlight.value || loading.value) return;
 	nextTick(() => {
 		submit(null, false, print);
 	});
+};
+
+const queueShortcutSubmit = (payload = {}) => {
+	queuedShortcutSubmit.value = payload;
+	if (isPaymentOpen.value) {
+		nextTick(() => {
+			setTimeout(() => {
+				if (!queuedShortcutSubmit.value) {
+					return;
+				}
+				const pendingPayload = queuedShortcutSubmit.value;
+				queuedShortcutSubmit.value = null;
+				handleSubmitPaymentShortcut(pendingPayload || {});
+			}, 150);
+		});
+	}
 };
 
 // Watchers
@@ -1069,11 +1212,13 @@ watch(
 
 watch(isPaymentOpen, (isOpen) => {
 	if (isOpen) {
+		ensurePaymentLinesInitialized();
 		handleShowPayment();
 	} else {
 		releaseActiveFocus();
 		paymentVisible.value = false;
 		highlightSubmit.value = false;
+		queuedShortcutSubmit.value = null;
 	}
 });
 
@@ -1127,33 +1272,15 @@ onMounted(() => {
 			paid_change.value = flt(doc.paid_change || 0, currency_precision.value);
 			credit_change.value = flt(doc.credit_change || 0, currency_precision.value);
 			last_payment_change_was_cash.value = null;
-			const default_payment = doc.payments.find((payment) => payment.default === 1);
-			const hasReturnPayments = doc.payments.some(
-				(payment) => Math.abs(flt(payment.amount || 0, currency_precision.value)) > 0,
-			);
 			is_credit_sale.value = false;
 			is_write_off_change.value = false;
+
+			const initializedPayment = ensurePaymentLinesInitialized(doc);
 
 			if (doc.is_return) {
 				is_return.value = true;
 				is_credit_return.value = false;
-				if (!hasReturnPayments) {
-					doc.payments.forEach((payment) => {
-						payment.amount = 0;
-						payment.base_amount = 0;
-					});
-					if (default_payment) {
-						const amount = doc.rounded_total || doc.grand_total;
-						default_payment.amount = -Math.abs(amount);
-						if (default_payment.base_amount !== undefined) {
-							default_payment.base_amount = -Math.abs(amount);
-						}
-					}
-				} else {
-					ensureReturnPaymentsAreNegative();
-				}
-			} else if (default_payment) {
-				default_payment.amount = flt(doc.rounded_total || doc.grand_total, currency_precision.value);
+			} else if (initializedPayment) {
 				is_credit_return.value = false;
 			}
 			initializeReturnValidity(doc);
@@ -1206,9 +1333,11 @@ onMounted(() => {
 		eventBus.on("set_mpesa_payment", (data) => {
 			set_mpesa_payment(data);
 		});
+		eventBus.on("queue_submit_payment_shortcut", queueShortcutSubmit);
 		eventBus.on("submit_payment_shortcut", handleSubmitPaymentShortcut);
 		eventBus.on("clear_invoice", () => {
-			invoiceStore.setInvoiceDoc({}); // Clear doc
+			invoiceStore.clear();
+			invoiceStore.resetPostingDate();
 			is_return.value = false;
 			is_credit_return.value = false;
 			return_valid_upto_date.value = null;
@@ -1227,6 +1356,7 @@ onBeforeUnmount(() => {
 	eventBus.off("update_invoice_type");
 	eventBus.off("set_pos_settings");
 	eventBus.off("set_mpesa_payment");
+	eventBus.off("queue_submit_payment_shortcut", queueShortcutSubmit);
 	eventBus.off("submit_payment_shortcut", handleSubmitPaymentShortcut);
 	eventBus.off("clear_invoice");
 	eventBus.off("network-online");

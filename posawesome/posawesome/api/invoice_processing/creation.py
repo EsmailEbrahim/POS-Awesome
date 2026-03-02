@@ -1,5 +1,6 @@
 import frappe
 from frappe import _
+from frappe.exceptions import TimestampMismatchError
 from frappe.utils import (
     cint,
     flt,
@@ -149,6 +150,38 @@ def _sanitize_delivery_dates(payload):
     for item in items:
         if isinstance(item, dict) and "posa_delivery_date" in item:
             item["posa_delivery_date"] = _safe_date_string(item.get("posa_delivery_date"))
+
+
+def _save_draft_with_latest_timestamp(invoice_doc, retries=2):
+    attempts = 0
+
+    while True:
+        if invoice_doc.name and not invoice_doc.is_new():
+            latest_modified = frappe.db.get_value(invoice_doc.doctype, invoice_doc.name, "modified")
+            if latest_modified:
+                invoice_doc.modified = latest_modified
+
+        try:
+            invoice_doc.save()
+            return invoice_doc
+        except TimestampMismatchError:
+            if attempts >= retries or not invoice_doc.name:
+                raise
+            attempts += 1
+            latest_doc = frappe.get_doc(invoice_doc.doctype, invoice_doc.name)
+            current_state = invoice_doc.as_dict()
+            current_state.pop("modified", None)
+            current_state.pop("modified_by", None)
+            current_state.pop("creation", None)
+            current_state.pop("owner", None)
+            current_state.pop("_liked_by", None)
+            current_state.pop("__last_sync_on", None)
+            current_state.pop("doctype", None)
+            latest_doc.update(current_state)
+            latest_doc.flags.ignore_permissions = getattr(
+                invoice_doc.flags, "ignore_permissions", False
+            )
+            invoice_doc = latest_doc
 
 
 @frappe.whitelist()
@@ -363,7 +396,7 @@ def update_invoice(data):
     invoice_doc.flags.ignore_permissions = True
     frappe.flags.ignore_account_permission = True
     invoice_doc.docstatus = 0
-    invoice_doc.save()
+    invoice_doc = _save_draft_with_latest_timestamp(invoice_doc)
 
     # Return both the invoice doc and the updated data
     response = invoice_doc.as_dict()
@@ -480,7 +513,7 @@ def submit_invoice(invoice, data, submit_in_background=False):
     invoice_doc.flags.ignore_permissions = True
     frappe.flags.ignore_account_permission = True
     invoice_doc.posa_is_printed = 1
-    invoice_doc.save()
+    invoice_doc = _save_draft_with_latest_timestamp(invoice_doc)
 
     if data.get("due_date"):
         frappe.db.set_value(
@@ -564,7 +597,7 @@ def submit_in_background_job(kwargs):
             if not invoice_doc.loyalty_redemption_cost_center:
                 invoice_doc.loyalty_redemption_cost_center = invoice_doc.cost_center
 
-        invoice_doc.save()
+        invoice_doc = _save_draft_with_latest_timestamp(invoice_doc)
 
         invoice_doc.submit()
 

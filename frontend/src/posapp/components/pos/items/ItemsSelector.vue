@@ -37,13 +37,14 @@
 					<ItemHeader
 						v-model:search-input="search_input"
 						v-model:qty-input="debounce_qty"
-						v-model:new-line="new_line"
+						:new-line="new_line"
 						:pos-profile="pos_profile"
 						:scanner-locked="scannerLocked"
 						:enable-background-sync="enable_background_sync"
 						:last-sync-time="lastSyncTimeLabel"
 						:sync-status="syncStatus"
 						:context="context"
+						@update:newLine="new_line = $event"
 						@esc="esc_event"
 						@enter="onEnter"
 						@search-keydown="handleSearchKeydown"
@@ -401,6 +402,16 @@ watch(
 	{ immediate: true },
 );
 
+watch(
+	new_line,
+	(value) => {
+		if (eventBus && typeof eventBus.emit === "function") {
+			eventBus.emit("set_new_line", !!value);
+		}
+	},
+	{ immediate: true },
+);
+
 const debounce_qty = computed({
 	get() {
 		if (qty.value === null) return "";
@@ -543,6 +554,10 @@ const add_item = async (item, optionsOrQty: any = {}) => {
 			items: invoiceStore.items,
 			isReturnInvoice: isReturnInvoice.value,
 			...options,
+			new_line:
+				typeof options?.new_line === "boolean"
+					? options.new_line
+					: !!new_line.value,
 		};
 
 		const isValid = await cartValidation.validateCartItem(
@@ -675,6 +690,10 @@ const toggleItemSettings = () => {
 
 const applyItemSettings = (settings) => {
 	itemsSelectorSettings.applyItemSettings(settings);
+};
+
+const handleRemoteStockAdjustment = (payload: unknown) => {
+	itemAvailability.handleInvoiceStockAdjusted(payload);
 };
 
 // 7. Lifecycle Hooks
@@ -822,6 +841,7 @@ onMounted(async () => {
 		});
 		eventBus.on("update_invoice_type", handleInvoiceTypeUpdate);
 		eventBus.on("focus_item_search", requestItemSearchFocus);
+		eventBus.on("remote_stock_adjustment", handleRemoteStockAdjustment);
 	}
 
 	// Watch UI Profile for initialization (Source of Truth)
@@ -893,6 +913,7 @@ onBeforeUnmount(() => {
 		eventBus.off("update_customer_price_list");
 		eventBus.off("update_invoice_type", handleInvoiceTypeUpdate);
 		eventBus.off("focus_item_search", requestItemSearchFocus);
+		eventBus.off("remote_stock_adjustment", handleRemoteStockAdjustment);
 	}
 	window.removeEventListener("resize", checkItemContainerOverflow);
 });

@@ -3,6 +3,7 @@ const isAltOnly = (event: KeyboardEvent) =>
 const consumeEvent = (event: KeyboardEvent) => {
 	event.preventDefault();
 	event.stopPropagation();
+	event.stopImmediatePropagation?.();
 };
 const isDigit = (event: KeyboardEvent, digit: number) =>
 	event.key === String(digit) ||
@@ -22,7 +23,11 @@ type ShortcutField = "qty" | "uom" | "rate";
 
 interface InvoiceShortcutsVm {
 	toastStore: { show: (_payload: { title: string; color: string }) => void };
-	eventBus: { emit: (_event: string, _payload?: unknown) => void };
+	eventBus: {
+		emit: (_event: string, _payload?: unknown) => void;
+		on?: (_event: string, _handler: (_payload?: unknown) => void) => void;
+		off?: (_event: string, _handler: (_payload?: unknown) => void) => void;
+	};
 	uiStore: {
 		setActiveView: (_view: string) => void;
 		triggerItemSearchFocus: () => void;
@@ -46,8 +51,20 @@ interface InvoiceShortcutsVm {
 	};
 	items?: Array<Record<string, unknown>>;
 	paymentVisible?: boolean;
+	shortcutSubmitInFlight?: boolean;
 	cancel_dialog?: boolean;
 	shortcutCycle?: Record<ShortcutField, number>;
+	flushBackgroundUpdates?: () => Promise<void> | void;
+	schedulePricingRuleApplication?: {
+		(_force?: boolean): void;
+		flush?: () => void;
+		cancel?: () => void;
+	};
+	triggerBackgroundFlush?: {
+		(): void;
+		flush?: () => void;
+		cancel?: () => void;
+	};
 	close_payments?: () => void;
 	focusCustomerSearchField?: () => void;
 	get_draft_orders?: () => void;
@@ -255,18 +272,28 @@ const invoiceShortcuts: Record<string, unknown> & ThisType<InvoiceShortcutsVm> =
 				if (this.paymentVisible) {
 					return;
 				}
-				consumeEvent(event);
-
-				const shouldPrint = isPrintShortcut;
-				const shouldSubmit = await this.confirmPaymentSubmission();
-				if (!shouldSubmit) {
+				if (event.repeat || this.shortcutSubmitInFlight) {
+					consumeEvent(event);
 					return;
 				}
-				await this.show_payment?.();
-				if (this.paymentVisible) {
-					this.eventBus.emit("submit_payment_shortcut", {
+				consumeEvent(event);
+				this.shortcutSubmitInFlight = true;
+
+				try {
+					const shouldPrint = isPrintShortcut;
+					const shouldSubmit = await this.confirmPaymentSubmission();
+					if (!shouldSubmit) {
+						return;
+					}
+					await this.flushBackgroundUpdates?.();
+					this.triggerBackgroundFlush?.flush?.();
+					this.schedulePricingRuleApplication?.flush?.();
+					this.eventBus.emit("queue_submit_payment_shortcut", {
 						print: shouldPrint,
 					});
+					await this.show_payment?.();
+				} finally {
+					this.shortcutSubmitInFlight = false;
 				}
 			}
 		},

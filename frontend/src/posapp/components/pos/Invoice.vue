@@ -359,6 +359,7 @@ export default {
 			invoice_posting_date: false,
 			posting_date_display: "",
 			_shortcutHandlers: {},
+			shortcutSubmitInFlight: false,
 			shortcutCycle: {
 				qty: 0,
 				uom: 0,

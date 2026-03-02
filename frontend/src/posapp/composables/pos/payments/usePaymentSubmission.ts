@@ -127,6 +127,42 @@ export function usePaymentSubmission(options: PaymentSubmissionOptions) {
 		return exc.toString ? exc.toString() : __("Unknown error");
 	};
 
+	const isTimestampMismatchError = (message: string): boolean => {
+		const normalized = String(message || "").toLowerCase();
+		return (
+			normalized.includes("document has been modified after you have opened it") ||
+			normalized.includes("timestampmismatcherror")
+		);
+	};
+
+	const fetchSubmittedDocstatus = async (doc: any): Promise<number | null> => {
+		const doctype =
+			doc?.doctype ||
+			(unref(posProfile)?.create_pos_invoice_instead_of_sales_invoice
+				? "POS Invoice"
+				: "Sales Invoice");
+		const name = doc?.name;
+		if (!doctype || !name) {
+			return null;
+		}
+
+		try {
+			const result = await frappe.call({
+				method: "frappe.client.get_value",
+				args: {
+					doctype,
+					filters: { name },
+					fieldname: ["docstatus"],
+				},
+			});
+			const status = result?.message?.docstatus;
+			return Number.isFinite(Number(status)) ? Number(status) : null;
+		} catch (error) {
+			console.warn("Unable to verify submitted docstatus after conflict", error);
+			return null;
+		}
+	};
+
 	const getWriteOffLimit = (profile: any): number | null => {
 		if (!profile) return null;
 		const possibleLimitFields = [
@@ -737,6 +773,48 @@ export function usePaymentSubmission(options: PaymentSubmissionOptions) {
 		} catch (exc: any) {
 			console.error("Error submitting invoice:", exc);
 			const errorMsg = extractSubmissionErrorMessage(exc);
+
+			if (isTimestampMismatchError(errorMsg)) {
+				const submittedStatus = await fetchSubmittedDocstatus(doc);
+				if (submittedStatus === 1) {
+					stores?.toastStore?.show({
+						title: __("Invoice {0} was already submitted", [doc?.name || ""]),
+						color: "warning",
+					});
+
+					if (stores?.uiStore && doc?.name) {
+						stores.uiStore.setLastInvoice(doc.name);
+					}
+
+					if (onFinishNavigation) {
+						onFinishNavigation(true);
+					}
+
+					if (stores?.customersStore?.setSelectedCustomer) {
+						stores.customersStore.setSelectedCustomer(
+							profile?.customer || null,
+						);
+					}
+
+					if (onSuccess) {
+						onSuccess({
+							name: doc?.name,
+							doctype: doc?.doctype,
+							docstatus: 1,
+							recovered: true,
+						});
+					}
+
+					return {
+						recoveredDuplicateSubmission: true,
+						message: {
+							name: doc?.name,
+							doctype: doc?.doctype,
+							docstatus: 1,
+						},
+					};
+				}
+			}
 
 			if (errorMsg.includes("Amount must be negative")) {
 				stores?.toastStore?.show({
