@@ -925,6 +925,7 @@ const submitInvoiceWrapper = async (print, callbackOverrides = {}, options = {})
 // Keyboard Shortcuts
 const handlePaymentShortcut = (event) => {
 	if (event.defaultPrevented || submissionInFlight.value || loading.value) return;
+	if (event.repeat) return;
 	if (!paymentVisible.value) return;
 
 	const isAltOnly = event.altKey && !event.ctrlKey && !event.metaKey;

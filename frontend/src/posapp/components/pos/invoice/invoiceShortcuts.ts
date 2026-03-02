@@ -47,6 +47,7 @@ interface InvoiceShortcutsVm {
 	};
 	items?: Array<Record<string, unknown>>;
 	paymentVisible?: boolean;
+	shortcutSubmitInFlight?: boolean;
 	cancel_dialog?: boolean;
 	shortcutCycle?: Record<ShortcutField, number>;
 	close_payments?: () => void;
@@ -256,18 +257,27 @@ const invoiceShortcuts: Record<string, unknown> & ThisType<InvoiceShortcutsVm> =
 				if (this.paymentVisible) {
 					return;
 				}
-				consumeEvent(event);
-
-				const shouldPrint = isPrintShortcut;
-				const shouldSubmit = await this.confirmPaymentSubmission();
-				if (!shouldSubmit) {
+				if (event.repeat || this.shortcutSubmitInFlight) {
+					consumeEvent(event);
 					return;
 				}
-				await this.show_payment?.();
-				if (this.paymentVisible) {
-					this.eventBus.emit("submit_payment_shortcut", {
-						print: shouldPrint,
-					});
+				consumeEvent(event);
+				this.shortcutSubmitInFlight = true;
+
+				try {
+					const shouldPrint = isPrintShortcut;
+					const shouldSubmit = await this.confirmPaymentSubmission();
+					if (!shouldSubmit) {
+						return;
+					}
+					await this.show_payment?.();
+					if (this.paymentVisible) {
+						this.eventBus.emit("submit_payment_shortcut", {
+							print: shouldPrint,
+						});
+					}
+				} finally {
+					this.shortcutSubmitInFlight = false;
 				}
 			}
 		},
