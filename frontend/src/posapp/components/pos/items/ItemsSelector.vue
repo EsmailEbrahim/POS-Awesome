@@ -533,6 +533,7 @@ const add_item = async (item, optionsOrQty: any = {}) => {
 			pos_profile: pos_profile.value,
 			stock_settings: stock_settings.value,
 			customer: selectedCustomer.value,
+			new_line: new_line.value,
 			selected_currency: selected_currency.value,
 			exchange_rate: selected_exchange_rate.value,
 			conversion_rate: selected_conversion_rate.value,
