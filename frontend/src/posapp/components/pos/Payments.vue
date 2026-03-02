@@ -326,6 +326,7 @@ const submitButton = ref(null);
 const _shortcutHandlers = ref({});
 const readonly = ref(false); // Add missing readonly ref
 const submissionInFlight = ref(false);
+const queuedShortcutSubmit = ref(null);
 
 // Computed Properties
 const invoice_doc = computed({
@@ -749,6 +750,11 @@ const handleShowPayment = () => {
 			if (eventBus && typeof eventBus.emit === "function") {
 				eventBus.emit("payment_ui_ready");
 			}
+			if (queuedShortcutSubmit.value) {
+				const payload = queuedShortcutSubmit.value;
+				queuedShortcutSubmit.value = null;
+				handleSubmitPaymentShortcut(payload || {});
+			}
 		}, 100);
 	});
 };
@@ -1011,6 +1017,22 @@ const handleSubmitPaymentShortcut = ({ print = false } = {}) => {
 	});
 };
 
+const queueShortcutSubmit = (payload = {}) => {
+	queuedShortcutSubmit.value = payload;
+	if (isPaymentOpen.value) {
+		nextTick(() => {
+			setTimeout(() => {
+				if (!queuedShortcutSubmit.value) {
+					return;
+				}
+				const pendingPayload = queuedShortcutSubmit.value;
+				queuedShortcutSubmit.value = null;
+				handleSubmitPaymentShortcut(pendingPayload || {});
+			}, 150);
+		});
+	}
+};
+
 // Watchers
 watch(
 	() => uiStore.posProfile,
@@ -1196,6 +1218,7 @@ watch(isPaymentOpen, (isOpen) => {
 		releaseActiveFocus();
 		paymentVisible.value = false;
 		highlightSubmit.value = false;
+		queuedShortcutSubmit.value = null;
 	}
 });
 
@@ -1310,6 +1333,7 @@ onMounted(() => {
 		eventBus.on("set_mpesa_payment", (data) => {
 			set_mpesa_payment(data);
 		});
+		eventBus.on("queue_submit_payment_shortcut", queueShortcutSubmit);
 		eventBus.on("submit_payment_shortcut", handleSubmitPaymentShortcut);
 		eventBus.on("clear_invoice", () => {
 			invoiceStore.clear();
@@ -1332,6 +1356,7 @@ onBeforeUnmount(() => {
 	eventBus.off("update_invoice_type");
 	eventBus.off("set_pos_settings");
 	eventBus.off("set_mpesa_payment");
+	eventBus.off("queue_submit_payment_shortcut", queueShortcutSubmit);
 	eventBus.off("submit_payment_shortcut", handleSubmitPaymentShortcut);
 	eventBus.off("clear_invoice");
 	eventBus.off("network-online");

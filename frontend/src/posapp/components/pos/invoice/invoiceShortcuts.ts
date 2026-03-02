@@ -54,6 +54,17 @@ interface InvoiceShortcutsVm {
 	shortcutSubmitInFlight?: boolean;
 	cancel_dialog?: boolean;
 	shortcutCycle?: Record<ShortcutField, number>;
+	flushBackgroundUpdates?: () => Promise<void> | void;
+	schedulePricingRuleApplication?: {
+		(_force?: boolean): void;
+		flush?: () => void;
+		cancel?: () => void;
+	};
+	triggerBackgroundFlush?: {
+		(): void;
+		flush?: () => void;
+		cancel?: () => void;
+	};
 	close_payments?: () => void;
 	focusCustomerSearchField?: () => void;
 	get_draft_orders?: () => void;
@@ -65,32 +76,10 @@ interface InvoiceShortcutsVm {
 	save_and_clear_invoice?: () => void;
 	confirmPaymentSubmission: () => Promise<boolean>;
 	focusItemTableField: (_field: ShortcutField) => void;
-	waitForPaymentUiReady: () => Promise<void>;
 }
 
 const invoiceShortcuts: Record<string, unknown> & ThisType<InvoiceShortcutsVm> =
 	{
-		waitForPaymentUiReady() {
-			return new Promise<void>((resolve) => {
-				const handler = () => {
-					cleanup();
-					resolve();
-				};
-				const cleanup = () => {
-					if (timeoutId) {
-						clearTimeout(timeoutId);
-					}
-					this.eventBus.off?.("payment_ui_ready", handler);
-				};
-				const timeoutId = setTimeout(() => {
-					cleanup();
-					resolve();
-				}, 1500);
-
-				this.eventBus.on?.("payment_ui_ready", handler);
-			});
-		},
-
 		async handleInvoiceShortcut(event: KeyboardEvent) {
 			if (event.defaultPrevented) {
 				return;
@@ -296,14 +285,13 @@ const invoiceShortcuts: Record<string, unknown> & ThisType<InvoiceShortcutsVm> =
 					if (!shouldSubmit) {
 						return;
 					}
-					const paymentUiReady = this.waitForPaymentUiReady();
+					await this.flushBackgroundUpdates?.();
+					this.triggerBackgroundFlush?.flush?.();
+					this.schedulePricingRuleApplication?.flush?.();
+					this.eventBus.emit("queue_submit_payment_shortcut", {
+						print: shouldPrint,
+					});
 					await this.show_payment?.();
-					await paymentUiReady;
-					if (this.paymentVisible) {
-						this.eventBus.emit("submit_payment_shortcut", {
-							print: shouldPrint,
-						});
-					}
 				} finally {
 					this.shortcutSubmitInFlight = false;
 				}
