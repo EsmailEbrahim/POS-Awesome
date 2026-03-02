@@ -624,13 +624,39 @@ const finishSubmissionNavigation = (clearInvoice = false) => {
 	}
 };
 
-const restorePaymentLinesAfterFailedSubmit = () => {
-	const doc = invoice_doc.value;
-	if (!doc || !Array.isArray(doc.payments) || !doc.payments.length) {
-		return;
+const buildProfilePaymentLines = () => {
+	const profilePayments = Array.isArray(pos_profile.value?.payments)
+		? pos_profile.value.payments
+		: [];
+
+	return profilePayments
+		.filter((payment) => payment?.mode_of_payment)
+		.map((payment, index) => ({
+			mode_of_payment: payment.mode_of_payment,
+			amount: 0,
+			base_amount: 0,
+			account: payment.account,
+			type: payment.type,
+			default:
+				payment.default === 1 || payment.default === true || index === 0
+					? 1
+					: 0,
+		}));
+};
+
+const ensurePaymentLinesInitialized = (doc = invoice_doc.value) => {
+	if (!doc) {
+		return null;
 	}
 
-	initializePaymentLinesForDialog(
+	if (!Array.isArray(doc.payments) || !doc.payments.length) {
+		const fallbackPayments = buildProfilePaymentLines();
+		if (fallbackPayments.length) {
+			doc.payments = fallbackPayments;
+		}
+	}
+
+	const initializedPayment = initializePaymentLinesForDialog(
 		doc,
 		currency_precision.value,
 		isCashLikePayment,
@@ -639,6 +665,18 @@ const restorePaymentLinesAfterFailedSubmit = () => {
 	if (doc.is_return) {
 		ensureReturnPaymentsAreNegative();
 	}
+
+	return initializedPayment;
+};
+
+const restorePaymentLinesAfterFailedSubmit = () => {
+	const doc = invoice_doc.value;
+	if (!doc) {
+		return;
+	}
+
+	ensurePaymentLinesInitialized(doc);
+	is_credit_sale.value = false;
 };
 
 const handleShowPayment = () => {
@@ -1092,6 +1130,7 @@ watch(
 
 watch(isPaymentOpen, (isOpen) => {
 	if (isOpen) {
+		ensurePaymentLinesInitialized();
 		handleShowPayment();
 	} else {
 		releaseActiveFocus();
@@ -1153,16 +1192,11 @@ onMounted(() => {
 			is_credit_sale.value = false;
 			is_write_off_change.value = false;
 
-			const initializedPayment = initializePaymentLinesForDialog(
-				doc,
-				currency_precision.value,
-				isCashLikePayment,
-			);
+			const initializedPayment = ensurePaymentLinesInitialized(doc);
 
 			if (doc.is_return) {
 				is_return.value = true;
 				is_credit_return.value = false;
-				ensureReturnPaymentsAreNegative();
 			} else if (initializedPayment) {
 				is_credit_return.value = false;
 			}
