@@ -45,7 +45,7 @@ describe("useScannerInput", () => {
 		expect(onScan).toHaveBeenCalledWith("123456789012");
 	});
 
-	it("does not auto-process slow manual typing", async () => {
+	it("does not auto-process short numeric input", async () => {
 		let searchValue = "";
 		const onScan = vi.fn().mockResolvedValue(undefined);
 		const scanner = useScannerInput({
@@ -53,27 +53,10 @@ describe("useScannerInput", () => {
 			getSearchInput: () => searchValue,
 		});
 
-		const typedValues = [
-			"1",
-			"12",
-			"123",
-			"1234",
-			"12345",
-			"123456",
-			"1234567",
-			"12345678",
-			"123456789",
-			"1234567890",
-			"12345678901",
-			"123456789012",
-		];
-
-		for (const value of typedValues) {
-			searchValue = value;
-			scanner.handleSearchInput(searchValue);
-			now += 220;
-			await vi.advanceTimersByTimeAsync(220);
-		}
+		searchValue = "12345";
+		scanner.handleSearchInput(searchValue);
+		now += 220;
+		await vi.advanceTimersByTimeAsync(220);
 
 		expect(onScan).not.toHaveBeenCalled();
 	});

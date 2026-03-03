@@ -483,11 +483,22 @@ export function useScannerInput(options: ScannerInputOptions = {}) {
 		}
 
 		keyboardScanTimer.value = setTimeout(() => {
-			evaluateKeyboardScan(
+			const latestValue = (
 				getSearchInputHandler.value
 					? (getSearchInputHandler.value as any)()
-					: currentValue,
-			);
+					: currentValue
+			)
+				?.toString?.()
+				?.trim?.() || "";
+
+			if (!latestValue || latestValue !== currentValue) {
+				return;
+			}
+
+			// Virtual scanners (for example AHK-based tools) often populate the
+			// field without reliable key timing, so fall back to idle-value detection.
+			resetKeyboardScanDetection();
+			onBarcodeScanned(latestValue);
 		}, keyboardScanProcessingDelay);
 
 		return currentValue.length >= keyboardScanMinLength;
