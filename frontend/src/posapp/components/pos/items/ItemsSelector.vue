@@ -980,6 +980,9 @@ const handleSearchKeydown = (e) => itemsSelectorFocus.handleSearchKeydown(e);
 const handleSearchInput = (val) => {
 	search_input.value = val;
 	first_search.value = String(val ?? "");
+	if (scannerInput.handleSearchInput) {
+		scannerInput.handleSearchInput(first_search.value);
+	}
 };
 const handleSearchPaste = (e) => itemsSelectorFocus.handleSearchPaste(e);
 const searchItems = (term) => itemsIntegration.searchItems(term);
