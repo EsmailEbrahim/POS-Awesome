@@ -79,7 +79,7 @@ import {
 } from "../composables/core/useNetwork";
 import { useRtl } from "../composables/core/useRtl";
 import authService from "../services/authService.js";
-import { isCachedOpeningValidForCurrentUser } from "../utils/openingCache";
+import { getValidCachedOpeningForCurrentUser } from "../utils/openingCache";
 
 /**
  * Frappe Desk UI selectors to hide in POS view.
@@ -227,9 +227,6 @@ onMounted(() => {
 	if (BUILD_VERSION) {
 		updateStore.setCurrentVersion(BUILD_VERSION);
 	}
-	updateStore.setReloadAction(() => {
-		window.location.reload();
-	});
 	updateStore.checkForUpdates(true);
 	updateInterval = setInterval(
 		() => updateStore.checkForUpdates(),
@@ -322,14 +319,12 @@ const initializeData = async () => {
 	await initPromise;
 	await memoryInitPromise;
 	checkDbHealth().catch(() => {});
-	// Load POS profile from cache or storage
-	const openingData = getOpeningStorage();
-	if (
-		openingData &&
-		openingData.pos_profile &&
-		isOffline() &&
-		isCachedOpeningValidForCurrentUser(openingData, frappe?.session?.user)
-	) {
+	// Offline-first bootstrap: hydrate register state from IndexedDB before server checks.
+	const openingData = getValidCachedOpeningForCurrentUser(
+		getOpeningStorage(),
+		frappe?.session?.user,
+	);
+	if (openingData) {
 		uiStore.setRegisterData(openingData);
 		if (navigator.onLine) {
 			await refreshTaxInclusiveSetting();
@@ -662,5 +657,31 @@ const adjust_frappe_sidebar_offset = () => {
 	flex-direction: column;
 	min-height: 100%;
 	height: 100%;
+}
+
+@media (max-width: 768px) {
+	.container1 {
+		height: auto;
+		max-height: none;
+		min-height: 100dvh;
+		overflow-y: auto;
+		overflow-x: hidden;
+	}
+
+	.main-content {
+		height: auto;
+		min-height: 100dvh;
+	}
+
+	.page-content {
+		overflow: visible;
+		min-height: 0;
+	}
+
+	:deep(.v-main__wrap) {
+		height: auto;
+		min-height: 100%;
+		overflow: visible;
+	}
 }
 </style>

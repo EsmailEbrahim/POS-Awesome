@@ -30,32 +30,38 @@
 
 			<!-- Add dynamic-padding wrapper like Invoice component -->
 			<div class="dynamic-padding">
-				<ItemHeader
-					v-model:search-input="search_input"
-					v-model:qty-input="debounce_qty"
-					v-model:new-line="new_line"
-					:pos-profile="pos_profile"
-					:scanner-locked="scannerLocked"
-					:enable-background-sync="enable_background_sync"
-					:last-sync-time="lastSyncTimeLabel"
-					:sync-status="syncStatus"
-					:context="context"
-					@esc="esc_event"
-					@enter="onEnter"
-					@search-keydown="handleSearchKeydown"
-					@clear-search="clearSearch"
-					@clear-search-and-qty="clearSearchAndQty"
-					@search-input="handleSearchInput"
-					@search-paste="handleSearchPaste"
-					@focus="handleItemSearchFocus"
-					@clear-qty="clearQty"
-					@blur-qty="onQtyBlur"
-					@start-camera="startCameraScanning"
-					@open-new-item="openNewItemDialog"
-					@toggle-settings="toggleItemSettings"
-					@reload-items="forceReloadItems"
-					ref="itemHeader"
-				/>
+				<v-card flat class="selector-section-card selector-header-card pos-themed-card">
+					<div class="section-card-heading">
+						<h3 class="section-card-heading__title">{{ __("Item Search") }}</h3>
+					</div>
+					<ItemHeader
+						v-model:search-input="search_input"
+						v-model:qty-input="debounce_qty"
+						:new-line="new_line"
+						:pos-profile="pos_profile"
+						:scanner-locked="scannerLocked"
+						:enable-background-sync="enable_background_sync"
+						:last-sync-time="lastSyncTimeLabel"
+						:sync-status="syncStatus"
+						:context="context"
+						@update:newLine="new_line = $event"
+						@esc="esc_event"
+						@enter="onEnter"
+						@search-keydown="handleSearchKeydown"
+						@clear-search="clearSearch"
+						@clear-search-and-qty="clearSearchAndQty"
+						@search-input="handleSearchInput"
+						@search-paste="handleSearchPaste"
+						@focus="handleItemSearchFocus"
+						@clear-qty="clearQty"
+						@blur-qty="onQtyBlur"
+						@start-camera="startCameraScanning"
+						@open-new-item="openNewItemDialog"
+						@toggle-settings="toggleItemSettings"
+						@reload-items="forceReloadItems"
+						ref="itemHeader"
+					/>
+				</v-card>
 
 				<ItemSettingsDialog
 					v-model="show_item_settings"
@@ -72,66 +78,71 @@
 					@save="applyItemSettings"
 				/>
 
-				<v-row class="items">
-					<v-col cols="12" class="pt-0 mt-0">
-						<ItemsSelectorCards
-							v-if="items_view === 'card'"
-							ref="itemsContainer"
-							:displayed-items="displayedItems"
-							:is-loading="isLoadingOrSyncing"
-							:search-input="search_input"
-							:item-group="item_group"
-							:is-overflowing="isOverflowing"
-							:card-slot-height="cardSlotHeight"
-							:card-columns="cardColumns"
-							:card-slot-width="cardSlotWidth"
-							:card-column-width="cardColumnWidth"
-							:card-row-height="cardRowHeight"
-							:virtual-scroll-buffer="virtualScrollBuffer"
-							:pos-profile="pos_profile"
-							:context="context"
-							:selected-currency="selected_currency"
-							:hide-qty-decimals="hide_qty_decimals"
-							:get-last-invoice-rate="getLastInvoiceRate"
-							:is-item-highlighted="isItemHighlighted"
-							:currency-symbol="currencySymbol"
-							:format-currency="memoizedFormatCurrency"
-							:format-number="memoizedFormatNumber"
-							:rate-precision="ratePrecision"
-							:is-negative="isNegative"
-							:no-items-title="__('No items found')"
-							:no-items-subtitle="__('Try adjusting your search or filters')"
-							:clear-search-label="__('Clear Search')"
-							@select-item="select_item"
-							@dragstart="onDragStart"
-							@dragend="onDragEnd"
-							@virtual-range-update="onVirtualRangeUpdate"
-							@clear-search="clearSearch"
-						/>
-						<ItemsSelectorTable
-							v-else
-							ref="itemsTable"
-							:headers="headers"
-							:displayed-items="displayedItems"
-							:header-props="headerProps"
-							:context="context"
-							:pos-profile="pos_profile"
-							:selected-currency="selected_currency"
-							:hide-qty-decimals="hide_qty_decimals"
-							:currency-symbol="currencySymbol"
-							:format-currency="memoizedFormatCurrency"
-							:format-number="memoizedFormatNumber"
-							:rate-precision="ratePrecision"
-							:get-last-invoice-rate="getLastInvoiceRate"
-							:is-negative="isNegative"
-							:item-class="getItemRowClass"
-							:row-props="getItemRowProps"
-							:no-data-text="__('No items found')"
-							@row-click="click_item_row"
-							@list-scroll="onListScroll"
-						/>
-					</v-col>
-				</v-row>
+				<v-card flat class="selector-section-card selector-results-card pos-themed-card">
+					<div class="section-card-heading section-card-heading--with-padding">
+						<h3 class="section-card-heading__title">{{ __("Available Items") }}</h3>
+					</div>
+					<v-row class="items">
+						<v-col cols="12" class="pt-0 mt-0">
+							<ItemsSelectorCards
+								v-if="items_view === 'card'"
+								ref="itemsContainer"
+								:displayed-items="displayedItems"
+								:is-loading="isLoadingOrSyncing"
+								:search-input="search_input"
+								:item-group="item_group"
+								:is-overflowing="isOverflowing"
+								:card-slot-height="cardSlotHeight"
+								:card-columns="cardColumns"
+								:card-slot-width="cardSlotWidth"
+								:card-column-width="cardColumnWidth"
+								:card-row-height="cardRowHeight"
+								:virtual-scroll-buffer="virtualScrollBuffer"
+								:pos-profile="pos_profile"
+								:context="context"
+								:selected-currency="selected_currency"
+								:hide-qty-decimals="hide_qty_decimals"
+								:get-last-invoice-rate="getLastInvoiceRate"
+								:is-item-highlighted="isItemHighlighted"
+								:currency-symbol="currencySymbol"
+								:format-currency="memoizedFormatCurrency"
+								:format-number="memoizedFormatNumber"
+								:rate-precision="ratePrecision"
+								:is-negative="isNegative"
+								:no-items-title="__('No items found')"
+								:no-items-subtitle="__('Try adjusting your search or filters')"
+								:clear-search-label="__('Clear Search')"
+								@select-item="select_item"
+								@dragstart="onDragStart"
+								@dragend="onDragEnd"
+								@virtual-range-update="onVirtualRangeUpdate"
+								@clear-search="clearSearch"
+							/>
+							<ItemsSelectorTable
+								v-else
+								ref="itemsTable"
+								:headers="headers"
+								:displayed-items="displayedItems"
+								:header-props="headerProps"
+								:context="context"
+								:pos-profile="pos_profile"
+								:selected-currency="selected_currency"
+								:hide-qty-decimals="hide_qty_decimals"
+								:currency-symbol="currencySymbol"
+								:format-currency="memoizedFormatCurrency"
+								:format-number="memoizedFormatNumber"
+								:rate-precision="ratePrecision"
+								:get-last-invoice-rate="getLastInvoiceRate"
+								:is-negative="isNegative"
+								:item-class="getItemRowClass"
+								:row-props="getItemRowProps"
+								:no-data-text="__('No items found')"
+								@row-click="click_item_row"
+								@list-scroll="onListScroll"
+							/>
+						</v-col>
+					</v-row>
+				</v-card>
 			</div>
 		</v-card>
 		<ItemActionToolbar
@@ -238,7 +249,7 @@ const toastStore = useToastStore();
 const uiStore = useUIStore();
 const invoiceStore = useInvoiceStore();
 const { selectedCustomer } = storeToRefs(customersStore);
-const { posProfile: uiPosProfile } = storeToRefs(uiStore);
+const { posProfile: uiPosProfile, searchFocusTrigger, activeView } = storeToRefs(uiStore);
 
 const __ = (window as any).__;
 
@@ -270,7 +281,8 @@ const itemSync = useItemSync();
 const itemDisplay = useItemDisplay();
 const itemsLoader = useItemsLoader();
 const itemCurrencyUtils = useItemCurrency();
-const { startItemWorker, itemWorker } = useItemStorageSafety();
+const { startItemWorker, itemWorker, storageAvailable, markStorageUnavailable } =
+	useItemStorageSafety();
 const {
 	ensureBarcodeIndex,
 	resetBarcodeIndex,
@@ -335,6 +347,11 @@ const headerProps = reactive({
 
 // 3. Computed Properties
 const pos_profile = computed(() => (itemsIntegration.posProfile.value || {}) as any);
+const usesLimitSearch = computed(() =>
+	parseBooleanSetting(
+		pos_profile.value?.posa_use_limit_search ?? pos_profile.value?.pose_use_limit_search,
+	),
+);
 const { stockSettings: stock_settings_ref } = storeToRefs(uiStore);
 const stock_settings = computed(() => stock_settings_ref.value || {});
 const items_group = computed(() => itemsIntegration.items_group.value || []);
@@ -381,6 +398,16 @@ watch(
 	() => props.showOnlyBarcodeItems,
 	(value) => {
 		showOnlyBarcodeItemsRef.value = !!value;
+	},
+	{ immediate: true },
+);
+
+watch(
+	new_line,
+	(value) => {
+		if (eventBus && typeof eventBus.emit === "function") {
+			eventBus.emit("set_new_line", !!value);
+		}
 	},
 	{ immediate: true },
 );
@@ -449,6 +476,14 @@ const itemsSelectorSearch = useItemsSelectorSearch({
 	getVM: () => vmInstance?.proxy,
 	scannerInput,
 	itemSelection,
+	getSearchInput: () => String(search_input.value || first_search.value || ""),
+	setSearchInput: (value) => {
+		search_input.value = value;
+		first_search.value = value;
+	},
+	isLimitSearchEnabled: () => usesLimitSearch.value,
+	runLimitSearch: (term) => itemsIntegration.searchItems(term),
+	clearHighlightedItem: () => itemSelection.clearHighlightedItem(),
 });
 const itemsSelectorSettings = useItemsSelectorSettings({ getVM: () => settingsContext, itemSync });
 const itemsSelectorFocus = useItemsSelectorFocus({
@@ -519,6 +554,10 @@ const add_item = async (item, optionsOrQty: any = {}) => {
 			items: invoiceStore.items,
 			isReturnInvoice: isReturnInvoice.value,
 			...options,
+			new_line:
+				typeof options?.new_line === "boolean"
+					? options.new_line
+					: !!new_line.value,
 		};
 
 		const isValid = await cartValidation.validateCartItem(
@@ -653,6 +692,10 @@ const applyItemSettings = (settings) => {
 	itemsSelectorSettings.applyItemSettings(settings);
 };
 
+const handleRemoteStockAdjustment = (payload: unknown) => {
+	itemAvailability.handleInvoiceStockAdjusted(payload);
+};
+
 // 7. Lifecycle Hooks
 const openNewItemDialog = () => {
 	newItemDialog.value = true;
@@ -664,6 +707,45 @@ onMounted(async () => {
 		getDisplayedItems: () => displayedItems.value,
 		getFilteredItems: () => filteredItems.value,
 		updateItemsDetails: (its, opts) => itemDetailFetcher.update_items_details(its, opts),
+	});
+
+	itemDetailFetcher.registerContext({
+		get pos_profile() {
+			return pos_profile.value;
+		},
+		get active_price_list() {
+			return active_price_list.value;
+		},
+		get items() {
+			return items.value;
+		},
+		get displayedItems() {
+			return displayedItems.value;
+		},
+		itemAvailability,
+		itemCurrencyUtils,
+		get usesLimitSearch() {
+			return parseBooleanSetting(
+				pos_profile.value?.posa_use_limit_search ?? pos_profile.value?.pose_use_limit_search,
+			);
+		},
+		get storageAvailable() {
+			return storageAvailable.value;
+		},
+		markStorageUnavailable,
+		applyCurrencyConversionToItem: (item) => {
+			itemCurrencyUtils.applyCurrencyConversionToItem(item, {
+				pos_profile: pos_profile.value,
+				price_list_currency:
+					item?.original_currency || item?.currency || pos_profile.value?.currency,
+				selected_currency: selected_currency.value || pos_profile.value?.currency,
+				exchange_rate: selected_exchange_rate.value,
+				conversion_rate: selected_conversion_rate.value,
+				currency_precision: pos_profile.value?.currency_precision || 2,
+				flt: (window as any).frappe?.utils?.flt,
+			});
+		},
+		forceUpdate: () => vmInstance?.proxy?.$forceUpdate?.(),
 	});
 
 	itemDisplay.registerContext({
@@ -758,6 +840,8 @@ onMounted(async () => {
 			syncSelectorPriceList(priceList);
 		});
 		eventBus.on("update_invoice_type", handleInvoiceTypeUpdate);
+		eventBus.on("focus_item_search", requestItemSearchFocus);
+		eventBus.on("remote_stock_adjustment", handleRemoteStockAdjustment);
 	}
 
 	// Watch UI Profile for initialization (Source of Truth)
@@ -828,6 +912,8 @@ onBeforeUnmount(() => {
 		eventBus.off("update_currency");
 		eventBus.off("update_customer_price_list");
 		eventBus.off("update_invoice_type", handleInvoiceTypeUpdate);
+		eventBus.off("focus_item_search", requestItemSearchFocus);
+		eventBus.off("remote_stock_adjustment", handleRemoteStockAdjustment);
 	}
 	window.removeEventListener("resize", checkItemContainerOverflow);
 });
@@ -836,6 +922,16 @@ onBeforeUnmount(() => {
 watch(search_input, (val) => {
 	first_search.value = val;
 	itemSelection.clearHighlightedItem();
+});
+
+watch(searchFocusTrigger, () => {
+	requestItemSearchFocus();
+});
+
+watch(activeView, (view) => {
+	if (view === "items") {
+		requestItemSearchFocus();
+	}
 });
 
 watch(selectedCustomer, () => {
@@ -883,11 +979,27 @@ const onEnter = (e) => itemsSelectorSearch.onEnter(e);
 const handleSearchKeydown = (e) => itemsSelectorFocus.handleSearchKeydown(e);
 const handleSearchInput = (val) => {
 	search_input.value = val;
+	first_search.value = String(val ?? "");
+	if (scannerInput.handleSearchInput) {
+		scannerInput.handleSearchInput(first_search.value);
+	}
 };
 const handleSearchPaste = (e) => itemsSelectorFocus.handleSearchPaste(e);
+const searchItems = (term) => itemsIntegration.searchItems(term);
+const get_items = (force = false) => itemsIntegration.get_items(force);
+const loadVisibleItems = (reset = false) => itemsLoader.loadVisibleItems(reset);
+const verifyServerItemCount = () => {};
+const requestItemSearchFocus = () => {
+	if (activeView.value !== "items") {
+		return;
+	}
+	nextTick(() => {
+		itemsSelectorFocus.focusItemSearch();
+	});
+};
 const handleItemSearchFocus = () => {
 	clearSearch();
-	itemsSelectorFocus.focusItemSearch();
+	requestItemSearchFocus();
 };
 const clearQty = () => {
 	qty.value = null as any;
@@ -898,7 +1010,7 @@ const onQtyBlur = () => {
 	}
 };
 const startCameraScanning = () => {
-	scannerInput.cameraScannerActive.value = true;
+	itemsSelectorFocus.startCameraScanning();
 };
 const forceReloadItems = () => itemsIntegration.get_items(true);
 const cancelItemDetailsRequest = () => itemDetailFetcher.cancelItemDetailsRequest();
@@ -983,6 +1095,12 @@ defineExpose({
 	handleSearchKeydown,
 	handleSearchInput,
 	handleSearchPaste,
+	searchItems,
+	get_items,
+	loadVisibleItems,
+	verifyServerItemCount,
+	usesLimitSearch,
+	storageAvailable,
 	handleItemSearchFocus,
 	clearQty,
 	startCameraScanning,
@@ -1038,6 +1156,45 @@ defineExpose({
 .dynamic-padding {
 	/* Equal spacing on all sides for consistent alignment */
 	padding: var(--dynamic-sm);
+	display: flex;
+	flex-direction: column;
+	gap: var(--dynamic-sm);
+}
+
+.selector-section-card {
+	background: var(--pos-card-bg) !important;
+	border: 1px solid rgba(var(--v-theme-on-surface), 0.08);
+	border-radius: var(--pos-radius-md, 18px);
+	box-shadow: 0 10px 30px rgba(15, 23, 42, 0.05);
+}
+
+.section-card-heading {
+	padding: 14px 16px 0;
+}
+
+.section-card-heading--with-padding {
+	padding-bottom: 8px;
+}
+
+.section-card-heading__title {
+	margin: 0;
+	font-size: 1rem;
+	font-weight: 700;
+	line-height: 1.25;
+	color: var(--pos-text-primary);
+}
+
+.selector-header-card {
+	padding: 0;
+	overflow: hidden;
+	position: sticky;
+	top: 0;
+	z-index: 8;
+}
+
+.selector-results-card {
+	padding: var(--dynamic-xs);
+	overflow: hidden;
 }
 
 .dynamic-scroll {
@@ -1111,7 +1268,7 @@ defineExpose({
 }
 
 .selection {
-	background-color: var(--surface-secondary) !important;
+	background-color: var(--pos-surface-muted) !important;
 }
 
 .item-selection-option {
