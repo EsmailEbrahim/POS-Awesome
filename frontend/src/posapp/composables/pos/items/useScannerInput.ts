@@ -76,8 +76,8 @@ export function useScannerInput(options: ScannerInputOptions = {}) {
 	// Keyboard Scan Detection State
 	const keyboardScanBuffer = ref("");
 	const keyboardScanTimer = ref<any>(null);
-	const keyboardScanLastTime = ref(0);
-	const keyboardScanStartTime = ref(0);
+	const keyboardScanLastTime = ref(-1);
+	const keyboardScanStartTime = ref(-1);
 	const keyboardScanPendingValue = ref("");
 
 	// Config
@@ -343,8 +343,8 @@ export function useScannerInput(options: ScannerInputOptions = {}) {
 			keyboardScanTimer.value = null;
 		}
 		keyboardScanBuffer.value = "";
-		keyboardScanLastTime.value = 0;
-		keyboardScanStartTime.value = 0;
+		keyboardScanLastTime.value = -1;
+		keyboardScanStartTime.value = -1;
 		keyboardScanPendingValue.value = "";
 	};
 
@@ -360,7 +360,7 @@ export function useScannerInput(options: ScannerInputOptions = {}) {
 			""
 		).trim();
 		const now = getScanTimestamp();
-		const duration = keyboardScanStartTime.value
+		const duration = keyboardScanStartTime.value >= 0
 			? now - keyboardScanStartTime.value
 			: 0;
 
@@ -413,7 +413,7 @@ export function useScannerInput(options: ScannerInputOptions = {}) {
 
 		const now = getScanTimestamp();
 		if (
-			keyboardScanLastTime.value &&
+			keyboardScanLastTime.value >= 0 &&
 			now - keyboardScanLastTime.value > keyboardScanMaxInterval
 		) {
 			// Gap too long, reset but start new buffer
@@ -430,6 +430,10 @@ export function useScannerInput(options: ScannerInputOptions = {}) {
 
 		if (keyboardScanTimer.value) clearTimeout(keyboardScanTimer.value);
 
+		if (keyboardScanBuffer.value.length < keyboardScanMinLength) {
+			return true;
+		}
+
 		// Schedule evaluation
 		keyboardScanTimer.value = setTimeout(() => {
 			evaluateKeyboardScan(
@@ -440,6 +444,64 @@ export function useScannerInput(options: ScannerInputOptions = {}) {
 		}, keyboardScanProcessingDelay);
 
 		return true;
+	};
+
+	const handleSearchInput = (value: string) => {
+		const currentValue = String(value || "").trim();
+		if (!currentValue) {
+			resetKeyboardScanDetection();
+			return false;
+		}
+
+		if (!isSearchFieldPrimedForScan(currentValue)) {
+			resetKeyboardScanDetection();
+			return false;
+		}
+
+		const now = getScanTimestamp();
+		const previousValue = keyboardScanPendingValue.value || "";
+		const isAppend =
+			!previousValue ||
+			(currentValue.length >= previousValue.length &&
+				currentValue.startsWith(previousValue));
+
+		if (keyboardScanStartTime.value < 0 || !isAppend) {
+			keyboardScanStartTime.value = now;
+		}
+
+		keyboardScanBuffer.value = currentValue;
+		keyboardScanPendingValue.value = currentValue;
+		keyboardScanLastTime.value = now;
+
+		if (keyboardScanTimer.value) {
+			clearTimeout(keyboardScanTimer.value);
+		}
+
+		if (currentValue.length < keyboardScanMinLength) {
+			keyboardScanTimer.value = null;
+			return false;
+		}
+
+		keyboardScanTimer.value = setTimeout(() => {
+			const latestValue = (
+				getSearchInputHandler.value
+					? (getSearchInputHandler.value as any)()
+					: currentValue
+			)
+				?.toString?.()
+				?.trim?.() || "";
+
+			if (!latestValue || latestValue !== currentValue) {
+				return;
+			}
+
+			// Virtual scanners (for example AHK-based tools) often populate the
+			// field without reliable key timing, so fall back to idle-value detection.
+			resetKeyboardScanDetection();
+			onBarcodeScanned(latestValue);
+		}, keyboardScanProcessingDelay);
+
+		return currentValue.length >= keyboardScanMinLength;
 	};
 
 	const handleSearchPaste = (event: ClipboardEvent) => {
@@ -508,8 +570,10 @@ export function useScannerInput(options: ScannerInputOptions = {}) {
 		ensureScaleBarcodeSettings,
 		updateScaleBarcodeSettings,
 		handleSearchKeydown,
+		handleSearchInput,
 		handleSearchPaste,
 		handleScanPipelineError,
+		resetKeyboardScanDetection,
 
 		// Utils exposed
 		getScaleBarcodePrefix: () =>
