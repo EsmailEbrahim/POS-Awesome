@@ -242,7 +242,6 @@
 			@open-invoice-management="open_invoice_management"
 			@open-returns="open_returns"
 			@print-draft="print_draft_invoice"
-			@apply-offers="apply_offers_and_reload"
 			@show-payment="handleShowPaymentRequest"
 			@open-customer-display="handleOpenCustomerDisplayRequest"
 		/>

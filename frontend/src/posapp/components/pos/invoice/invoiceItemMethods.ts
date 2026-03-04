@@ -313,9 +313,6 @@ const invoiceItemMethods: Record<string, unknown> &
 	process_invoice_from_order() {
 		return Server.process_invoice_from_order(this);
 	},
-	apply_offers_and_reload() {
-		return Server.apply_offers_and_reload(this);
-	},
 	reload_current_invoice_from_backend() {
 		return Server.reload_current_invoice_from_backend(this);
 	},

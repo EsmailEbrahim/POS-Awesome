@@ -92,19 +92,6 @@
 				{{ __("Print Draft") }}
 			</v-btn>
 		</v-col>
-		<v-col cols="6">
-			<v-btn
-				block
-				color="info"
-				theme="dark"
-				prepend-icon="mdi-tag"
-				@click="$emit('apply-offers')"
-				class="summary-btn"
-				:loading="applyOffersLoading"
-			>
-				{{ __("Apply Offers") }}
-			</v-btn>
-		</v-col>
 		<v-col cols="6" v-if="showCustomerDisplayButton">
 			<v-btn
 				block
@@ -152,7 +139,6 @@ const props = defineProps({
 	invoiceManagementLoading: Boolean,
 	returnsLoading: Boolean,
 	printLoading: Boolean,
-	applyOffersLoading: Boolean,
 	paymentLoading: Boolean,
 	customerDisplayLoading: Boolean,
 });
@@ -165,7 +151,6 @@ defineEmits([
 	"open-invoice-management",
 	"open-returns",
 	"print-draft",
-	"apply-offers",
 	"show-payment",
 	"open-customer-display",
 ]);
