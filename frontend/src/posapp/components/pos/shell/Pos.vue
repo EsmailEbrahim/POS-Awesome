@@ -5,6 +5,7 @@
 		:style="[responsiveStyles, rtlStyles]"
 	>
 		<Drafts></Drafts>
+		<InvoiceManagement></InvoiceManagement>
 		<SalesOrders></SalesOrders>
 		<Returns></Returns>
 		<NewAddress></NewAddress>
@@ -121,6 +122,7 @@ import Payments from "../Payments.vue";
 import PosOffers from "../offers/PosOffers.vue";
 import PosCoupons from "../offers/PosCoupons.vue";
 import Drafts from "../flows/Drafts.vue";
+import InvoiceManagement from "../flows/InvoiceManagement.vue";
 import SalesOrders from "../flows/SalesOrders.vue";
 import NewAddress from "../customer/NewAddress.vue";
 import Variants from "../items/Variants.vue";
@@ -265,6 +267,7 @@ export default {
 		OpeningDialog,
 		Payments,
 		Drafts,
+		InvoiceManagement,
 
 		Returns,
 		PosOffers,

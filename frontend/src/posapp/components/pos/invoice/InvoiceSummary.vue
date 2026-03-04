@@ -125,6 +125,7 @@
 					:selectOrderLoading="selectOrderLoading"
 					:selectPurchaseOrderLoading="selectPurchaseOrderLoading"
 					:cancelLoading="cancelLoading"
+					:invoiceManagementLoading="invoiceManagementLoading"
 					:returnsLoading="returnsLoading"
 					:printLoading="printLoading"
 					:applyOffersLoading="applyOffersLoading"
@@ -134,6 +135,7 @@
 					@load-drafts="handleLoadDrafts"
 					@select-order="handleSelectOrder"
 					@cancel-sale="handleCancelSale"
+					@open-invoice-management="handleOpenInvoiceManagement"
 					@open-returns="handleOpenReturns"
 					@print-draft="handlePrintDraft"
 					@apply-offers="handleApplyOffers"
@@ -178,6 +180,7 @@ const emit = defineEmits([
 	"load-drafts",
 	"select-order",
 	"cancel-sale",
+	"open-invoice-management",
 	"open-returns",
 	"print-draft",
 	"apply-offers",
@@ -189,6 +192,7 @@ const saveLoading = ref(false);
 const loadDraftsLoading = ref(false);
 const selectOrderLoading = ref(false);
 const cancelLoading = ref(false);
+const invoiceManagementLoading = ref(false);
 const returnsLoading = ref(false);
 const printLoading = ref(false);
 const applyOffersLoading = ref(false);
@@ -301,6 +305,15 @@ async function handleCancelSale() {
 		await emit("cancel-sale");
 	} finally {
 		cancelLoading.value = false;
+	}
+}
+
+async function handleOpenInvoiceManagement() {
+	invoiceManagementLoading.value = true;
+	try {
+		await emit("open-invoice-management");
+	} finally {
+		invoiceManagementLoading.value = false;
 	}
 }
 

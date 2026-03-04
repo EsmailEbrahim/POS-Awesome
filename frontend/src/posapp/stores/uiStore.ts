@@ -16,6 +16,7 @@ export const useUIStore = defineStore("ui", () => {
   const activeView = ref<string>("items"); // 'items', 'payment', 'offers', 'coupons'
   const paymentDialogOpen = ref(false);
 
+  const invoiceManagementDialog = ref(false);
   const draftsDialog = ref(false);
   const draftsData = ref<any[]>([]);
 
@@ -32,6 +33,14 @@ export const useUIStore = defineStore("ui", () => {
 
   const closePaymentDialog = () => {
     paymentDialogOpen.value = false;
+  };
+
+  const openInvoiceManagement = () => {
+    invoiceManagementDialog.value = true;
+  };
+
+  const closeInvoiceManagement = () => {
+    invoiceManagementDialog.value = false;
   };
 
   const openDrafts = (data?: any[]) => {
@@ -206,9 +215,12 @@ export const useUIStore = defineStore("ui", () => {
     freezeMessage,
     activeView,
     paymentDialogOpen,
+    invoiceManagementDialog,
     setActiveView,
     openPaymentDialog,
     closePaymentDialog,
+    openInvoiceManagement,
+    closeInvoiceManagement,
     draftsDialog,
     draftsData,
     openDrafts,

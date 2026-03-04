@@ -239,6 +239,7 @@
 			@save-and-clear="save_and_clear_invoice"
 			@load-drafts="get_draft_invoices"
 			@cancel-sale="cancel_dialog = true"
+			@open-invoice-management="open_invoice_management"
 			@open-returns="open_returns"
 			@print-draft="print_draft_invoice"
 			@apply-offers="apply_offers_and_reload"
