@@ -43,6 +43,16 @@ export const useUIStore = defineStore("ui", () => {
     invoiceManagementDialog.value = false;
   };
 
+  const paymentRouteTarget = ref<any | null>(null);
+
+  const setPaymentRouteTarget = (target: any | null) => {
+    paymentRouteTarget.value = target || null;
+  };
+
+  const clearPaymentRouteTarget = () => {
+    paymentRouteTarget.value = null;
+  };
+
   const openDrafts = (data?: any[]) => {
     draftsData.value = data || [];
     draftsDialog.value = true;
@@ -216,11 +226,14 @@ export const useUIStore = defineStore("ui", () => {
     activeView,
     paymentDialogOpen,
     invoiceManagementDialog,
+    paymentRouteTarget,
     setActiveView,
     openPaymentDialog,
     closePaymentDialog,
     openInvoiceManagement,
     closeInvoiceManagement,
+    setPaymentRouteTarget,
+    clearPaymentRouteTarget,
     draftsDialog,
     draftsData,
     openDrafts,
