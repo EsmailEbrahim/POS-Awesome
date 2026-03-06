@@ -1027,12 +1027,17 @@ export const useItemsStore = defineStore("items", () => {
 		}
 	};
 
-	const refreshModifiedItems = async () => {
+	const refreshModifiedItems = async (priceListOverride: string | null = null) => {
 		if (!itemsLoaded.value) return { size: 0, count: 0, items: [] };
+		const resolvedPriceList =
+			typeof priceListOverride === "string" &&
+			priceListOverride.trim().length > 0
+				? priceListOverride.trim()
+				: activePriceList.value;
 
 		return await syncRefreshModifiedItems(
 			posProfile.value,
-			activePriceList.value,
+			resolvedPriceList,
 			customer.value,
 			getStorageScope(),
 			(updates) => updateItemsInPlace(updates),

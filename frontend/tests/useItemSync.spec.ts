@@ -38,6 +38,7 @@ describe("useItemSync", () => {
 			get background_sync_interval() {
 				return 30;
 			},
+			getBackgroundSyncPriceList: () => "STANDARD-PL",
 			refreshModifiedItems,
 			itemDetailFetcher: {
 				update_items_details: updateItemsDetails,
@@ -52,8 +53,13 @@ describe("useItemSync", () => {
 		await sync.performBackgroundSync({ source: "test" });
 
 		expect(refreshModifiedItems).toHaveBeenCalledTimes(1);
-		expect(refreshAllItemDetailsInBatches).toHaveBeenCalledTimes(1);
-		expect(updateItemsDetails).toHaveBeenCalledTimes(1);
+		expect(refreshAllItemDetailsInBatches).toHaveBeenCalledWith(100, {
+			priceListOverride: "STANDARD-PL",
+		});
+		expect(updateItemsDetails).toHaveBeenCalledWith(
+			[{ item_code: "ITEM-1" }],
+			{ priceListOverride: "STANDARD-PL" },
+		);
 		expect(setItemsLastSync).toHaveBeenCalledTimes(1);
 		expect(sync.last_background_sync_time.value).toBeTruthy();
 	});

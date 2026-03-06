@@ -822,7 +822,14 @@ onMounted(async () => {
 				? items_per_page.value
 				: itemsPerPage.value;
 		},
-		refreshModifiedItems: () => itemsIntegration.refreshModifiedItems(),
+		getBackgroundSyncPriceList: () =>
+			pos_profile.value?.selling_price_list ||
+			itemsIntegration.active_price_list.value ||
+			null,
+		refreshModifiedItems: () =>
+			itemsIntegration.refreshModifiedItems(
+				pos_profile.value?.selling_price_list || null,
+			),
 		backgroundSyncItems: (args) => itemsIntegration.backgroundSyncItems(args),
 		get_items: (force) => itemsIntegration.get_items(force),
 		search_onchange: (value, fromScanner) =>

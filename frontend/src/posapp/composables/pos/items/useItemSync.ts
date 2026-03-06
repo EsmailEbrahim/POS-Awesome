@@ -19,9 +19,15 @@ export function useItemSync() {
 	type ItemDetailFetcher = {
 		update_items_details: (
 			_items: SyncItem[],
-			_options?: { forceRefresh?: boolean },
+			_options?: {
+				forceRefresh?: boolean;
+				priceListOverride?: string | null;
+			},
 		) => Promise<void>;
-		refreshAllItemDetailsInBatches: (_batchSize?: number) => Promise<void>;
+		refreshAllItemDetailsInBatches: (
+			_batchSize?: number,
+			_options?: { priceListOverride?: string | null },
+		) => Promise<void>;
 	};
 	type EventBus = { emit: (_event: string, _payload?: unknown) => void };
 	type ItemSyncContext = {
@@ -39,6 +45,7 @@ export function useItemSync() {
 		itemDetailFetcher: ItemDetailFetcher | null;
 		eventBus: EventBus | null;
 		fetchServerItemsTimestamp: null | (() => Promise<string | null>);
+		getBackgroundSyncPriceList: null | (() => string | null);
 		getItems: () => SyncItem[];
 		getDisplayedItems: () => SyncItem[];
 		onBackgroundLoadFinished?: () => void;
@@ -68,6 +75,7 @@ export function useItemSync() {
 		itemDetailFetcher: null,
 		eventBus: null,
 		fetchServerItemsTimestamp: null,
+		getBackgroundSyncPriceList: null,
 		// Data references
 		getItems: () => [],
 		getDisplayedItems: () => [],
@@ -186,6 +194,10 @@ export function useItemSync() {
 		try {
 			console.debug(`${BG_SYNC_LOG} started`, { source });
 			await ensureBackgroundSyncBaseline();
+			const backgroundPriceList =
+				typeof ctx.getBackgroundSyncPriceList === "function"
+					? ctx.getBackgroundSyncPriceList()
+					: null;
 
 			if (ctx.refreshModifiedItems) {
 				const { items: updatedItems } =
@@ -202,7 +214,10 @@ export function useItemSync() {
 					if (ctx.itemDetailFetcher) {
 						await ctx.itemDetailFetcher.update_items_details(
 							updatedItems,
-							{ forceRefresh: true },
+							{
+								forceRefresh: true,
+								priceListOverride: backgroundPriceList,
+							},
 						);
 					}
 					if (ctx.eventBus) {
@@ -215,11 +230,14 @@ export function useItemSync() {
 				// Refresh cached quantities/prices for all items so non-visible items stay in sync.
 				await ctx.itemDetailFetcher.refreshAllItemDetailsInBatches(
 					ctx.itemsPageLimit || 100,
+					{ priceListOverride: backgroundPriceList },
 				);
 
 				const displayed = ctx.getDisplayedItems();
 				if (displayed && displayed.length > 0) {
-					await ctx.itemDetailFetcher.update_items_details(displayed);
+					await ctx.itemDetailFetcher.update_items_details(displayed, {
+						priceListOverride: backgroundPriceList,
+					});
 				}
 			}
 
