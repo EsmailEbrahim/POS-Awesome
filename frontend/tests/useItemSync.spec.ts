@@ -25,6 +25,7 @@ describe("useItemSync", () => {
 		const sync = useItemSync();
 		let currentProfile: any = null;
 		const changedItem = { item_code: "ITEM-1" } as any;
+		getItemsLastSync.mockReturnValue("2026-03-06 15:27:28.166399");
 		const refreshModifiedItems = vi.fn(async () => ({
 			items: [changedItem],
 		}));
@@ -61,7 +62,9 @@ describe("useItemSync", () => {
 				priceListOverride: "STANDARD-PL",
 			},
 		);
-		expect(setItemsLastSync).toHaveBeenCalledTimes(1);
-		expect(sync.last_background_sync_time.value).toBeTruthy();
+		expect(setItemsLastSync).not.toHaveBeenCalled();
+		expect(sync.last_background_sync_time.value).toBe(
+			"2026-03-06 15:27:28.166399",
+		);
 	});
 });

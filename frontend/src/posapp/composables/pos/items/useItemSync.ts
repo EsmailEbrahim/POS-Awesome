@@ -205,11 +205,6 @@ export function useItemSync() {
 				modifiedCount = Array.isArray(updatedItems)
 					? updatedItems.length
 					: 0;
-				console.info("[POSA][TEMP][BG_SYNC] background sync step", {
-					source,
-					priceList: backgroundPriceList,
-					modifiedCount,
-				});
 				console.debug(`${BG_SYNC_LOG} modified items fetched`, {
 					source,
 					modifiedCount,
@@ -234,14 +229,13 @@ export function useItemSync() {
 			// Delta-only background sync: avoid full catalog refresh.
 			// Detailed refresh is applied only to changed items above.
 
-			const syncedAt = new Date().toISOString();
-			last_background_sync_time.value = syncedAt;
-			setItemsLastSync(syncedAt);
+			last_background_sync_time.value =
+				getItemsLastSync() || new Date().toISOString();
 			console.debug(`${BG_SYNC_LOG} completed`, {
 				source,
 				modifiedCount,
 				durationMs: Date.now() - startedAt,
-				syncedAt,
+				syncedAt: last_background_sync_time.value,
 			});
 		} catch (error) {
 			console.error(`${BG_SYNC_LOG} failed`, { source, error });

@@ -1054,17 +1054,22 @@ export const useItemsStore = defineStore("items", () => {
 
 		const additions: Item[] = [];
 		const touchedItems: Item[] = [];
+		const canonicalItemsByCode = new Map<string, Item>();
+		items.value.forEach((item) => {
+			if (item?.item_code) {
+				canonicalItemsByCode.set(item.item_code, item);
+			}
+		});
 
 		updates.forEach((update) => {
 			if (!update?.item_code) {
 				return;
 			}
 
-			const existing = itemsMap.value.get(update.item_code);
+			const existing = canonicalItemsByCode.get(update.item_code);
 			if (existing) {
 				Object.assign(existing, update);
-				const syncedRate =
-					update.price_list_rate ?? update.rate;
+				const syncedRate = update.price_list_rate ?? update.rate;
 				if (syncedRate !== undefined && syncedRate !== null) {
 					existing.original_rate = syncedRate as any;
 				}
@@ -1073,8 +1078,7 @@ export const useItemsStore = defineStore("items", () => {
 				}
 				touchedItems.push(existing);
 			} else {
-				const syncedRate =
-					update.price_list_rate ?? update.rate;
+				const syncedRate = update.price_list_rate ?? update.rate;
 				if (
 					syncedRate !== undefined &&
 					syncedRate !== null &&
@@ -1099,6 +1103,9 @@ export const useItemsStore = defineStore("items", () => {
 		}
 
 		if (touchedItems.length > 0) {
+			// Force a shallow array refresh so virtualized tables/cards re-render
+			// even when rows are updated in-place.
+			items.value = [...items.value];
 			updateIndexes(touchedItems, posProfile.value);
 		}
 
