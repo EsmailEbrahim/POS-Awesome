@@ -250,7 +250,8 @@ export const useItemsStore = defineStore("items", () => {
 
 			if (additions.length) {
 				items.value = [...items.value, ...additions];
-				updateIndexes(additions, posProfile.value);
+				const appendedItems = items.value.slice(-additions.length);
+				updateIndexes(appendedItems, posProfile.value);
 			}
 		}
 
@@ -951,6 +952,7 @@ export const useItemsStore = defineStore("items", () => {
 				item.currency = nextCurrency;
 			}
 		});
+		clearSearchCache();
 
 		if (searchTerm.value) {
 			filteredItems.value = performLocalSearch(
@@ -1046,25 +1048,45 @@ export const useItemsStore = defineStore("items", () => {
 	};
 
 	const updateItemsInPlace = (updates: Item[]) => {
-		let needsReindex = false;
+		if (!Array.isArray(updates) || updates.length === 0) {
+			return;
+		}
+
 		const additions: Item[] = [];
+		const touchedItems: Item[] = [];
 
 		updates.forEach((update) => {
+			if (!update?.item_code) {
+				return;
+			}
+
 			const existing = itemsMap.value.get(update.item_code);
 			if (existing) {
 				Object.assign(existing, update);
+				touchedItems.push(existing);
 			} else {
 				additions.push(update);
 			}
 		});
 
 		if (additions.length > 0) {
-			items.value.push(...additions);
-			updateIndexes(additions, posProfile.value);
-			needsReindex = true;
+			items.value = [...items.value, ...additions];
+			const appendedItems = items.value.slice(-additions.length);
+			updateIndexes(appendedItems, posProfile.value);
 		}
 
-		if (needsReindex && !searchTerm.value) {
+		if (touchedItems.length > 0) {
+			updateIndexes(touchedItems, posProfile.value);
+		}
+
+		clearSearchCache();
+		if (searchTerm.value) {
+			filteredItems.value = performLocalSearch(
+				searchTerm.value,
+				items.value,
+				itemGroup.value,
+			);
+		} else {
 			filteredItems.value = filterItemsByGroup(
 				items.value,
 				itemGroup.value,
