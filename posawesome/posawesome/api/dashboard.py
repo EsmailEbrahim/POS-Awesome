@@ -98,14 +98,18 @@ def _coerce_threshold(value: Any, fallback: Any, default: int = 10, maximum: int
     return min(int(threshold), maximum)
 
 
+def _to_bool_setting(value: Any, default: bool = False) -> bool:
+    if value in (None, ""):
+        return default
+    return bool(cint(value))
+
+
 def _is_dashboard_enabled(profile_doc: dict[str, Any]) -> bool:
     if not frappe.db.has_column("POS Profile", "posa_enable_awesome_dashboard"):
         return True
 
     value = profile_doc.get("posa_enable_awesome_dashboard")
-    if value in (None, ""):
-        return True
-    return bool(cint(value))
+    return _to_bool_setting(value, True)
 
 
 def _safe_pos_settings_value(fieldname: str, default: Any = None):
@@ -526,7 +530,9 @@ def get_dashboard_data(
     global_settings = _get_global_dashboard_settings()
     profile_scope_enabled = True
     if frappe.db.has_column("POS Profile", "posa_allow_company_dashboard_scope"):
-        profile_scope_enabled = bool(cint(current_profile_doc.get("posa_allow_company_dashboard_scope", 1)))
+        profile_scope_enabled = _to_bool_setting(
+            current_profile_doc.get("posa_allow_company_dashboard_scope"), True
+        )
 
     allow_all_profiles = _user_can_view_all_profiles(user) and profile_scope_enabled
     requested_scope = _normalize_scope(scope, global_settings["default_scope"], allow_all_profiles)
@@ -573,9 +579,11 @@ def get_dashboard_data(
     ]
     selected_profiles = [profile for profile in selected_profiles if profile]
 
-    if not selected_profiles and current_profile_name in profiles_by_name:
-        selected_profiles = [profiles_by_name[current_profile_name]]
-        selected_profile_names = [current_profile_name]
+    if not selected_profiles:
+        current_profile_fallback = profiles_by_name.get(current_profile_name) or current_profile_doc
+        if current_profile_fallback and _is_dashboard_enabled(current_profile_fallback):
+            selected_profiles = [current_profile_fallback]
+            selected_profile_names = [current_profile_name]
 
     profile_override_enabled = [
         profile for profile in selected_profiles if _is_dashboard_enabled(profile)
@@ -606,6 +614,12 @@ def get_dashboard_data(
     today = getdate(nowdate())
     month_start = today.replace(day=1)
     global_enabled = bool(global_settings["enabled"])
+    disabled_reason = None
+    if not global_enabled:
+        disabled_reason = "global_disabled"
+    elif not selected_profiles:
+        disabled_reason = "no_profiles_in_scope"
+
     enabled = bool(global_enabled and selected_profiles)
     profile_label = single_profile.get("name") if single_profile else None
     warehouse_label = warehouses[0] if len(warehouses) == 1 else _("Multiple Warehouses")
@@ -617,6 +631,7 @@ def get_dashboard_data(
         "default_scope": global_settings["default_scope"],
         "allow_all_profiles": allow_all_profiles,
         "profile_scope_enabled": profile_scope_enabled,
+        "disabled_reason": disabled_reason,
         "selected_profiles": selected_profile_names,
         "available_profiles": [
             {
