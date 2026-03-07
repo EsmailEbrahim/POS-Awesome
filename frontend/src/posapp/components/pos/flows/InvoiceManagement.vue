@@ -774,7 +774,7 @@ import { appendDebugPrintParam, isDebugPrintEnabled, silentPrint, watchPrintWind
 import { printDocumentViaQz } from "../../../services/qzTray";
 import { isOffline } from "../../../../offline/index";
 
-const TAB_PAGE_SIZE = 10;
+const TAB_PAGE_SIZE = 25;
 
 export default {
 	mixins: [format],
