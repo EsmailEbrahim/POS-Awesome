@@ -4448,32 +4448,99 @@ def _collect_reorder_purchase_suggestions(
     return report
 
 
-def _collect_supplier_purchase_summary(
+def _collect_supplier_overview_report(
     company: str,
     date_from: str,
     date_to: str,
     limit: int,
-) -> list[dict[str, Any]]:
+) -> dict[str, Any]:
+    report: dict[str, Any] = {
+        "period": {"from": date_from, "to": date_to},
+        "summary": {
+            "supplier_count": 0,
+            "purchase_count": 0,
+            "purchase_amount": 0.0,
+            "paid_amount": 0.0,
+            "pending_amount": 0.0,
+            "avg_invoice_value": 0.0,
+            "pending_ratio_pct": 0.0,
+        },
+        "purchase_summary": [],
+        "risk_suppliers": [],
+        "day_wise": [],
+        "highlights": {
+            "top_supplier": None,
+            "top_pending_supplier": None,
+        },
+    }
     if not frappe.db.exists("DocType", "Purchase Invoice"):
-        return []
+        return report
 
     amount_field = _pick_first_column("Purchase Invoice", ["base_grand_total", "grand_total"])
     if not amount_field:
-        return []
+        return report
+
+    paid_field = _pick_first_column("Purchase Invoice", ["base_paid_amount", "paid_amount"])
+    outstanding_field = _pick_first_column(
+        "Purchase Invoice",
+        ["base_outstanding_amount", "outstanding_amount"],
+    )
 
     supplier_name_field = (
         "supplier_name"
         if frappe.db.has_column("Purchase Invoice", "supplier_name")
         else "supplier"
     )
+    amount_expression = f"coalesce({amount_field}, 0)"
+    paid_expression = f"coalesce({paid_field}, 0)" if paid_field else "0"
+    if outstanding_field:
+        pending_expression = f"greatest(coalesce({outstanding_field}, 0), 0)"
+    elif paid_field:
+        pending_expression = f"greatest(({amount_expression}) - ({paid_expression}), 0)"
+    else:
+        pending_expression = "0"
 
-    return frappe.db.sql(
+    totals_rows = frappe.db.sql(
+        f"""
+        select
+            count(name) as purchase_count,
+            count(distinct supplier) as supplier_count,
+            sum({amount_expression}) as purchase_amount,
+            sum({paid_expression}) as paid_amount,
+            sum({pending_expression}) as pending_amount
+        from `tabPurchase Invoice`
+        where docstatus = 1
+          and company = %s
+          and posting_date between %s and %s
+        """,
+        (company, date_from, date_to),
+        as_dict=True,
+    )
+    totals = totals_rows[0] if totals_rows else {}
+    summary = report["summary"]
+    summary["supplier_count"] = cint(totals.get("supplier_count"))
+    summary["purchase_count"] = cint(totals.get("purchase_count"))
+    summary["purchase_amount"] = flt(totals.get("purchase_amount"))
+    summary["paid_amount"] = flt(totals.get("paid_amount"))
+    summary["pending_amount"] = flt(totals.get("pending_amount"))
+    purchase_count = cint(summary.get("purchase_count"))
+    purchase_amount = flt(summary.get("purchase_amount"))
+    summary["avg_invoice_value"] = flt(purchase_amount / purchase_count) if purchase_count else 0.0
+    summary["pending_ratio_pct"] = (
+        flt((flt(summary["pending_amount"]) / purchase_amount) * 100)
+        if purchase_amount > 0.00001
+        else 0.0
+    )
+
+    supplier_rows = frappe.db.sql(
         f"""
         select
             supplier as supplier,
             max({supplier_name_field}) as supplier_name,
             count(name) as purchase_count,
-            sum(coalesce({amount_field}, 0)) as purchase_amount,
+            sum({amount_expression}) as purchase_amount,
+            sum({paid_expression}) as paid_amount,
+            sum({pending_expression}) as pending_amount,
             max(posting_date) as last_purchase_date
         from `tabPurchase Invoice`
         where docstatus = 1
@@ -4486,6 +4553,69 @@ def _collect_supplier_purchase_summary(
         (company, date_from, date_to, limit),
         as_dict=True,
     )
+    purchase_summary: list[dict[str, Any]] = []
+    for row in supplier_rows:
+        supplier_amount = flt(row.get("purchase_amount"))
+        supplier_count = cint(row.get("purchase_count"))
+        pending_amount = flt(row.get("pending_amount"))
+        purchase_summary.append(
+            {
+                "supplier": cstr(row.get("supplier")).strip(),
+                "supplier_name": cstr(row.get("supplier_name")).strip(),
+                "purchase_count": supplier_count,
+                "purchase_amount": supplier_amount,
+                "paid_amount": flt(row.get("paid_amount")),
+                "pending_amount": pending_amount,
+                "avg_invoice_value": flt(supplier_amount / supplier_count) if supplier_count else 0.0,
+                "share_pct": flt((supplier_amount / purchase_amount) * 100) if purchase_amount > 0.00001 else 0.0,
+                "pending_ratio_pct": flt((pending_amount / supplier_amount) * 100)
+                if supplier_amount > 0.00001
+                else 0.0,
+                "last_purchase_date": row.get("last_purchase_date"),
+            }
+        )
+
+    risk_suppliers = sorted(
+        [row for row in purchase_summary if flt(row.get("pending_amount")) > 0.00001],
+        key=lambda row: (flt(row.get("pending_amount")), flt(row.get("pending_ratio_pct"))),
+        reverse=True,
+    )[:limit]
+
+    day_rows = frappe.db.sql(
+        f"""
+        select
+            posting_date as posting_date,
+            count(name) as purchase_count,
+            sum({amount_expression}) as purchase_amount,
+            sum({paid_expression}) as paid_amount,
+            sum({pending_expression}) as pending_amount
+        from `tabPurchase Invoice`
+        where docstatus = 1
+          and company = %s
+          and posting_date between %s and %s
+        group by posting_date
+        order by posting_date asc
+        """,
+        (company, date_from, date_to),
+        as_dict=True,
+    )
+    day_wise = [
+        {
+            "date": cstr(row.get("posting_date")).strip(),
+            "purchase_count": cint(row.get("purchase_count")),
+            "purchase_amount": flt(row.get("purchase_amount")),
+            "paid_amount": flt(row.get("paid_amount")),
+            "pending_amount": flt(row.get("pending_amount")),
+        }
+        for row in day_rows
+    ]
+
+    report["purchase_summary"] = purchase_summary
+    report["risk_suppliers"] = risk_suppliers
+    report["day_wise"] = day_wise
+    report["highlights"]["top_supplier"] = purchase_summary[0] if purchase_summary else None
+    report["highlights"]["top_pending_supplier"] = risk_suppliers[0] if risk_suppliers else None
+    return report
 
 
 @frappe.whitelist()
@@ -4975,8 +5105,23 @@ def get_dashboard_data(
             "low_stock_threshold": threshold,
         },
         "supplier_overview": {
-            "purchase_summary": [],
             "period": {"from": str(month_start), "to": str(report_to_date)},
+            "summary": {
+                "supplier_count": 0,
+                "purchase_count": 0,
+                "purchase_amount": 0.0,
+                "paid_amount": 0.0,
+                "pending_amount": 0.0,
+                "avg_invoice_value": 0.0,
+                "pending_ratio_pct": 0.0,
+            },
+            "purchase_summary": [],
+            "risk_suppliers": [],
+            "day_wise": [],
+            "highlights": {
+                "top_supplier": None,
+                "top_pending_supplier": None,
+            },
         },
     }
 
@@ -5141,7 +5286,7 @@ def get_dashboard_data(
         threshold=threshold,
         limit=low_stock_limit,
     )
-    payload["supplier_overview"]["purchase_summary"] = _collect_supplier_purchase_summary(
+    payload["supplier_overview"] = _collect_supplier_overview_report(
         company=company,
         date_from=str(month_start),
         date_to=str(report_to_date),

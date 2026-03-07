@@ -63,7 +63,30 @@ export interface SupplierSummaryRow {
 	supplier_name?: string;
 	purchase_count: number;
 	purchase_amount: number;
+	paid_amount?: number;
+	pending_amount?: number;
+	avg_invoice_value?: number;
+	share_pct?: number;
+	pending_ratio_pct?: number;
 	last_purchase_date?: string;
+}
+
+export interface SupplierDayRow {
+	date?: string;
+	purchase_count?: number;
+	purchase_amount?: number;
+	paid_amount?: number;
+	pending_amount?: number;
+}
+
+export interface SupplierOverviewSummary {
+	supplier_count?: number;
+	purchase_count?: number;
+	purchase_amount?: number;
+	paid_amount?: number;
+	pending_amount?: number;
+	avg_invoice_value?: number;
+	pending_ratio_pct?: number;
 }
 
 export interface ItemSalesRow {
@@ -661,7 +684,14 @@ export interface DashboardResponse {
 		low_stock_threshold: number;
 	};
 	supplier_overview: {
+		summary?: SupplierOverviewSummary;
 		purchase_summary: SupplierSummaryRow[];
+		risk_suppliers?: SupplierSummaryRow[];
+		day_wise?: SupplierDayRow[];
+		highlights?: {
+			top_supplier?: SupplierSummaryRow | null;
+			top_pending_supplier?: SupplierSummaryRow | null;
+		};
 		period?: {
 			from?: string;
 			to?: string;

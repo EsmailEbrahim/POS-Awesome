@@ -1810,9 +1810,17 @@
 						<v-card class="dashboard-card" elevation="2">
 							<div class="dashboard-card__header">
 								<h2 class="text-subtitle-1 font-weight-bold mb-0">{{ __("Supplier Purchase Summary") }}</h2>
-								<v-chip size="small" color="info" variant="tonal">
-									{{ monthRangeLabel }}
-								</v-chip>
+								<div class="dashboard-chip-row">
+									<v-chip size="small" color="info" variant="tonal">
+										{{ monthRangeLabel }}
+									</v-chip>
+									<v-chip size="small" color="primary" variant="tonal">
+										{{ __("Top Supplier") }}: {{ topSupplierLabel }}
+									</v-chip>
+									<v-chip size="small" color="warning" variant="tonal">
+										{{ __("Top Pending") }}: {{ topPendingSupplierLabel }}
+									</v-chip>
+								</div>
 							</div>
 							<div class="card-filters">
 								<v-text-field
@@ -1826,6 +1834,50 @@
 									class="card-filter-input"
 								/>
 							</div>
+							<div class="summary-grid">
+								<div class="summary-metric">
+									<div class="summary-metric__label">{{ __("Suppliers") }}</div>
+									<div class="summary-metric__value">
+										{{ formatQuantity(Number(supplierOverviewSummary.supplier_count || 0)) }}
+									</div>
+								</div>
+								<div class="summary-metric">
+									<div class="summary-metric__label">{{ __("Purchase Invoices") }}</div>
+									<div class="summary-metric__value">
+										{{ formatQuantity(Number(supplierOverviewSummary.purchase_count || 0)) }}
+									</div>
+								</div>
+								<div class="summary-metric">
+									<div class="summary-metric__label">{{ __("Purchase Amount") }}</div>
+									<div class="summary-metric__value">
+										{{ formatMoney(Number(supplierOverviewSummary.purchase_amount || 0)) }}
+									</div>
+								</div>
+								<div class="summary-metric">
+									<div class="summary-metric__label">{{ __("Paid Amount") }}</div>
+									<div class="summary-metric__value summary-metric__value--success">
+										{{ formatMoney(Number(supplierOverviewSummary.paid_amount || 0)) }}
+									</div>
+								</div>
+								<div class="summary-metric">
+									<div class="summary-metric__label">{{ __("Pending Amount") }}</div>
+									<div class="summary-metric__value summary-metric__value--danger">
+										{{ formatMoney(Number(supplierOverviewSummary.pending_amount || 0)) }}
+									</div>
+								</div>
+								<div class="summary-metric">
+									<div class="summary-metric__label">{{ __("Avg Invoice Value") }}</div>
+									<div class="summary-metric__value">
+										{{ formatMoney(Number(supplierOverviewSummary.avg_invoice_value || 0)) }}
+									</div>
+								</div>
+								<div class="summary-metric">
+									<div class="summary-metric__label">{{ __("Pending Ratio") }}</div>
+									<div class="summary-metric__value">
+										{{ formatPercent(Number(supplierOverviewSummary.pending_ratio_pct || 0), 1) }}
+									</div>
+								</div>
+							</div>
 
 							<div v-if="loading" class="py-2">
 								<v-skeleton-loader type="list-item-two-line" class="mb-2" />
@@ -1834,16 +1886,112 @@
 							</div>
 
 							<div v-else-if="filteredSupplierSummary.length" class="list-stack">
+								<div class="trend-grid">
+									<div class="trend-panel">
+										<div class="summary-metric__label">{{ __("Top Suppliers by Spend") }}</div>
+										<div v-if="filteredSupplierSummary.length" class="list-stack trend-list">
+											<div
+												v-for="supplier in filteredSupplierSummary"
+												:key="`supplier-top-${supplier.supplier}`"
+												class="insight-row"
+											>
+												<div class="insight-row__top">
+													<div class="insight-row__title">
+														{{ supplier.supplier_name || supplier.supplier }}
+													</div>
+													<div class="insight-row__value">
+														{{ formatMoney(Number(supplier.purchase_amount || 0)) }}
+													</div>
+												</div>
+												<div class="insight-row__meta">
+													{{ __("Invoices") }}: {{ formatQuantity(Number(supplier.purchase_count || 0)) }} .
+													{{ __("Share") }}: {{ formatPercent(supplier.share_pct, 1) }}
+												</div>
+												<v-progress-linear
+													:model-value="trendProgress(Number(supplier.purchase_amount || 0), supplierPurchaseMax)"
+													color="primary"
+													height="5"
+													rounded
+												/>
+											</div>
+										</div>
+										<div v-else class="empty-state">{{ __("No suppliers found for this period.") }}</div>
+									</div>
+
+									<div class="trend-panel">
+										<div class="summary-metric__label">{{ __("Pending Exposure") }}</div>
+										<div v-if="filteredSupplierRiskRows.length" class="list-stack trend-list">
+											<div
+												v-for="supplier in filteredSupplierRiskRows"
+												:key="`supplier-risk-${supplier.supplier}`"
+												class="insight-row"
+											>
+												<div class="insight-row__top">
+													<div class="insight-row__title">
+														{{ supplier.supplier_name || supplier.supplier }}
+													</div>
+													<div class="insight-row__value">
+														{{ formatMoney(Number(supplier.pending_amount || 0)) }}
+													</div>
+												</div>
+												<div class="insight-row__meta">
+													{{ __("Pending Ratio") }}: {{ formatPercent(supplier.pending_ratio_pct, 1) }} .
+													{{ __("Total Purchase") }}: {{ formatMoney(Number(supplier.purchase_amount || 0)) }}
+												</div>
+												<v-progress-linear
+													:model-value="trendProgress(Number(supplier.pending_amount || 0), supplierPendingMax)"
+													color="error"
+													height="5"
+													rounded
+												/>
+											</div>
+										</div>
+										<div v-else class="empty-state">{{ __("No pending balances in this period.") }}</div>
+									</div>
+
+									<div class="trend-panel">
+										<div class="summary-metric__label">{{ __("Last 14 Days Purchases") }}</div>
+										<div v-if="supplierDayRows.length" class="list-stack trend-list">
+											<div v-for="day in supplierDayRows" :key="`supplier-day-${day.date}`" class="insight-row">
+												<div class="insight-row__top">
+													<div class="insight-row__title">{{ formatDate(day.date) }}</div>
+													<div class="insight-row__value">
+														{{ formatMoney(Number(day.purchase_amount || 0)) }}
+													</div>
+												</div>
+												<div class="insight-row__meta">
+													{{ __("Invoices") }}: {{ formatQuantity(Number(day.purchase_count || 0)) }} .
+													{{ __("Pending") }}: {{ formatMoney(Number(day.pending_amount || 0)) }}
+												</div>
+												<v-progress-linear
+													:model-value="trendProgress(Number(day.purchase_amount || 0), supplierDayMax)"
+													color="success"
+													height="5"
+													rounded
+												/>
+											</div>
+										</div>
+										<div v-else class="empty-state">{{ __("No day-wise purchase data found.") }}</div>
+									</div>
+								</div>
+
+								<div class="summary-metric__label mt-2">{{ __("Detailed Supplier Breakdown") }}</div>
 								<div v-for="supplier in filteredSupplierSummary" :key="supplier.supplier" class="supplier-row">
 									<div class="supplier-row__name">
 										{{ supplier.supplier_name || supplier.supplier }}
 									</div>
 									<div class="supplier-row__meta">
-										{{ __("Invoices") }}: {{ supplier.purchase_count }} .
+										{{ __("Invoices") }}: {{ formatQuantity(Number(supplier.purchase_count || 0)) }} .
+										{{ __("Avg Invoice") }}: {{ formatMoney(Number(supplier.avg_invoice_value || 0)) }} .
 										{{ __("Last") }}: {{ formatDate(supplier.last_purchase_date) }}
 									</div>
+									<div class="supplier-row__meta">
+										{{ __("Paid") }}: {{ formatMoney(Number(supplier.paid_amount || 0)) }} .
+										{{ __("Pending") }}: {{ formatMoney(Number(supplier.pending_amount || 0)) }} .
+										{{ __("Pending Ratio") }}: {{ formatPercent(supplier.pending_ratio_pct, 1) }}
+									</div>
 									<div class="supplier-row__amount">
-										{{ formatMoney(supplier.purchase_amount) }}
+										{{ formatMoney(Number(supplier.purchase_amount || 0)) }}
 									</div>
 								</div>
 							</div>
@@ -1888,6 +2036,8 @@ import {
 	type TaxChargeHeadRow,
 	type TaxChargesDayRow,
 	type LowStockItem,
+	type SupplierDayRow,
+	type SupplierOverviewSummary,
 	type SupplierSummaryRow,
 } from "@/posapp/services/dashboardService";
 
@@ -2224,7 +2374,22 @@ const createEmptyDashboard = (): DashboardResponse => ({
 		low_stock_threshold: 10,
 	},
 	supplier_overview: {
+		summary: {
+			supplier_count: 0,
+			purchase_count: 0,
+			purchase_amount: 0,
+			paid_amount: 0,
+			pending_amount: 0,
+			avg_invoice_value: 0,
+			pending_ratio_pct: 0,
+		},
 		purchase_summary: [],
+		risk_suppliers: [],
+		day_wise: [],
+		highlights: {
+			top_supplier: null,
+			top_pending_supplier: null,
+		},
 		period: {},
 	},
 });
@@ -3160,8 +3325,20 @@ const fastMovingPageSizeItems = computed(() =>
 const lowStockItems = computed<LowStockItem[]>(
 	() => dashboardData.value.inventory_insights.low_stock_items || [],
 );
+const supplierOverview = computed(() => dashboardData.value.supplier_overview);
+const supplierOverviewSummary = computed<SupplierOverviewSummary>(
+	() => supplierOverview.value.summary || {},
+);
 const supplierSummary = computed<SupplierSummaryRow[]>(
-	() => dashboardData.value.supplier_overview.purchase_summary || [],
+	() => supplierOverview.value.purchase_summary || [],
+);
+const supplierRiskRows = computed<SupplierSummaryRow[]>(
+	() => supplierOverview.value.risk_suppliers || [],
+);
+const supplierDayRows = computed<SupplierDayRow[]>(() =>
+	[...(supplierOverview.value.day_wise || [])]
+		.sort((a, b) => String(a.date || "").localeCompare(String(b.date || "")))
+		.slice(-14),
 );
 const lowStockWarehouseItems = computed(() => {
 	const values = Array.from(
@@ -3198,6 +3375,53 @@ const filteredSupplierSummary = computed<SupplierSummaryRow[]>(() => {
 		);
 	});
 });
+const filteredSupplierRiskRows = computed<SupplierSummaryRow[]>(() => {
+	const searchText = String(supplierSearch.value || "").trim().toLowerCase();
+	if (!searchText) {
+		return supplierRiskRows.value;
+	}
+	return supplierRiskRows.value.filter((supplier) => {
+		return (
+			String(supplier.supplier || "").toLowerCase().includes(searchText) ||
+			String(supplier.supplier_name || "").toLowerCase().includes(searchText)
+		);
+	});
+});
+const supplierPurchaseMax = computed(() => {
+	const maxValue = filteredSupplierSummary.value.reduce(
+		(max, row) => Math.max(max, Number(row.purchase_amount || 0)),
+		0,
+	);
+	return maxValue > 0 ? maxValue : 1;
+});
+const supplierPendingMax = computed(() => {
+	const maxValue = filteredSupplierRiskRows.value.reduce(
+		(max, row) => Math.max(max, Number(row.pending_amount || 0)),
+		0,
+	);
+	return maxValue > 0 ? maxValue : 1;
+});
+const supplierDayMax = computed(() => {
+	const maxValue = supplierDayRows.value.reduce(
+		(max, row) => Math.max(max, Number(row.purchase_amount || 0)),
+		0,
+	);
+	return maxValue > 0 ? maxValue : 1;
+});
+const topSupplierLabel = computed(() => {
+	const row = supplierOverview.value.highlights?.top_supplier;
+	if (!row) {
+		return __("N/A");
+	}
+	return String(row.supplier_name || row.supplier || __("N/A"));
+});
+const topPendingSupplierLabel = computed(() => {
+	const row = supplierOverview.value.highlights?.top_pending_supplier;
+	if (!row) {
+		return __("N/A");
+	}
+	return String(row.supplier_name || row.supplier || __("N/A"));
+});
 
 const maxFastMovingQty = computed(() => {
 	const maxValue = fastMovingItems.value.reduce((max, item) => {
@@ -3212,8 +3436,8 @@ const lowStockThreshold = computed(
 );
 
 const monthRangeLabel = computed(() => {
-	const from = dashboardData.value.supplier_overview.period?.from;
-	const to = dashboardData.value.supplier_overview.period?.to;
+	const from = supplierOverview.value.period?.from;
+	const to = supplierOverview.value.period?.to;
 	if (!from || !to) {
 		return __("Current Month");
 	}
