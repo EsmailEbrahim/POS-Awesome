@@ -11,12 +11,9 @@ describe("change_price_list_rate", () => {
 	beforeEach(() => {
 		globalThis.__ = (text: string) => text;
 		vi.restoreAllMocks();
-		(globalThis as any).window = {
-			prompt: vi.fn(),
-		};
 	});
 
-	it("applies the entered price list rate from change-price button prompt", () => {
+	it("applies the entered price list rate from in-app rate dialog", async () => {
 		const context: any = {
 			selected_currency: "PKR",
 			price_list_currency: "PKR",
@@ -28,21 +25,22 @@ describe("change_price_list_rate", () => {
 			schedulePricingRuleApplication: vi.fn(),
 			forceUpdate: vi.fn(),
 			toastStore: { show: vi.fn() },
+			promptPriceListRate: vi.fn(async () => "150"),
 		};
 		const item: any = {
 			qty: 2,
 			rate: 100,
 			price_list_rate: 100,
 		};
-		(globalThis as any).window.prompt.mockReturnValue("150");
 
-		change_price_list_rate(context, item);
+		await change_price_list_rate(context, item);
 
 		expect(context._applyPriceListRate).toHaveBeenCalledWith(
 			item,
 			150,
 			"PKR",
 		);
+		expect(context.promptPriceListRate).toHaveBeenCalledWith("100", item);
 		expect(item.rate).toBe(150);
 		expect(item.base_rate).toBe(150);
 		expect(item.amount).toBe(300);
@@ -53,7 +51,7 @@ describe("change_price_list_rate", () => {
 		expect(context.forceUpdate).toHaveBeenCalled();
 	});
 
-	it("shows validation error for invalid input", () => {
+	it("shows validation error for invalid input", async () => {
 		const context: any = {
 			selected_currency: "PKR",
 			pos_profile: { currency: "PKR" },
@@ -62,11 +60,11 @@ describe("change_price_list_rate", () => {
 			_toBaseCurrency: (value: any) => Number(value),
 			_applyPriceListRate: vi.fn(),
 			toastStore: { show: vi.fn() },
+			promptPriceListRate: vi.fn(async () => "-1"),
 		};
 		const item: any = { qty: 1, rate: 100, price_list_rate: 100 };
-		(globalThis as any).window.prompt.mockReturnValue("-1");
 
-		change_price_list_rate(context, item);
+		await change_price_list_rate(context, item);
 
 		expect(context._applyPriceListRate).not.toHaveBeenCalled();
 		expect(context.toastStore.show).toHaveBeenCalled();

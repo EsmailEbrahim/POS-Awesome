@@ -217,7 +217,7 @@ export function close_payments(context: any) {
 	context.eventBus.emit("show_payment", "false");
 }
 
-export function change_price_list_rate(
+export async function change_price_list_rate(
 	context: any,
 	item: any,
 ) {
@@ -278,18 +278,18 @@ export function change_price_list_rate(
 	};
 
 	const currentRate = parseRate(item.price_list_rate ?? item.rate ?? 0) ?? 0;
-	const promptFn =
+	let prompted: unknown = null;
+
+	if (typeof context.promptPriceListRate === "function") {
+		prompted = await context.promptPriceListRate(String(currentRate), item);
+	} else if (
 		typeof window !== "undefined" &&
 		typeof window.prompt === "function"
-			? window.prompt.bind(window)
-			: null;
-	if (!promptFn) {
-		return;
+	) {
+		// Backward-compatible fallback when the host component has no custom dialog.
+		prompted = window.prompt(__("Enter new price list rate"), String(currentRate));
 	}
-	const prompted = promptFn(
-		__("Enter new price list rate"),
-		String(currentRate),
-	);
+
 	if (prompted === null) {
 		return;
 	}
