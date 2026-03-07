@@ -7,7 +7,7 @@ from typing import Any
 
 import frappe
 from frappe import _
-from frappe.utils import cint, cstr, flt, getdate, now_datetime, nowdate
+from frappe.utils import add_months, cint, cstr, flt, getdate, now_datetime, nowdate
 
 from .utils import get_active_pos_profile, get_default_warehouse
 
@@ -359,6 +359,378 @@ def _collect_sales_and_profit(
     }
 
 
+def _resolve_payment_child_doctype(parent_doctype: str) -> str | None:
+    try:
+        meta = frappe.get_meta(parent_doctype)
+    except Exception:
+        return None
+
+    for field in meta.get("fields", []):
+        if field.fieldtype == "Table" and field.fieldname == "payments" and field.options:
+            if frappe.db.exists("DocType", field.options):
+                return field.options
+
+    for field in meta.get("fields", []):
+        if field.fieldtype != "Table" or not field.options:
+            continue
+        if "payment" in cstr(field.options).lower() and frappe.db.exists("DocType", field.options):
+            return field.options
+
+    return None
+
+
+def _get_mode_type_map(mode_names: list[str]) -> dict[str, str]:
+    cleaned = sorted({cstr(name).strip() for name in mode_names if cstr(name).strip()})
+    if not cleaned:
+        return {}
+    if not frappe.db.exists("DocType", "Mode of Payment"):
+        return {}
+    if not frappe.db.has_column("Mode of Payment", "type"):
+        return {}
+
+    rows = frappe.get_all(
+        "Mode of Payment",
+        filters={"name": ["in", cleaned]},
+        fields=["name", "type"],
+    )
+    return {cstr(row.get("name")).strip(): cstr(row.get("type")).strip() for row in rows}
+
+
+def _classify_payment_mode(mode_name: str, mode_type: str, cash_modes: set[str]) -> str:
+    normalized_name = cstr(mode_name).strip()
+    lowered_name = normalized_name.lower()
+    lowered_type = cstr(mode_type).strip().lower()
+
+    if normalized_name in cash_modes or lowered_type == "cash" or "cash" in lowered_name:
+        return "cash"
+
+    if lowered_type in {"bank", "card"}:
+        return "card_online"
+
+    if any(
+        token in lowered_name
+        for token in ("card", "bank", "online", "wallet", "upi", "mpesa", "transfer", "mobile")
+    ):
+        return "card_online"
+
+    return "other"
+
+
+def _collect_daily_sales_summary(
+    profile_names: list[str],
+    company: str,
+    date_value: str,
+) -> dict[str, Any]:
+    summary: dict[str, Any] = {
+        "period": {"from": date_value, "to": date_value},
+        "invoice_count": 0,
+        "returns_count": 0,
+        "gross_sales": 0.0,
+        "net_sales": 0.0,
+        "returns_amount": 0.0,
+        "discount_amount": 0.0,
+        "tax_amount": 0.0,
+        "opening_amount": 0.0,
+        "opening_cash": 0.0,
+        "closing_amount": 0.0,
+        "closing_cash": 0.0,
+        "cash_collections": 0.0,
+        "card_online_collections": 0.0,
+        "other_collections": 0.0,
+        "change_given": 0.0,
+        "collections_total": 0.0,
+        "expected_cash": 0.0,
+        "actual_cash": 0.0,
+        "cash_variance": 0.0,
+        "average_invoice_value": 0.0,
+        "has_closing_snapshot": False,
+        "payment_methods": [],
+    }
+    if not profile_names:
+        return summary
+
+    profile_filter, profile_filter_params = _build_in_filter("inv.pos_profile", profile_names)
+    cash_modes: set[str] = {"Cash"}
+
+    if frappe.db.has_column("POS Profile", "posa_cash_mode_of_payment"):
+        configured_cash_modes = frappe.get_all(
+            "POS Profile",
+            filters={"name": ["in", profile_names]},
+            pluck="posa_cash_mode_of_payment",
+        )
+        cash_modes.update(
+            cstr(mode_name).strip()
+            for mode_name in configured_cash_modes
+            if cstr(mode_name).strip()
+        )
+
+    payment_totals: dict[str, float] = defaultdict(float)
+    opening_by_mode: dict[str, float] = defaultdict(float)
+    closing_expected_by_mode: dict[str, float] = defaultdict(float)
+    closing_actual_by_mode: dict[str, float] = defaultdict(float)
+    mode_names: set[str] = set(cash_modes)
+
+    if frappe.db.exists("DocType", "POS Opening Shift") and frappe.db.exists("DocType", "POS Opening Shift Detail"):
+        opening_rows = frappe.db.sql(
+            f"""
+            select
+                detail.mode_of_payment as mode_of_payment,
+                sum(coalesce(detail.amount, 0)) as opening_amount
+            from `tabPOS Opening Shift Detail` detail
+            inner join `tabPOS Opening Shift` inv on inv.name = detail.parent
+            where inv.docstatus = 1
+              and inv.company = %s
+              and inv.posting_date = %s
+              {profile_filter}
+            group by detail.mode_of_payment
+            """,
+            (company, date_value, *profile_filter_params),
+            as_dict=True,
+        )
+        for row in opening_rows:
+            mode_name = cstr(row.get("mode_of_payment")).strip()
+            if not mode_name:
+                continue
+            amount = flt(row.get("opening_amount"))
+            mode_names.add(mode_name)
+            opening_by_mode[mode_name] += amount
+            summary["opening_amount"] += amount
+
+    if frappe.db.exists("DocType", "POS Closing Shift") and frappe.db.exists("DocType", "POS Closing Shift Detail"):
+        closing_rows = frappe.db.sql(
+            f"""
+            select
+                detail.mode_of_payment as mode_of_payment,
+                sum(coalesce(detail.expected_amount, 0)) as expected_amount,
+                sum(coalesce(detail.closing_amount, 0)) as closing_amount
+            from `tabPOS Closing Shift Detail` detail
+            inner join `tabPOS Closing Shift` inv on inv.name = detail.parent
+            where inv.docstatus = 1
+              and inv.company = %s
+              and inv.posting_date = %s
+              {profile_filter}
+            group by detail.mode_of_payment
+            """,
+            (company, date_value, *profile_filter_params),
+            as_dict=True,
+        )
+        if closing_rows:
+            summary["has_closing_snapshot"] = True
+        for row in closing_rows:
+            mode_name = cstr(row.get("mode_of_payment")).strip()
+            if not mode_name:
+                continue
+            expected_amount = flt(row.get("expected_amount"))
+            closing_amount = flt(row.get("closing_amount"))
+            mode_names.add(mode_name)
+            closing_expected_by_mode[mode_name] += expected_amount
+            closing_actual_by_mode[mode_name] += closing_amount
+            summary["closing_amount"] += closing_amount
+
+    for parent_doctype, child_doctype in _iter_invoice_sources():
+        is_return_expression = (
+            "ifnull(inv.is_return, 0)" if frappe.db.has_column(parent_doctype, "is_return") else "0"
+        )
+        amount_field = _pick_first_column(parent_doctype, ["base_grand_total", "grand_total"])
+        discount_field = _pick_first_column(
+            parent_doctype,
+            [
+                "base_discount_amount",
+                "discount_amount",
+                "base_additional_discount_amount",
+                "additional_discount_amount",
+            ],
+        )
+        tax_field = _pick_first_column(parent_doctype, ["base_total_taxes_and_charges", "total_taxes_and_charges"])
+        change_field = _pick_first_column(parent_doctype, ["base_change_amount", "change_amount"])
+
+        amount_expression = f"coalesce(inv.{amount_field}, 0)" if amount_field else "0"
+        discount_expression = f"coalesce(inv.{discount_field}, 0)" if discount_field else "0"
+        tax_expression = f"coalesce(inv.{tax_field}, 0)" if tax_field else "0"
+        change_expression = f"coalesce(inv.{change_field}, 0)" if change_field else "0"
+
+        daily_row = frappe.db.sql(
+            f"""
+            select
+                count(inv.name) as invoice_count,
+                sum(
+                    case
+                        when {is_return_expression} = 1 then abs({amount_expression})
+                        else {amount_expression}
+                    end
+                ) as gross_sales,
+                sum(
+                    case
+                        when {is_return_expression} = 1 then abs({amount_expression})
+                        else 0
+                    end
+                ) as returns_amount,
+                sum(
+                    case
+                        when {is_return_expression} = 1 then 1
+                        else 0
+                    end
+                ) as returns_count,
+                sum({amount_expression}) as net_sales,
+                sum(
+                    case
+                        when {is_return_expression} = 1 then -abs({discount_expression})
+                        else {discount_expression}
+                    end
+                ) as discount_amount,
+                sum(
+                    case
+                        when {is_return_expression} = 1 then -abs({tax_expression})
+                        else {tax_expression}
+                    end
+                ) as tax_amount,
+                sum(
+                    case
+                        when {is_return_expression} = 1 then 0
+                        else abs({change_expression})
+                    end
+                ) as change_given
+            from `tab{parent_doctype}` inv
+            where inv.docstatus = 1
+              and inv.company = %s
+              and inv.posting_date = %s
+              {profile_filter}
+              {_extra_parent_filter(parent_doctype, "inv")}
+            """,
+            (company, date_value, *profile_filter_params),
+            as_dict=True,
+        )
+
+        row = daily_row[0] if daily_row else {}
+        summary["invoice_count"] += cint(row.get("invoice_count"))
+        summary["returns_count"] += cint(row.get("returns_count"))
+        summary["gross_sales"] += flt(row.get("gross_sales"))
+        summary["returns_amount"] += flt(row.get("returns_amount"))
+        summary["net_sales"] += flt(row.get("net_sales"))
+        summary["discount_amount"] += flt(row.get("discount_amount"))
+        summary["tax_amount"] += flt(row.get("tax_amount"))
+        summary["change_given"] += flt(row.get("change_given"))
+
+        item_discount_field = _pick_first_column(child_doctype, ["base_discount_amount", "discount_amount"])
+        if item_discount_field:
+            item_discount_row = frappe.db.sql(
+                f"""
+                select
+                    sum(
+                        case
+                            when {is_return_expression} = 1 then -abs(coalesce(item.{item_discount_field}, 0))
+                            else coalesce(item.{item_discount_field}, 0)
+                        end
+                    ) as item_discount_amount
+                from `tab{child_doctype}` item
+                inner join `tab{parent_doctype}` inv on inv.name = item.parent
+                where inv.docstatus = 1
+                  and inv.company = %s
+                  and inv.posting_date = %s
+                  {profile_filter}
+                  {_extra_parent_filter(parent_doctype, "inv")}
+                """,
+                (company, date_value, *profile_filter_params),
+                as_dict=True,
+            )
+            summary["discount_amount"] += flt((item_discount_row[0] or {}).get("item_discount_amount"))
+
+        payment_child_doctype = _resolve_payment_child_doctype(parent_doctype)
+        if payment_child_doctype and frappe.db.has_column(payment_child_doctype, "mode_of_payment"):
+            payment_amount_field = _pick_first_column(payment_child_doctype, ["base_amount", "amount"])
+            if payment_amount_field:
+                payment_rows = frappe.db.sql(
+                    f"""
+                    select
+                        pay.mode_of_payment as mode_of_payment,
+                        sum(
+                            case
+                                when {is_return_expression} = 1 then -abs(coalesce(pay.{payment_amount_field}, 0))
+                                else coalesce(pay.{payment_amount_field}, 0)
+                            end
+                        ) as collected_amount
+                    from `tab{payment_child_doctype}` pay
+                    inner join `tab{parent_doctype}` inv on inv.name = pay.parent
+                    where inv.docstatus = 1
+                      and inv.company = %s
+                      and inv.posting_date = %s
+                      {profile_filter}
+                      {_extra_parent_filter(parent_doctype, "inv")}
+                    group by pay.mode_of_payment
+                    """,
+                    (company, date_value, *profile_filter_params),
+                    as_dict=True,
+                )
+                for pay_row in payment_rows:
+                    mode_name = cstr(pay_row.get("mode_of_payment")).strip()
+                    if not mode_name:
+                        continue
+                    mode_names.add(mode_name)
+                    payment_totals[mode_name] += flt(pay_row.get("collected_amount"))
+
+    mode_type_map = _get_mode_type_map(sorted(mode_names))
+    for mode_name, amount in opening_by_mode.items():
+        category = _classify_payment_mode(mode_name, mode_type_map.get(mode_name, ""), cash_modes)
+        if category == "cash":
+            summary["opening_cash"] += flt(amount)
+
+    for mode_name, amount in closing_actual_by_mode.items():
+        category = _classify_payment_mode(mode_name, mode_type_map.get(mode_name, ""), cash_modes)
+        if category == "cash":
+            summary["closing_cash"] += flt(amount)
+
+    cash_payments_raw = 0.0
+    card_online_total = 0.0
+    other_total = 0.0
+    payment_method_rows: list[dict[str, Any]] = []
+    for mode_name in sorted(payment_totals.keys()):
+        amount = flt(payment_totals.get(mode_name))
+        category = _classify_payment_mode(mode_name, mode_type_map.get(mode_name, ""), cash_modes)
+        if category == "cash":
+            cash_payments_raw += amount
+        elif category == "card_online":
+            card_online_total += amount
+        else:
+            other_total += amount
+
+        payment_method_rows.append(
+            {
+                "mode_of_payment": mode_name,
+                "mode_type": mode_type_map.get(mode_name, ""),
+                "category": category,
+                "amount": amount,
+            }
+        )
+
+    summary["cash_collections"] = flt(cash_payments_raw - flt(summary.get("change_given")))
+    summary["card_online_collections"] = flt(card_online_total)
+    summary["other_collections"] = flt(other_total)
+    summary["collections_total"] = flt(
+        summary["cash_collections"] + summary["card_online_collections"] + summary["other_collections"]
+    )
+    summary["payment_methods"] = payment_method_rows
+
+    closing_expected_cash = 0.0
+    for mode_name, amount in closing_expected_by_mode.items():
+        category = _classify_payment_mode(mode_name, mode_type_map.get(mode_name, ""), cash_modes)
+        if category == "cash":
+            closing_expected_cash += flt(amount)
+
+    if summary["has_closing_snapshot"] and (closing_expected_cash or summary["closing_cash"]):
+        summary["expected_cash"] = flt(closing_expected_cash)
+        summary["actual_cash"] = flt(summary["closing_cash"])
+    else:
+        summary["expected_cash"] = flt(summary["opening_cash"] + summary["cash_collections"])
+        summary["actual_cash"] = flt(summary["expected_cash"])
+
+    summary["cash_variance"] = flt(summary["actual_cash"] - summary["expected_cash"])
+    invoice_count = cint(summary.get("invoice_count"))
+    summary["average_invoice_value"] = (
+        flt(summary["net_sales"] / invoice_count) if invoice_count > 0 else 0.0
+    )
+    return summary
+
+
 def _collect_fast_moving_items(
     profile_names: list[str],
     company: str,
@@ -704,6 +1076,31 @@ def get_dashboard_data(
             "monthly_profit": 0.0,
             "profit_method": "invoice_item",
         },
+        "daily_sales_summary": {
+            "period": {"from": str(today), "to": str(today)},
+            "invoice_count": 0,
+            "returns_count": 0,
+            "gross_sales": 0.0,
+            "net_sales": 0.0,
+            "returns_amount": 0.0,
+            "discount_amount": 0.0,
+            "tax_amount": 0.0,
+            "opening_amount": 0.0,
+            "opening_cash": 0.0,
+            "closing_amount": 0.0,
+            "closing_cash": 0.0,
+            "cash_collections": 0.0,
+            "card_online_collections": 0.0,
+            "other_collections": 0.0,
+            "change_given": 0.0,
+            "collections_total": 0.0,
+            "expected_cash": 0.0,
+            "actual_cash": 0.0,
+            "cash_variance": 0.0,
+            "average_invoice_value": 0.0,
+            "has_closing_snapshot": False,
+            "payment_methods": [],
+        },
         "inventory_insights": {
             "fast_moving_items": [],
             "fast_moving_period": {
@@ -756,6 +1153,12 @@ def get_dashboard_data(
             or monthly_stats.get("profit_method") == "stock_ledger"
         ):
             payload["sales_overview"]["profit_method"] = "stock_ledger"
+
+    payload["daily_sales_summary"] = _collect_daily_sales_summary(
+        profile_names=selected_profile_names,
+        company=company,
+        date_value=str(today),
+    )
 
     fast_moving_items, fast_moving_total_count = _collect_fast_moving_items(
         profile_names=selected_profile_names,

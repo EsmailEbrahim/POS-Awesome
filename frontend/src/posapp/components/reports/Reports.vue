@@ -84,6 +84,54 @@
 					</v-col>
 				</v-row>
 
+				<v-row class="dashboard-grid mb-2">
+					<v-col cols="12">
+						<v-card class="dashboard-card" elevation="2">
+							<div class="dashboard-card__header">
+								<h2 class="text-subtitle-1 font-weight-bold mb-0">{{ __("Daily Sales Summary / X-Z") }}</h2>
+								<div class="dashboard-chip-row">
+									<v-chip size="small" color="info" variant="tonal">
+										{{ __("Date") }}: {{ dailySummaryRangeLabel }}
+									</v-chip>
+									<v-chip
+										size="small"
+										:color="dailySummary.has_closing_snapshot ? 'success' : 'warning'"
+										variant="tonal"
+									>
+										{{
+											dailySummary.has_closing_snapshot
+												? __("Shift Closed Snapshot")
+												: __("Live Snapshot")
+										}}
+									</v-chip>
+								</div>
+							</div>
+							<div class="summary-grid">
+								<div v-for="metric in dailySummaryMetrics" :key="metric.key" class="summary-metric">
+									<div class="summary-metric__label">{{ metric.label }}</div>
+									<div class="summary-metric__value" :class="metric.valueClass">
+										{{ metric.value }}
+									</div>
+								</div>
+							</div>
+							<div v-if="dailyPaymentMethods.length" class="payment-breakdown">
+								<div class="summary-metric__label">{{ __("Payment Methods") }}</div>
+								<div class="payment-chip-list">
+									<v-chip
+										v-for="payment in dailyPaymentMethods"
+										:key="payment.mode_of_payment"
+										size="small"
+										:color="paymentCategoryColor(payment.category)"
+										variant="tonal"
+									>
+										{{ payment.mode_of_payment }}: {{ formatMoney(payment.amount) }}
+									</v-chip>
+								</div>
+							</div>
+						</v-card>
+					</v-col>
+				</v-row>
+
 				<v-row class="dashboard-grid">
 					<v-col cols="12" lg="6">
 						<v-card class="dashboard-card" elevation="2">
@@ -319,6 +367,31 @@ const createEmptyDashboard = (): DashboardResponse => ({
 		monthly_sales: 0,
 		monthly_profit: 0,
 	},
+	daily_sales_summary: {
+		period: {},
+		invoice_count: 0,
+		returns_count: 0,
+		gross_sales: 0,
+		net_sales: 0,
+		returns_amount: 0,
+		discount_amount: 0,
+		tax_amount: 0,
+		opening_amount: 0,
+		opening_cash: 0,
+		closing_amount: 0,
+		closing_cash: 0,
+		cash_collections: 0,
+		card_online_collections: 0,
+		other_collections: 0,
+		change_given: 0,
+		collections_total: 0,
+		expected_cash: 0,
+		actual_cash: 0,
+		cash_variance: 0,
+		average_invoice_value: 0,
+		has_closing_snapshot: false,
+		payment_methods: [],
+	},
 	inventory_insights: {
 		fast_moving_items: [],
 		fast_moving_period: {
@@ -442,6 +515,108 @@ const salesMetrics = computed(() => [
 		styleClass: "metric-card--profit",
 	},
 ]);
+
+const dailySummary = computed(() => dashboardData.value.daily_sales_summary || {});
+const dailySummaryRangeLabel = computed(() => {
+	const from = dailySummary.value.period?.from;
+	const to = dailySummary.value.period?.to;
+	if (!from || !to) {
+		const fallbackToday = dashboardData.value.date_context?.today;
+		return fallbackToday ? formatDate(fallbackToday) : __("Today");
+	}
+	if (from === to) {
+		return formatDate(from);
+	}
+	return `${formatDate(from)} - ${formatDate(to)}`;
+});
+const dailyPaymentMethods = computed(() =>
+	(dailySummary.value.payment_methods || [])
+		.filter((row) => Math.abs(Number(row.amount || 0)) > 0.00001)
+		.sort((a, b) => Math.abs(Number(b.amount || 0)) - Math.abs(Number(a.amount || 0))),
+);
+const dailySummaryMetrics = computed(() => {
+	const variance = Number(dailySummary.value.cash_variance || 0);
+	return [
+		{
+			key: "invoice_count",
+			label: __("Invoices"),
+			value: formatQuantity(Number(dailySummary.value.invoice_count || 0)),
+			valueClass: "",
+		},
+		{
+			key: "avg_invoice",
+			label: __("Average Bill"),
+			value: formatMoney(Number(dailySummary.value.average_invoice_value || 0)),
+			valueClass: "",
+		},
+		{
+			key: "opening_cash",
+			label: __("Opening Cash"),
+			value: formatMoney(Number(dailySummary.value.opening_cash || 0)),
+			valueClass: "",
+		},
+		{
+			key: "gross_sales",
+			label: __("Gross Sales"),
+			value: formatMoney(Number(dailySummary.value.gross_sales || 0)),
+			valueClass: "",
+		},
+		{
+			key: "returns_amount",
+			label: __("Returns"),
+			value: formatMoney(Number(dailySummary.value.returns_amount || 0)),
+			valueClass: "",
+		},
+		{
+			key: "discount_amount",
+			label: __("Discounts"),
+			value: formatMoney(Number(dailySummary.value.discount_amount || 0)),
+			valueClass: "",
+		},
+		{
+			key: "tax_amount",
+			label: __("Tax"),
+			value: formatMoney(Number(dailySummary.value.tax_amount || 0)),
+			valueClass: "",
+		},
+		{
+			key: "net_sales",
+			label: __("Net Sales"),
+			value: formatMoney(Number(dailySummary.value.net_sales || 0)),
+			valueClass: "",
+		},
+		{
+			key: "cash_collections",
+			label: __("Cash Collections"),
+			value: formatMoney(Number(dailySummary.value.cash_collections || 0)),
+			valueClass: "",
+		},
+		{
+			key: "card_online_collections",
+			label: __("Card / Online"),
+			value: formatMoney(Number(dailySummary.value.card_online_collections || 0)),
+			valueClass: "",
+		},
+		{
+			key: "expected_cash",
+			label: __("Expected Cash"),
+			value: formatMoney(Number(dailySummary.value.expected_cash || 0)),
+			valueClass: "",
+		},
+		{
+			key: "actual_cash",
+			label: __("Cash In Hand"),
+			value: formatMoney(Number(dailySummary.value.actual_cash || 0)),
+			valueClass: "",
+		},
+		{
+			key: "cash_variance",
+			label: __("Expected vs Actual"),
+			value: formatMoney(variance),
+			valueClass: variance > 0 ? "summary-metric__value--success" : variance < 0 ? "summary-metric__value--danger" : "",
+		},
+	];
+});
 
 const fastMovingItems = computed<FastMovingItem[]>(
 	() => dashboardData.value.inventory_insights.fast_moving_items || [],
@@ -598,6 +773,16 @@ function stockChipColor(quantity: number) {
 	return Number(quantity || 0) <= 0 ? "error" : "warning";
 }
 
+function paymentCategoryColor(category?: string) {
+	if (category === "cash") {
+		return "success";
+	}
+	if (category === "card_online") {
+		return "info";
+	}
+	return "secondary";
+}
+
 function mergeDashboardPayload(payload?: Partial<DashboardResponse>): DashboardResponse {
 	const base = createEmptyDashboard();
 	return {
@@ -606,6 +791,10 @@ function mergeDashboardPayload(payload?: Partial<DashboardResponse>): DashboardR
 		sales_overview: {
 			...base.sales_overview,
 			...(payload?.sales_overview || {}),
+		},
+		daily_sales_summary: {
+			...(base.daily_sales_summary || {}),
+			...(payload?.daily_sales_summary || {}),
 		},
 		inventory_insights: {
 			...base.inventory_insights,
@@ -898,6 +1087,52 @@ onMounted(() => {
 	align-items: center;
 	gap: 8px;
 	flex-wrap: wrap;
+}
+
+.summary-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+	gap: 10px;
+}
+
+.summary-metric {
+	border: 1px solid var(--pos-border);
+	border-radius: 10px;
+	padding: 10px;
+	background: var(--pos-card-bg);
+}
+
+.summary-metric__label {
+	font-size: 0.78rem;
+	font-weight: 600;
+	color: var(--pos-text-secondary);
+	margin-bottom: 4px;
+}
+
+.summary-metric__value {
+	font-size: 1rem;
+	font-weight: 700;
+	color: var(--pos-text-primary);
+	word-break: break-word;
+}
+
+.summary-metric__value--success {
+	color: #2e7d32;
+}
+
+.summary-metric__value--danger {
+	color: #c62828;
+}
+
+.payment-breakdown {
+	border-top: 1px dashed var(--pos-border);
+	padding-top: 10px;
+}
+
+.payment-chip-list {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
 }
 
 .card-filters {

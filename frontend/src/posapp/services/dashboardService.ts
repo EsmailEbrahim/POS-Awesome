@@ -57,6 +57,39 @@ export interface DashboardResponse {
 		month_start?: string;
 	};
 	sales_overview: DashboardMetricPayload;
+	daily_sales_summary?: {
+		period?: {
+			from?: string;
+			to?: string;
+		};
+		invoice_count?: number;
+		returns_count?: number;
+		gross_sales?: number;
+		net_sales?: number;
+		returns_amount?: number;
+		discount_amount?: number;
+		tax_amount?: number;
+		opening_amount?: number;
+		opening_cash?: number;
+		closing_amount?: number;
+		closing_cash?: number;
+		cash_collections?: number;
+		card_online_collections?: number;
+		other_collections?: number;
+		change_given?: number;
+		collections_total?: number;
+		expected_cash?: number;
+		actual_cash?: number;
+		cash_variance?: number;
+		average_invoice_value?: number;
+		has_closing_snapshot?: boolean;
+		payment_methods?: Array<{
+			mode_of_payment: string;
+			mode_type?: string;
+			category?: "cash" | "card_online" | "other" | string;
+			amount: number;
+		}>;
+	};
 	inventory_insights: {
 		fast_moving_items: FastMovingItem[];
 		fast_moving_period?: {
