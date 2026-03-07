@@ -2191,6 +2191,307 @@ def _collect_profitability_report(
     return report
 
 
+def _collect_branch_location_report(
+    profile_names: list[str],
+    company: str,
+    date_from: str,
+    date_to: str,
+    threshold: int = 10,
+    limit: int = 20,
+) -> dict[str, Any]:
+    report: dict[str, Any] = {
+        "period": {"from": date_from, "to": date_to},
+        "summary": {
+            "location_count": 0,
+            "total_invoices": 0,
+            "total_sales": 0.0,
+            "total_profit": 0.0,
+            "total_stock_qty": 0.0,
+            "low_stock_total": 0,
+            "cashier_count": 0,
+        },
+        "location_wise": [],
+        "top_items_by_location": [],
+    }
+    if not profile_names:
+        return report
+
+    row_limit = _coerce_limit(limit, default=20, minimum=1, maximum=200)
+    profile_rows = frappe.get_all(
+        "POS Profile",
+        filters={"name": ["in", profile_names]},
+        fields=["name", "warehouse"],
+    )
+    profiles_by_name: dict[str, dict[str, Any]] = {
+        cstr(row.get("name")).strip(): row for row in profile_rows if cstr(row.get("name")).strip()
+    }
+    valid_profiles = [name for name in profile_names if name in profiles_by_name]
+    if not valid_profiles:
+        return report
+
+    profile_filter, profile_filter_params = _build_in_filter("inv.pos_profile", valid_profiles)
+    location_buckets: dict[str, dict[str, Any]] = {
+        profile_name: {
+            "profile": profile_name,
+            "warehouse": cstr((profiles_by_name.get(profile_name) or {}).get("warehouse")).strip(),
+            "invoice_count": 0,
+            "sales_amount": 0.0,
+            "profit_amount": 0.0,
+            "average_bill": 0.0,
+            "cashier_count": 0,
+            "stock_qty": 0.0,
+            "low_stock_count": 0,
+            "top_item": None,
+        }
+        for profile_name in valid_profiles
+    }
+    cashier_sets: dict[str, set[str]] = {profile_name: set() for profile_name in valid_profiles}
+    item_sales_by_profile: dict[str, dict[str, float]] = defaultdict(lambda: defaultdict(float))
+    item_codes_seen: set[str] = set()
+
+    for parent_doctype, child_doctype in _iter_invoice_sources():
+        amount_field = _pick_first_column(parent_doctype, ["base_grand_total", "grand_total"])
+        if not amount_field:
+            continue
+        amount_expression = f"coalesce(inv.{amount_field}, 0)"
+        is_return_expression = (
+            "ifnull(inv.is_return, 0)" if frappe.db.has_column(parent_doctype, "is_return") else "0"
+        )
+        cashier_field = _pick_first_column(parent_doctype, ["owner", "cashier", "modified_by"])
+        cashier_expression = f"coalesce(inv.{cashier_field}, '')" if cashier_field else "''"
+
+        sales_rows = frappe.db.sql(
+            f"""
+            select
+                inv.pos_profile as pos_profile,
+                sum(case when {is_return_expression} = 1 then 0 else 1 end) as invoice_count,
+                sum(
+                    case
+                        when {is_return_expression} = 1 then 0
+                        else abs({amount_expression})
+                    end
+                ) as sales_amount
+            from `tab{parent_doctype}` inv
+            where inv.docstatus = 1
+              and inv.company = %s
+              and inv.posting_date between %s and %s
+              {profile_filter}
+              {_extra_parent_filter(parent_doctype, "inv")}
+            group by inv.pos_profile
+            """,
+            (company, date_from, date_to, *profile_filter_params),
+            as_dict=True,
+        )
+        for row in sales_rows:
+            profile_name = cstr(row.get("pos_profile")).strip()
+            if profile_name not in location_buckets:
+                continue
+            entry = location_buckets[profile_name]
+            entry["invoice_count"] += cint(row.get("invoice_count"))
+            entry["sales_amount"] += flt(row.get("sales_amount"))
+
+        if cashier_field:
+            cashier_rows = frappe.db.sql(
+                f"""
+                select
+                    inv.pos_profile as pos_profile,
+                    {cashier_expression} as cashier
+                from `tab{parent_doctype}` inv
+                where inv.docstatus = 1
+                  and inv.company = %s
+                  and inv.posting_date between %s and %s
+                  {profile_filter}
+                  {_extra_parent_filter(parent_doctype, "inv")}
+                """,
+                (company, date_from, date_to, *profile_filter_params),
+                as_dict=True,
+            )
+            for row in cashier_rows:
+                profile_name = cstr(row.get("pos_profile")).strip()
+                if profile_name not in cashier_sets:
+                    continue
+                cashier_name = cstr(row.get("cashier")).strip()
+                if cashier_name:
+                    cashier_sets[profile_name].add(cashier_name)
+
+        child_amount_field = _pick_first_column(child_doctype, ["base_net_amount", "net_amount", "amount"])
+        qty_field = _pick_first_column(child_doctype, ["stock_qty", "qty"])
+        if not child_amount_field or not qty_field:
+            continue
+        cost_field = _pick_first_column(child_doctype, ["incoming_rate", "valuation_rate"])
+        qty_base_expression = f"coalesce(item.{qty_field}, 0)"
+        amount_base_expression = f"coalesce(item.{child_amount_field}, 0)"
+        cost_rate_expression = f"coalesce(item.{cost_field}, 0)" if cost_field else "0"
+        qty_expression = (
+            f"case when {is_return_expression} = 1 then -abs({qty_base_expression}) "
+            f"else abs({qty_base_expression}) end"
+        )
+        amount_item_expression = (
+            f"case when {is_return_expression} = 1 then -abs({amount_base_expression}) "
+            f"else abs({amount_base_expression}) end"
+        )
+        profit_expression = f"({amount_item_expression}) - (({qty_expression}) * ({cost_rate_expression}))"
+
+        profit_rows = frappe.db.sql(
+            f"""
+            select
+                inv.pos_profile as pos_profile,
+                sum({profit_expression}) as profit_amount
+            from `tab{child_doctype}` item
+            inner join `tab{parent_doctype}` inv on inv.name = item.parent
+            where inv.docstatus = 1
+              and inv.company = %s
+              and inv.posting_date between %s and %s
+              {profile_filter}
+              {_extra_parent_filter(parent_doctype, "inv")}
+            group by inv.pos_profile
+            """,
+            (company, date_from, date_to, *profile_filter_params),
+            as_dict=True,
+        )
+        for row in profit_rows:
+            profile_name = cstr(row.get("pos_profile")).strip()
+            if profile_name not in location_buckets:
+                continue
+            location_buckets[profile_name]["profit_amount"] += flt(row.get("profit_amount"))
+
+        item_rows = frappe.db.sql(
+            f"""
+            select
+                inv.pos_profile as pos_profile,
+                item.item_code as item_code,
+                sum({amount_item_expression}) as sales_amount
+            from `tab{child_doctype}` item
+            inner join `tab{parent_doctype}` inv on inv.name = item.parent
+            where inv.docstatus = 1
+              and inv.company = %s
+              and inv.posting_date between %s and %s
+              {profile_filter}
+              {_extra_parent_filter(parent_doctype, "inv")}
+            group by inv.pos_profile, item.item_code
+            """,
+            (company, date_from, date_to, *profile_filter_params),
+            as_dict=True,
+        )
+        for row in item_rows:
+            profile_name = cstr(row.get("pos_profile")).strip()
+            item_code = cstr(row.get("item_code")).strip()
+            if profile_name not in location_buckets or not item_code:
+                continue
+            item_sales_by_profile[profile_name][item_code] += flt(row.get("sales_amount"))
+            item_codes_seen.add(item_code)
+
+    warehouse_names = sorted(
+        {
+            cstr((profiles_by_name.get(profile_name) or {}).get("warehouse")).strip()
+            for profile_name in valid_profiles
+            if cstr((profiles_by_name.get(profile_name) or {}).get("warehouse")).strip()
+        }
+    )
+    warehouse_stats: dict[str, dict[str, Any]] = {}
+    if warehouse_names and frappe.db.exists("DocType", "Bin"):
+        warehouse_filter, warehouse_params = _build_in_filter("warehouse", warehouse_names)
+        stock_rows = frappe.db.sql(
+            f"""
+            select
+                warehouse as warehouse,
+                sum(coalesce(actual_qty, 0)) as stock_qty,
+                sum(
+                    case
+                        when coalesce(actual_qty, 0) <= %s then 1
+                        else 0
+                    end
+                ) as low_stock_count
+            from `tabBin`
+            where 1=1
+              {warehouse_filter}
+            group by warehouse
+            """,
+            (threshold, *warehouse_params),
+            as_dict=True,
+        )
+        for row in stock_rows:
+            warehouse_name = cstr(row.get("warehouse")).strip()
+            if not warehouse_name:
+                continue
+            warehouse_stats[warehouse_name] = {
+                "stock_qty": flt(row.get("stock_qty")),
+                "low_stock_count": cint(row.get("low_stock_count")),
+            }
+
+    item_name_map: dict[str, str] = {}
+    if item_codes_seen:
+        item_rows = frappe.get_all(
+            "Item",
+            filters={"name": ["in", sorted(item_codes_seen)]},
+            fields=["name", "item_name"],
+        )
+        item_name_map = {
+            cstr(row.get("name")).strip(): cstr(row.get("item_name")).strip()
+            for row in item_rows
+            if cstr(row.get("name")).strip()
+        }
+
+    location_rows: list[dict[str, Any]] = []
+    top_items_by_location: list[dict[str, Any]] = []
+    for profile_name in valid_profiles:
+        entry = location_buckets[profile_name]
+        warehouse = cstr(entry.get("warehouse")).strip()
+        stock_meta = warehouse_stats.get(warehouse, {})
+        entry["stock_qty"] = flt(stock_meta.get("stock_qty"))
+        entry["low_stock_count"] = cint(stock_meta.get("low_stock_count"))
+        entry["cashier_count"] = len(cashier_sets.get(profile_name, set()))
+        invoice_count = cint(entry.get("invoice_count"))
+        sales_amount = flt(entry.get("sales_amount"))
+        entry["average_bill"] = flt(sales_amount / invoice_count) if invoice_count > 0 else 0.0
+
+        profile_items = item_sales_by_profile.get(profile_name, {})
+        top_items = sorted(profile_items.items(), key=lambda kv: abs(flt(kv[1])), reverse=True)[:5]
+        entry["top_item"] = (
+            {
+                "item_code": top_items[0][0],
+                "item_name": item_name_map.get(top_items[0][0]) or top_items[0][0],
+                "sales_amount": flt(top_items[0][1]),
+            }
+            if top_items
+            else None
+        )
+
+        top_items_by_location.append(
+            {
+                "profile": profile_name,
+                "warehouse": warehouse,
+                "items": [
+                    {
+                        "item_code": item_code,
+                        "item_name": item_name_map.get(item_code) or item_code,
+                        "sales_amount": flt(amount),
+                    }
+                    for item_code, amount in top_items
+                ],
+            }
+        )
+        location_rows.append(entry)
+
+    sorted_locations = sorted(
+        location_rows,
+        key=lambda row: (flt(row.get("sales_amount")), cint(row.get("invoice_count"))),
+        reverse=True,
+    )
+    summary = report["summary"]
+    summary["location_count"] = len(sorted_locations)
+    summary["total_invoices"] = sum(cint(row.get("invoice_count")) for row in sorted_locations)
+    summary["total_sales"] = flt(sum(flt(row.get("sales_amount")) for row in sorted_locations))
+    summary["total_profit"] = flt(sum(flt(row.get("profit_amount")) for row in sorted_locations))
+    summary["total_stock_qty"] = flt(sum(flt(row.get("stock_qty")) for row in sorted_locations))
+    summary["low_stock_total"] = sum(cint(row.get("low_stock_count")) for row in sorted_locations)
+    summary["cashier_count"] = len({cashier for values in cashier_sets.values() for cashier in values})
+
+    report["location_wise"] = sorted_locations[:row_limit]
+    report["top_items_by_location"] = top_items_by_location[:row_limit]
+    return report
+
+
 def _pct_change(current: float, previous: float) -> float | None:
     current_value = flt(current)
     previous_value = flt(previous)
@@ -3725,6 +4026,7 @@ def get_dashboard_data(
     customer_report_limit: int = 20,
     staff_report_limit: int = 20,
     profitability_report_limit: int = 20,
+    branch_report_limit: int = 20,
     supplier_limit: int = 8,
     low_stock_limit: int = 20,
 ):
@@ -3775,6 +4077,7 @@ def get_dashboard_data(
     profitability_report_limit = _coerce_limit(
         profitability_report_limit, default=20, minimum=1, maximum=200
     )
+    branch_report_limit = _coerce_limit(branch_report_limit, default=20, minimum=1, maximum=200)
 
     company = cstr(current_profile_doc.get("company")).strip()
     company_profiles = _get_company_profiles(company)
@@ -4015,6 +4318,20 @@ def get_dashboard_data(
                 "lowest_margin_item": None,
             },
         },
+        "branch_location_report": {
+            "period": {"from": str(month_start), "to": str(today)},
+            "summary": {
+                "location_count": 0,
+                "total_invoices": 0,
+                "total_sales": 0.0,
+                "total_profit": 0.0,
+                "total_stock_qty": 0.0,
+                "low_stock_total": 0,
+                "cashier_count": 0,
+            },
+            "location_wise": [],
+            "top_items_by_location": [],
+        },
         "sales_trend": {
             "period": {
                 "day_from": str(month_start),
@@ -4198,6 +4515,14 @@ def get_dashboard_data(
         date_from=str(month_start),
         date_to=str(today),
         limit=profitability_report_limit,
+    )
+    payload["branch_location_report"] = _collect_branch_location_report(
+        profile_names=selected_profile_names,
+        company=company,
+        date_from=str(month_start),
+        date_to=str(today),
+        threshold=threshold,
+        limit=branch_report_limit,
     )
     payload["sales_trend"] = _collect_sales_trend(
         profile_names=selected_profile_names,

@@ -234,6 +234,31 @@ export interface ProfitabilityDayRow {
 	gross_margin_pct?: number | null;
 }
 
+export interface BranchLocationTopItem {
+	item_code?: string;
+	item_name?: string;
+	sales_amount?: number;
+}
+
+export interface BranchLocationRow {
+	profile?: string;
+	warehouse?: string;
+	invoice_count?: number;
+	sales_amount?: number;
+	profit_amount?: number;
+	average_bill?: number;
+	cashier_count?: number;
+	stock_qty?: number;
+	low_stock_count?: number;
+	top_item?: BranchLocationTopItem | null;
+}
+
+export interface BranchTopItemsByLocationRow {
+	profile?: string;
+	warehouse?: string;
+	items?: BranchLocationTopItem[];
+}
+
 export interface DashboardResponse {
 	enabled: boolean;
 	profile?: string;
@@ -393,6 +418,23 @@ export interface DashboardResponse {
 			top_profit_item?: ProfitabilityItemRow | null;
 			lowest_margin_item?: ProfitabilityItemRow | null;
 		};
+	};
+	branch_location_report?: {
+		period?: {
+			from?: string;
+			to?: string;
+		};
+		summary?: {
+			location_count?: number;
+			total_invoices?: number;
+			total_sales?: number;
+			total_profit?: number;
+			total_stock_qty?: number;
+			low_stock_total?: number;
+			cashier_count?: number;
+		};
+		location_wise?: BranchLocationRow[];
+		top_items_by_location?: BranchTopItemsByLocationRow[];
 	};
 	sales_trend?: {
 		period?: {
@@ -593,6 +635,7 @@ export interface DashboardRequest {
 	customer_report_limit?: number;
 	staff_report_limit?: number;
 	profitability_report_limit?: number;
+	branch_report_limit?: number;
 	supplier_limit?: number;
 	low_stock_limit?: number;
 }

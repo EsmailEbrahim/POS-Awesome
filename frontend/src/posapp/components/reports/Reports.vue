@@ -78,6 +78,7 @@
 						<v-tab value="staff">{{ __("Staff") }}</v-tab>
 						<v-tab value="customers">{{ __("Customers") }}</v-tab>
 						<v-tab value="finance">{{ __("Finance") }}</v-tab>
+						<v-tab value="branches">{{ __("Branches") }}</v-tab>
 						<v-tab value="products">{{ __("Products") }}</v-tab>
 						<v-tab value="inventory">{{ __("Inventory") }}</v-tab>
 						<v-tab value="procurement">{{ __("Procurement") }}</v-tab>
@@ -872,6 +873,110 @@
 					</v-col>
 				</v-row>
 
+				<v-row v-show="activeDashboardTab === 'branches'" class="dashboard-grid mb-2">
+					<v-col cols="12">
+						<v-card class="dashboard-card" elevation="2">
+							<div class="dashboard-card__header">
+								<h2 class="text-subtitle-1 font-weight-bold mb-0">{{ __("Branch / Location-wise Report") }}</h2>
+								<div class="dashboard-chip-row">
+									<v-chip size="small" color="info" variant="tonal">
+										{{ branchReportRangeLabel }}
+									</v-chip>
+									<v-chip size="small" color="primary" variant="tonal">
+										{{ __("Locations") }}: {{ formatQuantity(Number(branchSummary.location_count || 0)) }}
+									</v-chip>
+									<v-chip size="small" color="success" variant="tonal">
+										{{ __("Sales") }}: {{ formatMoney(Number(branchSummary.total_sales || 0)) }}
+									</v-chip>
+									<v-chip size="small" color="warning" variant="tonal">
+										{{ __("Profit") }}: {{ formatMoney(Number(branchSummary.total_profit || 0)) }}
+									</v-chip>
+								</div>
+							</div>
+
+							<div class="summary-grid">
+								<div class="summary-metric">
+									<div class="summary-metric__label">{{ __("Total Invoices") }}</div>
+									<div class="summary-metric__value">{{ formatQuantity(Number(branchSummary.total_invoices || 0)) }}</div>
+								</div>
+								<div class="summary-metric">
+									<div class="summary-metric__label">{{ __("Total Stock Qty") }}</div>
+									<div class="summary-metric__value">{{ formatQuantity(Number(branchSummary.total_stock_qty || 0)) }}</div>
+								</div>
+								<div class="summary-metric">
+									<div class="summary-metric__label">{{ __("Low Stock Total") }}</div>
+									<div class="summary-metric__value summary-metric__value--danger">
+										{{ formatQuantity(Number(branchSummary.low_stock_total || 0)) }}
+									</div>
+								</div>
+								<div class="summary-metric">
+									<div class="summary-metric__label">{{ __("Cashiers") }}</div>
+									<div class="summary-metric__value">{{ formatQuantity(Number(branchSummary.cashier_count || 0)) }}</div>
+								</div>
+							</div>
+
+							<div class="trend-grid trend-grid--two">
+								<div class="trend-panel">
+									<div class="summary-metric__label">{{ __("Location Performance") }}</div>
+									<div v-if="branchRows.length" class="list-stack trend-list">
+										<div v-for="row in branchRows" :key="`branch-row-${row.profile}`" class="insight-row">
+											<div class="insight-row__top">
+												<div class="insight-row__title">{{ row.profile || "-" }}</div>
+												<div class="insight-row__value">{{ formatMoney(Number(row.sales_amount || 0)) }}</div>
+											</div>
+											<div class="insight-row__meta">
+												{{ __("Warehouse") }}: {{ row.warehouse || "-" }} .
+												{{ __("Invoices") }}: {{ formatQuantity(Number(row.invoice_count || 0)) }} .
+												{{ __("Avg Bill") }}: {{ formatMoney(Number(row.average_bill || 0)) }}
+											</div>
+											<div class="insight-row__meta">
+												{{ __("Profit") }}: {{ formatMoney(Number(row.profit_amount || 0)) }} .
+												{{ __("Stock") }}: {{ formatQuantity(Number(row.stock_qty || 0)) }} .
+												{{ __("Low Stock") }}: {{ formatQuantity(Number(row.low_stock_count || 0)) }}
+											</div>
+											<v-progress-linear
+												:model-value="trendProgress(Number(row.sales_amount || 0), branchSalesMax)"
+												color="primary"
+												height="5"
+												rounded
+											/>
+										</div>
+									</div>
+									<div v-else class="empty-state">{{ __("No branch/location data found.") }}</div>
+								</div>
+
+								<div class="trend-panel">
+									<div class="summary-metric__label">{{ __("Top Items by Location") }}</div>
+									<div v-if="branchTopItemsByLocation.length" class="list-stack trend-list">
+										<div
+											v-for="location in branchTopItemsByLocation"
+											:key="`branch-items-${location.profile}`"
+											class="insight-row"
+										>
+											<div class="insight-row__top">
+												<div class="insight-row__title">{{ location.profile || "-" }}</div>
+												<div class="insight-row__value">{{ location.warehouse || "-" }}</div>
+											</div>
+											<div
+												v-for="item in location.items || []"
+												:key="`branch-item-${location.profile}-${item.item_code}`"
+												class="insight-row__meta"
+											>
+												{{ item.item_name || item.item_code || "-" }}:
+												{{ formatMoney(Number(item.sales_amount || 0)) }}
+											</div>
+											<div v-if="!(location.items || []).length" class="insight-row__meta">
+												{{ __("No top items found for this location.") }}
+											</div>
+										</div>
+									</div>
+									<div v-else class="empty-state">{{ __("No location-wise top item data found.") }}</div>
+								</div>
+							</div>
+						</v-card>
+					</v-col>
+				</v-row>
+
 				<v-row v-show="activeDashboardTab === 'products'" class="dashboard-grid mb-2">
 					<v-col cols="12">
 						<v-card class="dashboard-card" elevation="2">
@@ -1556,6 +1661,8 @@
 import { computed, onBeforeUnmount, onMounted, ref, watch } from "vue";
 import { useUIStore } from "@/posapp/stores/uiStore";
 import {
+	type BranchLocationRow,
+	type BranchTopItemsByLocationRow,
 	fetchDashboardData,
 	type CategoryBrandVariantRow,
 	type CustomerReportRow,
@@ -1591,7 +1698,7 @@ const isDashboardEnabledOnServer = ref(true);
 const lastUpdatedAt = ref<Date | null>(null);
 const allowAllProfiles = ref(false);
 const activeDashboardTab = ref<
-	"sales" | "staff" | "customers" | "finance" | "products" | "inventory" | "procurement"
+	"sales" | "staff" | "customers" | "finance" | "branches" | "products" | "inventory" | "procurement"
 >("sales");
 const dashboardScope = ref<"all" | "current" | "specific">("all");
 const selectedProfileFilter = ref("");
@@ -1613,6 +1720,7 @@ const discountReportLimit = ref(20);
 const customerReportLimit = ref(20);
 const staffReportLimit = ref(20);
 const profitabilityReportLimit = ref(20);
+const branchReportLimit = ref(20);
 let fastMovingSearchDebounce: ReturnType<typeof setTimeout> | null = null;
 
 const createEmptyDashboard = (): DashboardResponse => ({
@@ -1734,6 +1842,20 @@ const createEmptyDashboard = (): DashboardResponse => ({
 			top_profit_item: null,
 			lowest_margin_item: null,
 		},
+	},
+	branch_location_report: {
+		period: {},
+		summary: {
+			location_count: 0,
+			total_invoices: 0,
+			total_sales: 0,
+			total_profit: 0,
+			total_stock_qty: 0,
+			low_stock_total: 0,
+			cashier_count: 0,
+		},
+		location_wise: [],
+		top_items_by_location: [],
 	},
 	sales_trend: {
 		period: {},
@@ -2236,6 +2358,32 @@ const lowestMarginItemLabel = computed(() => {
 		return __("N/A");
 	}
 	return `${name} . ${formatPercent(row.gross_margin_pct, 1)}`;
+});
+
+const branchReport = computed(() => dashboardData.value.branch_location_report || {});
+const branchSummary = computed(() => branchReport.value.summary || {});
+const branchReportRangeLabel = computed(() => {
+	const from = branchReport.value.period?.from || dashboardData.value.date_context?.month_start;
+	const to = branchReport.value.period?.to || dashboardData.value.date_context?.today;
+	if (!from || !to) {
+		return __("Current Month");
+	}
+	return `${formatDate(from)} - ${formatDate(to)}`;
+});
+const branchRows = computed<BranchLocationRow[]>(() =>
+	[...(branchReport.value.location_wise || [])]
+		.sort((a, b) => Number(b.sales_amount || 0) - Number(a.sales_amount || 0))
+		.slice(0, Number(branchReportLimit.value || 20)),
+);
+const branchTopItemsByLocation = computed<BranchTopItemsByLocationRow[]>(() =>
+	[...(branchReport.value.top_items_by_location || [])].slice(0, Number(branchReportLimit.value || 20)),
+);
+const branchSalesMax = computed(() => {
+	const maxValue = branchRows.value.reduce(
+		(max, row) => Math.max(max, Math.abs(Number(row.sales_amount || 0))),
+		0,
+	);
+	return maxValue > 0 ? maxValue : 1;
 });
 
 const customerReport = computed(() => dashboardData.value.customer_report || {});
@@ -2939,6 +3087,10 @@ function mergeDashboardPayload(payload?: Partial<DashboardResponse>): DashboardR
 			...(base.profitability_report || {}),
 			...(payload?.profitability_report || {}),
 		},
+		branch_location_report: {
+			...(base.branch_location_report || {}),
+			...(payload?.branch_location_report || {}),
+		},
 		sales_trend: {
 			...(base.sales_trend || {}),
 			...(payload?.sales_trend || {}),
@@ -3001,6 +3153,7 @@ function logDashboardResponse(response: DashboardResponse) {
 	console.info("customer_top_count", response.customer_report?.top_customers?.length || 0);
 	console.info("staff_cashier_count", response.staff_performance_report?.cashier_wise?.length || 0);
 	console.info("profit_item_count", response.profitability_report?.item_wise?.length || 0);
+	console.info("branch_count", response.branch_location_report?.location_wise?.length || 0);
 	console.info("item_sales_count", response.item_sales_report?.items?.length || 0);
 	console.info("category_report_count", response.category_brand_variant_report?.category_wise?.length || 0);
 	console.info("inventory_status_total_items", response.inventory_status_report?.summary?.total_items || 0);
@@ -3038,6 +3191,7 @@ async function loadDashboard() {
 			customer_report_limit: customerReportLimit.value,
 			staff_report_limit: staffReportLimit.value,
 			profitability_report_limit: profitabilityReportLimit.value,
+			branch_report_limit: branchReportLimit.value,
 			fast_moving_page: fastMovingPage.value,
 			fast_moving_page_size: fastMovingPageSize.value,
 			fast_moving_search: fastMovingSearch.value || undefined,
