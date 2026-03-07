@@ -15,6 +15,18 @@ INVOICE_SOURCES: tuple[tuple[str, str], ...] = (
     ("POS Invoice", "POS Invoice Item"),
 )
 
+SCOPE_ALL = "all"
+SCOPE_CURRENT = "current"
+SCOPE_SPECIFIC = "specific"
+
+DASHBOARD_MANAGER_ROLES = {
+    "System Manager",
+    "Accounts Manager",
+    "Sales Manager",
+    "Stock Manager",
+    "POS Manager",
+}
+
 
 def _pick_first_column(doctype: str, candidates: list[str]) -> str | None:
     for fieldname in candidates:
@@ -62,6 +74,14 @@ def _check_profile_permission(profile_name: str):
         )
 
 
+def _build_in_filter(column_sql: str, values: list[str]) -> tuple[str, list[str]]:
+    cleaned_values = [cstr(value).strip() for value in values if cstr(value).strip()]
+    if not cleaned_values:
+        return "", []
+    placeholders = ", ".join(["%s"] * len(cleaned_values))
+    return f" and {column_sql} in ({placeholders})", cleaned_values
+
+
 def _coerce_limit(value: Any, default: int, minimum: int = 1, maximum: int = 50) -> int:
     coerced = cint(value) if value is not None else default
     if not coerced:
@@ -86,6 +106,105 @@ def _is_dashboard_enabled(profile_doc: dict[str, Any]) -> bool:
     if value in (None, ""):
         return True
     return bool(cint(value))
+
+
+def _safe_pos_settings_value(fieldname: str, default: Any = None):
+    if not frappe.db.exists("DocType", "POS Settings"):
+        return default
+    if not frappe.db.has_column("POS Settings", fieldname):
+        return default
+    value = frappe.db.get_single_value("POS Settings", fieldname)
+    return default if value in (None, "") else value
+
+
+def _get_global_dashboard_settings() -> dict[str, Any]:
+    enabled_raw = _safe_pos_settings_value("posa_enable_awesome_dashboard_global", 1)
+    default_scope_raw = cstr(
+        _safe_pos_settings_value("posa_dashboard_default_scope", "All Profiles")
+    ).strip()
+    low_stock_threshold_raw = _safe_pos_settings_value(
+        "posa_dashboard_low_stock_alert_threshold", 10
+    )
+
+    if default_scope_raw.lower().startswith("current"):
+        default_scope = SCOPE_CURRENT
+    else:
+        default_scope = SCOPE_ALL
+
+    return {
+        "enabled": bool(cint(enabled_raw)),
+        "default_scope": default_scope,
+        "low_stock_threshold": _coerce_threshold(low_stock_threshold_raw, 10),
+    }
+
+
+def _user_can_view_all_profiles(user: str) -> bool:
+    if user == "Administrator":
+        return True
+    user_roles = set(frappe.get_roles(user))
+    return bool(user_roles & DASHBOARD_MANAGER_ROLES)
+
+
+def _normalize_scope(scope: Any, default_scope: str, allow_all_profiles: bool) -> str:
+    requested = cstr(scope).strip().lower()
+    if requested in ("all", "company", "global"):
+        normalized = SCOPE_ALL
+    elif requested in ("specific", "profile"):
+        normalized = SCOPE_SPECIFIC
+    elif requested in ("current", "my", "active"):
+        normalized = SCOPE_CURRENT
+    else:
+        normalized = default_scope
+
+    if not allow_all_profiles and normalized in (SCOPE_ALL, SCOPE_SPECIFIC):
+        return SCOPE_CURRENT
+    return normalized
+
+
+def _get_company_profiles(company: str) -> list[dict[str, Any]]:
+    fields = ["name", "warehouse", "currency", "company"]
+    has_disabled = frappe.db.has_column("POS Profile", "disabled")
+    if has_disabled:
+        fields.append("disabled")
+    if frappe.db.has_column("POS Profile", "posa_enable_awesome_dashboard"):
+        fields.append("posa_enable_awesome_dashboard")
+    if frappe.db.has_column("POS Profile", "posa_low_stock_alert_threshold"):
+        fields.append("posa_low_stock_alert_threshold")
+
+    filters: dict[str, Any] = {"company": company}
+    if has_disabled:
+        filters["disabled"] = 0
+
+    profiles = frappe.get_all(
+        "POS Profile",
+        filters=filters,
+        fields=fields,
+        order_by="name asc",
+    )
+
+    for profile in profiles:
+        profile["dashboard_enabled"] = _is_dashboard_enabled(profile)
+    return profiles
+
+
+def _get_assigned_profiles(user: str, company_profiles: list[dict[str, Any]]) -> list[str]:
+    if not frappe.db.exists("DocType", "POS Profile User"):
+        return []
+
+    allowed_profiles = set(
+        frappe.get_all(
+            "POS Profile User",
+            filters={"user": user},
+            pluck="parent",
+        )
+    )
+    if not allowed_profiles:
+        return []
+
+    company_profile_names = {profile.get("name") for profile in company_profiles}
+    return sorted(
+        [name for name in allowed_profiles if name in company_profile_names]
+    )
 
 
 def _iter_invoice_sources() -> list[tuple[str, str]]:
@@ -116,15 +235,19 @@ def _extra_sle_filter(alias: str = "sle") -> str:
 def _collect_sales_and_profit(
     parent_doctype: str,
     child_doctype: str,
-    profile_name: str,
+    profile_names: list[str],
     company: str,
     date_from: str,
     date_to: str,
 ) -> dict[str, float]:
+    if not profile_names:
+        return {"sales": 0.0, "profit": 0.0, "profit_method": "invoice_item"}
+
     total_sales = 0.0
     total_sales_for_profit = 0.0
     total_profit = 0.0
     profit_method = "invoice_item"
+    profile_filter, profile_filter_params = _build_in_filter("inv.pos_profile", profile_names)
 
     parent_amount_field = _pick_first_column(parent_doctype, ["base_grand_total", "grand_total"])
     parent_net_field = _pick_first_column(parent_doctype, ["base_net_total", "net_total"])
@@ -143,11 +266,11 @@ def _collect_sales_and_profit(
             from `tab{parent_doctype}` inv
             where inv.docstatus = 1
               and inv.company = %s
-              and inv.pos_profile = %s
               and inv.posting_date between %s and %s
+              {profile_filter}
               {_extra_parent_filter(parent_doctype, "inv")}
             """,
-            (company, profile_name, date_from, date_to),
+            (company, date_from, date_to, *profile_filter_params),
             as_dict=True,
         )
         total_sales = flt((sales_row[0] or {}).get("total_sales"))
@@ -169,12 +292,12 @@ def _collect_sales_and_profit(
                and sle.voucher_type = %s
             where inv.docstatus = 1
               and inv.company = %s
-              and inv.pos_profile = %s
               and inv.posting_date between %s and %s
+              {profile_filter}
               {_extra_sle_filter("sle")}
               {_extra_parent_filter(parent_doctype, "inv")}
             """,
-            (parent_doctype, company, profile_name, date_from, date_to),
+            (parent_doctype, company, date_from, date_to, *profile_filter_params),
             as_dict=True,
         )
         total_cogs = flt((cogs_row[0] or {}).get("total_cogs"))
@@ -206,11 +329,11 @@ def _collect_sales_and_profit(
             inner join `tab{parent_doctype}` inv on inv.name = item.parent
             where inv.docstatus = 1
               and inv.company = %s
-              and inv.pos_profile = %s
               and inv.posting_date between %s and %s
+              {profile_filter}
               {_extra_parent_filter(parent_doctype, "inv")}
             """,
-            (company, profile_name, date_from, date_to),
+            (company, date_from, date_to, *profile_filter_params),
             as_dict=True,
         )
         total_profit = flt((profit_row[0] or {}).get("total_profit"))
@@ -223,12 +346,15 @@ def _collect_sales_and_profit(
 
 
 def _collect_fast_moving_items(
-    profile_name: str,
+    profile_names: list[str],
     company: str,
     date_from: str,
     date_to: str,
     limit: int,
 ) -> list[dict[str, Any]]:
+    if not profile_names:
+        return []
+
     grouped_items: dict[str, dict[str, Any]] = defaultdict(
         lambda: {
             "item_code": "",
@@ -238,6 +364,7 @@ def _collect_fast_moving_items(
             "sales_amount": 0.0,
         }
     )
+    profile_filter, profile_filter_params = _build_in_filter("inv.pos_profile", profile_names)
 
     for parent_doctype, child_doctype in _iter_invoice_sources():
         qty_field = _pick_first_column(child_doctype, ["stock_qty", "qty"])
@@ -266,12 +393,12 @@ def _collect_fast_moving_items(
             inner join `tab{parent_doctype}` inv on inv.name = item.parent
             where inv.docstatus = 1
               and inv.company = %s
-              and inv.pos_profile = %s
               and inv.posting_date between %s and %s
+              {profile_filter}
               {_extra_parent_filter(parent_doctype, "inv")}
             group by item.item_code
             """,
-            (company, profile_name, date_from, date_to),
+            (company, date_from, date_to, *profile_filter_params),
             as_dict=True,
         )
 
@@ -296,8 +423,8 @@ def _collect_fast_moving_items(
     return filtered_items[:limit]
 
 
-def _collect_low_stock_items(warehouse: str | None, threshold: int, limit: int) -> list[dict[str, Any]]:
-    if not warehouse:
+def _collect_low_stock_items(warehouses: list[str], threshold: int, limit: int) -> list[dict[str, Any]]:
+    if not warehouses:
         return []
     if not frappe.db.exists("DocType", "Bin"):
         return []
@@ -305,8 +432,12 @@ def _collect_low_stock_items(warehouse: str | None, threshold: int, limit: int) 
     if not frappe.db.has_column("Bin", "actual_qty"):
         return []
 
+    warehouse_filter, warehouse_params = _build_in_filter("bin.warehouse", warehouses)
+    if not warehouse_filter:
+        return []
+
     return frappe.db.sql(
-        """
+        f"""
         select
             bin.item_code as item_code,
             item.item_name as item_name,
@@ -315,14 +446,14 @@ def _collect_low_stock_items(warehouse: str | None, threshold: int, limit: int) 
             bin.warehouse as warehouse
         from `tabBin` bin
         inner join `tabItem` item on item.name = bin.item_code
-        where bin.warehouse = %s
-          and ifnull(item.disabled, 0) = 0
+        where ifnull(item.disabled, 0) = 0
           and ifnull(item.is_stock_item, 0) = 1
+          {warehouse_filter}
           and ifnull(bin.actual_qty, 0) <= %s
         order by bin.actual_qty asc, bin.item_code asc
         limit %s
         """,
-        (warehouse, threshold, limit),
+        (*warehouse_params, threshold, limit),
         as_dict=True,
     )
 
@@ -370,37 +501,127 @@ def _collect_supplier_purchase_summary(
 @frappe.whitelist()
 def get_dashboard_data(
     pos_profile=None,
+    scope=None,
+    profile_filter=None,
     low_stock_threshold=None,
     fast_moving_limit: int = 10,
     supplier_limit: int = 8,
     low_stock_limit: int = 20,
 ):
-    """Return real-time dashboard data for the active POS profile."""
+    """Return real-time dashboard data for POS Awesome.
 
-    profile_doc = _resolve_profile(pos_profile)
-    profile_name = cstr(profile_doc.get("name")).strip()
-    _check_profile_permission(profile_name)
+    Scope values:
+    - all: aggregates all accessible profiles in the same company.
+    - current: only current POS profile.
+    - specific: selected profile_filter.
+    """
 
-    enabled = _is_dashboard_enabled(profile_doc)
-    profile_threshold = profile_doc.get("posa_low_stock_alert_threshold")
-    threshold = _coerce_threshold(low_stock_threshold, profile_threshold)
+    user = frappe.session.user
+    current_profile_doc = _resolve_profile(pos_profile)
+    current_profile_name = cstr(current_profile_doc.get("name")).strip()
+    _check_profile_permission(current_profile_name)
+
+    global_settings = _get_global_dashboard_settings()
+    allow_all_profiles = _user_can_view_all_profiles(user)
+    requested_scope = _normalize_scope(scope, global_settings["default_scope"], allow_all_profiles)
+    profile_filter = cstr(profile_filter).strip()
 
     fast_moving_limit = _coerce_limit(fast_moving_limit, default=10, minimum=1, maximum=25)
     supplier_limit = _coerce_limit(supplier_limit, default=8, minimum=1, maximum=25)
     low_stock_limit = _coerce_limit(low_stock_limit, default=20, minimum=1, maximum=100)
 
-    company = cstr(profile_doc.get("company")).strip()
-    warehouse = cstr(profile_doc.get("warehouse")).strip() or get_default_warehouse(company)
-    currency = cstr(profile_doc.get("currency")).strip()
+    company = cstr(current_profile_doc.get("company")).strip()
+    company_profiles = _get_company_profiles(company)
+    profiles_by_name = {profile.get("name"): profile for profile in company_profiles if profile.get("name")}
+
+    assigned_profile_names = _get_assigned_profiles(user, company_profiles)
+    if current_profile_name not in assigned_profile_names and not allow_all_profiles:
+        assigned_profile_names.append(current_profile_name)
+
+    available_profile_names = (
+        sorted(profiles_by_name.keys()) if allow_all_profiles else sorted(set(assigned_profile_names))
+    )
+    available_profiles = [
+        profiles_by_name[name]
+        for name in available_profile_names
+        if name in profiles_by_name
+    ]
+
+    if requested_scope == SCOPE_SPECIFIC:
+        target_profile = profile_filter or current_profile_name
+        if target_profile not in profiles_by_name:
+            frappe.throw(_("POS Profile {0} does not belong to company {1}.").format(target_profile, company))
+        if not allow_all_profiles and target_profile not in available_profile_names:
+            frappe.throw(
+                _("You are not permitted to view dashboard data for POS Profile {0}.").format(target_profile),
+                frappe.PermissionError,
+            )
+        selected_profile_names = [target_profile]
+    elif requested_scope == SCOPE_CURRENT:
+        selected_profile_names = [current_profile_name]
+    else:
+        selected_profile_names = available_profile_names or [current_profile_name]
+
+    selected_profiles = [
+        profiles_by_name.get(name) for name in selected_profile_names if profiles_by_name.get(name)
+    ]
+    selected_profiles = [profile for profile in selected_profiles if profile]
+
+    if not selected_profiles and current_profile_name in profiles_by_name:
+        selected_profiles = [profiles_by_name[current_profile_name]]
+        selected_profile_names = [current_profile_name]
+
+    profile_override_enabled = [
+        profile for profile in selected_profiles if _is_dashboard_enabled(profile)
+    ]
+    selected_profiles = profile_override_enabled
+    selected_profile_names = [profile.get("name") for profile in selected_profiles]
+
+    single_profile = selected_profiles[0] if len(selected_profiles) == 1 else None
+    profile_threshold = single_profile.get("posa_low_stock_alert_threshold") if single_profile else None
+    threshold_fallback = profile_threshold or global_settings["low_stock_threshold"]
+    threshold = _coerce_threshold(low_stock_threshold, threshold_fallback)
+
+    warehouses = [
+        cstr(profile.get("warehouse")).strip()
+        for profile in selected_profiles
+        if cstr(profile.get("warehouse")).strip()
+    ]
+    if not warehouses:
+        default_warehouse = get_default_warehouse(company)
+        warehouses = [default_warehouse] if default_warehouse else []
+
+    company_currency = cstr(frappe.db.get_value("Company", company, "default_currency")).strip()
+    if single_profile:
+        currency = cstr(single_profile.get("currency")).strip() or company_currency
+    else:
+        currency = company_currency or cstr(current_profile_doc.get("currency")).strip()
 
     today = getdate(nowdate())
     month_start = today.replace(day=1)
+    global_enabled = bool(global_settings["enabled"])
+    enabled = bool(global_enabled and selected_profiles)
+    profile_label = single_profile.get("name") if single_profile else None
+    warehouse_label = warehouses[0] if len(warehouses) == 1 else _("Multiple Warehouses")
 
     payload = {
         "enabled": enabled,
-        "profile": profile_name,
+        "profile": profile_label,
+        "scope": requested_scope,
+        "default_scope": global_settings["default_scope"],
+        "allow_all_profiles": allow_all_profiles,
+        "selected_profiles": selected_profile_names,
+        "available_profiles": [
+            {
+                "name": profile.get("name"),
+                "warehouse": profile.get("warehouse"),
+                "currency": profile.get("currency"),
+                "dashboard_enabled": profile.get("dashboard_enabled"),
+            }
+            for profile in available_profiles
+        ],
         "company": company,
-        "warehouse": warehouse,
+        "warehouse": warehouse_label,
         "currency": currency,
         "generated_at": now_datetime().isoformat(),
         "date_context": {
@@ -432,7 +653,7 @@ def get_dashboard_data(
         today_stats = _collect_sales_and_profit(
             parent_doctype=parent_doctype,
             child_doctype=child_doctype,
-            profile_name=profile_name,
+            profile_names=selected_profile_names,
             company=company,
             date_from=str(today),
             date_to=str(today),
@@ -440,7 +661,7 @@ def get_dashboard_data(
         monthly_stats = _collect_sales_and_profit(
             parent_doctype=parent_doctype,
             child_doctype=child_doctype,
-            profile_name=profile_name,
+            profile_names=selected_profile_names,
             company=company,
             date_from=str(month_start),
             date_to=str(today),
@@ -456,14 +677,14 @@ def get_dashboard_data(
             payload["sales_overview"]["profit_method"] = "stock_ledger"
 
     payload["inventory_insights"]["fast_moving_items"] = _collect_fast_moving_items(
-        profile_name=profile_name,
+        profile_names=selected_profile_names,
         company=company,
         date_from=str(month_start),
         date_to=str(today),
         limit=fast_moving_limit,
     )
     payload["inventory_insights"]["low_stock_items"] = _collect_low_stock_items(
-        warehouse=warehouse,
+        warehouses=warehouses,
         threshold=threshold,
         limit=low_stock_limit,
     )

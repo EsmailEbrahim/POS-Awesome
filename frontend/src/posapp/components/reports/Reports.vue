@@ -9,6 +9,29 @@
 					</p>
 				</div>
 				<div class="dashboard-actions">
+					<v-select
+						v-model="dashboardScope"
+						:items="dashboardScopeItems"
+						item-title="label"
+						item-value="value"
+						density="compact"
+						variant="outlined"
+						hide-details
+						class="dashboard-filter mr-2 mb-2 mb-sm-0"
+						:label="__('Scope')"
+					/>
+					<v-select
+						v-if="dashboardScope === 'specific'"
+						v-model="selectedProfileFilter"
+						:items="profileFilterItems"
+						item-title="label"
+						item-value="value"
+						density="compact"
+						variant="outlined"
+						hide-details
+						class="dashboard-filter mr-2 mb-2 mb-sm-0"
+						:label="__('Profile')"
+					/>
 					<v-chip
 						v-if="lastUpdatedLabel"
 						size="small"
@@ -24,17 +47,13 @@
 				</div>
 			</div>
 
-			<v-alert v-if="!isDashboardEnabledInProfile" type="info" variant="tonal" class="mb-4">
-				{{ __("Awesome Dashboard is disabled in POS Profile settings.") }}
-			</v-alert>
-
 			<v-alert
-				v-else-if="!isDashboardEnabledOnServer"
+				v-if="!isDashboardEnabledOnServer"
 				type="warning"
 				variant="tonal"
 				class="mb-4"
 			>
-				{{ __("Awesome Dashboard is disabled for this POS Profile.") }}
+				{{ __("Awesome Dashboard is disabled in global settings or for the selected scope.") }}
 			</v-alert>
 
 			<v-alert v-if="errorMessage" type="error" variant="tonal" class="mb-4">
@@ -179,7 +198,6 @@
 <script setup lang="ts">
 import { computed, onMounted, ref, watch } from "vue";
 import { useUIStore } from "@/posapp/stores/uiStore";
-import { parseBooleanSetting } from "@/posapp/utils/stock";
 import {
 	fetchDashboardData,
 	type DashboardResponse,
@@ -198,6 +216,10 @@ const loading = ref(false);
 const errorMessage = ref("");
 const isDashboardEnabledOnServer = ref(true);
 const lastUpdatedAt = ref<Date | null>(null);
+const allowAllProfiles = ref(false);
+const dashboardScope = ref<"all" | "current" | "specific">("all");
+const selectedProfileFilter = ref("");
+const scopeInitialized = ref(false);
 
 const createEmptyDashboard = (): DashboardResponse => ({
 	enabled: true,
@@ -226,22 +248,35 @@ const posProfile = computed(() => uiStore.posProfile || {});
 const profileName = computed(() => String((posProfile.value as any)?.name || "").trim());
 const currency = computed(() => dashboardData.value.currency || (posProfile.value as any)?.currency || "");
 
-const isDashboardEnabledInProfile = computed(() => {
-	const rawValue = (posProfile.value as any)?.posa_enable_awesome_dashboard;
-	if (rawValue === undefined || rawValue === null || rawValue === "") {
-		return true;
-	}
-	return parseBooleanSetting(rawValue);
-});
-
 const configuredLowStockThreshold = computed(() => {
 	const rawValue = Number((posProfile.value as any)?.posa_low_stock_alert_threshold);
 	return Number.isFinite(rawValue) && rawValue > 0 ? rawValue : undefined;
 });
 
-const canRenderDashboard = computed(
-	() => isDashboardEnabledInProfile.value && isDashboardEnabledOnServer.value,
+const availableProfiles = computed(() => dashboardData.value.available_profiles || []);
+const enabledProfiles = computed(() =>
+	availableProfiles.value.filter((profile) => profile.dashboard_enabled !== false),
 );
+
+const dashboardScopeItems = computed(() => {
+	const items = [
+		{ label: __("All Profiles"), value: "all" as const },
+		{ label: __("Current Profile"), value: "current" as const },
+		{ label: __("Specific Profile"), value: "specific" as const },
+	];
+	return allowAllProfiles.value
+		? items
+		: items.filter((item) => item.value === "current");
+});
+
+const profileFilterItems = computed(() =>
+	enabledProfiles.value.map((profile) => ({
+		label: profile.name,
+		value: profile.name,
+	})),
+);
+
+const canRenderDashboard = computed(() => isDashboardEnabledOnServer.value);
 
 const salesMetrics = computed(() => [
 	{
@@ -368,20 +403,35 @@ function mergeDashboardPayload(payload?: Partial<DashboardResponse>): DashboardR
 }
 
 async function loadDashboard() {
-	if (!isDashboardEnabledInProfile.value) {
-		return;
-	}
-
 	loading.value = true;
 	errorMessage.value = "";
 
 	try {
 		const response = await fetchDashboardData({
 			pos_profile: profileName.value || undefined,
+			scope: dashboardScope.value,
+			profile_filter:
+				dashboardScope.value === "specific" ? selectedProfileFilter.value || undefined : undefined,
 			low_stock_threshold: configuredLowStockThreshold.value,
 		});
 		dashboardData.value = mergeDashboardPayload(response);
 		isDashboardEnabledOnServer.value = response.enabled !== false;
+		allowAllProfiles.value = Boolean(response.allow_all_profiles);
+		if (!scopeInitialized.value) {
+			const defaultScope = (response.default_scope || dashboardScope.value) as
+				| "all"
+				| "current"
+				| "specific";
+			dashboardScope.value = defaultScope;
+			scopeInitialized.value = true;
+		}
+		if (!allowAllProfiles.value && dashboardScope.value !== "current") {
+			dashboardScope.value = "current";
+		}
+		if (dashboardScope.value === "specific" && !selectedProfileFilter.value) {
+			const firstProfile = profileFilterItems.value[0]?.value || "";
+			selectedProfileFilter.value = firstProfile;
+		}
 		lastUpdatedAt.value = new Date();
 	} catch (error: any) {
 		errorMessage.value = error?.message || __("Failed to load dashboard data.");
@@ -401,21 +451,32 @@ watch(
 );
 
 watch(
-	() => isDashboardEnabledInProfile.value,
-	(enabled) => {
-		if (enabled) {
-			void loadDashboard();
+	() => dashboardScope.value,
+	(scope) => {
+		if (scope !== "specific") {
+			selectedProfileFilter.value = "";
+		} else if (!selectedProfileFilter.value) {
+			selectedProfileFilter.value = profileFilterItems.value[0]?.value || "";
+		}
+		void loadDashboard();
+	},
+);
+
+watch(
+	() => selectedProfileFilter.value,
+	(newValue, oldValue) => {
+		if (dashboardScope.value !== "specific") {
 			return;
 		}
-		dashboardData.value = createEmptyDashboard();
-		errorMessage.value = "";
+		if (newValue === oldValue) {
+			return;
+		}
+		void loadDashboard();
 	},
 );
 
 onMounted(() => {
-	if (isDashboardEnabledInProfile.value) {
-		void loadDashboard();
-	}
+	void loadDashboard();
 });
 </script>
 
@@ -445,6 +506,11 @@ onMounted(() => {
 	display: flex;
 	align-items: center;
 	flex-wrap: wrap;
+}
+
+.dashboard-filter {
+	min-width: 180px;
+	max-width: 220px;
 }
 
 .dashboard-grid {
@@ -591,6 +657,11 @@ onMounted(() => {
 }
 
 @media (max-width: 600px) {
+	.dashboard-filter {
+		min-width: 150px;
+		max-width: 180px;
+	}
+
 	.metric-card__value {
 		font-size: 1.15rem;
 	}

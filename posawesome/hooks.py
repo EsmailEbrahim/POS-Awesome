@@ -78,6 +78,7 @@ after_migrate = [
     "posawesome.patches.add_cash_movement_to_workspace.execute",
     "posawesome.patches.add_customer_display_settings.execute",
     "posawesome.patches.add_dashboard_settings.execute",
+    "posawesome.patches.add_dashboard_global_settings.execute",
     "posawesome.patches.reorganize_pos_profile_sections.execute",
 ]
 
@@ -332,8 +333,15 @@ fixtures = [
                     "POS Profile-posa_allow_delete_cancelled_cash_movement",
                     "POS Profile-posa_require_cash_movement_remarks",
                     "POS Profile-posa_cash_movement_max_amount",
+                    "POS Profile-posa_section_awesome_dashboard",
+                    "POS Profile-posa_enable_awesome_dashboard",
+                    "POS Profile-posa_low_stock_alert_threshold",
                     "POS Settings-posa_enable_return_validity",
                     "POS Settings-posa_return_validity_days",
+                    "POS Settings-posa_section_dashboard",
+                    "POS Settings-posa_enable_awesome_dashboard_global",
+                    "POS Settings-posa_dashboard_default_scope",
+                    "POS Settings-posa_dashboard_low_stock_alert_threshold",
                     "POS Invoice-posa_return_valid_upto",
                     "Sales Invoice-posa_return_valid_upto",
                 ),

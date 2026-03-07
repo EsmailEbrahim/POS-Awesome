@@ -5,6 +5,7 @@ export interface DashboardMetricPayload {
 	today_profit: number;
 	monthly_sales: number;
 	monthly_profit: number;
+	profit_method?: "stock_ledger" | "invoice_item";
 }
 
 export interface FastMovingItem {
@@ -34,6 +35,16 @@ export interface SupplierSummaryRow {
 export interface DashboardResponse {
 	enabled: boolean;
 	profile?: string;
+	scope?: "all" | "current" | "specific";
+	default_scope?: "all" | "current" | "specific";
+	allow_all_profiles?: boolean;
+	selected_profiles?: string[];
+	available_profiles?: Array<{
+		name: string;
+		warehouse?: string;
+		currency?: string;
+		dashboard_enabled?: boolean;
+	}>;
 	company?: string;
 	warehouse?: string;
 	currency?: string;
@@ -59,6 +70,8 @@ export interface DashboardResponse {
 
 export interface DashboardRequest {
 	pos_profile?: string | null;
+	scope?: "all" | "current" | "specific";
+	profile_filter?: string | null;
 	low_stock_threshold?: number;
 	fast_moving_limit?: number;
 	supplier_limit?: number;
