@@ -48,13 +48,22 @@ def execute():
             "insert_after": "posa_section_awesome_dashboard",
         },
         {
+            "fieldname": "posa_allow_company_dashboard_scope",
+            "label": "Enable Company-Wide Dashboard Scope",
+            "fieldtype": "Check",
+            "default": "1",
+            "depends_on": "eval:doc.posa_enable_awesome_dashboard==1",
+            "description": "Allow this profile to view all company profiles in dashboard scope selector.",
+            "insert_after": "posa_enable_awesome_dashboard",
+        },
+        {
             "fieldname": "posa_low_stock_alert_threshold",
             "label": "Low Stock Alert Threshold",
             "fieldtype": "Int",
             "default": "10",
             "depends_on": "eval:doc.posa_enable_awesome_dashboard==1",
             "description": "Items with stock at or below this value are highlighted in dashboard alerts.",
-            "insert_after": "posa_enable_awesome_dashboard",
+            "insert_after": "posa_allow_company_dashboard_scope",
         },
     ]
 

@@ -168,6 +168,8 @@ def _get_company_profiles(company: str) -> list[dict[str, Any]]:
         fields.append("disabled")
     if frappe.db.has_column("POS Profile", "posa_enable_awesome_dashboard"):
         fields.append("posa_enable_awesome_dashboard")
+    if frappe.db.has_column("POS Profile", "posa_allow_company_dashboard_scope"):
+        fields.append("posa_allow_company_dashboard_scope")
     if frappe.db.has_column("POS Profile", "posa_low_stock_alert_threshold"):
         fields.append("posa_low_stock_alert_threshold")
 
@@ -522,7 +524,11 @@ def get_dashboard_data(
     _check_profile_permission(current_profile_name)
 
     global_settings = _get_global_dashboard_settings()
-    allow_all_profiles = _user_can_view_all_profiles(user)
+    profile_scope_enabled = True
+    if frappe.db.has_column("POS Profile", "posa_allow_company_dashboard_scope"):
+        profile_scope_enabled = bool(cint(current_profile_doc.get("posa_allow_company_dashboard_scope", 1)))
+
+    allow_all_profiles = _user_can_view_all_profiles(user) and profile_scope_enabled
     requested_scope = _normalize_scope(scope, global_settings["default_scope"], allow_all_profiles)
     profile_filter = cstr(profile_filter).strip()
 
@@ -610,6 +616,7 @@ def get_dashboard_data(
         "scope": requested_scope,
         "default_scope": global_settings["default_scope"],
         "allow_all_profiles": allow_all_profiles,
+        "profile_scope_enabled": profile_scope_enabled,
         "selected_profiles": selected_profile_names,
         "available_profiles": [
             {

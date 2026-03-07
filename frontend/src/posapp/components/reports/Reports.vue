@@ -7,6 +7,17 @@
 					<p class="text-body-2 text-medium-emphasis mb-0">
 						{{ __("Real-time POS insights for retail operations.") }}
 					</p>
+					<div class="dashboard-meta mt-2">
+						<v-chip size="x-small" color="secondary" variant="tonal" class="mr-1 mb-1">
+							{{ scopeDisplayLabel }}
+						</v-chip>
+						<v-chip size="x-small" color="info" variant="tonal" class="mr-1 mb-1">
+							{{ __("Profiles") }}: {{ selectedProfilesCount }}
+						</v-chip>
+						<v-chip size="x-small" :color="profitMethodColor" variant="tonal" class="mr-1 mb-1">
+							{{ profitMethodLabel }}
+						</v-chip>
+					</div>
 				</div>
 				<div class="dashboard-actions">
 					<v-select
@@ -277,6 +288,27 @@ const profileFilterItems = computed(() =>
 );
 
 const canRenderDashboard = computed(() => isDashboardEnabledOnServer.value);
+const selectedProfilesCount = computed(
+	() => Number(dashboardData.value.selected_profiles?.length || 0),
+);
+const scopeDisplayLabel = computed(() => {
+	const current = dashboardData.value.scope || dashboardScope.value;
+	if (current === "specific") {
+		return __("Scope: Specific Profile");
+	}
+	if (current === "current") {
+		return __("Scope: Current Profile");
+	}
+	return __("Scope: All Profiles");
+});
+const profitMethodLabel = computed(() =>
+	dashboardData.value.sales_overview.profit_method === "stock_ledger"
+		? __("Profit: Stock Ledger (COGS)")
+		: __("Profit: Invoice Item Estimate"),
+);
+const profitMethodColor = computed(() =>
+	dashboardData.value.sales_overview.profit_method === "stock_ledger" ? "success" : "warning",
+);
 
 const salesMetrics = computed(() => [
 	{
@@ -506,6 +538,12 @@ onMounted(() => {
 	display: flex;
 	align-items: center;
 	flex-wrap: wrap;
+}
+
+.dashboard-meta {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
 }
 
 .dashboard-filter {

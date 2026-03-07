@@ -335,6 +335,7 @@ fixtures = [
                     "POS Profile-posa_cash_movement_max_amount",
                     "POS Profile-posa_section_awesome_dashboard",
                     "POS Profile-posa_enable_awesome_dashboard",
+                    "POS Profile-posa_allow_company_dashboard_scope",
                     "POS Profile-posa_low_stock_alert_threshold",
                     "POS Settings-posa_enable_return_validity",
                     "POS Settings-posa_return_validity_days",
