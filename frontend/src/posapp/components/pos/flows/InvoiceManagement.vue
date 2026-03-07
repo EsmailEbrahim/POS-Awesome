@@ -820,6 +820,52 @@ export default {
 	},
 	methods: {
 		normalizeDate(value) { return value ? String(value).slice(0, 10) : ""; },
+		normalizePostingTime(value) {
+			const raw = String(value || "").split(".")[0].trim();
+			if (!raw) return "00:00:00";
+
+			const parts = raw.split(":").map((part) => part.trim());
+			if (parts.length < 1 || parts.length > 3) return "00:00:00";
+
+			const hour = Number.parseInt(parts[0] || "0", 10);
+			const minute = Number.parseInt(parts[1] || "0", 10);
+			const second = Number.parseInt(parts[2] || "0", 10);
+
+			if (
+				!Number.isInteger(hour) ||
+				!Number.isInteger(minute) ||
+				!Number.isInteger(second) ||
+				hour < 0 ||
+				hour > 23 ||
+				minute < 0 ||
+				minute > 59 ||
+				second < 0 ||
+				second > 59
+			) {
+				return "00:00:00";
+			}
+
+			return `${String(hour).padStart(2, "0")}:${String(minute).padStart(2, "0")}:${String(second).padStart(2, "0")}`;
+		},
+		toPostingTimestamp(postingDate, postingTime) {
+			if (!postingDate) return Number.NaN;
+			const dateParts = String(postingDate).split("-");
+			if (dateParts.length !== 3) return Number.NaN;
+
+			const year = Number.parseInt(dateParts[0], 10);
+			const month = Number.parseInt(dateParts[1], 10);
+			const day = Number.parseInt(dateParts[2], 10);
+			if (!Number.isInteger(year) || !Number.isInteger(month) || !Number.isInteger(day)) {
+				return Number.NaN;
+			}
+
+			const [hourText, minuteText, secondText] = postingTime.split(":");
+			const hour = Number.parseInt(hourText || "0", 10);
+			const minute = Number.parseInt(minuteText || "0", 10);
+			const second = Number.parseInt(secondText || "0", 10);
+
+			return Date.UTC(year, month - 1, day, hour, minute, second);
+		},
 		inRange(date, fromDate, toDate) {
 			const value = this.normalizeDate(date);
 			if (fromDate && value < fromDate) return false;
@@ -842,11 +888,10 @@ export default {
 		},
 		invoiceSortValue(invoice) {
 			const postingDate = this.normalizeDate(invoice?.posting_date) || "0000-00-00";
-			const postingTime = String(invoice?.posting_time || "00:00:00").split(".")[0].padEnd(8, "0");
+			const postingTime = this.normalizePostingTime(invoice?.posting_time);
 			const modified = String(invoice?.modified || "");
 			const createdAt = String(invoice?.created_at || "");
-			const composed = `${postingDate}T${postingTime}`;
-			const timestamp = Date.parse(composed);
+			const timestamp = this.toPostingTimestamp(postingDate, postingTime);
 			if (!Number.isNaN(timestamp)) return timestamp;
 			const createdTimestamp = Date.parse(createdAt);
 			if (!Number.isNaN(createdTimestamp)) return createdTimestamp;
