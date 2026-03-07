@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 import { start, stop } from "../composables/core/useLoading";
+import { recoverFromChunkLoadError } from "../utils/chunkLoadRecovery";
 
 const routes = [
 	{ path: "/", redirect: "/pos" },
@@ -68,8 +69,9 @@ const createPosAppRouter = () => {
 		window.scrollTo(0, 0);
 	});
 
-	router.onError(() => {
+	router.onError((error) => {
 		stop("route");
+		void recoverFromChunkLoadError(error, "router");
 	});
 
 	return { router, history };
