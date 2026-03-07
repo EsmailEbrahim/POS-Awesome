@@ -71,6 +71,35 @@ export interface InventoryStatusRow {
 	stock_cover_days?: number | null;
 }
 
+export interface StockMovementDayRow {
+	date?: string;
+	movement_count?: number;
+	sale_out_qty?: number;
+	return_in_qty?: number;
+	adjustment_in_qty?: number;
+	adjustment_out_qty?: number;
+	transfer_in_qty?: number;
+	transfer_out_qty?: number;
+	other_in_qty?: number;
+	other_out_qty?: number;
+	net_qty?: number;
+	net_value?: number;
+}
+
+export interface StockMovementRecentRow {
+	posting_date?: string;
+	voucher_type?: string;
+	voucher_no?: string;
+	item_code?: string;
+	item_name?: string;
+	warehouse?: string;
+	stock_entry_purpose?: string;
+	category?: string;
+	direction?: "in" | "out" | string;
+	qty?: number;
+	value_change?: number;
+}
+
 export interface DashboardResponse {
 	enabled: boolean;
 	profile?: string;
@@ -245,6 +274,27 @@ export interface DashboardResponse {
 		slow_moving_items?: InventoryStatusRow[];
 		dead_stock_items?: InventoryStatusRow[];
 	};
+	stock_movement_report?: {
+		period?: {
+			from?: string;
+			to?: string;
+		};
+		summary?: {
+			movement_count?: number;
+			sale_out_qty?: number;
+			return_in_qty?: number;
+			adjustment_in_qty?: number;
+			adjustment_out_qty?: number;
+			transfer_in_qty?: number;
+			transfer_out_qty?: number;
+			other_in_qty?: number;
+			other_out_qty?: number;
+			net_qty?: number;
+			net_value?: number;
+		};
+		day_wise?: StockMovementDayRow[];
+		recent_movements?: StockMovementRecentRow[];
+	};
 	inventory_insights: {
 		fast_moving_items: FastMovingItem[];
 		fast_moving_period?: {
@@ -283,6 +333,7 @@ export interface DashboardRequest {
 	item_sales_limit?: number;
 	category_report_limit?: number;
 	inventory_status_limit?: number;
+	stock_movement_limit?: number;
 	supplier_limit?: number;
 	low_stock_limit?: number;
 }

@@ -593,6 +593,133 @@
 					</v-col>
 				</v-row>
 
+				<v-row v-show="activeDashboardTab === 'inventory'" class="dashboard-grid mb-2">
+					<v-col cols="12">
+						<v-card class="dashboard-card" elevation="2">
+							<div class="dashboard-card__header">
+								<h2 class="text-subtitle-1 font-weight-bold mb-0">{{ __("Stock Movement Report") }}</h2>
+								<v-chip size="small" color="info" variant="tonal">
+									{{ stockMovementRangeLabel }}
+								</v-chip>
+							</div>
+
+							<div class="summary-grid">
+								<div class="summary-metric">
+									<div class="summary-metric__label">{{ __("Movements") }}</div>
+									<div class="summary-metric__value">
+										{{ formatQuantity(Number(stockMovementSummary.movement_count || 0)) }}
+									</div>
+								</div>
+								<div class="summary-metric">
+									<div class="summary-metric__label">{{ __("Sale Out Qty") }}</div>
+									<div class="summary-metric__value">
+										{{ formatQuantity(Number(stockMovementSummary.sale_out_qty || 0)) }}
+									</div>
+								</div>
+								<div class="summary-metric">
+									<div class="summary-metric__label">{{ __("Return Qty") }}</div>
+									<div class="summary-metric__value summary-metric__value--success">
+										{{ formatQuantity(Number(stockMovementSummary.return_in_qty || 0)) }}
+									</div>
+								</div>
+								<div class="summary-metric">
+									<div class="summary-metric__label">{{ __("Adjustment In/Out") }}</div>
+									<div class="summary-metric__value">
+										{{ formatQuantity(Number(stockMovementSummary.adjustment_in_qty || 0)) }} /
+										{{ formatQuantity(Number(stockMovementSummary.adjustment_out_qty || 0)) }}
+									</div>
+								</div>
+								<div class="summary-metric">
+									<div class="summary-metric__label">{{ __("Transfer In/Out") }}</div>
+									<div class="summary-metric__value">
+										{{ formatQuantity(Number(stockMovementSummary.transfer_in_qty || 0)) }} /
+										{{ formatQuantity(Number(stockMovementSummary.transfer_out_qty || 0)) }}
+									</div>
+								</div>
+								<div class="summary-metric">
+									<div class="summary-metric__label">{{ __("Net Qty") }}</div>
+									<div class="summary-metric__value">
+										{{ formatQuantity(Number(stockMovementSummary.net_qty || 0)) }}
+									</div>
+								</div>
+								<div class="summary-metric">
+									<div class="summary-metric__label">{{ __("Net Value") }}</div>
+									<div class="summary-metric__value">
+										{{ formatMoney(Number(stockMovementSummary.net_value || 0)) }}
+									</div>
+								</div>
+							</div>
+
+							<div class="trend-grid trend-grid--two">
+								<div class="trend-panel">
+									<div class="summary-metric__label">{{ __("Day-wise Movement") }}</div>
+									<div v-if="stockMovementDayWise.length" class="list-stack trend-list">
+										<div v-for="row in stockMovementDayWise" :key="`move-day-${row.date}`" class="insight-row">
+											<div class="insight-row__top">
+												<div class="insight-row__title">{{ formatDate(row.date) }}</div>
+												<div class="insight-row__value">
+													{{ __("Net") }}: {{ formatQuantity(Number(row.net_qty || 0)) }}
+												</div>
+											</div>
+											<div class="insight-row__meta">
+												{{ __("Sale") }}: {{ formatQuantity(Number(row.sale_out_qty || 0)) }} .
+												{{ __("Return") }}: {{ formatQuantity(Number(row.return_in_qty || 0)) }} .
+												{{ __("Transfer") }}:
+												{{ formatQuantity(Number(row.transfer_in_qty || 0)) }}/{{ formatQuantity(Number(row.transfer_out_qty || 0)) }}
+											</div>
+											<v-progress-linear
+												:model-value="
+													trendProgress(
+														Number(row.sale_out_qty || 0) +
+															Number(row.return_in_qty || 0) +
+															Number(row.adjustment_in_qty || 0) +
+															Number(row.adjustment_out_qty || 0) +
+															Number(row.transfer_in_qty || 0) +
+															Number(row.transfer_out_qty || 0),
+														stockMovementDayMax,
+													)
+												"
+												color="primary"
+												height="5"
+												rounded
+											/>
+										</div>
+									</div>
+									<div v-else class="empty-state">{{ __("No stock movement for this period.") }}</div>
+								</div>
+
+								<div class="trend-panel">
+									<div class="summary-metric__label">{{ __("Recent Movement Entries") }}</div>
+									<div v-if="stockMovementRecent.length" class="list-stack trend-list">
+										<div
+											v-for="row in stockMovementRecent"
+											:key="`move-row-${row.voucher_type}-${row.voucher_no}-${row.item_code}-${row.warehouse}`"
+											class="insight-row"
+										>
+											<div class="insight-row__top">
+												<div class="insight-row__title">{{ row.item_name || row.item_code || "-" }}</div>
+												<div class="insight-row__value">
+													{{ formatQuantity(Number(row.qty || 0)) }}
+												</div>
+											</div>
+											<div class="insight-row__meta">
+												{{ formatDate(row.posting_date) }} .
+												{{ row.voucher_type || "-" }} .
+												{{ row.voucher_no || "-" }}
+											</div>
+											<div class="insight-row__meta">
+												{{ formatMovementCategory(row.category) }} ({{ row.direction || "-" }}) .
+												{{ row.warehouse || "-" }}
+											</div>
+										</div>
+									</div>
+									<div v-else class="empty-state">{{ __("No recent stock entries found.") }}</div>
+								</div>
+							</div>
+						</v-card>
+					</v-col>
+				</v-row>
+
 				<v-row v-show="activeDashboardTab === 'inventory'" class="dashboard-grid">
 					<v-col cols="12" lg="6">
 						<v-card class="dashboard-card" elevation="2">
@@ -796,6 +923,8 @@ import {
 	type FastMovingItem,
 	type InventoryStatusRow,
 	type ItemSalesRow,
+	type StockMovementDayRow,
+	type StockMovementRecentRow,
 	type LowStockItem,
 	type SupplierSummaryRow,
 } from "@/posapp/services/dashboardService";
@@ -825,6 +954,7 @@ const supplierSearch = ref("");
 const itemSalesLimit = ref(20);
 const categoryReportLimit = ref(12);
 const inventoryStatusLimit = ref(20);
+const stockMovementLimit = ref(50);
 let fastMovingSearchDebounce: ReturnType<typeof setTimeout> | null = null;
 
 const createEmptyDashboard = (): DashboardResponse => ({
@@ -912,6 +1042,24 @@ const createEmptyDashboard = (): DashboardResponse => ({
 		negative_stock_items: [],
 		slow_moving_items: [],
 		dead_stock_items: [],
+	},
+	stock_movement_report: {
+		period: {},
+		summary: {
+			movement_count: 0,
+			sale_out_qty: 0,
+			return_in_qty: 0,
+			adjustment_in_qty: 0,
+			adjustment_out_qty: 0,
+			transfer_in_qty: 0,
+			transfer_out_qty: 0,
+			other_in_qty: 0,
+			other_out_qty: 0,
+			net_qty: 0,
+			net_value: 0,
+		},
+		day_wise: [],
+		recent_movements: [],
 	},
 	inventory_insights: {
 		fast_moving_items: [],
@@ -1430,6 +1578,38 @@ const inventoryStatusNegativeMax = computed(() => {
 	return maxValue > 0 ? maxValue : 1;
 });
 
+const stockMovementReport = computed(() => dashboardData.value.stock_movement_report || {});
+const stockMovementSummary = computed(() => stockMovementReport.value.summary || {});
+const stockMovementRangeLabel = computed(() => {
+	const from = stockMovementReport.value.period?.from || dashboardData.value.date_context?.month_start;
+	const to = stockMovementReport.value.period?.to || dashboardData.value.date_context?.today;
+	if (!from || !to) {
+		return __("Current Month");
+	}
+	return `${formatDate(from)} - ${formatDate(to)}`;
+});
+const stockMovementDayWise = computed<StockMovementDayRow[]>(() =>
+	[...(stockMovementReport.value.day_wise || [])]
+		.sort((a, b) => String(a.date || "").localeCompare(String(b.date || "")))
+		.slice(-31),
+);
+const stockMovementRecent = computed<StockMovementRecentRow[]>(() =>
+	[...(stockMovementReport.value.recent_movements || [])].slice(0, Number(stockMovementLimit.value || 50)),
+);
+const stockMovementDayMax = computed(() => {
+	const maxValue = stockMovementDayWise.value.reduce((max, row) => {
+		const magnitude =
+			Math.abs(Number(row.sale_out_qty || 0)) +
+			Math.abs(Number(row.return_in_qty || 0)) +
+			Math.abs(Number(row.adjustment_in_qty || 0)) +
+			Math.abs(Number(row.adjustment_out_qty || 0)) +
+			Math.abs(Number(row.transfer_in_qty || 0)) +
+			Math.abs(Number(row.transfer_out_qty || 0));
+		return Math.max(max, magnitude);
+	}, 0);
+	return maxValue > 0 ? maxValue : 1;
+});
+
 const fastMovingItems = computed<FastMovingItem[]>(
 	() => dashboardData.value.inventory_insights.fast_moving_items || [],
 );
@@ -1591,6 +1771,23 @@ function formatDays(value?: number | null) {
 	return `${Math.round(Number(value))} ${__("days")}`;
 }
 
+function formatMovementCategory(category?: string) {
+	const normalized = String(category || "").trim().toLowerCase();
+	if (normalized === "sale") {
+		return __("Sale");
+	}
+	if (normalized === "return") {
+		return __("Return");
+	}
+	if (normalized === "adjustment") {
+		return __("Adjustment");
+	}
+	if (normalized === "transfer") {
+		return __("Transfer");
+	}
+	return __("Other");
+}
+
 function progressFromQuantity(quantity: number) {
 	return Math.min(100, (Number(quantity || 0) / maxFastMovingQty.value) * 100);
 }
@@ -1664,6 +1861,10 @@ function mergeDashboardPayload(payload?: Partial<DashboardResponse>): DashboardR
 			...(base.inventory_status_report || {}),
 			...(payload?.inventory_status_report || {}),
 		},
+		stock_movement_report: {
+			...(base.stock_movement_report || {}),
+			...(payload?.stock_movement_report || {}),
+		},
 		inventory_insights: {
 			...base.inventory_insights,
 			...(payload?.inventory_insights || {}),
@@ -1700,6 +1901,7 @@ function logDashboardResponse(response: DashboardResponse) {
 	console.info("item_sales_count", response.item_sales_report?.items?.length || 0);
 	console.info("category_report_count", response.category_brand_variant_report?.category_wise?.length || 0);
 	console.info("inventory_status_total_items", response.inventory_status_report?.summary?.total_items || 0);
+	console.info("stock_movement_count", response.stock_movement_report?.summary?.movement_count || 0);
 	console.info("fast_moving_pagination", response.inventory_insights?.fast_moving_pagination || null);
 	console.groupEnd();
 }
@@ -1725,6 +1927,7 @@ async function loadDashboard() {
 			item_sales_limit: itemSalesLimit.value,
 			category_report_limit: categoryReportLimit.value,
 			inventory_status_limit: inventoryStatusLimit.value,
+			stock_movement_limit: stockMovementLimit.value,
 			fast_moving_page: fastMovingPage.value,
 			fast_moving_page_size: fastMovingPageSize.value,
 			fast_moving_search: fastMovingSearch.value || undefined,
@@ -1981,6 +2184,10 @@ onMounted(() => {
 	display: grid;
 	grid-template-columns: repeat(4, minmax(0, 1fr));
 	gap: 10px;
+}
+
+.trend-grid--two {
+	grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
 .trend-panel {

@@ -1705,6 +1705,257 @@ def _collect_inventory_status_report(
     return report
 
 
+def _classify_stock_movement(
+    voucher_type: str,
+    qty: float,
+    stock_entry_purpose: str = "",
+) -> tuple[str, str]:
+    normalized_type = cstr(voucher_type).strip().lower()
+    normalized_purpose = cstr(stock_entry_purpose).strip().lower()
+    direction = "in" if qty >= 0 else "out"
+
+    if normalized_type in {"sales invoice", "pos invoice", "delivery note"}:
+        if qty < 0:
+            return "sale", "out"
+        return "return", "in"
+
+    if normalized_type in {"sales return", "purchase return"}:
+        return "return", direction
+
+    if normalized_type == "stock reconciliation":
+        return "adjustment", direction
+
+    if normalized_type == "stock entry":
+        if "transfer" in normalized_purpose:
+            return "transfer", direction
+        if any(
+            token in normalized_purpose
+            for token in ("issue", "receipt", "manufacture", "repack", "scrap", "material")
+        ):
+            return "adjustment", direction
+        return "adjustment", direction
+
+    if normalized_type in {"purchase receipt", "purchase invoice"}:
+        return "other", direction
+
+    return "other", direction
+
+
+def _collect_stock_movement_report(
+    company: str,
+    warehouses: list[str],
+    date_from: str,
+    date_to: str,
+    limit: int = 50,
+) -> dict[str, Any]:
+    report: dict[str, Any] = {
+        "period": {"from": date_from, "to": date_to},
+        "summary": {
+            "movement_count": 0,
+            "sale_out_qty": 0.0,
+            "return_in_qty": 0.0,
+            "adjustment_in_qty": 0.0,
+            "adjustment_out_qty": 0.0,
+            "transfer_in_qty": 0.0,
+            "transfer_out_qty": 0.0,
+            "other_in_qty": 0.0,
+            "other_out_qty": 0.0,
+            "net_qty": 0.0,
+            "net_value": 0.0,
+        },
+        "day_wise": [],
+        "recent_movements": [],
+    }
+
+    if not warehouses:
+        return report
+    if not frappe.db.exists("DocType", "Stock Ledger Entry"):
+        return report
+    if not frappe.db.has_column("Stock Ledger Entry", "actual_qty"):
+        return report
+    if not frappe.db.has_column("Stock Ledger Entry", "posting_date"):
+        return report
+    if not frappe.db.has_column("Stock Ledger Entry", "company"):
+        return report
+    if not frappe.db.has_column("Stock Ledger Entry", "warehouse"):
+        return report
+
+    warehouse_filter, warehouse_params = _build_in_filter("sle.warehouse", warehouses)
+    if not warehouse_filter:
+        return report
+
+    value_column = (
+        "stock_value_difference"
+        if frappe.db.has_column("Stock Ledger Entry", "stock_value_difference")
+        else None
+    )
+    value_expression = f"coalesce(sle.{value_column}, 0)" if value_column else "0"
+
+    sle_rows = frappe.db.sql(
+        f"""
+        select
+            sle.posting_date as posting_date,
+            sle.voucher_type as voucher_type,
+            sle.voucher_no as voucher_no,
+            sle.item_code as item_code,
+            sle.warehouse as warehouse,
+            sle.actual_qty as actual_qty,
+            {value_expression} as value_change
+        from `tabStock Ledger Entry` sle
+        where sle.company = %s
+          and sle.posting_date between %s and %s
+          {warehouse_filter}
+          {_extra_sle_filter("sle")}
+        order by sle.posting_date desc, sle.modified desc
+        """,
+        (company, date_from, date_to, *warehouse_params),
+        as_dict=True,
+    )
+
+    if not sle_rows:
+        return report
+
+    stock_entry_names = sorted(
+        {
+            cstr(row.get("voucher_no")).strip()
+            for row in sle_rows
+            if cstr(row.get("voucher_type")).strip() == "Stock Entry"
+            and cstr(row.get("voucher_no")).strip()
+        }
+    )
+    stock_entry_purpose_map: dict[str, str] = {}
+    if stock_entry_names and frappe.db.exists("DocType", "Stock Entry"):
+        fields = ["name"]
+        if frappe.db.has_column("Stock Entry", "purpose"):
+            fields.append("purpose")
+        stock_entry_rows = frappe.get_all(
+            "Stock Entry",
+            filters={"name": ["in", stock_entry_names]},
+            fields=fields,
+        )
+        stock_entry_purpose_map = {
+            cstr(row.get("name")).strip(): cstr(row.get("purpose")).strip()
+            for row in stock_entry_rows
+            if cstr(row.get("name")).strip()
+        }
+
+    item_codes = sorted(
+        {
+            cstr(row.get("item_code")).strip()
+            for row in sle_rows
+            if cstr(row.get("item_code")).strip()
+        }
+    )
+    item_name_map: dict[str, str] = {}
+    if item_codes and frappe.db.exists("DocType", "Item"):
+        item_rows = frappe.get_all(
+            "Item",
+            filters={"name": ["in", item_codes]},
+            fields=["name", "item_name"],
+        )
+        item_name_map = {
+            cstr(row.get("name")).strip(): cstr(row.get("item_name")).strip()
+            for row in item_rows
+            if cstr(row.get("name")).strip()
+        }
+
+    day_buckets: dict[str, dict[str, Any]] = {}
+    recent_movements: list[dict[str, Any]] = []
+    summary = report["summary"]
+    page_limit = _coerce_limit(limit, default=50, minimum=1, maximum=200)
+
+    for row in sle_rows:
+        posting_date = cstr(row.get("posting_date")).strip()
+        if not posting_date:
+            continue
+        qty = flt(row.get("actual_qty"))
+        value_change = flt(row.get("value_change"))
+        voucher_type = cstr(row.get("voucher_type")).strip()
+        voucher_no = cstr(row.get("voucher_no")).strip()
+        item_code = cstr(row.get("item_code")).strip()
+        warehouse = cstr(row.get("warehouse")).strip()
+
+        stock_entry_purpose = stock_entry_purpose_map.get(voucher_no, "")
+        category, direction = _classify_stock_movement(voucher_type, qty, stock_entry_purpose)
+
+        day_entry = day_buckets.setdefault(
+            posting_date,
+            {
+                "date": posting_date,
+                "movement_count": 0,
+                "sale_out_qty": 0.0,
+                "return_in_qty": 0.0,
+                "adjustment_in_qty": 0.0,
+                "adjustment_out_qty": 0.0,
+                "transfer_in_qty": 0.0,
+                "transfer_out_qty": 0.0,
+                "other_in_qty": 0.0,
+                "other_out_qty": 0.0,
+                "net_qty": 0.0,
+                "net_value": 0.0,
+            },
+        )
+
+        day_entry["movement_count"] += 1
+        day_entry["net_qty"] += qty
+        day_entry["net_value"] += value_change
+        summary["movement_count"] += 1
+        summary["net_qty"] += qty
+        summary["net_value"] += value_change
+
+        qty_abs = abs(qty)
+        if category == "sale" and direction == "out":
+            day_entry["sale_out_qty"] += qty_abs
+            summary["sale_out_qty"] += qty_abs
+        elif category == "return" and direction == "in":
+            day_entry["return_in_qty"] += qty_abs
+            summary["return_in_qty"] += qty_abs
+        elif category == "adjustment":
+            if direction == "in":
+                day_entry["adjustment_in_qty"] += qty_abs
+                summary["adjustment_in_qty"] += qty_abs
+            else:
+                day_entry["adjustment_out_qty"] += qty_abs
+                summary["adjustment_out_qty"] += qty_abs
+        elif category == "transfer":
+            if direction == "in":
+                day_entry["transfer_in_qty"] += qty_abs
+                summary["transfer_in_qty"] += qty_abs
+            else:
+                day_entry["transfer_out_qty"] += qty_abs
+                summary["transfer_out_qty"] += qty_abs
+        else:
+            if direction == "in":
+                day_entry["other_in_qty"] += qty_abs
+                summary["other_in_qty"] += qty_abs
+            else:
+                day_entry["other_out_qty"] += qty_abs
+                summary["other_out_qty"] += qty_abs
+
+        if len(recent_movements) < page_limit:
+            recent_movements.append(
+                {
+                    "posting_date": posting_date,
+                    "voucher_type": voucher_type,
+                    "voucher_no": voucher_no,
+                    "item_code": item_code,
+                    "item_name": item_name_map.get(item_code, "") or item_code,
+                    "warehouse": warehouse,
+                    "stock_entry_purpose": stock_entry_purpose,
+                    "category": category,
+                    "direction": direction,
+                    "qty": qty,
+                    "value_change": value_change,
+                }
+            )
+
+    report["day_wise"] = sorted(day_buckets.values(), key=lambda row: cstr(row.get("date")))
+    report["recent_movements"] = recent_movements
+    report["summary"] = {key: flt(value) if isinstance(value, float) else value for key, value in summary.items()}
+    report["summary"]["movement_count"] = cint(summary.get("movement_count"))
+    return report
+
+
 def _collect_supplier_purchase_summary(
     company: str,
     date_from: str,
@@ -1758,6 +2009,7 @@ def get_dashboard_data(
     item_sales_limit: int = 20,
     category_report_limit: int = 12,
     inventory_status_limit: int = 20,
+    stock_movement_limit: int = 50,
     supplier_limit: int = 8,
     low_stock_limit: int = 20,
 ):
@@ -1799,6 +2051,7 @@ def get_dashboard_data(
     item_sales_limit = _coerce_limit(item_sales_limit, default=20, minimum=1, maximum=100)
     category_report_limit = _coerce_limit(category_report_limit, default=12, minimum=1, maximum=100)
     inventory_status_limit = _coerce_limit(inventory_status_limit, default=20, minimum=1, maximum=100)
+    stock_movement_limit = _coerce_limit(stock_movement_limit, default=50, minimum=1, maximum=200)
 
     company = cstr(current_profile_doc.get("company")).strip()
     company_profiles = _get_company_profiles(company)
@@ -2011,6 +2264,24 @@ def get_dashboard_data(
             "slow_moving_items": [],
             "dead_stock_items": [],
         },
+        "stock_movement_report": {
+            "period": {"from": str(month_start), "to": str(today)},
+            "summary": {
+                "movement_count": 0,
+                "sale_out_qty": 0.0,
+                "return_in_qty": 0.0,
+                "adjustment_in_qty": 0.0,
+                "adjustment_out_qty": 0.0,
+                "transfer_in_qty": 0.0,
+                "transfer_out_qty": 0.0,
+                "other_in_qty": 0.0,
+                "other_out_qty": 0.0,
+                "net_qty": 0.0,
+                "net_value": 0.0,
+            },
+            "day_wise": [],
+            "recent_movements": [],
+        },
         "inventory_insights": {
             "fast_moving_items": [],
             "fast_moving_period": {
@@ -2097,6 +2368,13 @@ def get_dashboard_data(
         date_from=str(month_start),
         date_to=str(today),
         limit=inventory_status_limit,
+    )
+    payload["stock_movement_report"] = _collect_stock_movement_report(
+        company=company,
+        warehouses=warehouses,
+        date_from=str(month_start),
+        date_to=str(today),
+        limit=stock_movement_limit,
     )
 
     fast_moving_items, fast_moving_total_count = _collect_fast_moving_items(
