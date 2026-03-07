@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+from math import ceil
 from collections import defaultdict
 from typing import Any
 
@@ -87,6 +88,13 @@ def _coerce_limit(value: Any, default: int, minimum: int = 1, maximum: int = 50)
     if not coerced:
         coerced = default
     return max(minimum, min(int(coerced), maximum))
+
+
+def _coerce_page(value: Any, default: int = 1, maximum: int = 100000) -> int:
+    page = cint(value) if value is not None else default
+    if not page:
+        page = default
+    return max(1, min(int(page), maximum))
 
 
 def _coerce_threshold(value: Any, fallback: Any, default: int = 10, maximum: int = 9999) -> int:
@@ -357,9 +365,11 @@ def _collect_fast_moving_items(
     date_from: str,
     date_to: str,
     limit: int,
-) -> list[dict[str, Any]]:
+    offset: int = 0,
+    search_text: str = "",
+) -> tuple[list[dict[str, Any]], int]:
     if not profile_names:
-        return []
+        return [], 0
 
     grouped_items: dict[str, dict[str, Any]] = defaultdict(
         lambda: {
@@ -421,12 +431,26 @@ def _collect_fast_moving_items(
             current["sales_amount"] = flt(current["sales_amount"]) + flt(row.get("sales_amount"))
 
     filtered_items = [row for row in grouped_items.values() if flt(row.get("sold_qty")) > 0]
+
+    query = cstr(search_text).strip().casefold()
+    if query:
+        filtered_items = [
+            row
+            for row in filtered_items
+            if query in cstr(row.get("item_code")).casefold()
+            or query in cstr(row.get("item_name")).casefold()
+            or query in cstr(row.get("stock_uom")).casefold()
+        ]
+
     filtered_items.sort(
         key=lambda item: (flt(item.get("sold_qty")), flt(item.get("sales_amount"))),
         reverse=True,
     )
 
-    return filtered_items[:limit]
+    total_count = len(filtered_items)
+    page_offset = max(0, cint(offset))
+    page_limit = _coerce_limit(limit, default=10, minimum=1, maximum=100)
+    return filtered_items[page_offset : page_offset + page_limit], total_count
 
 
 def _collect_low_stock_items(warehouses: list[str], threshold: int, limit: int) -> list[dict[str, Any]]:
@@ -511,6 +535,9 @@ def get_dashboard_data(
     profile_filter=None,
     low_stock_threshold=None,
     fast_moving_limit: int = 10,
+    fast_moving_page: int = 1,
+    fast_moving_page_size=None,
+    fast_moving_search=None,
     supplier_limit: int = 8,
     low_stock_limit: int = 20,
 ):
@@ -538,7 +565,15 @@ def get_dashboard_data(
     requested_scope = _normalize_scope(scope, global_settings["default_scope"], allow_all_profiles)
     profile_filter = cstr(profile_filter).strip()
 
-    fast_moving_limit = _coerce_limit(fast_moving_limit, default=10, minimum=1, maximum=25)
+    requested_fast_moving_page_size = (
+        fast_moving_page_size if fast_moving_page_size is not None else fast_moving_limit
+    )
+    fast_moving_page_size = _coerce_limit(
+        requested_fast_moving_page_size, default=10, minimum=1, maximum=100
+    )
+    fast_moving_page = _coerce_page(fast_moving_page, default=1)
+    fast_moving_offset = (fast_moving_page - 1) * fast_moving_page_size
+    fast_moving_search = cstr(fast_moving_search).strip()
     supplier_limit = _coerce_limit(supplier_limit, default=8, minimum=1, maximum=25)
     low_stock_limit = _coerce_limit(low_stock_limit, default=20, minimum=1, maximum=100)
 
@@ -670,6 +705,13 @@ def get_dashboard_data(
         },
         "inventory_insights": {
             "fast_moving_items": [],
+            "fast_moving_pagination": {
+                "page": fast_moving_page,
+                "page_size": fast_moving_page_size,
+                "total_count": 0,
+                "total_pages": 0,
+                "search": fast_moving_search,
+            },
             "low_stock_items": [],
             "low_stock_threshold": threshold,
         },
@@ -709,13 +751,25 @@ def get_dashboard_data(
         ):
             payload["sales_overview"]["profit_method"] = "stock_ledger"
 
-    payload["inventory_insights"]["fast_moving_items"] = _collect_fast_moving_items(
+    fast_moving_items, fast_moving_total_count = _collect_fast_moving_items(
         profile_names=selected_profile_names,
         company=company,
         date_from=str(month_start),
         date_to=str(today),
-        limit=fast_moving_limit,
+        limit=fast_moving_page_size,
+        offset=fast_moving_offset,
+        search_text=fast_moving_search,
     )
+    payload["inventory_insights"]["fast_moving_items"] = fast_moving_items
+    payload["inventory_insights"]["fast_moving_pagination"] = {
+        "page": fast_moving_page,
+        "page_size": fast_moving_page_size,
+        "total_count": fast_moving_total_count,
+        "total_pages": int(ceil(fast_moving_total_count / fast_moving_page_size))
+        if fast_moving_total_count
+        else 0,
+        "search": fast_moving_search,
+    }
     payload["inventory_insights"]["low_stock_items"] = _collect_low_stock_items(
         warehouses=warehouses,
         threshold=threshold,

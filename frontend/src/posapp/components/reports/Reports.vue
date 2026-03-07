@@ -90,8 +90,31 @@
 							<div class="dashboard-card__header">
 								<h2 class="text-subtitle-1 font-weight-bold mb-0">{{ __("Fast Moving Items") }}</h2>
 								<v-chip size="small" color="success" variant="tonal">
-									{{ __("Top 10") }}
+									{{ __("Total") }}: {{ fastMovingTotalCount }}
 								</v-chip>
+							</div>
+							<div class="card-filters">
+								<v-text-field
+									v-model="fastMovingSearchInput"
+									:label="__('Search item')"
+									density="compact"
+									variant="outlined"
+									hide-details
+									clearable
+									prepend-inner-icon="mdi-magnify"
+									class="card-filter-input"
+								/>
+								<v-select
+									v-model="fastMovingPageSize"
+									:items="fastMovingPageSizeItems"
+									item-title="label"
+									item-value="value"
+									:label="__('Per Page')"
+									density="compact"
+									variant="outlined"
+									hide-details
+									class="card-filter-select"
+								/>
 							</div>
 
 							<div v-if="loading" class="py-2">
@@ -119,8 +142,16 @@
 									/>
 								</div>
 							</div>
+							<div v-if="!loading && fastMovingItems.length && fastMovingTotalPages > 1" class="pagination-row">
+								<v-pagination
+									v-model="fastMovingPage"
+									:length="fastMovingTotalPages"
+									:total-visible="5"
+									density="comfortable"
+								/>
+							</div>
 
-							<div v-else class="empty-state">
+							<div v-if="!loading && !fastMovingItems.length" class="empty-state">
 								{{ __("No sales activity found for this period.") }}
 							</div>
 						</v-card>
@@ -134,6 +165,29 @@
 									{{ __("Threshold") }}: {{ lowStockThreshold }}
 								</v-chip>
 							</div>
+							<div class="card-filters">
+								<v-text-field
+									v-model="lowStockSearch"
+									:label="__('Search item / code')"
+									density="compact"
+									variant="outlined"
+									hide-details
+									clearable
+									prepend-inner-icon="mdi-magnify"
+									class="card-filter-input"
+								/>
+								<v-select
+									v-model="lowStockWarehouseFilter"
+									:items="lowStockWarehouseItems"
+									item-title="label"
+									item-value="value"
+									:label="__('Warehouse')"
+									density="compact"
+									variant="outlined"
+									hide-details
+									class="card-filter-select"
+								/>
+							</div>
 
 							<div v-if="loading" class="py-2">
 								<v-skeleton-loader type="list-item-two-line" class="mb-2" />
@@ -141,8 +195,8 @@
 								<v-skeleton-loader type="list-item-two-line" />
 							</div>
 
-							<div v-else-if="lowStockItems.length" class="list-stack">
-								<div v-for="item in lowStockItems" :key="item.item_code" class="insight-row">
+							<div v-else-if="filteredLowStockItems.length" class="list-stack">
+								<div v-for="item in filteredLowStockItems" :key="`${item.item_code}-${item.warehouse}`" class="insight-row">
 									<div class="insight-row__top">
 										<div class="insight-row__title">
 											{{ item.item_name || item.item_code }}
@@ -173,6 +227,18 @@
 									{{ monthRangeLabel }}
 								</v-chip>
 							</div>
+							<div class="card-filters">
+								<v-text-field
+									v-model="supplierSearch"
+									:label="__('Search supplier')"
+									density="compact"
+									variant="outlined"
+									hide-details
+									clearable
+									prepend-inner-icon="mdi-magnify"
+									class="card-filter-input"
+								/>
+							</div>
 
 							<div v-if="loading" class="py-2">
 								<v-skeleton-loader type="list-item-two-line" class="mb-2" />
@@ -180,8 +246,8 @@
 								<v-skeleton-loader type="list-item-two-line" />
 							</div>
 
-							<div v-else-if="supplierSummary.length" class="list-stack">
-								<div v-for="supplier in supplierSummary" :key="supplier.supplier" class="supplier-row">
+							<div v-else-if="filteredSupplierSummary.length" class="list-stack">
+								<div v-for="supplier in filteredSupplierSummary" :key="supplier.supplier" class="supplier-row">
 									<div class="supplier-row__name">
 										{{ supplier.supplier_name || supplier.supplier }}
 									</div>
@@ -207,7 +273,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted, ref, watch } from "vue";
+import { computed, onBeforeUnmount, onMounted, ref, watch } from "vue";
 import { useUIStore } from "@/posapp/stores/uiStore";
 import {
 	fetchDashboardData,
@@ -231,6 +297,14 @@ const allowAllProfiles = ref(false);
 const dashboardScope = ref<"all" | "current" | "specific">("all");
 const selectedProfileFilter = ref("");
 const scopeInitialized = ref(false);
+const fastMovingPage = ref(1);
+const fastMovingPageSize = ref(10);
+const fastMovingSearch = ref("");
+const fastMovingSearchInput = ref("");
+const lowStockSearch = ref("");
+const lowStockWarehouseFilter = ref("");
+const supplierSearch = ref("");
+let fastMovingSearchDebounce: ReturnType<typeof setTimeout> | null = null;
 
 const createEmptyDashboard = (): DashboardResponse => ({
 	enabled: true,
@@ -242,6 +316,13 @@ const createEmptyDashboard = (): DashboardResponse => ({
 	},
 	inventory_insights: {
 		fast_moving_items: [],
+		fast_moving_pagination: {
+			page: 1,
+			page_size: 10,
+			total_count: 0,
+			total_pages: 0,
+			search: "",
+		},
 		low_stock_items: [],
 		low_stock_threshold: 10,
 	},
@@ -355,12 +436,71 @@ const salesMetrics = computed(() => [
 const fastMovingItems = computed<FastMovingItem[]>(
 	() => dashboardData.value.inventory_insights.fast_moving_items || [],
 );
+const fastMovingPagination = computed(() => {
+	const fallbackSize = Number(fastMovingPageSize.value || 10);
+	return (
+		dashboardData.value.inventory_insights.fast_moving_pagination || {
+			page: Number(fastMovingPage.value || 1),
+			page_size: fallbackSize,
+			total_count: fastMovingItems.value.length,
+			total_pages: fastMovingItems.value.length > 0 ? 1 : 0,
+			search: fastMovingSearch.value,
+		}
+	);
+});
+const fastMovingTotalCount = computed(() =>
+	Number(fastMovingPagination.value.total_count || fastMovingItems.value.length || 0),
+);
+const fastMovingTotalPages = computed(() =>
+	Number(fastMovingPagination.value.total_pages || 0),
+);
+const fastMovingPageSizeItems = computed(() =>
+	[10, 20, 30, 50].map((size) => ({
+		label: String(size),
+		value: size,
+	})),
+);
 const lowStockItems = computed<LowStockItem[]>(
 	() => dashboardData.value.inventory_insights.low_stock_items || [],
 );
 const supplierSummary = computed<SupplierSummaryRow[]>(
 	() => dashboardData.value.supplier_overview.purchase_summary || [],
 );
+const lowStockWarehouseItems = computed(() => {
+	const values = Array.from(
+		new Set(lowStockItems.value.map((item) => String(item.warehouse || "").trim()).filter(Boolean)),
+	).sort((a, b) => a.localeCompare(b));
+	return [{ label: __("All Warehouses"), value: "" }, ...values.map((value) => ({ label: value, value }))];
+});
+const filteredLowStockItems = computed<LowStockItem[]>(() => {
+	const searchText = String(lowStockSearch.value || "").trim().toLowerCase();
+	const warehouse = String(lowStockWarehouseFilter.value || "").trim();
+	return lowStockItems.value.filter((item) => {
+		if (warehouse && String(item.warehouse || "").trim() !== warehouse) {
+			return false;
+		}
+		if (!searchText) {
+			return true;
+		}
+		return (
+			String(item.item_code || "").toLowerCase().includes(searchText) ||
+			String(item.item_name || "").toLowerCase().includes(searchText) ||
+			String(item.warehouse || "").toLowerCase().includes(searchText)
+		);
+	});
+});
+const filteredSupplierSummary = computed<SupplierSummaryRow[]>(() => {
+	const searchText = String(supplierSearch.value || "").trim().toLowerCase();
+	if (!searchText) {
+		return supplierSummary.value;
+	}
+	return supplierSummary.value.filter((supplier) => {
+		return (
+			String(supplier.supplier || "").toLowerCase().includes(searchText) ||
+			String(supplier.supplier_name || "").toLowerCase().includes(searchText)
+		);
+	});
+});
 
 const maxFastMovingQty = computed(() => {
 	const maxValue = fastMovingItems.value.reduce((max, item) => {
@@ -451,6 +591,9 @@ function logDashboardRequest() {
 	console.info("profile_filter", selectedProfileFilter.value || null);
 	console.info("pos_profile", profileName.value || null);
 	console.info("threshold_override", configuredLowStockThreshold.value ?? null);
+	console.info("fast_moving_page", fastMovingPage.value);
+	console.info("fast_moving_page_size", fastMovingPageSize.value);
+	console.info("fast_moving_search", fastMovingSearch.value || null);
 	console.groupEnd();
 }
 
@@ -464,6 +607,7 @@ function logDashboardResponse(response: DashboardResponse) {
 	console.info("selected_profiles", response.selected_profiles || []);
 	console.info("available_profiles_count", response.available_profiles?.length || 0);
 	console.info("profit_method", response.sales_overview?.profit_method || null);
+	console.info("fast_moving_pagination", response.inventory_insights?.fast_moving_pagination || null);
 	console.groupEnd();
 }
 
@@ -485,6 +629,9 @@ async function loadDashboard() {
 			profile_filter:
 				dashboardScope.value === "specific" ? selectedProfileFilter.value || undefined : undefined,
 			low_stock_threshold: configuredLowStockThreshold.value,
+			fast_moving_page: fastMovingPage.value,
+			fast_moving_page_size: fastMovingPageSize.value,
+			fast_moving_search: fastMovingSearch.value || undefined,
 		});
 		logDashboardResponse(response);
 		dashboardData.value = mergeDashboardPayload(response);
@@ -548,6 +695,66 @@ watch(
 		void loadDashboard();
 	},
 );
+
+watch(
+	() => fastMovingPage.value,
+	(newPage, oldPage) => {
+		if (newPage === oldPage) {
+			return;
+		}
+		void loadDashboard();
+	},
+);
+
+watch(
+	() => fastMovingPageSize.value,
+	(newSize, oldSize) => {
+		if (newSize === oldSize) {
+			return;
+		}
+		if (fastMovingPage.value !== 1) {
+			fastMovingPage.value = 1;
+			return;
+		}
+		void loadDashboard();
+	},
+);
+
+watch(
+	() => fastMovingSearch.value,
+	(newSearch, oldSearch) => {
+		if (newSearch === oldSearch) {
+			return;
+		}
+		if (fastMovingPage.value !== 1) {
+			fastMovingPage.value = 1;
+			return;
+		}
+		void loadDashboard();
+	},
+);
+
+watch(
+	() => fastMovingSearchInput.value,
+	(newSearch, oldSearch) => {
+		if (newSearch === oldSearch) {
+			return;
+		}
+		if (fastMovingSearchDebounce) {
+			clearTimeout(fastMovingSearchDebounce);
+		}
+		fastMovingSearchDebounce = setTimeout(() => {
+			fastMovingSearch.value = String(newSearch || "").trim();
+		}, 320);
+	},
+);
+
+onBeforeUnmount(() => {
+	if (fastMovingSearchDebounce) {
+		clearTimeout(fastMovingSearchDebounce);
+		fastMovingSearchDebounce = null;
+	}
+});
 
 onMounted(() => {
 	void loadDashboard();
@@ -653,6 +860,21 @@ onMounted(() => {
 	flex-wrap: wrap;
 }
 
+.card-filters {
+	display: grid;
+	grid-template-columns: 1fr auto;
+	gap: 8px;
+	align-items: center;
+}
+
+.card-filter-input {
+	min-width: 180px;
+}
+
+.card-filter-select {
+	min-width: 120px;
+}
+
 .list-stack {
 	display: flex;
 	flex-direction: column;
@@ -730,9 +952,23 @@ onMounted(() => {
 	padding: 16px 0;
 }
 
+.pagination-row {
+	display: flex;
+	justify-content: center;
+	padding-top: 4px;
+}
+
 @media (max-width: 960px) {
 	.list-stack {
 		max-height: none;
+	}
+
+	.card-filters {
+		grid-template-columns: 1fr;
+	}
+
+	.card-filter-select {
+		min-width: 100%;
 	}
 }
 

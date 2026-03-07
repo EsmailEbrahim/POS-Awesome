@@ -59,6 +59,13 @@ export interface DashboardResponse {
 	sales_overview: DashboardMetricPayload;
 	inventory_insights: {
 		fast_moving_items: FastMovingItem[];
+		fast_moving_pagination?: {
+			page: number;
+			page_size: number;
+			total_count: number;
+			total_pages: number;
+			search?: string;
+		};
 		low_stock_items: LowStockItem[];
 		low_stock_threshold: number;
 	};
@@ -77,6 +84,9 @@ export interface DashboardRequest {
 	profile_filter?: string | null;
 	low_stock_threshold?: number;
 	fast_moving_limit?: number;
+	fast_moving_page?: number;
+	fast_moving_page_size?: number;
+	fast_moving_search?: string | null;
 	supplier_limit?: number;
 	low_stock_limit?: number;
 }
