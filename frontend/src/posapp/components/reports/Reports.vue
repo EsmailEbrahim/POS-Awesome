@@ -395,7 +395,7 @@
 					<v-col cols="12">
 						<v-card class="dashboard-card" elevation="2">
 							<div class="dashboard-card__header">
-								<h2 class="text-subtitle-1 font-weight-bold mb-0">{{ __("Daily Sales Summary / X-Z") }}</h2>
+								<h2 class="text-subtitle-1 font-weight-bold mb-0">{{ __("Daily Sales Summary") }}</h2>
 								<div class="dashboard-chip-row">
 									<v-chip size="small" color="info" variant="tonal">
 										{{ __("Date") }}: {{ dailySummaryRangeLabel }}
@@ -426,6 +426,54 @@
 								<div class="payment-chip-list">
 									<v-chip
 										v-for="payment in dailyPaymentMethods"
+										:key="payment.mode_of_payment"
+										size="small"
+										:color="paymentCategoryColor(payment.category)"
+										variant="tonal"
+									>
+										{{ payment.mode_of_payment }}: {{ formatMoney(payment.amount) }}
+									</v-chip>
+								</div>
+							</div>
+						</v-card>
+					</v-col>
+				</v-row>
+
+				<v-row v-show="activeDashboardTab === 'sales'" class="dashboard-grid mb-2">
+					<v-col cols="12">
+						<v-card class="dashboard-card" elevation="2">
+							<div class="dashboard-card__header">
+								<h2 class="text-subtitle-1 font-weight-bold mb-0">{{ __("Monthly Sales Summary") }}</h2>
+								<div class="dashboard-chip-row">
+									<v-chip size="small" color="info" variant="tonal">
+										{{ __("Month") }}: {{ monthlySummaryRangeLabel }}
+									</v-chip>
+									<v-chip
+										size="small"
+										:color="monthlySummary.has_closing_snapshot ? 'success' : 'warning'"
+										variant="tonal"
+									>
+										{{
+											monthlySummary.has_closing_snapshot
+												? __("Closing Snapshot Available")
+												: __("Live Snapshot")
+										}}
+									</v-chip>
+								</div>
+							</div>
+							<div class="summary-grid">
+								<div v-for="metric in monthlySummaryMetrics" :key="metric.key" class="summary-metric">
+									<div class="summary-metric__label">{{ metric.label }}</div>
+									<div class="summary-metric__value" :class="metric.valueClass">
+										{{ metric.value }}
+									</div>
+								</div>
+							</div>
+							<div v-if="monthlyPaymentMethods.length" class="payment-breakdown">
+								<div class="summary-metric__label">{{ __("Payment Methods") }}</div>
+								<div class="payment-chip-list">
+									<v-chip
+										v-for="payment in monthlyPaymentMethods"
 										:key="payment.mode_of_payment"
 										size="small"
 										:color="paymentCategoryColor(payment.category)"
@@ -1824,6 +1872,7 @@ import {
 	type DiscountVoidReturnDayRow,
 	type DiscountVoidReturnItemRow,
 	type DashboardResponse,
+	type SalesSummaryPayload,
 	type FastMovingItem,
 	type InventoryStatusRow,
 	type ItemSalesRow,
@@ -1899,6 +1948,31 @@ const createEmptyDashboard = (): DashboardResponse => ({
 		monthly_profit: 0,
 	},
 	daily_sales_summary: {
+		period: {},
+		invoice_count: 0,
+		returns_count: 0,
+		gross_sales: 0,
+		net_sales: 0,
+		returns_amount: 0,
+		discount_amount: 0,
+		tax_amount: 0,
+		opening_amount: 0,
+		opening_cash: 0,
+		closing_amount: 0,
+		closing_cash: 0,
+		cash_collections: 0,
+		card_online_collections: 0,
+		other_collections: 0,
+		change_given: 0,
+		collections_total: 0,
+		expected_cash: 0,
+		actual_cash: 0,
+		cash_variance: 0,
+		average_invoice_value: 0,
+		has_closing_snapshot: false,
+		payment_methods: [],
+	},
+	monthly_sales_summary: {
 		period: {},
 		invoice_count: 0,
 		returns_count: 0,
@@ -2268,97 +2342,100 @@ const salesMetrics = computed(() => [
 	},
 ]);
 
-const dailySummary = computed(() => dashboardData.value.daily_sales_summary || {});
-const dailySummaryRangeLabel = computed(() => {
-	const from = dailySummary.value.period?.from;
-	const to = dailySummary.value.period?.to;
+const dailySummary = computed<SalesSummaryPayload>(() => dashboardData.value.daily_sales_summary || {});
+const monthlySummary = computed<SalesSummaryPayload>(() => dashboardData.value.monthly_sales_summary || {});
+
+function summaryRangeLabel(summary: SalesSummaryPayload, fallbackLabel: string) {
+	const from = summary.period?.from;
+	const to = summary.period?.to;
 	if (!from || !to) {
-		const fallbackToday = dashboardData.value.date_context?.today;
-		return fallbackToday ? formatDate(fallbackToday) : __("Today");
+		return fallbackLabel;
 	}
 	if (from === to) {
 		return formatDate(from);
 	}
 	return `${formatDate(from)} - ${formatDate(to)}`;
-});
-const dailyPaymentMethods = computed(() =>
-	(dailySummary.value.payment_methods || [])
+}
+
+function summaryPaymentMethods(summary: SalesSummaryPayload) {
+	return (summary.payment_methods || [])
 		.filter((row) => Math.abs(Number(row.amount || 0)) > 0.00001)
-		.sort((a, b) => Math.abs(Number(b.amount || 0)) - Math.abs(Number(a.amount || 0))),
-);
-const dailySummaryMetrics = computed(() => {
-	const variance = Number(dailySummary.value.cash_variance || 0);
+		.sort((a, b) => Math.abs(Number(b.amount || 0)) - Math.abs(Number(a.amount || 0)));
+}
+
+function summaryMetrics(summary: SalesSummaryPayload) {
+	const variance = Number(summary.cash_variance || 0);
 	return [
 		{
 			key: "invoice_count",
 			label: __("Invoices"),
-			value: formatQuantity(Number(dailySummary.value.invoice_count || 0)),
+			value: formatQuantity(Number(summary.invoice_count || 0)),
 			valueClass: "",
 		},
 		{
 			key: "avg_invoice",
 			label: __("Average Bill"),
-			value: formatMoney(Number(dailySummary.value.average_invoice_value || 0)),
+			value: formatMoney(Number(summary.average_invoice_value || 0)),
 			valueClass: "",
 		},
 		{
 			key: "opening_cash",
 			label: __("Opening Cash"),
-			value: formatMoney(Number(dailySummary.value.opening_cash || 0)),
+			value: formatMoney(Number(summary.opening_cash || 0)),
 			valueClass: "",
 		},
 		{
 			key: "gross_sales",
 			label: __("Gross Sales"),
-			value: formatMoney(Number(dailySummary.value.gross_sales || 0)),
+			value: formatMoney(Number(summary.gross_sales || 0)),
 			valueClass: "",
 		},
 		{
 			key: "returns_amount",
 			label: __("Returns"),
-			value: formatMoney(Number(dailySummary.value.returns_amount || 0)),
+			value: formatMoney(Number(summary.returns_amount || 0)),
 			valueClass: "",
 		},
 		{
 			key: "discount_amount",
 			label: __("Discounts"),
-			value: formatMoney(Number(dailySummary.value.discount_amount || 0)),
+			value: formatMoney(Number(summary.discount_amount || 0)),
 			valueClass: "",
 		},
 		{
 			key: "tax_amount",
 			label: __("Tax"),
-			value: formatMoney(Number(dailySummary.value.tax_amount || 0)),
+			value: formatMoney(Number(summary.tax_amount || 0)),
 			valueClass: "",
 		},
 		{
 			key: "net_sales",
 			label: __("Net Sales"),
-			value: formatMoney(Number(dailySummary.value.net_sales || 0)),
+			value: formatMoney(Number(summary.net_sales || 0)),
 			valueClass: "",
 		},
 		{
 			key: "cash_collections",
 			label: __("Cash Collections"),
-			value: formatMoney(Number(dailySummary.value.cash_collections || 0)),
+			value: formatMoney(Number(summary.cash_collections || 0)),
 			valueClass: "",
 		},
 		{
 			key: "card_online_collections",
 			label: __("Card / Online"),
-			value: formatMoney(Number(dailySummary.value.card_online_collections || 0)),
+			value: formatMoney(Number(summary.card_online_collections || 0)),
 			valueClass: "",
 		},
 		{
 			key: "expected_cash",
 			label: __("Expected Cash"),
-			value: formatMoney(Number(dailySummary.value.expected_cash || 0)),
+			value: formatMoney(Number(summary.expected_cash || 0)),
 			valueClass: "",
 		},
 		{
 			key: "actual_cash",
 			label: __("Cash In Hand"),
-			value: formatMoney(Number(dailySummary.value.actual_cash || 0)),
+			value: formatMoney(Number(summary.actual_cash || 0)),
 			valueClass: "",
 		},
 		{
@@ -2368,7 +2445,18 @@ const dailySummaryMetrics = computed(() => {
 			valueClass: variance > 0 ? "summary-metric__value--success" : variance < 0 ? "summary-metric__value--danger" : "",
 		},
 	];
-});
+}
+
+const dailySummaryRangeLabel = computed(() =>
+	summaryRangeLabel(dailySummary.value, dashboardData.value.date_context?.today ? formatDate(dashboardData.value.date_context.today) : __("Today")),
+);
+const monthlySummaryRangeLabel = computed(() =>
+	summaryRangeLabel(monthlySummary.value, __("Current Month")),
+);
+const dailyPaymentMethods = computed(() => summaryPaymentMethods(dailySummary.value));
+const monthlyPaymentMethods = computed(() => summaryPaymentMethods(monthlySummary.value));
+const dailySummaryMetrics = computed(() => summaryMetrics(dailySummary.value));
+const monthlySummaryMetrics = computed(() => summaryMetrics(monthlySummary.value));
 
 const paymentReport = computed(() => dashboardData.value.payment_method_report || {});
 const paymentReportTotals = computed(() => paymentReport.value.totals || {});
@@ -3316,6 +3404,10 @@ function mergeDashboardPayload(payload?: Partial<DashboardResponse>): DashboardR
 		daily_sales_summary: {
 			...(base.daily_sales_summary || {}),
 			...(payload?.daily_sales_summary || {}),
+		},
+		monthly_sales_summary: {
+			...(base.monthly_sales_summary || {}),
+			...(payload?.monthly_sales_summary || {}),
 		},
 		payment_method_report: {
 			...(base.payment_method_report || {}),

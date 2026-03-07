@@ -503,13 +503,14 @@ def _get_cash_modes(profile_names: list[str]) -> set[str]:
     return cash_modes
 
 
-def _collect_daily_sales_summary(
+def _collect_sales_summary(
     profile_names: list[str],
     company: str,
-    date_value: str,
+    date_from: str,
+    date_to: str,
 ) -> dict[str, Any]:
     summary: dict[str, Any] = {
-        "period": {"from": date_value, "to": date_value},
+        "period": {"from": date_from, "to": date_to},
         "invoice_count": 0,
         "returns_count": 0,
         "gross_sales": 0.0,
@@ -555,11 +556,11 @@ def _collect_daily_sales_summary(
             inner join `tabPOS Opening Shift` inv on inv.name = detail.parent
             where inv.docstatus = 1
               and inv.company = %s
-              and inv.posting_date = %s
+              and inv.posting_date between %s and %s
               {profile_filter}
             group by detail.mode_of_payment
             """,
-            (company, date_value, *profile_filter_params),
+            (company, date_from, date_to, *profile_filter_params),
             as_dict=True,
         )
         for row in opening_rows:
@@ -582,11 +583,11 @@ def _collect_daily_sales_summary(
             inner join `tabPOS Closing Shift` inv on inv.name = detail.parent
             where inv.docstatus = 1
               and inv.company = %s
-              and inv.posting_date = %s
+              and inv.posting_date between %s and %s
               {profile_filter}
             group by detail.mode_of_payment
             """,
-            (company, date_value, *profile_filter_params),
+            (company, date_from, date_to, *profile_filter_params),
             as_dict=True,
         )
         if closing_rows:
@@ -624,7 +625,7 @@ def _collect_daily_sales_summary(
         tax_expression = f"coalesce(inv.{tax_field}, 0)" if tax_field else "0"
         change_expression = f"coalesce(inv.{change_field}, 0)" if change_field else "0"
 
-        daily_row = frappe.db.sql(
+        summary_rows = frappe.db.sql(
             f"""
             select
                 count(inv.name) as invoice_count,
@@ -668,15 +669,15 @@ def _collect_daily_sales_summary(
             from `tab{parent_doctype}` inv
             where inv.docstatus = 1
               and inv.company = %s
-              and inv.posting_date = %s
+              and inv.posting_date between %s and %s
               {profile_filter}
               {_extra_parent_filter(parent_doctype, "inv")}
             """,
-            (company, date_value, *profile_filter_params),
+            (company, date_from, date_to, *profile_filter_params),
             as_dict=True,
         )
 
-        row = daily_row[0] if daily_row else {}
+        row = summary_rows[0] if summary_rows else {}
         summary["invoice_count"] += cint(row.get("invoice_count"))
         summary["returns_count"] += cint(row.get("returns_count"))
         summary["gross_sales"] += flt(row.get("gross_sales"))
@@ -701,11 +702,11 @@ def _collect_daily_sales_summary(
                 inner join `tab{parent_doctype}` inv on inv.name = item.parent
                 where inv.docstatus = 1
                   and inv.company = %s
-                  and inv.posting_date = %s
+                  and inv.posting_date between %s and %s
                   {profile_filter}
                   {_extra_parent_filter(parent_doctype, "inv")}
                 """,
-                (company, date_value, *profile_filter_params),
+                (company, date_from, date_to, *profile_filter_params),
                 as_dict=True,
             )
             summary["discount_amount"] += flt((item_discount_row[0] or {}).get("item_discount_amount"))
@@ -728,12 +729,12 @@ def _collect_daily_sales_summary(
                     inner join `tab{parent_doctype}` inv on inv.name = pay.parent
                     where inv.docstatus = 1
                       and inv.company = %s
-                      and inv.posting_date = %s
+                      and inv.posting_date between %s and %s
                       {profile_filter}
                       {_extra_parent_filter(parent_doctype, "inv")}
                     group by pay.mode_of_payment
                     """,
-                    (company, date_value, *profile_filter_params),
+                    (company, date_from, date_to, *profile_filter_params),
                     as_dict=True,
                 )
                 for pay_row in payment_rows:
@@ -804,6 +805,33 @@ def _collect_daily_sales_summary(
         flt(summary["net_sales"] / invoice_count) if invoice_count > 0 else 0.0
     )
     return summary
+
+
+def _collect_daily_sales_summary(
+    profile_names: list[str],
+    company: str,
+    date_value: str,
+) -> dict[str, Any]:
+    return _collect_sales_summary(
+        profile_names=profile_names,
+        company=company,
+        date_from=date_value,
+        date_to=date_value,
+    )
+
+
+def _collect_monthly_sales_summary(
+    profile_names: list[str],
+    company: str,
+    date_from: str,
+    date_to: str,
+) -> dict[str, Any]:
+    return _collect_sales_summary(
+        profile_names=profile_names,
+        company=company,
+        date_from=date_from,
+        date_to=date_to,
+    )
 
 
 def _collect_payment_method_report(
@@ -4689,6 +4717,31 @@ def get_dashboard_data(
             "has_closing_snapshot": False,
             "payment_methods": [],
         },
+        "monthly_sales_summary": {
+            "period": {"from": str(month_start), "to": str(report_to_date)},
+            "invoice_count": 0,
+            "returns_count": 0,
+            "gross_sales": 0.0,
+            "net_sales": 0.0,
+            "returns_amount": 0.0,
+            "discount_amount": 0.0,
+            "tax_amount": 0.0,
+            "opening_amount": 0.0,
+            "opening_cash": 0.0,
+            "closing_amount": 0.0,
+            "closing_cash": 0.0,
+            "cash_collections": 0.0,
+            "card_online_collections": 0.0,
+            "other_collections": 0.0,
+            "change_given": 0.0,
+            "collections_total": 0.0,
+            "expected_cash": 0.0,
+            "actual_cash": 0.0,
+            "cash_variance": 0.0,
+            "average_invoice_value": 0.0,
+            "has_closing_snapshot": False,
+            "payment_methods": [],
+        },
         "payment_method_report": {
             "period": {"from": str(month_start), "to": str(report_to_date)},
             "totals": {
@@ -4961,6 +5014,12 @@ def get_dashboard_data(
         profile_names=selected_profile_names,
         company=company,
         date_value=str(report_to_date),
+    )
+    payload["monthly_sales_summary"] = _collect_monthly_sales_summary(
+        profile_names=selected_profile_names,
+        company=company,
+        date_from=str(month_start),
+        date_to=str(report_to_date),
     )
     payload["payment_method_report"] = _collect_payment_method_report(
         profile_names=selected_profile_names,
