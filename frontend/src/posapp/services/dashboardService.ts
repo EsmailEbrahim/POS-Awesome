@@ -47,6 +47,20 @@ export interface ItemSalesRow {
 	discount_frequency_pct?: number;
 }
 
+export interface CategoryBrandVariantRow {
+	label?: string;
+	sold_qty: number;
+	sales_amount: number;
+	discount_amount?: number;
+	item_count?: number;
+	variant_item_count?: number;
+	attribute?: string;
+	attribute_value?: string;
+	category?: string;
+	brand?: string;
+	variant_of?: string;
+}
+
 export interface DashboardResponse {
 	enabled: boolean;
 	profile?: string;
@@ -185,6 +199,21 @@ export interface DashboardResponse {
 			} | null;
 		};
 	};
+	category_brand_variant_report?: {
+		period?: {
+			from?: string;
+			to?: string;
+		};
+		category_wise?: CategoryBrandVariantRow[];
+		brand_wise?: CategoryBrandVariantRow[];
+		variant_wise?: CategoryBrandVariantRow[];
+		attribute_wise?: CategoryBrandVariantRow[];
+		highlights?: {
+			top_category?: CategoryBrandVariantRow | null;
+			top_brand?: CategoryBrandVariantRow | null;
+			top_variant?: CategoryBrandVariantRow | null;
+		};
+	};
 	inventory_insights: {
 		fast_moving_items: FastMovingItem[];
 		fast_moving_period?: {
@@ -221,6 +250,7 @@ export interface DashboardRequest {
 	fast_moving_page_size?: number;
 	fast_moving_search?: string | null;
 	item_sales_limit?: number;
+	category_report_limit?: number;
 	supplier_limit?: number;
 	low_stock_limit?: number;
 }

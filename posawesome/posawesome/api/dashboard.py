@@ -997,24 +997,14 @@ def _collect_sales_trend(
     return trend
 
 
-def _collect_item_sales_report(
+def _collect_item_totals(
     profile_names: list[str],
     company: str,
     date_from: str,
     date_to: str,
-    limit: int = 20,
-) -> dict[str, Any]:
-    report: dict[str, Any] = {
-        "period": {"from": date_from, "to": date_to},
-        "items": [],
-        "highlights": {
-            "best_seller": None,
-            "top_margin_item": None,
-            "top_discount_item": None,
-        },
-    }
+) -> dict[str, dict[str, Any]]:
     if not profile_names:
-        return report
+        return {}
 
     profile_filter, profile_filter_params = _build_in_filter("inv.pos_profile", profile_names)
     grouped_items: dict[str, dict[str, Any]] = defaultdict(
@@ -1063,9 +1053,7 @@ def _collect_item_sales_report(
             f"case when {is_return_expression} = 1 then -abs({discount_base_expression}) "
             f"else abs({discount_base_expression}) end"
         )
-        discounted_line_expression = (
-            f"case when abs({discount_base_expression}) > 0.00001 then 1 else 0 end"
-        )
+        discounted_line_expression = f"case when abs({discount_base_expression}) > 0.00001 then 1 else 0 end"
         item_name_expression = (
             f"coalesce(item.{name_field}, item.item_code)" if name_field else "item.item_code"
         )
@@ -1113,6 +1101,32 @@ def _collect_item_sales_report(
             current["discounted_lines"] = cint(current.get("discounted_lines")) + cint(
                 row.get("discounted_lines")
             )
+
+    return dict(grouped_items)
+
+
+def _collect_item_sales_report(
+    profile_names: list[str],
+    company: str,
+    date_from: str,
+    date_to: str,
+    limit: int = 20,
+) -> dict[str, Any]:
+    report: dict[str, Any] = {
+        "period": {"from": date_from, "to": date_to},
+        "items": [],
+        "highlights": {
+            "best_seller": None,
+            "top_margin_item": None,
+            "top_discount_item": None,
+        },
+    }
+    grouped_items = _collect_item_totals(
+        profile_names=profile_names,
+        company=company,
+        date_from=date_from,
+        date_to=date_to,
+    )
 
     items: list[dict[str, Any]] = []
     for row in grouped_items.values():
@@ -1185,6 +1199,236 @@ def _collect_item_sales_report(
             },
         }
 
+    return report
+
+
+def _collect_category_brand_variant_report(
+    profile_names: list[str],
+    company: str,
+    date_from: str,
+    date_to: str,
+    limit: int = 12,
+) -> dict[str, Any]:
+    report: dict[str, Any] = {
+        "period": {"from": date_from, "to": date_to},
+        "category_wise": [],
+        "brand_wise": [],
+        "variant_wise": [],
+        "attribute_wise": [],
+        "highlights": {
+            "top_category": None,
+            "top_brand": None,
+            "top_variant": None,
+        },
+    }
+
+    grouped_items = _collect_item_totals(
+        profile_names=profile_names,
+        company=company,
+        date_from=date_from,
+        date_to=date_to,
+    )
+    if not grouped_items:
+        return report
+
+    item_codes = sorted(grouped_items.keys())
+    if not item_codes:
+        return report
+
+    item_fields = ["name", "item_name", "item_group"]
+    has_brand_field = frappe.db.has_column("Item", "brand")
+    has_variant_of_field = frappe.db.has_column("Item", "variant_of")
+    if has_brand_field:
+        item_fields.append("brand")
+    if has_variant_of_field:
+        item_fields.append("variant_of")
+
+    item_rows = frappe.get_all(
+        "Item",
+        filters={"name": ["in", item_codes]},
+        fields=item_fields,
+    )
+    item_meta: dict[str, dict[str, Any]] = {
+        cstr(row.get("name")).strip(): row for row in item_rows if cstr(row.get("name")).strip()
+    }
+
+    category_buckets: dict[str, dict[str, Any]] = defaultdict(
+        lambda: {"label": "", "sold_qty": 0.0, "sales_amount": 0.0, "discount_amount": 0.0, "item_codes": set()}
+    )
+    brand_buckets: dict[str, dict[str, Any]] = defaultdict(
+        lambda: {"label": "", "sold_qty": 0.0, "sales_amount": 0.0, "discount_amount": 0.0, "item_codes": set()}
+    )
+    variant_buckets: dict[str, dict[str, Any]] = defaultdict(
+        lambda: {
+            "variant_of": "",
+            "label": "",
+            "sold_qty": 0.0,
+            "sales_amount": 0.0,
+            "discount_amount": 0.0,
+            "variant_item_codes": set(),
+        }
+    )
+    attribute_buckets: dict[str, dict[str, Any]] = defaultdict(
+        lambda: {
+            "attribute": "",
+            "attribute_value": "",
+            "label": "",
+            "sold_qty": 0.0,
+            "sales_amount": 0.0,
+            "discount_amount": 0.0,
+            "item_codes": set(),
+        }
+    )
+
+    for item_code, totals in grouped_items.items():
+        meta = item_meta.get(item_code, {})
+        category_label = cstr(meta.get("item_group")).strip() or _("Uncategorized")
+        brand_label = cstr(meta.get("brand")).strip() if has_brand_field else ""
+        brand_label = brand_label or _("Unbranded")
+        variant_parent = cstr(meta.get("variant_of")).strip() if has_variant_of_field else ""
+
+        sold_qty = flt(totals.get("sold_qty"))
+        sales_amount = flt(totals.get("sales_amount"))
+        discount_amount = flt(totals.get("discount_amount"))
+        if abs(sold_qty) < 0.00001 and abs(sales_amount) < 0.00001:
+            continue
+
+        category_row = category_buckets[category_label]
+        category_row["label"] = category_label
+        category_row["sold_qty"] += sold_qty
+        category_row["sales_amount"] += sales_amount
+        category_row["discount_amount"] += discount_amount
+        category_row["item_codes"].add(item_code)
+
+        brand_row = brand_buckets[brand_label]
+        brand_row["label"] = brand_label
+        brand_row["sold_qty"] += sold_qty
+        brand_row["sales_amount"] += sales_amount
+        brand_row["discount_amount"] += discount_amount
+        brand_row["item_codes"].add(item_code)
+
+        if variant_parent:
+            variant_row = variant_buckets[variant_parent]
+            variant_row["variant_of"] = variant_parent
+            variant_row["label"] = variant_parent
+            variant_row["sold_qty"] += sold_qty
+            variant_row["sales_amount"] += sales_amount
+            variant_row["discount_amount"] += discount_amount
+            variant_row["variant_item_codes"].add(item_code)
+
+    if frappe.db.exists("DocType", "Item Variant Attribute"):
+        parent_filter, parent_params = _build_in_filter("attr.parent", item_codes)
+        if parent_filter:
+            attribute_rows = frappe.db.sql(
+                f"""
+                select
+                    attr.parent as item_code,
+                    attr.attribute as attribute,
+                    attr.attribute_value as attribute_value
+                from `tabItem Variant Attribute` attr
+                where 1=1
+                  {parent_filter}
+                """,
+                tuple(parent_params),
+                as_dict=True,
+            )
+
+            for row in attribute_rows:
+                item_code = cstr(row.get("item_code")).strip()
+                if not item_code or item_code not in grouped_items:
+                    continue
+                attribute = cstr(row.get("attribute")).strip()
+                attribute_value = cstr(row.get("attribute_value")).strip()
+                if not attribute or not attribute_value:
+                    continue
+
+                key = f"{attribute}:{attribute_value}"
+                bucket = attribute_buckets[key]
+                bucket["attribute"] = attribute
+                bucket["attribute_value"] = attribute_value
+                bucket["label"] = f"{attribute}: {attribute_value}"
+
+                if item_code in bucket["item_codes"]:
+                    continue
+                bucket["item_codes"].add(item_code)
+
+                item_totals = grouped_items[item_code]
+                bucket["sold_qty"] += flt(item_totals.get("sold_qty"))
+                bucket["sales_amount"] += flt(item_totals.get("sales_amount"))
+                bucket["discount_amount"] += flt(item_totals.get("discount_amount"))
+
+    category_rows = sorted(
+        [
+            {
+                "category": key,
+                "label": row.get("label"),
+                "sold_qty": flt(row.get("sold_qty")),
+                "sales_amount": flt(row.get("sales_amount")),
+                "discount_amount": flt(row.get("discount_amount")),
+                "item_count": len(row.get("item_codes", set())),
+            }
+            for key, row in category_buckets.items()
+        ],
+        key=lambda row: (flt(row.get("sales_amount")), flt(row.get("sold_qty"))),
+        reverse=True,
+    )
+    brand_rows = sorted(
+        [
+            {
+                "brand": key,
+                "label": row.get("label"),
+                "sold_qty": flt(row.get("sold_qty")),
+                "sales_amount": flt(row.get("sales_amount")),
+                "discount_amount": flt(row.get("discount_amount")),
+                "item_count": len(row.get("item_codes", set())),
+            }
+            for key, row in brand_buckets.items()
+        ],
+        key=lambda row: (flt(row.get("sales_amount")), flt(row.get("sold_qty"))),
+        reverse=True,
+    )
+    variant_rows = sorted(
+        [
+            {
+                "variant_of": key,
+                "label": row.get("label"),
+                "sold_qty": flt(row.get("sold_qty")),
+                "sales_amount": flt(row.get("sales_amount")),
+                "discount_amount": flt(row.get("discount_amount")),
+                "variant_item_count": len(row.get("variant_item_codes", set())),
+            }
+            for key, row in variant_buckets.items()
+        ],
+        key=lambda row: (flt(row.get("sales_amount")), flt(row.get("sold_qty"))),
+        reverse=True,
+    )
+    attribute_rows = sorted(
+        [
+            {
+                "attribute": row.get("attribute"),
+                "attribute_value": row.get("attribute_value"),
+                "label": row.get("label"),
+                "sold_qty": flt(row.get("sold_qty")),
+                "sales_amount": flt(row.get("sales_amount")),
+                "discount_amount": flt(row.get("discount_amount")),
+                "item_count": len(row.get("item_codes", set())),
+            }
+            for row in attribute_buckets.values()
+        ],
+        key=lambda row: (flt(row.get("sales_amount")), flt(row.get("sold_qty"))),
+        reverse=True,
+    )
+
+    page_limit = _coerce_limit(limit, default=12, minimum=1, maximum=100)
+    report["category_wise"] = category_rows[:page_limit]
+    report["brand_wise"] = brand_rows[:page_limit]
+    report["variant_wise"] = variant_rows[:page_limit]
+    report["attribute_wise"] = attribute_rows[:page_limit]
+    report["highlights"] = {
+        "top_category": category_rows[0] if category_rows else None,
+        "top_brand": brand_rows[0] if brand_rows else None,
+        "top_variant": variant_rows[0] if variant_rows else None,
+    }
     return report
 
 
@@ -1368,6 +1612,7 @@ def get_dashboard_data(
     fast_moving_page_size=None,
     fast_moving_search=None,
     item_sales_limit: int = 20,
+    category_report_limit: int = 12,
     supplier_limit: int = 8,
     low_stock_limit: int = 20,
 ):
@@ -1407,6 +1652,7 @@ def get_dashboard_data(
     supplier_limit = _coerce_limit(supplier_limit, default=8, minimum=1, maximum=25)
     low_stock_limit = _coerce_limit(low_stock_limit, default=20, minimum=1, maximum=100)
     item_sales_limit = _coerce_limit(item_sales_limit, default=20, minimum=1, maximum=100)
+    category_report_limit = _coerce_limit(category_report_limit, default=12, minimum=1, maximum=100)
 
     company = cstr(current_profile_doc.get("company")).strip()
     company_profiles = _get_company_profiles(company)
@@ -1589,6 +1835,18 @@ def get_dashboard_data(
                 "top_discount_item": None,
             },
         },
+        "category_brand_variant_report": {
+            "period": {"from": str(month_start), "to": str(today)},
+            "category_wise": [],
+            "brand_wise": [],
+            "variant_wise": [],
+            "attribute_wise": [],
+            "highlights": {
+                "top_category": None,
+                "top_brand": None,
+                "top_variant": None,
+            },
+        },
         "inventory_insights": {
             "fast_moving_items": [],
             "fast_moving_period": {
@@ -1659,6 +1917,13 @@ def get_dashboard_data(
         date_from=str(month_start),
         date_to=str(today),
         limit=item_sales_limit,
+    )
+    payload["category_brand_variant_report"] = _collect_category_brand_variant_report(
+        profile_names=selected_profile_names,
+        company=company,
+        date_from=str(month_start),
+        date_to=str(today),
+        limit=category_report_limit,
     )
 
     fast_moving_items, fast_moving_total_count = _collect_fast_moving_items(

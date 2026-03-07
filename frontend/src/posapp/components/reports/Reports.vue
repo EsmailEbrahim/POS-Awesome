@@ -72,7 +72,16 @@
 			</v-alert>
 
 			<template v-if="canRenderDashboard">
-				<v-row class="dashboard-grid mb-2">
+				<div class="dashboard-tabs mb-3">
+					<v-tabs v-model="activeDashboardTab" color="primary" class="dashboard-tab-bar" density="comfortable">
+						<v-tab value="sales">{{ __("Sales") }}</v-tab>
+						<v-tab value="products">{{ __("Products") }}</v-tab>
+						<v-tab value="inventory">{{ __("Inventory") }}</v-tab>
+						<v-tab value="procurement">{{ __("Procurement") }}</v-tab>
+					</v-tabs>
+				</div>
+
+				<v-row v-show="activeDashboardTab === 'sales'" class="dashboard-grid mb-2">
 					<v-col v-for="metric in salesMetrics" :key="metric.key" cols="12" sm="6" lg="3">
 						<v-card class="metric-card" :class="metric.styleClass" elevation="2">
 							<div class="metric-card__header">
@@ -84,7 +93,7 @@
 					</v-col>
 				</v-row>
 
-				<v-row class="dashboard-grid mb-2">
+				<v-row v-show="activeDashboardTab === 'sales'" class="dashboard-grid mb-2">
 					<v-col cols="12">
 						<v-card class="dashboard-card" elevation="2">
 							<div class="dashboard-card__header">
@@ -132,7 +141,7 @@
 					</v-col>
 				</v-row>
 
-				<v-row class="dashboard-grid mb-2">
+				<v-row v-show="activeDashboardTab === 'sales'" class="dashboard-grid mb-2">
 					<v-col cols="12">
 						<v-card class="dashboard-card" elevation="2">
 							<div class="dashboard-card__header">
@@ -252,7 +261,7 @@
 					</v-col>
 				</v-row>
 
-				<v-row class="dashboard-grid mb-2">
+				<v-row v-show="activeDashboardTab === 'products'" class="dashboard-grid mb-2">
 					<v-col cols="12">
 						<v-card class="dashboard-card" elevation="2">
 							<div class="dashboard-card__header">
@@ -306,7 +315,125 @@
 					</v-col>
 				</v-row>
 
-				<v-row class="dashboard-grid">
+				<v-row v-show="activeDashboardTab === 'products'" class="dashboard-grid mb-2">
+					<v-col cols="12">
+						<v-card class="dashboard-card" elevation="2">
+							<div class="dashboard-card__header">
+								<h2 class="text-subtitle-1 font-weight-bold mb-0">{{ __("Category / Brand / Variant Report") }}</h2>
+								<div class="dashboard-chip-row">
+									<v-chip size="small" color="info" variant="tonal">
+										{{ categoryVariantRangeLabel }}
+									</v-chip>
+									<v-chip size="small" color="primary" variant="tonal">
+										{{ __("Top Category") }}: {{ topCategoryLabel }}
+									</v-chip>
+									<v-chip size="small" color="success" variant="tonal">
+										{{ __("Top Brand") }}: {{ topBrandLabel }}
+									</v-chip>
+									<v-chip size="small" color="warning" variant="tonal">
+										{{ __("Top Variant") }}: {{ topVariantLabel }}
+									</v-chip>
+								</div>
+							</div>
+
+							<div class="trend-grid">
+								<div class="trend-panel">
+									<div class="summary-metric__label">{{ __("Category-wise") }}</div>
+									<div v-if="categorySalesPoints.length" class="list-stack trend-list">
+										<div v-for="row in categorySalesPoints" :key="`cat-${row.category || row.label}`" class="insight-row">
+											<div class="insight-row__top">
+												<div class="insight-row__title">{{ row.label || "-" }}</div>
+												<div class="insight-row__value">{{ formatMoney(Number(row.sales_amount || 0)) }}</div>
+											</div>
+											<div class="insight-row__meta">
+												{{ __("Items") }}: {{ formatQuantity(Number(row.item_count || 0)) }}
+											</div>
+											<v-progress-linear
+												:model-value="trendProgress(Number(row.sales_amount || 0), categorySalesMax)"
+												color="primary"
+												height="5"
+												rounded
+											/>
+										</div>
+									</div>
+									<div v-else class="empty-state">{{ __("No category data found.") }}</div>
+								</div>
+
+								<div class="trend-panel">
+									<div class="summary-metric__label">{{ __("Brand-wise") }}</div>
+									<div v-if="brandSalesPoints.length" class="list-stack trend-list">
+										<div v-for="row in brandSalesPoints" :key="`brand-${row.brand || row.label}`" class="insight-row">
+											<div class="insight-row__top">
+												<div class="insight-row__title">{{ row.label || "-" }}</div>
+												<div class="insight-row__value">{{ formatMoney(Number(row.sales_amount || 0)) }}</div>
+											</div>
+											<div class="insight-row__meta">
+												{{ __("Items") }}: {{ formatQuantity(Number(row.item_count || 0)) }}
+											</div>
+											<v-progress-linear
+												:model-value="trendProgress(Number(row.sales_amount || 0), brandSalesMax)"
+												color="success"
+												height="5"
+												rounded
+											/>
+										</div>
+									</div>
+									<div v-else class="empty-state">{{ __("No brand data found.") }}</div>
+								</div>
+
+								<div class="trend-panel">
+									<div class="summary-metric__label">{{ __("Variant-wise") }}</div>
+									<div v-if="variantSalesPoints.length" class="list-stack trend-list">
+										<div v-for="row in variantSalesPoints" :key="`variant-${row.variant_of || row.label}`" class="insight-row">
+											<div class="insight-row__top">
+												<div class="insight-row__title">{{ row.label || "-" }}</div>
+												<div class="insight-row__value">{{ formatMoney(Number(row.sales_amount || 0)) }}</div>
+											</div>
+											<div class="insight-row__meta">
+												{{ __("Variants") }}: {{ formatQuantity(Number(row.variant_item_count || 0)) }}
+											</div>
+											<v-progress-linear
+												:model-value="trendProgress(Number(row.sales_amount || 0), variantSalesMax)"
+												color="warning"
+												height="5"
+												rounded
+											/>
+										</div>
+									</div>
+									<div v-else class="empty-state">{{ __("No variant data found.") }}</div>
+								</div>
+
+								<div class="trend-panel">
+									<div class="summary-metric__label">{{ __("Attributes (Size/Color)") }}</div>
+									<div v-if="attributeSalesPoints.length" class="list-stack trend-list">
+										<div
+											v-for="row in attributeSalesPoints"
+											:key="`attr-${row.attribute || ''}-${row.attribute_value || ''}`"
+											class="insight-row"
+										>
+											<div class="insight-row__top">
+												<div class="insight-row__title">{{ row.label || "-" }}</div>
+												<div class="insight-row__value">{{ formatMoney(Number(row.sales_amount || 0)) }}</div>
+											</div>
+											<div class="insight-row__meta">
+												{{ __("Items") }}: {{ formatQuantity(Number(row.item_count || 0)) }}
+											</div>
+											<v-progress-linear
+												:model-value="trendProgress(Number(row.sales_amount || 0), attributeSalesMax)"
+												color="info"
+												height="5"
+												rounded
+											/>
+										</div>
+									</div>
+									<div v-else class="empty-state">{{ __("No attribute data found.") }}</div>
+								</div>
+							</div>
+						</v-card>
+					</v-col>
+				</v-row>
+
+				<v-row v-show="activeDashboardTab === 'inventory'" class="dashboard-grid">
 					<v-col cols="12" lg="6">
 						<v-card class="dashboard-card" elevation="2">
 							<div class="dashboard-card__header">
@@ -445,7 +572,7 @@
 					</v-col>
 				</v-row>
 
-				<v-row class="dashboard-grid mt-1">
+				<v-row v-show="activeDashboardTab === 'procurement'" class="dashboard-grid mt-1">
 					<v-col cols="12">
 						<v-card class="dashboard-card" elevation="2">
 							<div class="dashboard-card__header">
@@ -504,6 +631,7 @@ import { computed, onBeforeUnmount, onMounted, ref, watch } from "vue";
 import { useUIStore } from "@/posapp/stores/uiStore";
 import {
 	fetchDashboardData,
+	type CategoryBrandVariantRow,
 	type DashboardResponse,
 	type FastMovingItem,
 	type ItemSalesRow,
@@ -522,6 +650,7 @@ const errorMessage = ref("");
 const isDashboardEnabledOnServer = ref(true);
 const lastUpdatedAt = ref<Date | null>(null);
 const allowAllProfiles = ref(false);
+const activeDashboardTab = ref<"sales" | "products" | "inventory" | "procurement">("sales");
 const dashboardScope = ref<"all" | "current" | "specific">("all");
 const selectedProfileFilter = ref("");
 const scopeInitialized = ref(false);
@@ -533,6 +662,7 @@ const lowStockSearch = ref("");
 const lowStockWarehouseFilter = ref("");
 const supplierSearch = ref("");
 const itemSalesLimit = ref(20);
+const categoryReportLimit = ref(12);
 let fastMovingSearchDebounce: ReturnType<typeof setTimeout> | null = null;
 
 const createEmptyDashboard = (): DashboardResponse => ({
@@ -589,6 +719,18 @@ const createEmptyDashboard = (): DashboardResponse => ({
 			best_seller: null,
 			top_margin_item: null,
 			top_discount_item: null,
+		},
+	},
+	category_brand_variant_report: {
+		period: {},
+		category_wise: [],
+		brand_wise: [],
+		variant_wise: [],
+		attribute_wise: [],
+		highlights: {
+			top_category: null,
+			top_brand: null,
+			top_variant: null,
 		},
 	},
 	inventory_insights: {
@@ -974,6 +1116,86 @@ const itemSalesMaxSales = computed(() => {
 	return maxValue > 0 ? maxValue : 1;
 });
 
+const categoryVariantReport = computed(() => dashboardData.value.category_brand_variant_report || {});
+const categoryVariantHighlights = computed(() => categoryVariantReport.value.highlights || {});
+const categorySalesPoints = computed<CategoryBrandVariantRow[]>(() =>
+	[...(categoryVariantReport.value.category_wise || [])]
+		.sort((a, b) => Number(b.sales_amount || 0) - Number(a.sales_amount || 0))
+		.slice(0, Number(categoryReportLimit.value || 12)),
+);
+const brandSalesPoints = computed<CategoryBrandVariantRow[]>(() =>
+	[...(categoryVariantReport.value.brand_wise || [])]
+		.sort((a, b) => Number(b.sales_amount || 0) - Number(a.sales_amount || 0))
+		.slice(0, Number(categoryReportLimit.value || 12)),
+);
+const variantSalesPoints = computed<CategoryBrandVariantRow[]>(() =>
+	[...(categoryVariantReport.value.variant_wise || [])]
+		.sort((a, b) => Number(b.sales_amount || 0) - Number(a.sales_amount || 0))
+		.slice(0, Number(categoryReportLimit.value || 12)),
+);
+const attributeSalesPoints = computed<CategoryBrandVariantRow[]>(() =>
+	[...(categoryVariantReport.value.attribute_wise || [])]
+		.sort((a, b) => Number(b.sales_amount || 0) - Number(a.sales_amount || 0))
+		.slice(0, Number(categoryReportLimit.value || 12)),
+);
+const categoryVariantRangeLabel = computed(() => {
+	const from = categoryVariantReport.value.period?.from || dashboardData.value.date_context?.month_start;
+	const to = categoryVariantReport.value.period?.to || dashboardData.value.date_context?.today;
+	if (!from || !to) {
+		return __("Current Month");
+	}
+	return `${formatDate(from)} - ${formatDate(to)}`;
+});
+const topCategoryLabel = computed(() => {
+	const row = categoryVariantHighlights.value.top_category;
+	if (!row?.label) {
+		return __("N/A");
+	}
+	return `${row.label} . ${formatMoney(Number(row.sales_amount || 0))}`;
+});
+const topBrandLabel = computed(() => {
+	const row = categoryVariantHighlights.value.top_brand;
+	if (!row?.label) {
+		return __("N/A");
+	}
+	return `${row.label} . ${formatMoney(Number(row.sales_amount || 0))}`;
+});
+const topVariantLabel = computed(() => {
+	const row = categoryVariantHighlights.value.top_variant;
+	if (!row?.label) {
+		return __("N/A");
+	}
+	return `${row.label} . ${formatMoney(Number(row.sales_amount || 0))}`;
+});
+const categorySalesMax = computed(() => {
+	const maxValue = categorySalesPoints.value.reduce(
+		(max, row) => Math.max(max, Math.abs(Number(row.sales_amount || 0))),
+		0,
+	);
+	return maxValue > 0 ? maxValue : 1;
+});
+const brandSalesMax = computed(() => {
+	const maxValue = brandSalesPoints.value.reduce(
+		(max, row) => Math.max(max, Math.abs(Number(row.sales_amount || 0))),
+		0,
+	);
+	return maxValue > 0 ? maxValue : 1;
+});
+const variantSalesMax = computed(() => {
+	const maxValue = variantSalesPoints.value.reduce(
+		(max, row) => Math.max(max, Math.abs(Number(row.sales_amount || 0))),
+		0,
+	);
+	return maxValue > 0 ? maxValue : 1;
+});
+const attributeSalesMax = computed(() => {
+	const maxValue = attributeSalesPoints.value.reduce(
+		(max, row) => Math.max(max, Math.abs(Number(row.sales_amount || 0))),
+		0,
+	);
+	return maxValue > 0 ? maxValue : 1;
+});
+
 const fastMovingItems = computed<FastMovingItem[]>(
 	() => dashboardData.value.inventory_insights.fast_moving_items || [],
 );
@@ -1193,6 +1415,10 @@ function mergeDashboardPayload(payload?: Partial<DashboardResponse>): DashboardR
 			...(base.item_sales_report || {}),
 			...(payload?.item_sales_report || {}),
 		},
+		category_brand_variant_report: {
+			...(base.category_brand_variant_report || {}),
+			...(payload?.category_brand_variant_report || {}),
+		},
 		inventory_insights: {
 			...base.inventory_insights,
 			...(payload?.inventory_insights || {}),
@@ -1227,6 +1453,7 @@ function logDashboardResponse(response: DashboardResponse) {
 	console.info("available_profiles_count", response.available_profiles?.length || 0);
 	console.info("profit_method", response.sales_overview?.profit_method || null);
 	console.info("item_sales_count", response.item_sales_report?.items?.length || 0);
+	console.info("category_report_count", response.category_brand_variant_report?.category_wise?.length || 0);
 	console.info("fast_moving_pagination", response.inventory_insights?.fast_moving_pagination || null);
 	console.groupEnd();
 }
@@ -1250,6 +1477,7 @@ async function loadDashboard() {
 				dashboardScope.value === "specific" ? selectedProfileFilter.value || undefined : undefined,
 			low_stock_threshold: configuredLowStockThreshold.value,
 			item_sales_limit: itemSalesLimit.value,
+			category_report_limit: categoryReportLimit.value,
 			fast_moving_page: fastMovingPage.value,
 			fast_moving_page_size: fastMovingPageSize.value,
 			fast_moving_search: fastMovingSearch.value || undefined,
@@ -1419,6 +1647,14 @@ onMounted(() => {
 .dashboard-filter {
 	min-width: 180px;
 	max-width: 220px;
+}
+
+.dashboard-tabs {
+	border-bottom: 1px solid var(--pos-border);
+}
+
+.dashboard-tab-bar {
+	background: transparent;
 }
 
 .dashboard-grid {
