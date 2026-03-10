@@ -1060,13 +1060,16 @@ export default {
 	display: flex;
 	flex-direction: column;
 	gap: var(--dynamic-sm);
+	flex: 1 1 auto;
 	min-height: 0;
+	overflow: auto;
 }
 
 .invoice-main-card {
 	display: flex;
 	flex-direction: column;
-	overflow: hidden !important;
+	flex: 0 0 auto;
+	overflow: auto !important;
 }
 
 /* Style for selected checkbox button */
@@ -1133,7 +1136,7 @@ export default {
 	gap: var(--dynamic-sm);
 	flex: 1 1 auto;
 	min-height: 0;
-	overflow: hidden;
+	overflow: visible;
 }
 
 .invoice-status-alert {
@@ -1147,7 +1150,7 @@ export default {
 	gap: var(--dynamic-sm);
 	flex: 1 1 auto;
 	min-height: 0;
-	overflow: hidden;
+	overflow: visible;
 	align-items: stretch;
 }
 
@@ -1191,9 +1194,9 @@ export default {
 	padding-bottom: var(--dynamic-xs);
 	display: flex;
 	flex-direction: column;
-	flex: 1 1 auto;
-	min-height: 0;
-	overflow: hidden;
+	flex: 0 0 auto;
+	min-height: 320px;
+	overflow: visible;
 }
 
 /* Responsive breakpoints */
@@ -1330,8 +1333,8 @@ export default {
 	box-sizing: border-box;
 	display: flex;
 	flex-direction: column;
-	flex: 1 1 auto;
-	min-height: 0;
+	flex: 0 0 auto;
+	min-height: 320px;
 }
 
 :deep(.items-table-wrapper .column-selector-container) {
@@ -1342,10 +1345,18 @@ export default {
 }
 
 :deep(.items-table-wrapper .posa-items-table-container) {
-	flex: 1 1 auto;
-	min-height: 0;
-	height: 100% !important;
-	max-height: 100% !important;
+	flex: 0 0 auto;
+	min-height: 320px;
+	height: auto !important;
+	max-height: none !important;
+	overflow: visible !important;
+}
+
+:deep(.items-table-wrapper .posa-cart-table),
+:deep(.items-table-wrapper .v-data-table__wrapper),
+:deep(.items-table-wrapper .v-table__wrapper) {
+	height: auto !important;
+	max-height: none !important;
 }
 
 /* New styles for improved column switches */
