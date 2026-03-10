@@ -1,11 +1,30 @@
 <template>
 	<v-row justify="center">
-		<v-dialog v-model="invoicesDialog" max-width="800px" min-width="800px">
-			<v-card>
-				<v-card-title>
-					<span class="text-h5 text-primary">{{ __("Select Return Invoice") }}</span>
+		<v-dialog
+			v-model="invoicesDialog"
+			:max-width="returnsDialogMaxWidth"
+			:fullscreen="isCompactReturns"
+			:width="returnsDialogWidth"
+			scrollable
+			class="returns-dialog"
+		>
+			<v-card class="returns-card">
+				<v-card-title class="returns-card__title">
+					<div class="returns-card__title-copy">
+						<span class="text-h5 text-primary">{{ __("Select Return Invoice") }}</span>
+						<span class="returns-card__subtitle">
+							{{ __("Search an invoice and continue the return flow without extra steps.") }}
+						</span>
+					</div>
+					<v-btn
+						icon="mdi-close"
+						variant="text"
+						color="medium-emphasis"
+						class="returns-card__close"
+						@click="close_dialog"
+					/>
 				</v-card-title>
-				<v-container>
+				<v-container class="returns-card__content">
 					<!-- Invoice ID and Date Range search -->
 					<v-row class="mb-2">
 						<v-col cols="12">
@@ -144,11 +163,11 @@
 					</v-row>
 
 					<!-- Action buttons -->
-					<v-row class="mt-2 mb-2">
-						<v-spacer></v-spacer>
-						<v-btn
+					<v-row class="mt-2 mb-2 returns-actions">
+						<v-col cols="12" sm="4" md="auto">
+							<v-btn
+							block
 							variant="text"
-							class="ml-2"
 							color="primary"
 							theme="dark"
 							@click="search_invoices"
@@ -156,26 +175,84 @@
 							<v-icon start>mdi-magnify</v-icon>
 							{{ __("Search") }}
 						</v-btn>
-						<v-btn variant="text" class="ml-2" color="warning" theme="dark" @click="clear_search">
+						</v-col>
+						<v-col cols="12" sm="4" md="auto">
+						<v-btn block variant="text" color="warning" theme="dark" @click="clear_search">
 							<v-icon start>mdi-refresh</v-icon>
 							{{ __("Clear") }}
 						</v-btn>
-						<v-btn
+						</v-col>
+						<v-col
+							cols="12"
+							sm="4"
+							md="auto"
 							v-if="pos_profile.posa_allow_return_without_invoice == 1"
+						>
+						<v-btn
+							block
 							variant="text"
-							class="ml-2"
 							color="secondary"
 							theme="dark"
 							@click="return_without_invoice"
 						>
 							{{ __("Return without Invoice") }}
 						</v-btn>
+						</v-col>
 					</v-row>
 
 					<!-- Results -->
 					<v-row>
 						<v-col cols="12" class="pa-0 mt-1" v-if="dialog_data && dialog_data.length > 0">
+							<div v-if="isCompactReturns" class="returns-results-list">
+								<button
+									v-for="item in dialog_data"
+									:key="item.name"
+									type="button"
+									class="returns-result-card"
+									:class="{
+										'returns-result-card--selected': isSelectedInvoice(item),
+										'returns-result-card--expired': item.posa_return_expired,
+									}"
+									@click="selectInvoice(item)"
+								>
+									<div class="returns-result-card__top">
+										<div class="returns-result-card__identity">
+											<strong>{{ item.customer }}</strong>
+											<span>{{ item.name }}</span>
+										</div>
+										<div class="returns-result-card__amount">
+											{{ currencySymbol(item.currency) }}{{ formatCurrency(item.grand_total) }}
+										</div>
+									</div>
+									<div class="returns-result-card__meta">
+										<span>{{ __("Date") }}: {{ formatDateDisplay(item.posting_date) }}</span>
+										<span v-if="item.posa_return_valid_upto">
+											{{ __("Valid until") }}:
+											{{ formatDateDisplay(item.posa_return_valid_upto) }}
+										</span>
+									</div>
+									<div class="returns-result-card__chips">
+										<v-chip
+											v-if="item.posa_return_expired"
+											color="error"
+											size="small"
+											label
+										>
+											{{ __("Return window passed") }}
+										</v-chip>
+										<v-chip
+											v-else-if="isSelectedInvoice(item)"
+											color="primary"
+											size="small"
+											label
+										>
+											{{ __("Selected") }}
+										</v-chip>
+									</div>
+								</button>
+							</div>
 							<v-data-table
+								v-else
 								:headers="headers"
 								:items="dialog_data"
 								item-key="name"
@@ -239,12 +316,18 @@
 						</v-col>
 					</v-row>
 				</v-container>
-				<v-card-actions class="mt-1">
-					<v-spacer></v-spacer>
-					<v-btn color="error mx-2" theme="dark" @click="close_dialog">{{ __("Close") }}</v-btn>
-					<v-btn v-if="selected.length" color="success" theme="dark" @click="submit_dialog">{{
-						__("Select")
-					}}</v-btn>
+				<v-card-actions class="mt-1 returns-card__footer">
+					<v-btn color="error" variant="tonal" theme="dark" @click="close_dialog">
+						{{ __("Close") }}
+					</v-btn>
+					<v-btn
+						v-if="selected.length"
+						color="success"
+						theme="dark"
+						@click="submit_dialog"
+					>
+						{{ __("Select") }}
+					</v-btn>
 				</v-card-actions>
 			</v-card>
 		</v-dialog>
@@ -255,13 +338,29 @@
 import format, { formatUtils } from "../../../format";
 import { useInvoiceStore } from "../../../stores/invoiceStore.js";
 import { useUIStore } from "../../../stores/uiStore.js";
+import { computed } from "vue";
+import { useResponsive } from "../../../composables/core/useResponsive";
 
 export default {
 	mixins: [format],
 	setup() {
 		const invoiceStore = useInvoiceStore();
 		const uiStore = useUIStore();
-		return { invoiceStore, uiStore };
+		const responsive = useResponsive();
+		const isCompactReturns = computed(() => responsive.windowWidth.value < 1280);
+		const returnsDialogWidth = computed(() =>
+			responsive.windowWidth.value < 600 ? "100vw" : "min(1120px, 96vw)",
+		);
+		const returnsDialogMaxWidth = computed(() =>
+			responsive.windowWidth.value < 1280 ? "100vw" : "1120px",
+		);
+		return {
+			invoiceStore,
+			uiStore,
+			isCompactReturns,
+			returnsDialogWidth,
+			returnsDialogMaxWidth,
+		};
 	},
 	data: () => ({
 		invoicesDialog: false,
@@ -329,6 +428,12 @@ export default {
 		},
 	},
 	methods: {
+		isSelectedInvoice(item) {
+			return Array.isArray(this.selected) && this.selected.some((entry) => entry?.name === item?.name);
+		},
+		selectInvoice(item) {
+			this.selected = item ? [item] : [];
+		},
 		returnRowProps({ item }) {
 			const rowClass = this.returnRowClass(item);
 			return rowClass ? { class: rowClass } : {};
@@ -748,5 +853,182 @@ export default {
 <style scoped>
 .return-expired-row {
 	background-color: #ffebee !important;
+}
+
+.returns-card {
+	display: flex;
+	flex-direction: column;
+	max-height: min(92vh, 100%);
+}
+
+.returns-card__title {
+	display: flex;
+	align-items: flex-start;
+	justify-content: space-between;
+	gap: 12px;
+	padding: 20px 20px 12px;
+}
+
+.returns-card__title-copy {
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+	min-width: 0;
+}
+
+.returns-card__subtitle {
+	font-size: 0.88rem;
+	line-height: 1.4;
+	color: rgba(var(--v-theme-on-surface), 0.68);
+}
+
+.returns-card__content {
+	flex: 1 1 auto;
+	overflow: auto;
+	padding-top: 4px;
+}
+
+.returns-actions {
+	align-items: stretch;
+}
+
+.returns-results-list {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	padding: 4px 0;
+}
+
+.returns-result-card {
+	width: 100%;
+	border: 1px solid rgba(var(--v-theme-on-surface), 0.08);
+	border-radius: 18px;
+	background: var(--pos-card-bg, rgb(var(--v-theme-surface)));
+	padding: 14px;
+	text-align: left;
+	cursor: pointer;
+	transition:
+		border-color 0.18s ease,
+		box-shadow 0.18s ease,
+		transform 0.18s ease;
+}
+
+.returns-result-card:hover {
+	border-color: rgba(var(--v-theme-primary), 0.28);
+	box-shadow: 0 10px 24px rgba(15, 23, 42, 0.08);
+	transform: translateY(-1px);
+}
+
+.returns-result-card--selected {
+	border-color: rgb(var(--v-theme-primary));
+	box-shadow: 0 0 0 2px rgba(var(--v-theme-primary), 0.14);
+}
+
+.returns-result-card--expired {
+	background: rgba(var(--v-theme-error), 0.04);
+}
+
+.returns-result-card__top {
+	display: flex;
+	align-items: flex-start;
+	justify-content: space-between;
+	gap: 12px;
+}
+
+.returns-result-card__identity {
+	display: flex;
+	flex-direction: column;
+	gap: 3px;
+	min-width: 0;
+}
+
+.returns-result-card__identity strong,
+.returns-result-card__amount {
+	color: var(--pos-text-primary, rgb(var(--v-theme-on-surface)));
+}
+
+.returns-result-card__identity span,
+.returns-result-card__meta {
+	color: rgba(var(--v-theme-on-surface), 0.68);
+	font-size: 0.86rem;
+}
+
+.returns-result-card__amount {
+	font-weight: 700;
+	white-space: nowrap;
+}
+
+.returns-result-card__meta {
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+	margin-top: 10px;
+}
+
+.returns-result-card__chips {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+	margin-top: 10px;
+}
+
+.returns-card__footer {
+	position: sticky;
+	bottom: 0;
+	display: flex;
+	justify-content: flex-end;
+	gap: 12px;
+	padding: 14px 20px 18px;
+	background: linear-gradient(180deg, rgba(255, 255, 255, 0), var(--pos-surface) 30%);
+}
+
+@media (max-width: 1279px) {
+	.returns-card {
+		max-height: 100vh;
+		height: 100vh;
+		border-radius: 0;
+	}
+
+	.returns-card__title {
+		position: sticky;
+		top: 0;
+		z-index: 2;
+		padding: 16px 16px 10px;
+		background: var(--pos-surface, rgb(var(--v-theme-surface)));
+		border-bottom: 1px solid rgba(var(--v-theme-on-surface), 0.08);
+	}
+
+	.returns-card__content {
+		padding-left: 12px;
+		padding-right: 12px;
+		padding-bottom: 12px;
+	}
+
+	.returns-card__footer {
+		padding: 12px;
+	}
+
+	.returns-card__footer .v-btn {
+		flex: 1 1 0;
+		min-height: 46px;
+	}
+}
+
+@media (max-width: 767px) {
+	.returns-result-card {
+		padding: 12px;
+	}
+
+	.returns-result-card__top {
+		flex-direction: column;
+	}
+
+	.returns-result-card__amount {
+		white-space: normal;
+	}
+
+	.returns-card__subtitle {
+		font-size: 0.82rem;
+	}
 }
 </style>
