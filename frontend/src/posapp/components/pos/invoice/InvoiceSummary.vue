@@ -2,58 +2,45 @@
 	<v-card
 		class="cards sticky-summary-card mb-0 py-2 px-3 rounded-lg pos-themed-card"
 	>
-		<div class="summary-hero">
-			<div class="summary-hero__copy">
-				<strong class="summary-hero__amount">
-					{{ currencySymbol(displayCurrency) }}{{ formatCurrency(subtotal) }}
-				</strong>
-				<div class="summary-hero__meta">
-					<span>{{ formatFloat(total_qty, hide_qty_decimals ? 0 : undefined) }} {{ __("qty") }}</span>
-					<span>{{ currencySymbol(displayCurrency) }}{{ formatCurrency(total_items_discount_amount) }} {{ __("discount") }}</span>
-				</div>
-			</div>
-		</div>
 		<v-row dense class="summary-content">
-			<!-- Summary Info -->
 			<v-col cols="12" md="7">
-				<v-row dense>
-					<v-col
-						cols="12"
-						v-if="
-							return_discount_meta &&
-							!pos_profile.posa_use_percentage_discount &&
-							!isFullReturnDiscount(return_discount_meta.ratio)
-						"
-					>
-						<v-alert
-							density="compact"
-							type="info"
-							variant="tonal"
-							class="summary-field"
-						>
-							{{ __("Prorated return discount") }}:
-							{{ formatRatio(return_discount_meta.ratio) }} —
-							{{ __("Original") }}:
-							{{ formatCurrency(return_discount_meta.original_discount) }},
-							{{ __("Applied") }}:
-							{{ formatCurrency(return_discount_meta.prorated_discount) }}
-						</v-alert>
-					</v-col>
-					<!-- Total Qty -->
-					<v-col cols="12" sm="6">
+				<v-alert
+					v-if="
+						return_discount_meta &&
+						!pos_profile.posa_use_percentage_discount &&
+						!isFullReturnDiscount(return_discount_meta.ratio)
+					"
+					density="compact"
+					type="info"
+					variant="tonal"
+					class="summary-field summary-field--alert"
+				>
+					{{ __("Prorated return discount") }}:
+					{{ formatRatio(return_discount_meta.ratio) }} -
+					{{ __("Original") }}:
+					{{ formatCurrency(return_discount_meta.original_discount) }},
+					{{ __("Applied") }}:
+					{{ formatCurrency(return_discount_meta.prorated_discount) }}
+				</v-alert>
+
+				<div class="summary-hero">
+					<div class="summary-hero__copy">
+						<span class="summary-hero__eyebrow">{{ __("Active sale") }}</span>
+						<strong class="summary-hero__amount">
+							{{ currencySymbol(displayCurrency) }}{{ formatCurrency(subtotal) }}
+						</strong>
+						<div class="summary-hero__meta">
+							<span>{{ formatFloat(total_qty, hide_qty_decimals ? 0 : undefined) }} {{ __("qty") }}</span>
+							<span>
+								{{ currencySymbol(displayCurrency) }}{{ formatCurrency(total_items_discount_amount) }}
+								{{ __("discount") }}
+							</span>
+						</div>
+					</div>
+
+					<div class="summary-hero__field-wrap">
 						<v-text-field
-							:model-value="formatFloat(total_qty, hide_qty_decimals ? 0 : undefined)"
-							:label="frappe._('Total Qty')"
-							prepend-inner-icon="mdi-format-list-numbered"
-							variant="solo"
-							density="compact"
-							readonly
-							color="accent"
-						/>
-					</v-col>
-					<!-- Additional Discount (Amount or Percentage) -->
-					<v-col cols="12" sm="6" v-if="!pos_profile.posa_use_percentage_discount">
-						<v-text-field
+							v-if="!pos_profile.posa_use_percentage_discount"
 							ref="additionalDiscountField"
 							v-model="additionalDiscountDisplay"
 							@update:model-value="handleAdditionalDiscountUpdate"
@@ -69,12 +56,11 @@
 								!pos_profile.posa_allow_user_to_edit_additional_discount ||
 								!!discount_percentage_offer_name
 							"
-							class="summary-field"
+							class="summary-field summary-field--dock"
 						/>
-					</v-col>
 
-					<v-col cols="12" sm="6" v-else>
 						<v-text-field
+							v-else
 							ref="additionalDiscountField"
 							v-model="additionalDiscountPercentageDisplay"
 							@update:model-value="handleAdditionalDiscountPercentageUpdate"
@@ -92,42 +78,12 @@
 								!pos_profile.posa_allow_user_to_edit_additional_discount ||
 								!!discount_percentage_offer_name
 							"
-							class="summary-field"
+							class="summary-field summary-field--dock"
 						/>
-					</v-col>
-					<!-- Items Discount -->
-					<v-col cols="12" sm="6">
-						<v-text-field
-							:model-value="formatCurrency(total_items_discount_amount)"
-							:prefix="currencySymbol(displayCurrency)"
-							:label="frappe._('Items Discounts')"
-							prepend-inner-icon="mdi-tag-minus"
-							variant="solo"
-							density="compact"
-							color="warning"
-							readonly
-							class="summary-field"
-						/>
-					</v-col>
-
-					<!-- Total (moved to maintain row alignment) -->
-					<v-col cols="12" sm="6">
-						<v-text-field
-							:model-value="formatCurrency(subtotal)"
-							:prefix="currencySymbol(displayCurrency)"
-							:label="frappe._('Total')"
-							prepend-inner-icon="mdi-cash"
-							variant="solo"
-							density="compact"
-							readonly
-							color="success"
-							class="summary-field"
-						/>
-					</v-col>
-				</v-row>
+					</div>
+				</div>
 			</v-col>
 
-			<!-- Action Buttons -->
 			<v-col cols="12" md="5" class="invoice-summary-actions">
 				<InvoiceActionButtons
 					:pos_profile="pos_profile"
@@ -243,7 +199,6 @@ function normalizeDiscountDisplay(value) {
 	return value;
 }
 
-// Debounced handlers for better performance
 function handleAdditionalDiscountUpdate(value) {
 	emit("update:additional_discount", value);
 }
@@ -374,17 +329,21 @@ async function handleOpenCustomerDisplay() {
 	box-shadow: 0 -8px 24px rgba(15, 23, 42, 0.08);
 }
 
+.summary-content {
+	row-gap: 6px;
+}
+
 .summary-hero {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	margin-bottom: 14px;
+	gap: 14px;
 	padding: 14px 16px;
-	border-radius: 18px;
+	border-radius: 20px;
 	background:
-		linear-gradient(135deg, rgba(var(--v-theme-success), 0.14), rgba(var(--v-theme-primary), 0.08)),
+		linear-gradient(135deg, rgba(var(--v-theme-primary), 0.12), rgba(var(--v-theme-success), 0.08)),
 		var(--pos-surface-muted);
-	border: 1px solid rgba(var(--v-theme-success), 0.12);
+	border: 1px solid rgba(var(--v-theme-primary), 0.12);
 }
 
 .summary-hero__copy {
@@ -392,6 +351,14 @@ async function handleOpenCustomerDisplay() {
 	flex-direction: column;
 	gap: 4px;
 	min-width: 0;
+}
+
+.summary-hero__eyebrow {
+	font-size: 0.72rem;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 0.08em;
+	color: var(--pos-text-secondary);
 }
 
 .summary-hero__amount {
@@ -408,8 +375,8 @@ async function handleOpenCustomerDisplay() {
 	color: var(--pos-text-secondary);
 }
 
-.summary-content {
-	row-gap: 6px;
+.summary-hero__field-wrap {
+	width: min(260px, 100%);
 }
 
 .invoice-summary-actions {
@@ -417,7 +384,6 @@ async function handleOpenCustomerDisplay() {
 	bottom: 0;
 }
 
-/* Enhanced field styling */
 .summary-field {
 	transition: all 0.2s ease;
 }
@@ -425,6 +391,14 @@ async function handleOpenCustomerDisplay() {
 .summary-field:hover {
 	transform: translateY(-1px);
 	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.summary-field--alert {
+	margin-bottom: 10px;
+}
+
+.summary-field--dock :deep(.v-field) {
+	background: rgba(var(--v-theme-surface), 0.92);
 }
 
 @media (max-width: 768px) {
@@ -435,8 +409,13 @@ async function handleOpenCustomerDisplay() {
 	}
 
 	.summary-hero {
+		flex-direction: column;
+		align-items: stretch;
 		padding: 12px;
-		margin-bottom: 12px;
+	}
+
+	.summary-hero__field-wrap {
+		width: 100%;
 	}
 
 	.invoice-summary-actions {

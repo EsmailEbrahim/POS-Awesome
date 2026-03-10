@@ -93,13 +93,6 @@
 			</v-col>
 		</v-row>
 		<div v-if="showBottomDock" class="mobile-pos-dock">
-			<div class="mobile-pos-dock__summary">
-				<div class="mobile-pos-dock__summary-copy">
-					<span class="mobile-pos-dock__summary-eyebrow">{{ __("Active sale") }}</span>
-					<strong class="mobile-pos-dock__summary-amount">{{ formattedCartTotal }}</strong>
-				</div>
-				<span class="mobile-pos-dock__summary-meta">{{ cartMetaLabel }}</span>
-			</div>
 			<button
 				type="button"
 				class="mobile-pos-dock__item"
@@ -525,42 +518,6 @@ export default {
 	z-index: 20;
 }
 
-.mobile-pos-dock__summary {
-	grid-column: 1 / -1;
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	gap: 12px;
-	padding: 8px 10px 12px;
-	border-bottom: 1px solid var(--pos-border);
-}
-
-.mobile-pos-dock__summary-copy {
-	display: flex;
-	flex-direction: column;
-	min-width: 0;
-}
-
-.mobile-pos-dock__summary-eyebrow {
-	font-size: 0.72rem;
-	font-weight: 700;
-	text-transform: uppercase;
-	letter-spacing: 0.08em;
-	color: var(--pos-text-secondary);
-}
-
-.mobile-pos-dock__summary-amount {
-	font-size: 1.15rem;
-	line-height: 1.15;
-	color: var(--pos-text-primary);
-}
-
-.mobile-pos-dock__summary-meta {
-	font-size: 0.8rem;
-	color: var(--pos-text-secondary);
-	text-align: right;
-}
-
 .mobile-pos-dock__item {
 	position: relative;
 	border: 0;
@@ -600,12 +557,6 @@ export default {
 	background: color-mix(in srgb, var(--pos-card-bg) 94%, transparent);
 	box-shadow: 0 18px 40px rgba(0, 0, 0, 0.42);
 	border-color: rgba(255, 255, 255, 0.08);
-}
-
-:deep(.v-theme--dark) .mobile-pos-dock__summary,
-:deep([data-theme="dark"]) .mobile-pos-dock__summary,
-:deep([data-theme-mode="dark"]) .mobile-pos-dock__summary {
-	border-bottom-color: rgba(255, 255, 255, 0.08);
 }
 
 :deep(.v-theme--dark) .mobile-pos-dock__item--active,
@@ -652,15 +603,6 @@ export default {
 }
 
 @media (max-width: 560px) {
-	.mobile-pos-dock__summary {
-		flex-direction: column;
-		align-items: stretch;
-	}
-
-	.mobile-pos-dock__summary-meta {
-		text-align: left;
-	}
-
 	.mobile-pos-dock {
 		gap: 6px;
 		padding: 8px;
