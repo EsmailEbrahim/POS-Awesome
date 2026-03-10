@@ -4,7 +4,6 @@
 	>
 		<div class="summary-hero">
 			<div class="summary-hero__copy">
-				<span class="summary-hero__eyebrow">{{ __("Ready to checkout") }}</span>
 				<strong class="summary-hero__amount">
 					{{ currencySymbol(displayCurrency) }}{{ formatCurrency(subtotal) }}
 				</strong>
@@ -393,14 +392,6 @@ async function handleOpenCustomerDisplay() {
 	flex-direction: column;
 	gap: 4px;
 	min-width: 0;
-}
-
-.summary-hero__eyebrow {
-	font-size: 0.72rem;
-	font-weight: 700;
-	text-transform: uppercase;
-	letter-spacing: 0.08em;
-	color: var(--pos-text-secondary);
 }
 
 .summary-hero__amount {

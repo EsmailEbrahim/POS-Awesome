@@ -518,10 +518,10 @@ export default {
 	gap: 8px;
 	padding: 10px;
 	border-radius: 24px;
-	background: rgba(255, 255, 255, 0.94);
+	background: color-mix(in srgb, var(--pos-card-bg) 88%, transparent);
 	backdrop-filter: blur(18px);
-	box-shadow: 0 18px 38px rgba(15, 23, 42, 0.18);
-	border: 1px solid rgba(15, 23, 42, 0.08);
+	box-shadow: 0 18px 38px var(--pos-shadow);
+	border: 1px solid var(--pos-border);
 	z-index: 20;
 }
 
@@ -532,7 +532,7 @@ export default {
 	justify-content: space-between;
 	gap: 12px;
 	padding: 8px 10px 12px;
-	border-bottom: 1px solid rgba(15, 23, 42, 0.08);
+	border-bottom: 1px solid var(--pos-border);
 }
 
 .mobile-pos-dock__summary-copy {
@@ -592,6 +592,32 @@ export default {
 .mobile-pos-dock__item--pay.mobile-pos-dock__item--active {
 	background: rgba(var(--v-theme-success), 0.16);
 	color: rgb(var(--v-theme-success));
+}
+
+:deep(.v-theme--dark) .mobile-pos-dock,
+:deep([data-theme="dark"]) .mobile-pos-dock,
+:deep([data-theme-mode="dark"]) .mobile-pos-dock {
+	background: color-mix(in srgb, var(--pos-card-bg) 94%, transparent);
+	box-shadow: 0 18px 40px rgba(0, 0, 0, 0.42);
+	border-color: rgba(255, 255, 255, 0.08);
+}
+
+:deep(.v-theme--dark) .mobile-pos-dock__summary,
+:deep([data-theme="dark"]) .mobile-pos-dock__summary,
+:deep([data-theme-mode="dark"]) .mobile-pos-dock__summary {
+	border-bottom-color: rgba(255, 255, 255, 0.08);
+}
+
+:deep(.v-theme--dark) .mobile-pos-dock__item--active,
+:deep([data-theme="dark"]) .mobile-pos-dock__item--active,
+:deep([data-theme-mode="dark"]) .mobile-pos-dock__item--active {
+	background: rgba(var(--v-theme-primary), 0.2);
+}
+
+:deep(.v-theme--dark) .mobile-pos-dock__item--pay.mobile-pos-dock__item--active,
+:deep([data-theme="dark"]) .mobile-pos-dock__item--pay.mobile-pos-dock__item--active,
+:deep([data-theme-mode="dark"]) .mobile-pos-dock__item--pay.mobile-pos-dock__item--active {
+	background: rgba(var(--v-theme-success), 0.22);
 }
 
 .mobile-pos-dock__item:active {
