@@ -1,5 +1,8 @@
 <template>
-	<v-card class="cards mb-0 mt-3 dynamic-padding resizable" style="resize: vertical; overflow: auto">
+	<v-card
+		class="cards mb-0 mt-3 dynamic-padding"
+		:class="{ 'cards--with-mobile-offset': reserveBottomDockSpace }"
+	>
 		<v-row no-gutters align="center" justify="center" class="dynamic-spacing-sm">
 			<v-col cols="12" class="mb-2">
 				<v-select
@@ -77,6 +80,7 @@ defineProps({
 	activePriceList: { type: String, default: "" },
 	offersCount: { type: Number, default: 0 },
 	couponsCount: { type: Number, default: 0 },
+	reserveBottomDockSpace: { type: Boolean, default: false },
 });
 
 defineEmits(["update:modelValue", "update:itemsView", "open-offers", "open-coupons"]);
@@ -119,6 +123,21 @@ defineEmits(["update:modelValue", "update:itemsView", "open-offers", "open-coupo
 	border: 1px solid var(--pos-border-light);
 	border-radius: var(--pos-radius-md) !important;
 	box-shadow: none !important;
+	position: sticky;
+	bottom: 0;
+	z-index: 7;
+	min-width: 0;
+	overflow: visible;
+}
+
+.cards--with-mobile-offset {
+	margin-bottom: calc(var(--bottom-safe-space) + 6px) !important;
+}
+
+@media (max-width: 1099px) {
+	.cards {
+		position: static;
+	}
 }
 
 @media (max-width: 768px) {
@@ -144,6 +163,7 @@ defineEmits(["update:modelValue", "update:itemsView", "open-offers", "open-coupo
 @media (max-width: 480px) {
 	.cards {
 		padding: var(--dynamic-xs) !important;
+		position: static;
 	}
 }
 </style>

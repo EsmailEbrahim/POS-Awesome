@@ -255,7 +255,7 @@ export default {
 		const compactPanel = ref("selector");
 		const isPhone = computed(() => responsive.isPhone.value);
 		const showBottomDock = computed(
-			() => !dialog.value && responsive.windowWidth.value < 1024,
+			() => !dialog.value && responsive.windowWidth.value < 1100,
 		);
 		const isEditingAdditionalDiscount = ref(false);
 		const isEditingAdditionalDiscountPercentage = ref(false);
@@ -737,6 +737,7 @@ export default {
 	border: 0;
 	border-radius: 18px;
 	background: transparent;
+	min-width: 0;
 	min-height: 58px;
 	padding: 8px 4px;
 	display: flex;
@@ -753,6 +754,16 @@ export default {
 		background-color 0.18s ease,
 		color 0.18s ease,
 		transform 0.18s ease;
+}
+
+.mobile-pos-dock__item span {
+	display: block;
+	width: 100%;
+	min-width: 0;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	text-align: center;
 }
 
 .mobile-pos-dock__item--active {
@@ -834,8 +845,8 @@ export default {
 	}
 
 	.mobile-pos-dock__item {
-		min-height: 54px;
-		font-size: 0.68rem;
+		min-height: 52px;
+		font-size: 0.65rem;
 	}
 }
 </style>

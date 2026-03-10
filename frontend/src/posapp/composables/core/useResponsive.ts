@@ -63,7 +63,7 @@ export function useResponsive() {
 		let bottomSafeSpace = 24;
 		if (windowWidth.value < 600) {
 			bottomSafeSpace = isShortViewport.value ? 176 : 196;
-		} else if (windowWidth.value < 1024) {
+		} else if (windowWidth.value < 1100) {
 			bottomSafeSpace = isShortViewport.value ? 112 : 132;
 		}
 
