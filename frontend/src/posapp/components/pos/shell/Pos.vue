@@ -89,56 +89,109 @@
 				cols="12"
 				class="pos dynamic-col dynamic-col--invoice"
 			>
-				<Invoice></Invoice>
+				<Invoice ref="invoicePanel"></Invoice>
 			</v-col>
 		</v-row>
-		<div v-if="showBottomDock" class="mobile-pos-dock">
-			<button
-				type="button"
-				class="mobile-pos-dock__item"
-				:class="{ 'mobile-pos-dock__item--active': isSelectorViewActive('items') }"
-				@click="setSelectorView('items')"
-			>
-				<v-icon icon="mdi-magnify" size="20" />
-				<span>{{ __("Browse") }}</span>
-			</button>
-			<button
-				type="button"
-				class="mobile-pos-dock__item"
-				:class="{ 'mobile-pos-dock__item--active': activeView === 'offers' }"
-				@click="setSelectorView('offers')"
-			>
-				<v-icon icon="mdi-tag-outline" size="20" />
-				<span>{{ __("Offers") }}</span>
-			</button>
-			<button
-				type="button"
-				class="mobile-pos-dock__item mobile-pos-dock__item--cart"
-				:class="{ 'mobile-pos-dock__item--active': compactPanel === 'invoice' }"
-				@click="showInvoicePanel"
-			>
-				<span class="mobile-pos-dock__pill">{{ itemsCount }}</span>
-				<v-icon icon="mdi-cart-outline" size="22" />
-				<span>{{ __("Cart") }}</span>
-			</button>
-			<button
-				type="button"
-				class="mobile-pos-dock__item"
-				:class="{ 'mobile-pos-dock__item--active': activeView === 'coupons' }"
-				@click="setSelectorView('coupons')"
-			>
-				<v-icon icon="mdi-ticket-percent-outline" size="20" />
-				<span>{{ __("Coupons") }}</span>
-			</button>
-			<button
-				type="button"
-				class="mobile-pos-dock__item mobile-pos-dock__item--pay"
-				:class="{ 'mobile-pos-dock__item--active': activeView === 'payment' }"
-				@click="showPaymentPanel"
-			>
-				<v-icon icon="mdi-credit-card-outline" size="20" />
-				<span>{{ __("Pay") }}</span>
-			</button>
+		<div v-if="showBottomDock" class="mobile-pos-stack">
+			<div class="mobile-sale-dock">
+				<div class="mobile-sale-dock__copy">
+					<span class="mobile-sale-dock__eyebrow">{{ __("Active sale") }}</span>
+					<strong class="mobile-sale-dock__amount">{{ formattedCartTotal }}</strong>
+					<div class="mobile-sale-dock__meta">
+						<span>{{ cartMetaLabel }}</span>
+						<span>{{ formattedDiscountTotal }}</span>
+					</div>
+				</div>
+				<div class="mobile-sale-dock__field">
+					<v-text-field
+						v-if="!posProfile?.posa_use_percentage_discount"
+						ref="additionalDiscountField"
+						v-model="additionalDiscountDisplay"
+						@update:model-value="handleAdditionalDiscountUpdate"
+						@focus="handleAdditionalDiscountFocus"
+						@blur="handleAdditionalDiscountBlur"
+						:label="__('Additional Discount')"
+						prepend-inner-icon="mdi-cash-minus"
+						variant="solo"
+						density="compact"
+						color="warning"
+						:prefix="getCurrencySymbol(posProfile?.currency)"
+						:disabled="
+							!posProfile?.posa_allow_user_to_edit_additional_discount ||
+							!!discountPercentageOfferName
+						"
+						hide-details
+					/>
+					<v-text-field
+						v-else
+						ref="additionalDiscountField"
+						v-model="additionalDiscountPercentageDisplay"
+						@update:model-value="handleAdditionalDiscountPercentageUpdate"
+						@focus="handleAdditionalDiscountPercentageFocus"
+						@blur="handleAdditionalDiscountPercentageBlur"
+						@change="commitAdditionalDiscountPercentage"
+						:label="__('Additional Discount %')"
+						suffix="%"
+						prepend-inner-icon="mdi-percent"
+						variant="solo"
+						density="compact"
+						color="warning"
+						:disabled="
+							!posProfile?.posa_allow_user_to_edit_additional_discount ||
+							!!discountPercentageOfferName
+						"
+						hide-details
+					/>
+				</div>
+			</div>
+			<div class="mobile-pos-dock">
+				<button
+					type="button"
+					class="mobile-pos-dock__item"
+					:class="{ 'mobile-pos-dock__item--active': isSelectorViewActive('items') }"
+					@click="setSelectorView('items')"
+				>
+					<v-icon icon="mdi-magnify" size="20" />
+					<span>{{ __("Browse") }}</span>
+				</button>
+				<button
+					type="button"
+					class="mobile-pos-dock__item"
+					:class="{ 'mobile-pos-dock__item--active': activeView === 'offers' }"
+					@click="setSelectorView('offers')"
+				>
+					<v-icon icon="mdi-tag-outline" size="20" />
+					<span>{{ __("Offers") }}</span>
+				</button>
+				<button
+					type="button"
+					class="mobile-pos-dock__item mobile-pos-dock__item--cart"
+					:class="{ 'mobile-pos-dock__item--active': compactPanel === 'invoice' }"
+					@click="showInvoicePanel"
+				>
+					<span class="mobile-pos-dock__pill">{{ itemsCount }}</span>
+					<v-icon icon="mdi-cart-outline" size="22" />
+					<span>{{ __("Cart") }}</span>
+				</button>
+				<button
+					type="button"
+					class="mobile-pos-dock__item"
+					:class="{ 'mobile-pos-dock__item--active': activeView === 'coupons' }"
+					@click="setSelectorView('coupons')"
+				>
+					<v-icon icon="mdi-ticket-percent-outline" size="20" />
+					<span>{{ __("Coupons") }}</span>
+				</button>
+				<button
+					type="button"
+					class="mobile-pos-dock__item mobile-pos-dock__item--pay"
+					:class="{ 'mobile-pos-dock__item--active': activeView === 'payment' }"
+					@click="showPaymentPanel"
+				>
+					<v-icon icon="mdi-credit-card-outline" size="20" />
+					<span>{{ __("Pay") }}</span>
+				</button>
+			</div>
 		</div>
 	</div>
 </template>
@@ -175,6 +228,8 @@ export default {
 	setup() {
 		const eventBus = inject("eventBus");
 		const dialog = ref(false);
+		const invoicePanel = ref(null);
+		const additionalDiscountField = ref(null);
 		const responsive = useResponsive();
 		const rtl = useRtl();
 		const shift = usePosShift(() => {
@@ -186,12 +241,22 @@ export default {
 		const itemsStore = useItemsStore();
 		const __ = window.__;
 		const { activeView, posProfile, paymentDialogOpen } = storeToRefs(uiStore);
-		const { invoiceDoc, itemsCount, totalQty, grossTotal } = storeToRefs(invoiceStore);
+		const {
+			invoiceDoc,
+			itemsCount,
+			totalQty,
+			grossTotal,
+			discountTotal,
+			additionalDiscount,
+			additionalDiscountPercentage,
+		} = storeToRefs(invoiceStore);
 		const usePaymentDialog = computed(() => responsive.windowWidth.value >= 992);
 		const useCompactPosSwitcher = computed(() => responsive.windowWidth.value < 1280);
 		const compactPanel = ref("selector");
 		const isPhone = computed(() => responsive.isPhone.value);
 		const showBottomDock = computed(() => !dialog.value && useCompactPosSwitcher.value);
+		const isEditingAdditionalDiscount = ref(false);
+		const isEditingAdditionalDiscountPercentage = ref(false);
 		const invoiceTotal = computed(() => {
 			const doc = invoiceDoc.value || {};
 			const fallbackTotal = Number(grossTotal.value || 0);
@@ -218,10 +283,43 @@ export default {
 			const symbol = getCurrencySymbol(activeCurrency.value);
 			return `${symbol}${formatCompactNumber(invoiceTotal.value)}`.trim();
 		});
+		const formattedDiscountTotal = computed(() => {
+			const symbol = getCurrencySymbol(activeCurrency.value);
+			return `${symbol}${formatCompactNumber(discountTotal.value || 0)} ${__("discount")}`.trim();
+		});
 		const cartMetaLabel = computed(() => {
 			const qty = formatCompactNumber(totalQty.value || 0);
 			const itemCount = formatCompactNumber(itemsCount.value || 0);
-			return `${itemCount} ${__("lines")} • ${qty} ${__("qty")}`;
+			return `${itemCount} ${__("lines")} | ${qty} ${__("qty")}`;
+		});
+
+		const discountPercentageOfferName = computed(
+			() => invoicePanel.value?.discount_percentage_offer_name || null,
+		);
+		const normalizeDiscountDisplay = (value) => {
+			if (value === 0 || value === "0") {
+				return "";
+			}
+			return value;
+		};
+		const additionalDiscountDisplay = ref(
+			normalizeDiscountDisplay(additionalDiscount.value),
+		);
+		const additionalDiscountPercentageDisplay = ref(
+			normalizeDiscountDisplay(additionalDiscountPercentage.value),
+		);
+
+		watch(additionalDiscount, (value) => {
+			if (!isEditingAdditionalDiscount.value) {
+				additionalDiscountDisplay.value = normalizeDiscountDisplay(value);
+			}
+		});
+
+		watch(additionalDiscountPercentage, (value) => {
+			if (!isEditingAdditionalDiscountPercentage.value) {
+				additionalDiscountPercentageDisplay.value =
+					normalizeDiscountDisplay(value);
+			}
 		});
 
 		const handlePaymentDialogUpdate = (value) => {
@@ -268,6 +366,33 @@ export default {
 		};
 		const isSelectorViewActive = (view) =>
 			compactPanel.value === "selector" && activeView.value === view;
+		const handleAdditionalDiscountUpdate = (value) => {
+			invoiceStore.setAdditionalDiscount(value);
+		};
+		const handleAdditionalDiscountFocus = () => {
+			isEditingAdditionalDiscount.value = true;
+		};
+		const handleAdditionalDiscountBlur = () => {
+			isEditingAdditionalDiscount.value = false;
+		};
+		const handleAdditionalDiscountPercentageUpdate = (value) => {
+			invoiceStore.setAdditionalDiscountPercentage(value);
+		};
+		const handleAdditionalDiscountPercentageFocus = () => {
+			isEditingAdditionalDiscountPercentage.value = true;
+		};
+		const commitAdditionalDiscountPercentage = () => {
+			invoicePanel.value?.update_discount_umount?.();
+		};
+		const handleAdditionalDiscountPercentageBlur = () => {
+			isEditingAdditionalDiscountPercentage.value = false;
+			commitAdditionalDiscountPercentage();
+		};
+		const focusAdditionalDiscountField = () => {
+			const field = additionalDiscountField.value;
+			field?.focus?.();
+			field?.$el?.querySelector?.("input")?.focus?.();
+		};
 
 		useCustomerDisplayPublisher({
 			posProfile,
@@ -279,12 +404,14 @@ export default {
 				eventBus.on("submit_closing_pos", (data) => {
 					shift.submit_closing_pos(data);
 				});
+				eventBus.on("focus_additional_discount", focusAdditionalDiscountField);
 			}
 		});
 
 		onBeforeUnmount(() => {
 			if (eventBus) {
 				eventBus.off("submit_closing_pos");
+				eventBus.off("focus_additional_discount", focusAdditionalDiscountField);
 			}
 		});
 
@@ -335,7 +462,12 @@ export default {
 			itemsCount,
 			totalQty,
 			formattedCartTotal,
+			formattedDiscountTotal,
 			cartMetaLabel,
+			posProfile,
+			additionalDiscountField,
+			additionalDiscountDisplay,
+			additionalDiscountPercentageDisplay,
 			activeView,
 			paymentDialogOpen,
 			isPhone,
@@ -348,7 +480,17 @@ export default {
 			showInvoicePanel,
 			showPaymentPanel,
 			isSelectorViewActive,
+			handleAdditionalDiscountUpdate,
+			handleAdditionalDiscountFocus,
+			handleAdditionalDiscountBlur,
+			handleAdditionalDiscountPercentageUpdate,
+			handleAdditionalDiscountPercentageFocus,
+			handleAdditionalDiscountPercentageBlur,
+			commitAdditionalDiscountPercentage,
 			handlePaymentDialogUpdate,
+			discountPercentageOfferName,
+			getCurrencySymbol,
+			invoicePanel,
 			eventBus,
 			dialog,
 		};
@@ -501,21 +643,71 @@ export default {
 	flex-direction: column;
 }
 
-.mobile-pos-dock {
+.mobile-pos-stack {
 	position: fixed;
 	left: max(10px, env(safe-area-inset-left));
 	right: max(10px, env(safe-area-inset-right));
 	bottom: max(10px, env(safe-area-inset-bottom));
-	display: grid;
-	grid-template-columns: repeat(5, minmax(0, 1fr));
-	gap: 8px;
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	z-index: 20;
+}
+
+.mobile-sale-dock,
+.mobile-pos-dock {
 	padding: 10px;
 	border-radius: 24px;
 	background: color-mix(in srgb, var(--pos-card-bg) 88%, transparent);
 	backdrop-filter: blur(18px);
 	box-shadow: 0 18px 38px var(--pos-shadow);
 	border: 1px solid var(--pos-border);
-	z-index: 20;
+}
+
+.mobile-sale-dock {
+	display: grid;
+	grid-template-columns: minmax(0, 1.2fr) minmax(220px, 0.8fr);
+	gap: 12px;
+	align-items: center;
+}
+
+.mobile-sale-dock__copy {
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+	min-width: 0;
+}
+
+.mobile-sale-dock__eyebrow {
+	font-size: 0.72rem;
+	font-weight: 700;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+	color: var(--pos-text-secondary);
+}
+
+.mobile-sale-dock__amount {
+	font-size: clamp(1.05rem, 2vw, 1.5rem);
+	line-height: 1.1;
+	color: var(--pos-text-primary);
+}
+
+.mobile-sale-dock__meta {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 6px 12px;
+	font-size: 0.82rem;
+	color: var(--pos-text-secondary);
+}
+
+.mobile-sale-dock__field :deep(.v-field) {
+	background: rgba(var(--v-theme-surface), 0.92);
+}
+
+.mobile-pos-dock {
+	display: grid;
+	grid-template-columns: repeat(5, minmax(0, 1fr));
+	gap: 8px;
 }
 
 .mobile-pos-dock__item {
@@ -551,8 +743,11 @@ export default {
 	color: rgb(var(--v-theme-success));
 }
 
+:deep(.v-theme--dark) .mobile-sale-dock,
 :deep(.v-theme--dark) .mobile-pos-dock,
+:deep([data-theme="dark"]) .mobile-sale-dock,
 :deep([data-theme="dark"]) .mobile-pos-dock,
+:deep([data-theme-mode="dark"]) .mobile-sale-dock,
 :deep([data-theme-mode="dark"]) .mobile-pos-dock {
 	background: color-mix(in srgb, var(--pos-card-bg) 94%, transparent);
 	box-shadow: 0 18px 40px rgba(0, 0, 0, 0.42);
@@ -603,9 +798,17 @@ export default {
 }
 
 @media (max-width: 560px) {
+	.mobile-sale-dock {
+		grid-template-columns: 1fr;
+	}
+
+	.mobile-sale-dock,
+	.mobile-pos-dock {
+		padding: 8px;
+	}
+
 	.mobile-pos-dock {
 		gap: 6px;
-		padding: 8px;
 	}
 
 	.mobile-pos-dock__item {

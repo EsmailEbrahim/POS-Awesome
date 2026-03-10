@@ -515,6 +515,7 @@ export default {
 		},
 
 		focusAdditionalDiscountField() {
+			this.eventBus?.emit?.("focus_additional_discount");
 			this.$refs.invoiceSummary?.focusAdditionalDiscountField?.();
 		},
 

@@ -3,13 +3,13 @@
 		class="cards sticky-summary-card mb-0 py-2 px-3 rounded-lg pos-themed-card"
 	>
 		<v-row dense class="summary-content">
-			<v-col cols="12" md="7">
+			<v-col
+				v-if="!useCompactSaleDock || showReturnDiscountAlert"
+				cols="12"
+				:md="useCompactSaleDock ? 12 : 7"
+			>
 				<v-alert
-					v-if="
-						return_discount_meta &&
-						!pos_profile.posa_use_percentage_discount &&
-						!isFullReturnDiscount(return_discount_meta.ratio)
-					"
+					v-if="showReturnDiscountAlert"
 					density="compact"
 					type="info"
 					variant="tonal"
@@ -23,7 +23,7 @@
 					{{ formatCurrency(return_discount_meta.prorated_discount) }}
 				</v-alert>
 
-				<div class="summary-hero">
+				<div v-if="!useCompactSaleDock" class="summary-hero">
 					<div class="summary-hero__copy">
 						<span class="summary-hero__eyebrow">{{ __("Active sale") }}</span>
 						<strong class="summary-hero__amount">
@@ -84,7 +84,7 @@
 				</div>
 			</v-col>
 
-			<v-col cols="12" md="5" class="invoice-summary-actions">
+			<v-col cols="12" :md="useCompactSaleDock ? 12 : 5" class="invoice-summary-actions">
 				<InvoiceActionButtons
 					:pos_profile="pos_profile"
 					:saveLoading="saveLoading"
@@ -115,6 +115,7 @@
 <script setup>
 import { computed, ref, watch } from "vue";
 import { loadItemSelectorSettings } from "../../../utils/itemSelectorSettings";
+import { useResponsive } from "../../../composables/core/useResponsive";
 import InvoiceActionButtons from "./InvoiceActionButtons.vue";
 
 defineOptions({
@@ -163,10 +164,19 @@ const paymentLoading = ref(false);
 const customerDisplayLoading = ref(false);
 const isEditingAdditionalDiscount = ref(false);
 const isEditingAdditionalDiscountPercentage = ref(false);
+const additionalDiscountField = ref(null);
+const responsive = useResponsive();
 
 const additionalDiscountDisplay = ref(normalizeDiscountDisplay(props.additional_discount));
 const additionalDiscountPercentageDisplay = ref(
 	normalizeDiscountDisplay(props.additional_discount_percentage),
+);
+const useCompactSaleDock = computed(() => responsive.windowWidth.value < 1280);
+const showReturnDiscountAlert = computed(
+	() =>
+		!!props.return_discount_meta &&
+		!props.pos_profile?.posa_use_percentage_discount &&
+		!isFullReturnDiscount(props.return_discount_meta?.ratio),
 );
 
 const hide_qty_decimals = computed(() => {
@@ -221,6 +231,12 @@ function handleAdditionalDiscountPercentageFocus() {
 
 function handleAdditionalDiscountPercentageBlur() {
 	isEditingAdditionalDiscountPercentage.value = false;
+}
+
+function focusAdditionalDiscountField() {
+	const field = additionalDiscountField.value;
+	field?.focus?.();
+	field?.$el?.querySelector?.("input")?.focus?.();
 }
 
 function formatRatio(value) {
@@ -314,6 +330,10 @@ async function handleOpenCustomerDisplay() {
 		customerDisplayLoading.value = false;
 	}
 }
+
+defineExpose({
+	focusAdditionalDiscountField,
+});
 </script>
 
 <style scoped>
@@ -399,6 +419,18 @@ async function handleOpenCustomerDisplay() {
 
 .summary-field--dock :deep(.v-field) {
 	background: rgba(var(--v-theme-surface), 0.92);
+}
+
+@media (max-width: 1279px) {
+	.sticky-summary-card {
+		position: static;
+		bottom: auto;
+		box-shadow: none;
+	}
+
+	.invoice-summary-actions {
+		position: static;
+	}
 }
 
 @media (max-width: 768px) {
