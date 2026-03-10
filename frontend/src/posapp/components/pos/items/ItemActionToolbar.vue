@@ -23,7 +23,7 @@
 					readonly
 				></v-text-field>
 			</v-col>
-			<v-col cols="3" class="dynamic-margin-xs">
+			<v-col cols="12" sm="4" class="dynamic-margin-xs">
 				<v-btn-toggle
 					:model-value="itemsView"
 					@update:model-value="$emit('update:itemsView', $event)"
@@ -37,7 +37,7 @@
 					<v-btn size="small" value="card">{{ __("Card") }}</v-btn>
 				</v-btn-toggle>
 			</v-col>
-			<v-col cols="5" class="dynamic-margin-xs">
+			<v-col cols="6" sm="4" class="dynamic-margin-xs">
 				<v-btn
 					size="small"
 					block
@@ -49,7 +49,7 @@
 					{{ offersCount }} {{ __("Offers") }}
 				</v-btn>
 			</v-col>
-			<v-col cols="4" class="dynamic-margin-xs">
+			<v-col cols="6" sm="4" class="dynamic-margin-xs">
 				<v-btn
 					size="small"
 					block
@@ -130,9 +130,14 @@ defineEmits(["update:modelValue", "update:itemsView", "open-offers", "open-coupo
 		padding: var(--dynamic-xs) !important;
 	}
 
+	.view-toggle-btn {
+		width: 100%;
+	}
+
 	.action-btn-consistent {
 		padding: var(--dynamic-xs) !important;
 		font-size: 0.875rem !important;
+		min-height: 42px !important;
 	}
 }
 

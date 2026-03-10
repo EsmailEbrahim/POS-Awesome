@@ -190,6 +190,17 @@
 	pointer-events: none;
 	cursor: not-allowed;
 }
+
+@media (max-width: 768px) {
+	.customer-input-wrapper {
+		padding-right: 0;
+	}
+
+	.customer-load-percent {
+		min-width: 34px;
+		margin-right: 4px;
+	}
+}
 </style>
 
 <script>

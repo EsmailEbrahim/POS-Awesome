@@ -6,6 +6,14 @@ export function useResponsive() {
 	const baseWidth = ref(window.innerWidth);
 	const baseHeight = ref(window.innerHeight);
 
+	const isPhone = computed(() => windowWidth.value < 768);
+	const isTablet = computed(
+		() => windowWidth.value >= 768 && windowWidth.value < 1280,
+	);
+	const isDesktop = computed(() => windowWidth.value >= 1280);
+	const isCompact = computed(() => windowWidth.value < 1280);
+	const isShortViewport = computed(() => windowHeight.value < 760);
+
 	const widthScale = computed(() => windowWidth.value / baseWidth.value);
 	const heightScale = computed(() => windowHeight.value / baseHeight.value);
 	const averageScale = computed(
@@ -32,26 +40,27 @@ export function useResponsive() {
 
 	const responsiveStyles = computed(() => {
 		let cardHeightVh;
-		if (windowWidth.value <= 480) {
-			cardHeightVh = Math.round(45 * heightScale.value);
-		} else if (windowWidth.value <= 768) {
-			cardHeightVh = Math.round(55 * heightScale.value);
+		if (isPhone.value) {
+			cardHeightVh = isShortViewport.value ? 56 : 62;
+		} else if (isTablet.value) {
+			cardHeightVh = isShortViewport.value ? 58 : 64;
 		} else {
 			cardHeightVh = Math.round(60 * heightScale.value);
 		}
 
-		cardHeightVh = Math.max(30, Math.min(cardHeightVh, 70));
+		cardHeightVh = Math.max(42, Math.min(cardHeightVh, 72));
 		let containerHeightVh = 68;
-		if (windowHeight.value <= 800) {
-			containerHeightVh = 48;
+		if (isPhone.value) {
+			containerHeightVh = isShortViewport.value ? 64 : 72;
+		} else if (isTablet.value) {
+			containerHeightVh = isShortViewport.value ? 62 : 70;
+		} else if (windowHeight.value <= 800) {
+			containerHeightVh = 52;
 		} else if (windowHeight.value <= 900) {
-			containerHeightVh = 56;
+			containerHeightVh = 60;
 		}
 
-		// Keep small-width layouts usable while still protecting short-height screens.
-		if (windowWidth.value <= 768) {
-			containerHeightVh = Math.min(containerHeightVh, 55);
-		}
+		const bottomSafeSpace = isPhone.value ? 108 : isTablet.value ? 36 : 20;
 
 		return {
 			"--dynamic-xs": `${dynamicSpacing.value.xs}px`,
@@ -61,6 +70,8 @@ export function useResponsive() {
 			"--dynamic-xl": `${dynamicSpacing.value.xl}px`,
 			"--container-height": `${containerHeightVh}vh`,
 			"--card-height": `${cardHeightVh}vh`,
+			"--bottom-safe-space": `${bottomSafeSpace}px`,
+			"--viewport-height": `${windowHeight.value}px`,
 			"--font-scale": averageScale.value.toFixed(2),
 		};
 	});
@@ -98,6 +109,11 @@ export function useResponsive() {
 		windowHeight,
 		baseWidth,
 		baseHeight,
+		isPhone,
+		isTablet,
+		isDesktop,
+		isCompact,
+		isShortViewport,
 		widthScale,
 		heightScale,
 		averageScale,

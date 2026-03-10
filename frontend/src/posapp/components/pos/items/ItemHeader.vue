@@ -1,5 +1,16 @@
 <template>
 	<div class="sticky-header">
+		<div class="sticky-header__intro">
+			<div class="sticky-header__copy">
+				<span class="sticky-header__eyebrow">{{ __("Fast lookup") }}</span>
+				<strong class="sticky-header__title">{{ __("Search, scan, or browse items") }}</strong>
+			</div>
+			<div class="sticky-header__badges">
+				<span class="sticky-header__badge">{{ __("Barcode") }}</span>
+				<span class="sticky-header__badge">{{ __("Code") }}</span>
+				<span class="sticky-header__badge">{{ __("Name") }}</span>
+			</div>
+		</div>
 		<v-row class="items">
 			<v-col
 				class="pb-0"
@@ -13,7 +24,7 @@
 					variant="solo"
 					color="primary"
 					:label="frappe._('Search Items')"
-					hint="Search by item code, serial number, batch no or barcode"
+					:placeholder="frappe._('Barcode, item code, name, brand, or SKU')"
 					hide-details
 					:model-value="searchInput"
 					@update:model-value="
@@ -61,6 +72,7 @@
 					:model-value="qtyInput"
 					@update:model-value="$emit('update:qtyInput', $event)"
 					type="text"
+					inputmode="decimal"
 					@keydown.enter="$emit('enter')"
 					@keydown.esc="$emit('esc')"
 					@focus="$emit('clear-qty')"
@@ -171,6 +183,53 @@ defineExpose({
 	margin-bottom: 0;
 }
 
+.sticky-header__intro {
+	display: flex;
+	align-items: flex-start;
+	justify-content: space-between;
+	gap: 12px;
+	padding-bottom: 10px;
+}
+
+.sticky-header__copy {
+	display: flex;
+	flex-direction: column;
+	min-width: 0;
+}
+
+.sticky-header__eyebrow {
+	font-size: 0.72rem;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 0.08em;
+	color: var(--pos-text-secondary);
+}
+
+.sticky-header__title {
+	font-size: 0.96rem;
+	line-height: 1.3;
+	color: var(--pos-text-primary);
+}
+
+.sticky-header__badges {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: flex-end;
+	gap: 6px;
+}
+
+.sticky-header__badge {
+	display: inline-flex;
+	align-items: center;
+	min-height: 28px;
+	padding: 4px 10px;
+	border-radius: 999px;
+	background: rgba(var(--v-theme-primary), 0.08);
+	color: rgb(var(--v-theme-primary));
+	font-size: 0.75rem;
+	font-weight: 700;
+}
+
 .items {
 	margin: 0;
 }
@@ -186,6 +245,7 @@ defineExpose({
 	letter-spacing: normal !important;
 	font-weight: 500 !important;
 	background-color: transparent !important;
+	min-height: 40px !important;
 }
 
 .last-sync-label {
@@ -195,5 +255,29 @@ defineExpose({
 
 .dynamic-margin-xs {
 	margin-top: 4px;
+}
+
+:deep(.sticky-header .v-field) {
+	border-radius: 16px;
+}
+
+@media (max-width: 768px) {
+	.sticky-header {
+		padding: 12px 12px 2px;
+	}
+
+	.sticky-header__intro {
+		flex-direction: column;
+		align-items: stretch;
+	}
+
+	.sticky-header__badges {
+		justify-content: flex-start;
+	}
+
+	.settings-container {
+		flex-wrap: wrap;
+		gap: 6px;
+	}
 }
 </style>

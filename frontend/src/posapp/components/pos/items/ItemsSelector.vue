@@ -1,5 +1,5 @@
 <template>
-	<div :style="responsiveStyles">
+	<div class="items-selector-shell" :style="responsiveStyles">
 		<ScanErrorDialog
 			v-model="scanErrorDialog"
 			:message="scanErrorMessage"
@@ -9,16 +9,11 @@
 		/>
 		<v-card
 			:class="[
-				'selection mx-auto my-0 py-0 mt-3 pos-card dynamic-card resizable pos-themed-card',
+				'selection selection-card mx-auto my-0 py-0 mt-3 pos-card dynamic-card resizable pos-themed-card',
+				{ 'selection-card--phone': isPhone },
 				rtlClasses,
 			]"
-			:style="{
-				height: responsiveStyles['--container-height'],
-				maxHeight: responsiveStyles['--container-height'],
-				resize: 'vertical',
-				overflow: 'auto',
-				position: 'relative',
-			}"
+			:style="selectorCardStyle"
 		>
 			<v-progress-linear
 				:active="isLoadingOrSyncing"
@@ -59,6 +54,26 @@
 						@reload-items="forceReloadItems"
 						ref="itemHeader"
 					/>
+					<div class="selector-search-meta">
+						<div class="selector-search-meta__copy">
+							<span class="selector-search-meta__eyebrow">{{ __("Search flow") }}</span>
+							<strong class="selector-search-meta__headline">{{ searchHelperText }}</strong>
+						</div>
+						<div class="selector-search-meta__chips">
+							<span class="selector-search-chip">{{ quickGroupLabel }}</span>
+							<span class="selector-search-chip selector-search-chip--muted">
+								{{ resultsLabel }}
+							</span>
+							<button
+								v-if="search_input"
+								type="button"
+								class="selector-search-chip selector-search-chip--action"
+								@click="clearSearchAndQty"
+							>
+								{{ __("Clear Search") }}
+							</button>
+						</div>
+					</div>
 				</v-card>
 
 				<ItemSettingsDialog
@@ -184,6 +199,7 @@ import {
 	reactive,
 	inject,
 	type Ref,
+	type CSSProperties,
 } from "vue";
 import { storeToRefs } from "pinia";
 import * as _ from "lodash";
@@ -1014,6 +1030,31 @@ const {
 } = scannerInput;
 const { responsiveStyles } = responsive;
 const { rtlClasses } = rtl;
+const isPhone = computed(() => responsive.isPhone.value);
+const selectorCardStyle = computed<CSSProperties>(() => ({
+	height: isPhone.value ? "auto" : responsiveStyles.value["--container-height"],
+	maxHeight: isPhone.value ? "none" : responsiveStyles.value["--container-height"],
+	minHeight: isPhone.value
+		? "calc(var(--viewport-height) * 0.46)"
+		: responsiveStyles.value["--container-height"],
+	resize: isPhone.value ? "none" : "vertical",
+	overflow: isPhone.value ? "visible" : "auto",
+	position: "relative",
+}));
+const searchHelperText = computed(() =>
+	search_input.value
+		? __("Searching barcode, item code, name and quick matches")
+		: __("Scan barcode or type item code, name, brand, or SKU"),
+);
+const quickGroupLabel = computed(() =>
+	item_group.value === "ALL" ? __("All categories") : item_group.value,
+);
+const resultsLabel = computed(
+	() =>
+		`${displayedItems.value.length} ${__("results")} • ${
+			Array.isArray(items_group.value) ? items_group.value.length : 0
+		} ${__("groups")}`,
+);
 
 // Proxy functions for template
 const esc_event = () => clearSearch();
@@ -1196,12 +1237,20 @@ defineExpose({
 
 <style scoped>
 /* "dynamic-card" no longer composes from pos-card; the pos-card class is added directly in the template */
+.items-selector-shell {
+	min-height: 0;
+}
+
 .dynamic-padding {
 	/* Equal spacing on all sides for consistent alignment */
 	padding: var(--dynamic-sm);
 	display: flex;
 	flex-direction: column;
 	gap: var(--dynamic-sm);
+}
+
+.selection-card {
+	border-radius: 22px;
 }
 
 .selector-section-card {
@@ -1233,6 +1282,71 @@ defineExpose({
 	position: sticky;
 	top: 0;
 	z-index: 8;
+}
+
+.selector-search-meta {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: var(--pos-space-3);
+	padding: 0 16px 14px;
+	border-top: 1px solid rgba(var(--v-theme-on-surface), 0.06);
+	background:
+		linear-gradient(180deg, rgba(var(--v-theme-primary), 0.04), transparent),
+		var(--pos-card-bg);
+}
+
+.selector-search-meta__copy {
+	display: flex;
+	flex-direction: column;
+	min-width: 0;
+}
+
+.selector-search-meta__eyebrow {
+	font-size: 0.72rem;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 0.08em;
+	color: var(--pos-text-secondary);
+}
+
+.selector-search-meta__headline {
+	font-size: 0.92rem;
+	line-height: 1.3;
+	color: var(--pos-text-primary);
+}
+
+.selector-search-meta__chips {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: flex-end;
+	gap: 8px;
+}
+
+.selector-search-chip {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 32px;
+	padding: 6px 12px;
+	border-radius: 999px;
+	background: rgba(var(--v-theme-primary), 0.08);
+	color: rgb(var(--v-theme-primary));
+	font-size: 0.78rem;
+	font-weight: 700;
+	border: 1px solid transparent;
+}
+
+.selector-search-chip--muted {
+	background: rgba(var(--v-theme-on-surface), 0.05);
+	color: var(--pos-text-secondary);
+}
+
+.selector-search-chip--action {
+	cursor: pointer;
+	background: rgba(var(--v-theme-warning), 0.12);
+	color: rgb(var(--v-theme-warning));
+	border-color: rgba(var(--v-theme-warning), 0.18);
 }
 
 .selector-results-card {
@@ -1349,6 +1463,20 @@ defineExpose({
 		padding: var(--dynamic-xs);
 	}
 
+	.selection-card {
+		margin-top: var(--dynamic-xs) !important;
+	}
+
+	.selector-search-meta {
+		padding: 0 12px 12px;
+		flex-direction: column;
+		align-items: stretch;
+	}
+
+	.selector-search-meta__chips {
+		justify-content: flex-start;
+	}
+
 	.items-card-grid {
 		grid-template-columns: 1fr;
 		gap: 10px;
@@ -1359,6 +1487,12 @@ defineExpose({
 @media (max-width: 480px) {
 	.dynamic-padding {
 		padding: var(--dynamic-xs);
+	}
+
+	.selector-search-chip {
+		min-height: 30px;
+		padding-inline: 10px;
+		font-size: 0.74rem;
 	}
 }
 

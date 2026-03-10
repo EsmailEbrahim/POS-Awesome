@@ -18,6 +18,24 @@
 				ref="paymentContainer"
 				class="overflow-y-auto payment-scroll"
 			>
+				<div class="payment-headline pos-themed-card">
+					<div class="payment-headline__copy">
+						<span class="payment-headline__eyebrow">{{ __("Finalize payment") }}</span>
+						<strong class="payment-headline__amount">{{ paymentHeadlineTotal }}</strong>
+						<span class="payment-headline__meta">
+							{{ paymentHeadlineStatus }}
+						</span>
+					</div>
+					<v-btn
+						variant="tonal"
+						color="primary"
+						prepend-icon="mdi-arrow-left"
+						class="payment-headline__back"
+						@click="back_to_invoice"
+					>
+						{{ __("Back to cart") }}
+					</v-btn>
+				</div>
 				<div :class="['payment-sections', { 'payment-sections--dialog': dialogMode }]">
 					<section class="payment-section payment-section--summary">
 						<div class="payment-section__header">
@@ -336,6 +354,23 @@ const invoice_doc = computed({
 
 const displayCurrency = computed(() => (invoice_doc.value ? invoice_doc.value.currency : ""));
 const isPaymentOpen = computed(() => activeView.value === "payment" || paymentDialogOpen.value);
+const paymentHeadlineTotal = computed(() => {
+	const currency = invoice_doc.value?.currency || pos_profile.value?.currency || "";
+	const rawTotal =
+		invoice_doc.value?.rounded_total ??
+		invoice_doc.value?.grand_total ??
+		invoice_doc.value?.total ??
+		0;
+	return `${currencySymbol(currency)}${formatCurrency(rawTotal)}`.trim();
+});
+const paymentHeadlineStatus = computed(() => {
+	const customerLabel =
+		selectedCustomer.value?.customer_name ||
+		selectedCustomer.value?.name ||
+		customer_info.value?.customer_name ||
+		__("Walk-in customer");
+	return `${diff_label.value}: ${diff_payment_display.value || formatCurrency(0)} • ${customerLabel}`;
+});
 
 const validatePayment = computed(() => {
 	const profile = pos_profile.value;
@@ -1446,6 +1481,51 @@ onBeforeUnmount(() => {
 	min-height: 0;
 }
 
+.payment-headline {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: var(--pos-space-3);
+	padding: 14px 16px;
+	border-radius: 20px;
+	background:
+		linear-gradient(135deg, rgba(var(--v-theme-primary), 0.12), rgba(var(--v-theme-success), 0.08)),
+		var(--pos-surface-muted);
+	border: 1px solid rgba(var(--v-theme-primary), 0.08);
+}
+
+.payment-headline__copy {
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+	min-width: 0;
+}
+
+.payment-headline__eyebrow {
+	font-size: 0.72rem;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 0.08em;
+	color: var(--pos-text-secondary);
+}
+
+.payment-headline__amount {
+	font-size: clamp(1.2rem, 2vw, 1.8rem);
+	line-height: 1.1;
+	color: var(--pos-text-primary);
+}
+
+.payment-headline__meta {
+	font-size: 0.84rem;
+	color: var(--pos-text-secondary);
+}
+
+.payment-headline__back {
+	min-height: 42px;
+	text-transform: none !important;
+	font-weight: 700 !important;
+}
+
 .payment-sections {
 	display: flex;
 	flex-direction: column;
@@ -1543,6 +1623,11 @@ onBeforeUnmount(() => {
 
 .payment-footer {
 	flex: 0 0 auto;
+	position: sticky;
+	bottom: 0;
+	z-index: 8;
+	padding-top: 8px;
+	background: linear-gradient(180deg, rgba(255, 255, 255, 0), var(--pos-surface) 30%);
 }
 
 .payment-footer--dialog {
@@ -1665,8 +1750,19 @@ onBeforeUnmount(() => {
 	}
 
 	.payment-footer {
-		position: static;
+		position: sticky;
 		margin-top: 0;
+		padding-bottom: calc(env(safe-area-inset-bottom) + 4px);
+	}
+
+	.payment-headline {
+		flex-direction: column;
+		align-items: stretch;
+		padding: 12px;
+	}
+
+	.payment-headline__back {
+		width: 100%;
 	}
 }
 </style>

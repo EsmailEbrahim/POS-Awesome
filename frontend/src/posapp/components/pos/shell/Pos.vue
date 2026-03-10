@@ -29,7 +29,36 @@
 		>
 			<Payments dialog-mode />
 		</v-dialog>
-		<div v-if="!dialog && useCompactPosSwitcher" class="compact-pos-switcher">
+		<div v-if="showMobileHeader" class="mobile-pos-header pos-themed-card">
+			<div class="mobile-pos-header__copy">
+				<span class="mobile-pos-header__eyebrow">{{ __("Active sale") }}</span>
+				<strong class="mobile-pos-header__amount">{{ formattedCartTotal }}</strong>
+				<span class="mobile-pos-header__meta">
+					{{ cartMetaLabel }}
+				</span>
+			</div>
+			<div class="mobile-pos-header__actions">
+				<v-btn
+					variant="tonal"
+					color="primary"
+					class="mobile-pos-header__btn"
+					prepend-icon="mdi-receipt-text-outline"
+					@click="showInvoicePanel"
+				>
+					{{ __("Cart") }}
+				</v-btn>
+				<v-btn
+					variant="flat"
+					color="success"
+					class="mobile-pos-header__btn"
+					prepend-icon="mdi-credit-card-outline"
+					@click="showPaymentPanel"
+				>
+					{{ __("Pay") }}
+				</v-btn>
+			</div>
+		</div>
+		<div v-if="!dialog && showCompactHeaderSwitcher" class="compact-pos-switcher">
 			<v-btn-toggle
 				:model-value="compactPanel"
 				mandatory
@@ -54,7 +83,12 @@
 				</v-btn>
 			</v-btn-toggle>
 		</div>
-		<v-row v-show="!dialog" dense class="ma-0 dynamic-main-row">
+		<v-row
+			v-show="!dialog"
+			dense
+			class="ma-0 dynamic-main-row"
+			:class="{ 'dynamic-main-row--phone': isPhone }"
+		>
 			<v-col
 				v-show="(!useCompactPosSwitcher || compactPanel === 'selector') && activeView === 'items'"
 				:xl="useCompactPosSwitcher ? 12 : 5"
@@ -62,7 +96,7 @@
 				:md="useCompactPosSwitcher ? 12 : 5"
 				:sm="useCompactPosSwitcher ? 12 : 5"
 				cols="12"
-				class="pos dynamic-col"
+				class="pos dynamic-col dynamic-col--selector"
 			>
 				<ItemsSelector context="pos" />
 			</v-col>
@@ -73,7 +107,7 @@
 				:md="useCompactPosSwitcher ? 12 : 5"
 				:sm="useCompactPosSwitcher ? 12 : 5"
 				cols="12"
-				class="pos dynamic-col"
+				class="pos dynamic-col dynamic-col--selector"
 			>
 				<PosOffers></PosOffers>
 			</v-col>
@@ -84,7 +118,7 @@
 				:md="useCompactPosSwitcher ? 12 : 5"
 				:sm="useCompactPosSwitcher ? 12 : 5"
 				cols="12"
-				class="pos dynamic-col"
+				class="pos dynamic-col dynamic-col--selector"
 			>
 				<PosCoupons></PosCoupons>
 			</v-col>
@@ -95,7 +129,7 @@
 				:md="useCompactPosSwitcher ? 12 : 5"
 				:sm="useCompactPosSwitcher ? 12 : 5"
 				cols="12"
-				class="pos dynamic-col"
+				class="pos dynamic-col dynamic-col--selector"
 			>
 				<Payments></Payments>
 			</v-col>
@@ -107,11 +141,59 @@
 				:md="useCompactPosSwitcher ? 12 : 7"
 				:sm="useCompactPosSwitcher ? 12 : 7"
 				cols="12"
-				class="pos dynamic-col"
+				class="pos dynamic-col dynamic-col--invoice"
 			>
 				<Invoice></Invoice>
 			</v-col>
 		</v-row>
+		<div v-if="showMobileDock" class="mobile-pos-dock">
+			<button
+				type="button"
+				class="mobile-pos-dock__item"
+				:class="{ 'mobile-pos-dock__item--active': isSelectorViewActive('items') }"
+				@click="setSelectorView('items')"
+			>
+				<v-icon icon="mdi-magnify" size="20" />
+				<span>{{ __("Browse") }}</span>
+			</button>
+			<button
+				type="button"
+				class="mobile-pos-dock__item"
+				:class="{ 'mobile-pos-dock__item--active': activeView === 'offers' }"
+				@click="setSelectorView('offers')"
+			>
+				<v-icon icon="mdi-tag-outline" size="20" />
+				<span>{{ __("Offers") }}</span>
+			</button>
+			<button
+				type="button"
+				class="mobile-pos-dock__item mobile-pos-dock__item--cart"
+				:class="{ 'mobile-pos-dock__item--active': compactPanel === 'invoice' }"
+				@click="showInvoicePanel"
+			>
+				<span class="mobile-pos-dock__pill">{{ itemsCount }}</span>
+				<v-icon icon="mdi-cart-outline" size="22" />
+				<span>{{ __("Cart") }}</span>
+			</button>
+			<button
+				type="button"
+				class="mobile-pos-dock__item"
+				:class="{ 'mobile-pos-dock__item--active': activeView === 'coupons' }"
+				@click="setSelectorView('coupons')"
+			>
+				<v-icon icon="mdi-ticket-percent-outline" size="20" />
+				<span>{{ __("Coupons") }}</span>
+			</button>
+			<button
+				type="button"
+				class="mobile-pos-dock__item mobile-pos-dock__item--pay"
+				:class="{ 'mobile-pos-dock__item--active': activeView === 'payment' }"
+				@click="showPaymentPanel"
+			>
+				<v-icon icon="mdi-credit-card-outline" size="20" />
+				<span>{{ __("Pay") }}</span>
+			</button>
+		</div>
 	</div>
 </template>
 
@@ -158,9 +240,55 @@ export default {
 		const itemsStore = useItemsStore();
 		const __ = window.__;
 		const { activeView, posProfile, paymentDialogOpen } = storeToRefs(uiStore);
+		const { invoiceDoc, itemsCount, totalQty, grossTotal } = storeToRefs(invoiceStore);
 		const usePaymentDialog = computed(() => responsive.windowWidth.value >= 992);
 		const useCompactPosSwitcher = computed(() => responsive.windowWidth.value < 1280);
 		const compactPanel = ref("selector");
+		const isPhone = computed(() => responsive.isPhone.value);
+		const showCompactHeaderSwitcher = computed(
+			() => !dialog.value && useCompactPosSwitcher.value && !isPhone.value,
+		);
+		const showMobileDock = computed(() => !dialog.value && isPhone.value);
+		const showMobileHeader = computed(
+			() =>
+				!dialog.value &&
+				isPhone.value &&
+				(activeView.value === "items" ||
+					activeView.value === "offers" ||
+					activeView.value === "coupons" ||
+					compactPanel.value === "invoice"),
+		);
+		const invoiceTotal = computed(() => {
+			const doc = invoiceDoc.value || {};
+			const fallbackTotal = Number(grossTotal.value || 0);
+			const rawValue = doc.rounded_total ?? doc.grand_total ?? doc.total ?? fallbackTotal;
+			const numericValue = Number(rawValue);
+			return Number.isFinite(numericValue) ? numericValue : fallbackTotal;
+		});
+		const activeCurrency = computed(
+			() => invoiceDoc.value?.currency || posProfile.value?.currency || "",
+		);
+		const formatCompactNumber = (value) =>
+			new Intl.NumberFormat(undefined, {
+				maximumFractionDigits: value % 1 === 0 ? 0 : 2,
+			}).format(Number(value || 0));
+		const getCurrencySymbol = (currency) => {
+			const resolver =
+				window.get_currency_symbol || globalThis.get_currency_symbol;
+			if (typeof resolver === "function") {
+				return resolver(currency || activeCurrency.value || "") || "";
+			}
+			return currency ? `${currency} ` : "";
+		};
+		const formattedCartTotal = computed(() => {
+			const symbol = getCurrencySymbol(activeCurrency.value);
+			return `${symbol}${formatCompactNumber(invoiceTotal.value)}`.trim();
+		});
+		const cartMetaLabel = computed(() => {
+			const qty = formatCompactNumber(totalQty.value || 0);
+			const itemCount = formatCompactNumber(itemsCount.value || 0);
+			return `${itemCount} ${__("lines")} • ${qty} ${__("qty")}`;
+		});
 
 		const handlePaymentDialogUpdate = (value) => {
 			if (value || !usePaymentDialog.value) {
@@ -180,6 +308,32 @@ export default {
 				});
 			}
 		};
+		const setSelectorView = (view) => {
+			compactPanel.value = "selector";
+			uiStore.setActiveView(view);
+			if (view === "items") {
+				nextTick(() => {
+					uiStore.triggerItemSearchFocus();
+				});
+			}
+		};
+		const showInvoicePanel = () => {
+			compactPanel.value = "invoice";
+			if (activeView.value === "payment" && !usePaymentDialog.value) {
+				uiStore.setActiveView("items");
+			}
+		};
+		const showPaymentPanel = () => {
+			compactPanel.value = "selector";
+			if (usePaymentDialog.value) {
+				uiStore.openPaymentDialog();
+				uiStore.setActiveView("items");
+				return;
+			}
+			uiStore.setActiveView("payment");
+		};
+		const isSelectorViewActive = (view) =>
+			compactPanel.value === "selector" && activeView.value === view;
 
 		useCustomerDisplayPublisher({
 			posProfile,
@@ -243,12 +397,25 @@ export default {
 			invoiceStore,
 			itemsStore,
 			__,
+			invoiceDoc,
+			itemsCount,
+			totalQty,
+			formattedCartTotal,
+			cartMetaLabel,
 			activeView,
 			paymentDialogOpen,
+			isPhone,
 			usePaymentDialog,
 			useCompactPosSwitcher,
+			showCompactHeaderSwitcher,
+			showMobileDock,
+			showMobileHeader,
 			compactPanel,
 			setCompactPanel,
+			setSelectorView,
+			showInvoicePanel,
+			showPaymentPanel,
+			isSelectorViewActive,
 			handlePaymentDialogUpdate,
 			eventBus,
 			dialog,
@@ -403,14 +570,10 @@ export default {
 	background: rgba(var(--v-theme-primary), 0.12) !important;
 	color: rgb(var(--v-theme-primary)) !important;
 }
-</style>
 
-<style scoped>
 .dynamic-container {
-	/* add space for the navbar with better spacing */
-	/*padding-top: calc(25px + var(--dynamic-lg));*/
-	/* Navbar height (25px) + larger spacing */
 	transition: all 0.3s ease;
+	padding-bottom: calc(var(--bottom-safe-space) + var(--dynamic-sm));
 }
 
 .dynamic-main-row {
@@ -418,22 +581,190 @@ export default {
 	margin: 0;
 }
 
+.dynamic-main-row--phone {
+	align-items: stretch;
+}
+
 .dynamic-col {
 	padding: var(--dynamic-sm);
 	transition: padding 0.3s ease;
 	margin-top: var(--dynamic-sm);
-	/* Add top margin for better separation */
+}
+
+.dynamic-col--selector,
+.dynamic-col--invoice {
+	display: flex;
+	flex-direction: column;
+}
+
+.mobile-pos-header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: var(--pos-space-3);
+	margin: var(--dynamic-sm) var(--dynamic-sm) 0;
+	padding: 14px 16px;
+	border-radius: 20px;
+	background:
+		linear-gradient(135deg, rgba(var(--v-theme-primary), 0.12), rgba(var(--v-theme-surface), 0.98)),
+		var(--pos-card-bg);
+	position: sticky;
+	top: var(--dynamic-sm);
+	z-index: 12;
+}
+
+.mobile-pos-header__copy {
+	display: flex;
+	flex-direction: column;
+	min-width: 0;
+}
+
+.mobile-pos-header__eyebrow {
+	font-size: 0.72rem;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 0.08em;
+	color: var(--pos-text-secondary);
+}
+
+.mobile-pos-header__amount {
+	font-size: 1.3rem;
+	line-height: 1.15;
+	color: var(--pos-text-primary);
+}
+
+.mobile-pos-header__meta {
+	font-size: 0.82rem;
+	color: var(--pos-text-secondary);
+}
+
+.mobile-pos-header__actions {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+}
+
+.mobile-pos-header__btn {
+	min-height: 42px;
+	text-transform: none !important;
+	letter-spacing: 0 !important;
+	font-weight: 700 !important;
+}
+
+.mobile-pos-dock {
+	position: fixed;
+	left: max(10px, env(safe-area-inset-left));
+	right: max(10px, env(safe-area-inset-right));
+	bottom: max(10px, env(safe-area-inset-bottom));
+	display: grid;
+	grid-template-columns: repeat(5, minmax(0, 1fr));
+	gap: 8px;
+	padding: 10px;
+	border-radius: 24px;
+	background: rgba(255, 255, 255, 0.94);
+	backdrop-filter: blur(18px);
+	box-shadow: 0 18px 38px rgba(15, 23, 42, 0.18);
+	border: 1px solid rgba(15, 23, 42, 0.08);
+	z-index: 20;
+}
+
+.mobile-pos-dock__item {
+	position: relative;
+	border: 0;
+	border-radius: 18px;
+	background: transparent;
+	min-height: 58px;
+	padding: 8px 4px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 4px;
+	font: inherit;
+	font-size: 0.72rem;
+	font-weight: 700;
+	color: var(--pos-text-secondary);
+	cursor: pointer;
+	transition:
+		background-color 0.18s ease,
+		color 0.18s ease,
+		transform 0.18s ease;
+}
+
+.mobile-pos-dock__item--active {
+	background: rgba(var(--v-theme-primary), 0.12);
+	color: rgb(var(--v-theme-primary));
+}
+
+.mobile-pos-dock__item--pay.mobile-pos-dock__item--active {
+	background: rgba(var(--v-theme-success), 0.16);
+	color: rgb(var(--v-theme-success));
+}
+
+.mobile-pos-dock__item:active {
+	transform: scale(0.98);
+}
+
+.mobile-pos-dock__pill {
+	position: absolute;
+	top: 4px;
+	right: 10px;
+	min-width: 18px;
+	height: 18px;
+	padding: 0 5px;
+	border-radius: 999px;
+	background: rgb(var(--v-theme-primary));
+	color: #fff;
+	font-size: 0.68rem;
+	line-height: 18px;
+	text-align: center;
 }
 
 @media (max-width: 768px) {
 	.dynamic-container {
-		padding-top: calc(56px + var(--dynamic-md));
-		/* Consistent navbar height + medium spacing */
+		padding-top: var(--dynamic-xs);
+		padding-bottom: calc(var(--bottom-safe-space) + var(--dynamic-xs));
 	}
 
 	.dynamic-col {
 		padding: var(--dynamic-xs);
 		margin-top: var(--dynamic-xs);
+	}
+
+	.mobile-pos-header {
+		margin: var(--dynamic-xs) var(--dynamic-xs) 0;
+		padding: 12px;
+		gap: 10px;
+	}
+
+	.mobile-pos-header__actions {
+		flex-direction: column;
+		align-items: stretch;
+	}
+
+	.mobile-pos-header__btn {
+		min-width: 96px;
+	}
+}
+
+@media (max-width: 560px) {
+	.mobile-pos-header {
+		flex-direction: column;
+		align-items: stretch;
+	}
+
+	.mobile-pos-header__actions {
+		flex-direction: row;
+	}
+
+	.mobile-pos-dock {
+		gap: 6px;
+		padding: 8px;
+	}
+
+	.mobile-pos-dock__item {
+		min-height: 54px;
+		font-size: 0.68rem;
 	}
 }
 </style>

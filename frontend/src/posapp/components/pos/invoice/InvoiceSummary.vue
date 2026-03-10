@@ -2,7 +2,19 @@
 	<v-card
 		class="cards sticky-summary-card mb-0 py-2 px-3 rounded-lg pos-themed-card"
 	>
-		<v-row dense>
+		<div class="summary-hero">
+			<div class="summary-hero__copy">
+				<span class="summary-hero__eyebrow">{{ __("Ready to checkout") }}</span>
+				<strong class="summary-hero__amount">
+					{{ currencySymbol(displayCurrency) }}{{ formatCurrency(subtotal) }}
+				</strong>
+				<div class="summary-hero__meta">
+					<span>{{ formatFloat(total_qty, hide_qty_decimals ? 0 : undefined) }} {{ __("qty") }}</span>
+					<span>{{ currencySymbol(displayCurrency) }}{{ formatCurrency(total_items_discount_amount) }} {{ __("discount") }}</span>
+				</div>
+			</div>
+		</div>
+		<v-row dense class="summary-content">
 			<!-- Summary Info -->
 			<v-col cols="12" md="7">
 				<v-row dense>
@@ -29,7 +41,7 @@
 						</v-alert>
 					</v-col>
 					<!-- Total Qty -->
-					<v-col cols="6">
+					<v-col cols="12" sm="6">
 						<v-text-field
 							:model-value="formatFloat(total_qty, hide_qty_decimals ? 0 : undefined)"
 							:label="frappe._('Total Qty')"
@@ -41,7 +53,7 @@
 						/>
 					</v-col>
 					<!-- Additional Discount (Amount or Percentage) -->
-					<v-col cols="6" v-if="!pos_profile.posa_use_percentage_discount">
+					<v-col cols="12" sm="6" v-if="!pos_profile.posa_use_percentage_discount">
 						<v-text-field
 							ref="additionalDiscountField"
 							v-model="additionalDiscountDisplay"
@@ -62,7 +74,7 @@
 						/>
 					</v-col>
 
-					<v-col cols="6" v-else>
+					<v-col cols="12" sm="6" v-else>
 						<v-text-field
 							ref="additionalDiscountField"
 							v-model="additionalDiscountPercentageDisplay"
@@ -85,7 +97,7 @@
 						/>
 					</v-col>
 					<!-- Items Discount -->
-					<v-col cols="6">
+					<v-col cols="12" sm="6">
 						<v-text-field
 							:model-value="formatCurrency(total_items_discount_amount)"
 							:prefix="currencySymbol(displayCurrency)"
@@ -100,7 +112,7 @@
 					</v-col>
 
 					<!-- Total (moved to maintain row alignment) -->
-					<v-col cols="6">
+					<v-col cols="12" sm="6">
 						<v-text-field
 							:model-value="formatCurrency(subtotal)"
 							:prefix="currencySymbol(displayCurrency)"
@@ -363,6 +375,52 @@ async function handleOpenCustomerDisplay() {
 	box-shadow: 0 -8px 24px rgba(15, 23, 42, 0.08);
 }
 
+.summary-hero {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: 14px;
+	padding: 14px 16px;
+	border-radius: 18px;
+	background:
+		linear-gradient(135deg, rgba(var(--v-theme-success), 0.14), rgba(var(--v-theme-primary), 0.08)),
+		var(--pos-surface-muted);
+	border: 1px solid rgba(var(--v-theme-success), 0.12);
+}
+
+.summary-hero__copy {
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+	min-width: 0;
+}
+
+.summary-hero__eyebrow {
+	font-size: 0.72rem;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 0.08em;
+	color: var(--pos-text-secondary);
+}
+
+.summary-hero__amount {
+	font-size: clamp(1.2rem, 2vw, 1.8rem);
+	line-height: 1.1;
+	color: var(--pos-text-primary);
+}
+
+.summary-hero__meta {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px 14px;
+	font-size: 0.84rem;
+	color: var(--pos-text-secondary);
+}
+
+.summary-content {
+	row-gap: 6px;
+}
+
 .invoice-summary-actions {
 	position: sticky;
 	bottom: 0;
@@ -383,6 +441,11 @@ async function handleOpenCustomerDisplay() {
 		position: static;
 		bottom: auto;
 		box-shadow: none;
+	}
+
+	.summary-hero {
+		padding: 12px;
+		margin-bottom: 12px;
 	}
 
 	.invoice-summary-actions {
