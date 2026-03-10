@@ -1,16 +1,5 @@
 <template>
 	<div class="sticky-header">
-		<div class="sticky-header__intro">
-			<div class="sticky-header__copy">
-				<span class="sticky-header__eyebrow">{{ __("Fast lookup") }}</span>
-				<strong class="sticky-header__title">{{ __("Search, scan, or browse items") }}</strong>
-			</div>
-			<div class="sticky-header__badges">
-				<span class="sticky-header__badge">{{ __("Barcode") }}</span>
-				<span class="sticky-header__badge">{{ __("Code") }}</span>
-				<span class="sticky-header__badge">{{ __("Name") }}</span>
-			</div>
-		</div>
 		<v-row class="items">
 			<v-col
 				class="pb-0"
@@ -23,8 +12,7 @@
 					autofocus
 					variant="solo"
 					color="primary"
-					:label="frappe._('Search Items')"
-					:placeholder="frappe._('Barcode, item code, name, brand, or SKU')"
+					:label="frappe._('Search, scan or browse item')"
 					hide-details
 					:model-value="searchInput"
 					@update:model-value="
@@ -183,53 +171,6 @@ defineExpose({
 	margin-bottom: 0;
 }
 
-.sticky-header__intro {
-	display: flex;
-	align-items: flex-start;
-	justify-content: space-between;
-	gap: 12px;
-	padding-bottom: 10px;
-}
-
-.sticky-header__copy {
-	display: flex;
-	flex-direction: column;
-	min-width: 0;
-}
-
-.sticky-header__eyebrow {
-	font-size: 0.72rem;
-	font-weight: 700;
-	text-transform: uppercase;
-	letter-spacing: 0.08em;
-	color: var(--pos-text-secondary);
-}
-
-.sticky-header__title {
-	font-size: 0.96rem;
-	line-height: 1.3;
-	color: var(--pos-text-primary);
-}
-
-.sticky-header__badges {
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: flex-end;
-	gap: 6px;
-}
-
-.sticky-header__badge {
-	display: inline-flex;
-	align-items: center;
-	min-height: 28px;
-	padding: 4px 10px;
-	border-radius: 999px;
-	background: rgba(var(--v-theme-primary), 0.08);
-	color: rgb(var(--v-theme-primary));
-	font-size: 0.75rem;
-	font-weight: 700;
-}
-
 .items {
 	margin: 0;
 }
@@ -264,15 +205,6 @@ defineExpose({
 @media (max-width: 768px) {
 	.sticky-header {
 		padding: 12px 12px 2px;
-	}
-
-	.sticky-header__intro {
-		flex-direction: column;
-		align-items: stretch;
-	}
-
-	.sticky-header__badges {
-		justify-content: flex-start;
 	}
 
 	.settings-container {

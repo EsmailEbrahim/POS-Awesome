@@ -29,60 +29,6 @@
 		>
 			<Payments dialog-mode />
 		</v-dialog>
-		<div v-if="showMobileHeader" class="mobile-pos-header pos-themed-card">
-			<div class="mobile-pos-header__copy">
-				<span class="mobile-pos-header__eyebrow">{{ __("Active sale") }}</span>
-				<strong class="mobile-pos-header__amount">{{ formattedCartTotal }}</strong>
-				<span class="mobile-pos-header__meta">
-					{{ cartMetaLabel }}
-				</span>
-			</div>
-			<div class="mobile-pos-header__actions">
-				<v-btn
-					variant="tonal"
-					color="primary"
-					class="mobile-pos-header__btn"
-					prepend-icon="mdi-receipt-text-outline"
-					@click="showInvoicePanel"
-				>
-					{{ __("Cart") }}
-				</v-btn>
-				<v-btn
-					variant="flat"
-					color="success"
-					class="mobile-pos-header__btn"
-					prepend-icon="mdi-credit-card-outline"
-					@click="showPaymentPanel"
-				>
-					{{ __("Pay") }}
-				</v-btn>
-			</div>
-		</div>
-		<div v-if="!dialog && showCompactHeaderSwitcher" class="compact-pos-switcher">
-			<v-btn-toggle
-				:model-value="compactPanel"
-				mandatory
-				divided
-				class="compact-pos-switcher__toggle pos-themed-card"
-			>
-				<v-btn
-					value="selector"
-					class="compact-pos-switcher__btn"
-					prepend-icon="mdi-view-grid-outline"
-					@click="setCompactPanel('selector')"
-				>
-					{{ __("Item Selector") }}
-				</v-btn>
-				<v-btn
-					value="invoice"
-					class="compact-pos-switcher__btn"
-					prepend-icon="mdi-receipt-text-outline"
-					@click="setCompactPanel('invoice')"
-				>
-					{{ __("Invoice") }}
-				</v-btn>
-			</v-btn-toggle>
-		</div>
 		<v-row
 			v-show="!dialog"
 			dense
@@ -146,7 +92,14 @@
 				<Invoice></Invoice>
 			</v-col>
 		</v-row>
-		<div v-if="showMobileDock" class="mobile-pos-dock">
+		<div v-if="showBottomDock" class="mobile-pos-dock">
+			<div class="mobile-pos-dock__summary">
+				<div class="mobile-pos-dock__summary-copy">
+					<span class="mobile-pos-dock__summary-eyebrow">{{ __("Active sale") }}</span>
+					<strong class="mobile-pos-dock__summary-amount">{{ formattedCartTotal }}</strong>
+				</div>
+				<span class="mobile-pos-dock__summary-meta">{{ cartMetaLabel }}</span>
+			</div>
 			<button
 				type="button"
 				class="mobile-pos-dock__item"
@@ -245,19 +198,7 @@ export default {
 		const useCompactPosSwitcher = computed(() => responsive.windowWidth.value < 1280);
 		const compactPanel = ref("selector");
 		const isPhone = computed(() => responsive.isPhone.value);
-		const showCompactHeaderSwitcher = computed(
-			() => !dialog.value && useCompactPosSwitcher.value && !isPhone.value,
-		);
-		const showMobileDock = computed(() => !dialog.value && isPhone.value);
-		const showMobileHeader = computed(
-			() =>
-				!dialog.value &&
-				isPhone.value &&
-				(activeView.value === "items" ||
-					activeView.value === "offers" ||
-					activeView.value === "coupons" ||
-					compactPanel.value === "invoice"),
-		);
+		const showBottomDock = computed(() => !dialog.value && useCompactPosSwitcher.value);
 		const invoiceTotal = computed(() => {
 			const doc = invoiceDoc.value || {};
 			const fallbackTotal = Number(grossTotal.value || 0);
@@ -407,9 +348,7 @@ export default {
 			isPhone,
 			usePaymentDialog,
 			useCompactPosSwitcher,
-			showCompactHeaderSwitcher,
-			showMobileDock,
-			showMobileHeader,
+			showBottomDock,
 			compactPanel,
 			setCompactPanel,
 			setSelectorView,
@@ -543,34 +482,6 @@ export default {
 	max-height: calc(100vh - 24px);
 }
 
-.compact-pos-switcher {
-	padding: 0 var(--dynamic-sm);
-	margin-top: var(--dynamic-sm);
-}
-
-.compact-pos-switcher__toggle {
-	display: grid !important;
-	grid-template-columns: repeat(2, minmax(0, 1fr));
-	width: 100%;
-	padding: 4px;
-	border-radius: 18px;
-	background: var(--pos-card-bg) !important;
-	border: 1px solid rgba(var(--v-theme-on-surface), 0.08);
-	box-shadow: 0 10px 30px rgba(15, 23, 42, 0.05);
-}
-
-.compact-pos-switcher__btn {
-	min-height: 44px;
-	text-transform: none !important;
-	letter-spacing: 0 !important;
-	font-weight: 600 !important;
-}
-
-.compact-pos-switcher__toggle :deep(.v-btn--active) {
-	background: rgba(var(--v-theme-primary), 0.12) !important;
-	color: rgb(var(--v-theme-primary)) !important;
-}
-
 .dynamic-container {
 	transition: all 0.3s ease;
 	padding-bottom: calc(var(--bottom-safe-space) + var(--dynamic-sm));
@@ -597,60 +508,6 @@ export default {
 	flex-direction: column;
 }
 
-.mobile-pos-header {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	gap: var(--pos-space-3);
-	margin: var(--dynamic-sm) var(--dynamic-sm) 0;
-	padding: 14px 16px;
-	border-radius: 20px;
-	background:
-		linear-gradient(135deg, rgba(var(--v-theme-primary), 0.12), rgba(var(--v-theme-surface), 0.98)),
-		var(--pos-card-bg);
-	position: sticky;
-	top: var(--dynamic-sm);
-	z-index: 12;
-}
-
-.mobile-pos-header__copy {
-	display: flex;
-	flex-direction: column;
-	min-width: 0;
-}
-
-.mobile-pos-header__eyebrow {
-	font-size: 0.72rem;
-	font-weight: 700;
-	text-transform: uppercase;
-	letter-spacing: 0.08em;
-	color: var(--pos-text-secondary);
-}
-
-.mobile-pos-header__amount {
-	font-size: 1.3rem;
-	line-height: 1.15;
-	color: var(--pos-text-primary);
-}
-
-.mobile-pos-header__meta {
-	font-size: 0.82rem;
-	color: var(--pos-text-secondary);
-}
-
-.mobile-pos-header__actions {
-	display: flex;
-	align-items: center;
-	gap: 8px;
-}
-
-.mobile-pos-header__btn {
-	min-height: 42px;
-	text-transform: none !important;
-	letter-spacing: 0 !important;
-	font-weight: 700 !important;
-}
-
 .mobile-pos-dock {
 	position: fixed;
 	left: max(10px, env(safe-area-inset-left));
@@ -666,6 +523,42 @@ export default {
 	box-shadow: 0 18px 38px rgba(15, 23, 42, 0.18);
 	border: 1px solid rgba(15, 23, 42, 0.08);
 	z-index: 20;
+}
+
+.mobile-pos-dock__summary {
+	grid-column: 1 / -1;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 12px;
+	padding: 8px 10px 12px;
+	border-bottom: 1px solid rgba(15, 23, 42, 0.08);
+}
+
+.mobile-pos-dock__summary-copy {
+	display: flex;
+	flex-direction: column;
+	min-width: 0;
+}
+
+.mobile-pos-dock__summary-eyebrow {
+	font-size: 0.72rem;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 0.08em;
+	color: var(--pos-text-secondary);
+}
+
+.mobile-pos-dock__summary-amount {
+	font-size: 1.15rem;
+	line-height: 1.15;
+	color: var(--pos-text-primary);
+}
+
+.mobile-pos-dock__summary-meta {
+	font-size: 0.8rem;
+	color: var(--pos-text-secondary);
+	text-align: right;
 }
 
 .mobile-pos-dock__item {
@@ -730,31 +623,16 @@ export default {
 		padding: var(--dynamic-xs);
 		margin-top: var(--dynamic-xs);
 	}
-
-	.mobile-pos-header {
-		margin: var(--dynamic-xs) var(--dynamic-xs) 0;
-		padding: 12px;
-		gap: 10px;
-	}
-
-	.mobile-pos-header__actions {
-		flex-direction: column;
-		align-items: stretch;
-	}
-
-	.mobile-pos-header__btn {
-		min-width: 96px;
-	}
 }
 
 @media (max-width: 560px) {
-	.mobile-pos-header {
+	.mobile-pos-dock__summary {
 		flex-direction: column;
 		align-items: stretch;
 	}
 
-	.mobile-pos-header__actions {
-		flex-direction: row;
+	.mobile-pos-dock__summary-meta {
+		text-align: left;
 	}
 
 	.mobile-pos-dock {

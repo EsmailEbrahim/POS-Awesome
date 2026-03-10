@@ -60,7 +60,7 @@ export function useResponsive() {
 			containerHeightVh = 60;
 		}
 
-		const bottomSafeSpace = isPhone.value ? 108 : isTablet.value ? 36 : 20;
+		const bottomSafeSpace = isCompact.value ? 136 : 20;
 
 		return {
 			"--dynamic-xs": `${dynamicSpacing.value.xs}px`,
