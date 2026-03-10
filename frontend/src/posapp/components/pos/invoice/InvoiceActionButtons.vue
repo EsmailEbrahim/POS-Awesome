@@ -1,19 +1,5 @@
 <template>
 	<v-row dense>
-		<v-col cols="12">
-			<v-btn
-				block
-				color="success"
-				theme="dark"
-				size="large"
-				prepend-icon="mdi-credit-card"
-				@click="$emit('show-payment')"
-				class="summary-btn pay-btn"
-				:loading="paymentLoading"
-			>
-				{{ __("PAY") }}
-			</v-btn>
-		</v-col>
 		<v-col cols="12" sm="6">
 			<v-btn
 				block
@@ -117,6 +103,20 @@
 				:loading="customerDisplayLoading"
 			>
 				{{ __("Customer Screen") }}
+			</v-btn>
+		</v-col>
+		<v-col cols="12">
+			<v-btn
+				block
+				color="success"
+				theme="dark"
+				size="large"
+				prepend-icon="mdi-credit-card"
+				@click="$emit('show-payment')"
+				class="summary-btn pay-btn"
+				:loading="paymentLoading"
+			>
+				{{ __("PAY") }}
 			</v-btn>
 		</v-col>
 	</v-row>
