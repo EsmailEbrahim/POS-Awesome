@@ -44,9 +44,13 @@ const resolveInitialThemeMode = () => {
 	}
 
 	if (typeof localStorage !== "undefined") {
-		const storedMode = normalizeThemeMode(
-			localStorage.getItem(THEME_STORAGE_KEY),
-		);
+		let storedThemePreference: string | null = null;
+		try {
+			storedThemePreference = localStorage.getItem(THEME_STORAGE_KEY);
+		} catch {
+			storedThemePreference = null;
+		}
+		const storedMode = normalizeThemeMode(storedThemePreference);
 		if (storedMode) {
 			return storedMode;
 		}
