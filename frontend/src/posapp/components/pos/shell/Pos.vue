@@ -26,6 +26,7 @@
 			scrim="rgba(15, 23, 42, 0.55)"
 			class="payment-dialog"
 			@update:model-value="handlePaymentDialogUpdate"
+			@after-leave="handlePaymentDialogAfterLeave"
 		>
 			<Payments dialog-mode />
 		</v-dialog>
@@ -332,31 +333,38 @@ export default {
 			}
 		});
 
+		const focusItemSearchField = () => {
+			nextTick(() => {
+				uiStore.triggerItemSearchFocus();
+				eventBus?.emit?.("focus_item_search");
+			});
+		};
+
 		const handlePaymentDialogUpdate = (value) => {
 			if (value || !usePaymentDialog.value) {
 				return;
 			}
 			uiStore.closePaymentDialog();
-			nextTick(() => {
-				uiStore.triggerItemSearchFocus();
-			});
+		};
+
+		const handlePaymentDialogAfterLeave = () => {
+			if (!usePaymentDialog.value) {
+				return;
+			}
+			focusItemSearchField();
 		};
 
 		const setCompactPanel = (panel) => {
 			compactPanel.value = panel;
 			if (panel === "selector" && activeView.value === "items") {
-				nextTick(() => {
-					uiStore.triggerItemSearchFocus();
-				});
+				focusItemSearchField();
 			}
 		};
 		const setSelectorView = (view) => {
 			compactPanel.value = "selector";
 			uiStore.setActiveView(view);
 			if (view === "items") {
-				nextTick(() => {
-					uiStore.triggerItemSearchFocus();
-				});
+				focusItemSearchField();
 			}
 		};
 		const showInvoicePanel = () => {
@@ -565,6 +573,7 @@ export default {
 			handleAdditionalDiscountPercentageBlur,
 			commitAdditionalDiscountPercentage,
 			handlePaymentDialogUpdate,
+			handlePaymentDialogAfterLeave,
 			discountPercentageOfferName,
 			getCurrencySymbol,
 			invoicePanel,
