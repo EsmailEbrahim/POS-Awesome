@@ -60,6 +60,21 @@ export const useItemsSelectorFocus = ({
 		}
 	};
 
+	const hasExplicitFocusTrapMarker = (element: Element | null) => {
+		let current: Element | null = element;
+		while (current) {
+			if (
+				current.getAttribute?.("data-posa-focus-trap") === "true" ||
+				current.getAttribute?.("data-focus-trap") === "true" ||
+				current.getAttribute?.("data-focus-guard") === "true"
+			) {
+				return true;
+			}
+			current = current.parentElement;
+		}
+		return false;
+	};
+
 	const releaseBlockedFocus = (target?: Element | null) => {
 		if (typeof document === "undefined") {
 			return;
@@ -72,7 +87,12 @@ export const useItemsSelectorFocus = ({
 		) {
 			return;
 		}
-		active.blur();
+		if (
+			isElementHiddenFromInteraction(active) ||
+			hasExplicitFocusTrapMarker(active)
+		) {
+			active.blur();
+		}
 	};
 
 	const scheduleFocusAttempt = (attempt: number) => {

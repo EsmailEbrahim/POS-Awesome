@@ -93,7 +93,7 @@ describe("useItemsSelectorFocus", () => {
 		expect(startScanning).toHaveBeenCalledTimes(1);
 	});
 
-	it("releases stale focus traps before retrying the search input", () => {
+	it("does not blur a visible active control during focus retries", () => {
 		const originalRaf = window.requestAnimationFrame;
 		window.requestAnimationFrame = ((cb: FrameRequestCallback) => {
 			cb(0);
@@ -136,8 +136,8 @@ describe("useItemsSelectorFocus", () => {
 
 		focusApi.focusItemSearch();
 
-		expect(trappedBlurSpy).toHaveBeenCalled();
-		expect(document.activeElement).toBe(searchInput);
+		expect(trappedBlurSpy).not.toHaveBeenCalled();
+		expect(document.activeElement).toBe(trappedButton);
 
 		trappedBlurSpy.mockRestore();
 		searchInput.remove();

@@ -627,9 +627,18 @@ const queueSearchRefocusRecovery = () => {
 	};
 
 	window.addEventListener("focus", onWindowFocus);
+	if (fallbackTimer) {
+		clearTimeout(fallbackTimer);
+		fallbackTimer = null;
+	}
 	fallbackTimer = setTimeout(() => {
 		recover();
+		cleanup();
 	}, 900);
+	if (cleanupTimer) {
+		clearTimeout(cleanupTimer);
+		cleanupTimer = null;
+	}
 	cleanupTimer = setTimeout(() => {
 		cleanup();
 	}, 10000);
