@@ -148,7 +148,14 @@
 		/>
 
 		<!-- New Item Dialog -->
-		<NewItemDialog v-model="newItemDialog" :items-group="items_group" @item-created="handleItemCreated" />
+		<NewItemDialog
+			v-model="newItemDialog"
+			:items-group="items_group"
+			:camera-enabled="!!pos_profile.posa_enable_camera_scanning"
+			:scanned-barcode="newItemDialogScannedBarcode"
+			@request-camera-scan="startNewItemBarcodeScan"
+			@item-created="handleItemCreated"
+		/>
 
 		<!-- Camera Scanner Component -->
 		<CameraScanner
@@ -289,6 +296,8 @@ const {
 
 // 2. Local State & Settings
 const newItemDialog = ref(false);
+const newItemDialogScannedBarcode = ref("");
+const newItemDialogAwaitingScan = ref(false);
 const qty = ref(1);
 const search_input = ref("");
 const first_search = ref("");
@@ -700,6 +709,8 @@ const handleRemoteStockAdjustment = (payload: unknown) => {
 
 // 7. Lifecycle Hooks
 const openNewItemDialog = () => {
+	newItemDialogScannedBarcode.value = "";
+	newItemDialogAwaitingScan.value = false;
 	newItemDialog.value = true;
 };
 
@@ -1060,14 +1071,21 @@ const onQtyBlur = () => {
 const startCameraScanning = () => {
 	itemsSelectorFocus.startCameraScanning();
 };
+const startNewItemBarcodeScan = () => {
+	newItemDialogScannedBarcode.value = "";
+	newItemDialogAwaitingScan.value = true;
+	startCameraScanning();
+};
 const forceReloadItems = () => itemsIntegration.get_items(true);
 const cancelItemDetailsRequest = () => itemDetailFetcher.cancelItemDetailsRequest();
 
 const onBarcodeScanned = async (code: string) => {
-	// This function body was empty in the instruction, keeping it empty or adding a placeholder
-	// The original onBarcodeScanned from scannerInput is now aliased as onBarcodeScannedFromScannerInput
-	// If the intent was to override it, the body should be provided.
-	// For now, calling the original one if it exists.
+	if (newItemDialog.value && newItemDialogAwaitingScan.value) {
+		newItemDialogScannedBarcode.value = code;
+		newItemDialogAwaitingScan.value = false;
+		return;
+	}
+
 	if (onBarcodeScannedFromScannerInput) {
 		onBarcodeScannedFromScannerInput(code);
 	}
@@ -1082,6 +1100,7 @@ const onScannerOpened = () => {
 };
 const onScannerClosed = () => {
 	scannerInput.cameraScannerActive.value = false;
+	newItemDialogAwaitingScan.value = false;
 };
 
 const handleInvoiceTypeUpdate = (type: unknown) => {
@@ -1101,6 +1120,8 @@ const getItemRowProps = (item) => ({
 
 const handleItemCreated = (_item) => {
 	newItemDialog.value = false;
+	newItemDialogScannedBarcode.value = "";
+	newItemDialogAwaitingScan.value = false;
 	itemsIntegration.get_items(true);
 };
 
@@ -1121,6 +1142,8 @@ defineExpose({
 	format_number,
 	currencySymbol,
 	openNewItemDialog: () => {
+		newItemDialogScannedBarcode.value = "";
+		newItemDialogAwaitingScan.value = false;
 		newItemDialog.value = true;
 	},
 	clearSearch,
