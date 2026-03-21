@@ -332,6 +332,7 @@ export const useInvoiceStore = defineStore("invoice", () => {
 		packedItems.value = [];
 
 		if (!preserveStickies) {
+			resetInvoiceType();
 			discountAmount.value = 0;
 			additionalDiscount.value = 0;
 			additionalDiscountPercentage.value = 0;

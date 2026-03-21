@@ -53,4 +53,26 @@ describe("invoiceStore invoice type state", () => {
 		expect(store.deliveryChargesRate).toBe(0);
 		expect(store.selectedDeliveryCharge).toBe("");
 	});
+
+	it("resets invoice type when clearing without preserved stickies", () => {
+		const store = useInvoiceStore();
+
+		store.setInvoiceType("Order");
+
+		store.clear();
+
+		expect(store.invoiceType).toBe("Invoice");
+		expect(store.deferStockValidationToPayment).toBe(false);
+	});
+
+	it("preserves invoice type when clearing with preserved stickies", () => {
+		const store = useInvoiceStore();
+
+		store.setInvoiceType("Quotation");
+
+		store.clear({ preserveStickies: true });
+
+		expect(store.invoiceType).toBe("Quotation");
+		expect(store.deferStockValidationToPayment).toBe(true);
+	});
 });
