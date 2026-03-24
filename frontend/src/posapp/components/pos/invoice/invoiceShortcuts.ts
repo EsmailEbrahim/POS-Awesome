@@ -41,6 +41,10 @@ interface InvoiceShortcutsVm {
 		toggleItemSettings: () => void;
 	};
 	$refs: {
+		customerSection?: {
+			openNewCustomer?: () => void;
+			selectFirstCustomer?: () => void;
+		};
 		customerComponent?: {
 			openNewCustomer?: () => void;
 			selectFirstCustomer?: () => void;
@@ -50,6 +54,9 @@ interface InvoiceShortcutsVm {
 		itemSearchField?: {
 			focus?: () => void;
 			$el?: { querySelector?: (_s: string) => { focus?: () => void } };
+		};
+		itemsTableRef?: {
+			focusItemField?: (_index: number, _field: ShortcutField) => void;
 		};
 		itemsTable?: {
 			focusItemField?: (_index: number, _field: ShortcutField) => void;
@@ -104,7 +111,8 @@ const invoiceShortcuts: Record<string, unknown> & ThisType<InvoiceShortcutsVm> =
 
 			if (key === "F6") {
 				consumeEvent(event);
-				this.$refs.customerComponent?.openNewCustomer?.();
+				this.$refs.customerSection?.openNewCustomer?.() ||
+					this.$refs.customerComponent?.openNewCustomer?.();
 				return;
 			}
 
@@ -147,6 +155,7 @@ const invoiceShortcuts: Record<string, unknown> & ThisType<InvoiceShortcutsVm> =
 			if (isDigit(event, 3)) {
 				consumeEvent(event);
 				showCompactPanel(this.eventBus, "selector");
+				this.uiStore.setActiveView("items");
 				this.uiStore.triggerItemSearchFocus();
 				return;
 			}
@@ -154,6 +163,7 @@ const invoiceShortcuts: Record<string, unknown> & ThisType<InvoiceShortcutsVm> =
 			if (isDigit(event, 4)) {
 				consumeEvent(event);
 				showCompactPanel(this.eventBus, "selector");
+				this.uiStore.setActiveView("items");
 				this.uiStore.selectTopItem();
 				return;
 			}
@@ -168,7 +178,8 @@ const invoiceShortcuts: Record<string, unknown> & ThisType<InvoiceShortcutsVm> =
 			if (isDigit(event, 6)) {
 				consumeEvent(event);
 				showCompactPanel(this.eventBus, "invoice");
-				this.$refs.customerComponent?.selectFirstCustomer?.();
+				this.$refs.customerSection?.selectFirstCustomer?.() ||
+					this.$refs.customerComponent?.selectFirstCustomer?.();
 				return;
 			}
 
@@ -338,7 +349,8 @@ const invoiceShortcuts: Record<string, unknown> & ThisType<InvoiceShortcutsVm> =
 				index = 0;
 			}
 			this.shortcutCycle[field] = (index + 1) % count;
-			this.$refs.itemsTable?.focusItemField?.(index, field);
+			this.$refs.itemsTableRef?.focusItemField?.(index, field) ||
+				this.$refs.itemsTable?.focusItemField?.(index, field);
 		},
 	};
 

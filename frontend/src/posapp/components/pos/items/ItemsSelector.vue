@@ -252,7 +252,12 @@ const toastStore = useToastStore();
 const uiStore = useUIStore();
 const invoiceStore = useInvoiceStore();
 const { selectedCustomer } = storeToRefs(customersStore);
-const { posProfile: uiPosProfile, searchFocusTrigger, activeView } = storeToRefs(uiStore);
+const {
+	posProfile: uiPosProfile,
+	searchFocusTrigger,
+	triggerTopItemSelection,
+	activeView,
+} = storeToRefs(uiStore);
 const { deferStockValidationToPayment: invoiceTypeDefersStockValidation } =
 	storeToRefs(invoiceStore);
 
@@ -973,6 +978,13 @@ watch(search_input, (val) => {
 
 watch(searchFocusTrigger, () => {
 	requestItemSearchFocus();
+});
+
+watch(triggerTopItemSelection, () => {
+	if (activeView.value !== "items") {
+		uiStore.setActiveView("items");
+	}
+	itemSelection.selectTopItem();
 });
 
 watch(activeView, (view) => {

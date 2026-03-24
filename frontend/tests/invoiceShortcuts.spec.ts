@@ -43,6 +43,7 @@ describe("invoiceShortcuts", () => {
 		await (invoiceShortcuts as any).handleInvoiceShortcut.call(vm, event);
 
 		expect(vm.eventBus.emit).toHaveBeenCalledWith("set_compact_panel", "selector");
+		expect(vm.uiStore.setActiveView).toHaveBeenCalledWith("items");
 		expect(vm.uiStore.triggerItemSearchFocus).toHaveBeenCalledTimes(1);
 		expect(event.defaultPrevented).toBe(true);
 	});
@@ -99,5 +100,38 @@ describe("invoiceShortcuts", () => {
 			) ?? Number.MAX_SAFE_INTEGER,
 		);
 		expect(event.defaultPrevented).toBe(true);
+	});
+
+	it("uses the customer section ref when selecting the first customer", async () => {
+		const selectFirstCustomer = vi.fn();
+		const vm = {
+			...createVm(),
+			$refs: {
+				customerSection: {
+					selectFirstCustomer,
+				},
+			},
+		};
+		const event = createAltEvent("6", "Digit6");
+
+		await (invoiceShortcuts as any).handleInvoiceShortcut.call(vm, event);
+
+		expect(vm.eventBus.emit).toHaveBeenCalledWith("set_compact_panel", "invoice");
+		expect(selectFirstCustomer).toHaveBeenCalledTimes(1);
+	});
+
+	it("falls back to itemsTableRef when cycling cart field focus", () => {
+		const focusItemField = vi.fn();
+		const vm = {
+			...createVm(),
+			$refs: {
+				itemsTableRef: { focusItemField },
+			},
+			shortcutCycle: { qty: 0, uom: 0, rate: 0 },
+		};
+
+		(invoiceShortcuts as any).focusItemTableField.call(vm, "qty");
+
+		expect(focusItemField).toHaveBeenCalledWith(0, "qty");
 	});
 });
