@@ -227,6 +227,10 @@ import { useUIStore } from "../../../stores/uiStore";
 import { useInvoiceStore } from "../../../stores/invoiceStore";
 
 import { parseBooleanSetting } from "../../../utils/stock";
+import {
+	buildSelectorRowProps,
+	createItemHighlightMatcher,
+} from "../../../utils/itemSelectorHighlightBindings";
 
 const props = defineProps({
 	context: {
@@ -1001,7 +1005,7 @@ const headers = computed(() => itemDisplay.headers.value);
 const memoizedFormatCurrency = computed(() => itemDisplay.memoizedFormatCurrency.value);
 const memoizedFormatNumber = computed(() => itemDisplay.memoizedFormatNumber.value);
 
-const isItemHighlighted = (index) => itemSelection.highlightedIndex.value === index;
+const isItemHighlighted = createItemHighlightMatcher(itemSelection);
 const isNegative = (val) => val < 0;
 
 const {
@@ -1102,15 +1106,9 @@ const onScannerClosed = () => {
 	newItemDialogAwaitingScan.value = false;
 };
 
-const getItemRowClass = (item) => ({
-	"pos-item-row": true,
-	highlighted: isItemHighlighted(items.value.indexOf(item)),
-});
+const getItemRowClass = (item) => itemSelection.getItemRowClass(item);
 
-const getItemRowProps = (item) => ({
-	"data-item-code": item.item_code,
-	draggable: true,
-});
+const getItemRowProps = (item) => buildSelectorRowProps(itemSelection, item);
 
 const handleItemCreated = (_item) => {
 	newItemDialog.value = false;
