@@ -18,6 +18,7 @@ vi.mock("../src/posapp/composables/core/useRtl", () => ({
 
 const VDialogStub = defineComponent({
 	name: "VDialogStub",
+	emits: ["update:modelValue"],
 	props: {
 		modelValue: {
 			type: Boolean,
@@ -113,5 +114,20 @@ describe("UpdatePrompt", () => {
 		expect(dialog.attributes("data-persistent")).toBe("false");
 		expect(dialog.attributes("data-retain-focus")).toBe("false");
 		expect(dialog.attributes("data-scrim")).toBe("false");
+	});
+
+	it("dismisses the update when the dialog closes externally", async () => {
+		const updateStore = useUpdateStore();
+		updateStore.setCurrentVersion("build-1000", 1000);
+		updateStore.setAvailableVersion("build-2000", 2000);
+
+		const wrapper = mountPrompt();
+
+		wrapper.getComponent(VDialogStub).vm.$emit("update:modelValue", false);
+		await wrapper.vm.$nextTick();
+
+		expect(updateStore.dismissedVersion).toBe("build-2000");
+		expect(updateStore.shouldPrompt).toBe(false);
+		expect(wrapper.get('[data-test="update-dialog"]').attributes("data-model-value")).toBe("false");
 	});
 });

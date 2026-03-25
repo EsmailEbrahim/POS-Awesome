@@ -1,6 +1,7 @@
 ﻿<template>
 	<v-dialog
 		v-model="visible"
+		@update:model-value="handleDialogModelUpdate"
 		max-width="460"
 		:scrim="false"
 		:retain-focus="false"
@@ -101,6 +102,12 @@ const commits = computed(() => updateStore.formattedAvailableCommits);
 function dismiss() {
 	updateStore.dismissUpdate();
 	visible.value = false;
+}
+
+function handleDialogModelUpdate(nextVisible: boolean) {
+	if (!nextVisible && updateStore.shouldPrompt) {
+		dismiss();
+	}
 }
 
 function reloadNow() {
