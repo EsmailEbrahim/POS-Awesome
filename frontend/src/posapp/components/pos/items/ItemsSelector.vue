@@ -950,6 +950,9 @@ onMounted(async () => {
 	);
 
 	window.addEventListener("resize", checkItemContainerOverflow);
+	if (props.context === "pos") {
+		document.addEventListener("keydown", handleGlobalTypeToSearchKeydown, true);
+	}
 	nextTick(() => {
 		checkItemContainerOverflow();
 		scheduleCardMetricsUpdate();
@@ -966,6 +969,9 @@ onBeforeUnmount(() => {
 		eventBus.off("update_customer_price_list");
 		eventBus.off("focus_item_search", requestItemSearchFocus);
 		eventBus.off("remote_stock_adjustment", handleRemoteStockAdjustment);
+	}
+	if (props.context === "pos") {
+		document.removeEventListener("keydown", handleGlobalTypeToSearchKeydown, true);
 	}
 	window.removeEventListener("resize", checkItemContainerOverflow);
 });
@@ -1047,6 +1053,55 @@ const selectorCardStyle = computed<CSSProperties>(() => ({
 	position: "relative",
 }));
 
+const SEARCH_TRIGGER_KEY_PATTERN = /^[A-Za-z0-9\-._/\\]$/;
+
+const isEditableElement = (element: Element | null | undefined) => {
+	if (!(element instanceof HTMLElement)) {
+		return false;
+	}
+	const contentEditable = element.getAttribute("contenteditable");
+	if (
+		element.isContentEditable ||
+		(typeof element.contentEditable === "string" &&
+			element.contentEditable.toLowerCase() !== "inherit") ||
+		(contentEditable !== null && contentEditable.toLowerCase() !== "false")
+	) {
+		return true;
+	}
+	const tagName = element.tagName;
+	if (tagName === "INPUT" || tagName === "TEXTAREA" || tagName === "SELECT") {
+		return true;
+	}
+	return Boolean(
+		element.closest(
+			"input, textarea, select, [contenteditable='true'], [contenteditable=''], [contenteditable='plaintext-only']",
+		),
+	);
+};
+
+const isTypeToSearchKey = (event: KeyboardEvent) => {
+	if (!event || event.defaultPrevented || event.repeat) {
+		return false;
+	}
+	if (event.ctrlKey || event.metaKey || event.altKey) {
+		return false;
+	}
+	return SEARCH_TRIGGER_KEY_PATTERN.test(event.key || "");
+};
+
+const hasVisibleDialog = () => {
+	if (typeof document === "undefined") {
+		return false;
+	}
+	const dialogs = document.querySelectorAll("[role='dialog']");
+	return Array.from(dialogs).some((dialog) => {
+		if (!(dialog instanceof HTMLElement)) {
+			return false;
+		}
+		return Boolean(dialog.offsetWidth || dialog.offsetHeight || dialog.getClientRects().length);
+	});
+};
+
 // Proxy functions for template
 const esc_event = () => clearSearch();
 const onEnter = (e) => itemsSelectorSearch.onEnter(e);
@@ -1063,6 +1118,16 @@ const searchItems = (term) => itemsIntegration.searchItems(term);
 const get_items = (force = false) => itemsIntegration.get_items(force);
 const loadVisibleItems = (reset = false) => itemsLoader.loadVisibleItems(reset);
 const verifyServerItemCount = () => {};
+const appendSearchCharacter = (character: string) => {
+	const nextValue = `${String(search_input.value || "")}${character}`;
+	handleSearchInput(nextValue);
+};
+const revealItemSearchView = () => {
+	eventBus?.emit?.("set_compact_panel", "selector");
+	if (activeView.value !== "items") {
+		uiStore.setActiveView("items");
+	}
+};
 const requestItemSearchFocus = () => {
 	if (activeView.value !== "items") {
 		return;
@@ -1070,6 +1135,36 @@ const requestItemSearchFocus = () => {
 	nextTick(() => {
 		itemsSelectorFocus.focusItemSearch();
 	});
+};
+const requestForegroundItemSearchFocus = () => {
+	revealItemSearchView();
+	uiStore.triggerItemSearchFocus();
+	eventBus?.emit?.("focus_item_search");
+};
+scannerInput.setInputHandlers?.({
+	get: () => String(search_input.value || ""),
+	set: (value: string) => handleSearchInput(String(value ?? "")),
+	clear: clearSearch,
+	focus: requestForegroundItemSearchFocus,
+});
+const handleGlobalTypeToSearchKeydown = (event: KeyboardEvent) => {
+	if (!isTypeToSearchKey(event)) {
+		return;
+	}
+	if (
+		props.context !== "pos" ||
+		activeView.value === "payment" ||
+		scannerInput.cameraScannerActive.value ||
+		hasVisibleDialog() ||
+		isEditableElement(document.activeElement)
+	) {
+		return;
+	}
+	event.preventDefault();
+	event.stopPropagation();
+	revealItemSearchView();
+	appendSearchCharacter(event.key);
+	requestForegroundItemSearchFocus();
 };
 const handleItemSearchFocus = () => {
 	clearSearch();
@@ -1101,6 +1196,7 @@ const onBarcodeScanned = async (code: string) => {
 		return;
 	}
 
+	requestForegroundItemSearchFocus();
 	if (onBarcodeScannedFromScannerInput) {
 		onBarcodeScannedFromScannerInput(code);
 	}
