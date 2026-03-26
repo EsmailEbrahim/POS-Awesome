@@ -3,6 +3,7 @@ const CHUNK_RELOAD_KEY = "posa_chunk_reload_once";
 const CHUNK_CACHE_RECOVERY_KEY = "posa_chunk_cache_recovery_once";
 const CHUNK_RECOVERY_IN_PROGRESS_KEY = "posa_chunk_recovery_in_progress";
 const LOADER_RECOVERY_KEY = "posa_loader_chunk_recovery_once";
+const CHUNK_RECOVERY_STABLE_DELAY_MS = 3000;
 
 function normalizeErrorText(error: unknown): string {
 	const message =
@@ -35,7 +36,24 @@ function resetRecoveryState() {
 }
 
 export function clearChunkRecoveryState() {
+	if (typeof window === "undefined" || !window.sessionStorage) {
+		return;
+	}
+	window.sessionStorage.removeItem(CHUNK_RECOVERY_IN_PROGRESS_KEY);
+}
+
+export function resetChunkRecoveryState() {
 	resetRecoveryState();
+}
+
+export function scheduleChunkRecoveryStateReset() {
+	if (typeof window === "undefined") {
+		return;
+	}
+
+	window.setTimeout(() => {
+		resetRecoveryState();
+	}, CHUNK_RECOVERY_STABLE_DELAY_MS);
 }
 
 function redirectToPosApp(param: string) {

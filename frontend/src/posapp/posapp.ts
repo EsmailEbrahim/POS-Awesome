@@ -29,6 +29,7 @@ import {
 	clearChunkRecoveryState,
 	isDynamicImportFailure,
 	recoverFromChunkLoadError,
+	scheduleChunkRecoveryStateReset,
 } from "./utils/chunkLoadRecovery";
 import "../sw-updater"; // Initialize service worker auto-updater
 import App from "./App.vue";
@@ -106,6 +107,9 @@ frappe.PosApp.posapp = class {
 
 		this.app.mount(this.$el[0]);
 		clearChunkRecoveryState();
+		void this.router.isReady().finally(() => {
+			scheduleChunkRecoveryStateReset();
+		});
 
 		// Initialize socket listeners
 		const socketStore = useSocketStore();
