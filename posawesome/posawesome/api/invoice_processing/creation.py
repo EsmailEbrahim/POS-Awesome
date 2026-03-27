@@ -62,6 +62,16 @@ def _process_post_submit_payments(
         return
 
     if run_async:
+        user = getattr(getattr(frappe, "session", None), "user", None)
+        if user and hasattr(frappe, "publish_realtime"):
+            frappe.publish_realtime(
+                "pos_post_submit_payments_started",
+                {
+                    "invoice": invoice_doc.name,
+                    "doctype": invoice_doc.doctype,
+                },
+                user=user,
+            )
         enqueue(
             method=process_post_submit_payments_job,
             queue="default",
@@ -75,7 +85,7 @@ def _process_post_submit_payments(
                 "total_cash": total_cash,
                 "cash_account": cash_account,
                 "payments": payments,
-                "user": getattr(getattr(frappe, "session", None), "user", None),
+                "user": user,
             },
         )
         return
@@ -100,6 +110,16 @@ def process_post_submit_payments_job(kwargs):
         invoice_doc.flags.ignore_permissions = True
         frappe.flags.ignore_account_permission = True
         _run_post_submit_payments(invoice_doc, data, is_payment_entry, total_cash, cash_account, payments)
+        user = kwargs.get("user")
+        if user and hasattr(frappe, "publish_realtime"):
+            frappe.publish_realtime(
+                "pos_post_submit_payments_completed",
+                {
+                    "invoice": invoice,
+                    "doctype": doctype,
+                },
+                user=user,
+            )
     except Exception as e:
         frappe.db.rollback()
         error_msg = str(e)
@@ -107,7 +127,7 @@ def process_post_submit_payments_job(kwargs):
         user = kwargs.get("user")
         if user and hasattr(frappe, "publish_realtime"):
             frappe.publish_realtime(
-                "pos_invoice_submit_error",
+                "pos_post_submit_payments_failed",
                 {"invoice": invoice, "error": error_msg},
                 user=user,
             )
@@ -711,6 +731,16 @@ def submit_in_background_job(kwargs):
         invoice_doc = _save_draft_with_latest_timestamp(invoice_doc)
 
         invoice_doc.submit()
+        if hasattr(frappe, "publish_realtime"):
+            frappe.publish_realtime(
+                "pos_invoice_processed",
+                {
+                    "invoice": invoice_doc.name,
+                    "doctype": invoice_doc.doctype,
+                    "has_post_submit_payment_work": _has_post_submit_payment_work(data),
+                },
+                user=frappe.session.user,
+            )
         _process_post_submit_payments(
             invoice_doc,
             data,
@@ -718,7 +748,7 @@ def submit_in_background_job(kwargs):
             total_cash,
             cash_account,
             payments,
-            run_async=False,
+            run_async=True,
         )
 
     except Exception as e:

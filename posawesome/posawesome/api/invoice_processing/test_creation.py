@@ -99,11 +99,17 @@ def _install_framework_stubs():
     frappe_module.get_cached_value = lambda *args, **kwargs: None
     frappe_module.get_cached_doc = lambda *args, **kwargs: _FrappeDict()
     frappe_module.flags = types.SimpleNamespace(ignore_account_permission=False)
+    publish_realtime_calls = []
     frappe_module.db = types.SimpleNamespace(
         get_value=lambda *args, **kwargs: None,
         exists=lambda *args, **kwargs: False,
+        rollback=lambda: None,
     )
     frappe_module.get_doc = lambda *args, **kwargs: None
+    frappe_module.publish_realtime = lambda *args, **kwargs: publish_realtime_calls.append(
+        {"args": args, "kwargs": kwargs}
+    )
+    frappe_module.session = types.SimpleNamespace(user="test@example.com")
 
     frappe_exceptions.TimestampMismatchError = TimestampMismatchError
     enqueue_calls = []
@@ -114,6 +120,7 @@ def _install_framework_stubs():
 
     frappe_background_jobs.enqueue = _enqueue
     frappe_module._enqueue_calls = enqueue_calls
+    frappe_module._publish_realtime_calls = publish_realtime_calls
 
     sys.modules["frappe"] = frappe_module
     sys.modules["frappe.utils"] = frappe_utils
@@ -197,6 +204,7 @@ class TestUpdateInvoiceReturnPayments(unittest.TestCase):
 
     def setUp(self):
         self.enqueue_calls.clear()
+        self.frappe._publish_realtime_calls.clear()
 
     def test_return_invoice_derives_missing_base_amount_from_amount(self):
         invoice_doc = FakeDoc(
@@ -317,6 +325,7 @@ class TestPostSubmitPaymentProcessing(unittest.TestCase):
 
     def setUp(self):
         self.enqueue_calls.clear()
+        self.frappe._publish_realtime_calls.clear()
 
     def test_process_post_submit_payments_runs_inline_when_async_disabled(self):
         calls = []
@@ -374,6 +383,81 @@ class TestPostSubmitPaymentProcessing(unittest.TestCase):
         self.assertEqual(queued["kwargs"]["doctype"], "Sales Invoice")
         self.assertEqual(queued["kwargs"]["data"], {"paid_change": 4})
         self.assertEqual(queued["kwargs"]["payments"], [{"mode_of_payment": "Cash", "amount": 600}])
+        self.assertEqual(len(self.frappe._publish_realtime_calls), 1)
+        self.assertEqual(
+            self.frappe._publish_realtime_calls[0]["args"][0],
+            "pos_post_submit_payments_started",
+        )
+
+    def test_process_post_submit_payments_job_publishes_completion_event(self):
+        invoice_doc = FakeDoc(
+            doctype="Sales Invoice",
+            name="SINV-0003",
+            docstatus=1,
+            pos_profile="Main POS",
+            company="Test Company",
+            flags=types.SimpleNamespace(ignore_permissions=False),
+        )
+        self.creation.frappe.get_doc = lambda doctype, name: invoice_doc
+
+        calls = []
+        original_runner = self.creation._run_post_submit_payments
+        self.creation._run_post_submit_payments = (
+            lambda *args, **kwargs: calls.append(("run", args))
+        )
+
+        try:
+            self.creation.process_post_submit_payments_job(
+                {
+                    "invoice": "SINV-0003",
+                    "doctype": "Sales Invoice",
+                    "data": {"paid_change": 4},
+                    "user": "test@example.com",
+                }
+            )
+        finally:
+            self.creation._run_post_submit_payments = original_runner
+
+        self.assertEqual([call[0] for call in calls], ["run"])
+        self.assertEqual(len(self.frappe._publish_realtime_calls), 1)
+        self.assertEqual(
+            self.frappe._publish_realtime_calls[0]["args"][0],
+            "pos_post_submit_payments_completed",
+        )
+
+    def test_submit_in_background_job_publishes_invoice_processed_before_queueing_post_submit_work(self):
+        invoice_doc = FakeDoc(
+            doctype="Sales Invoice",
+            name="SINV-0004",
+            docstatus=0,
+            pos_profile="Main POS",
+            company="Test Company",
+            customer="CUST-0001",
+            is_return=0,
+            redeem_loyalty_points=0,
+            loyalty_program=None,
+            cost_center=None,
+            flags=types.SimpleNamespace(ignore_permissions=False),
+        )
+        invoice_doc.submit = lambda: setattr(invoice_doc, "docstatus", 1)
+        self.creation.frappe.get_doc = lambda doctype, name: invoice_doc
+        self.creation._save_draft_with_latest_timestamp = lambda doc: doc
+
+        self.creation.submit_in_background_job(
+            {
+                "invoice": "SINV-0004",
+                "doctype": "Sales Invoice",
+                "data": {"paid_change": 4},
+                "payments": [],
+            }
+        )
+
+        self.assertGreaterEqual(len(self.frappe._publish_realtime_calls), 1)
+        self.assertEqual(
+            self.frappe._publish_realtime_calls[0]["args"][0],
+            "pos_invoice_processed",
+        )
+        self.assertEqual(len(self.enqueue_calls), 1)
 
 
 if __name__ == "__main__":
