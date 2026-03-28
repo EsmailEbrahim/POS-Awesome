@@ -391,6 +391,85 @@ class TestStaleNamedInvoiceHandling(unittest.TestCase):
         self.assertNotIn("name", created_payloads[0])
         self.assertEqual(result["docstatus"], 0)
 
+    def test_update_invoice_recreated_draft_clears_stale_party_fields_from_submitted_doc(self):
+        submitted_doc = self._build_invoice_doc(
+            name="SINV-OLD",
+            docstatus=1,
+            customer="CUST-OLD",
+            customer_name="Old Customer",
+            customer_address="ADDR-OLD",
+            shipping_address_name="SHIP-OLD",
+            contact_person="CONT-OLD",
+            address_display="Old Address",
+            contact_display="Old Contact",
+            contact_mobile="0300",
+            contact_email="old@example.com",
+            territory="Old Territory",
+        )
+        fresh_doc = self._build_invoice_doc()
+        created_payloads = []
+
+        def fake_get_doc(*args):
+            if len(args) == 2:
+                return submitted_doc
+            payload = dict(args[0])
+            created_payloads.append(payload)
+            fresh_doc.update(payload)
+            return fresh_doc
+
+        self.creation.frappe.db.exists = (
+            lambda doctype, name:
+                (doctype == "Sales Invoice" and name == "SINV-OLD")
+                or (doctype == "Customer" and name == "CUST-NEW")
+        )
+        self.creation.frappe.get_doc = fake_get_doc
+        self.creation.frappe.get_cached_value = lambda *args, **kwargs: 0
+        self.creation.frappe.db.get_value = (
+            lambda doctype, name, fieldname=None, **kwargs:
+                "New Customer"
+                if doctype == "Customer" and fieldname == "customer_name" and name == "CUST-NEW"
+                else None
+        )
+        self.creation._save_draft_with_latest_timestamp = lambda doc: doc
+
+        result = self.creation.update_invoice(
+            json.dumps(
+                {
+                    "doctype": "Sales Invoice",
+                    "name": "SINV-OLD",
+                    "pos_profile": "Main POS",
+                    "company": "Test Company",
+                    "currency": "USD",
+                    "posting_date": "2026-03-21",
+                    "customer": "CUST-NEW",
+                    "customer_name": "Old Customer",
+                    "customer_address": "ADDR-OLD",
+                    "shipping_address_name": "SHIP-OLD",
+                    "contact_person": "CONT-OLD",
+                    "address_display": "Old Address",
+                    "contact_display": "Old Contact",
+                    "contact_mobile": "0300",
+                    "contact_email": "old@example.com",
+                    "territory": "Old Territory",
+                    "items": [],
+                    "payments": [],
+                }
+            )
+        )
+
+        self.assertEqual(len(created_payloads), 1)
+        self.assertNotIn("name", created_payloads[0])
+        self.assertEqual(created_payloads[0].get("customer_address"), None)
+        self.assertEqual(created_payloads[0].get("shipping_address_name"), None)
+        self.assertEqual(created_payloads[0].get("contact_person"), None)
+        self.assertEqual(created_payloads[0].get("address_display"), None)
+        self.assertEqual(created_payloads[0].get("contact_display"), None)
+        self.assertEqual(created_payloads[0].get("contact_mobile"), None)
+        self.assertEqual(created_payloads[0].get("contact_email"), None)
+        self.assertEqual(created_payloads[0].get("territory"), None)
+        self.assertEqual(result["customer"], "CUST-NEW")
+        self.assertEqual(result["customer_name"], "New Customer")
+
     def test_update_invoice_creates_new_draft_when_named_doc_is_missing(self):
         fresh_doc = self._build_invoice_doc()
         created_payloads = []

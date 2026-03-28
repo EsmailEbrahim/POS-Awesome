@@ -275,6 +275,36 @@ def _build_fresh_invoice_payload(data, doctype):
     return fresh_data
 
 
+def _clear_stale_party_fields_in_payload(
+    payload,
+    previous_customer,
+    previous_values=None,
+):
+    next_customer = (payload or {}).get("customer")
+    if not previous_customer or not next_customer or previous_customer == next_customer:
+        return payload
+
+    customer_dependent_fields = (
+        "customer_name",
+        "customer_address",
+        "address_display",
+        "shipping_address_name",
+        "contact_person",
+        "contact_display",
+        "contact_mobile",
+        "contact_email",
+        "territory",
+    )
+
+    for fieldname in customer_dependent_fields:
+        previous_value = (previous_values or {}).get(fieldname)
+        next_value = payload.get(fieldname)
+        if next_value not in (None, "") and next_value == previous_value:
+            payload[fieldname] = None
+
+    return payload
+
+
 def _clear_stale_party_fields_for_customer_change(
     invoice_doc,
     incoming_data,
@@ -316,9 +346,6 @@ def _get_mutable_invoice_doc(data, doctype):
         return frappe.get_doc(_build_fresh_invoice_payload(data, doctype))
 
     invoice_doc = frappe.get_doc(doctype, invoice_name)
-    if cint(invoice_doc.docstatus) != 0:
-        return frappe.get_doc(_build_fresh_invoice_payload(data, doctype))
-
     previous_customer = invoice_doc.get("customer")
     previous_values = {fieldname: invoice_doc.get(fieldname) for fieldname in (
         "customer_name",
@@ -331,6 +358,15 @@ def _get_mutable_invoice_doc(data, doctype):
         "contact_email",
         "territory",
     )}
+    if cint(invoice_doc.docstatus) != 0:
+        fresh_payload = _build_fresh_invoice_payload(data, doctype)
+        fresh_payload = _clear_stale_party_fields_in_payload(
+            fresh_payload,
+            previous_customer,
+            previous_values=previous_values,
+        )
+        return frappe.get_doc(fresh_payload)
+
     invoice_doc.update(data)
     invoice_doc = _clear_stale_party_fields_for_customer_change(
         invoice_doc,
