@@ -445,6 +445,14 @@ def update_invoice(data):
         except Exception as e:
             frappe.log_error(f"Failed to create customer {customer_name}: {e}")
 
+    if invoice_doc.get("customer"):
+        resolved_customer_name = frappe.db.get_value(
+            "Customer",
+            invoice_doc.customer,
+            "customer_name",
+        )
+        invoice_doc.customer_name = resolved_customer_name or invoice_doc.get("customer_name") or invoice_doc.customer
+
     effective_price_list = _resolve_effective_price_list(
         invoice_doc.get("customer"),
         invoice_doc.get("pos_profile") or pos_profile,

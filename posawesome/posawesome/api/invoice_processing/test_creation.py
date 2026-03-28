@@ -443,6 +443,12 @@ class TestStaleNamedInvoiceHandling(unittest.TestCase):
         self.creation.frappe.db.exists = lambda doctype, name: True
         self.creation.frappe.get_doc = lambda *args: existing_doc
         self.creation.frappe.get_cached_value = lambda *args, **kwargs: 0
+        self.creation.frappe.db.get_value = (
+            lambda doctype, name, fieldname=None, **kwargs:
+                "New Customer"
+                if doctype == "Customer" and fieldname == "customer_name" and name == "CUST-NEW"
+                else None
+        )
         self.creation._save_draft_with_latest_timestamp = lambda doc: doc
 
         result = self.creation.update_invoice(
@@ -471,6 +477,7 @@ class TestStaleNamedInvoiceHandling(unittest.TestCase):
         )
 
         self.assertEqual(result["customer"], "CUST-NEW")
+        self.assertEqual(result["customer_name"], "New Customer")
         self.assertIsNone(result.get("customer_address"))
         self.assertIsNone(result.get("shipping_address_name"))
         self.assertIsNone(result.get("contact_person"))
@@ -493,6 +500,12 @@ class TestStaleNamedInvoiceHandling(unittest.TestCase):
         self.creation.frappe.db.exists = lambda doctype, name: True
         self.creation.frappe.get_doc = lambda *args: existing_doc
         self.creation.frappe.get_cached_value = lambda *args, **kwargs: 0
+        self.creation.frappe.db.get_value = (
+            lambda doctype, name, fieldname=None, **kwargs:
+                "New Customer"
+                if doctype == "Customer" and fieldname == "customer_name" and name == "CUST-NEW"
+                else None
+        )
         self.creation._save_draft_with_latest_timestamp = lambda doc: doc
 
         result = self.creation.update_invoice(
@@ -517,6 +530,7 @@ class TestStaleNamedInvoiceHandling(unittest.TestCase):
         self.assertEqual(result.get("customer_address"), "ADDR-NEW")
         self.assertEqual(result.get("shipping_address_name"), "SHIP-NEW")
         self.assertEqual(result.get("contact_person"), "CONT-NEW")
+        self.assertEqual(result.get("customer_name"), "New Customer")
 
 
 class TestPostSubmitPaymentProcessing(unittest.TestCase):

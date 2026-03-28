@@ -64,6 +64,7 @@ function resolveOrderDeliveryDate(context: any, sourceDoc: any): string | null {
 export function get_invoice_doc(context: any) {
 	let doc: any = {};
 	const sourceDoc = context.invoice_doc || {};
+	const previousCustomer = sourceDoc.customer || null;
 
 	if (sourceDoc.name) {
 		doc = { ...sourceDoc };
@@ -131,7 +132,12 @@ export function get_invoice_doc(context: any) {
 			: {};
 	const resolvedCustomer =
 		context.customer || customerDetails.customer || doc.customer || null;
+	const customerChanged =
+		Boolean(previousCustomer && resolvedCustomer && previousCustomer !== resolvedCustomer);
 	doc.customer = resolvedCustomer;
+	if (customerChanged) {
+		doc.customer_name = customerDetails.customer_name || resolvedCustomer;
+	}
 	if (!doc.customer_name && customerDetails.customer_name) {
 		doc.customer_name = customerDetails.customer_name;
 	}

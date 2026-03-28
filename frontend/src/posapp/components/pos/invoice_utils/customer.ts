@@ -89,6 +89,7 @@ export function sync_invoice_customer_details(
 	if (!details) return;
 
 	if (context.invoice_doc) {
+		if (details.customer_name) context.invoice_doc.customer_name = details.customer_name;
 		if (details.customer_address)
 			context.invoice_doc.customer_address = details.customer_address;
 		if (details.territory)
