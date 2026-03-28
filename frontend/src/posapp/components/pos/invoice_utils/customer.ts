@@ -95,11 +95,21 @@ export function sync_invoice_customer_details(
 	if (context.invoice_doc) {
 		const activeCustomer =
 			typeof context.customer === "string" ? context.customer.trim() : "";
-		if (activeCustomer || details?.customer) {
-			context.invoice_doc.customer = activeCustomer || details?.customer || null;
+		context.invoice_doc.customer = activeCustomer || details?.customer || null;
+		if (!details) {
+			details =
+				context.customer_info?.customer === activeCustomer
+					? context.customer_info
+					: null;
 		}
 		if (!details) {
-			details = context.customer_info;
+			context.invoice_doc.customer_name = activeCustomer || null;
+			context.invoice_doc.customer_address = null;
+			context.invoice_doc.shipping_address_name = null;
+			context.invoice_doc.contact_person = null;
+			context.invoice_doc.territory = null;
+			context.invoice_doc.customer = activeCustomer || null;
+			return;
 		}
 		if (details?.customer_name) {
 			context.invoice_doc.customer_name = details.customer_name;

@@ -35,6 +35,8 @@ export function usePaymentPrinting(options: PaymentPrintingOptions) {
 
 		if (input.doctype) {
 			doctype = input.doctype;
+		} else if (input.doc?.doctype) {
+			doctype = input.doc.doctype;
 		} else if (type === "Quotation") {
 			doctype = "Quotation";
 		} else if (type === "Order" && profile.posa_create_only_sales_order) {

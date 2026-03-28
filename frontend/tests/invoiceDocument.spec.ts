@@ -133,4 +133,65 @@ describe("get_invoice_doc", () => {
 		expect(doc.contact_email).toBeNull();
 		expect(doc.territory).toBeNull();
 	});
+
+	it("ignores mismatched cached customer info when resolving a different customer", () => {
+		const context: any = {
+			invoiceType: "Invoice",
+			pos_profile: {
+				company: "Test Company",
+				name: "Main POS",
+				currency: "PKR",
+				payments: [{ mode_of_payment: "Cash", account: "Cash", type: "Cash", default: 1 }],
+			},
+			selected_currency: "PKR",
+			conversion_rate: 1,
+			company: { default_currency: "PKR" },
+			price_list_currency: "PKR",
+			get_price_list: () => "Standard Selling",
+			customer_info: {
+				customer: "CUST-OLD",
+				customer_name: "Old Customer",
+				customer_address: "ADDR-OLD",
+				shipping_address: "SHIP-OLD",
+				contact_person: "CONT-OLD",
+				territory: "Old Territory",
+			},
+			customer: "CUST-NEW",
+			isReturnInvoice: false,
+			items: [],
+			packed_items: [],
+			Total: 0,
+			subtotal: 0,
+			additional_discount: 0,
+			additional_discount_percentage: 0,
+			roundAmount: (value: number) => value,
+			pos_opening_shift: { name: "SHIFT-1" },
+			posa_offers: [],
+			posa_coupons: [],
+			selected_delivery_charge: null,
+			delivery_charges_rate: 0,
+			posting_date_display: "2026-03-28",
+			formatDateForBackend: (value: string) => value,
+			invoice_doc: {
+				name: "ACC-SINV-0002",
+				customer: "CUST-OLD",
+				customer_name: "Old Customer",
+				customer_address: "ADDR-OLD",
+				shipping_address_name: "SHIP-OLD",
+				contact_person: "CONT-OLD",
+				territory: "Old Territory",
+				payments: [],
+				taxes: [],
+			},
+		};
+
+		const doc = get_invoice_doc(context);
+
+		expect(doc.customer).toBe("CUST-NEW");
+		expect(doc.customer_name).toBe("CUST-NEW");
+		expect(doc.customer_address).toBeNull();
+		expect(doc.shipping_address_name).toBeNull();
+		expect(doc.contact_person).toBeNull();
+		expect(doc.territory).toBeNull();
+	});
 });

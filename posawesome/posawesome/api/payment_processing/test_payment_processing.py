@@ -239,6 +239,15 @@ class TestPosPaymentProcessing(unittest.TestCase):
         )
 
         self.assertEqual(rows, [])
+        self.assertGreaterEqual(mock_frappe.get_list.call_count, 1)
+        payment_entry_calls = [
+            call
+            for call in mock_frappe.get_list.call_args_list
+            if call.args and call.args[0] == "Payment Entry"
+        ]
+        self.assertGreaterEqual(len(payment_entry_calls), 1)
+        for call in payment_entry_calls:
+            self.assertEqual(call.kwargs["filters"]["payment_type"], "Receive")
 
     @patch(
         "posawesome.posawesome.api.payment_processing.data.get_erpnext_outstanding_invoices",

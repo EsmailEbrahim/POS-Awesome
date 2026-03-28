@@ -756,7 +756,12 @@ export function usePaymentSubmission(options: PaymentSubmissionOptions) {
 			}
 
 			// Success
-			if (print && onPrint && !waitForInvoiceProcessing) {
+			if (
+				print &&
+				onPrint &&
+				!waitForInvoiceProcessing &&
+				!hasPostSubmitPaymentWork
+			) {
 				onPrint(doc, {
 					name: responseInvoiceName,
 					doctype: submittedDoctype,
@@ -833,7 +838,10 @@ export function usePaymentSubmission(options: PaymentSubmissionOptions) {
 				);
 			}
 
-			if (onScheduleBackgroundCheck) {
+			if (
+				onScheduleBackgroundCheck &&
+				(waitForInvoiceProcessing || hasPostSubmitPaymentWork)
+			) {
 				onScheduleBackgroundCheck({
 					name: responseInvoiceName,
 					doctype: submittedDoctype,

@@ -428,6 +428,9 @@ def get_available_credit(customer, company):
 
     remaining_pay_outflow = sum(flt(row.unallocated_amount) for row in outstanding_payments)
 
+    # Net customer "Pay" outflows against available "Receive" advances in the
+    # same iteration order returned by frappe.get_all. This preserves the
+    # existing FIFO-style behavior by list order without imposing a new sort.
     for row in advances:
         available_credit = flt(row.unallocated_amount)
         if remaining_pay_outflow > 0:

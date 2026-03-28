@@ -23,10 +23,21 @@ describe("invoice customer sync", () => {
 	it("updates local draft customer title immediately on customer change", () => {
 		const context: any = {
 			customer: "CUST-NEW",
-			customer_info: {},
+			customer_info: {
+				customer: "CUST-OLD",
+				customer_name: "Old Customer",
+				customer_address: "ADDR-OLD",
+				shipping_address: "SHIP-OLD",
+				contact_person: "CONT-OLD",
+				territory: "Old Territory",
+			},
 			invoice_doc: {
 				customer: "CUST-OLD",
 				customer_name: "Old Customer",
+				customer_address: "ADDR-OLD",
+				shipping_address_name: "SHIP-OLD",
+				contact_person: "CONT-OLD",
+				territory: "Old Territory",
 			},
 		};
 
@@ -34,6 +45,10 @@ describe("invoice customer sync", () => {
 
 		expect(context.invoice_doc.customer).toBe("CUST-NEW");
 		expect(context.invoice_doc.customer_name).toBe("CUST-NEW");
+		expect(context.invoice_doc.customer_address).toBeNull();
+		expect(context.invoice_doc.shipping_address_name).toBeNull();
+		expect(context.invoice_doc.contact_person).toBeNull();
+		expect(context.invoice_doc.territory).toBeNull();
 	});
 
 	it("ignores stale async customer info responses", async () => {

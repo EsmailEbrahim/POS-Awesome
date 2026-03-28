@@ -109,6 +109,7 @@ const { rtlClasses } = useRtl();
 // For now, let's use a proxy helper.
 const instance = getCurrentInstance();
 const $theme = instance?.proxy?.$theme || { toggle: () => {}, isDark: false }; // Fallback
+const __ = instance?.proxy?.__ || ((value) => value);
 
 // Utils
 const { overlayVisible: globalLoading } = useLoading();

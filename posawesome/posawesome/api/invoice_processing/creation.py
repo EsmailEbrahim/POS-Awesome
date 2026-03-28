@@ -45,8 +45,16 @@ def _has_post_submit_payment_work(data):
 def _run_post_submit_payments(invoice_doc, data, is_payment_entry, total_cash, cash_account, payments):
     from posawesome.posawesome.api.invoice_processing.payment import _create_change_payment_entries
 
-    redeeming_customer_credit(invoice_doc, data, is_payment_entry, total_cash, cash_account, payments)
-    _create_change_payment_entries(invoice_doc, data, invoice_doc.pos_profile, cash_account)
+    receive_entries = redeeming_customer_credit(
+        invoice_doc, data, is_payment_entry, total_cash, cash_account, payments
+    )
+    _create_change_payment_entries(
+        invoice_doc,
+        data,
+        invoice_doc.pos_profile,
+        cash_account,
+        receive_entries,
+    )
 
 
 def _process_post_submit_payments(
@@ -78,6 +86,7 @@ def _process_post_submit_payments(
             queue="default",
             timeout=3000,
             is_async=True,
+            enqueue_after_commit=True,
             kwargs={
                 "invoice": invoice_doc.name,
                 "doctype": invoice_doc.doctype,
@@ -898,7 +907,7 @@ def submit_in_background_job(kwargs):
         frappe.publish_realtime(
             "pos_invoice_submit_error",
             {"invoice": invoice, "error": error_msg},
-            user=frappe.session.user,
+            user=user,
         )
 
 @frappe.whitelist()

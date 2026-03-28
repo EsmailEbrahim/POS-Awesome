@@ -1,16 +1,22 @@
 // @vitest-environment jsdom
-import { beforeEach, describe, expect, it } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 import {
 	clearChunkRecoveryState,
 	isDynamicImportFailure,
 	recoverFromChunkLoadError,
+	scheduleAfterStableBoot,
 } from "../src/posapp/utils/chunkLoadRecovery";
 
 describe("chunk load recovery helpers", () => {
 	beforeEach(() => {
 		window.sessionStorage.clear();
 		window.localStorage.clear();
+	});
+
+	afterEach(() => {
+		vi.useRealTimers();
+		vi.restoreAllMocks();
 	});
 
 	it("detects dynamic import failures", () => {
@@ -49,6 +55,20 @@ describe("chunk load recovery helpers", () => {
 		expect(
 			window.sessionStorage.getItem("posa_chunk_cache_recovery_once"),
 		).toBe("1");
+	});
+
+	it("swallows rejected stable-boot tasks to avoid unhandled rejections", async () => {
+		vi.useFakeTimers();
+		const warnSpy = vi.spyOn(console, "warn").mockImplementation(() => {});
+
+		scheduleAfterStableBoot(() => Promise.reject(new Error("boom")));
+
+		await vi.runAllTimersAsync();
+
+		expect(warnSpy).toHaveBeenCalledWith(
+			"Chunk recovery: stable boot task failed",
+			expect.any(Error),
+		);
 	});
 });
 

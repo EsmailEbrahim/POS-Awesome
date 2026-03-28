@@ -691,6 +691,42 @@ class TestPostSubmitPaymentProcessing(unittest.TestCase):
             self.frappe._publish_realtime_calls[0]["kwargs"]["user"],
             "cashier@example.com",
         )
+        self.assertTrue(queued["enqueue_after_commit"])
+
+    def test_run_post_submit_payments_passes_created_receive_entries_to_change_entry_creation(self):
+        receive_entries = [{"name": "ACC-PAY-0001", "unallocated_amount": 4}]
+        invoice_doc = FakeDoc(
+            doctype="Sales Invoice",
+            name="SINV-0005",
+            pos_profile="Main POS",
+            company="Test Company",
+        )
+
+        payment_module_name = "posawesome.posawesome.api.invoice_processing.payment"
+        payment_module = types.ModuleType(payment_module_name)
+        captured_calls = []
+        payment_module._create_change_payment_entries = (
+            lambda *args, **kwargs: captured_calls.append((args, kwargs))
+        )
+        sys.modules[payment_module_name] = payment_module
+
+        original_redeem = self.creation.redeeming_customer_credit
+        self.creation.redeeming_customer_credit = lambda *args, **kwargs: receive_entries
+
+        try:
+            self.creation._run_post_submit_payments(
+                invoice_doc,
+                {"paid_change": 4},
+                is_payment_entry=1,
+                total_cash=100,
+                cash_account={"account": "Cash"},
+                payments=[{"mode_of_payment": "Cash", "amount": 100}],
+            )
+        finally:
+            self.creation.redeeming_customer_credit = original_redeem
+
+        self.assertEqual(len(captured_calls), 1)
+        self.assertEqual(captured_calls[0][0][4], receive_entries)
 
     def test_process_post_submit_payments_job_publishes_completion_event(self):
         invoice_doc = FakeDoc(
@@ -726,6 +762,45 @@ class TestPostSubmitPaymentProcessing(unittest.TestCase):
         self.assertEqual(
             self.frappe._publish_realtime_calls[0]["args"][0],
             "pos_post_submit_payments_completed",
+        )
+
+    def test_submit_in_background_job_uses_captured_user_for_submit_errors(self):
+        invoice_doc = FakeDoc(
+            doctype="Sales Invoice",
+            name="SINV-ERR-0001",
+            docstatus=0,
+            pos_profile="Main POS",
+            company="Test Company",
+            customer="CUST-0001",
+            is_return=0,
+            redeem_loyalty_points=0,
+            loyalty_program=None,
+            cost_center=None,
+            flags=types.SimpleNamespace(ignore_permissions=False),
+        )
+        invoice_doc.submit = lambda: (_ for _ in ()).throw(Exception("submit failed"))
+        self.creation.frappe.get_doc = lambda doctype, name: invoice_doc
+        self.creation._save_draft_with_latest_timestamp = lambda doc: doc
+        self.creation.frappe.session.user = "session-user@example.com"
+
+        self.creation.submit_in_background_job(
+            {
+                "invoice": "SINV-ERR-0001",
+                "doctype": "Sales Invoice",
+                "data": {"paid_change": 4},
+                "payments": [],
+                "user": "cashier@example.com",
+            }
+        )
+
+        self.assertGreaterEqual(len(self.frappe._publish_realtime_calls), 1)
+        self.assertEqual(
+            self.frappe._publish_realtime_calls[0]["args"][0],
+            "pos_invoice_submit_error",
+        )
+        self.assertEqual(
+            self.frappe._publish_realtime_calls[0]["kwargs"]["user"],
+            "cashier@example.com",
         )
 
     def test_submit_in_background_job_publishes_invoice_processed_before_queueing_post_submit_work(self):

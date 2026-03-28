@@ -11,7 +11,9 @@ from erpnext.accounts.doctype.sales_invoice.sales_invoice import get_bank_cash_a
 from posawesome.posawesome.api.payment_processing.utils import get_party_account
 from posawesome.posawesome.api.payment_processing.utils import get_bank_cash_account as get_bank_account_processing
 
-def _create_change_payment_entries(invoice_doc, data, pos_profile=None, cash_account=None):
+def _create_change_payment_entries(
+    invoice_doc, data, pos_profile=None, cash_account=None, receive_entries=None
+):
     """Create change-related Payment Entries after the invoice is submitted."""
 
     credit_change_amount = flt(data.get("credit_change"))
@@ -72,7 +74,7 @@ def _create_change_payment_entries(invoice_doc, data, pos_profile=None, cash_acc
 
     posting_date = invoice_doc.get("posting_date") or nowdate()
     reference_no = invoice_doc.get("posa_pos_opening_shift")
-    created_receive_payment_entries = data.get("created_receive_payment_entries") or []
+    created_receive_payment_entries = receive_entries or data.get("created_receive_payment_entries") or []
 
     def _normalized_text(value):
         return str(value or "").strip().lower()

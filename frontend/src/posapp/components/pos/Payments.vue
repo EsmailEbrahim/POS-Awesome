@@ -280,6 +280,7 @@ const props = defineProps({
 const { proxy } = getCurrentInstance();
 const eventBus = proxy.eventBus;
 const __ = window.__;
+const frappe = window.frappe;
 
 const invoiceStore = useInvoiceStore();
 const customersStore = useCustomersStore();
@@ -1041,7 +1042,6 @@ const runDeferredPrintWorkflow = async ({
 		}
 
 		const freshDoc = await fetchSubmittedInvoiceDoc(name, resolvedDoctype);
-		invoiceStore.setInvoiceDoc(freshDoc);
 
 		if (isOffline()) {
 			await printOfflineInvoice(freshDoc);
@@ -1081,7 +1081,7 @@ const scheduleBackgroundStatusCheck = ({
 		});
 	}
 
-	if (!waitForInvoiceProcessing) {
+	if (waitForInvoiceProcessing) {
 		return;
 	}
 
@@ -1138,12 +1138,19 @@ const submitInvoiceWrapper = async (print, callbackOverrides = {}, options = {})
 		await submitInvoice(print, {
 			onPrint: (doc, printOptions = {}) => {
 				if (print) {
-					if (printOptions.waitForPostSubmitPayments) {
+					if (
+						printOptions.waitForPostSubmitPayments ||
+						printOptions.waitForInvoiceProcessing
+					) {
 						void runDeferredPrintWorkflow({
 							name: printOptions.name || doc?.name,
 							doctype: printOptions.doctype,
-							waitForPostSubmitPayments: true,
-							waitForInvoiceProcessing: false,
+							waitForPostSubmitPayments: Boolean(
+								printOptions.waitForPostSubmitPayments,
+							),
+							waitForInvoiceProcessing: Boolean(
+								printOptions.waitForInvoiceProcessing,
+							),
 						});
 					} else if (isOffline()) {
 						printOfflineInvoice(doc);

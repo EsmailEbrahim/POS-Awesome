@@ -58,7 +58,9 @@ export function scheduleAfterStableBoot(task: () => void | Promise<void>) {
 	}
 
 	window.setTimeout(() => {
-		void task();
+		void Promise.resolve(task()).catch((error) => {
+			console.warn("Chunk recovery: stable boot task failed", error);
+		});
 	}, CHUNK_RECOVERY_STABLE_DELAY_MS);
 }
 

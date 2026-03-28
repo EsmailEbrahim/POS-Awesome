@@ -16,7 +16,9 @@ function recordPendingBundleActivation(version: string) {
 	) {
 		return;
 	}
-	window.sessionStorage.setItem("posa_pending_bundle_activation", version);
+	try {
+		window.sessionStorage.setItem("posa_pending_bundle_activation", version);
+	} catch {}
 }
 
 declare global {

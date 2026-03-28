@@ -1,10 +1,47 @@
 const PENDING_BUNDLE_ACTIVATION_KEY = "posa_pending_bundle_activation";
 
 function getStorage(): Storage | null {
-	if (typeof window === "undefined" || !window.sessionStorage) {
+	try {
+		if (typeof window === "undefined" || !window.sessionStorage) {
+			return null;
+		}
+
+		return window.sessionStorage;
+	} catch {
 		return null;
 	}
-	return window.sessionStorage;
+}
+
+function safeStorageGetItem(storage: Storage | null, key: string): string | null {
+	if (!storage) {
+		return null;
+	}
+
+	try {
+		return storage.getItem(key);
+	} catch {
+		return null;
+	}
+}
+
+function safeStorageSetItem(storage: Storage | null, key: string, value: string) {
+	if (!storage) {
+		return;
+	}
+
+	try {
+		storage.setItem(key, value);
+	} catch {}
+}
+
+function safeStorageRemoveItem(storage: Storage | null, key: string) {
+	if (!storage) {
+		return;
+	}
+
+	try {
+		storage.removeItem(key);
+	} catch {}
 }
 
 function getPendingBundleActivationVersion(): string | null {
@@ -12,7 +49,7 @@ function getPendingBundleActivationVersion(): string | null {
 	if (!storage) {
 		return null;
 	}
-	return storage.getItem(PENDING_BUNDLE_ACTIVATION_KEY);
+	return safeStorageGetItem(storage, PENDING_BUNDLE_ACTIVATION_KEY);
 }
 
 async function postMessageToActiveServiceWorker(
@@ -53,7 +90,7 @@ export function recordPendingBundleActivation(version: string) {
 	if (!storage || !version) {
 		return;
 	}
-	storage.setItem(PENDING_BUNDLE_ACTIVATION_KEY, version);
+	safeStorageSetItem(storage, PENDING_BUNDLE_ACTIVATION_KEY, version);
 }
 
 export function clearPendingBundleActivation() {
@@ -61,7 +98,7 @@ export function clearPendingBundleActivation() {
 	if (!storage) {
 		return;
 	}
-	storage.removeItem(PENDING_BUNDLE_ACTIVATION_KEY);
+	safeStorageRemoveItem(storage, PENDING_BUNDLE_ACTIVATION_KEY);
 }
 
 export async function finalizePendingBundleActivation(

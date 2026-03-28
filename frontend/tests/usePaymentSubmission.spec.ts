@@ -125,7 +125,7 @@ describe("usePaymentSubmission", () => {
 		);
 	});
 
-	it("marks print to wait for post-submit payments when invoice is already submitted", async () => {
+	it("schedules deferred printing instead of calling onPrint when post-submit work remains", async () => {
 		const invoiceService =
 			(await import("../src/posapp/services/invoiceService")).default;
 		(invoiceService.submitInvoice as any).mockResolvedValue({
@@ -144,6 +144,7 @@ describe("usePaymentSubmission", () => {
 			grand_total: 690,
 		});
 		const onPrint = vi.fn();
+		const onScheduleBackgroundCheck = vi.fn();
 
 		const { submitInvoice } = usePaymentSubmission({
 			invoiceDoc,
@@ -171,18 +172,80 @@ describe("usePaymentSubmission", () => {
 		await submitInvoice(true, {
 			onPrint,
 			onFinishNavigation: vi.fn(),
-			onScheduleBackgroundCheck: vi.fn(),
+			onScheduleBackgroundCheck,
 		});
 
-		expect(onPrint).toHaveBeenCalledWith(
-			invoiceDoc.value,
+		expect(onPrint).not.toHaveBeenCalled();
+		expect(onScheduleBackgroundCheck).toHaveBeenCalledWith(
 			expect.objectContaining({
-			name: "ACC-SINV-0002",
+				name: "ACC-SINV-0002",
 				doctype: "Sales Invoice",
 				waitForInvoiceProcessing: false,
 				waitForPostSubmitPayments: true,
 			}),
 		);
+	});
+
+	it("prints immediately when there is no deferred post-submit work", async () => {
+		const invoiceService =
+			(await import("../src/posapp/services/invoiceService")).default;
+		(invoiceService.submitInvoice as any).mockResolvedValue({
+			name: "ACC-SINV-0004",
+			doctype: "Sales Invoice",
+			docstatus: 1,
+		});
+
+		const invoiceDoc = ref<any>({
+			name: "ACC-SINV-0004",
+			doctype: "Sales Invoice",
+			is_return: 0,
+			items: [],
+			payments: [{ mode_of_payment: "Cash", amount: 690, type: "Cash" }],
+			rounded_total: 690,
+			grand_total: 690,
+		});
+		const onPrint = vi.fn();
+		const onScheduleBackgroundCheck = vi.fn();
+
+		const { submitInvoice } = usePaymentSubmission({
+			invoiceDoc,
+			posProfile: ref({
+				posa_allow_submissions_in_background_job: 1,
+				create_pos_invoice_instead_of_sales_invoice: 0,
+			}),
+			stockSettings: ref({}),
+			invoiceType: ref("Invoice"),
+			formatFloat: (value) => Number(value || 0),
+			stores: {
+				toastStore: { show: vi.fn() },
+				uiStore: { setLastInvoice: vi.fn(), setLastStockAdjustment: vi.fn() },
+				customersStore: { setSelectedCustomer: vi.fn() },
+				invoiceStore: { invoiceDoc: invoiceDoc.value },
+			},
+			isCashback: ref(true),
+			paidChange: ref(0),
+			creditChange: ref(0),
+			redeemedCustomerCredit: ref(0),
+			customerCreditDict: ref([]),
+			diff_payment: ref(0),
+		});
+
+		await submitInvoice(true, {
+			onPrint,
+			onFinishNavigation: vi.fn(),
+			onScheduleBackgroundCheck,
+		});
+
+		expect(onPrint).toHaveBeenCalledWith(
+			invoiceDoc.value,
+			expect.objectContaining({
+				name: "ACC-SINV-0004",
+				doctype: "Sales Invoice",
+				waitForInvoiceProcessing: false,
+				waitForPostSubmitPayments: false,
+			}),
+		);
+		expect(onScheduleBackgroundCheck).not.toHaveBeenCalled();
 	});
 
 	it("shows a merged processing toast instead of a plain success toast when post-submit payments are pending", async () => {

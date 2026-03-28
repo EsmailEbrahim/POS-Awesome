@@ -182,20 +182,26 @@ export function get_invoice_doc(context: any) {
 			: {};
 	const resolvedCustomer =
 		context.customer || customerDetails.customer || doc.customer || null;
+	const matchingCustomerDetails =
+		customerDetails?.customer &&
+		resolvedCustomer &&
+		customerDetails.customer === resolvedCustomer
+			? customerDetails
+			: {};
 	const customerChanged =
 		Boolean(previousCustomer && resolvedCustomer && previousCustomer !== resolvedCustomer);
 	doc.customer = resolvedCustomer;
 	if (customerChanged) {
-		doc.customer_name = customerDetails.customer_name || resolvedCustomer;
+		doc.customer_name = matchingCustomerDetails.customer_name || resolvedCustomer;
 	}
-	if (!doc.customer_name && customerDetails.customer_name) {
-		doc.customer_name = customerDetails.customer_name;
+	if (!doc.customer_name && matchingCustomerDetails.customer_name) {
+		doc.customer_name = matchingCustomerDetails.customer_name;
 	}
 	clearStalePartyFieldsForCustomerChange(
 		doc,
 		sourceDoc,
 		customerChanged,
-		customerDetails,
+		matchingCustomerDetails,
 	);
 	if (doc.doctype === "Quotation") {
 		doc.quotation_to = doc.quotation_to || "Customer";

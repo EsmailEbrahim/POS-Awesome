@@ -19,8 +19,9 @@ class FakeChildRow(dict):
 class FakePaymentEntry:
     def __init__(self):
         self.references = []
-        self.flags = types.SimpleNamespace(ignore_permissions=False)
+        self.flags = types.SimpleNamespace(ignore_permissions=False, submitted=True)
         self.name = "ACC-PAY-TEST-0001"
+        self.docstatus = 1
 
     def update(self, other=None, **kwargs):
         if other:
@@ -50,6 +51,8 @@ class FakePaymentEntry:
         return None
 
     def submit(self):
+        self.docstatus = 1
+        self.flags.submitted = True
         return None
 
 
@@ -202,6 +205,8 @@ class TestRedeemingCustomerCredit(unittest.TestCase):
         payment_entry = self.created_docs[0]
         self.assertEqual(payment_entry.paid_amount, 10)
         self.assertEqual(payment_entry.received_amount, 10)
+        self.assertEqual(payment_entry.docstatus, 1)
+        self.assertTrue(payment_entry.flags.submitted)
         self.assertEqual(len(payment_entry.references), 1)
         self.assertEqual(payment_entry.references[0]["allocated_amount"], 6)
         self.assertEqual(
