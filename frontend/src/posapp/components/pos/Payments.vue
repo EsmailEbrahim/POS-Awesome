@@ -1136,6 +1136,32 @@ const rebalancePreferredPaymentCoverage = (giftCardAmount = giftCardAppliedAmoun
 	});
 };
 
+const mergeProfilePaymentsIntoReturn = (doc: any) => {
+	const profilePayments = buildProfilePaymentLines();
+	if (!profilePayments.length) return;
+
+	if (!Array.isArray(doc.payments)) {
+		doc.payments = [];
+	}
+
+	const existingModes = new Set(
+		doc.payments.map((p: any) => p?.mode_of_payment).filter(Boolean),
+	);
+
+	profilePayments.forEach((pp: any) => {
+		if (!existingModes.has(pp.mode_of_payment)) {
+			doc.payments.push({
+				mode_of_payment: pp.mode_of_payment,
+				amount: 0,
+				base_amount: 0,
+				default: pp.default,
+				account: pp.account,
+				type: pp.type,
+			});
+		}
+	});
+};
+
 const ensurePaymentLinesInitialized = (doc = invoice_doc.value) => {
 	if (!doc) {
 		return null;
@@ -1146,6 +1172,11 @@ const ensurePaymentLinesInitialized = (doc = invoice_doc.value) => {
 		if (fallbackPayments.length) {
 			doc.payments = fallbackPayments;
 		}
+	}
+
+	// For returns, always show all profile payment methods so user can split refund
+	if (doc.is_return) {
+		mergeProfilePaymentsIntoReturn(doc);
 	}
 
 	const initializedPayment = initializePaymentLinesForDialog(
@@ -1265,6 +1296,15 @@ const updateCreditChange = (rawValue) => {
 const handlePaymentAmountChange = (payment, event) => {
 	last_payment_change_was_cash.value = isCashLikePayment(payment);
 	setFormatedCurrency(payment, "amount", null, false, event);
+
+	// For return invoices: user enters a positive number but we store it as negative (refund)
+	if (invoice_doc.value?.is_return && payment.amount > 0) {
+		payment.amount = -payment.amount;
+	}
+	if (payment.base_amount !== undefined && invoice_doc.value?.is_return) {
+		const conversion_rate = invoice_doc.value.conversion_rate || 1;
+		payment.base_amount = flt(payment.amount * conversion_rate, currency_precision.value);
+	}
 
 	nextTick(() => {
 		autoBalancePayments(payment);
