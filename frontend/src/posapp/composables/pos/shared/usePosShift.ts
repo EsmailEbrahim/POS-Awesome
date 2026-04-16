@@ -9,9 +9,13 @@ import {
 	clearOpeningStorage,
 	setTaxTemplate,
 	isOffline,
+	getBootstrapSnapshot,
+	setBootstrapSnapshot,
 } from "../../../../offline/index";
 import { getValidCachedOpeningForCurrentUser } from "../../../utils/openingCache";
+import { createBootstrapSnapshotFromRegisterData } from "../../../../offline/bootstrapSnapshot";
 
+declare const __BUILD_VERSION__: string;
 declare const frappe: any;
 
 type SkippedPrintedInvoice = {
@@ -76,6 +80,8 @@ export function usePosShift(openDialog?: () => void) {
 	const instance = getCurrentInstance();
 	const proxy: any = instance?.proxy;
 	const eventBus: any = proxy?.eventBus || inject("eventBus");
+	const buildVersion =
+		typeof __BUILD_VERSION__ !== "undefined" ? __BUILD_VERSION__ : null;
 	const toastStore = useToastStore();
 	const uiStore = useUIStore();
 
@@ -89,6 +95,13 @@ export function usePosShift(openDialog?: () => void) {
 		pos_profile.value = data.pos_profile;
 		pos_opening_shift.value = data.pos_opening_shift;
 		uiStore.setRegisterData(data);
+		setBootstrapSnapshot(
+			createBootstrapSnapshotFromRegisterData(
+				data,
+				getBootstrapSnapshot(),
+				{ buildVersion },
+			),
+		);
 
 		try {
 			frappe.realtime.emit("pos_profile_registered");
