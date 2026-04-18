@@ -141,6 +141,11 @@ describe("bootstrap snapshot", () => {
 		expect(result.mode).toBe("normal");
 		expect(result.capabilities.canApplyPricingOffline).toBe(false);
 		expect(result.capabilities.canSellOffline).toBe(true);
+		expect(
+			result.capabilitySummaries.find(
+				(summary) => summary.id === "pricing_offline",
+			)?.status,
+		).toBe("degraded");
 	});
 
 	it("collects expanded prerequisites from cached state", () => {
@@ -213,7 +218,7 @@ describe("bootstrap snapshot", () => {
 		);
 	});
 
-	it("keeps sell capability available when only warning prerequisites are missing", () => {
+	it("keeps sell capability available when optional non-selling prerequisites are missing", () => {
 		const result = validateBootstrapSnapshot(
 			buildBootstrapSnapshot({
 				buildVersion: "build-2",
@@ -227,9 +232,12 @@ describe("bootstrap snapshot", () => {
 					payment_methods: "ready",
 					items_cache_ready: "ready",
 					customers_cache_ready: "ready",
+					pricing_rules_snapshot: "ready",
+					pricing_rules_context: "ready",
+					tax_inclusive: "ready",
+					stock_cache_ready: "ready",
 					sales_persons: "missing",
 					item_groups: "missing",
-					stock_cache_ready: "missing",
 				},
 			}),
 			{
@@ -248,9 +256,47 @@ describe("bootstrap snapshot", () => {
 		expect(result.mode).toBe("normal");
 		expect(result.capabilities.canSellOffline).toBe(true);
 		expect(decision.limitedMode).toBe(false);
-		// Warning codes are empty in normal mode — optional missing items do not
-		// surface as actionable warnings.
-		expect(decision.warningCodes).toEqual([]);
+		expect(decision.primaryWarning.active).toBe(false);
+	});
+
+	it("requires stock-confidence override by default when stock cache is unverified", () => {
+		const result = validateBootstrapSnapshot(
+			buildBootstrapSnapshot({
+				buildVersion: "build-2",
+				profileName: "Main POS",
+				profileModified: "2026-04-08 10:00:00",
+				openingShiftName: "POS-OPEN-1",
+				openingShiftUser: "test@example.com",
+				prerequisites: {
+					pos_profile: "ready",
+					pos_opening_shift: "ready",
+					payment_methods: "ready",
+					items_cache_ready: "ready",
+					customers_cache_ready: "ready",
+					stock_cache_ready: "missing",
+				},
+			}),
+			{
+				buildVersion: "build-2",
+				profileName: "Main POS",
+				profileModified: "2026-04-08 10:00:00",
+				sessionUser: "test@example.com",
+			},
+		);
+
+		const decision = resolveBootstrapRuntimeState(result);
+
+		expect(result.mode).toBe("normal");
+		expect(result.capabilities.canSellOffline).toBe(true);
+		expect(result.capabilities.canTrustStockOffline).toBe(false);
+		expect(
+			result.capabilitySummaries.find(
+				(summary) => summary.id === "stock_confidence_offline",
+			)?.status,
+		).toBe("override_required");
+		expect(decision.limitedMode).toBe(true);
+		expect(decision.primaryWarning.capabilityId).toBe("stock_confidence_offline");
+		expect(decision.primaryWarning.active).toBe(true);
 	});
 
 	it("blocks sell capability when item or customer caches are not ready", () => {
@@ -287,6 +333,7 @@ describe("bootstrap snapshot", () => {
 				pos_profile: {
 					name: "POS-1",
 					modified: "2026-04-08 10:00:00",
+					payments: [{ mode_of_payment: "Cash" }],
 				},
 				pos_opening_shift: {
 					name: "SHIFT-1",
@@ -301,6 +348,7 @@ describe("bootstrap snapshot", () => {
 		expect(snapshot.opening_shift_user).toBe("test@example.com");
 		expect(snapshot.prerequisites.pos_profile).toBe("ready");
 		expect(snapshot.prerequisites.pos_opening_shift).toBe("ready");
+		expect(snapshot.prerequisites.payment_methods).toBe("ready");
 	});
 
 	it("stamps the current build version into register snapshot updates", () => {
@@ -501,6 +549,7 @@ describe("bootstrap snapshot", () => {
 		expect(result.mode).toBe("limited");
 		expect(result.reasons).toContain("snapshot_missing");
 		expect(result.capabilities.canSellOffline).toBe(false);
+		expect(decisionFor(result).primaryWarning.active).toBe(true);
 	});
 
 	it("requires confirmation before continuing offline on snapshot mismatch", () => {
@@ -564,3 +613,7 @@ describe("bootstrap snapshot", () => {
 		expect(decision.warningCodes).toContain("build_version_mismatch");
 	});
 });
+
+function decisionFor(validation: ReturnType<typeof validateBootstrapSnapshot>) {
+	return resolveBootstrapRuntimeState(validation);
+}
