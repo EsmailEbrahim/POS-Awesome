@@ -157,6 +157,10 @@ import {
 	resolveBootstrapWarningUiState,
 	shouldLiftBootstrapWarningStartupGate,
 } from "../utils/bootstrapWarningVisibility";
+import {
+	reconcileBuildChangeOnStartup,
+	reconcileWhenBackOnline,
+} from "../utils/buildCacheReconciler";
 
 /**
  * Frappe Desk UI selectors to hide in POS view.
@@ -452,12 +456,26 @@ function scheduleBootCriticalWarmSync() {
 }
 
 function triggerOnlineResumeSync() {
-	return offlineSyncRuntime.triggerOnlineResumeSync().catch((error) => {
-		console.error("Failed to trigger online resume sync", error, syncCoordinator.getLastRunSummary());
-		return false;
-	}).finally(() => {
-		evaluateBootstrapSnapshot({ allowPrompt: false });
-	});
+	return reconcileWhenBackOnline({
+		runtimeBuildVersion: BUILD_VERSION,
+	})
+		.catch((error) => {
+			console.error("Failed to reconcile build caches after reconnect", error);
+			return null;
+		})
+		.then(() =>
+			offlineSyncRuntime.triggerOnlineResumeSync().catch((error) => {
+				console.error(
+					"Failed to trigger online resume sync",
+					error,
+					syncCoordinator.getLastRunSummary(),
+				);
+				return false;
+			}),
+		)
+		.finally(() => {
+			evaluateBootstrapSnapshot({ allowPrompt: false });
+		});
 }
 
 function triggerOperatorRefreshSync(options = {}) {
@@ -810,6 +828,10 @@ const setupNetworkListeners = () => {
 const initializeData = async () => {
 	await initPromise;
 	await memoryInitPromise;
+	await reconcileBuildChangeOnStartup({
+		runtimeBuildVersion: BUILD_VERSION,
+		isOnline: !isOffline(),
+	});
 	await ensureOfflineQueueReady();
 	await hydrateOfflineSyncResourceStates();
 	checkDbHealth().catch(() => {});
