@@ -453,11 +453,16 @@ function scheduleBootCriticalWarmSync() {
 
 function triggerOnlineResumeSync() {
 	return offlineSyncRuntime.triggerOnlineResumeSync().catch((error) => {
-		console.error("Failed to trigger online resume sync", error, syncCoordinator.getLastRunSummary());
+		console.error(
+			"Failed to trigger online resume sync",
+			error,
+			syncCoordinator.getLastRunSummary(),
+		);
 		return false;
-	}).finally(() => {
-		evaluateBootstrapSnapshot({ allowPrompt: false });
-	});
+	})
+		.finally(() => {
+			evaluateBootstrapSnapshot({ allowPrompt: false });
+		});
 }
 
 function triggerOperatorRefreshSync(options = {}) {
