@@ -493,9 +493,19 @@ export const useItemsStore = defineStore("items", () => {
 				getCacheScope(),
 			);
 
+			const isInitialBootstrapRequest =
+				!forceServer &&
+				!limitSearchEnabled.value &&
+				!searchValue &&
+				normalizedGroup === "ALL" &&
+				items.value.length === 0 &&
+				totalItemCount.value === 0;
+
 			const resolvedLimit =
 				Number.isFinite(limit) && limit! > 0
 					? limit!
+					: isInitialBootstrapRequest
+						? resolvePageSize()
 					: limitSearchEnabled.value
 						? resolveLimitSearchSize(
 								posProfile.value,
@@ -597,7 +607,10 @@ export const useItemsStore = defineStore("items", () => {
 			setItems(fetchedItems);
 			itemsLoaded.value = true;
 
-			if (!limitSearchEnabled.value) {
+			const shouldCacheFetchedItems =
+				!limitSearchEnabled.value && !isInitialBootstrapRequest;
+
+			if (shouldCacheFetchedItems) {
 				await cacheItems(cacheKey, fetchedItems);
 			}
 

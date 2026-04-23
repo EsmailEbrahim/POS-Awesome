@@ -34,6 +34,8 @@
 						:enable-background-sync="enable_background_sync"
 						:last-sync-time="lastSyncTimeLabel"
 						:sync-status="syncStatus"
+						:show-sync-progress="showSearchSyncProgress"
+						:sync-progress="syncProgressValue"
 						:context="context"
 						@esc="esc_event"
 						@enter="onEnter"
@@ -410,7 +412,14 @@ const forceCustomerPriceList = computed(() =>
 	parseBooleanSetting(pos_profile.value?.posa_force_price_from_customer_price_list),
 );
 
-const { items, filteredItems, customer_price_list, loading, isBackgroundLoading } = itemsIntegration;
+const {
+	items,
+	filteredItems,
+	customer_price_list,
+	loading,
+	isBackgroundLoading,
+	loadProgress,
+} = itemsIntegration;
 
 const displayedItems = computed(() => {
 	const baseItems = Array.isArray(filteredItems.value) ? filteredItems.value : [];
@@ -464,9 +473,24 @@ const isLoadingOrSyncing = computed(() => {
 
 const syncStatus = computed(() => {
 	if (loading.value) return __("Loading items...");
-	if (isBackgroundLoading.value) return __("Syncing offline catalog...");
+	if (isBackgroundLoading.value && syncProgressValue.value > 0) {
+		return __("Syncing items in background");
+	}
+	if (isBackgroundLoading.value) return __("Preparing background sync");
 	return "";
 });
+
+const syncProgressValue = computed(() => {
+	const progress = Number(loadProgress.value || 0);
+	if (!Number.isFinite(progress) || progress <= 0) {
+		return 0;
+	}
+	return Math.min(100, Math.round(progress));
+});
+
+const showSearchSyncProgress = computed(
+	() => isBackgroundLoading.value && items.value.length > 0,
+);
 
 const lastSyncTimeLabel = computed(() => {
 	const lastSync = itemSync.last_background_sync_time?.value;
@@ -732,7 +756,6 @@ const syncSelectorPriceList = async (incomingPriceList: unknown) => {
 	}
 
 	await itemsIntegration.get_items(true);
-	itemDetailFetcher.update_cur_items_details();
 };
 
 const toggleItemSettings = () => {
@@ -994,7 +1017,6 @@ onMounted(async () => {
 					isInitialized.value = true;
 					startItemWorker();
 					itemsSelectorSettings.loadItemSettings();
-					itemDetailFetcher.update_cur_items_details();
 					itemSync.startBackgroundSyncScheduler();
 				} catch (err: any) {
 					console.error("ItemsSelector: Initialization failed", err);
