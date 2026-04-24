@@ -15,6 +15,16 @@ class AttrDict(dict):
 
 
 def _install_stubs():
+	for package_name in (
+		"posawesome",
+		"posawesome.posawesome",
+		"posawesome.posawesome.api",
+		"posawesome.posawesome.api.offline_sync",
+	):
+		package = types.ModuleType(package_name)
+		package.__path__ = []
+		sys.modules[package_name] = package
+
 	frappe_module = types.ModuleType("frappe")
 	frappe_module._ = lambda text: text
 	frappe_module.throw = lambda message: (_ for _ in ()).throw(Exception(message))
@@ -68,6 +78,18 @@ def _install_stubs():
 		"modified": "2026-04-09T10:01:00",
 	}
 	sys.modules["posawesome.posawesome.api.utils"] = api_utils_module
+	common_spec = importlib.util.spec_from_file_location(
+		"posawesome.posawesome.api.offline_sync.common",
+		REPO_ROOT
+		/ "posawesome"
+		/ "posawesome"
+		/ "api"
+		/ "offline_sync"
+		/ "common.py",
+	)
+	common_module = importlib.util.module_from_spec(common_spec)
+	sys.modules["posawesome.posawesome.api.offline_sync.common"] = common_module
+	common_spec.loader.exec_module(common_module)
 
 
 def _load_module():
@@ -116,6 +138,9 @@ class TestOfflineSyncCurrencies(unittest.TestCase):
 			[{"key": "currency::EUR"}],
 		)
 		self.assertEqual(response["next_watermark"], "2026-04-09T10:04:00")
+		self.assertEqual(response["schema_version"], self.module.SYNC_SCHEMA_VERSION)
+		self.assertIn("next_watermark", response)
+		self.assertIn("has_more", response)
 
 	def test_sync_currency_scope_skips_unchanged_results_for_current_watermark(self):
 		response = self.module.sync_currency_scope(
@@ -127,6 +152,9 @@ class TestOfflineSyncCurrencies(unittest.TestCase):
 		self.assertEqual(response["changes"], [])
 		self.assertEqual(response["deleted"], [])
 		self.assertEqual(response["next_watermark"], "2026-04-09T10:04:00")
+		self.assertEqual(response["schema_version"], self.module.SYNC_SCHEMA_VERSION)
+		self.assertIn("next_watermark", response)
+		self.assertIn("has_more", response)
 
 
 if __name__ == "__main__":

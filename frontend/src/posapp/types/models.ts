@@ -93,6 +93,13 @@ export interface InvoiceDoc {
   [key: string]: any;
 }
 
+export interface InvoiceDocRef {
+  name?: string;
+  doctype?: string;
+}
+
+export type PartialInvoiceDoc = Partial<InvoiceDoc> & InvoiceDocRef;
+
 /**
  * A single payment line on an invoice (e.g. Cash, Card, Loyalty Points).
  */
@@ -153,6 +160,21 @@ export interface Customer {
   primary_address?: string;
   [key: string]: any;
 }
+
+export interface CustomerSummary {
+  name: string;
+  customer_name: string;
+  email_id?: string;
+  mobile_no?: string;
+  primary_address?: string;
+  [key: string]: any;
+}
+
+export interface StoredCustomer extends CustomerSummary {
+  tax_id?: string;
+}
+
+export type CustomerInfo = Record<string, unknown>;
 
 /**
  * Internal versioning metadata attached to the invoice store.
