@@ -5,6 +5,15 @@ import types
 import unittest
 
 REPO_ROOT = pathlib.Path(__file__).resolve().parents[3]
+sys.path.insert(
+	0,
+	str(REPO_ROOT / "posawesome" / "posawesome" / "api" / "test_support"),
+)
+
+from offline_sync_harness import (
+	install_offline_sync_package_stubs,
+	load_offline_sync_common,
+)
 
 
 class AttrDict(dict):
@@ -15,15 +24,7 @@ class AttrDict(dict):
 
 
 def _install_stubs():
-	for package_name in (
-		"posawesome",
-		"posawesome.posawesome",
-		"posawesome.posawesome.api",
-		"posawesome.posawesome.api.offline_sync",
-	):
-		package = types.ModuleType(package_name)
-		package.__path__ = []
-		sys.modules[package_name] = package
+	install_offline_sync_package_stubs()
 
 	frappe_module = types.ModuleType("frappe")
 	frappe_module._ = lambda text: text
@@ -78,18 +79,9 @@ def _install_stubs():
 		"modified": "2026-04-09T10:01:00",
 	}
 	sys.modules["posawesome.posawesome.api.utils"] = api_utils_module
-	common_spec = importlib.util.spec_from_file_location(
-		"posawesome.posawesome.api.offline_sync.common",
-		REPO_ROOT
-		/ "posawesome"
-		/ "posawesome"
-		/ "api"
-		/ "offline_sync"
-		/ "common.py",
+	sys.modules["posawesome.posawesome.api.offline_sync.common"] = (
+		load_offline_sync_common()
 	)
-	common_module = importlib.util.module_from_spec(common_spec)
-	sys.modules["posawesome.posawesome.api.offline_sync.common"] = common_module
-	common_spec.loader.exec_module(common_module)
 
 
 def _load_module():
