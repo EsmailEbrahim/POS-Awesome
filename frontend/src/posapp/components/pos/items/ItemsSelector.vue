@@ -229,6 +229,8 @@ import { registerItemsSelectorTypeToSearch } from "../../../composables/pos/item
 import { useItemsSelectorLayoutLifecycle } from "../../../composables/pos/items/useItemsSelectorLayoutLifecycle";
 import { useItemsSelectorSearchInput } from "../../../composables/pos/items/useItemsSelectorSearchInput";
 import { useItemsSelectorScannerBridge } from "../../../composables/pos/items/useItemsSelectorScannerBridge";
+import { useItemsSelectorPriceListSync } from "../../../composables/pos/items/useItemsSelectorPriceListSync";
+import { useItemsSelectorQuantity } from "../../../composables/pos/items/useItemsSelectorQuantity";
 
 import { useCustomersStore } from "../../../stores/customersStore";
 import { useToastStore } from "../../../stores/toastStore";
@@ -325,7 +327,6 @@ const {
 } = useBarcodeIndexing();
 
 // 2. Local State & Settings
-const qty = ref(1);
 const search_input = ref("");
 const first_search = ref("");
 const items_view = ref("list");
@@ -370,6 +371,16 @@ const temp_show_last_invoice_rate = ref(true);
 const temp_enable_background_sync = ref(true);
 const temp_background_sync_interval = ref(30);
 
+const {
+	qty,
+	debounceQty: debounce_qty,
+	clearQty,
+	onQtyBlur,
+} = useItemsSelectorQuantity({
+	hideQtyDecimals: hide_qty_decimals,
+	initialQty: 1,
+});
+
 const flyConfig = reactive({ speed: 0.6, easing: "ease-in-out" });
 const headerProps = reactive({
 	"sort-icon": "mdi-arrow-up",
@@ -392,6 +403,12 @@ const couponsCount = computed(() => uiStore.couponsCount || 0);
 const active_price_list = computed(
 	() => itemsIntegration.active_price_list.value || pos_profile.value?.selling_price_list,
 );
+const { syncSelectorPriceList } = useItemsSelectorPriceListSync({
+	activePriceList: itemsIntegration.active_price_list,
+	getDefaultPriceList: () => pos_profile.value?.selling_price_list || "",
+	updatePriceList: (priceList) => itemsIntegration.updatePriceList(priceList),
+	getItems: (force) => itemsIntegration.get_items(force),
+});
 const isPosSupervisor = computed(() =>
 	parseBooleanSetting(currentCashier.value?.is_supervisor),
 );
@@ -455,19 +472,6 @@ watch(
 	},
 	{ immediate: true },
 );
-
-const debounce_qty = computed({
-	get() {
-		if (qty.value === null) return "";
-		return hide_qty_decimals.value ? Math.round(qty.value) : qty.value;
-	},
-	set(value) {
-		let parsed: number | null = parseFloat(String(value).replace(/,/g, ""));
-		if (isNaN(parsed)) parsed = null;
-		if (hide_qty_decimals.value && parsed != null) parsed = Math.round(parsed);
-		qty.value = parsed as any;
-	},
-});
 
 const isLoadingOrSyncing = computed(() => {
 	if (loading.value) return true;
@@ -740,27 +744,6 @@ const onDragStart = (event, item) => {
 const onDragEnd = () => {
 	isDragging.value = false;
 	uiStore.setDraggedItem(null);
-};
-
-const resolveIncomingPriceList = (incomingPriceList: unknown) => {
-	const normalized = typeof incomingPriceList === "string" ? incomingPriceList.trim() : "";
-	if (normalized) {
-		return normalized;
-	}
-	return pos_profile.value?.selling_price_list || "";
-};
-
-const syncSelectorPriceList = async (incomingPriceList: unknown) => {
-	const nextPriceList = resolveIncomingPriceList(incomingPriceList);
-	if (!nextPriceList) {
-		return;
-	}
-
-	if (itemsIntegration.active_price_list.value !== nextPriceList) {
-		await itemsIntegration.updatePriceList(nextPriceList);
-	}
-
-	await itemsIntegration.get_items(true);
 };
 
 const toggleItemSettings = () => {
@@ -1120,14 +1103,6 @@ const searchItems = (term) => itemsIntegration.searchItems(term);
 const get_items = (force = false) => itemsIntegration.get_items(force);
 const loadVisibleItems = (reset = false) => itemsLoader.loadVisibleItems(reset);
 const verifyServerItemCount = () => {};
-const clearQty = () => {
-	qty.value = null as any;
-};
-const onQtyBlur = () => {
-	if (!qty.value || qty.value <= 0) {
-		qty.value = 1;
-	}
-};
 const forceReloadItems = () => itemsIntegration.get_items(true);
 const cancelItemDetailsRequest = () => itemDetailFetcher.cancelItemDetailsRequest();
 
