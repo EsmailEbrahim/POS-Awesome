@@ -11,6 +11,7 @@ type EnsureItemsReadyArgs = {
 };
 
 const inflightInitializations = new Map<string, Promise<void>>();
+const completedInitializations = new Set<string>();
 
 function normalizeKeyPart(value: unknown) {
 	return String(value || "").trim();
@@ -36,6 +37,7 @@ function getItemLoadKey({
 
 export function resetItemLoadingCoordinator() {
 	inflightInitializations.clear();
+	completedInitializations.clear();
 }
 
 export async function ensureItemsReady({
@@ -49,13 +51,19 @@ export async function ensureItemsReady({
 		return false;
 	}
 
+	if (completedInitializations.has(loadKey)) {
+		return false;
+	}
+
 	const inflight = inflightInitializations.get(loadKey);
 	if (inflight) {
 		await inflight;
 		return true;
 	}
 
-	const initializationPromise = Promise.resolve(initialize());
+	const initializationPromise = Promise.resolve(initialize()).then(() => {
+		completedInitializations.add(loadKey);
+	});
 	inflightInitializations.set(loadKey, initializationPromise);
 
 	try {
