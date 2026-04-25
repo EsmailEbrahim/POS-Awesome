@@ -181,7 +181,6 @@ import {
 	ref,
 	computed,
 	watch,
-	nextTick,
 	reactive,
 	inject,
 	type Ref,
@@ -229,6 +228,7 @@ import { startItemsSelectorInitialization } from "../../../composables/pos/items
 import { registerItemsSelectorEvents } from "../../../composables/pos/items/useItemsSelectorEvents";
 import { registerItemsSelectorTypeToSearch } from "../../../composables/pos/items/useItemsSelectorTypeToSearch";
 import { useItemsSelectorLayoutLifecycle } from "../../../composables/pos/items/useItemsSelectorLayoutLifecycle";
+import { useItemsSelectorSearchInput } from "../../../composables/pos/items/useItemsSelectorSearchInput";
 
 import { useCustomersStore } from "../../../stores/customersStore";
 import { useToastStore } from "../../../stores/toastStore";
@@ -287,6 +287,7 @@ let stopItemInitializationWatcher: (() => void) | null = null;
 let cleanupItemsSelectorEvents: (() => void) | null = null;
 let cleanupTypeToSearch: (() => void) | null = null;
 let cleanupLayoutLifecycle: (() => void) | null = null;
+let cleanupSearchInput: (() => void) | null = null;
 
 const responsive = useResponsive();
 const rtl = useRtl();
@@ -727,14 +728,6 @@ const scanProcessor = useScanProcessor({
 	search_from_scanner_ref: scannerInput.searchFromScanner,
 });
 
-// 6. Template Helpers
-const clearSearch = () => {
-	clearingSearch.value = true;
-	search_input.value = "";
-	first_search.value = "";
-	clearingSearch.value = false;
-};
-
 const clearSearchAndQty = () => {
 	clearSearch();
 	clearQty();
@@ -1007,15 +1000,12 @@ onBeforeUnmount(() => {
 	cleanupTypeToSearch = null;
 	cleanupLayoutLifecycle?.();
 	cleanupLayoutLifecycle = null;
+	cleanupSearchInput?.();
+	cleanupSearchInput = null;
 	itemSearchFocusClearGuard.dispose();
 });
 
 // 8. Watchers
-watch(search_input, (val) => {
-	first_search.value = val;
-	itemSelection.clearHighlightedItem();
-});
-
 watch(searchFocusTrigger, () => {
 	requestItemSearchFocus();
 });
@@ -1086,67 +1076,40 @@ const selectorCardStyle = computed<CSSProperties>(() => ({
 	position: "relative",
 }));
 const itemSearchFocusClearGuard = createItemSearchFocusClearGuard();
+const {
+	clearSearch,
+	handleSearchInput,
+	prepareSearchInjection,
+	appendSearchCharacter,
+	revealItemSearchView,
+	requestItemSearchFocus,
+	requestForegroundItemSearchFocus,
+	handleItemSearchFocus,
+	cleanup: stopSearchInputWatcher,
+} = useItemsSelectorSearchInput({
+	searchInput: search_input,
+	firstSearch: first_search,
+	clearingSearch,
+	activeView,
+	eventBus,
+	scannerInput,
+	searchFocusGuard: itemSearchFocusClearGuard,
+	clearHighlightedItem: () => itemSelection.clearHighlightedItem(),
+	focusItemSearch: () => itemsSelectorFocus.focusItemSearch(),
+	setActiveView: (view) => uiStore.setActiveView(view),
+	triggerItemSearchFocus: () => uiStore.triggerItemSearchFocus(),
+});
+cleanupSearchInput = stopSearchInputWatcher;
 
 // Proxy functions for template
 const esc_event = () => clearSearch();
 const onEnter = (e) => itemsSelectorSearch.onEnter(e);
 const handleSearchKeydown = (e) => itemsSelectorFocus.handleSearchKeydown(e);
-const handleSearchInput = (val) => {
-	search_input.value = val;
-	first_search.value = String(val ?? "");
-	if (scannerInput.handleSearchInput) {
-		scannerInput.handleSearchInput(first_search.value);
-	}
-};
 const handleSearchPaste = (e) => itemsSelectorFocus.handleSearchPaste(e);
 const searchItems = (term) => itemsIntegration.searchItems(term);
 const get_items = (force = false) => itemsIntegration.get_items(force);
 const loadVisibleItems = (reset = false) => itemsLoader.loadVisibleItems(reset);
 const verifyServerItemCount = () => {};
-const prepareSearchInjection = () => {
-	clearSearch();
-	itemSearchFocusClearGuard.armPreserveNextFocusClear();
-};
-const appendSearchCharacter = (character: string) => {
-	const nextValue = `${String(search_input.value || "")}${character}`;
-	handleSearchInput(nextValue);
-};
-const revealItemSearchView = () => {
-	eventBus?.emit?.("set_compact_panel", "selector");
-	if (activeView.value !== "items") {
-		uiStore.setActiveView("items");
-	}
-};
-const requestItemSearchFocus = () => {
-	if (activeView.value !== "items") {
-		return;
-	}
-	nextTick(() => {
-		itemsSelectorFocus.focusItemSearch();
-	});
-};
-const requestForegroundItemSearchFocus = () => {
-	revealItemSearchView();
-	uiStore.triggerItemSearchFocus();
-	eventBus?.emit?.("focus_item_search");
-};
-scannerInput.setInputHandlers?.({
-	get: () => String(search_input.value || ""),
-	set: (value: string) => {
-		prepareSearchInjection();
-		handleSearchInput(String(value ?? ""));
-	},
-	clear: clearSearch,
-	focus: requestForegroundItemSearchFocus,
-});
-const handleItemSearchFocus = () => {
-	if (!itemSearchFocusClearGuard.shouldClearSearchOnFocus()) {
-		requestItemSearchFocus();
-		return;
-	}
-	clearSearch();
-	requestItemSearchFocus();
-};
 const clearQty = () => {
 	qty.value = null as any;
 };
