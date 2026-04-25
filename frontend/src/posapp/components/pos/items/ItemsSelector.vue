@@ -189,7 +189,6 @@ import {
 } from "vue";
 import { storeToRefs } from "pinia";
 import * as _ from "lodash";
-import { memoryInitPromise } from "../../../../offline/index";
 
 import CameraScanner from "./CameraScanner.vue";
 import ItemActionToolbar from "./ItemActionToolbar.vue";
@@ -226,6 +225,7 @@ import { useItemsLoader } from "../../../composables/pos/items/useItemsLoader";
 import { useBarcodeIndexing } from "../../../composables/pos/items/useBarcodeIndexing";
 import { useScanProcessor } from "../../../composables/pos/items/useScanProcessor";
 import { useItemCurrency } from "../../../composables/pos/items/useItemCurrency";
+import { startItemsSelectorInitialization } from "../../../composables/pos/items/useItemsSelectorInitialization";
 
 import { useCustomersStore } from "../../../stores/customersStore";
 import { useToastStore } from "../../../stores/toastStore";
@@ -239,7 +239,6 @@ import {
 	createItemHighlightMatcher,
 } from "../../../utils/itemSelectorHighlightBindings";
 import { createItemSearchFocusClearGuard } from "../../../utils/itemSearchFocusClearGuard";
-import { ensureItemsReady } from "../../../modules/items/itemLoadingCoordinator";
 
 const props = defineProps({
 	context: {
@@ -279,8 +278,9 @@ const selected_currency = ref("");
 const selected_exchange_rate = ref(1);
 const selected_conversion_rate = ref(1);
 const isInitialized = ref(false);
-const initTimeout = ref(null);
-const initError = ref(null);
+const initTimeout = ref<ReturnType<typeof setTimeout> | null>(null);
+const initError = ref<unknown>(null);
+let stopItemInitializationWatcher: (() => void) | null = null;
 
 const responsive = useResponsive();
 const rtl = useRtl();
@@ -977,62 +977,21 @@ onMounted(async () => {
 		eventBus.on("remote_stock_adjustment", handleRemoteStockAdjustment);
 	}
 
-	// Watch UI Profile for initialization (Source of Truth)
-	watch(
+	stopItemInitializationWatcher = startItemsSelectorInitialization({
 		uiPosProfile,
-		async (newProfile) => {
-			if (newProfile && newProfile.name && !isInitialized.value) {
-				// Safety timeout to prevent infinite loading if memoryInit or store init hangs
-				if (initTimeout.value) clearTimeout(initTimeout.value);
-				// @ts-ignore
-				initTimeout.value = setTimeout(() => {
-					if (!isInitialized.value) {
-						console.warn(
-							"ItemsSelector: Initialization taking too long, forcing isInitialized to true.",
-						);
-						isInitialized.value = true;
-					}
-				}, 10000);
-
-				try {
-					await memoryInitPromise;
-
-					// Set local currency ref
-					selected_currency.value = newProfile.currency || "";
-					selected_exchange_rate.value = 1;
-					selected_conversion_rate.value = 1;
-
-					await ensureItemsReady({
-						profile: newProfile as any,
-						customer: selectedCustomer.value as any,
-						priceList: customer_price_list.value as any,
-						initialize: async () =>
-							await itemsIntegration.initializeStore(
-								newProfile as any,
-								selectedCustomer.value as any,
-								customer_price_list.value as any,
-							),
-					});
-
-					isInitialized.value = true;
-					startItemWorker();
-					itemsSelectorSettings.loadItemSettings();
-					itemSync.startBackgroundSyncScheduler();
-				} catch (err: any) {
-					console.error("ItemsSelector: Initialization failed", err);
-					initError.value = err.message || err;
-					// Unblock UI even on error
-					isInitialized.value = true;
-				} finally {
-					if (initTimeout.value) {
-						clearTimeout(initTimeout.value);
-						initTimeout.value = null;
-					}
-				}
-			}
-		},
-		{ immediate: true },
-	);
+		selectedCustomer,
+		customerPriceList: customer_price_list,
+		selectedCurrency: selected_currency,
+		selectedExchangeRate: selected_exchange_rate,
+		selectedConversionRate: selected_conversion_rate,
+		isInitialized,
+		initTimeout,
+		initError,
+		itemsIntegration,
+		startItemWorker,
+		loadItemSettings: () => itemsSelectorSettings.loadItemSettings(),
+		startBackgroundSyncScheduler: () => itemSync.startBackgroundSyncScheduler(),
+	});
 
 	window.addEventListener("resize", checkItemContainerOverflow);
 	if (props.context === "pos") {
@@ -1045,6 +1004,8 @@ onMounted(async () => {
 });
 
 onBeforeUnmount(() => {
+	stopItemInitializationWatcher?.();
+	stopItemInitializationWatcher = null;
 	if (initTimeout.value) clearTimeout(initTimeout.value);
 	itemSync.stopBackgroundSyncScheduler();
 	// @ts-ignore
