@@ -184,7 +184,6 @@ import {
 	reactive,
 	inject,
 	type Ref,
-	type CSSProperties,
 } from "vue";
 import { storeToRefs } from "pinia";
 import * as _ from "lodash";
@@ -230,6 +229,7 @@ import { useItemsSelectorLayoutLifecycle } from "../../../composables/pos/items/
 import { useItemsSelectorSearchInput } from "../../../composables/pos/items/useItemsSelectorSearchInput";
 import { useItemsSelectorScannerBridge } from "../../../composables/pos/items/useItemsSelectorScannerBridge";
 import { useItemsSelectorPriceListSync } from "../../../composables/pos/items/useItemsSelectorPriceListSync";
+import { useItemsSelectorPanelSizing } from "../../../composables/pos/items/useItemsSelectorPanelSizing";
 import { useItemsSelectorQuantity } from "../../../composables/pos/items/useItemsSelectorQuantity";
 
 import { useCustomersStore } from "../../../stores/customersStore";
@@ -1038,20 +1038,12 @@ const startCameraScanning = () => {
 const { responsiveStyles } = responsive;
 const { rtlClasses } = rtl;
 const isPhone = computed(() => responsive.isPhone.value);
-const canResizeSelectorPanel = computed(
-	() => responsive.windowWidth.value >= 1280 && responsive.windowHeight.value >= 860,
-);
-const phoneSelectorHeight = "calc(var(--viewport-height) - var(--bottom-safe-space) - 24px)";
-const selectorCardStyle = computed<CSSProperties>(() => ({
-	height: isPhone.value ? phoneSelectorHeight : responsiveStyles.value["--container-height"],
-	maxHeight: isPhone.value ? phoneSelectorHeight : responsiveStyles.value["--container-height"],
-	minHeight: isPhone.value
-		? "calc(var(--viewport-height) * 0.46)"
-		: responsiveStyles.value["--container-height"],
-	resize: canResizeSelectorPanel.value ? "vertical" : "none",
-	overflow: "auto",
-	position: "relative",
-}));
+const { selectorCardStyle } = useItemsSelectorPanelSizing({
+	isPhone,
+	windowWidth: responsive.windowWidth,
+	windowHeight: responsive.windowHeight,
+	responsiveStyles,
+});
 const itemSearchFocusClearGuard = createItemSearchFocusClearGuard();
 const {
 	clearSearch,
