@@ -197,7 +197,6 @@ import ItemsSelectorCards from "./ItemsSelectorCards.vue";
 import ItemsSelectorTable from "./ItemsSelectorTable.vue";
 import NewItemDialog from "./NewItemDialog.vue";
 import ScanErrorDialog from "./ScanErrorDialog.vue";
-import { resetNewItemDialogState } from "./newItemDialogState";
 
 import { useResponsive } from "../../../composables/core/useResponsive";
 import { useRtl } from "../../../composables/core/useRtl";
@@ -229,6 +228,7 @@ import { registerItemsSelectorEvents } from "../../../composables/pos/items/useI
 import { registerItemsSelectorTypeToSearch } from "../../../composables/pos/items/useItemsSelectorTypeToSearch";
 import { useItemsSelectorLayoutLifecycle } from "../../../composables/pos/items/useItemsSelectorLayoutLifecycle";
 import { useItemsSelectorSearchInput } from "../../../composables/pos/items/useItemsSelectorSearchInput";
+import { useItemsSelectorScannerBridge } from "../../../composables/pos/items/useItemsSelectorScannerBridge";
 
 import { useCustomersStore } from "../../../stores/customersStore";
 import { useToastStore } from "../../../stores/toastStore";
@@ -325,9 +325,6 @@ const {
 } = useBarcodeIndexing();
 
 // 2. Local State & Settings
-const newItemDialog = ref(false);
-const newItemDialogScannedBarcode = ref("");
-const newItemDialogAwaitingScan = ref(false);
 const qty = ref(1);
 const search_input = ref("");
 const first_search = ref("");
@@ -787,12 +784,6 @@ const handleRemoteStockAdjustment = (payload: unknown) => {
 	itemAvailability.handleInvoiceStockAdjusted(payload);
 };
 
-// 7. Lifecycle Hooks
-const openNewItemDialog = () => {
-	resetNewItemDialogState(newItemDialogScannedBarcode, newItemDialogAwaitingScan);
-	newItemDialog.value = true;
-};
-
 onMounted(async () => {
 	itemAvailability.initAvailability();
 
@@ -1058,6 +1049,9 @@ const {
 	acknowledgeScanError,
 	onBarcodeScanned: onBarcodeScannedFromScannerInput,
 } = scannerInput;
+const startCameraScanning = () => {
+	itemsSelectorFocus.startCameraScanning();
+};
 const { responsiveStyles } = responsive;
 const { rtlClasses } = rtl;
 const isPhone = computed(() => responsive.isPhone.value);
@@ -1100,6 +1094,22 @@ const {
 	triggerItemSearchFocus: () => uiStore.triggerItemSearchFocus(),
 });
 cleanupSearchInput = stopSearchInputWatcher;
+const {
+	newItemDialog,
+	newItemDialogScannedBarcode,
+	openNewItemDialog,
+	startNewItemBarcodeScan,
+	onBarcodeScanned,
+	onScannerOpened,
+	onScannerClosed,
+	handleItemCreated,
+} = useItemsSelectorScannerBridge({
+	cameraScannerActive: scannerInput.cameraScannerActive,
+	startCameraScanning,
+	requestForegroundItemSearchFocus,
+	onBarcodeScannedFromScannerInput,
+	reloadItems: () => itemsIntegration.get_items(true),
+});
 
 // Proxy functions for template
 const esc_event = () => clearSearch();
@@ -1118,51 +1128,17 @@ const onQtyBlur = () => {
 		qty.value = 1;
 	}
 };
-const startCameraScanning = () => {
-	itemsSelectorFocus.startCameraScanning();
-};
-const startNewItemBarcodeScan = () => {
-	newItemDialogScannedBarcode.value = "";
-	newItemDialogAwaitingScan.value = true;
-	startCameraScanning();
-};
 const forceReloadItems = () => itemsIntegration.get_items(true);
 const cancelItemDetailsRequest = () => itemDetailFetcher.cancelItemDetailsRequest();
-
-const onBarcodeScanned = async (code: string) => {
-	if (newItemDialog.value && newItemDialogAwaitingScan.value) {
-		newItemDialogScannedBarcode.value = code;
-		newItemDialogAwaitingScan.value = false;
-		return;
-	}
-
-	requestForegroundItemSearchFocus();
-	if (onBarcodeScannedFromScannerInput) {
-		onBarcodeScannedFromScannerInput(code);
-	}
-};
 
 const select_item = (e, item) => itemSelection.handleItemSelection(e, item);
 const click_item_row = (e, data) => itemSelection.handleRowClick(e, data);
 const onVirtualRangeUpdate = (s, e, vs, ve) => itemsLoader.onVirtualRangeUpdate(s, e, vs, ve);
 const onListScroll = (e) => handleListScroll(e);
-const onScannerOpened = () => {
-	scannerInput.cameraScannerActive.value = true;
-};
-const onScannerClosed = () => {
-	scannerInput.cameraScannerActive.value = false;
-	newItemDialogAwaitingScan.value = false;
-};
 
 const getItemRowClass = (item) => itemSelection.getItemRowClass(item);
 
 const getItemRowProps = (item) => buildSelectorRowProps(itemSelection, item);
-
-const handleItemCreated = (_item) => {
-	newItemDialog.value = false;
-	resetNewItemDialogState(newItemDialogScannedBarcode, newItemDialogAwaitingScan);
-	itemsIntegration.get_items(true);
-};
 
 defineExpose({
 	search_input,

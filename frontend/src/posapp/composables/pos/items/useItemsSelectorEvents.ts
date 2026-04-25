@@ -1,8 +1,8 @@
 import type { Ref } from "vue";
 
 type EventBusLike = {
-	on?: (event: string, handler: (...args: any[]) => void) => void;
-	off?: (event: string, handler?: (...args: any[]) => void) => void;
+	on?: (_event: string, _handler: (..._args: any[]) => void) => void;
+	off?: (_event: string, _handler?: (..._args: any[]) => void) => void;
 };
 
 type CurrencyPayload =
@@ -30,11 +30,11 @@ type UseItemsSelectorEventsArgs = {
 	selectedExchangeRate: Ref<number>;
 	selectedConversionRate: Ref<number>;
 	selectedSupplier: Ref<string | null>;
-	syncSelectorPriceList: (priceList: unknown) => Promise<void> | void;
+	syncSelectorPriceList: (_priceList: unknown) => Promise<void> | void;
 	scheduleLastBuyingRateRefresh: () => void;
 	requestItemSearchFocus: () => void;
-	handleCartQuantitiesUpdated: (...args: any[]) => void;
-	handleRemoteStockAdjustment: (payload: unknown) => void;
+	handleCartQuantitiesUpdated: (..._args: any[]) => void;
+	handleRemoteStockAdjustment: (_payload: unknown) => void;
 };
 
 type ItemsSelectorEventsCleanup = () => void;

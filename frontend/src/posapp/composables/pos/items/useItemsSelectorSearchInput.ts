@@ -1,14 +1,14 @@
 import { nextTick, watch, type Ref } from "vue";
 
 type EventBusLike = {
-	emit?: (event: string, payload?: unknown) => void;
+	emit?: (_event: string, _payload?: unknown) => void;
 };
 
 type ScannerInputLike = {
-	handleSearchInput?: (value: string) => void;
-	setInputHandlers?: (handlers: {
+	handleSearchInput?: (_value: string) => void;
+	setInputHandlers?: (_handlers: {
 		get: () => string;
-		set: (value: string) => void;
+		set: (_value: string) => void;
 		clear: () => void;
 		focus: () => void;
 	}) => void;
@@ -29,7 +29,7 @@ type UseItemsSelectorSearchInputArgs = {
 	searchFocusGuard: SearchFocusGuardLike;
 	clearHighlightedItem: () => void;
 	focusItemSearch: () => void;
-	setActiveView: (view: string) => void;
+	setActiveView: (_view: string) => void;
 	triggerItemSearchFocus: () => void;
 };
 

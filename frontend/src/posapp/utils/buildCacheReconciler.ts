@@ -85,7 +85,9 @@ function safeStorageSet(storage: Storage | null, key: string, value: string) {
 
 	try {
 		storage.setItem(key, value);
-	} catch {}
+	} catch {
+		// Storage writes may fail in private or restricted browser contexts.
+	}
 }
 
 function readBooleanFlag(storage: Storage | null, key: string) {

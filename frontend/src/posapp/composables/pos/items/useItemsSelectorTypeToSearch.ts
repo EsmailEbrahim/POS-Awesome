@@ -7,7 +7,7 @@ type UseItemsSelectorTypeToSearchArgs = {
 	prepareSearchInjection: () => void;
 	revealItemSearchView: () => void;
 	requestForegroundItemSearchFocus: () => void;
-	appendSearchCharacter: (character: string) => void;
+	appendSearchCharacter: (_character: string) => void;
 };
 
 const SEARCH_TRIGGER_KEY_PATTERN = /^[A-Za-z0-9\-._/\\]$/;

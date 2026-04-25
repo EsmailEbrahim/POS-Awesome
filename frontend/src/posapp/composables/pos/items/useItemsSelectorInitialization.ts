@@ -10,9 +10,9 @@ type PosProfileLike = {
 
 type ItemsIntegrationLike = {
 	initializeStore: (
-		profile: PosProfileLike,
-		customer: unknown,
-		priceList: unknown,
+		_profile: PosProfileLike,
+		_customer: unknown,
+		_priceList: unknown,
 	) => Promise<void>;
 };
 

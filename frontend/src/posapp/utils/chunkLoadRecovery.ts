@@ -104,17 +104,23 @@ async function clearServiceWorkersAndCaches() {
 						registration.active?.postMessage({
 							type: "CLIENT_FORCE_UNREGISTER",
 						});
-					} catch {}
+					} catch {
+						// Service worker messaging is best-effort before unregister.
+					}
 					try {
 						registration.waiting?.postMessage({
 							type: "CLIENT_FORCE_UNREGISTER",
 						});
-					} catch {}
+					} catch {
+						// Service worker messaging is best-effort before unregister.
+					}
 					try {
 						registration.installing?.postMessage({
 							type: "CLIENT_FORCE_UNREGISTER",
 						});
-					} catch {}
+					} catch {
+						// Service worker messaging is best-effort before unregister.
+					}
 					await registration.unregister();
 				}),
 			);
