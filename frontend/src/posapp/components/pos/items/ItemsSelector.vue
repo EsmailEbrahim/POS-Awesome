@@ -226,6 +226,7 @@ import { useBarcodeIndexing } from "../../../composables/pos/items/useBarcodeInd
 import { useScanProcessor } from "../../../composables/pos/items/useScanProcessor";
 import { useItemCurrency } from "../../../composables/pos/items/useItemCurrency";
 import { startItemsSelectorInitialization } from "../../../composables/pos/items/useItemsSelectorInitialization";
+import { registerItemsSelectorEvents } from "../../../composables/pos/items/useItemsSelectorEvents";
 
 import { useCustomersStore } from "../../../stores/customersStore";
 import { useToastStore } from "../../../stores/toastStore";
@@ -281,6 +282,7 @@ const isInitialized = ref(false);
 const initTimeout = ref<ReturnType<typeof setTimeout> | null>(null);
 const initError = ref<unknown>(null);
 let stopItemInitializationWatcher: (() => void) | null = null;
+let cleanupItemsSelectorEvents: (() => void) | null = null;
 
 const responsive = useResponsive();
 const rtl = useRtl();
@@ -937,45 +939,18 @@ onMounted(async () => {
 		scannerInput.setScanHandler(scanProcessor.processScannedItem);
 	}
 
-	if (eventBus) {
-		eventBus.on("update_currency", (data) => {
-			if (typeof data === "string" && data) {
-				selected_currency.value = data;
-				return;
-			}
-			if (data && data.currency) {
-				selected_currency.value = data.currency;
-				if (data.exchange_rate) {
-					selected_exchange_rate.value = Number(data.exchange_rate) || 1;
-				}
-				if (data.conversion_rate) {
-					selected_conversion_rate.value = Number(data.conversion_rate) || 1;
-				}
-			}
-		});
-		eventBus.on("update_customer_price_list", (priceList) => {
-			syncSelectorPriceList(priceList);
-		});
-		eventBus.on("update_buying_price_list", (data) => {
-			if (data && typeof data === "object") {
-				if (data.price_list) syncSelectorPriceList(data.price_list);
-				selectedSupplier.value = data.supplier || null;
-				scheduleLastBuyingRateRefresh();
-			} else if (typeof data === "string") {
-				syncSelectorPriceList(data);
-				selectedSupplier.value = null;
-				scheduleLastBuyingRateRefresh();
-			} else {
-				selectedSupplier.value = null;
-			}
-		});
-		eventBus.on("focus_item_search", requestItemSearchFocus);
-		eventBus.on(
-			"cart_quantities_updated",
-			itemAvailability.handleCartQuantitiesUpdated,
-		);
-		eventBus.on("remote_stock_adjustment", handleRemoteStockAdjustment);
-	}
+	cleanupItemsSelectorEvents = registerItemsSelectorEvents({
+		eventBus,
+		selectedCurrency: selected_currency,
+		selectedExchangeRate: selected_exchange_rate,
+		selectedConversionRate: selected_conversion_rate,
+		selectedSupplier,
+		syncSelectorPriceList,
+		scheduleLastBuyingRateRefresh,
+		requestItemSearchFocus,
+		handleCartQuantitiesUpdated: itemAvailability.handleCartQuantitiesUpdated,
+		handleRemoteStockAdjustment,
+	});
 
 	stopItemInitializationWatcher = startItemsSelectorInitialization({
 		uiPosProfile,
@@ -1010,17 +985,8 @@ onBeforeUnmount(() => {
 	itemSync.stopBackgroundSyncScheduler();
 	// @ts-ignore
 	if (itemWorker.value) itemWorker.value.terminate();
-	if (eventBus) {
-		eventBus.off("update_currency");
-		eventBus.off("update_customer_price_list");
-		eventBus.off("update_buying_price_list");
-		eventBus.off("focus_item_search", requestItemSearchFocus);
-		eventBus.off(
-			"cart_quantities_updated",
-			itemAvailability.handleCartQuantitiesUpdated,
-		);
-		eventBus.off("remote_stock_adjustment", handleRemoteStockAdjustment);
-	}
+	cleanupItemsSelectorEvents?.();
+	cleanupItemsSelectorEvents = null;
 	if (props.context === "pos") {
 		document.removeEventListener("keydown", handleGlobalTypeToSearchKeydown, true);
 	}
