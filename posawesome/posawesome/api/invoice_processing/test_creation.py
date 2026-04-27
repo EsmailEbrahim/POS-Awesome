@@ -1075,7 +1075,12 @@ class TestManualPostingDatePreservation(unittest.TestCase):
                 )
             ],
         )
-        invoice_doc.submit = lambda: setattr(invoice_doc, "docstatus", 1)
+        def assert_submit_sees_negative_payments():
+            self.assertEqual(invoice_doc.payments[0].amount, -90)
+            self.assertEqual(invoice_doc.payments[0].base_amount, -90)
+            invoice_doc.docstatus = 1
+
+        invoice_doc.submit = assert_submit_sees_negative_payments
 
         self.creation.frappe.db.exists = lambda doctype, name: name == "ACC-SINV-RETURN-0001"
         self.creation.frappe.db.get_value = lambda *args, **kwargs: 0
@@ -1084,12 +1089,15 @@ class TestManualPostingDatePreservation(unittest.TestCase):
         self.creation._apply_invoice_gift_card_settlement = lambda *args, **kwargs: None
         self.creation._process_post_submit_payments = lambda *args, **kwargs: None
 
-        def assert_return_payments_are_negative(doc):
+        def assert_return_payments_are_negative_before_save(doc):
             self.assertEqual(doc.payments[0].amount, -90)
             self.assertEqual(doc.payments[0].base_amount, -90)
+            # Simulate framework-side save logic mutating child rows before submit.
+            doc.payments[0].amount = 90
+            doc.payments[0].base_amount = 90
             return doc
 
-        self.creation._save_draft_with_latest_timestamp = assert_return_payments_are_negative
+        self.creation._save_draft_with_latest_timestamp = assert_return_payments_are_negative_before_save
 
         result = self.creation.submit_invoice(
             json.dumps(

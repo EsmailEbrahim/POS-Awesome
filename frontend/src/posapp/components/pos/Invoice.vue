@@ -841,6 +841,24 @@ export default {
 			this.invoiceType = "Return";
 			this.invoiceTypes = ["Return"];
 			this.invoice_doc.is_return = 1;
+			if (Array.isArray(this.invoice_doc.payments)) {
+				this.invoice_doc.payments.forEach((payment) => {
+					const amount = this.flt(
+						payment.amount || 0,
+						this.currency_precision,
+					);
+					payment.amount = amount ? -Math.abs(amount) : 0;
+					if (payment.base_amount !== undefined) {
+						const baseAmount = this.flt(
+							payment.base_amount || 0,
+							this.currency_precision,
+						);
+						payment.base_amount = baseAmount
+							? -Math.abs(baseAmount)
+							: 0;
+					}
+				});
+			}
 			if (this.items && this.items.length) {
 				this.items.forEach((item) => {
 					if (item.qty > 0) item.qty = -Math.abs(item.qty);
@@ -882,7 +900,10 @@ export default {
 						undefined
 					) {
 						this.additional_discount_percentage =
-							data.return_doc.additional_discount_percentage || 0;
+							this.flt(
+								data.return_doc.additional_discount_percentage || 0,
+								this.float_precision,
+							);
 					}
 					this.update_discount_umount();
 				} else {

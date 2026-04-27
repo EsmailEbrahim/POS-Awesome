@@ -858,6 +858,7 @@ def submit_invoice(invoice, data, submit_in_background=False):
     frappe.flags.ignore_account_permission = True
     invoice_doc.posa_is_printed = 1
     invoice_doc = _save_draft_with_latest_timestamp(invoice_doc)
+    _normalize_return_payment_rows(invoice_doc, invoice_doc.get("conversion_rate") or 1)
 
     if data.get("due_date"):
         frappe.db.set_value(
@@ -953,6 +954,7 @@ def submit_in_background_job(kwargs):
         _normalize_return_payment_rows(invoice_doc, invoice_doc.get("conversion_rate") or 1)
 
         invoice_doc = _save_draft_with_latest_timestamp(invoice_doc)
+        _normalize_return_payment_rows(invoice_doc, invoice_doc.get("conversion_rate") or 1)
 
         invoice_doc.submit()
         if hasattr(frappe, "publish_realtime"):

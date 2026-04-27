@@ -268,11 +268,21 @@ export async function new_order(context: any, data: any = {}) {
 			context.pos_profile?.posa_use_percentage_discount
 		) {
 			context.additional_discount_percentage = -Math.abs(
-				Number.parseFloat(data.additional_discount_percentage),
+				context.flt
+					? context.flt(
+							Number.parseFloat(data.additional_discount_percentage),
+							context.float_precision,
+						)
+					: Number.parseFloat(data.additional_discount_percentage),
 			);
 		} else {
 			context.additional_discount_percentage =
-				data.additional_discount_percentage;
+				context.flt
+					? context.flt(
+							data.additional_discount_percentage,
+							context.float_precision,
+						)
+					: data.additional_discount_percentage;
 		}
 
 		context.items.forEach((item) => {
