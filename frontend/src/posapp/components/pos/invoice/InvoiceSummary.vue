@@ -329,6 +329,15 @@ function normalizeDiscountDisplay(value) {
 	if (value === 0 || value === "0") {
 		return "";
 	}
+	if (
+		props.return_discount_meta &&
+		!props.pos_profile?.posa_use_percentage_discount
+	) {
+		const numericValue = Number(value);
+		if (Number.isFinite(numericValue)) {
+			return Math.abs(numericValue);
+		}
+	}
 	return value;
 }
 

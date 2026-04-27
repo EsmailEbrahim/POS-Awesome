@@ -306,9 +306,20 @@ export default {
 		const discountPercentageOfferName = computed(
 			() => invoicePanel.value?.discount_percentage_offer_name || null,
 		);
+		const showUnsignedReturnDiscount = computed(
+			() =>
+				!!invoicePanel.value?.return_discount_meta &&
+				!posProfile.value?.posa_use_percentage_discount,
+		);
 		const normalizeDiscountDisplay = (value) => {
 			if (value === 0 || value === "0") {
 				return "";
+			}
+			if (showUnsignedReturnDiscount.value) {
+				const numericValue = Number(value);
+				if (Number.isFinite(numericValue)) {
+					return Math.abs(numericValue);
+				}
 			}
 			return value;
 		};
