@@ -91,7 +91,7 @@ type CommitFlowOptions = {
 	payload?: Record<string, any> | null;
 };
 
-export const DOCUMENT_SOURCE_OPTIONS: DocumentSourceOption[] = [
+const DOCUMENT_SOURCE_OPTIONS: DocumentSourceOption[] = [
 	{
 		key: "invoice",
 		label: "Invoice",
@@ -150,13 +150,13 @@ export const DOCUMENT_SOURCE_OPTIONS: DocumentSourceOption[] = [
 	},
 ];
 
-export function isSalesOrderSourceEnabled(posProfile: any): boolean {
+function isSalesOrderSourceEnabled(posProfile: any): boolean {
 	return parseBooleanSetting(
 		posProfile?.custom_allow_select_sales_order ?? posProfile?.posa_allow_sales_order,
 	);
 }
 
-export function isQuotationSourceEnabled(posProfile: any): boolean {
+function isQuotationSourceEnabled(posProfile: any): boolean {
 	return parseBooleanSetting(
 		posProfile?.custom_allow_create_quotation ??
 			posProfile?.custom_allow_select_quotation ??
@@ -254,7 +254,7 @@ function normalizeDocumentStatus(
 	return "Draft";
 }
 
-export function normalizeDocumentSourceRecord(
+function normalizeDocumentSourceRecord(
 	source: CommercialDocumentSourceKey,
 	record: Record<string, any>,
 ): DocumentSourceRecord {
@@ -304,7 +304,7 @@ export function normalizeDocumentSourceRecord(
 	};
 }
 
-export function getSourceDoctypeForKey(
+function getSourceDoctypeForKey(
 	source: CommercialDocumentSourceKey,
 	currentInvoiceDoctype = "Sales Invoice",
 ): string {
@@ -338,7 +338,7 @@ export function getDocumentFlowActionsForRecord(
 	return [];
 }
 
-export function getPrimaryDocumentFlowAction(
+function getPrimaryDocumentFlowAction(
 	record: Partial<DocumentSourceRecord> | null | undefined,
 ): DocumentFlowActionKey | null {
 	const allowed = getDocumentFlowActionsForRecord(record);
@@ -370,10 +370,6 @@ export function getDocumentFlowActionLabel(
 		default:
 			return "Open";
 	}
-}
-
-export function isPrepareOnlyFlowAction(action: DocumentFlowActionKey): boolean {
-	return action !== "quote_submit" && action !== "order_to_delivery_note";
 }
 
 export async function fetchDocumentSourceRecords(
@@ -472,19 +468,6 @@ export async function commitDocumentFlowAction(
 		},
 	});
 	return message || null;
-}
-
-export async function prepareSalesOrderRecordForLoading(
-	orderRecord: DocumentSourceRecord,
-	currentInvoiceDoctype = "Sales Invoice",
-): Promise<Record<string, any> | null> {
-	const prepared = await prepareDocumentFlowAction({
-		action: "order_load",
-		source: "order",
-		record: orderRecord,
-		currentInvoiceDoctype,
-	});
-	return prepared?.prepared_doc || null;
 }
 
 export async function loadDocumentSourceRecord(

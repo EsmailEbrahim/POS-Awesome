@@ -157,7 +157,7 @@ function writeBuildState(
 	}
 }
 
-export function getRuntimeBuildVersion(explicitBuildVersion?: string | null) {
+function getRuntimeBuildVersion(explicitBuildVersion?: string | null) {
 	if (typeof explicitBuildVersion !== "undefined") {
 		return normalizeBuildVersion(explicitBuildVersion);
 	}
@@ -253,7 +253,7 @@ export function detectBuildChange(
 	};
 }
 
-export async function purgeDerivedOfflineCaches() {
+async function purgeDerivedOfflineCaches() {
 	await clearDerivedOfflineCachesFromDb();
 }
 
@@ -323,11 +323,3 @@ export async function reconcileBuildChangeOnStartup(
 	};
 }
 
-export async function reconcileWhenBackOnline(
-	input: Omit<ReconcileBuildChangeInput, "isOnline"> = {},
-) {
-	return reconcileBuildChangeOnStartup({
-		...input,
-		isOnline: true,
-	});
-}

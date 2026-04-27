@@ -46,10 +46,6 @@ export function clearChunkRecoveryState() {
 	window.sessionStorage.removeItem(CHUNK_RECOVERY_IN_PROGRESS_KEY);
 }
 
-export function resetChunkRecoveryState() {
-	resetRecoveryState();
-}
-
 export function scheduleChunkRecoveryStateReset() {
 	scheduleAfterStableBoot(() => {
 		resetRecoveryState();
