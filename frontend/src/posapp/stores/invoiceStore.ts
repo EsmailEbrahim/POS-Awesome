@@ -195,6 +195,8 @@ export const useInvoiceStore = defineStore("invoice", () => {
 
 	const invoiceToLoad = ref<any>(null);
 	const orderToLoad = ref<any>(null);
+	const flowToLoad = ref<any>(null);
+	const flowContext = ref<any | null>(null);
 	const postingDate = ref(frappe.datetime.nowdate());
 
 	// Sticky fields moved from local component state
@@ -526,6 +528,8 @@ export const useInvoiceStore = defineStore("invoice", () => {
 	const clear = (options: { preserveStickies?: boolean } = {}) => {
 		const { preserveStickies = false } = options;
 		invoiceDoc.value = null;
+		flowContext.value = null;
+		flowToLoad.value = null;
 		clearItems();
 		packedItems.value = [];
 
@@ -628,6 +632,8 @@ export const useInvoiceStore = defineStore("invoice", () => {
 			invoiceToLoad.value = doc;
 		},
 		orderToLoad,
+		flowToLoad,
+		flowContext,
 		/**
 		 * Signals that `doc` should be loaded as the active order.
 		 * Sets `orderToLoad`, which is watched by the order-loading composable.
@@ -636,6 +642,16 @@ export const useInvoiceStore = defineStore("invoice", () => {
 		 */
 		triggerLoadOrder: (doc: any) => {
 			orderToLoad.value = doc;
+		},
+		setFlowContext: (context: any) => {
+			flowContext.value = context || null;
+		},
+		clearFlowContext: () => {
+			flowContext.value = null;
+		},
+		triggerLoadFlow: (flow: any) => {
+			flowToLoad.value = flow;
+			flowContext.value = flow?.flow_context || null;
 		},
 		// Exposed sticky fields
 		discountAmount,
