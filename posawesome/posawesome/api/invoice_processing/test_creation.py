@@ -1129,11 +1129,13 @@ class TestInvoiceIdempotency(unittest.TestCase):
         _install_dependency_stubs()
         _install_package_stubs()
         cls.creation = _load_module()
+        cls.original_process_post_submit_payments = cls.creation._process_post_submit_payments
 
     def setUp(self):
         self.enqueue_calls.clear()
         self.frappe._publish_realtime_calls.clear()
         self.creation.frappe.db.has_column = lambda doctype, fieldname: True
+        self.creation._process_post_submit_payments = type(self).original_process_post_submit_payments
 
     def test_submit_invoice_returns_existing_submitted_doc_for_same_client_request_id(self):
         existing_doc = FakeDoc(
@@ -1293,6 +1295,249 @@ class TestInvoiceIdempotency(unittest.TestCase):
 
         self.assertEqual(result["status"], 1)
         self.assertEqual(getattr(invoice_doc, "posa_client_request_id", None), None)
+
+    def test_submit_invoice_replays_from_durable_ledger_without_invoice_custom_field(self):
+        ledger_rows = {}
+        submitted_docs = {}
+        submit_count = {"value": 0}
+
+        def make_invoice_doc(name):
+            invoice_doc = FakeDoc(
+                doctype="Sales Invoice",
+                name=name,
+                docstatus=0,
+                pos_profile="Main POS",
+                company="Test Company",
+                currency="USD",
+                customer="CUST-0001",
+                is_return=0,
+                items=[],
+                payments=[],
+                taxes=[],
+                flags=types.SimpleNamespace(ignore_permissions=False),
+                redeem_loyalty_points=0,
+                loyalty_program=None,
+                cost_center=None,
+                write_off_amount=0,
+                rounded_total=0,
+                grand_total=0,
+                remarks="",
+            )
+
+            def submit():
+                submit_count["value"] += 1
+                invoice_doc.docstatus = 1
+
+            invoice_doc.submit = submit
+            submitted_docs[name] = invoice_doc
+            return invoice_doc
+
+        def fake_update_invoice(payload):
+            name = f"ACC-SINV-LEDGER-{len(submitted_docs) + 1:04d}"
+            make_invoice_doc(name)
+            return {"name": name}
+
+        def attach_ledger_methods(ledger_doc):
+            def insert(ignore_permissions=False):
+                ledger_doc.name = ledger_doc.get("name") or ledger_doc.ledger_key
+                ledger_rows[ledger_doc.name] = ledger_doc
+                return ledger_doc
+
+            def save(ignore_permissions=False):
+                ledger_rows[ledger_doc.name] = ledger_doc
+                return ledger_doc
+
+            ledger_doc.insert = insert
+            ledger_doc.save = save
+            return ledger_doc
+
+        def fake_get_doc(*args):
+            if len(args) == 1 and isinstance(args[0], dict):
+                payload = dict(args[0])
+                if payload.get("doctype") == "POS Invoice Submission Ledger":
+                    return attach_ledger_methods(FakeDoc(**payload))
+            if len(args) == 2 and args[0] == "Sales Invoice":
+                return submitted_docs[args[1]]
+            if len(args) == 2 and args[0] == "POS Invoice Submission Ledger":
+                return ledger_rows[args[1]]
+            raise AssertionError(f"unexpected get_doc call: {args}")
+
+        def fake_get_value(doctype, filters=None, fieldname=None, **kwargs):
+            if doctype == "POS Invoice Submission Ledger" and isinstance(filters, dict):
+                for row in ledger_rows.values():
+                    if all(row.get(key) == value for key, value in filters.items()):
+                        return row.name
+                return None
+            return 0
+
+        self.creation.frappe.db.has_column = (
+            lambda doctype, fieldname: not (
+                doctype in {"Sales Invoice", "POS Invoice"}
+                and fieldname == "posa_client_request_id"
+            )
+        )
+        self.creation.frappe.db.get_value = fake_get_value
+        self.creation.frappe.db.exists = (
+            lambda doctype, name: doctype == "Sales Invoice"
+            and name in submitted_docs
+        )
+        self.creation.frappe.get_value = lambda *args, **kwargs: 0
+        self.creation.frappe.get_doc = fake_get_doc
+        self.creation.update_invoice = fake_update_invoice
+        self.creation._save_draft_with_latest_timestamp = lambda doc: doc
+        self.creation._apply_invoice_gift_card_settlement = lambda *args, **kwargs: None
+
+        payload = {
+            "doctype": "Sales Invoice",
+            "pos_profile": "Main POS",
+            "company": "Test Company",
+            "currency": "USD",
+            "customer": "CUST-0001",
+            "items": [],
+            "payments": [],
+            "posa_client_request_id": "ledger-fixed-001",
+        }
+        data = {"idempotency_key": "ledger-fixed-001"}
+
+        first = self.creation.submit_invoice(
+            json.dumps(payload),
+            json.dumps(data),
+            submit_in_background=0,
+        )
+        second = self.creation.submit_invoice(
+            json.dumps(payload),
+            json.dumps(data),
+            submit_in_background=0,
+        )
+
+        self.assertEqual(first["name"], "ACC-SINV-LEDGER-0001")
+        self.assertEqual(second["name"], "ACC-SINV-LEDGER-0001")
+        self.assertEqual(len(ledger_rows), 1)
+        self.assertEqual(next(iter(ledger_rows.values())).state, "POST_SUBMIT_DONE")
+        self.assertTrue(second["replayed"])
+        self.assertTrue(second["idempotent"])
+        self.assertEqual(submit_count["value"], 1)
+        self.assertEqual(len(submitted_docs), 1)
+
+    def test_repair_incomplete_submission_ledger_reconciles_submitted_invoice(self):
+        ledger_doc = FakeDoc(
+            doctype="POS Invoice Submission Ledger",
+            name="ledger-repair-001",
+            ledger_key="ledger-repair-001",
+            client_request_id="ledger-repair-001",
+            company="Test Company",
+            pos_profile="Main POS",
+            document_type="Sales Invoice",
+            invoice_name="ACC-SINV-REPAIR-0001",
+            state="SUBMITTED",
+            request_data=json.dumps({}),
+            payment_context=json.dumps({}),
+        )
+        ledger_doc.save = lambda ignore_permissions=False: ledger_doc
+        invoice_doc = FakeDoc(
+            doctype="Sales Invoice",
+            name="ACC-SINV-REPAIR-0001",
+            docstatus=1,
+            pos_profile="Main POS",
+            company="Test Company",
+        )
+
+        def fake_get_value(doctype, filters=None, fieldname=None, **kwargs):
+            if doctype == "POS Invoice Submission Ledger":
+                return ledger_doc.name
+            return None
+
+        def fake_get_doc(doctype, name):
+            if doctype == "POS Invoice Submission Ledger":
+                return ledger_doc
+            if doctype == "Sales Invoice":
+                return invoice_doc
+            raise AssertionError(f"unexpected get_doc call: {(doctype, name)}")
+
+        self.creation.frappe.db.get_value = fake_get_value
+        self.creation.frappe.db.exists = (
+            lambda doctype, name: doctype == "Sales Invoice"
+            and name == "ACC-SINV-REPAIR-0001"
+        )
+        self.creation.frappe.get_doc = fake_get_doc
+        self.creation._process_post_submit_payments = lambda *args, **kwargs: None
+
+        result = self.creation.repair_invoice_submission(
+            client_request_id="ledger-repair-001",
+            company="Test Company",
+            pos_profile="Main POS",
+            document_type="Sales Invoice",
+        )
+
+        self.assertEqual(result["name"], "ACC-SINV-REPAIR-0001")
+        self.assertEqual(result["ledger_state"], "POST_SUBMIT_DONE")
+        self.assertTrue(result["repaired"])
+
+    def test_background_submit_updates_existing_submission_ledger(self):
+        ledger_doc = FakeDoc(
+            doctype="POS Invoice Submission Ledger",
+            name="ledger-background-001",
+            ledger_key="ledger-background-001",
+            client_request_id="ledger-background-001",
+            company="Test Company",
+            pos_profile="Main POS",
+            document_type="Sales Invoice",
+            invoice_name="ACC-SINV-BG-0001",
+            state="DRAFT_CREATED",
+            request_data=json.dumps({}),
+            payment_context=json.dumps({}),
+        )
+        ledger_doc.save = lambda ignore_permissions=False: ledger_doc
+        invoice_doc = FakeDoc(
+            doctype="Sales Invoice",
+            name="ACC-SINV-BG-0001",
+            docstatus=0,
+            pos_profile="Main POS",
+            company="Test Company",
+            currency="USD",
+            customer="CUST-0001",
+            is_return=0,
+            items=[],
+            payments=[],
+            taxes=[],
+            flags=types.SimpleNamespace(ignore_permissions=False),
+            redeem_loyalty_points=0,
+            loyalty_program=None,
+            cost_center=None,
+            write_off_amount=0,
+            rounded_total=0,
+            grand_total=0,
+            remarks="",
+        )
+        invoice_doc.submit = lambda: setattr(invoice_doc, "docstatus", 1)
+
+        def fake_get_doc(doctype, name):
+            if doctype == "POS Invoice Submission Ledger":
+                return ledger_doc
+            if doctype == "Sales Invoice":
+                return invoice_doc
+            raise AssertionError(f"unexpected get_doc call: {(doctype, name)}")
+
+        self.creation.frappe.get_doc = fake_get_doc
+        self.creation.frappe.db.get_value = lambda *args, **kwargs: 0
+        self.creation._save_draft_with_latest_timestamp = lambda doc: doc
+        self.creation._apply_invoice_gift_card_settlement = lambda *args, **kwargs: None
+
+        self.creation.submit_in_background_job(
+            {
+                "invoice": "ACC-SINV-BG-0001",
+                "doctype": "Sales Invoice",
+                "data": {},
+                "is_payment_entry": 0,
+                "total_cash": 0,
+                "cash_account": None,
+                "payments": [],
+                "ledger_name": "ledger-background-001",
+            }
+        )
+
+        self.assertEqual(invoice_doc.docstatus, 1)
+        self.assertEqual(ledger_doc.state, "POST_SUBMIT_DONE")
 
 
 if __name__ == "__main__":

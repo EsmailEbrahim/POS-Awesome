@@ -59,6 +59,7 @@ def _install_frappe_stub():
     invoice_processing_creation.update_invoice = lambda *args, **kwargs: None
     invoice_processing_creation.submit_invoice = lambda *args, **kwargs: None
     invoice_processing_creation.submit_in_background_job = lambda *args, **kwargs: None
+    invoice_processing_creation.repair_invoice_submission = lambda *args, **kwargs: None
     invoice_processing_creation.validate_cart_items = lambda *args, **kwargs: None
     sys.modules[
         "posawesome.posawesome.api.invoice_processing.creation"

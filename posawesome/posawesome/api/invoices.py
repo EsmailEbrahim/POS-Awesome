@@ -29,6 +29,7 @@ from posawesome.posawesome.api.invoice_processing.creation import (
     update_invoice,
     submit_invoice,
     submit_in_background_job,
+    repair_invoice_submission,
     validate_cart_items
 )
 from posawesome.posawesome.api.invoice_processing.returns import (
