@@ -1,4 +1,4 @@
-import { checkDbHealth, db, initPromise, memory, persist } from "./db";
+import { checkDbHealth, db, initPromise, memory, persist, safeBulkPut } from "./db";
 
 type AnyRecord = Record<string, any>;
 
@@ -13,12 +13,14 @@ export type InvoiceOutboxStatus =
 export interface InvoiceOutboxEntry {
 	outbox_id?: number;
 	client_request_id: string;
+	resource?: "invoice_outbox";
 	status: InvoiceOutboxStatus;
 	invoice: AnyRecord;
 	data: AnyRecord;
 	created_at: string;
 	updated_at: string;
 	next_retry_at: string | null;
+	nextAttemptAt?: string | null;
 	retry_count: number;
 	last_error: string | null;
 	invoice_name: string | null;
@@ -104,12 +106,14 @@ export async function enqueueInvoiceOutboxEntry(entry: AnyRecord) {
 		const timestamp = nowIso();
 		const outboxEntry: InvoiceOutboxEntry = {
 			client_request_id: clientRequestId,
+			resource: "invoice_outbox",
 			status: "pending",
 			invoice: cleanEntry.invoice,
 			data: cleanEntry.data || {},
 			created_at: timestamp,
 			updated_at: timestamp,
 			next_retry_at: null,
+			nextAttemptAt: null,
 			retry_count: 0,
 			last_error: null,
 			invoice_name: null,
@@ -149,27 +153,29 @@ function computeBackoffMs(retryCount: number) {
 	return Math.min(MAX_BACKOFF_MS, INITIAL_BACKOFF_MS * multiplier);
 }
 
-async function markOutboxAcknowledged(
+function markOutboxAcknowledged(
 	row: InvoiceOutboxEntry,
 	response: AnyRecord,
-) {
+): InvoiceOutboxEntry {
 	const timestamp = nowIso();
-	await db.table(TABLE).put({
+	return {
 		...row,
 		status: "acknowledged",
+		resource: "invoice_outbox" as const,
 		updated_at: timestamp,
 		acknowledged_at: timestamp,
 		last_error: null,
 		next_retry_at: null,
+		nextAttemptAt: null,
 		invoice_name:
 			response?.invoice?.name ||
 			response?.name ||
 			row.invoice_name ||
 			null,
-	});
+	};
 }
 
-async function markOutboxFailed(row: InvoiceOutboxEntry, error: unknown) {
+function markOutboxFailed(row: InvoiceOutboxEntry, error: unknown): InvoiceOutboxEntry {
 	const retryCount = Number(row.retry_count || 0) + 1;
 	const status: InvoiceOutboxStatus =
 		retryCount >= MAX_RETRY_COUNT ? "dead_letter" : "retrying";
@@ -177,14 +183,16 @@ async function markOutboxFailed(row: InvoiceOutboxEntry, error: unknown) {
 		status === "dead_letter"
 			? null
 			: new Date(Date.now() + computeBackoffMs(retryCount)).toISOString();
-	await db.table(TABLE).put({
+	return {
 		...row,
+		resource: "invoice_outbox" as const,
 		status,
 		retry_count: retryCount,
 		updated_at: nowIso(),
 		next_retry_at: nextRetryAt,
+		nextAttemptAt: nextRetryAt,
 		last_error: toErrorMessage(error),
-	});
+	};
 }
 
 export async function syncInvoiceOutboxResource(
@@ -197,19 +205,21 @@ export async function syncInvoiceOutboxResource(
 	const rows = await getInvoiceOutboxRows();
 	let acknowledged = 0;
 	let failed = 0;
+	const claimTimestamp = nowIso();
+	const attemptRows = rows.filter((row) => shouldAttempt(row));
+	const claimedRows: InvoiceOutboxEntry[] = attemptRows.map((row) => ({
+		...row,
+		resource: "invoice_outbox" as const,
+		status: "syncing" as InvoiceOutboxStatus,
+		updated_at: claimTimestamp,
+		nextAttemptAt: row.next_retry_at || null,
+	}));
+	if (claimedRows.length) {
+		await safeBulkPut(TABLE, claimedRows);
+	}
+	const finalRows: InvoiceOutboxEntry[] = [];
 
-	for (const row of rows) {
-		if (!shouldAttempt(row)) {
-			continue;
-		}
-
-		const claimed: InvoiceOutboxEntry = {
-			...row,
-			status: "syncing",
-			updated_at: nowIso(),
-		};
-		await db.table(TABLE).put(claimed);
-
+	for (const claimed of claimedRows) {
 		try {
 			const response = await callOfflineSyncMethod(
 				"posawesome.posawesome.api.offline_sync.invoices.submit_invoice_outbox_entry",
@@ -220,15 +230,18 @@ export async function syncInvoiceOutboxResource(
 				},
 			);
 			if (response?.acknowledged || response?.invoice || response?.name) {
-				await markOutboxAcknowledged(claimed, response || {});
+				finalRows.push(markOutboxAcknowledged(claimed, response || {}));
 				acknowledged += 1;
 			} else {
 				throw new Error("Invoice outbox response was not acknowledged");
 			}
 		} catch (error) {
 			failed += 1;
-			await markOutboxFailed(claimed, error);
+			finalRows.push(markOutboxFailed(claimed, error));
 		}
+	}
+	if (finalRows.length) {
+		await safeBulkPut(TABLE, finalRows);
 	}
 
 	const pending = await getPendingInvoiceOutboxCount();
