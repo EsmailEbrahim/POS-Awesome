@@ -1419,6 +1419,33 @@ class TestInvoiceIdempotency(unittest.TestCase):
         self.assertEqual(submit_count["value"], 1)
         self.assertEqual(len(submitted_docs), 1)
 
+    def test_save_submission_ledger_inserts_named_new_doc(self):
+        calls = {"insert": 0, "save": 0}
+        ledger_doc = FakeDoc(
+            doctype="POS Invoice Submission Ledger",
+            name="ledger-key-001",
+            ledger_key="ledger-key-001",
+            client_request_id="request-001",
+        )
+        ledger_doc.is_new = lambda: True
+
+        def insert(ignore_permissions=False):
+            calls["insert"] += 1
+            return ledger_doc
+
+        def save(ignore_permissions=False):
+            calls["save"] += 1
+            raise AssertionError("new named ledger docs must be inserted, not saved")
+
+        ledger_doc.insert = insert
+        ledger_doc.save = save
+
+        result = self.creation._save_submission_ledger(ledger_doc)
+
+        self.assertIs(result, ledger_doc)
+        self.assertEqual(calls["insert"], 1)
+        self.assertEqual(calls["save"], 0)
+
     def test_repair_incomplete_submission_ledger_reconciles_submitted_invoice(self):
         ledger_doc = FakeDoc(
             doctype="POS Invoice Submission Ledger",

@@ -129,6 +129,12 @@ def _get_submission_ledger(client_request_id, company, pos_profile, document_typ
 def _save_submission_ledger(ledger_doc):
     if not ledger_doc:
         return None
+
+    if hasattr(ledger_doc, "is_new"):
+        if ledger_doc.is_new() and hasattr(ledger_doc, "insert"):
+            ledger_doc.insert(ignore_permissions=True)
+            return ledger_doc
+
     if getattr(ledger_doc, "name", None) and hasattr(ledger_doc, "save"):
         ledger_doc.save(ignore_permissions=True)
     elif hasattr(ledger_doc, "insert"):
