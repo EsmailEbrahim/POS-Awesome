@@ -23,9 +23,7 @@ def _install_stubs():
     frappe_module.whitelist = lambda *args, **kwargs: (lambda fn: fn)
     sys.modules["frappe"] = frappe_module
 
-    creation_module = types.ModuleType(
-        "posawesome.posawesome.api.invoice_processing.creation"
-    )
+    creation_module = types.ModuleType("posawesome.posawesome.api.invoice_processing.creation")
     creation_module.submit_invoice = lambda invoice, data, submit_in_background=0: {
         "name": "ACC-SINV-OUTBOX-0001",
         "doctype": "Sales Invoice",
@@ -40,21 +38,12 @@ def _install_stubs():
         "ledger_state": "POST_SUBMIT_DONE",
         "repaired": True,
     }
-    sys.modules[
-        "posawesome.posawesome.api.invoice_processing.creation"
-    ] = creation_module
+    sys.modules["posawesome.posawesome.api.invoice_processing.creation"] = creation_module
 
 
 def _load_module():
     module_name = "test_offline_sync_invoices_target"
-    file_path = (
-        REPO_ROOT
-        / "posawesome"
-        / "posawesome"
-        / "api"
-        / "offline_sync"
-        / "invoices.py"
-    )
+    file_path = REPO_ROOT / "posawesome" / "posawesome" / "api" / "offline_sync" / "invoices.py"
     spec = importlib.util.spec_from_file_location(module_name, file_path)
     module = importlib.util.module_from_spec(spec)
     sys.modules[module_name] = module

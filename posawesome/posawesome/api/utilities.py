@@ -185,11 +185,7 @@ def _get_git_commit_info(app_name: str = "posawesome") -> Dict[str, Any]:
         return {}
 
     def _run(cmd: List[str]) -> str:
-        return (
-            subprocess.check_output(cmd, cwd=app_path, stderr=subprocess.DEVNULL)
-            .decode("utf-8")
-            .strip()
-        )
+        return subprocess.check_output(cmd, cwd=app_path, stderr=subprocess.DEVNULL).decode("utf-8").strip()
 
     try:
         commit_hash = _run(["git", "rev-parse", "HEAD"])
@@ -251,21 +247,33 @@ def _get_remote_heads(app_path: str) -> Dict[str, str]:
 
 def _get_commit_details(app_path: str, ref: str) -> Dict[str, str]:
     try:
-        commit_message = subprocess.check_output(
-            ["git", "log", "-1", "--pretty=%B", ref],
-            cwd=app_path,
-            stderr=subprocess.DEVNULL,
-        ).decode("utf-8").strip()
-        commit_date = subprocess.check_output(
-            ["git", "log", "-1", "--pretty=%cI", ref],
-            cwd=app_path,
-            stderr=subprocess.DEVNULL,
-        ).decode("utf-8").strip()
-        commit_hash = subprocess.check_output(
-            ["git", "rev-parse", ref],
-            cwd=app_path,
-            stderr=subprocess.DEVNULL,
-        ).decode("utf-8").strip()
+        commit_message = (
+            subprocess.check_output(
+                ["git", "log", "-1", "--pretty=%B", ref],
+                cwd=app_path,
+                stderr=subprocess.DEVNULL,
+            )
+            .decode("utf-8")
+            .strip()
+        )
+        commit_date = (
+            subprocess.check_output(
+                ["git", "log", "-1", "--pretty=%cI", ref],
+                cwd=app_path,
+                stderr=subprocess.DEVNULL,
+            )
+            .decode("utf-8")
+            .strip()
+        )
+        commit_hash = (
+            subprocess.check_output(
+                ["git", "rev-parse", ref],
+                cwd=app_path,
+                stderr=subprocess.DEVNULL,
+            )
+            .decode("utf-8")
+            .strip()
+        )
         return {
             "commit_hash": commit_hash,
             "commit_message": commit_message,
@@ -309,6 +317,7 @@ def _get_commit_list(app_path: str, range_ref: str, limit: int = 20) -> List[Dic
         return commits
     except Exception:
         return []
+
 
 def _get_current_branch(app_path: str) -> str:
     try:
@@ -359,9 +368,7 @@ def get_remote_update_info() -> Dict[str, Any]:
             if details:
                 data["remote_sample_branch"] = current_branch
                 data["remote_sample"] = details
-            data["remote_commits"] = _get_commit_list(
-                app_path, f"{current_hash}..{ref}"
-            )
+            data["remote_commits"] = _get_commit_list(app_path, f"{current_hash}..{ref}")
 
     return data
 

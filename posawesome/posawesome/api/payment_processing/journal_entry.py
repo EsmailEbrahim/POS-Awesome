@@ -1,9 +1,7 @@
 import frappe
 from frappe.utils import nowdate
-from posawesome.posawesome.api.payment_processing.utils import (
-    get_party_account,
-    get_bank_cash_account
-)
+from posawesome.posawesome.api.payment_processing.utils import get_party_account, get_bank_cash_account
+
 
 def create_direct_journal_entry(
     company,

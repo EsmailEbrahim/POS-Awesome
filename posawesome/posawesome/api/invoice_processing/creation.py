@@ -14,7 +14,7 @@ from posawesome.posawesome.api.invoice_processing.utils import (
     _resolve_effective_price_list,
     _build_invoice_remarks,
     _set_return_valid_upto,
-    get_latest_rate
+    get_latest_rate,
 )
 from posawesome.posawesome.api.invoice_processing.stock import (
     _strip_client_freebies_from_payload,
@@ -24,7 +24,7 @@ from posawesome.posawesome.api.invoice_processing.stock import (
     _merge_duplicate_taxes,
     _auto_set_return_batches,
     _collect_stock_errors,
-    _should_block
+    _should_block,
 )
 from posawesome.posawesome.api.payment_processing.utils import get_bank_cash_account as get_bank_account
 from posawesome.posawesome.api.utilities import ensure_child_doctype, set_batch_nos_for_bundels
@@ -466,9 +466,7 @@ def _apply_write_off_settings(invoice_doc, data):
     conversion_rate = flt(invoice_doc.get("conversion_rate") or 1)
 
     invoice_doc.write_off_amount = flt(effective_write_off, precision_write_off)
-    invoice_doc.base_write_off_amount = flt(
-        effective_write_off * conversion_rate, precision_base_write_off
-    )
+    invoice_doc.base_write_off_amount = flt(effective_write_off * conversion_rate, precision_base_write_off)
 
 
 def _safe_date_string(value):
@@ -617,17 +615,20 @@ def _get_mutable_invoice_doc(data, doctype):
 
     invoice_doc = frappe.get_doc(doctype, invoice_name)
     previous_customer = invoice_doc.get("customer")
-    previous_values = {fieldname: invoice_doc.get(fieldname) for fieldname in (
-        "customer_name",
-        "customer_address",
-        "address_display",
-        "shipping_address_name",
-        "contact_person",
-        "contact_display",
-        "contact_mobile",
-        "contact_email",
-        "territory",
-    )}
+    previous_values = {
+        fieldname: invoice_doc.get(fieldname)
+        for fieldname in (
+            "customer_name",
+            "customer_address",
+            "address_display",
+            "shipping_address_name",
+            "contact_person",
+            "contact_display",
+            "contact_mobile",
+            "contact_email",
+            "territory",
+        )
+    }
     if cint(invoice_doc.docstatus) != 0:
         fresh_payload = _build_fresh_invoice_payload(data, doctype)
         fresh_payload = _clear_stale_party_fields_in_payload(
@@ -673,9 +674,7 @@ def _save_draft_with_latest_timestamp(invoice_doc, retries=2):
             current_state.pop("__last_sync_on", None)
             current_state.pop("doctype", None)
             latest_doc.update(current_state)
-            latest_doc.flags.ignore_permissions = getattr(
-                invoice_doc.flags, "ignore_permissions", False
-            )
+            latest_doc.flags.ignore_permissions = getattr(invoice_doc.flags, "ignore_permissions", False)
             invoice_doc = latest_doc
 
 
@@ -742,6 +741,7 @@ def update_invoice(data):
     if (data.get("is_return") or invoice_doc.is_return) and invoice_doc.get("return_against"):
         # We need to import this here to avoid circular imports if possible, or just import it at top if safe
         from posawesome.posawesome.api.invoice_processing.returns import validate_return_items
+
         validation = validate_return_items(
             invoice_doc.return_against,
             [d.as_dict() for d in invoice_doc.items],
@@ -778,7 +778,9 @@ def update_invoice(data):
             invoice_doc.customer,
             "customer_name",
         )
-        invoice_doc.customer_name = resolved_customer_name or invoice_doc.get("customer_name") or invoice_doc.customer
+        invoice_doc.customer_name = (
+            resolved_customer_name or invoice_doc.get("customer_name") or invoice_doc.customer
+        )
 
     effective_price_list = _resolve_effective_price_list(
         invoice_doc.get("customer"),
@@ -833,8 +835,7 @@ def update_invoice(data):
         invoice_doc.calculate_taxes_and_totals()
 
     company_currency = (
-        frappe.get_cached_value("Company", invoice_doc.company, "default_currency")
-        or invoice_doc.currency
+        frappe.get_cached_value("Company", invoice_doc.company, "default_currency") or invoice_doc.currency
     )
 
     # Ensure selected currency is preserved after set_missing_values

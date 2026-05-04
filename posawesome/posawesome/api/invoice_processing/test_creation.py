@@ -417,18 +417,15 @@ class TestStaleNamedInvoiceHandling(unittest.TestCase):
             fresh_doc.update(payload)
             return fresh_doc
 
-        self.creation.frappe.db.exists = (
-            lambda doctype, name:
-                (doctype == "Sales Invoice" and name == "SINV-OLD")
-                or (doctype == "Customer" and name == "CUST-NEW")
-        )
+        self.creation.frappe.db.exists = lambda doctype, name: (
+            doctype == "Sales Invoice" and name == "SINV-OLD"
+        ) or (doctype == "Customer" and name == "CUST-NEW")
         self.creation.frappe.get_doc = fake_get_doc
         self.creation.frappe.get_cached_value = lambda *args, **kwargs: 0
-        self.creation.frappe.db.get_value = (
-            lambda doctype, name, fieldname=None, **kwargs:
-                "New Customer"
-                if doctype == "Customer" and fieldname == "customer_name" and name == "CUST-NEW"
-                else None
+        self.creation.frappe.db.get_value = lambda doctype, name, fieldname=None, **kwargs: (
+            "New Customer"
+            if doctype == "Customer" and fieldname == "customer_name" and name == "CUST-NEW"
+            else None
         )
         self.creation._save_draft_with_latest_timestamp = lambda doc: doc
 
@@ -522,11 +519,10 @@ class TestStaleNamedInvoiceHandling(unittest.TestCase):
         self.creation.frappe.db.exists = lambda doctype, name: True
         self.creation.frappe.get_doc = lambda *args: existing_doc
         self.creation.frappe.get_cached_value = lambda *args, **kwargs: 0
-        self.creation.frappe.db.get_value = (
-            lambda doctype, name, fieldname=None, **kwargs:
-                "New Customer"
-                if doctype == "Customer" and fieldname == "customer_name" and name == "CUST-NEW"
-                else None
+        self.creation.frappe.db.get_value = lambda doctype, name, fieldname=None, **kwargs: (
+            "New Customer"
+            if doctype == "Customer" and fieldname == "customer_name" and name == "CUST-NEW"
+            else None
         )
         self.creation._save_draft_with_latest_timestamp = lambda doc: doc
 
@@ -579,11 +575,10 @@ class TestStaleNamedInvoiceHandling(unittest.TestCase):
         self.creation.frappe.db.exists = lambda doctype, name: True
         self.creation.frappe.get_doc = lambda *args: existing_doc
         self.creation.frappe.get_cached_value = lambda *args, **kwargs: 0
-        self.creation.frappe.db.get_value = (
-            lambda doctype, name, fieldname=None, **kwargs:
-                "New Customer"
-                if doctype == "Customer" and fieldname == "customer_name" and name == "CUST-NEW"
-                else None
+        self.creation.frappe.db.get_value = lambda doctype, name, fieldname=None, **kwargs: (
+            "New Customer"
+            if doctype == "Customer" and fieldname == "customer_name" and name == "CUST-NEW"
+            else None
         )
         self.creation._save_draft_with_latest_timestamp = lambda doc: doc
 
@@ -634,9 +629,7 @@ class TestPostSubmitPaymentProcessing(unittest.TestCase):
         )
 
         original_runner = self.creation._run_post_submit_payments
-        self.creation._run_post_submit_payments = (
-            lambda *args, **kwargs: calls.append(("run", args))
-        )
+        self.creation._run_post_submit_payments = lambda *args, **kwargs: calls.append(("run", args))
 
         try:
             self.creation._process_post_submit_payments(
@@ -705,8 +698,8 @@ class TestPostSubmitPaymentProcessing(unittest.TestCase):
         payment_module_name = "posawesome.posawesome.api.invoice_processing.payment"
         payment_module = types.ModuleType(payment_module_name)
         captured_calls = []
-        payment_module._create_change_payment_entries = (
-            lambda *args, **kwargs: captured_calls.append((args, kwargs))
+        payment_module._create_change_payment_entries = lambda *args, **kwargs: captured_calls.append(
+            (args, kwargs)
         )
         sys.modules[payment_module_name] = payment_module
 
@@ -731,11 +724,7 @@ class TestPostSubmitPaymentProcessing(unittest.TestCase):
     def test_has_post_submit_payment_work_ignores_gift_card_redemptions(self):
         self.assertFalse(
             self.creation._has_post_submit_payment_work(
-                {
-                    "gift_card_redemptions": [
-                        {"gift_card_code": "GC-0001", "amount": 150}
-                    ]
-                }
+                {"gift_card_redemptions": [{"gift_card_code": "GC-0001", "amount": 150}]}
             )
         )
 
@@ -790,8 +779,8 @@ class TestPostSubmitPaymentProcessing(unittest.TestCase):
         gift_card_module_name = "posawesome.posawesome.api.gift_cards"
         gift_card_calls = []
         gift_card_module = types.ModuleType(gift_card_module_name)
-        gift_card_module.apply_invoice_gift_card_redemptions = (
-            lambda *args, **kwargs: gift_card_calls.append((args, kwargs))
+        gift_card_module.apply_invoice_gift_card_redemptions = lambda *args, **kwargs: gift_card_calls.append(
+            (args, kwargs)
         )
         sys.modules[gift_card_module_name] = gift_card_module
 
@@ -829,9 +818,7 @@ class TestPostSubmitPaymentProcessing(unittest.TestCase):
 
         calls = []
         original_runner = self.creation._run_post_submit_payments
-        self.creation._run_post_submit_payments = (
-            lambda *args, **kwargs: calls.append(("run", args))
-        )
+        self.creation._run_post_submit_payments = lambda *args, **kwargs: calls.append(("run", args))
 
         try:
             self.creation.process_post_submit_payments_job(
@@ -1075,6 +1062,7 @@ class TestManualPostingDatePreservation(unittest.TestCase):
                 )
             ],
         )
+
         def assert_submit_sees_negative_payments():
             self.assertEqual(invoice_doc.payments[0].amount, -90)
             self.assertEqual(invoice_doc.payments[0].base_amount, -90)
@@ -1370,16 +1358,12 @@ class TestInvoiceIdempotency(unittest.TestCase):
                 return None
             return 0
 
-        self.creation.frappe.db.has_column = (
-            lambda doctype, fieldname: not (
-                doctype in {"Sales Invoice", "POS Invoice"}
-                and fieldname == "posa_client_request_id"
-            )
+        self.creation.frappe.db.has_column = lambda doctype, fieldname: not (
+            doctype in {"Sales Invoice", "POS Invoice"} and fieldname == "posa_client_request_id"
         )
         self.creation.frappe.db.get_value = fake_get_value
         self.creation.frappe.db.exists = (
-            lambda doctype, name: doctype == "Sales Invoice"
-            and name in submitted_docs
+            lambda doctype, name: doctype == "Sales Invoice" and name in submitted_docs
         )
         self.creation.frappe.get_value = lambda *args, **kwargs: 0
         self.creation.frappe.get_doc = fake_get_doc
@@ -1503,8 +1487,7 @@ class TestInvoiceIdempotency(unittest.TestCase):
 
         self.creation.frappe.db.get_value = fake_get_value
         self.creation.frappe.db.exists = (
-            lambda doctype, name: doctype == "Sales Invoice"
-            and name == "ACC-SINV-REPAIR-0001"
+            lambda doctype, name: doctype == "Sales Invoice" and name == "ACC-SINV-REPAIR-0001"
         )
         self.creation.frappe.get_doc = fake_get_doc
         self.creation._process_post_submit_payments = lambda *args, **kwargs: None
@@ -1636,9 +1619,9 @@ class TestInvoiceIdempotency(unittest.TestCase):
         self.creation.frappe.db.get_value = lambda *args, **kwargs: 0
         self.creation._save_draft_with_latest_timestamp = lambda doc: doc
         self.creation._apply_invoice_gift_card_settlement = lambda *args, **kwargs: None
-        self.creation._process_post_submit_payments = lambda *args, **kwargs: (
-            _ for _ in ()
-        ).throw(Exception("post submit failed"))
+        self.creation._process_post_submit_payments = lambda *args, **kwargs: (_ for _ in ()).throw(
+            Exception("post submit failed")
+        )
 
         self.creation.submit_in_background_job(
             {

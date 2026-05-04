@@ -10,6 +10,7 @@ from posawesome.posawesome.doctype.pos_closing_shift.closing_processing.invoices
     submit_printed_invoices,
 )
 
+
 @frappe.whitelist()
 def make_closing_shift_from_opening(opening_shift):
     opening_shift = json.loads(opening_shift)
@@ -32,11 +33,14 @@ def make_closing_shift_from_opening(opening_shift):
     closing_shift.total_quantity = 0
 
     company_currency = frappe.get_cached_value("Company", closing_shift.company, "default_currency")
-    cash_mode_of_payment = frappe.get_value(
-        "POS Profile",
-        opening_shift.get("pos_profile"),
-        "posa_cash_mode_of_payment",
-    ) or "Cash"
+    cash_mode_of_payment = (
+        frappe.get_value(
+            "POS Profile",
+            opening_shift.get("pos_profile"),
+            "posa_cash_mode_of_payment",
+        )
+        or "Cash"
+    )
 
     invoices = get_pos_invoices(opening_shift.get("name"), doctype, submit_printed=0)
 

@@ -5,6 +5,7 @@ from erpnext.stock.doctype.batch.batch import get_batch_qty
 from posawesome.posawesome.api.items import get_bulk_stock_availability, get_stock_availability
 from posawesome.posawesome.api.invoice_processing.utils import _sanitize_item_name
 
+
 def _is_stock_item(item):
     """Return True when the provided row represents a stock item."""
 
@@ -172,11 +173,7 @@ def _auto_set_return_batches(invoice_doc):
         fields=["name", "expiry_date"],
     )
 
-    valid_batches = {
-        b.name
-        for b in batch_details
-        if not b.expiry_date or getdate(b.expiry_date) >= today
-    }
+    valid_batches = {b.name for b in batch_details if not b.expiry_date or getdate(b.expiry_date) >= today}
 
     # Assign batches
     for item, batch_list in items_to_process:
@@ -187,7 +184,9 @@ def _auto_set_return_batches(invoice_doc):
                 assigned = True
                 break
         if not assigned and not allow_free:
-            frappe.throw(_("No valid batches available in {0} for {1}.").format(item.warehouse, item.item_code))
+            frappe.throw(
+                _("No valid batches available in {0} for {1}.").format(item.warehouse, item.item_code)
+            )
 
 
 def _apply_item_name_overrides(invoice_doc, overrides=None):

@@ -9,8 +9,9 @@ from erpnext.accounts.doctype.bank_account.bank_account import get_party_bank_ac
 from posawesome.posawesome.api.idempotency import doctype_supports_client_request_id
 from posawesome.posawesome.api.payment_processing.utils import (
     get_bank_cash_account,
-    set_paid_amount_and_received_amount
+    set_paid_amount_and_received_amount,
 )
+
 
 def create_payment_entry(
     company,
@@ -99,7 +100,6 @@ def create_payment_entry(
         pe.source_exchange_rate = flt(exchange_rate)
         pe.target_exchange_rate = flt(exchange_rate)
         frappe.logger().info(f"Set custom exchange rate: {exchange_rate}")
-
 
     if party_account and bank:
         pe.set_amounts()

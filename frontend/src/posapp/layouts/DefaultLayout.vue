@@ -204,9 +204,7 @@ const loadingApi = (() => {
 })();
 const globalLoading = loadingApi?.overlayVisible || ref(false);
 const getScopeState =
-	typeof loadingApi?.getScopeState === "function"
-		? loadingApi.getScopeState
-		: createFallbackLoadingScope;
+	typeof loadingApi?.getScopeState === "function" ? loadingApi.getScopeState : createFallbackLoadingScope;
 const { get_closing_data } = usePosShift();
 const syncStore = useSyncStore();
 const customersStore = useCustomersStore();
@@ -593,7 +591,9 @@ const bootstrapRecoveryMessage = computed(() => {
 		return "";
 	}
 
-	return __("If the warning persists, open Settings > Offline & Sync, then run Refresh Offline Data or Rebuild Offline Data.");
+	return __(
+		"If the warning persists, open Settings > Offline & Sync, then run Refresh Offline Data or Rebuild Offline Data.",
+	);
 });
 const bootstrapWarningTooltip = computed(() => {
 	if (!bootstrapWarningActive.value) {
@@ -942,7 +942,9 @@ const handleRebuildOfflineData = async () => {
 	}
 	toastStore.show({
 		title: __("Offline rebuild guidance"),
-		detail: __("If stale data remains, open Settings > Offline & Sync and run Rebuild Offline Data again while online."),
+		detail: __(
+			"If stale data remains, open Settings > Offline & Sync and run Rebuild Offline Data again while online.",
+		),
 		color: "warning",
 	});
 };

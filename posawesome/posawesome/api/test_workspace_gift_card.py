@@ -4,9 +4,7 @@ import unittest
 
 
 REPO_ROOT = pathlib.Path(__file__).resolve().parents[3]
-WORKSPACE_PATH = (
-    REPO_ROOT / "posawesome" / "posawesome" / "workspace" / "pos_awesome" / "pos_awesome.json"
-)
+WORKSPACE_PATH = REPO_ROOT / "posawesome" / "posawesome" / "workspace" / "pos_awesome" / "pos_awesome.json"
 HOOKS_PATH = REPO_ROOT / "posawesome" / "hooks.py"
 PATCHES_PATH = REPO_ROOT / "posawesome" / "patches.txt"
 PATCH_PATH = "posawesome.patches.add_gift_card_to_workspace.execute"
@@ -26,8 +24,7 @@ class TestGiftCardWorkspaceExposure(unittest.TestCase):
         )
         self.assertTrue(
             any(
-                block.get("type") == "card"
-                and (block.get("data") or {}).get("card_name") == "Gift Cards"
+                block.get("type") == "card" and (block.get("data") or {}).get("card_name") == "Gift Cards"
                 for block in content
             )
         )
@@ -46,8 +43,7 @@ class TestGiftCardWorkspaceExposure(unittest.TestCase):
 
         self.assertTrue(
             any(
-                link.get("type") == "Link"
-                and link.get("link_to") == "POS Invoice Submission Ledger"
+                link.get("type") == "Link" and link.get("link_to") == "POS Invoice Submission Ledger"
                 for link in links
             )
         )
