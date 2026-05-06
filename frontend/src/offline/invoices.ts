@@ -38,41 +38,101 @@ const asBoolean = (value: any): boolean => {
 
 let invoiceSyncInProgress = false;
 
-export function validateStockForOfflineInvoice(items: AnyRecord[]) {
+function shouldValidateOfflineInvoiceStock(invoice: AnyRecord) {
+	if (!invoice || invoice.is_return) {
+		return false;
+	}
+
+	const doctype = String(invoice.doctype || "").trim();
+	if (["Sales Order", "Quotation", "Purchase Order"].includes(doctype)) {
+		return false;
+	}
+
+	if (doctype === "Sales Invoice") {
+		return asBoolean(invoice.update_stock);
+	}
+
+	if (doctype === "POS Invoice") {
+		return true;
+	}
+
+	return true;
+}
+
+export function validateStockForOfflineInvoice(
+	items: AnyRecord[],
+	invoice: AnyRecord = {},
+) {
 	const openingStorage = memory.pos_opening_storage || {};
 	const stockSettings = openingStorage?.stock_settings || {};
 	const posProfile = openingStorage?.pos_profile || {};
 
-	const allowNegativeStock = asBoolean(stockSettings?.allow_negative_stock);
-	if (allowNegativeStock) {
+	if (!shouldValidateOfflineInvoiceStock(invoice)) {
+		return { isValid: true, invalidItems: [], errorMessage: "" };
+	}
+
+	const allowOfflineWithoutStockVerification = asBoolean(
+		posProfile?.posa_allow_offline_sale_without_stock_verification,
+	);
+	if (allowOfflineWithoutStockVerification) {
 		return { isValid: true, invalidItems: [], errorMessage: "" };
 	}
 
 	const blockSaleBeyondAvailableQty = asBoolean(
 		posProfile?.posa_block_sale_beyond_available_qty,
 	);
+	const allowGlobalNegativeStock = asBoolean(
+		stockSettings?.allow_negative_stock,
+	);
 
 	const stockCache = memory.local_stock_cache || {};
 	const invalidItems: AnyRecord[] = [];
+	const requestedByItem = new Map<string, AnyRecord>();
 
 	items.forEach((item) => {
-		if (asBoolean(item?.allow_negative_stock)) {
+		if (!asBoolean(item?.is_stock_item)) {
 			return;
 		}
 
 		const itemCode = item.item_code;
-		const requestedQty = Math.abs(item.qty || 0);
-		const currentStock = stockCache[itemCode]?.actual_qty || 0;
-
-		if (!blockSaleBeyondAvailableQty) {
+		if (!itemCode || Number(item.qty || 0) < 0) {
 			return;
 		}
 
-		if (currentStock - requestedQty < 0) {
+		const itemAllowsNegativeStock = asBoolean(item?.allow_negative_stock);
+		if (
+			!blockSaleBeyondAvailableQty &&
+			(allowGlobalNegativeStock || itemAllowsNegativeStock)
+		) {
+			return;
+		}
+
+		const requestedQty = Math.abs(
+			Number(item.stock_qty ?? item.qty ?? 0) || 0,
+		);
+		const existing = requestedByItem.get(itemCode);
+		if (existing) {
+			existing.requested_qty += requestedQty;
+			return;
+		}
+
+		requestedByItem.set(itemCode, {
+			item_code: itemCode,
+			item_name: item.item_name || itemCode,
+			requested_qty: requestedQty,
+		});
+	});
+
+	requestedByItem.forEach((item) => {
+		const currentStock = Number(
+			stockCache[item.item_code]?.actual_qty || 0,
+		);
+
+		if (currentStock - item.requested_qty < 0) {
 			invalidItems.push({
-				item_code: itemCode,
-				item_name: item.item_name || itemCode,
-				requested_qty: requestedQty,
+				item_code: item.item_code,
+				item_name: item.item_name,
+				requested_qty: item.requested_qty,
 				available_qty: currentStock,
 			});
 		}
@@ -113,7 +173,10 @@ function prepareOfflineInvoiceEntry(entry: AnyRecord) {
 		throw new Error("Cart is empty. Add items before saving.");
 	}
 
-	const validation = validateStockForOfflineInvoice(entry.invoice.items);
+	const validation = validateStockForOfflineInvoice(
+		entry.invoice.items,
+		entry.invoice,
+	);
 	if (!validation.isValid) {
 		throw new Error(validation.errorMessage);
 	}
@@ -158,7 +221,10 @@ export async function saveOfflineInvoice(entry: AnyRecord) {
 		cleanEntry,
 	);
 
-	if (entry.invoice?.items) {
+	if (
+		entry.invoice?.items &&
+		shouldValidateOfflineInvoiceStock(entry.invoice)
+	) {
 		updateLocalStock(entry.invoice.items);
 	}
 
