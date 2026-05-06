@@ -24,7 +24,6 @@ from posawesome.posawesome.api.invoice_processing.stock import (
     _merge_duplicate_taxes,
     _auto_set_return_batches,
     _collect_stock_errors,
-    _should_block,
 )
 from posawesome.posawesome.api.payment_processing.utils import get_bank_cash_account as get_bank_account
 from posawesome.posawesome.api.utilities import ensure_child_doctype, set_batch_nos_for_bundels
@@ -1395,8 +1394,7 @@ def repair_invoice_submission(client_request_id, company, pos_profile, document_
 def validate_cart_items(items, pos_profile=None):
     """Validate cart items for available stock.
 
-    Returns a list of item dicts where requested quantity exceeds availability.
-    This can be used on the front-end for pre-submission checks.
+    Returns blocking errors and warning-only shortages for front-end checks.
     """
 
     if isinstance(items, str):
@@ -1405,11 +1403,18 @@ def validate_cart_items(items, pos_profile=None):
     if pos_profile and not frappe.db.exists("POS Profile", pos_profile):
         pos_profile = None
 
-    if not _should_block(pos_profile):
-        return []
+    errors = _collect_stock_errors(
+        items,
+        pos_profile=pos_profile,
+        include_warnings=True,
+    )
+    blocking_errors = [row for row in errors if row.get("policy") == "block"]
+    warnings = [row for row in errors if row.get("policy") != "block"]
 
-    errors = _collect_stock_errors(items)
-    if not errors:
-        return []
-
-    return errors
+    return {
+        "mode": "block" if blocking_errors else ("warn" if warnings else "allow"),
+        "errors": blocking_errors,
+        "warnings": warnings,
+        "items": errors,
+        "should_block": bool(blocking_errors),
+    }

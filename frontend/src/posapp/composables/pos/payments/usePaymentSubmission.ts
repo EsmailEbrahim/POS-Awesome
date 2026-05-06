@@ -8,6 +8,7 @@ import {
 } from "../../../../offline/index";
 import { ensureInvoiceClientRequestId } from "../../../../offline/idempotency";
 import stockCoordinator from "../../../utils/stockCoordinator";
+import { parseBooleanSetting } from "../../../utils/stock";
 
 declare const frappe: any;
 declare const __: (_str: string, _args?: any[]) => string;
@@ -99,6 +100,69 @@ export function usePaymentSubmission(options: PaymentSubmissionOptions) {
 		return blocking
 			? __("Insufficient stock:\n{0}", [msg])
 			: __("Stock is lower than requested:\n{0}", [msg]);
+	};
+
+	const formatStockIssueLines = (issues: any[]) =>
+		issues
+			.map(
+				(issue) =>
+					`${issue.item_code} (${issue.warehouse || __("Unknown Warehouse")}) - ${formatFloat(issue.available_qty)} / ${formatFloat(issue.requested_qty)} requested`,
+			)
+			.join("\n");
+
+	const shouldValidateStockForSubmission = (doc: any, type: string) => {
+		if (!doc || doc.is_return) {
+			return false;
+		}
+
+		const doctype = String(doc.doctype || "").trim();
+		if (
+			["Order", "Quotation"].includes(type) ||
+			["Sales Order", "Quotation", "Purchase Order"].includes(doctype)
+		) {
+			return false;
+		}
+
+		if (doctype === "Sales Invoice") {
+			return parseBooleanSetting(doc.update_stock);
+		}
+
+		return true;
+	};
+
+	const validateStockBeforeOnlineSubmission = async (doc: any, profile: any, type: string) => {
+		if (!shouldValidateStockForSubmission(doc, type)) {
+			return;
+		}
+
+		const response = await frappe.call({
+			method: "posawesome.posawesome.api.invoices.validate_cart_items",
+			args: {
+				items: JSON.stringify(doc.items || []),
+				pos_profile: profile?.name,
+			},
+		});
+		const payload = response?.message;
+		const blockingErrors = Array.isArray(payload)
+			? payload
+			: Array.isArray(payload?.errors)
+				? payload.errors
+				: [];
+		const warnings = Array.isArray(payload?.warnings)
+			? payload.warnings
+			: [];
+
+		if (blockingErrors.length) {
+			throw new Error(formatStockErrors(blockingErrors));
+		}
+
+		if (warnings.length) {
+			stores?.toastStore?.show({
+				title: __("Stock is lower than requested"),
+				detail: formatStockIssueLines(warnings),
+				color: "warning",
+			});
+		}
 	};
 
 	const extractSubmissionErrorMessage = (exc: any): string => {
@@ -767,6 +831,7 @@ export function usePaymentSubmission(options: PaymentSubmissionOptions) {
 
 		// Online Submission
 		try {
+			await validateStockBeforeOnlineSubmission(doc, profile, type);
 			const submissionDoc = buildSubmissionInvoiceDoc(doc);
 			const message = unwrapApiResult(
 				await invoiceService.submitInvoice(
