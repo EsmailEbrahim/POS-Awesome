@@ -144,6 +144,7 @@ import {
 	checkDbHealth,
 } from "../../../../offline/index";
 import { createBootstrapSnapshotFromRegisterData } from "../../../../offline/bootstrapSnapshot";
+import authService from "../../../services/authService";
 
 defineOptions({
 	name: "OpeningDialog",
@@ -297,7 +298,7 @@ function go_desk() {
 function logout() {
 	const redirectTarget = "/app/posapp";
 	const loginPath = `/login?redirect-to=${encodeURIComponent(redirectTarget)}`;
-	frappe.call("logout").finally(() => {
+	authService.logout().finally(() => {
 		const loginUrl =
 			frappe?.utils?.get_url?.(loginPath) ??
 			(frappe?.urllib?.get_base_url?.() ? `${frappe.urllib.get_base_url()}${loginPath}` : loginPath);
