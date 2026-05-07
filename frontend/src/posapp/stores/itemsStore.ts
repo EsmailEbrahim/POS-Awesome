@@ -513,9 +513,10 @@ export const useItemsStore = defineStore("items", () => {
 					cachedPagination.value.total = cachedResult.length;
 					cachedPagination.value.loading = false;
 					if (!searchValue && shouldPersistItems()) {
-						const storedCount = await getStoredItemsCountByScopeCompat(
-							getStorageScope(),
-						).catch(() => 0);
+						const storedCount =
+							await getStoredItemsCountByScopeCompat(
+								getStorageScope(),
+							).catch(() => 0);
 						if (!storedCount && cachedResult.length) {
 							await persistItemsToStorage(
 								cachedResult,
@@ -535,7 +536,10 @@ export const useItemsStore = defineStore("items", () => {
 						}
 						if (normalizedGroup === "ALL") {
 							syncBootstrapItemReadiness(
-								Math.max(Number(storedCount || 0), cachedResult.length),
+								Math.max(
+									Number(storedCount || 0),
+									cachedResult.length,
+								),
 							);
 						}
 					}
@@ -553,7 +557,7 @@ export const useItemsStore = defineStore("items", () => {
 				return [];
 			}
 
-			const fetchedItems = await itemService.getItems(
+			const fetchedItems = await itemService.getItemsData(
 				args,
 				abortController.signal,
 			);
@@ -977,7 +981,7 @@ export const useItemsStore = defineStore("items", () => {
 		if (item) return item;
 
 		try {
-			const newItem: any = await itemService.getItemsFromBarcode({
+			const newItem: any = await itemService.getItemsFromBarcodeData({
 				selling_price_list: activePriceList.value,
 				currency: posProfile.value?.currency || "",
 				barcode: barcode,
@@ -1026,7 +1030,9 @@ export const useItemsStore = defineStore("items", () => {
 		}
 	};
 
-	const refreshModifiedItems = async (priceListOverride: string | null = null) => {
+	const refreshModifiedItems = async (
+		priceListOverride: string | null = null,
+	) => {
 		if (!itemsLoaded.value) return { size: 0, count: 0, items: [] };
 		const resolvedPriceList =
 			typeof priceListOverride === "string" &&
@@ -1083,10 +1089,7 @@ export const useItemsStore = defineStore("items", () => {
 				) {
 					(update as any).original_rate = syncedRate;
 				}
-				if (
-					update.currency &&
-					update.original_currency === undefined
-				) {
+				if (update.currency && update.original_currency === undefined) {
 					(update as any).original_currency = update.currency;
 				}
 				additions.push(update);
