@@ -98,13 +98,23 @@ jobs:
       - name: Initialize Frappe bench
         run: bench init --frappe-branch version-15 --python python3 frappe-bench
 
+      - name: Start Frappe Redis services
+        run: |
+          cd frappe-bench
+          for service in redis_cache redis_queue redis_socketio; do
+            if [ -f "config/${service}.conf" ]; then
+              redis-server "config/${service}.conf" --daemonize yes
+            fi
+          done
+          redis-cli -p 11000 ping
+
       - name: Create test site and install POS Awesome
         run: |
           cd frappe-bench
           bench new-site example.com \
             --mariadb-root-password frappe \
             --admin-password frappe \
-            --no-mariadb-socket
+            --mariadb-user-host-login-scope='%'
           bench get-app --branch version-15 https://github.com/frappe/erpnext
           bench --site example.com install-app erpnext
           bench get-app "$GITHUB_WORKSPACE"
