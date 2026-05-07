@@ -45,6 +45,7 @@ def _get_open_sales_invoices(
             "currency",
             "pos_profile",
             "customer_name",
+            "conversion_rate",
         ],
         order_by="posting_date desc, name desc",
     )
@@ -79,6 +80,7 @@ def _get_open_purchase_invoices(
             "base_grand_total",
             "currency",
             "supplier_name",
+            "conversion_rate",
         ],
         order_by="posting_date desc, name desc",
     )
@@ -188,11 +190,22 @@ def get_outstanding_invoices(
 
         normalized_rows = []
         for invoice in invoice_rows:
-            outstanding_amount = flt(invoice.get("outstanding_amount"))
+            invoice_outstanding = flt(invoice.get("outstanding_amount"))
+            conversion_rate = flt(invoice.get("conversion_rate")) or 1
+
+            outstanding_amount = invoice_outstanding
+
             if outstanding_amount <= 0:
                 continue
 
             row_currency = invoice.get("currency") or currency
+
+            outstanding_in_invoice_currency = flt(outstanding_amount / conversion_rate, 2) if conversion_rate > 0 else outstanding_amount
+            invoice_total = flt(
+                invoice.get("rounded_total")
+                or invoice.get("grand_total")
+                or outstanding_in_invoice_currency
+            )
 
             normalized_rows.append(
                 frappe._dict(
@@ -200,13 +213,8 @@ def get_outstanding_invoices(
                         "voucher_no": invoice.get("name"),
                         "voucher_type": "Purchase Invoice" if party_type == "Supplier" else "Sales Invoice",
                         "outstanding_amount": outstanding_amount,
-                        "invoice_amount": flt(
-                            invoice.get("rounded_total")
-                            or invoice.get("base_rounded_total")
-                            or invoice.get("grand_total")
-                            or invoice.get("base_grand_total")
-                            or outstanding_amount
-                        ),
+                        "outstanding_amount_in_invoice_currency": outstanding_in_invoice_currency,
+                        "invoice_amount": invoice_total,
                         "due_date": invoice.get("due_date") or invoice.get("posting_date"),
                         "posting_date": invoice.get("posting_date"),
                         "currency": row_currency,
@@ -226,6 +234,7 @@ def get_outstanding_invoices(
                         )
                         or customer_name,
                         "party_type": party_type,
+                        "conversion_rate": conversion_rate,
                     }
                 )
             )
