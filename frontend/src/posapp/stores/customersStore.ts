@@ -242,6 +242,7 @@ export const useCustomersStore = defineStore("customers", () => {
 			existingIndex >= 0 ? customers.value[existingIndex] : null;
 		const summary: CustomerSummary = {
 			...(existing || {}),
+			...info,
 			name: customerName,
 			customer_name:
 				getStringField(info, "customer_name") ||

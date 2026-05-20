@@ -34,8 +34,8 @@ type SupportedSyncProfile = SyncScopedProfile & {
 };
 
 type CallOfflineSyncMethod = (
-	method: string,
-	args?: Record<string, any>,
+	_method: string,
+	_args?: Record<string, any>,
 ) => Promise<any>;
 
 type RunSupportedOfflineSyncResourceArgs = {
@@ -43,9 +43,9 @@ type RunSupportedOfflineSyncResourceArgs = {
 	posProfile: SupportedSyncProfile;
 	schemaVersion: string;
 	getPersistedState: (
-		resourceId: SyncResourceId,
+		_resourceId: SyncResourceId,
 	) => Promise<SyncResourceState | null>;
-	getRuntimeState?: (resourceId: SyncResourceId) => SyncResourceState | null;
+	getRuntimeState?: (_resourceId: SyncResourceId) => SyncResourceState | null;
 	callOfflineSyncMethod: CallOfflineSyncMethod;
 };
 

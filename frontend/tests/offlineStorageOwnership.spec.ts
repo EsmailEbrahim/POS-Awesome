@@ -94,6 +94,9 @@ describe("offline storage ownership", () => {
 			{
 				name: "CUST-1",
 				customer_name: "Customer 1",
+				loyalty_program: "Retail Loyalty",
+				loyalty_points: 2,
+				conversion_factor: 5,
 				stored_value_balance: 10,
 			},
 		]);
@@ -102,6 +105,9 @@ describe("offline storage ownership", () => {
 			expect.objectContaining({
 				name: "CUST-1",
 				customer_name: "Customer 1",
+				loyalty_program: "Retail Loyalty",
+				loyalty_points: 2,
+				conversion_factor: 5,
 				stored_value_balance: 10,
 			}),
 		]);
@@ -111,12 +117,16 @@ describe("offline storage ownership", () => {
 		customersTable.get.mockResolvedValueOnce({
 			name: "CUST-1",
 			customer_name: "Customer 1",
+			loyalty_points: 2,
+			conversion_factor: 5,
 			stored_value_balance: 10,
 		});
 
 		expect(await getStoredCustomer("CUST-1")).toEqual(
 			expect.objectContaining({
 				name: "CUST-1",
+				loyalty_points: 2,
+				conversion_factor: 5,
 				stored_value_balance: 10,
 			}),
 		);

@@ -19,7 +19,7 @@ import {
 	type SyncScopedProfile,
 } from "./common";
 
-type CustomersFetcher = (args: {
+type CustomersFetcher = (_args: {
 	posProfile: SyncScopedProfile;
 	watermark?: string | null;
 	schemaVersion?: string | null;
@@ -62,12 +62,22 @@ export async function syncCustomersResource(
 	args: CustomersSyncArgs,
 ): Promise<ResourceSyncResult> {
 	const scopeChanged = await hasCustomerScopeChanged(args.posProfile);
-	const effectiveWatermark = scopeChanged ? null : args.watermark;
-	const response = await args.fetcher({
+	let effectiveWatermark = scopeChanged ? null : args.watermark;
+	let response = await args.fetcher({
 		posProfile: args.posProfile,
 		watermark: effectiveWatermark,
 		schemaVersion: args.schemaVersion,
 	});
+
+	if (response?.full_resync_required) {
+		effectiveWatermark = null;
+		await clearCustomerStorage();
+		response = await args.fetcher({
+			posProfile: args.posProfile,
+			watermark: effectiveWatermark,
+			schemaVersion: null,
+		});
+	}
 
 	if (response?.full_resync_required) {
 		await persistResourceSyncState({

@@ -177,12 +177,17 @@ export async function getStoredCustomer(customerName: string) {
 export async function setCustomerStorage(customers: AnyRecord[]) {
 	try {
 		const clean = customers.map((customer) => ({
-			name: customer.name,
-			customer_name: customer.customer_name,
+			...customer,
+			name: customer.name || customer.customer,
+			customer_name:
+				customer.customer_name || customer.name || customer.customer,
 			mobile_no: customer.mobile_no,
 			email_id: customer.email_id,
 			primary_address: customer.primary_address,
 			tax_id: customer.tax_id,
+			loyalty_program: customer.loyalty_program,
+			loyalty_points: customer.loyalty_points,
+			conversion_factor: customer.conversion_factor,
 			stored_value_balance: customer.stored_value_balance || 0,
 			stored_value_sources: customer.stored_value_sources || 0,
 		}));
