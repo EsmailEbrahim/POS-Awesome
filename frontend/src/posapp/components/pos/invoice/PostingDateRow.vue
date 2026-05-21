@@ -115,7 +115,6 @@ interface Props {
 	customer_balance_currency?: string;
 	balance_loading?: boolean;
 	formatCurrency: (val: number | undefined, currency?: string) => string;
-	currencySymbol: (currency?: string) => string;
 	priceList?: string;
 	priceLists?: string[];
 }
@@ -141,9 +140,7 @@ const priceListLabel = computed(() => __("Price List"));
 
 const isNegative = computed(() => (props.customer_balance ?? 0) < 0);
 const formattedBalance = computed(() => {
-	const symbol = props.currencySymbol(props.customer_balance_currency);
-	const amount = props.formatCurrency(props.customer_balance);
-	return `${symbol}${amount}`;
+	return props.formatCurrency(props.customer_balance, props.customer_balance_currency);
 });
 
 watch(() => props.posting_date_display, (val) => {
