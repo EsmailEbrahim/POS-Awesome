@@ -13,7 +13,13 @@ from posawesome.posawesome.api.offline_sync.common import (
     _resolve_profile,
 )
 
-SYNC_SCHEMA_VERSION = "2026-04-09"
+SYNC_SCHEMA_VERSION = "2026-05-20"
+
+
+def _build_customer_response(**kwargs):
+    response = _build_response(**kwargs)
+    response["schema_version"] = SYNC_SCHEMA_VERSION
+    return response
 
 
 def _coerce_limit(value, default=200, maximum=2000):
@@ -60,7 +66,7 @@ def sync_customers(
     schema_version=None,
 ):
     if schema_version and schema_version != SYNC_SCHEMA_VERSION:
-        return _build_response(full_resync_required=True)
+        return _build_customer_response(full_resync_required=True)
 
     profile = _resolve_profile(pos_profile)
     if not profile:
@@ -99,7 +105,7 @@ def sync_customers(
         [row.get("modified") for row in rows],
         [row.get("modified") for row in deleted_rows],
     )
-    return _build_response(
+    return _build_customer_response(
         changes=changes,
         deleted=deleted,
         next_watermark=next_watermark,

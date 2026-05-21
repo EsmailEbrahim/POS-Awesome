@@ -299,7 +299,12 @@ import { usePaymentPrinting } from "../../composables/pos/payments/usePaymentPri
 import { usePaymentMethods } from "../../composables/pos/payments/usePaymentMethods";
 import { useInvoiceDetails } from "../../composables/pos/invoice/useInvoiceDetails";
 import { useFormat } from "../../format";
-import { isOffline, getCachedGiftCardSnapshot, saveGiftCardSnapshot } from "../../../offline/index";
+import {
+	isOffline,
+	getStoredCustomer,
+	getCachedGiftCardSnapshot,
+	saveGiftCardSnapshot,
+} from "../../../offline/index";
 import GiftCardDialog from "./wallet/GiftCardDialog.vue";
 import {
 	initializePaymentLinesForDialog,
@@ -324,7 +329,7 @@ import PaymentOptions from "./payments/PaymentOptions.vue";
 import PaymentSelectionFields from "./payments/PaymentSelectionFields.vue";
 import PaymentDialogs from "./payments/PaymentDialogs.vue";
 
-const props = defineProps({
+defineProps({
 	dialogMode: {
 		type: Boolean,
 		default: false,
@@ -1329,6 +1334,48 @@ const creditSourceLabel = (row) => {
 	return row.credit_origin;
 };
 
+const applyPaymentCustomerInfo = (info, customer) => {
+	if (!info) return;
+	const nextInfo = {
+		...info,
+		name: info.name || info.customer || customer,
+		customer: info.customer || info.name || customer,
+	};
+	customer_info.value = nextInfo;
+	customersStore.setCustomerInfo(nextInfo);
+};
+
+const refreshPaymentCustomerInfo = async (doc) => {
+	const customer = typeof doc?.customer === "string" ? doc.customer.trim() : "";
+	if (!customer) {
+		return;
+	}
+
+	const cachedCustomer = await getStoredCustomer(customer);
+	if (cachedCustomer?.name) {
+		applyPaymentCustomerInfo(cachedCustomer, customer);
+	}
+
+	if (isOffline()) {
+		return;
+	}
+
+	try {
+		const result = await frappe.call({
+			method: "posawesome.posawesome.api.customers.get_customer_info",
+			args: {
+				customer,
+				company: pos_profile.value?.company || doc.company || null,
+			},
+		});
+		if (result?.message && !result.exc) {
+			applyPaymentCustomerInfo(result.message, customer);
+		}
+	} catch (error) {
+		console.error("Failed to refresh payment customer loyalty details", error);
+	}
+};
+
 const showDiffPayment = () => {
 	if (!invoice_doc.value) return;
 	toastStore.show({
@@ -1688,6 +1735,12 @@ watch(paid_change, (newVal) => {
 watch(loyalty_amount, (value) => {
 	if (!invoice_doc.value) return;
 	const amount = parseFloat(value) || 0;
+	if (amount <= 0) {
+		invoice_doc.value.loyalty_amount = 0;
+		invoice_doc.value.redeem_loyalty_points = 0;
+		invoice_doc.value.loyalty_points = 0;
+		return;
+	}
 	if (amount > available_points_amount.value + 0.001) {
 		invoice_doc.value.loyalty_amount = 0;
 		invoice_doc.value.redeem_loyalty_points = 0;
@@ -1823,10 +1876,14 @@ watch(
 	},
 );
 
-watch(customerInfo, (newInfo) => {
-	customer_info.value = newInfo || "";
-	set_print_format();
-});
+watch(
+	customerInfo,
+	(newInfo) => {
+		customer_info.value = newInfo || "";
+		set_print_format();
+	},
+	{ immediate: true },
+);
 
 watch(selectedCustomer, (newCustomer, oldCustomer) => {
 	if (newCustomer === oldCustomer) return;
@@ -1856,6 +1913,7 @@ onMounted(() => {
 	if (eventBus) {
 		eventBus.on("send_invoice_doc_payment", (doc) => {
 			invoiceStore.setInvoiceDoc(doc);
+			void refreshPaymentCustomerInfo(doc);
 			paid_change.value = flt(doc.paid_change || 0, currency_precision.value);
 			credit_change.value = flt(doc.credit_change || 0, currency_precision.value);
 			last_payment_change_was_cash.value = null;
