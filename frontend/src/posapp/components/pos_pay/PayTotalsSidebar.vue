@@ -955,7 +955,7 @@ const enteredPayments = computed(() => {
 				row_id: m.row_id,
 				mode_of_payment: m.mode_of_payment,
 				amount: flt(m.amount),
-				baseAmount: effectiveBasePaid(m) || flt(m.amount),
+				baseAmount,
 			};
 		});
 });

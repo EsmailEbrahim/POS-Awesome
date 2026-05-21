@@ -186,10 +186,15 @@ export async function setCustomerStorage(customers: AnyRecord[]) {
 			}
 		});
 
-		const clean = customers.flatMap((customer) => {
+		const clean = customers.flatMap((customer, index) => {
 			const name = customer.name || customer.customer;
 			if (!name) {
-				console.warn("Skipping customer cache row without a name", customer);
+				const customerIdentifier =
+					customer.id ?? customer.customerId ?? customer.customer_id ?? `row:${index}`;
+				console.warn(
+					"Skipping customer cache row without a name",
+					{ customerIdentifier },
+				);
 				return [];
 			}
 			const existing = name ? existingByName.get(name) : null;
@@ -212,8 +217,10 @@ export async function setCustomerStorage(customers: AnyRecord[]) {
 						customer.conversion_factor !== undefined
 							? customer.conversion_factor
 							: existing?.conversion_factor,
-					stored_value_balance: customer.stored_value_balance || 0,
-					stored_value_sources: customer.stored_value_sources || 0,
+					stored_value_balance:
+						customer.stored_value_balance ?? existing?.stored_value_balance ?? 0,
+					stored_value_sources:
+						customer.stored_value_sources ?? existing?.stored_value_sources ?? 0,
 				},
 			];
 		});

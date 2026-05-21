@@ -48,6 +48,7 @@ export async function fetch_customer_balance(context: any) {
 	try {
 		if (!context.customer) {
 			context.customer_balance = 0;
+			context.customer_balance_currency = undefined;
 			context.customer_balance_loading = false;
 			return;
 		}
