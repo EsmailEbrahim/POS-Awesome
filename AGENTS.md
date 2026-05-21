@@ -34,6 +34,7 @@ Before editing files:
    - Linked features affected
    - What was verified
    - Remaining risks
+   - Suggested commit message
 
 ---
 

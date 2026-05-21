@@ -13,6 +13,7 @@ import {
 	customerMatchesSearchTerm,
 	normalizeCustomerSearchTerm,
 } from "./customers/customerSearch";
+import { resetCustomerLoadingCoordinator } from "../modules/customers/customerLoadingCoordinator";
 // @ts-ignore
 import {
 	db,
@@ -242,6 +243,7 @@ export const useCustomersStore = defineStore("customers", () => {
 			existingIndex >= 0 ? customers.value[existingIndex] : null;
 		const summary: CustomerSummary = {
 			...(existing || {}),
+			...info,
 			name: customerName,
 			customer_name:
 				getStringField(info, "customer_name") ||
@@ -706,6 +708,7 @@ export const useCustomersStore = defineStore("customers", () => {
 			return;
 		}
 
+		resetCustomerLoadingCoordinator();
 		clearLocalState();
 		await clearCustomerStorage();
 		setCustomersLastSync(null);
@@ -716,6 +719,7 @@ export const useCustomersStore = defineStore("customers", () => {
 		if (posProfile.value && posProfile.value.customer) {
 			setSelectedCustomer(posProfile.value.customer);
 		}
+		requestCustomerRefresh();
 	}
 
 	function openUpdateCustomerDialog(customer: StoredCustomer | null = null) {

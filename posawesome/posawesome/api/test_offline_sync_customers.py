@@ -82,6 +82,7 @@ def _install_stubs():
                 "name": "CUST-002",
                 "customer_name": "Beta Customer",
                 "mobile_no": "456",
+                "loyalty_program": "Retail Loyalty",
                 "modified": "2026-04-09T10:05:00",
                 "pos_profile_id": profile_id,
             },
@@ -130,6 +131,9 @@ class TestOfflineSyncCustomers(unittest.TestCase):
             ["customer::CUST-001", "customer::CUST-002", "customer::CUST-003"],
         )
         self.assertEqual(response["changes"][1]["data"]["customer_name"], "Beta Customer")
+        self.assertNotIn("loyalty_points", response["changes"][1]["data"])
+        self.assertNotIn("conversion_factor", response["changes"][1]["data"])
+        self.assertIn("loyalty_program", response["changes"][1]["data"])
         self.assertEqual(response["deleted"], [{"key": "customer::CUST-REMOVED"}])
         self.assertEqual(response["next_watermark"], "2026-04-09T10:07:00")
         self.assertEqual(response["schema_version"], self.module.SYNC_SCHEMA_VERSION)

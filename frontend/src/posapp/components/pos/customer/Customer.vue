@@ -232,6 +232,8 @@ export default {
 			loadingCustomers,
 			isCustomerBackgroundLoading,
 			loadProgress,
+			customersLoaded,
+			loadedCustomerCount,
 			selectedCustomer,
 			customerInfo,
 		} = storeToRefs(customersStore);
@@ -269,6 +271,13 @@ export default {
 				? `${__("Loading customers...")} ${customerLoadPercent.value}%`
 				: __("Customers not found"),
 		);
+		const hasReadyCustomerCache = () =>
+			Boolean(
+				customersLoaded.value &&
+					(loadProgress.value >= 100 ||
+						loadedCustomerCount.value > 0 ||
+						customers.value.length > 0),
+			);
 
 		const formatCustomerMetric = (value) => {
 			const numericValue = Number(value || 0);
@@ -290,6 +299,7 @@ export default {
 					manualOffline: false,
 					setProfile: customersStore.setPosProfile,
 					load: customersStore.get_customer_names,
+					isReady: hasReadyCustomerCache,
 				});
 			}
 
@@ -299,6 +309,7 @@ export default {
 				manualOffline: false,
 				setProfile: customersStore.setPosProfile,
 				load: customersStore.get_customer_names,
+				isReady: hasReadyCustomerCache,
 			});
 		};
 
@@ -343,6 +354,16 @@ export default {
 			}
 		};
 
+		const commitPendingCustomerSelection = () => {
+			if (tempSelectedCustomer.value) {
+				internalCustomer.value = tempSelectedCustomer.value;
+				customersStore.setSelectedCustomer(tempSelectedCustomer.value);
+			} else if (selectedCustomer.value) {
+				internalCustomer.value = selectedCustomer.value;
+			}
+			tempSelectedCustomer.value = null;
+		};
+
 		const onCustomerMenuToggle = (isOpen) => {
 			isMenuOpen.value = isOpen;
 			if (isOpen) {
@@ -356,16 +377,11 @@ export default {
 			}
 
 			detachScrollListener();
-			if (tempSelectedCustomer.value) {
-				internalCustomer.value = tempSelectedCustomer.value;
-				customersStore.setSelectedCustomer(tempSelectedCustomer.value);
-			} else if (selectedCustomer.value) {
-				internalCustomer.value = selectedCustomer.value;
-			}
-			tempSelectedCustomer.value = null;
+			commitPendingCustomerSelection();
 		};
 
 		const closeCustomerMenu = () => {
+			commitPendingCustomerSelection();
 			const dropdown = customerDropdown.value;
 			if (dropdown) {
 				try {

@@ -69,7 +69,13 @@ describe("customersStore profile and customer dto handling", () => {
 		await store.addOrUpdateCustomer(customer);
 		store.setCustomerInfo(info);
 
-		expect(store.customers).toEqual([customer]);
+		expect(store.customers).toEqual([
+			expect.objectContaining({
+				...customer,
+				loyalty_points: 15,
+				stored_value_balance: 0,
+			}),
+		]);
 		expect(store.customerInfo).toEqual(info);
 		expectTypeOf(store.customers).toEqualTypeOf<CustomerSummary[]>();
 		expect(setCustomerStorageMock).toHaveBeenCalledWith([customer]);
