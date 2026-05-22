@@ -1,4 +1,39 @@
-﻿- Total Unallocated,- Total Unallocated
+POS Awesome,PDV incrível
+Fetch Items Directly from Server,Buscar itens diretamente do servidor
+Menu,Cardápio
+Actions,Ações
+Close Shift,Fechar turno
+End current session,Encerrar sessão atual
+Print Last Invoice,Imprimir última fatura
+Reprint previous transaction,Reimprimir transação anterior
+Sync Offline Invoices,Sincronizar faturas off-line
+Upload pending transactions,Carregar transações pendentes
+Go Online,Fique on-line
+Go Offline,Fique off-line
+Disable offline mode,Desative o modo off-line
+Work without server connection,Trabalhe sem conexão com o servidor
+Clear Cache,Limpar Cache
+Remove local data and refresh,Remova os dados locais e atualize
+About,Sobre
+App information,Informações do aplicativo
+Language,Idioma
+Change interface language,Alterar idioma da interface
+Light Mode,Modo claro
+Dark Mode,Modo escuro
+Switch theme appearance,Mudar a aparência do tema
+Logout,Sair
+Sign out of session,Sair da sessão
+Select Language,Selecione o idioma
+Choose your preferred language for the POS interface,Escolha seu idioma preferido para a interface do PDV
+Language will be changed to,O idioma será alterado para
+Cancel,Cancelar
+Change Language,Alterar idioma
+Close,Fechar
+Cannot change language - same language selected,Não é possível alterar o idioma – mesmo idioma selecionado
+Language changed successfully! Reloading...,Idioma alterado com sucesso! Recarregando...
+Failed to change language,Falha ao alterar o idioma
+Unknown error,Erro desconhecido
+- Total Unallocated,- Total não alocado
 * Required,* Obrigatório
 {0} (Qty: {1}),{0} (Quantidade: {1})
 {0} actions,{0} ações
@@ -11,7 +46,6 @@
 {0}h ago,{0}h atrás
 {0}m ago,{0}m atrás
 A POS supervisor is required for this action.,Um supervisor de PDV é necessário para esta ação.
-About,Sobre
 Access,Acesso
 Account,Conta
 Account is overdrawn,A conta está a descoberto
@@ -19,7 +53,6 @@ Acknowledge the error to resume scanning,Reconheça o erro para retomar a digita
 Acknowledge the error to resume scanning.,Reconheça o erro para retomar a digitalização.
 Across,Do outro lado
 Action,Ação
-Actions,Ações
 Active sale,Venda ativa
 add,adicionar
 Add items from the selector to start building this sale.,Adicione itens do seletor para começar a construir esta venda.
@@ -55,7 +88,6 @@ Amount already received,Valor já recebido
 Amount exceeds profile cash movement max amount.,O valor excede o valor máximo de movimentação de dinheiro do perfil.
 Amount must be greater than zero.,O valor deve ser maior que zero.
 Amount received from customer,Valor recebido do cliente
-App information,Informações do aplicativo
 Appearance and user-level preferences for the current session.,Aparência e preferências de nível de usuário para a sessão atual.
 Applied,Aplicado
 Apply,Aplicar
@@ -133,7 +165,6 @@ Camera is busy or blocked by another app/tab. Close other camera apps and try ag
 Camera permission denied. Please allow camera access in your browser settings and refresh the page.,Permissão da câmera negada. Permita o acesso à câmera nas configurações do seu navegador e atualize a página.
 Camera scanner is locked until the current error is acknowledged,O scanner da câmera fica bloqueado até que o erro atual seja reconhecido
 Camera started but the video stream did not load in time. Please try again.,"A câmera foi iniciada, mas o fluxo de vídeo não foi carregado a tempo. Por favor, tente novamente."
-Cancel,Cancelar
 Cancel cash movement {0}?,Cancelar movimentação de dinheiro {0}?
 Cancel Payment,Cancelar pagamento
 Cancel Sale,Cancelar venda
@@ -184,8 +215,6 @@ Certificate is missing or not trusted. QZ may show confirmation dialogs.,O certi
 Certificate is trusted. Silent QZ printing is active.,O certificado é confiável. A impressão QZ silenciosa está ativa.
 Change,Mudança
 Change allocation repaired,Alterar alocação reparada
-Change interface language,Alterar idioma da interface
-Change Language,Alterar idioma
 Change Price,Alterar preço
 Change Return,Alterar retorno
 Change Returned,Alteração devolvida
@@ -204,20 +233,17 @@ Checking...,Verificando...
 Cheque/Reference Date,Data do Cheque/Referência
 Cheque/Reference No,Cheque/Nº de referência
 Choose the cashier currently operating this terminal.,Escolha o caixa que atualmente opera este terminal.
-Choose your preferred language for the POS interface,Escolha seu idioma preferido para a interface do PDV
 City,Cidade
 Clear,Limpar
 Clear All,Limpar tudo
 Clear all barcode items,Limpar todos os itens do código de barras
 Clear all purchase order items,Limpar todos os itens do pedido de compra
-Clear Cache,Limpar Cache
 Clear Search,Limpar pesquisa
 Clearing local cache...,Limpando cache local...
 Click to refresh,Clique para atualizar
 Client CPU Lag:,Atraso da CPU do cliente:
 Client Memory Usage:,Uso de memória do cliente:
 Client Metrics,Métricas do cliente
-Close,Fechar
 Close about dialog,Fechar sobre a caixa de diálogo
 Close cashier switcher,Fechar comutador de caixa
 Close closing shift dialog,Fechar caixa de diálogo de fechamento do turno
@@ -233,7 +259,6 @@ Close sales orders dialog,Caixa de diálogo Fechar pedidos de vendas
 Close Scanner,Fechar scanner
 Close scanner dialog,Fechar caixa de diálogo do scanner
 Close Settings,Fechar configurações
-Close Shift,Fechar turno
 Closing Amount,Valor de fechamento
 Closing POS Shift,Fechando turno de PDV
 Closing Snapshot Available,Instantâneo de fechamento disponível
@@ -318,13 +343,12 @@ Customers not found,Clientes não encontrados
 Daily cashier actions without scrolling.,Ações diárias do caixa sem rolagem.
 Daily Sales,Vendas Diárias
 Daily Sales Summary,Resumo diário de vendas
-Dark Mode,Modo escuro
 Data loaded in form. Review and submit.,Dados carregados no formulário. Revise e envie.
 Database Health,Integridade do banco de dados
 Database health affects overall system speed and reliability.,A integridade do banco de dados afeta a velocidade e a confiabilidade geral do sistema.
 Database Info,Informações do banco de dados
 Date,Data
-Day Δ,Dia Δ
+Day ?,Dia?
 days,dias
 Day-wise (MTD),Dia a dia (MTD)
 Day-wise Movement,Movimento Diurno
@@ -383,7 +407,6 @@ Edited,Editado
 Employee,Funcionário
 Enable background sync,Ativar sincronização em segundo plano
 Enable Customer Display in POS Profile first.,Ative primeiro a exibição do cliente no perfil POS.
-End current session,Encerrar sessão atual
 Enter a PIN.,Insira um PIN.
 Enter a valid grams value,Insira um valor válido em gramas
 Enter new price list rate,Insira a nova taxa da lista de preços
@@ -468,8 +491,6 @@ Gift card payment,Pagamento com vale-presente
 Gift card redemption requires an online connection,O resgate do vale-presente requer uma conexão on-line
 Gift card topped up successfully.,Vale-presente carregado com sucesso.
 Gift Cards,Cartões-presente
-Go Offline,Fique off-line
-Go Online,Fique on-line
 Go to Frappe Desk,Vá para o Frappe Desk
 Grand Total,Total geral
 Gross Margin,Margem Bruta
@@ -552,8 +573,6 @@ json,json
 Just now,Agora mesmo
 Keep offline prerequisites healthy and recover stale data safely.,Mantenha os pré-requisitos offline saudáveis e recupere dados obsoletos com segurança.
 Labels,Etiquetas
-Language,Idioma
-Language will be changed to,O idioma será alterado para
 "Language, theme, terminal tools, and session controls.","Idioma, tema, ferramentas de terminal e controles de sessão."
 Last,Último
 Last 14 Days (Paid vs Pending),Últimos 14 dias (pago x pendente)
@@ -565,7 +584,6 @@ Last sync:,Última sincronização:
 Last sync: {0} | ok: {1} | failed: {2} | skipped: {3},Última sincronização: {0} | ok: {1} | falhou: {2} | ignorado: {3}
 Latest entries for current shift,Últimas entradas para o turno atual
 Lead Time,Prazo de entrega
-Light Mode,Modo claro
 Limited,Limitado
 lines,linhas
 List,Lista
@@ -594,7 +612,6 @@ localStorage,armazenamento local
 Location Performance,Desempenho de localização
 Locations,Locais
 Lock Screen,Tela de bloqueio
-Logout,Sair
 Lookup Workflow,Fluxo de trabalho de pesquisa
 Loss,Perda
 Low,Baixo
@@ -621,7 +638,6 @@ Maximum discount amount for this offer item is {0}.,O valor máximo do desconto 
 Maximum discount percentage for this offer item is {0}%.,A porcentagem máxima de desconto para este item da oferta é de {0}%.
 Maximum offer quantity is {0}. Quantity adjusted to allowed limit.,A quantidade máxima de oferta é {0}. Quantidade ajustada ao limite permitido.
 Medium,Médio
-Menu,Cardápio
 Method-wise Collections,Coleções metodológicas
 Minimum allowed rate for this offer item is {0}.,A taxa mínima permitida para este item de oferta é {0}.
 Minimum Qty,Quantidade mínima
@@ -629,7 +645,7 @@ Mobile No,Celular Não
 Mode,Modo
 Mode of Payment,Modo de Pagamento
 Month,Mês
-Month Δ,Mês Δ
+Month ?,Mês?
 Monthly Profit,Lucro Mensal
 Monthly Sales,Vendas Mensais
 Monthly Sales Summary,Resumo mensal de vendas
@@ -894,7 +910,6 @@ Print Draft,Imprimir rascunho
 Print Format (Invoice),Formato de impressão (fatura)
 Print Format (Order),Formato de impressão (pedido)
 Print invoice,Imprimir fatura
-Print Last Invoice,Imprimir última fatura
 Print Purchase Invoice instead of PO,Imprimir fatura de compra em vez de PO
 Printer,Impressora
 Processed returns impacting the shift totals,Devoluções processadas impactando os totais de turno
@@ -977,7 +992,6 @@ Repaired,Reparado
 Repairing change allocation,Reparando a alocação de alterações
 Repeat Customers,Clientes recorrentes
 Repeat Rate,Taxa de repetição
-Reprint previous transaction,Reimprimir transação anterior
 Request,Solicitação
 Request ID: {0},ID da solicitação: {0}
 Request Payment,Solicitar pagamento
@@ -1063,7 +1077,6 @@ Select a printer to use QZ silent printing.,Selecione uma impressora para usar a
 Select Batch,Selecione lote
 Select Columns to Display,Selecione colunas para exibir
 Select items to sell,Selecione itens para vender
-Select Language,Selecione o idioma
 Select Payment,Selecione Pagamento
 Select Payment Account,Selecione conta de pagamento
 Select printer,Selecione a impressora
@@ -1102,7 +1115,6 @@ Show the active cart on a customer-facing screen,Mostrar o carrinho ativo em uma
 Showing {0}-{1} of {2},Mostrando {0}-{1} de {2}
 Showing 0 of 0,Mostrando 0 de 0
 Shows the distribution of invoices per currency,Mostra a distribuição das faturas por moeda
-Sign out of session,Sair da sessão
 Sign out of the current POS session,Sair da sessão atual do PDV
 Size:,Tamanho:
 Skipped Payments,Pagamentos ignorados
@@ -1150,7 +1162,6 @@ Suppliers not found,Fornecedores não encontrados
 Switch Camera,Trocar câmera
 Switch Cashier,Trocar de caixa
 Switch the POS appearance theme,Mudar o tema da aparência do PDV
-Switch theme appearance,Mudar a aparência do tema
 Switched to:,Mudou para:
 Sync All Invoices,Sincronizar todas as faturas
 Sync Offline Cash Movements ({0}),Sincronizar movimentos de dinheiro off-line ({0})
@@ -1286,7 +1297,6 @@ Unallocated,Não alocado
 Unallocated:,Não alocado:
 Unavailable,Indisponível
 Unknown,Desconhecido
-Unknown error,Erro desconhecido
 Unknown Item,Item desconhecido
 Unknown Warehouse,Armazém Desconhecido
 Unlock POS,Desbloquear PDV
@@ -1301,7 +1311,6 @@ Update Price List Rate,Atualizar taxa da lista de preços
 Updated,Atualizado
 Updates and app info that stay out of the cashier flow.,Atualizações e informações do app que ficam fora do fluxo de caixa.
 Updates automatically,Atualizações automaticamente
-Upload pending transactions,Carregar transações pendentes
 Usage,Uso
 Usage Stats,Estatísticas de uso
 Use a 4 to 8 digit PIN for cashier switching and terminal unlock.,Use um PIN de 4 a 8 dígitos para troca de caixa e desbloqueio de terminal.
@@ -1336,7 +1345,7 @@ Walk-in Customer,Cliente visitante
 Warehouse,Armazém
 Warning: High cache usage may affect performance.,Aviso: o alto uso do cache pode afetar o desempenho.
 Warning: High lag may indicate heavy processing or browser slowness.,Aviso: um atraso elevado pode indicar processamento pesado ou lentidão do navegador.
-Week Δ,Semana Δ
+Week ?,Semana ?
 Week-wise,Semanalmente
 Weight (g),Peso (g)
 Weight (grams),Peso (gramas)

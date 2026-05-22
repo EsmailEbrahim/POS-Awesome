@@ -1,4 +1,39 @@
-﻿- Total Unallocated,- Total Unallocated
+POS Awesome,POS Lieliski
+Fetch Items Directly from Server,Ienesiet preces tieši no servera
+Menu,Izvēlne
+Actions,Darbības
+Close Shift,Aizvērt Shift
+End current session,Beigt pašreizējo sesiju
+Print Last Invoice,Drukāt pēdējo rēķinu
+Reprint previous transaction,Pārdrukājiet iepriekšējo darījumu
+Sync Offline Invoices,Sinhronizējiet bezsaistes rēķinus
+Upload pending transactions,Augšupielādējiet neapstiprinātos darījumus
+Go Online,Iet tiešsaistē
+Go Offline,Pāriet bezsaistē
+Disable offline mode,Atspējot bezsaistes režīmu
+Work without server connection,Strādājiet bez savienojuma ar serveri
+Clear Cache,Notīrīt kešatmiņu
+Remove local data and refresh,Noņemiet vietējos datus un atsvaidziniet
+About,Par
+App information,Lietotnes informācija
+Language,Valoda
+Change interface language,Mainiet saskarnes valodu
+Light Mode,Gaismas režīms
+Dark Mode,Tumšais režīms
+Switch theme appearance,Mainiet motīva izskatu
+Logout,Atteikties
+Sign out of session,Izrakstieties no sesijas
+Select Language,Izvēlieties valodu
+Choose your preferred language for the POS interface,Izvēlieties vēlamo valodu POS saskarnei
+Language will be changed to,Valoda tiks mainīta uz
+Cancel,Atcelt
+Change Language,Mainīt valodu
+Close,Aizvērt
+Cannot change language - same language selected,Nevar mainīt valodu — atlasīta tā pati valoda
+Language changed successfully! Reloading...,Valoda veiksmīgi nomainīta! Notiek atkārtota ielāde...
+Failed to change language,Neizdevās mainīt valodu
+Unknown error,Nezināma kļūda
+- Total Unallocated,- Kopējais nepiešķirtais
 * Required,* Obligāti
 {0} (Qty: {1}),{0} (daudzums: {1})
 {0} actions,{0} darbības
@@ -11,7 +46,6 @@
 {0}h ago,pirms {0} h
 {0}m ago,pirms {0} min
 A POS supervisor is required for this action.,Šai darbībai ir nepieciešams POS vadītājs.
-About,Par
 Access,Piekļuve
 Account,Konts
 Account is overdrawn,Konts ir pārtērēts
@@ -19,7 +53,6 @@ Acknowledge the error to resume scanning,"Apstipriniet kļūdu, lai atsāktu ske
 Acknowledge the error to resume scanning.,"Apstipriniet kļūdu, lai atsāktu skenēšanu."
 Across,Pāri
 Action,Darbība
-Actions,Darbības
 Active sale,Aktīva izpārdošana
 add,pievienot
 Add items from the selector to start building this sale.,"Pievienojiet preces no atlasītāja, lai sāktu veidot šo izpārdošanu."
@@ -55,7 +88,6 @@ Amount already received,Summa jau saņemta
 Amount exceeds profile cash movement max amount.,Summa pārsniedz profila skaidras naudas kustības maksimālo summu.
 Amount must be greater than zero.,Summai ir jābūt lielākai par nulli.
 Amount received from customer,"Summa, kas saņemta no klienta"
-App information,Lietotnes informācija
 Appearance and user-level preferences for the current session.,Pašreizējās sesijas izskats un lietotāja līmeņa preferences.
 Applied,Pielietots
 Apply,Pieteikties
@@ -133,7 +165,6 @@ Camera is busy or blocked by another app/tab. Close other camera apps and try ag
 Camera permission denied. Please allow camera access in your browser settings and refresh the page.,"Kameras atļauja liegta. Lūdzu, pārlūkprogrammas iestatījumos atļaujiet piekļuvi kamerai un atsvaidziniet lapu."
 Camera scanner is locked until the current error is acknowledged,"Kameras skeneris ir bloķēts, līdz tiek apstiprināta pašreizējā kļūda"
 Camera started but the video stream did not load in time. Please try again.,"Kamera startēja, bet video straume netika ielādēta laikā. Lūdzu, mēģiniet vēlreiz."
-Cancel,Atcelt
 Cancel cash movement {0}?,Vai atcelt skaidras naudas kustību {0}?
 Cancel Payment,Atcelt maksājumu
 Cancel Sale,Atcelt izpārdošanu
@@ -184,8 +215,6 @@ Certificate is missing or not trusted. QZ may show confirmation dialogs.,Trūkst
 Certificate is trusted. Silent QZ printing is active.,Sertifikāts ir uzticams. Klusā QZ drukāšana ir aktīva.
 Change,Mainīt
 Change allocation repaired,Izmaiņu piešķīrums labots
-Change interface language,Mainiet saskarnes valodu
-Change Language,Mainīt valodu
 Change Price,Mainīt cenu
 Change Return,Mainīt atgriešanos
 Change Returned,Izmaiņas atgrieztas
@@ -204,20 +233,17 @@ Checking...,Notiek pārbaude...
 Cheque/Reference Date,Čeks/atsauces datums
 Cheque/Reference No,Čeka/uzziņas Nr
 Choose the cashier currently operating this terminal.,"Izvēlieties kasieri, kas pašlaik pārvalda šo termināli."
-Choose your preferred language for the POS interface,Izvēlieties vēlamo valodu POS saskarnei
 City,Pilsēta
 Clear,Skaidrs
 Clear All,Notīrīt visu
 Clear all barcode items,Notīrīt visus svītrkoda vienumus
 Clear all purchase order items,Notīriet visas pirkuma pasūtījuma preces
-Clear Cache,Notīrīt kešatmiņu
 Clear Search,Notīrīt meklēšanu
 Clearing local cache...,Notiek vietējās kešatmiņas dzēšana...
 Click to refresh,"Noklikšķiniet, lai atsvaidzinātu"
 Client CPU Lag:,Klienta CPU kavēšanās:
 Client Memory Usage:,Klienta atmiņas lietojums:
 Client Metrics,Klientu metrika
-Close,Aizvērt
 Close about dialog,Aizvērt par dialoglodziņu
 Close cashier switcher,Aizveriet kases pārslēdzēju
 Close closing shift dialog,Aizvērt maiņas dialoglodziņu
@@ -233,7 +259,6 @@ Close sales orders dialog,Aizvērt pārdošanas pasūtījumu dialoglodziņu
 Close Scanner,Aizveriet skeneri
 Close scanner dialog,Aizvērt skenera dialoglodziņu
 Close Settings,Aizveriet iestatījumus
-Close Shift,Aizvērt Shift
 Closing Amount,Noslēguma summa
 Closing POS Shift,POS Shift aizvēršana
 Closing Snapshot Available,Ir pieejams noslēguma momentuzņēmums
@@ -318,13 +343,12 @@ Customers not found,Klienti nav atrasti
 Daily cashier actions without scrolling.,Ikdienas kases darbības bez ritināšanas.
 Daily Sales,Ikdienas izpārdošana
 Daily Sales Summary,Ikdienas pārdošanas kopsavilkums
-Dark Mode,Tumšais režīms
 Data loaded in form. Review and submit.,Dati ielādēti formā. Pārskatiet un iesniedziet.
 Database Health,Datu bāzes veselība
 Database health affects overall system speed and reliability.,Datu bāzes stāvoklis ietekmē kopējo sistēmas ātrumu un uzticamību.
 Database Info,Informācija par datu bāzi
 Date,Datums
-Day Δ,Diena Δ
+Day ?,Diena?
 days,dienas
 Day-wise (MTD),Dienas ziņā (MTD)
 Day-wise Movement,Dienas gudra kustība
@@ -383,7 +407,6 @@ Edited,Rediģēts
 Employee,Darbinieks
 Enable background sync,Iespējot fona sinhronizāciju
 Enable Customer Display in POS Profile first.,Vispirms iespējojiet klienta attēlojumu POS profilā.
-End current session,Beigt pašreizējo sesiju
 Enter a PIN.,Ievadiet PIN.
 Enter a valid grams value,Ievadiet derīgu gramu vērtību
 Enter new price list rate,Ievadiet jauno cenrāža likmi
@@ -468,8 +491,6 @@ Gift card payment,Dāvanu kartes apmaksa
 Gift card redemption requires an online connection,Dāvanu kartes izpirkšanai nepieciešams tiešsaistes savienojums
 Gift card topped up successfully.,Dāvanu karte veiksmīgi papildināta.
 Gift Cards,Dāvanu kartes
-Go Offline,Pāriet bezsaistē
-Go Online,Iet tiešsaistē
 Go to Frappe Desk,Dodieties uz Frappe Desk
 Grand Total,Grand Total
 Gross Margin,Bruto peļņa
@@ -552,8 +573,6 @@ json,json
 Just now,Tikai tagad
 Keep offline prerequisites healthy and recover stale data safely.,Saglabājiet bezsaistes priekšnoteikumus veselīgus un droši atkopiet novecojušus datus.
 Labels,Etiķetes
-Language,Valoda
-Language will be changed to,Valoda tiks mainīta uz
 "Language, theme, terminal tools, and session controls.","Valoda, motīvs, termināļa rīki un sesijas vadīklas."
 Last,Pēdējais
 Last 14 Days (Paid vs Pending),Pēdējās 14 dienas (apmaksātās un neapstiprinātās)
@@ -565,7 +584,6 @@ Last sync:,Pēdējā sinhronizācija:
 Last sync: {0} | ok: {1} | failed: {2} | skipped: {3},Pēdējā sinhronizācija: {0} | labi: {1} | neizdevās: {2} | izlaists: {3}
 Latest entries for current shift,Jaunākie ieraksti par pašreizējo maiņu
 Lead Time,Izpildes laiks
-Light Mode,Gaismas režīms
 Limited,Ierobežots
 lines,līnijas
 List,Saraksts
@@ -594,7 +612,6 @@ localStorage,vietējāStorage
 Location Performance,Atrašanās vietas veiktspēja
 Locations,Atrašanās vietas
 Lock Screen,Bloķēšanas ekrāns
-Logout,Atteikties
 Lookup Workflow,Uzmeklēšanas darbplūsma
 Loss,Zaudējums
 Low,Zems
@@ -621,7 +638,6 @@ Maximum discount amount for this offer item is {0}.,Maksimālā atlaides summa �
 Maximum discount percentage for this offer item is {0}%.,Maksimālā atlaides procentuālā daļa šim piedāvājuma vienumam ir {0}%.
 Maximum offer quantity is {0}. Quantity adjusted to allowed limit.,Maksimālais piedāvājuma daudzums ir {0}. Daudzums pielāgots atļautajam ierobežojumam.
 Medium,Vidēja
-Menu,Izvēlne
 Method-wise Collections,Metodiski kolekcijas
 Minimum allowed rate for this offer item is {0}.,Minimālā atļautā cena šim piedāvājuma vienumam ir {0}.
 Minimum Qty,Minimālais daudzums
@@ -629,7 +645,7 @@ Mobile No,Mobilais Nr
 Mode,Režīms
 Mode of Payment,Maksājuma veids
 Month,Mēnesis
-Month Δ,Mēnesis Δ
+Month ?,Mēnesi?
 Monthly Profit,Mēneša peļņa
 Monthly Sales,Ikmēneša izpārdošana
 Monthly Sales Summary,Mēneša pārdošanas kopsavilkums
@@ -894,7 +910,6 @@ Print Draft,Drukāt melnrakstu
 Print Format (Invoice),Drukas formāts (rēķins)
 Print Format (Order),Drukas formāts (pasūtījums)
 Print invoice,Drukāt rēķinu
-Print Last Invoice,Drukāt pēdējo rēķinu
 Print Purchase Invoice instead of PO,"Drukāt pirkuma rēķinu, nevis PO"
 Printer,Printeris
 Processed returns impacting the shift totals,"Apstrādātas atgriešanas, kas ietekmē maiņu kopsummas"
@@ -977,7 +992,6 @@ Repaired,Remontēts
 Repairing change allocation,Izmaiņu piešķiršanas labošana
 Repeat Customers,Atkārtoti klienti
 Repeat Rate,Atkārtošanas ātrums
-Reprint previous transaction,Pārdrukājiet iepriekšējo darījumu
 Request,Pieprasīt
 Request ID: {0},Pieprasījuma ID: {0}
 Request Payment,Pieprasīt maksājumu
@@ -1063,7 +1077,6 @@ Select a printer to use QZ silent printing.,"Izvēlieties printeri, lai izmantot
 Select Batch,Atlasiet Pakete
 Select Columns to Display,Atlasiet Parādāmās kolonnas
 Select items to sell,"Izvēlieties preces, ko pārdot"
-Select Language,Izvēlieties valodu
 Select Payment,Atlasiet Maksājums
 Select Payment Account,Atlasiet Maksājumu konts
 Select printer,Izvēlieties printeri
@@ -1102,7 +1115,6 @@ Show the active cart on a customer-facing screen,Rādīt aktīvo grozu uz klient
 Showing {0}-{1} of {2},Rāda {0}-{1} no {2}
 Showing 0 of 0,Rāda 0 no 0
 Shows the distribution of invoices per currency,Parāda rēķinu sadalījumu pa valūtām
-Sign out of session,Izrakstieties no sesijas
 Sign out of the current POS session,Izrakstieties no pašreizējās POS sesijas
 Size:,Izmērs:
 Skipped Payments,Izlaistie maksājumi
@@ -1150,7 +1162,6 @@ Suppliers not found,Piegādātāji nav atrasti
 Switch Camera,Pārslēgt kameru
 Switch Cashier,Mainiet kasieri
 Switch the POS appearance theme,Pārslēdziet POS izskata motīvu
-Switch theme appearance,Mainiet motīva izskatu
 Switched to:,Pārslēgts uz:
 Sync All Invoices,Sinhronizēt visus rēķinus
 Sync Offline Cash Movements ({0}),Sinhronizēt bezsaistes naudas kustības ({0})
@@ -1286,7 +1297,6 @@ Unallocated,Nepiešķirts
 Unallocated:,Nepiešķirts:
 Unavailable,Nav pieejams
 Unknown,Nezināms
-Unknown error,Nezināma kļūda
 Unknown Item,Nezināms vienums
 Unknown Warehouse,Nezināma noliktava
 Unlock POS,Atbloķēt POS
@@ -1301,7 +1311,6 @@ Update Price List Rate,Atjaunināt cenrāža likmi
 Updated,Atjaunināts
 Updates and app info that stay out of the cashier flow.,"Atjauninājumi un lietotņu informācija, kas neietilpst kasē."
 Updates automatically,Atjaunina automātiski
-Upload pending transactions,Augšupielādējiet neapstiprinātos darījumus
 Usage,Lietošana
 Usage Stats,Lietošanas statistika
 Use a 4 to 8 digit PIN for cashier switching and terminal unlock.,"Izmantojiet 4–8 ciparu PIN kodu, lai pārslēgtu kasieri un atbloķētu termināli."
@@ -1336,7 +1345,7 @@ Walk-in Customer,Ieejas klients
 Warehouse,Noliktava
 Warning: High cache usage may affect performance.,Brīdinājums: liels kešatmiņas lietojums var ietekmēt veiktspēju.
 Warning: High lag may indicate heavy processing or browser slowness.,Brīdinājums: liela aizkave var liecināt par intensīvu apstrādi vai pārlūkprogrammas lēnu darbību.
-Week Δ,Δ nedēļa
+Week ?,nedēļa?
 Week-wise,Nedēļas ziņā
 Weight (g),Svars (g)
 Weight (grams),Svars (gramos)

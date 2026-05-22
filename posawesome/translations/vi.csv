@@ -1,4 +1,39 @@
-﻿- Total Unallocated,- Total Unallocated
+POS Awesome,POS tuyệt vời
+Fetch Items Directly from Server,Tìm nạp các mục trực tiếp từ máy chủ
+Menu,Thực đơn
+Actions,hành động
+Close Shift,Đóng ca
+End current session,Kết thúc phiên hiện tại
+Print Last Invoice,In hóa đơn cuối cùng
+Reprint previous transaction,In lại giao dịch trước đó
+Sync Offline Invoices,Đồng bộ hoá đơn ngoại tuyến
+Upload pending transactions,Tải lên các giao dịch đang chờ xử lý
+Go Online,Lên mạng
+Go Offline,Đi ngoại tuyến
+Disable offline mode,Tắt chế độ ngoại tuyến
+Work without server connection,Làm việc mà không cần kết nối máy chủ
+Clear Cache,Xóa bộ nhớ đệm
+Remove local data and refresh,Xóa dữ liệu cục bộ và làm mới
+About,Giới thiệu
+App information,Thông tin ứng dụng
+Language,Ngôn ngữ
+Change interface language,Thay đổi ngôn ngữ giao diện
+Light Mode,Chế độ ánh sáng
+Dark Mode,Chế độ tối
+Switch theme appearance,Chuyển đổi giao diện chủ đề
+Logout,Đăng xuất
+Sign out of session,Đăng xuất khỏi phiên
+Select Language,Chọn ngôn ngữ
+Choose your preferred language for the POS interface,Chọn ngôn ngữ ưa thích của bạn cho giao diện POS
+Language will be changed to,Ngôn ngữ sẽ được thay đổi thành
+Cancel,Hủy bỏ
+Change Language,Thay đổi ngôn ngữ
+Close,Đóng
+Cannot change language - same language selected,Không thể thay đổi ngôn ngữ - đã chọn cùng một ngôn ngữ
+Language changed successfully! Reloading...,Ngôn ngữ đã thay đổi thành công! Đang tải lại...
+Failed to change language,Không thể thay đổi ngôn ngữ
+Unknown error,Lỗi không xác định
+- Total Unallocated,- Tổng số chưa phân bổ
 * Required,* Bắt buộc
 {0} (Qty: {1}),{0} (Số lượng: {1})
 {0} actions,{0} hành động
@@ -11,7 +46,6 @@
 {0}h ago,{0} giờ trước
 {0}m ago,{0} phút trước
 A POS supervisor is required for this action.,Cần có người giám sát POS cho hành động này.
-About,Giới thiệu
 Access,Truy cập
 Account,Tài khoản
 Account is overdrawn,Tài khoản bị rút quá mức
@@ -19,7 +53,6 @@ Acknowledge the error to resume scanning,Xác nhận lỗi để tiếp tục qu
 Acknowledge the error to resume scanning.,Xác nhận lỗi để tiếp tục quét.
 Across,Bên kia
 Action,hành động
-Actions,hành động
 Active sale,Bán hàng tích cực
 add,thêm
 Add items from the selector to start building this sale.,Thêm các mặt hàng từ bộ chọn để bắt đầu xây dựng chương trình giảm giá này.
@@ -55,7 +88,6 @@ Amount already received,Số tiền đã nhận được
 Amount exceeds profile cash movement max amount.,Số tiền vượt quá số tiền tối đa của chuyển động tiền mặt trong hồ sơ.
 Amount must be greater than zero.,Số tiền phải lớn hơn 0.
 Amount received from customer,Số tiền nhận được từ khách hàng
-App information,Thông tin ứng dụng
 Appearance and user-level preferences for the current session.,Tùy chọn giao diện và cấp độ người dùng cho phiên hiện tại.
 Applied,Đã áp dụng
 Apply,Áp dụng
@@ -133,7 +165,6 @@ Camera is busy or blocked by another app/tab. Close other camera apps and try ag
 Camera permission denied. Please allow camera access in your browser settings and refresh the page.,Quyền sử dụng máy ảnh bị từ chối. Vui lòng cho phép truy cập máy ảnh trong cài đặt trình duyệt của bạn và làm mới trang.
 Camera scanner is locked until the current error is acknowledged,Máy quét camera bị khóa cho đến khi lỗi hiện tại được xác nhận
 Camera started but the video stream did not load in time. Please try again.,Camera đã khởi động nhưng luồng video không tải kịp thời. Vui lòng thử lại.
-Cancel,Hủy bỏ
 Cancel cash movement {0}?,Hủy chuyển tiền mặt {0}?
 Cancel Payment,Hủy thanh toán
 Cancel Sale,Hủy giảm giá
@@ -184,8 +215,6 @@ Certificate is missing or not trusted. QZ may show confirmation dialogs.,Chứng
 Certificate is trusted. Silent QZ printing is active.,Chứng chỉ được tin cậy. Tính năng in QZ im lặng đang hoạt động.
 Change,Thay đổi
 Change allocation repaired,Đã sửa chữa thay đổi phân bổ
-Change interface language,Thay đổi ngôn ngữ giao diện
-Change Language,Thay đổi ngôn ngữ
 Change Price,Thay đổi giá
 Change Return,Thay đổi Trả lại
 Change Returned,Thay đổi được trả lại
@@ -204,20 +233,17 @@ Checking...,Đang kiểm tra...
 Cheque/Reference Date,Séc/Ngày tham chiếu
 Cheque/Reference No,Séc/Số tham chiếu
 Choose the cashier currently operating this terminal.,Chọn nhân viên thu ngân hiện đang vận hành thiết bị đầu cuối này.
-Choose your preferred language for the POS interface,Chọn ngôn ngữ ưa thích của bạn cho giao diện POS
 City,Thành phố
 Clear,Xóa
 Clear All,Xóa tất cả
 Clear all barcode items,Xóa tất cả các mục mã vạch
 Clear all purchase order items,Xóa tất cả các mặt hàng trong đơn đặt hàng
-Clear Cache,Xóa bộ nhớ đệm
 Clear Search,Xóa tìm kiếm
 Clearing local cache...,Đang xóa bộ nhớ đệm cục bộ...
 Click to refresh,Bấm để làm mới
 Client CPU Lag:,Độ trễ CPU của máy khách:
 Client Memory Usage:,Sử dụng bộ nhớ máy khách:
 Client Metrics,Số liệu khách hàng
-Close,Đóng
 Close about dialog,Đóng hộp thoại
 Close cashier switcher,Đóng bộ chuyển đổi thu ngân
 Close closing shift dialog,Đóng hộp thoại chuyển đổi đang đóng
@@ -233,7 +259,6 @@ Close sales orders dialog,Đóng hộp thoại đặt hàng bán hàng
 Close Scanner,Đóng máy quét
 Close scanner dialog,Đóng hộp thoại máy quét
 Close Settings,Đóng cài đặt
-Close Shift,Đóng ca
 Closing Amount,Số tiền đóng
 Closing POS Shift,Đóng ca POS
 Closing Snapshot Available,Có sẵn ảnh chụp nhanh
@@ -318,13 +343,12 @@ Customers not found,Không tìm thấy khách hàng
 Daily cashier actions without scrolling.,Hành động thu ngân hàng ngày mà không cần cuộn.
 Daily Sales,Bán hàng hàng ngày
 Daily Sales Summary,Tóm tắt doanh số hàng ngày
-Dark Mode,Chế độ tối
 Data loaded in form. Review and submit.,Dữ liệu được tải trong biểu mẫu. Xem xét và gửi.
 Database Health,Tình trạng cơ sở dữ liệu
 Database health affects overall system speed and reliability.,Tình trạng cơ sở dữ liệu ảnh hưởng đến tốc độ và độ tin cậy tổng thể của hệ thống.
 Database Info,Thông tin cơ sở dữ liệu
 Date,Ngày
-Day Δ,Ngày Δ
+Day ?,Ngày?
 days,ngày
 Day-wise (MTD),Hàng ngày (MTD)
 Day-wise Movement,Phong trào hàng ngày
@@ -383,7 +407,6 @@ Edited,Đã chỉnh sửa
 Employee,nhân viên
 Enable background sync,Bật đồng bộ hóa nền
 Enable Customer Display in POS Profile first.,Trước tiên hãy bật Hiển thị khách hàng trong Hồ sơ POS.
-End current session,Kết thúc phiên hiện tại
 Enter a PIN.,Nhập mã PIN.
 Enter a valid grams value,Nhập giá trị gam hợp lệ
 Enter new price list rate,Nhập tỷ lệ bảng giá mới
@@ -468,8 +491,6 @@ Gift card payment,Thanh toán bằng thẻ quà tặng
 Gift card redemption requires an online connection,Đổi thẻ quà tặng yêu cầu kết nối trực tuyến
 Gift card topped up successfully.,Nạp thẻ quà tặng thành công.
 Gift Cards,Thẻ quà tặng
-Go Offline,Đi ngoại tuyến
-Go Online,Lên mạng
 Go to Frappe Desk,Đi đến bàn Frappe
 Grand Total,Tổng cộng
 Gross Margin,Tỷ suất lợi nhuận gộp
@@ -552,8 +573,6 @@ json,json
 Just now,Vừa rồi
 Keep offline prerequisites healthy and recover stale data safely.,Giữ các điều kiện tiên quyết ngoại tuyến ổn định và khôi phục dữ liệu cũ một cách an toàn.
 Labels,Nhãn
-Language,Ngôn ngữ
-Language will be changed to,Ngôn ngữ sẽ được thay đổi thành
 "Language, theme, terminal tools, and session controls.","Ngôn ngữ, chủ đề, công cụ đầu cuối và điều khiển phiên."
 Last,Cuối cùng
 Last 14 Days (Paid vs Pending),14 ngày qua (Trả tiền và Đang chờ xử lý)
@@ -565,7 +584,6 @@ Last sync:,Đồng bộ hóa lần cuối:
 Last sync: {0} | ok: {1} | failed: {2} | skipped: {3},Đồng bộ hóa lần cuối: {0} | được: {1} | thất bại: {2} | đã bỏ qua: {3}
 Latest entries for current shift,Các mục mới nhất cho ca hiện tại
 Lead Time,Thời gian dẫn
-Light Mode,Chế độ ánh sáng
 Limited,Bị giới hạn
 lines,dòng
 List,Danh sách
@@ -594,7 +612,6 @@ localStorage,lưu trữ cục bộ
 Location Performance,Hiệu suất vị trí
 Locations,Địa điểm
 Lock Screen,Màn hình khóa
-Logout,Đăng xuất
 Lookup Workflow,Tra cứu quy trình làm việc
 Loss,Mất mát
 Low,Thấp
@@ -621,7 +638,6 @@ Maximum discount amount for this offer item is {0}.,Số tiền chiết khấu t
 Maximum discount percentage for this offer item is {0}%.,Tỷ lệ phần trăm giảm giá tối đa cho mặt hàng ưu đãi này là {0}%.
 Maximum offer quantity is {0}. Quantity adjusted to allowed limit.,Số lượng ưu đãi tối đa là {0}. Số lượng được điều chỉnh đến giới hạn cho phép.
 Medium,Trung bình
-Menu,Thực đơn
 Method-wise Collections,Bộ sưu tập theo phương pháp
 Minimum allowed rate for this offer item is {0}.,Tỷ lệ tối thiểu được phép cho mặt hàng ưu đãi này là {0}.
 Minimum Qty,Số lượng tối thiểu
@@ -629,7 +645,7 @@ Mobile No,Số di động
 Mode,Chế độ
 Mode of Payment,Phương thức thanh toán
 Month,Tháng
-Month Δ,Tháng Δ
+Month ?,Tháng?
 Monthly Profit,Lợi nhuận hàng tháng
 Monthly Sales,Doanh thu hàng tháng
 Monthly Sales Summary,Tóm tắt doanh số hàng tháng
@@ -769,7 +785,7 @@ Offline snapshot does not match the current POS state.,Ảnh chụp nhanh ngoạ
 Offline Status,Trạng thái ngoại tuyến
 "Offline, terminal, and system controls","Điều khiển ngoại tuyến, thiết bị đầu cuối và hệ thống"
 OK,được rồi
-Online,Trực tuyến
+Online,trực tuyến
 Open actions menu,Mở menu hành động
 Open balance to collect,Mở số dư để thu thập
 Open Customer Display,Mở màn hình khách hàng
@@ -894,7 +910,6 @@ Print Draft,In bản nháp
 Print Format (Invoice),Định dạng in (Hóa đơn)
 Print Format (Order),Định dạng in (Thứ tự)
 Print invoice,In hóa đơn
-Print Last Invoice,In hóa đơn cuối cùng
 Print Purchase Invoice instead of PO,In hóa đơn mua hàng thay vì PO
 Printer,Máy in
 Processed returns impacting the shift totals,Lợi nhuận đã xử lý ảnh hưởng đến tổng ca
@@ -977,7 +992,6 @@ Repaired,Đã sửa chữa
 Repairing change allocation,Sửa chữa phân bổ thay đổi
 Repeat Customers,Khách hàng lặp lại
 Repeat Rate,Tỷ lệ lặp lại
-Reprint previous transaction,In lại giao dịch trước đó
 Request,Yêu cầu
 Request ID: {0},ID yêu cầu: {0}
 Request Payment,Yêu cầu thanh toán
@@ -1063,7 +1077,6 @@ Select a printer to use QZ silent printing.,Chọn máy in để sử dụng tí
 Select Batch,Chọn lô
 Select Columns to Display,Chọn cột để hiển thị
 Select items to sell,Chọn mặt hàng để bán
-Select Language,Chọn ngôn ngữ
 Select Payment,Chọn thanh toán
 Select Payment Account,Chọn tài khoản thanh toán
 Select printer,Chọn máy in
@@ -1102,7 +1115,6 @@ Show the active cart on a customer-facing screen,Hiển thị giỏ hàng đang 
 Showing {0}-{1} of {2},Đang hiển thị {0}-{1} trong số {2}
 Showing 0 of 0,Hiển thị 0 trên 0
 Shows the distribution of invoices per currency,Hiển thị phân bổ hóa đơn theo loại tiền tệ
-Sign out of session,Đăng xuất khỏi phiên
 Sign out of the current POS session,Đăng xuất khỏi phiên POS hiện tại
 Size:,Kích thước:
 Skipped Payments,Thanh toán bị bỏ qua
@@ -1125,7 +1137,7 @@ Stock is lower than requested,Hàng tồn kho thấp hơn yêu cầu
 Stock is lower than requested:\n{0},Hàng còn ít hơn yêu cầu:\n{0}
 Stock Movement Report,Báo cáo biến động chứng khoán
 Stock update: {0} has {1} available. Adding {2} will bring the stock below zero.,Cập nhật chứng khoán: {0} có sẵn {1}. Thêm {2} sẽ đưa cổ phiếu xuống dưới 0.
-Submit,Gửi
+Submit,Nộp
 Submit & Print,Gửi & In
 Submit Deposit,Gửi tiền gửi
 Submit Expense,Gửi chi phí
@@ -1150,7 +1162,6 @@ Suppliers not found,Không tìm thấy nhà cung cấp
 Switch Camera,Chuyển đổi máy ảnh
 Switch Cashier,Chuyển đổi nhân viên thu ngân
 Switch the POS appearance theme,Chuyển chủ đề giao diện POS
-Switch theme appearance,Chuyển đổi giao diện chủ đề
 Switched to:,Đã chuyển sang:
 Sync All Invoices,Đồng bộ hóa tất cả hóa đơn
 Sync Offline Cash Movements ({0}),Đồng bộ hóa các chuyển động tiền mặt ngoại tuyến ({0})
@@ -1286,7 +1297,6 @@ Unallocated,Chưa phân bổ
 Unallocated:,Chưa được phân bổ:
 Unavailable,Không có sẵn
 Unknown,Không xác định
-Unknown error,Lỗi không xác định
 Unknown Item,Mục không xác định
 Unknown Warehouse,Kho không xác định
 Unlock POS,Mở khóa POS
@@ -1301,7 +1311,6 @@ Update Price List Rate,Cập Nhật Bảng Giá Tỷ Lệ
 Updated,Đã cập nhật
 Updates and app info that stay out of the cashier flow.,Các cập nhật và thông tin ứng dụng nằm ngoài luồng thu ngân.
 Updates automatically,Cập nhật tự động
-Upload pending transactions,Tải lên các giao dịch đang chờ xử lý
 Usage,Cách sử dụng
 Usage Stats,Thống kê sử dụng
 Use a 4 to 8 digit PIN for cashier switching and terminal unlock.,Sử dụng mã PIN gồm 4 đến 8 chữ số để chuyển đổi nhân viên thu ngân và mở khóa thiết bị đầu cuối.
@@ -1336,7 +1345,7 @@ Walk-in Customer,Khách hàng tham gia
 Warehouse,Kho
 Warning: High cache usage may affect performance.,Cảnh báo: Việc sử dụng bộ nhớ đệm cao có thể ảnh hưởng đến hiệu suất.
 Warning: High lag may indicate heavy processing or browser slowness.,Cảnh báo: Độ trễ cao có thể cho thấy quá trình xử lý nặng hoặc trình duyệt chậm.
-Week Δ,Tuần Δ
+Week ?,Tuần ?
 Week-wise,Hàng tuần
 Weight (g),Trọng lượng (g)
 Weight (grams),Trọng lượng (gram)

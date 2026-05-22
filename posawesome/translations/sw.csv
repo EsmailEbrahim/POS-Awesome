@@ -1,4 +1,39 @@
-﻿- Total Unallocated,- Total Unallocated
+POS Awesome,POS ya Kushangaza
+Fetch Items Directly from Server,Leta Vipengee Moja kwa Moja kutoka kwa Seva
+Menu,Menyu
+Actions,Vitendo
+Close Shift,Funga Shift
+End current session,Maliza kipindi cha sasa
+Print Last Invoice,Chapisha ankara ya Mwisho
+Reprint previous transaction,Chapisha tena muamala uliopita
+Sync Offline Invoices,Sawazisha Ankara za Nje ya Mtandao
+Upload pending transactions,Pakia shughuli zinazosubiri
+Go Online,Nenda Mtandaoni
+Go Offline,Nenda Nje ya Mtandao
+Disable offline mode,Zima hali ya nje ya mtandao
+Work without server connection,Fanya kazi bila muunganisho wa seva
+Clear Cache,Futa Cache
+Remove local data and refresh,Ondoa data ya ndani na uonyeshe upya
+About,Kuhusu
+App information,Taarifa ya programu
+Language,Lugha
+Change interface language,Badilisha lugha ya kiolesura
+Light Mode,Hali ya Mwanga
+Dark Mode,Hali ya Giza
+Switch theme appearance,Badilisha mwonekano wa mandhari
+Logout,Ondoka
+Sign out of session,Ondoka kwenye kipindi
+Select Language,Chagua Lugha
+Choose your preferred language for the POS interface,Chagua lugha unayopendelea kwa kiolesura cha POS
+Language will be changed to,Lugha itabadilishwa kuwa
+Cancel,Ghairi
+Change Language,Badilisha Lugha
+Close,Funga
+Cannot change language - same language selected,Haiwezi kubadilisha lugha - lugha sawa imechaguliwa
+Language changed successfully! Reloading...,Lugha imebadilishwa kwa mafanikio! Inapakia upya...
+Failed to change language,Imeshindwa kubadilisha lugha
+Unknown error,Hitilafu isiyojulikana
+- Total Unallocated,- Jumla Isiyotengwa
 * Required,* Inahitajika
 {0} (Qty: {1}),{0} (Kiasi: {1})
 {0} actions,{0} vitendo
@@ -11,7 +46,6 @@
 {0}h ago,Saa {0} zilizopita
 {0}m ago,Dakika {0} zilizopita
 A POS supervisor is required for this action.,Msimamizi wa POS anahitajika kwa hatua hii.
-About,Kuhusu
 Access,Ufikiaji
 Account,Akaunti
 Account is overdrawn,Akaunti imetolewa
@@ -19,7 +53,6 @@ Acknowledge the error to resume scanning,Kubali hitilafu ili kuendelea na utafut
 Acknowledge the error to resume scanning.,Kubali hitilafu ili kuendelea na utafutaji.
 Across,Kuvuka
 Action,Kitendo
-Actions,Vitendo
 Active sale,Uuzaji unaotumika
 add,ongeza
 Add items from the selector to start building this sale.,Ongeza bidhaa kutoka kwa kiteuzi ili kuanza kuunda ofa hii.
@@ -55,7 +88,6 @@ Amount already received,Kiasi ambacho tayari kimepokelewa
 Amount exceeds profile cash movement max amount.,Kiasi kinazidi kiwango cha juu cha uhamishaji wa pesa wasifu.
 Amount must be greater than zero.,Kiasi lazima kiwe kikubwa kuliko sifuri.
 Amount received from customer,Kiasi kilichopokelewa kutoka kwa mteja
-App information,Taarifa ya programu
 Appearance and user-level preferences for the current session.,Muonekano na mapendeleo ya kiwango cha mtumiaji kwa kipindi cha sasa.
 Applied,Imetumika
 Apply,Omba
@@ -133,7 +165,6 @@ Camera is busy or blocked by another app/tab. Close other camera apps and try ag
 Camera permission denied. Please allow camera access in your browser settings and refresh the page.,Ruhusa ya kamera imekataliwa. Tafadhali ruhusu ufikiaji wa kamera katika mipangilio ya kivinjari chako na uonyeshe ukurasa upya.
 Camera scanner is locked until the current error is acknowledged,Kichanganuzi cha kamera kimefungwa hadi hitilafu ya sasa ikubaliwe
 Camera started but the video stream did not load in time. Please try again.,Kamera ilianza lakini mtiririko wa video haukupakia kwa wakati. Tafadhali jaribu tena.
-Cancel,Ghairi
 Cancel cash movement {0}?,Ungependa kughairi usafirishaji wa pesa {0}?
 Cancel Payment,Ghairi Malipo
 Cancel Sale,Ghairi Uuzaji
@@ -184,8 +215,6 @@ Certificate is missing or not trusted. QZ may show confirmation dialogs.,Cheti h
 Certificate is trusted. Silent QZ printing is active.,Cheti kinaaminika. Uchapishaji wa QZ wa Kimya unatumika.
 Change,Badilika
 Change allocation repaired,Mgao wa mabadiliko umerekebishwa
-Change interface language,Badilisha lugha ya kiolesura
-Change Language,Badilisha Lugha
 Change Price,Badilisha Bei
 Change Return,Badilisha Kurudi
 Change Returned,Mabadiliko Imerejeshwa
@@ -204,20 +233,17 @@ Checking...,Inaangalia...
 Cheque/Reference Date,Tarehe ya Cheki/Marejeleo
 Cheque/Reference No,Cheki/Rejea No
 Choose the cashier currently operating this terminal.,Chagua mtunza fedha anayetumia kituo hiki kwa sasa.
-Choose your preferred language for the POS interface,Chagua lugha unayopendelea kwa kiolesura cha POS
 City,Jiji
 Clear,Wazi
 Clear All,Futa Zote
 Clear all barcode items,Futa vipengee vyote vya msimbopau
 Clear all purchase order items,Futa bidhaa zote za agizo la ununuzi
-Clear Cache,Futa Cache
 Clear Search,Futa Utafutaji
 Clearing local cache...,Inafuta akiba ya ndani...
 Click to refresh,Bofya ili kuonyesha upya
 Client CPU Lag:,Kuchelewa kwa CPU ya Mteja:
 Client Memory Usage:,Matumizi ya Kumbukumbu ya Mteja:
 Client Metrics,Vipimo vya Mteja
-Close,Funga
 Close about dialog,Funga kuhusu mazungumzo
 Close cashier switcher,Funga kibadilisha fedha
 Close closing shift dialog,Funga kidirisha cha kufunga zamu
@@ -233,7 +259,6 @@ Close sales orders dialog,Funga mazungumzo ya maagizo ya mauzo
 Close Scanner,Funga Kichanganuzi
 Close scanner dialog,Funga kidirisha cha skana
 Close Settings,Funga Mipangilio
-Close Shift,Funga Shift
 Closing Amount,Kiasi cha Kufunga
 Closing POS Shift,Inafunga Shift ya POS
 Closing Snapshot Available,Picha ya Kufunga Inapatikana
@@ -318,13 +343,12 @@ Customers not found,Wateja hawakupatikana
 Daily cashier actions without scrolling.,Vitendo vya keshia kila siku bila kusogeza.
 Daily Sales,Mauzo ya kila siku
 Daily Sales Summary,Muhtasari wa Mauzo ya Kila Siku
-Dark Mode,Hali ya Giza
 Data loaded in form. Review and submit.,Data iliyopakiwa katika fomu. Kagua na uwasilishe.
 Database Health,Afya ya Hifadhidata
 Database health affects overall system speed and reliability.,Afya ya hifadhidata huathiri kasi ya jumla ya mfumo na kutegemewa.
 Database Info,Maelezo ya Hifadhidata
 Date,Tarehe
-Day Δ,Siku Δ
+Day ?,Siku?
 days,siku
 Day-wise (MTD),Siku kwa siku (MTD)
 Day-wise Movement,Harakati za Mchana
@@ -383,7 +407,6 @@ Edited,Imehaririwa
 Employee,Mfanyakazi
 Enable background sync,Washa usawazishaji wa usuli
 Enable Customer Display in POS Profile first.,Washa Onyesho la Wateja katika Wasifu wa POS kwanza.
-End current session,Maliza kipindi cha sasa
 Enter a PIN.,Weka PIN.
 Enter a valid grams value,Weka thamani halali ya gramu
 Enter new price list rate,Weka bei mpya ya orodha ya bei
@@ -468,8 +491,6 @@ Gift card payment,Malipo ya kadi ya zawadi
 Gift card redemption requires an online connection,Ukombozi wa kadi ya zawadi unahitaji muunganisho wa mtandaoni
 Gift card topped up successfully.,Kadi ya zawadi imeongezwa kwa mafanikio.
 Gift Cards,Kadi za Zawadi
-Go Offline,Nenda Nje ya Mtandao
-Go Online,Nenda Mtandaoni
 Go to Frappe Desk,Nenda kwenye Dawati la Frappe
 Grand Total,Jumla Kubwa
 Gross Margin,Pambizo la Jumla
@@ -552,8 +573,6 @@ json,json
 Just now,Sasa hivi
 Keep offline prerequisites healthy and recover stale data safely.,Weka sharti za nje ya mtandao zikiwa na afya na urejeshe data ya zamani kwa usalama.
 Labels,Lebo
-Language,Lugha
-Language will be changed to,Lugha itabadilishwa kuwa
 "Language, theme, terminal tools, and session controls.","Lugha, mandhari, zana za mwisho, na vidhibiti vya kipindi."
 Last,Mwisho
 Last 14 Days (Paid vs Pending),Siku 14 Zilizopita (Inalipwa vs Inasubiri)
@@ -565,7 +584,6 @@ Last sync:,Usawazishaji wa mwisho:
 Last sync: {0} | ok: {1} | failed: {2} | skipped: {3},Usawazishaji wa mwisho: {0} | sawa: {1} | imeshindwa: {2} | ruka: {3}
 Latest entries for current shift,Maingizo ya hivi punde kwa zamu ya sasa
 Lead Time,Muda wa Kuongoza
-Light Mode,Hali ya Mwanga
 Limited,Kikomo
 lines,mistari
 List,Orodha
@@ -594,7 +612,6 @@ localStorage,Hifadhi ya ndani
 Location Performance,Utendaji wa Mahali
 Locations,Maeneo
 Lock Screen,Funga Skrini
-Logout,Ondoka
 Lookup Workflow,Tafuta mtiririko wa kazi
 Loss,Hasara
 Low,Chini
@@ -621,7 +638,6 @@ Maximum discount amount for this offer item is {0}.,Kiwango cha juu cha punguzo 
 Maximum discount percentage for this offer item is {0}%.,Asilimia ya juu zaidi ya punguzo kwa bidhaa hii ya ofa ni {0}%.
 Maximum offer quantity is {0}. Quantity adjusted to allowed limit.,Kiwango cha juu cha ofa ni {0}. Kiasi kimerekebishwa hadi kikomo kinachoruhusiwa.
 Medium,Kati
-Menu,Menyu
 Method-wise Collections,Mikusanyiko ya busara
 Minimum allowed rate for this offer item is {0}.,Kiwango cha chini kinachoruhusiwa cha bidhaa hii ya ofa ni {0}.
 Minimum Qty,Kiwango cha chini cha Qty
@@ -629,7 +645,7 @@ Mobile No,Simu No
 Mode,Hali
 Mode of Payment,Njia ya Malipo
 Month,Mwezi
-Month Δ,Mwezi Δ
+Month ?,Mwezi?
 Monthly Profit,Faida ya Kila Mwezi
 Monthly Sales,Mauzo ya Kila Mwezi
 Monthly Sales Summary,Muhtasari wa Mauzo ya Kila Mwezi
@@ -894,7 +910,6 @@ Print Draft,Chapisha Rasimu
 Print Format (Invoice),Umbizo la Chapisha (Ankara)
 Print Format (Order),Umbizo la Chapisha (Agizo)
 Print invoice,Chapisha ankara
-Print Last Invoice,Chapisha ankara ya Mwisho
 Print Purchase Invoice instead of PO,Chapisha Ankara ya Ununuzi badala ya PO
 Printer,Kichapishaji
 Processed returns impacting the shift totals,Marejesho yaliyochakatwa yanayoathiri jumla ya zamu
@@ -977,7 +992,6 @@ Repaired,Imetengenezwa
 Repairing change allocation,Inarekebisha mgao wa mabadiliko
 Repeat Customers,Rudia Wateja
 Repeat Rate,Kiwango cha Rudia
-Reprint previous transaction,Chapisha tena muamala uliopita
 Request,Ombi
 Request ID: {0},Ombi la kitambulisho: {0}
 Request Payment,Omba Malipo
@@ -1063,7 +1077,6 @@ Select a printer to use QZ silent printing.,Chagua kichapishi ili kutumia uchapi
 Select Batch,Chagua Kundi
 Select Columns to Display,Chagua Safu wima za Kuonyesha
 Select items to sell,Chagua bidhaa za kuuza
-Select Language,Chagua Lugha
 Select Payment,Chagua Malipo
 Select Payment Account,Chagua Akaunti ya Malipo
 Select printer,Chagua kichapishi
@@ -1102,7 +1115,6 @@ Show the active cart on a customer-facing screen,Onyesha rukwama inayotumika kwe
 Showing {0}-{1} of {2},Inaonyesha {0}-{1} kati ya {2}
 Showing 0 of 0,Inaonyesha 0 kati ya 0
 Shows the distribution of invoices per currency,Inaonyesha usambazaji wa ankara kwa kila sarafu
-Sign out of session,Ondoka kwenye kipindi
 Sign out of the current POS session,Ondoka kwenye kipindi cha sasa cha POS
 Size:,Ukubwa:
 Skipped Payments,Malipo Yameruka
@@ -1150,7 +1162,6 @@ Suppliers not found,Wasambazaji hawakupatikana
 Switch Camera,Badili Kamera
 Switch Cashier,Badilisha Cashier
 Switch the POS appearance theme,Badili mandhari ya mwonekano wa POS
-Switch theme appearance,Badilisha mwonekano wa mandhari
 Switched to:,Imebadilishwa hadi:
 Sync All Invoices,Sawazisha Ankara Zote
 Sync Offline Cash Movements ({0}),Sawazisha Mienendo ya Pesa Nje ya Mtandao ({0})
@@ -1286,7 +1297,6 @@ Unallocated,Haijatengwa
 Unallocated:,Haijatengwa:
 Unavailable,Haipatikani
 Unknown,Haijulikani
-Unknown error,Hitilafu isiyojulikana
 Unknown Item,Kipengee kisichojulikana
 Unknown Warehouse,Ghala lisilojulikana
 Unlock POS,Fungua POS
@@ -1301,7 +1311,6 @@ Update Price List Rate,Sasisha Kiwango cha Orodha ya Bei
 Updated,Imesasishwa
 Updates and app info that stay out of the cashier flow.,Masasisho na maelezo ya programu ambayo hayatumiki kwenye mtiririko wa mtunza fedha.
 Updates automatically,Inasasisha kiotomatiki
-Upload pending transactions,Pakia shughuli zinazosubiri
 Usage,Matumizi
 Usage Stats,Takwimu za Matumizi
 Use a 4 to 8 digit PIN for cashier switching and terminal unlock.,Tumia PIN ya tarakimu 4 hadi 8 kubadilisha keshia na kufungua terminal.
@@ -1336,7 +1345,7 @@ Walk-in Customer,Mteja wa Kuingia
 Warehouse,Ghala
 Warning: High cache usage may affect performance.,Onyo: Matumizi ya akiba ya juu yanaweza kuathiri utendakazi.
 Warning: High lag may indicate heavy processing or browser slowness.,Onyo: Kuchelewa sana kunaweza kuonyesha uchakataji mzito au ucheleweshaji wa kivinjari.
-Week Δ,Wiki Δ
+Week ?,Wiki?
 Week-wise,Wiki-busara
 Weight (g),Uzito (g)
 Weight (grams),Uzito (gramu)

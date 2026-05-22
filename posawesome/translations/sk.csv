@@ -1,4 +1,39 @@
-﻿- Total Unallocated,- Total Unallocated
+POS Awesome,POS Úžasné
+Fetch Items Directly from Server,Získajte položky priamo zo servera
+Menu,Menu
+Actions,Akcie
+Close Shift,Zatvorte Shift
+End current session,Ukončiť aktuálnu reláciu
+Print Last Invoice,Tlač poslednej faktúry
+Reprint previous transaction,Znova vytlačte predchádzajúcu transakciu
+Sync Offline Invoices,Synchronizujte offline faktúry
+Upload pending transactions,Nahrajte čakajúce transakcie
+Go Online,Choďte online
+Go Offline,Prejsť do režimu offline
+Disable offline mode,Zakázať režim offline
+Work without server connection,Pracujte bez pripojenia k serveru
+Clear Cache,Vymazať vyrovnávaciu pamäť
+Remove local data and refresh,Odstráňte miestne údaje a obnovte ich
+About,O
+App information,Informácie o aplikácii
+Language,Jazyk
+Change interface language,Zmeňte jazyk rozhrania
+Light Mode,Svetelný režim
+Dark Mode,Tmavý režim
+Switch theme appearance,Prepnúť vzhľad témy
+Logout,Odhlásiť sa
+Sign out of session,Odhláste sa z relácie
+Select Language,Vyberte Jazyk
+Choose your preferred language for the POS interface,Vyberte si preferovaný jazyk rozhrania POS
+Language will be changed to,Jazyk sa zmení na
+Cancel,Zrušiť
+Change Language,Zmeniť jazyk
+Close,Zavrieť
+Cannot change language - same language selected,Nie je možné zmeniť jazyk – je vybratý rovnaký jazyk
+Language changed successfully! Reloading...,Jazyk úspešne zmenený! Opätovné načítavanie...
+Failed to change language,Nepodarilo sa zmeniť jazyk
+Unknown error,Neznáma chyba
+- Total Unallocated,- Celkom nepridelené
 * Required,* Povinné
 {0} (Qty: {1}),{0} (množstvo: {1})
 {0} actions,{0} akcií
@@ -11,7 +46,6 @@
 {0}h ago,pred {0}h
 {0}m ago,pred {0} min
 A POS supervisor is required for this action.,Na tento úkon je potrebný supervízor POS.
-About,O
 Access,Prístup
 Account,účtu
 Account is overdrawn,Účet je prečerpaný
@@ -19,7 +53,6 @@ Acknowledge the error to resume scanning,"Ak chcete pokračovať v skenovaní, p
 Acknowledge the error to resume scanning.,"Ak chcete pokračovať v skenovaní, potvrďte chybu."
 Across,Naprieč
 Action,Akcia
-Actions,Akcie
 Active sale,Aktívny predaj
 add,pridať
 Add items from the selector to start building this sale.,"Ak chcete začať vytvárať tento výpredaj, pridajte položky zo selektora."
@@ -55,7 +88,6 @@ Amount already received,Suma už prijatá
 Amount exceeds profile cash movement max amount.,Suma presahuje maximálnu sumu pohybu hotovosti profilu.
 Amount must be greater than zero.,Suma musí byť väčšia ako nula.
 Amount received from customer,Suma prijatá od zákazníka
-App information,Informácie o aplikácii
 Appearance and user-level preferences for the current session.,Vzhľad a preferencie na úrovni používateľa pre aktuálnu reláciu.
 Applied,Aplikované
 Apply,Použiť
@@ -133,7 +165,6 @@ Camera is busy or blocked by another app/tab. Close other camera apps and try ag
 Camera permission denied. Please allow camera access in your browser settings and refresh the page.,Povolenie fotoaparátu bolo zamietnuté. Povoľte prístup k fotoaparátu v nastaveniach prehliadača a obnovte stránku.
 Camera scanner is locked until the current error is acknowledged,"Skener fotoaparátu je uzamknutý, kým sa nepotvrdí aktuálna chyba"
 Camera started but the video stream did not load in time. Please try again.,"Kamera sa spustila, ale stream videa sa nenačítal včas. Skúste to znova."
-Cancel,Zrušiť
 Cancel cash movement {0}?,Zrušiť pohyb hotovosti {0}?
 Cancel Payment,Zrušiť platbu
 Cancel Sale,Zrušiť predaj
@@ -184,8 +215,6 @@ Certificate is missing or not trusted. QZ may show confirmation dialogs.,Certifi
 Certificate is trusted. Silent QZ printing is active.,Certifikát je dôveryhodný. Tichá tlač QZ je aktívna.
 Change,Zmeniť
 Change allocation repaired,Pridelenie zmeny opravené
-Change interface language,Zmeňte jazyk rozhrania
-Change Language,Zmeniť jazyk
 Change Price,Zmeniť cenu
 Change Return,Zmeniť návrat
 Change Returned,Zmena vrátená
@@ -204,20 +233,17 @@ Checking...,Prebieha kontrola...
 Cheque/Reference Date,Šek/Referenčný dátum
 Cheque/Reference No,Šek/Referenčné číslo
 Choose the cashier currently operating this terminal.,"Vyberte pokladníka, ktorý práve obsluhuje tento terminál."
-Choose your preferred language for the POS interface,Vyberte si preferovaný jazyk rozhrania POS
 City,Mesto
 Clear,Jasné
 Clear All,Vymazať všetko
 Clear all barcode items,Vymažte všetky položky čiarového kódu
 Clear all purchase order items,Vymažte všetky položky nákupnej objednávky
-Clear Cache,Vymazať vyrovnávaciu pamäť
 Clear Search,Vymazať vyhľadávanie
 Clearing local cache...,Vymazáva sa lokálna vyrovnávacia pamäť...
 Click to refresh,Kliknutím obnovíte
 Client CPU Lag:,Oneskorenie CPU klienta:
 Client Memory Usage:,Využitie pamäte klienta:
 Client Metrics,Klientské metriky
-Close,Zavrieť
 Close about dialog,Zavrieť dialógové okno s informáciami
 Close cashier switcher,Zatvorte pokladničný prepínač
 Close closing shift dialog,Zatvorte dialógové okno zatvárania posunu
@@ -233,7 +259,6 @@ Close sales orders dialog,Zatvorte dialógové okno predajných objednávok
 Close Scanner,Zatvorte skener
 Close scanner dialog,Zatvorte dialógové okno skenera
 Close Settings,Zatvorte Nastavenia
-Close Shift,Zatvorte Shift
 Closing Amount,Záverečná suma
 Closing POS Shift,Zatváranie POS Shift
 Closing Snapshot Available,K dispozícii je záverečná snímka
@@ -318,13 +343,12 @@ Customers not found,Zákazníci sa nenašli
 Daily cashier actions without scrolling.,Denné pokladničné akcie bez rolovania.
 Daily Sales,Denný predaj
 Daily Sales Summary,Denný súhrn predaja
-Dark Mode,Tmavý režim
 Data loaded in form. Review and submit.,Údaje načítané vo forme. Skontrolujte a odošlite.
 Database Health,Zdravie databázy
 Database health affects overall system speed and reliability.,Stav databázy ovplyvňuje celkovú rýchlosť a spoľahlivosť systému.
 Database Info,Informácie o databáze
 Date,Dátum
-Day Δ,Deň Δ
+Day ?,deň?
 days,dní
 Day-wise (MTD),Denne (MTD)
 Day-wise Movement,Denný pohyb
@@ -383,7 +407,6 @@ Edited,Upravené
 Employee,zamestnanec
 Enable background sync,Povoliť synchronizáciu na pozadí
 Enable Customer Display in POS Profile first.,Najprv povoľte zobrazenie zákazníka v profile POS.
-End current session,Ukončiť aktuálnu reláciu
 Enter a PIN.,Zadajte kód PIN.
 Enter a valid grams value,Zadajte platnú hodnotu v gramoch
 Enter new price list rate,Zadajte novú cenníkovú sadzbu
@@ -468,8 +491,6 @@ Gift card payment,Platba darčekovou kartou
 Gift card redemption requires an online connection,Na uplatnenie darčekovej karty je potrebné online pripojenie
 Gift card topped up successfully.,Darčeková karta bola úspešne nabitá.
 Gift Cards,Darčekové poukážky
-Go Offline,Prejsť do režimu offline
-Go Online,Choďte online
 Go to Frappe Desk,Prejdite na Frappe Desk
 Grand Total,Celkový súčet
 Gross Margin,Hrubá marža
@@ -552,8 +573,6 @@ json,json
 Just now,Práve teraz
 Keep offline prerequisites healthy and recover stale data safely.,Udržujte podmienky offline v poriadku a bezpečne obnovujte zastarané údaje.
 Labels,Štítky
-Language,Jazyk
-Language will be changed to,Jazyk sa zmení na
 "Language, theme, terminal tools, and session controls.","Jazyk, téma, terminálové nástroje a ovládacie prvky relácie."
 Last,Posledný
 Last 14 Days (Paid vs Pending),Posledných 14 dní (zaplatené vs. čakajúce)
@@ -565,7 +584,6 @@ Last sync:,Posledná synchronizácia:
 Last sync: {0} | ok: {1} | failed: {2} | skipped: {3},Posledná synchronizácia: {0} | dobre: ​​{1} | neúspešné: {2} | preskočené: {3}
 Latest entries for current shift,Najnovšie záznamy pre aktuálnu zmenu
 Lead Time,Dodacia lehota
-Light Mode,Svetelný režim
 Limited,Obmedzené
 lines,linky
 List,Zoznam
@@ -594,7 +612,6 @@ localStorage,localStorage
 Location Performance,Výkon miesta
 Locations,Miesta
 Lock Screen,Uzamknúť obrazovku
-Logout,Odhlásiť sa
 Lookup Workflow,Pracovný postup vyhľadávania
 Loss,Strata
 Low,Nízka
@@ -621,7 +638,6 @@ Maximum discount amount for this offer item is {0}.,Maximálna výška zľavy pr
 Maximum discount percentage for this offer item is {0}%.,Maximálne percento zľavy pre túto položku ponuky je {0} %.
 Maximum offer quantity is {0}. Quantity adjusted to allowed limit.,Maximálne množstvo ponuky je {0}. Množstvo upravené na povolený limit.
 Medium,Stredná
-Menu,Menu
 Method-wise Collections,Metodické zbierky
 Minimum allowed rate for this offer item is {0}.,Minimálna povolená sadzba pre túto položku ponuky je {0}.
 Minimum Qty,Minimálne množstvo
@@ -629,7 +645,7 @@ Mobile No,Mobil č
 Mode,Režim
 Mode of Payment,Spôsob platby
 Month,mesiac
-Month Δ,Mesiac Δ
+Month ?,mesiac?
 Monthly Profit,Mesačný zisk
 Monthly Sales,Mesačný predaj
 Monthly Sales Summary,Mesačný súhrn predaja
@@ -894,7 +910,6 @@ Print Draft,Vytlačiť koncept
 Print Format (Invoice),Formát tlače (faktúra)
 Print Format (Order),Formát tlače (objednávka)
 Print invoice,Vytlačiť faktúru
-Print Last Invoice,Tlač poslednej faktúry
 Print Purchase Invoice instead of PO,Vytlačte nákupnú faktúru namiesto objednávky
 Printer,Tlačiareň
 Processed returns impacting the shift totals,Spracované výnosy ovplyvňujúce súčty zmien
@@ -977,7 +992,6 @@ Repaired,Opravené
 Repairing change allocation,Oprava alokácie zmien
 Repeat Customers,Opakovaní zákazníci
 Repeat Rate,Miera opakovania
-Reprint previous transaction,Znova vytlačte predchádzajúcu transakciu
 Request,Žiadosť
 Request ID: {0},ID žiadosti: {0}
 Request Payment,Požiadať o platbu
@@ -1063,7 +1077,6 @@ Select a printer to use QZ silent printing.,Vyberte tlačiareň na použitie tic
 Select Batch,Vyberte položku Dávka
 Select Columns to Display,Vyberte položku Stĺpce na zobrazenie
 Select items to sell,Vyberte položky na predaj
-Select Language,Vyberte Jazyk
 Select Payment,Vyberte položku Platba
 Select Payment Account,Vyberte Platobný účet
 Select printer,Vyberte tlačiareň
@@ -1102,7 +1115,6 @@ Show the active cart on a customer-facing screen,Zobrazte aktívny košík na ob
 Showing {0}-{1} of {2},Zobrazuje sa {0}-{1} z {2}
 Showing 0 of 0,Zobrazuje sa 0 z 0
 Shows the distribution of invoices per currency,Zobrazuje rozdelenie faktúr podľa meny
-Sign out of session,Odhláste sa z relácie
 Sign out of the current POS session,Odhláste sa z aktuálnej relácie POS
 Size:,Veľkosť:
 Skipped Payments,Preskočené platby
@@ -1150,7 +1162,6 @@ Suppliers not found,Dodávatelia sa nenašli
 Switch Camera,Prepnúť fotoaparát
 Switch Cashier,Prepnúť pokladňu
 Switch the POS appearance theme,Prepnite tému vzhľadu POS
-Switch theme appearance,Prepnúť vzhľad témy
 Switched to:,Prepnuté na:
 Sync All Invoices,Synchronizovať všetky faktúry
 Sync Offline Cash Movements ({0}),Synchronizovať peňažné pohyby offline ({0})
@@ -1286,7 +1297,6 @@ Unallocated,Nepridelené
 Unallocated:,Nepridelené:
 Unavailable,nedostupné
 Unknown,Neznámy
-Unknown error,Neznáma chyba
 Unknown Item,Neznáma položka
 Unknown Warehouse,Neznámy sklad
 Unlock POS,Odomknite POS
@@ -1301,7 +1311,6 @@ Update Price List Rate,Aktualizovať sadzbu cenníka
 Updated,Aktualizované
 Updates and app info that stay out of the cashier flow.,"Aktualizácie a informácie o aplikáciách, ktoré zostávajú mimo toku pokladníkov."
 Updates automatically,Aktualizuje sa automaticky
-Upload pending transactions,Nahrajte čakajúce transakcie
 Usage,Použitie
 Usage Stats,Štatistiky používania
 Use a 4 to 8 digit PIN for cashier switching and terminal unlock.,Na prepínanie pokladníka a odblokovanie terminálu použite 4 až 8-miestny PIN.
@@ -1336,7 +1345,7 @@ Walk-in Customer,Prichádzajúci zákazník
 Warehouse,Sklad
 Warning: High cache usage may affect performance.,Upozornenie: Vysoké využitie vyrovnávacej pamäte môže ovplyvniť výkon.
 Warning: High lag may indicate heavy processing or browser slowness.,Upozornenie: Veľké oneskorenie môže naznačovať náročné spracovanie alebo pomalosť prehliadača.
-Week Δ,Týždeň Δ
+Week ?,týždeň?
 Week-wise,Týždenne
 Weight (g),Hmotnosť (g)
 Weight (grams),Hmotnosť (gramy)

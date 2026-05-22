@@ -1,4 +1,39 @@
-﻿- Total Unallocated,- Total Unallocated
+POS Awesome,POS Geweldig
+Fetch Items Directly from Server,Haal items rechtstreeks van de server op
+Menu,Menukaart
+Actions,Acties
+Close Shift,Sluit Shift
+End current session,Beëindig de huidige sessie
+Print Last Invoice,Laatste factuur afdrukken
+Reprint previous transaction,Vorige transactie opnieuw afdrukken
+Sync Offline Invoices,Synchroniseer offline facturen
+Upload pending transactions,Upload openstaande transacties
+Go Online,Ga online
+Go Offline,Ga offline
+Disable offline mode,Schakel de offlinemodus uit
+Work without server connection,Werk zonder serververbinding
+Clear Cache,Cache wissen
+Remove local data and refresh,Verwijder lokale gegevens en vernieuw
+About,Over
+App information,App-informatie
+Language,Taal
+Change interface language,Wijzig de interfacetaal
+Light Mode,Lichte modus
+Dark Mode,Donkere modus
+Switch theme appearance,Verander het uiterlijk van het thema
+Logout,Uitloggen
+Sign out of session,Meld u af bij de sessie
+Select Language,Selecteer Taal
+Choose your preferred language for the POS interface,Kies uw voorkeurstaal voor de POS-interface
+Language will be changed to,De taal wordt gewijzigd in
+Cancel,Annuleer
+Change Language,Taal wijzigen
+Close,Sluiten
+Cannot change language - same language selected,Kan taal niet wijzigen - dezelfde taal geselecteerd
+Language changed successfully! Reloading...,Taal succesvol gewijzigd! Herladen...
+Failed to change language,Kan de taal niet wijzigen
+Unknown error,Onbekende fout
+- Total Unallocated,- Totaal niet toegewezen
 * Required,* Vereist
 {0} (Qty: {1}),{0} (Aantal: {1})
 {0} actions,{0} acties
@@ -11,7 +46,6 @@
 {0}h ago,{0}u geleden
 {0}m ago,{0}m geleden
 A POS supervisor is required for this action.,Voor deze actie is een POS-supervisor vereist.
-About,Over
 Access,Toegang
 Account,Rekening
 Account is overdrawn,Rekening is rood
@@ -19,7 +53,6 @@ Acknowledge the error to resume scanning,Bevestig de fout om het scannen te herv
 Acknowledge the error to resume scanning.,Bevestig de fout om het scannen te hervatten.
 Across,Aan de overkant
 Action,Actie
-Actions,Acties
 Active sale,Actieve verkoop
 add,toevoegen
 Add items from the selector to start building this sale.,Voeg items uit de selector toe om deze verkoop op te bouwen.
@@ -55,7 +88,6 @@ Amount already received,Bedrag al ontvangen
 Amount exceeds profile cash movement max amount.,Het bedrag overschrijdt het maximale bedrag voor cashbewegingen in het profiel.
 Amount must be greater than zero.,Het bedrag moet groter zijn dan nul.
 Amount received from customer,Bedrag ontvangen van klant
-App information,App-informatie
 Appearance and user-level preferences for the current session.,Voorkeuren voor uiterlijk en gebruikersniveau voor de huidige sessie.
 Applied,Toegepast
 Apply,Toepassen
@@ -133,7 +165,6 @@ Camera is busy or blocked by another app/tab. Close other camera apps and try ag
 Camera permission denied. Please allow camera access in your browser settings and refresh the page.,Cameratoestemming geweigerd. Sta cameratoegang toe in uw browserinstellingen en vernieuw de pagina.
 Camera scanner is locked until the current error is acknowledged,De camerascanner is vergrendeld totdat de huidige fout wordt bevestigd
 Camera started but the video stream did not load in time. Please try again.,"Camera gestart, maar de videostream is niet op tijd geladen. Probeer het opnieuw."
-Cancel,Annuleer
 Cancel cash movement {0}?,Contante verplaatsing {0} annuleren?
 Cancel Payment,Betaling annuleren
 Cancel Sale,Verkoop annuleren
@@ -184,8 +215,6 @@ Certificate is missing or not trusted. QZ may show confirmation dialogs.,Certifi
 Certificate is trusted. Silent QZ printing is active.,Certificaat is vertrouwd. Stil QZ-printen is actief.
 Change,Verandering
 Change allocation repaired,Wijzigingstoewijzing gerepareerd
-Change interface language,Wijzig de interfacetaal
-Change Language,Taal wijzigen
 Change Price,Wijzig prijs
 Change Return,Wijzig retour
 Change Returned,Wijziging geretourneerd
@@ -204,20 +233,17 @@ Checking...,Controleren...
 Cheque/Reference Date,Cheque/referentiedatum
 Cheque/Reference No,Cheque/referentienr
 Choose the cashier currently operating this terminal.,Kies de kassier die momenteel deze terminal bedient.
-Choose your preferred language for the POS interface,Kies uw voorkeurstaal voor de POS-interface
 City,Stad
 Clear,Duidelijk
 Clear All,Alles wissen
 Clear all barcode items,Wis alle streepjescode-items
 Clear all purchase order items,Wis alle inkooporderitems
-Clear Cache,Cache wissen
 Clear Search,Zoekopdracht wissen
 Clearing local cache...,Lokale cache wissen...
 Click to refresh,Klik om te vernieuwen
 Client CPU Lag:,CPU-vertraging van client:
 Client Memory Usage:,Clientgeheugengebruik:
 Client Metrics,Klantstatistieken
-Close,Sluiten
 Close about dialog,Sluiten over dialoog
 Close cashier switcher,Sluit de kassierwisselaar
 Close closing shift dialog,Sluit het sluitende ploegdialoogvenster
@@ -233,7 +259,6 @@ Close sales orders dialog,Dialoogvenster verkooporders sluiten
 Close Scanner,Sluit Scanner
 Close scanner dialog,Sluit het scannerdialoogvenster
 Close Settings,Sluit Instellingen
-Close Shift,Sluit Shift
 Closing Amount,Slotbedrag
 Closing POS Shift,POS-shift sluiten
 Closing Snapshot Available,Sluitingsmomentopname beschikbaar
@@ -318,13 +343,12 @@ Customers not found,Klanten niet gevonden
 Daily cashier actions without scrolling.,Dagelijkse kassaacties zonder te scrollen.
 Daily Sales,Dagelijkse verkoop
 Daily Sales Summary,Dagelijks verkoopoverzicht
-Dark Mode,Donkere modus
 Data loaded in form. Review and submit.,Gegevens geladen in formulier. Beoordelen en indienen.
 Database Health,Databasestatus
 Database health affects overall system speed and reliability.,De databasestatus heeft invloed op de algehele systeemsnelheid en betrouwbaarheid.
 Database Info,Database-informatie
 Date,Datum
-Day Δ,Dag Δ
+Day ?,Dag?
 days,dagen
 Day-wise (MTD),Daggewijs (MTD)
 Day-wise Movement,Dagwijze beweging
@@ -383,7 +407,6 @@ Edited,Bewerkt
 Employee,Medewerker
 Enable background sync,Schakel achtergrondsynchronisatie in
 Enable Customer Display in POS Profile first.,Schakel eerst Klantweergave in POS-profiel in.
-End current session,Beëindig de huidige sessie
 Enter a PIN.,Voer een pincode in.
 Enter a valid grams value,Voer een geldige gramwaarde in
 Enter new price list rate,Voer een nieuw prijslijsttarief in
@@ -468,8 +491,6 @@ Gift card payment,Betaling met cadeaukaart
 Gift card redemption requires an online connection,Voor het inwisselen van een cadeaukaart is een online verbinding vereist
 Gift card topped up successfully.,Cadeaukaart succesvol opgewaardeerd.
 Gift Cards,Cadeaubonnen
-Go Offline,Ga offline
-Go Online,Ga online
 Go to Frappe Desk,Ga naar Frappe Desk
 Grand Total,Algemeen totaal
 Gross Margin,Bruto marge
@@ -552,8 +573,6 @@ json,json
 Just now,Zojuist
 Keep offline prerequisites healthy and recover stale data safely.,Houd de offline vereisten gezond en herstel verouderde gegevens veilig.
 Labels,Etiketten
-Language,Taal
-Language will be changed to,De taal wordt gewijzigd in
 "Language, theme, terminal tools, and session controls.","Taal, thema, terminaltools en sessiebediening."
 Last,Laatste
 Last 14 Days (Paid vs Pending),Afgelopen 14 dagen (betaald versus in behandeling)
@@ -565,7 +584,6 @@ Last sync:,Laatste synchronisatie:
 Last sync: {0} | ok: {1} | failed: {2} | skipped: {3},Laatste synchronisatie: {0} | oké: {1} | mislukt: {2} | overgeslagen: {3}
 Latest entries for current shift,Laatste invoer voor huidige dienst
 Lead Time,Doorlooptijd
-Light Mode,Lichte modus
 Limited,Beperkt
 lines,lijnen
 List,Lijst
@@ -594,7 +612,6 @@ localStorage,lokale opslag
 Location Performance,Locatieprestaties
 Locations,Locaties
 Lock Screen,Vergrendelscherm
-Logout,Uitloggen
 Lookup Workflow,Werkstroom opzoeken
 Loss,Verlies
 Low,Laag
@@ -621,7 +638,6 @@ Maximum discount amount for this offer item is {0}.,Het maximale kortingsbedrag 
 Maximum discount percentage for this offer item is {0}%.,Het maximale kortingspercentage voor dit aanbiedingsartikel is {0}%.
 Maximum offer quantity is {0}. Quantity adjusted to allowed limit.,Het maximale aanbiedingsaantal is {0}. Hoeveelheid aangepast aan toegestane limiet.
 Medium,Middelmatig
-Menu,Menukaart
 Method-wise Collections,Methodische collecties
 Minimum allowed rate for this offer item is {0}.,Het minimaal toegestane tarief voor dit aanbiedingsitem is {0}.
 Minimum Qty,Minimum aantal
@@ -629,7 +645,7 @@ Mobile No,Mobiel nummer
 Mode,Modus
 Mode of Payment,Wijze van betaling
 Month,Maand
-Month Δ,Maand Δ
+Month ?,Maand?
 Monthly Profit,Maandelijkse winst
 Monthly Sales,Maandelijkse omzet
 Monthly Sales Summary,Maandelijks verkoopoverzicht
@@ -894,7 +910,6 @@ Print Draft,Concept afdrukken
 Print Format (Invoice),Afdrukformaat (factuur)
 Print Format (Order),Afdrukformaat (bestelling)
 Print invoice,Factuur afdrukken
-Print Last Invoice,Laatste factuur afdrukken
 Print Purchase Invoice instead of PO,Aankoopfactuur afdrukken in plaats van inkooporder
 Printer,Printer
 Processed returns impacting the shift totals,Verwerkte retourzendingen die van invloed zijn op de ploegtotalen
@@ -977,7 +992,6 @@ Repaired,Gerepareerd
 Repairing change allocation,Wijzigingstoewijzing herstellen
 Repeat Customers,Herhaalde klanten
 Repeat Rate,Herhaalsnelheid
-Reprint previous transaction,Vorige transactie opnieuw afdrukken
 Request,Verzoek
 Request ID: {0},Verzoek-ID: {0}
 Request Payment,Betaling aanvragen
@@ -1063,7 +1077,6 @@ Select a printer to use QZ silent printing.,Selecteer een printer om QZ stil afd
 Select Batch,Selecteer Batch
 Select Columns to Display,Selecteer Kolommen om weer te geven
 Select items to sell,Selecteer items om te verkopen
-Select Language,Selecteer Taal
 Select Payment,Selecteer Betaling
 Select Payment Account,Selecteer Betaalrekening
 Select printer,Selecteer printer
@@ -1102,7 +1115,6 @@ Show the active cart on a customer-facing screen,Toon de actieve winkelwagen op 
 Showing {0}-{1} of {2},Toont {0}-{1} van {2}
 Showing 0 of 0,Toont 0 van 0
 Shows the distribution of invoices per currency,Toont de verdeling van facturen per valuta
-Sign out of session,Meld u af bij de sessie
 Sign out of the current POS session,Meld u af bij de huidige POS-sessie
 Size:,Maat:
 Skipped Payments,Overgeslagen betalingen
@@ -1125,7 +1137,7 @@ Stock is lower than requested,De voorraad is lager dan gevraagd
 Stock is lower than requested:\n{0},Voorraad is lager dan gevraagd:\n{0}
 Stock Movement Report,Rapport over aandelenbewegingen
 Stock update: {0} has {1} available. Adding {2} will bring the stock below zero.,"Voorraadupdate: {0} heeft {1} beschikbaar. Door {2} toe te voegen, zal de voorraad onder nul komen."
-Submit,Verzenden
+Submit,Indienen
 Submit & Print,Verzenden en afdrukken
 Submit Deposit,Storting indienen
 Submit Expense,Kosten indienen
@@ -1150,7 +1162,6 @@ Suppliers not found,Leveranciers niet gevonden
 Switch Camera,Camera wisselen
 Switch Cashier,Wissel van kassier
 Switch the POS appearance theme,Wijzig het POS-uiterlijkthema
-Switch theme appearance,Verander het uiterlijk van het thema
 Switched to:,Overgeschakeld naar:
 Sync All Invoices,Synchroniseer alle facturen
 Sync Offline Cash Movements ({0}),Offline geldbewegingen synchroniseren ({0})
@@ -1286,7 +1297,6 @@ Unallocated,Niet toegewezen
 Unallocated:,Niet toegewezen:
 Unavailable,Niet beschikbaar
 Unknown,Onbekend
-Unknown error,Onbekende fout
 Unknown Item,Onbekend artikel
 Unknown Warehouse,Onbekend magazijn
 Unlock POS,Ontgrendel POS
@@ -1301,7 +1311,6 @@ Update Price List Rate,Prijslijsttarief bijwerken
 Updated,Bijgewerkt
 Updates and app info that stay out of the cashier flow.,Updates en app-info die buiten de kassastroom blijven.
 Updates automatically,Wordt automatisch bijgewerkt
-Upload pending transactions,Upload openstaande transacties
 Usage,Gebruik
 Usage Stats,Gebruiksstatistieken
 Use a 4 to 8 digit PIN for cashier switching and terminal unlock.,Gebruik een pincode van 4 tot 8 cijfers voor het wisselen van kassier en het ontgrendelen van de terminal.
@@ -1336,7 +1345,7 @@ Walk-in Customer,Inloop klant
 Warehouse,Magazijn
 Warning: High cache usage may affect performance.,Waarschuwing: Een hoog cachegebruik kan de prestaties beïnvloeden.
 Warning: High lag may indicate heavy processing or browser slowness.,Waarschuwing: een hoge vertraging kan duiden op zware verwerking of browsertraagheid.
-Week Δ,Week Δ
+Week ?,Week ?
 Week-wise,Weekgewijs
 Weight (g),Gewicht (g)
 Weight (grams),Gewicht (gram)

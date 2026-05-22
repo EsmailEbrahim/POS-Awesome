@@ -1,4 +1,39 @@
-﻿- Total Unallocated,- Total Unallocated
+POS Awesome,POS Awesome
+Fetch Items Directly from Server,Tiştên rasterast ji serverê bistînin
+Menu,Menu
+Actions,Actions
+Close Shift,Close Shift
+End current session,Danişîna heyî biqedînin
+Print Last Invoice,Fatoya Dawî çap bike
+Reprint previous transaction,Danûstandinên berê ji nû ve çap bikin
+Sync Offline Invoices,Fanoyên Offline Sync bikin
+Upload pending transactions,Danûstandinên li benda barkirin
+Go Online,Biçe Online
+Go Offline,Biçe Offline
+Disable offline mode,Moda offline neçalak bike
+Work without server connection,Bê girêdana serverê bixebite
+Clear Cache,Cache paqij bike
+Remove local data and refresh,Daneyên herêmî jêbirin û nûve bikin
+About,About
+App information,Agahdariya app
+Language,Ziman
+Change interface language,Zimanê navberê biguherînin
+Light Mode,Moda Ronahî
+Dark Mode,Moda Dark
+Switch theme appearance,Nîşana mijarê biguherînin
+Logout,Derketin
+Sign out of session,Ji danişînê derkeve
+Select Language,Ziman hilbijêrin
+Choose your preferred language for the POS interface,Ji bo pêwendiya POS-ê zimanê xweya bijartî hilbijêrin
+Language will be changed to,Ziman dê were guhertin
+Cancel,Betal bike
+Change Language,Ziman biguherînin
+Close,Close
+Cannot change language - same language selected,Ziman nayê guhertin - heman ziman hatiye hilbijartin
+Language changed successfully! Reloading...,Ziman bi serkeftî guherî! Ji nû ve barkirin...
+Failed to change language,Nekarî ziman biguhere
+Unknown error,Çewtiya nenas
+- Total Unallocated,- Tevahiya Unallocated
 * Required,* Pêdivî ye
 {0} (Qty: {1}),{0} (Qty: {1})
 {0} actions,{0} çalakî
@@ -11,7 +46,6 @@
 {0}h ago,{0}h berê
 {0}m ago,{0} m berê
 A POS supervisor is required for this action.,Ji bo vê çalakiyê çavdêrek POS-ê hewce ye.
-About,About
 Access,Gihîştin
 Account,Account
 Account is overdrawn,Hesab zêde ye
@@ -19,7 +53,6 @@ Acknowledge the error to resume scanning,Çewtiyê bipejirînin ku ji nû ve şo
 Acknowledge the error to resume scanning.,Çewtiyê bipejirînin ku ji nû ve şopandinê dest pê bike.
 Across,Li seranserê
 Action,Çalakî
-Actions,Actions
 Active sale,Firotina çalak
 add,lê zêde bike
 Add items from the selector to start building this sale.,Ji hilbijêrê tiştan zêde bikin da ku dest bi avakirina vê firotanê bikin.
@@ -55,7 +88,6 @@ Amount already received,Heqê ku jixwe hatiye standin
 Amount exceeds profile cash movement max amount.,Mîqdar ji mîqdara herî zêde ya tevgera dravê profîlê derbas dike.
 Amount must be greater than zero.,Divê mîqdar ji sifirê mezintir be.
 Amount received from customer,Heqê ku ji xerîdar hatî wergirtin
-App information,Agahdariya app
 Appearance and user-level preferences for the current session.,Xuyabûn û tercîhên asta bikarhêner ji bo rûniştina heyî.
 Applied,Applied
 Apply,Apply
@@ -133,7 +165,6 @@ Camera is busy or blocked by another app/tab. Close other camera apps and try ag
 Camera permission denied. Please allow camera access in your browser settings and refresh the page.,Destûra kamerayê hat redkirin. Ji kerema xwe destûrê bide gihîştina kamerayê di mîhengên geroka xwe de û rûpelê nûve bike.
 Camera scanner is locked until the current error is acknowledged,Skanera kamerayê girtî ye heya ku xeletiya heyî were pejirandin
 Camera started but the video stream did not load in time. Please try again.,Kamera dest pê kir lê weşana vîdyoyê di wextê xwe de bar nekir. Ji kerema xwe dîsa biceribîne.
-Cancel,Betal bike
 Cancel cash movement {0}?,Tevgera drav {0} betal bike?
 Cancel Payment,Betal Payment
 Cancel Sale,Cancel Sale
@@ -184,8 +215,6 @@ Certificate is missing or not trusted. QZ may show confirmation dialogs.,Sertîf
 Certificate is trusted. Silent QZ printing is active.,Sertîfîka pêbawer e. Çapkirina QZ ya bêdeng çalak e.
 Change,Guhertin
 Change allocation repaired,Dabeşkirina guhertinê hate tamîrkirin
-Change interface language,Zimanê navberê biguherînin
-Change Language,Ziman biguherînin
 Change Price,Guhertina Bihayê
 Change Return,Vegere Guhertin
 Change Returned,Guhertin Vegere
@@ -204,20 +233,17 @@ Checking...,Kontrolkirin...
 Cheque/Reference Date,Çek / Dîroka Referansê
 Cheque/Reference No,Çek / Referans No
 Choose the cashier currently operating this terminal.,Diravê ku niha vê termînalê dixebitîne hilbijêrin.
-Choose your preferred language for the POS interface,Ji bo pêwendiya POS-ê zimanê xweya bijartî hilbijêrin
 City,City
 Clear,Clear
 Clear All,Hemî Paqij bike
 Clear all barcode items,Hemî tiştên barcode paqij bikin
 Clear all purchase order items,Hemî tiştên fermana kirînê paqij bikin
-Clear Cache,Cache paqij bike
 Clear Search,Lêgerînê Paqij bike
 Clearing local cache...,Paqijkirina cacheya herêmî...
 Click to refresh,Ji bo nûvekirinê bikirtînin
 Client CPU Lag:,Derengiya CPU ya Xerîdar:
 Client Memory Usage:,Bikaranîna Bîra Xerîdar:
 Client Metrics,Metrics Client
-Close,Close
 Close about dialog,Di derbarê diyalogê de nêzîk bibin
 Close cashier switcher,Nêzîkî veguherînerê dravê
 Close closing shift dialog,Diyaloga girtina guheztinê bigire
@@ -233,7 +259,6 @@ Close sales orders dialog,Danûstandina fermanên firotanê bigire
 Close Scanner,Scanner Close
 Close scanner dialog,Danûstandina skanerê bigire
 Close Settings,Mîhengan bigire
-Close Shift,Close Shift
 Closing Amount,Girtina Heqê
 Closing POS Shift,Girtina POS Shift
 Closing Snapshot Available,Girtina Snapshot Berdest e
@@ -318,13 +343,12 @@ Customers not found,Mişterî nehatin dîtin
 Daily cashier actions without scrolling.,Çalakiyên dravê rojane bêyî gerok.
 Daily Sales,Sales rojane
 Daily Sales Summary,Kurteya Sales Daily
-Dark Mode,Moda Dark
 Data loaded in form. Review and submit.,Daneyên di formê de hatine barkirin. Binirxînin û bişînin.
 Database Health,Database Health
 Database health affects overall system speed and reliability.,Tenduristiya databasê bandorê li leza pergalê û pêbaweriya giştî dike.
 Database Info,Database Info
 Date,Date
-Day Δ,Roja Δ
+Day ?,Day ?
 days,rojan
 Day-wise (MTD),Rojane (MTD)
 Day-wise Movement,Tevgera rojane
@@ -383,7 +407,6 @@ Edited,Edited
 Employee,Employee
 Enable background sync,Hevdemkirina paşxanê çalak bike
 Enable Customer Display in POS Profile first.,Pêşî di Profîla POS-ê de Nîşandana Xerîdar çalak bikin.
-End current session,Danişîna heyî biqedînin
 Enter a PIN.,PINek binivîse.
 Enter a valid grams value,Nirxa gramek derbasdar binivîse
 Enter new price list rate,Rêjeya lîsteya bihayê nû binivîse
@@ -468,8 +491,6 @@ Gift card payment,Dravdana karta diyariyê
 Gift card redemption requires an online connection,Veguheztina qerta diyariyê pêwendiyek serhêl hewce dike
 Gift card topped up successfully.,Karta diyariyê bi serketî hat zêdekirin.
 Gift Cards,Kartên diyariyê
-Go Offline,Biçe Offline
-Go Online,Biçe Online
 Go to Frappe Desk,Biçe Maseya Frappe
 Grand Total,Grand Total
 Gross Margin,Margin Gross
@@ -552,8 +573,6 @@ json,json
 Just now,Just now
 Keep offline prerequisites healthy and recover stale data safely.,Pêşmercên negirêdayî saxlem bihêlin û daneyên kevin bi ewlehî vegerînin.
 Labels,Labels
-Language,Ziman
-Language will be changed to,Ziman dê were guhertin
 "Language, theme, terminal tools, and session controls.","Ziman, mijar, amûrên termînalê, û kontrolên rûniştinê."
 Last,Dawî
 Last 14 Days (Paid vs Pending),14 Rojên Dawî (Derdayî beramberî Li bendê)
@@ -565,7 +584,6 @@ Last sync:,Hevdemkirina dawîn:
 Last sync: {0} | ok: {1} | failed: {2} | skipped: {3},Hevdemkirina dawîn: {0} | baş: {1} | têkçû: {2} | derbas bû: {3}
 Latest entries for current shift,Danûstandinên herî paşîn ji bo guheztina heyî
 Lead Time,Lead Time
-Light Mode,Moda Ronahî
 Limited,Limited
 lines,xetên
 List,List
@@ -594,7 +612,6 @@ localStorage,localStorage
 Location Performance,Cihê Performansa
 Locations,Cihan
 Lock Screen,Lock Screen
-Logout,Derketin
 Lookup Workflow,Bigerin Workflow
 Loss,Loss
 Low,Low
@@ -621,7 +638,6 @@ Maximum discount amount for this offer item is {0}.,Rêjeya erzaniyê ya herî z
 Maximum discount percentage for this offer item is {0}%.,Rêjeya erzaniyê ya herî zêde ji bo vê babetê teklîfê {0}%.
 Maximum offer quantity is {0}. Quantity adjusted to allowed limit.,Hêjmara pêşniyarê ya herî zêde {0} e. Mîqdar li gorî sînorê destûr hatî guheztin.
 Medium,Medium
-Menu,Menu
 Method-wise Collections,Koleksiyonên Rêbaz
 Minimum allowed rate for this offer item is {0}.,Rêjeya herî kêm a destûr ji bo vê babetê pêşkêşî {0} e.
 Minimum Qty,Hejmara hindiktirîn
@@ -629,7 +645,7 @@ Mobile No,Hejmara Mobîl
 Mode,Mode
 Mode of Payment,Mode of Payment
 Month,Month
-Month Δ,Meh Δ
+Month ?,Meh ?
 Monthly Profit,Qezenciya mehane
 Monthly Sales,Firotana mehane
 Monthly Sales Summary,Kurteya Firotana Mehane
@@ -832,7 +848,7 @@ Payment submitted but print function could not be executed. Payment name not fou
 Payment submitted.,Payment şandin.
 Payment Summary,Kurteya Tezmînatê
 Payments,Payments
-Payments are not open. Do you want to open payments and submit?,Tezmînat vekirî ne. Do you want to open payments and submit?
+Payments are not open. Do you want to open payments and submit?,Tezmînat vekirî ne. Ma hûn dixwazin dravdanê vekin û radest bikin?
 Payments by Mode of Payment,Tezmînatên bi Moda Tezmînatê
 PDF,PDF
 Peak Hour,Saet Peak
@@ -894,7 +910,6 @@ Print Draft,Pêşnûmeya çapkirinê
 Print Format (Invoice),Forma Çapkirinê (Fatur)
 Print Format (Order),Forma Çapkirinê (Siparîş)
 Print invoice,fatûreya çap bike
-Print Last Invoice,Fatoya Dawî çap bike
 Print Purchase Invoice instead of PO,Li şûna PO fatûreya kirînê çap bike
 Printer,Printer
 Processed returns impacting the shift totals,Vegerên pêvajoyî ku bandorê li serhevhatinên guheztinê dikin
@@ -977,7 +992,6 @@ Repaired,Tamîr kirin
 Repairing change allocation,Tamîrkirina dabeşkirina guhertinê
 Repeat Customers,Dubare Mişterî
 Repeat Rate,Rêjeya Dubarekirin
-Reprint previous transaction,Danûstandinên berê ji nû ve çap bikin
 Request,Daxwaz
 Request ID: {0},Nasnameya daxwazkirinê: {0}
 Request Payment,Daxwaza Tezmînatê
@@ -1063,7 +1077,6 @@ Select a printer to use QZ silent printing.,Çapkerek hilbijêrin ku çapkirina 
 Select Batch,Batch hilbijêre
 Select Columns to Display,Ji bo Nîşandanê Stûnên Hilbijêre
 Select items to sell,Tiştên ji bo firotanê hilbijêrin
-Select Language,Ziman hilbijêrin
 Select Payment,Payment hilbijêrin
 Select Payment Account,Hesabê Paymentê hilbijêrin
 Select printer,Çapkerê hilbijêre
@@ -1102,7 +1115,6 @@ Show the active cart on a customer-facing screen,Kartê çalak li ser ekranek r�
 Showing {0}-{1} of {2},Nîşandana {0}-{1} ji {2}
 Showing 0 of 0,0 ji 0 tê nîşandan
 Shows the distribution of invoices per currency,Dabeşkirina fatûreyan li ser pereyê nîşan dide
-Sign out of session,Ji danişînê derkeve
 Sign out of the current POS session,Ji danişîna POS-ê ya heyî derkeve
 Size:,Mezinahî:
 Skipped Payments,Payments Skipped
@@ -1125,7 +1137,7 @@ Stock is lower than requested,Stock ji daxwazê kêmtir e
 Stock is lower than requested:\n{0},Stock ji daxwazê kêmtir e:\n{0}
 Stock Movement Report,Rapora Tevgera Stock
 Stock update: {0} has {1} available. Adding {2} will bring the stock below zero.,Nûvekirina stock: {0} {1} heye. Zêdekirina {2}ê wê stokê bîne binê sifirê.
-Submit,Bişînin
+Submit,Nermijîn
 Submit & Print,Bişînin & Çap bikin
 Submit Deposit,Deposit bişînin
 Submit Expense,Submit Expense
@@ -1150,7 +1162,6 @@ Suppliers not found,Pêşkêşker nehatin dîtin
 Switch Camera,Biguherîne Kamera
 Switch Cashier,Switch Cashier
 Switch the POS appearance theme,Mijara xuyangkirina POS-ê biguherînin
-Switch theme appearance,Nîşana mijarê biguherînin
 Switched to:,Veguherî ser:
 Sync All Invoices,Hemî fatûreyan hevdeng bikin
 Sync Offline Cash Movements ({0}),Tevgerên Diravî yên Offline Senkronîze bike ({0})
@@ -1286,7 +1297,6 @@ Unallocated,Unallocated
 Unallocated:,Nedabeşkirî:
 Unavailable,Unavailable
 Unknown,Unknown
-Unknown error,Çewtiya nenas
 Unknown Item,Item Unknown
 Unknown Warehouse,Warehouse Unknown
 Unlock POS,POS-ê vekin
@@ -1301,7 +1311,6 @@ Update Price List Rate,Nûvekirina Rêjeya Lîsteya Bihayê
 Updated,Nûkirin
 Updates and app info that stay out of the cashier flow.,Nûvekirin û agahdariya serîlêdanê ya ku li derveyî herikîna dravê dimîne.
 Updates automatically,Jixweber nûvekirin
-Upload pending transactions,Danûstandinên li benda barkirin
 Usage,Bikaranîna
 Usage Stats,Statîstîkên Bikaranînê
 Use a 4 to 8 digit PIN for cashier switching and terminal unlock.,Ji bo guheztina dravê û vekirina termînalê PINek 4-8-hejmar bikar bînin.
@@ -1336,7 +1345,7 @@ Walk-in Customer,Walk-in Mişterî
 Warehouse,Warehouse
 Warning: High cache usage may affect performance.,Hişyarî: Bikaranîna cache ya zêde dibe ku bandorê li performansê bike.
 Warning: High lag may indicate heavy processing or browser slowness.,Hişyarî: Derengiya zêde dibe ku pêvajoyek giran an hêdîbûna gerokê nîşan bide.
-Week Δ,Hefteya Δ
+Week ?,Week ?
 Week-wise,Weke-aqilmend
 Weight (g),Giranî (g)
 Weight (grams),Giranî (gram)

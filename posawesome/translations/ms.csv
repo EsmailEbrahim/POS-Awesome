@@ -1,4 +1,39 @@
-﻿- Total Unallocated,- Total Unallocated
+POS Awesome,POS Hebat
+Fetch Items Directly from Server,Ambil Item Terus dari Pelayan
+Menu,Menu
+Actions,Tindakan
+Close Shift,Tutup Shift
+End current session,Tamatkan sesi semasa
+Print Last Invoice,Cetak Invois Terakhir
+Reprint previous transaction,Cetak semula transaksi sebelumnya
+Sync Offline Invoices,Segerakkan Invois Luar Talian
+Upload pending transactions,Muat naik transaksi yang belum selesai
+Go Online,Pergi Dalam Talian
+Go Offline,Pergi Luar Talian
+Disable offline mode,Lumpuhkan mod luar talian
+Work without server connection,Bekerja tanpa sambungan pelayan
+Clear Cache,Kosongkan Cache
+Remove local data and refresh,Alih keluar data setempat dan muat semula
+About,Tentang
+App information,Maklumat apl
+Language,Bahasa
+Change interface language,Tukar bahasa antara muka
+Light Mode,Mod Cahaya
+Dark Mode,Mod Gelap
+Switch theme appearance,Tukar penampilan tema
+Logout,Log keluar
+Sign out of session,Log keluar dari sesi
+Select Language,Pilih Bahasa
+Choose your preferred language for the POS interface,Pilih bahasa pilihan anda untuk antara muka POS
+Language will be changed to,Bahasa akan ditukar kepada
+Cancel,Batal
+Change Language,Tukar Bahasa
+Close,tutup
+Cannot change language - same language selected,Tidak boleh menukar bahasa - bahasa yang sama dipilih
+Language changed successfully! Reloading...,Bahasa berjaya ditukar! Memuatkan semula...
+Failed to change language,Gagal menukar bahasa
+Unknown error,Ralat tidak diketahui
+- Total Unallocated,- Jumlah Tidak Diperuntukkan
 * Required,* Diperlukan
 {0} (Qty: {1}),{0} (Kuantiti: {1})
 {0} actions,{0} tindakan
@@ -11,7 +46,6 @@
 {0}h ago,{0}j lalu
 {0}m ago,{0}m lalu
 A POS supervisor is required for this action.,Penyelia POS diperlukan untuk tindakan ini.
-About,Tentang
 Access,Akses
 Account,Akaun
 Account is overdrawn,Akaun terlebih keluar
@@ -19,7 +53,6 @@ Acknowledge the error to resume scanning,Akui ralat untuk menyambung semula peng
 Acknowledge the error to resume scanning.,Akui ralat untuk menyambung semula pengimbasan.
 Across,Di seberang
 Action,Tindakan
-Actions,Tindakan
 Active sale,Jualan aktif
 add,tambah
 Add items from the selector to start building this sale.,Tambahkan item daripada pemilih untuk mula membina jualan ini.
@@ -55,7 +88,6 @@ Amount already received,Jumlah yang telah diterima
 Amount exceeds profile cash movement max amount.,Amaun melebihi amaun maks pergerakan tunai profil.
 Amount must be greater than zero.,Jumlah mestilah lebih besar daripada sifar.
 Amount received from customer,Jumlah yang diterima daripada pelanggan
-App information,Maklumat apl
 Appearance and user-level preferences for the current session.,Penampilan dan pilihan peringkat pengguna untuk sesi semasa.
 Applied,Digunakan
 Apply,Mohon
@@ -133,7 +165,6 @@ Camera is busy or blocked by another app/tab. Close other camera apps and try ag
 Camera permission denied. Please allow camera access in your browser settings and refresh the page.,Kebenaran kamera ditolak. Sila benarkan akses kamera dalam tetapan penyemak imbas anda dan muat semula halaman.
 Camera scanner is locked until the current error is acknowledged,Pengimbas kamera dikunci sehingga ralat semasa diakui
 Camera started but the video stream did not load in time. Please try again.,Kamera bermula tetapi strim video tidak dimuatkan dalam masa. Sila cuba lagi.
-Cancel,Batal
 Cancel cash movement {0}?,Batalkan pergerakan tunai {0}?
 Cancel Payment,Batalkan Pembayaran
 Cancel Sale,Batalkan Jualan
@@ -184,8 +215,6 @@ Certificate is missing or not trusted. QZ may show confirmation dialogs.,Sijil t
 Certificate is trusted. Silent QZ printing is active.,Sijil dipercayai. Pencetakan QZ senyap aktif.
 Change,Berubah
 Change allocation repaired,Perubahan peruntukan dibaiki
-Change interface language,Tukar bahasa antara muka
-Change Language,Tukar Bahasa
 Change Price,Tukar Harga
 Change Return,Tukar Pulangan
 Change Returned,Perubahan Dikembalikan
@@ -204,20 +233,17 @@ Checking...,Menyemak...
 Cheque/Reference Date,Tarikh Cek/Rujukan
 Cheque/Reference No,Cek/No Rujukan
 Choose the cashier currently operating this terminal.,Pilih juruwang yang sedang mengendalikan terminal ini.
-Choose your preferred language for the POS interface,Pilih bahasa pilihan anda untuk antara muka POS
 City,Bandar
 Clear,Jelas
 Clear All,Kosongkan Semua
 Clear all barcode items,Kosongkan semua item kod bar
 Clear all purchase order items,Kosongkan semua item pesanan pembelian
-Clear Cache,Kosongkan Cache
 Clear Search,Kosongkan Carian
 Clearing local cache...,Mengosongkan cache setempat...
 Click to refresh,Klik untuk memuat semula
 Client CPU Lag:,Kelewatan CPU Pelanggan:
 Client Memory Usage:,Penggunaan Memori Pelanggan:
 Client Metrics,Metrik Pelanggan
-Close,tutup
 Close about dialog,Tutup tentang dialog
 Close cashier switcher,Tutup penukar juruwang
 Close closing shift dialog,Tutup dialog syif penutupan
@@ -233,7 +259,6 @@ Close sales orders dialog,Tutup dialog pesanan jualan
 Close Scanner,Tutup Pengimbas
 Close scanner dialog,Tutup dialog pengimbas
 Close Settings,Tutup Tetapan
-Close Shift,Tutup Shift
 Closing Amount,Jumlah Penutupan
 Closing POS Shift,Menutup Shift POS
 Closing Snapshot Available,Gambar Penutup Tersedia
@@ -318,13 +343,12 @@ Customers not found,Pelanggan tidak ditemui
 Daily cashier actions without scrolling.,Tindakan juruwang harian tanpa menatal.
 Daily Sales,Jualan Harian
 Daily Sales Summary,Ringkasan Jualan Harian
-Dark Mode,Mod Gelap
 Data loaded in form. Review and submit.,Data dimuatkan dalam bentuk. Semak dan serahkan.
 Database Health,Kesihatan Pangkalan Data
 Database health affects overall system speed and reliability.,Kesihatan pangkalan data mempengaruhi kelajuan dan kebolehpercayaan sistem secara keseluruhan.
 Database Info,Maklumat Pangkalan Data
 Date,tarikh
-Day Δ,Hari Δ
+Day ?,Hari ?
 days,hari
 Day-wise (MTD),Dari segi hari (MTD)
 Day-wise Movement,Pergerakan Harian
@@ -383,7 +407,6 @@ Edited,disunting
 Employee,Pekerja
 Enable background sync,Dayakan penyegerakan latar belakang
 Enable Customer Display in POS Profile first.,Dayakan Paparan Pelanggan dalam Profil POS dahulu.
-End current session,Tamatkan sesi semasa
 Enter a PIN.,Masukkan PIN.
 Enter a valid grams value,Masukkan nilai gram yang sah
 Enter new price list rate,Masukkan kadar senarai harga baharu
@@ -468,8 +491,6 @@ Gift card payment,Pembayaran kad hadiah
 Gift card redemption requires an online connection,Penebusan kad hadiah memerlukan sambungan dalam talian
 Gift card topped up successfully.,Kad hadiah berjaya ditambah nilai.
 Gift Cards,Kad Hadiah
-Go Offline,Pergi Luar Talian
-Go Online,Pergi Dalam Talian
 Go to Frappe Desk,Pergi ke Frappe Desk
 Grand Total,Jumlah Besar
 Gross Margin,Margin Kasar
@@ -552,8 +573,6 @@ json,json
 Just now,tadi
 Keep offline prerequisites healthy and recover stale data safely.,Pastikan prasyarat luar talian sihat dan pulihkan data basi dengan selamat.
 Labels,Label
-Language,Bahasa
-Language will be changed to,Bahasa akan ditukar kepada
 "Language, theme, terminal tools, and session controls.","Bahasa, tema, alat terminal dan kawalan sesi."
 Last,Terakhir
 Last 14 Days (Paid vs Pending),14 Hari Terakhir (Dibayar lwn Belum Selesai)
@@ -565,7 +584,6 @@ Last sync:,Penyegerakan terakhir:
 Last sync: {0} | ok: {1} | failed: {2} | skipped: {3},Penyegerakan terakhir: {0} | ok: {1} | gagal: {2} | dilangkau: {3}
 Latest entries for current shift,Penyertaan terkini untuk syif semasa
 Lead Time,Masa Utama
-Light Mode,Mod Cahaya
 Limited,Terhad
 lines,garisan
 List,Senaraikan
@@ -594,7 +612,6 @@ localStorage,localStorage
 Location Performance,Prestasi Lokasi
 Locations,Lokasi
 Lock Screen,Kunci Skrin
-Logout,Log keluar
 Lookup Workflow,Aliran Kerja Carian
 Loss,rugi
 Low,rendah
@@ -621,7 +638,6 @@ Maximum discount amount for this offer item is {0}.,Amaun diskaun maksimum untuk
 Maximum discount percentage for this offer item is {0}%.,Peratusan diskaun maksimum untuk item tawaran ini ialah {0}%.
 Maximum offer quantity is {0}. Quantity adjusted to allowed limit.,Kuantiti tawaran maksimum ialah {0}. Kuantiti diselaraskan kepada had yang dibenarkan.
 Medium,Sederhana
-Menu,Menu
 Method-wise Collections,Koleksi mengikut kaedah
 Minimum allowed rate for this offer item is {0}.,Kadar minimum yang dibenarkan untuk item tawaran ini ialah {0}.
 Minimum Qty,Kuantiti Minimum
@@ -629,7 +645,7 @@ Mobile No,Mudah Alih No
 Mode,Mod
 Mode of Payment,Cara Pembayaran
 Month,bulan
-Month Δ,Bulan Δ
+Month ?,bulan ?
 Monthly Profit,Keuntungan Bulanan
 Monthly Sales,Jualan Bulanan
 Monthly Sales Summary,Ringkasan Jualan Bulanan
@@ -894,7 +910,6 @@ Print Draft,Cetak Draf
 Print Format (Invoice),Format Cetak (Invois)
 Print Format (Order),Format Cetak (Pesanan)
 Print invoice,Cetak invois
-Print Last Invoice,Cetak Invois Terakhir
 Print Purchase Invoice instead of PO,Cetak Invois Pembelian dan bukannya PO
 Printer,Pencetak
 Processed returns impacting the shift totals,Pulangan yang diproses memberi kesan kepada jumlah syif
@@ -977,7 +992,6 @@ Repaired,dibaiki
 Repairing change allocation,Membaiki peruntukan perubahan
 Repeat Customers,Pelanggan Berulang
 Repeat Rate,Kadar Ulangan
-Reprint previous transaction,Cetak semula transaksi sebelumnya
 Request,Permintaan
 Request ID: {0},ID Permintaan: {0}
 Request Payment,Minta Bayaran
@@ -1063,7 +1077,6 @@ Select a printer to use QZ silent printing.,Pilih pencetak untuk menggunakan pen
 Select Batch,Pilih Kelompok
 Select Columns to Display,Pilih Lajur untuk Dipaparkan
 Select items to sell,Pilih barang untuk dijual
-Select Language,Pilih Bahasa
 Select Payment,Pilih Pembayaran
 Select Payment Account,Pilih Akaun Pembayaran
 Select printer,Pilih pencetak
@@ -1102,7 +1115,6 @@ Show the active cart on a customer-facing screen,Tunjukkan troli aktif pada skri
 Showing {0}-{1} of {2},Menunjukkan {0}-{1} daripada {2}
 Showing 0 of 0,Menunjukkan 0 daripada 0
 Shows the distribution of invoices per currency,Menunjukkan pengagihan invois setiap mata wang
-Sign out of session,Log keluar dari sesi
 Sign out of the current POS session,Log keluar daripada sesi POS semasa
 Size:,Saiz:
 Skipped Payments,Bayaran Dilangkau
@@ -1150,7 +1162,6 @@ Suppliers not found,Pembekal tidak ditemui
 Switch Camera,Tukar Kamera
 Switch Cashier,Tukar Juruwang
 Switch the POS appearance theme,Tukar tema penampilan POS
-Switch theme appearance,Tukar penampilan tema
 Switched to:,Bertukar kepada:
 Sync All Invoices,Segerakkan Semua Invois
 Sync Offline Cash Movements ({0}),Segerakkan Pergerakan Tunai Luar Talian ({0})
@@ -1286,7 +1297,6 @@ Unallocated,Tidak diperuntukkan
 Unallocated:,Tidak diperuntukkan:
 Unavailable,Tidak tersedia
 Unknown,Tidak diketahui
-Unknown error,Ralat tidak diketahui
 Unknown Item,Item Tidak Diketahui
 Unknown Warehouse,Gudang Tidak Dikenali
 Unlock POS,Buka kunci POS
@@ -1301,7 +1311,6 @@ Update Price List Rate,Kemas kini Kadar Senarai Harga
 Updated,dikemas kini
 Updates and app info that stay out of the cashier flow.,Kemas kini dan maklumat apl yang tidak termasuk dalam aliran juruwang.
 Updates automatically,Kemas kini secara automatik
-Upload pending transactions,Muat naik transaksi yang belum selesai
 Usage,Penggunaan
 Usage Stats,Statistik Penggunaan
 Use a 4 to 8 digit PIN for cashier switching and terminal unlock.,Gunakan PIN 4 hingga 8 digit untuk penukaran juruwang dan buka kunci terminal.
@@ -1336,7 +1345,7 @@ Walk-in Customer,Pelanggan Walk-in
 Warehouse,Gudang
 Warning: High cache usage may affect performance.,Amaran: Penggunaan cache yang tinggi boleh menjejaskan prestasi.
 Warning: High lag may indicate heavy processing or browser slowness.,Amaran: Lag yang tinggi mungkin menunjukkan pemprosesan yang berat atau kelembapan penyemak imbas.
-Week Δ,Minggu Δ
+Week ?,Minggu ?
 Week-wise,Dari segi minggu
 Weight (g),Berat (g)
 Weight (grams),Berat (gram)

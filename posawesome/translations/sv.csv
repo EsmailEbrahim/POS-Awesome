@@ -1,4 +1,39 @@
-﻿- Total Unallocated,- Total Unallocated
+POS Awesome,POS Fantastiskt
+Fetch Items Directly from Server,Hämta objekt direkt från servern
+Menu,Meny
+Actions,Åtgärder
+Close Shift,Stäng Shift
+End current session,Avsluta aktuell session
+Print Last Invoice,Skriv ut senaste fakturan
+Reprint previous transaction,Skriv ut tidigare transaktion
+Sync Offline Invoices,Synkronisera offlinefakturor
+Upload pending transactions,Ladda upp väntande transaktioner
+Go Online,Gå online
+Go Offline,Gå offline
+Disable offline mode,Inaktivera offlineläge
+Work without server connection,Arbeta utan serveranslutning
+Clear Cache,Rensa cache
+Remove local data and refresh,Ta bort lokal data och uppdatera
+About,Om
+App information,Appinformation
+Language,Språk
+Change interface language,Ändra gränssnittsspråk
+Light Mode,Ljusläge
+Dark Mode,Mörkt läge
+Switch theme appearance,Byt temat utseende
+Logout,Logga ut
+Sign out of session,Logga ut från sessionen
+Select Language,Välj Språk
+Choose your preferred language for the POS interface,Välj ditt föredragna språk för POS-gränssnittet
+Language will be changed to,Språket kommer att ändras till
+Cancel,Avbryt
+Change Language,Byt språk
+Close,Stäng
+Cannot change language - same language selected,Kan inte ändra språk - samma språk valt
+Language changed successfully! Reloading...,Språket har ändrats! Laddar om...
+Failed to change language,Det gick inte att byta språk
+Unknown error,Okänt fel
+- Total Unallocated,- Totalt ej allokerat
 * Required,*Obligatoriskt
 {0} (Qty: {1}),{0} (Antal: {1})
 {0} actions,{0} åtgärder
@@ -11,7 +46,6 @@
 {0}h ago,{0}h sedan
 {0}m ago,{0}m sedan
 A POS supervisor is required for this action.,En POS-övervakare krävs för denna åtgärd.
-About,Om
 Access,Tillgång
 Account,konto
 Account is overdrawn,Kontot är övertrasserat
@@ -19,7 +53,6 @@ Acknowledge the error to resume scanning,Bekräfta felet för att återuppta ska
 Acknowledge the error to resume scanning.,Bekräfta felet för att återuppta skanningen.
 Across,Tvärs över
 Action,Åtgärd
-Actions,Åtgärder
 Active sale,Aktiv försäljning
 add,lägga till
 Add items from the selector to start building this sale.,Lägg till föremål från väljaren för att börja bygga den här rean.
@@ -55,7 +88,6 @@ Amount already received,Redan mottaget belopp
 Amount exceeds profile cash movement max amount.,Beloppet överstiger profilens maxbelopp för kontantrörelse.
 Amount must be greater than zero.,Beloppet måste vara större än noll.
 Amount received from customer,Mottaget belopp från kund
-App information,Appinformation
 Appearance and user-level preferences for the current session.,Utseende och inställningar på användarnivå för den aktuella sessionen.
 Applied,Tillämpas
 Apply,Ansök
@@ -133,7 +165,6 @@ Camera is busy or blocked by another app/tab. Close other camera apps and try ag
 Camera permission denied. Please allow camera access in your browser settings and refresh the page.,Kameratillstånd nekad. Tillåt kameraåtkomst i webbläsarinställningarna och uppdatera sidan.
 Camera scanner is locked until the current error is acknowledged,Kameraskannern är låst tills det aktuella felet bekräftas
 Camera started but the video stream did not load in time. Please try again.,Kameran startade men videoströmmen laddades inte i tid. Försök igen.
-Cancel,Avbryt
 Cancel cash movement {0}?,Vill du avbryta kontantförflyttning {0}?
 Cancel Payment,Avbryt betalning
 Cancel Sale,Avbryt försäljning
@@ -184,8 +215,6 @@ Certificate is missing or not trusted. QZ may show confirmation dialogs.,Certifi
 Certificate is trusted. Silent QZ printing is active.,Certifikatet är pålitligt. Tyst QZ-utskrift är aktiv.
 Change,Ändra
 Change allocation repaired,Ändringstilldelning reparerad
-Change interface language,Ändra gränssnittsspråk
-Change Language,Byt språk
 Change Price,Ändra pris
 Change Return,Ändra retur
 Change Returned,Ändring returneras
@@ -204,20 +233,17 @@ Checking...,Kontrollerar...
 Cheque/Reference Date,Check/referensdatum
 Cheque/Reference No,Check/referensnr
 Choose the cashier currently operating this terminal.,Välj den kassörska som för närvarande använder denna terminal.
-Choose your preferred language for the POS interface,Välj ditt föredragna språk för POS-gränssnittet
 City,Stad
 Clear,Rensa
 Clear All,Rensa alla
 Clear all barcode items,Rensa alla streckkodsobjekt
 Clear all purchase order items,Rensa alla inköpsorderartiklar
-Clear Cache,Rensa cache
 Clear Search,Rensa sökning
 Clearing local cache...,Rensar lokal cache...
 Click to refresh,Klicka för att uppdatera
 Client CPU Lag:,Klient CPU-fördröjning:
 Client Memory Usage:,Klientminnesanvändning:
 Client Metrics,Klientstatistik
-Close,Stäng
 Close about dialog,Stäng om dialog
 Close cashier switcher,Stäng kassaväxeln
 Close closing shift dialog,Stäng stängande skiftdialog
@@ -233,7 +259,6 @@ Close sales orders dialog,Stäng försäljningsorderdialogen
 Close Scanner,Stäng skannern
 Close scanner dialog,Stäng skannerdialogrutan
 Close Settings,Stäng Inställningar
-Close Shift,Stäng Shift
 Closing Amount,Slutbelopp
 Closing POS Shift,Stänger POS Shift
 Closing Snapshot Available,Avslutande ögonblicksbild tillgänglig
@@ -318,13 +343,12 @@ Customers not found,Kunder hittades inte
 Daily cashier actions without scrolling.,Dagliga kassaåtgärder utan att rulla.
 Daily Sales,Daglig försäljning
 Daily Sales Summary,Daglig försäljningsöversikt
-Dark Mode,Mörkt läge
 Data loaded in form. Review and submit.,Data laddas i form. Granska och skicka in.
 Database Health,Databashälsa
 Database health affects overall system speed and reliability.,Databasens hälsa påverkar systemets övergripande hastighet och tillförlitlighet.
 Database Info,Databas info
 Date,Datum
-Day Δ,Dag Δ
+Day ?,dag?
 days,dagar
 Day-wise (MTD),Dagsmässigt (MTD)
 Day-wise Movement,Daglig rörelse
@@ -383,7 +407,6 @@ Edited,Redigerat
 Employee,Anställd
 Enable background sync,Aktivera bakgrundssynkronisering
 Enable Customer Display in POS Profile first.,Aktivera kundvisning i POS-profil först.
-End current session,Avsluta aktuell session
 Enter a PIN.,Ange en PIN-kod.
 Enter a valid grams value,Ange ett giltigt gramvärde
 Enter new price list rate,Ange ny prislista
@@ -468,8 +491,6 @@ Gift card payment,Presentkortsbetalning
 Gift card redemption requires an online connection,Inlösen av presentkort kräver en onlineanslutning
 Gift card topped up successfully.,Presentkortet fylldes på.
 Gift Cards,Presentkort
-Go Offline,Gå offline
-Go Online,Gå online
 Go to Frappe Desk,Gå till Frappe Desk
 Grand Total,Totalsumma
 Gross Margin,Bruttomarginal
@@ -552,8 +573,6 @@ json,json
 Just now,Just nu
 Keep offline prerequisites healthy and recover stale data safely.,Håll offlineförutsättningarna sunda och återställ inaktuella data på ett säkert sätt.
 Labels,Etiketter
-Language,Språk
-Language will be changed to,Språket kommer att ändras till
 "Language, theme, terminal tools, and session controls.","Språk, tema, terminalverktyg och sessionskontroller."
 Last,Sist
 Last 14 Days (Paid vs Pending),Senaste 14 dagarna (betald vs väntande)
@@ -565,7 +584,6 @@ Last sync:,Senaste synkronisering:
 Last sync: {0} | ok: {1} | failed: {2} | skipped: {3},Senaste synkronisering: {0} | ok: {1} | misslyckades: {2} | hoppade över: {3}
 Latest entries for current shift,Senaste inlägg för aktuellt skift
 Lead Time,Ledtid
-Light Mode,Ljusläge
 Limited,Begränsad
 lines,linjer
 List,Lista
@@ -594,7 +612,6 @@ localStorage,localStorage
 Location Performance,Platsprestanda
 Locations,Platser
 Lock Screen,Låsskärm
-Logout,Logga ut
 Lookup Workflow,Sök arbetsflöde
 Loss,Förlust
 Low,Låg
@@ -621,7 +638,6 @@ Maximum discount amount for this offer item is {0}.,Maximalt rabattbelopp för d
 Maximum discount percentage for this offer item is {0}%.,Den maximala rabattprocenten för denna erbjudandevara är {0}%.
 Maximum offer quantity is {0}. Quantity adjusted to allowed limit.,Högsta erbjudandekvantitet är {0}. Kvantitet justerad till tillåten gräns.
 Medium,Medium
-Menu,Meny
 Method-wise Collections,Metodmässiga samlingar
 Minimum allowed rate for this offer item is {0}.,Lägsta tillåtna pris för denna erbjudandeartikel är {0}.
 Minimum Qty,Minsta kvantitet
@@ -629,7 +645,7 @@ Mobile No,Mobilnr
 Mode,Läge
 Mode of Payment,Betalningssätt
 Month,Månad
-Month Δ,Månad Δ
+Month ?,Månad?
 Monthly Profit,Månadsvinst
 Monthly Sales,Månadsförsäljning
 Monthly Sales Summary,Månatlig försäljningsöversikt
@@ -894,7 +910,6 @@ Print Draft,Skriv ut utkast
 Print Format (Invoice),Utskriftsformat (faktura)
 Print Format (Order),Utskriftsformat (beställning)
 Print invoice,Skriv ut faktura
-Print Last Invoice,Skriv ut senaste fakturan
 Print Purchase Invoice instead of PO,Skriv ut inköpsfaktura istället för PO
 Printer,Skrivare
 Processed returns impacting the shift totals,Bearbetade returer som påverkar skiftsummorna
@@ -977,7 +992,6 @@ Repaired,Reparerad
 Repairing change allocation,Reparera ändringstilldelning
 Repeat Customers,Återkommande kunder
 Repeat Rate,Upprepa hastighet
-Reprint previous transaction,Skriv ut tidigare transaktion
 Request,Begäran
 Request ID: {0},Begärans ID: {0}
 Request Payment,Begär betalning
@@ -1063,7 +1077,6 @@ Select a printer to use QZ silent printing.,Välj en skrivare för att använda 
 Select Batch,Välj Batch
 Select Columns to Display,Välj kolumner att visa
 Select items to sell,Välj artiklar att sälja
-Select Language,Välj Språk
 Select Payment,Välj Betalning
 Select Payment Account,Välj Betalkonto
 Select printer,Välj skrivare
@@ -1102,7 +1115,6 @@ Show the active cart on a customer-facing screen,Visa den aktiva varukorgen på 
 Showing {0}-{1} of {2},Visar {0}-{1} av {2}
 Showing 0 of 0,Visar 0 av 0
 Shows the distribution of invoices per currency,Visar fördelningen av fakturor per valuta
-Sign out of session,Logga ut från sessionen
 Sign out of the current POS session,Logga ut från den aktuella POS-sessionen
 Size:,Storlek:
 Skipped Payments,Överhoppade betalningar
@@ -1125,7 +1137,7 @@ Stock is lower than requested,Lager är lägre än begärt
 Stock is lower than requested:\n{0},Lagret är lägre än begärt:\n{0}
 Stock Movement Report,Aktierörelserapport
 Stock update: {0} has {1} available. Adding {2} will bring the stock below zero.,Lageruppdatering: {0} har {1} tillgänglig. Om du lägger till {2} kommer aktien under noll.
-Submit,Skicka in
+Submit,Överlämna
 Submit & Print,Skicka & skriv ut
 Submit Deposit,Skicka insättning
 Submit Expense,Skicka in kostnad
@@ -1150,7 +1162,6 @@ Suppliers not found,Leverantörer hittades inte
 Switch Camera,Byt kamera
 Switch Cashier,Byt kassa
 Switch the POS appearance theme,Byt tema för POS-utseende
-Switch theme appearance,Byt temat utseende
 Switched to:,Bytte till:
 Sync All Invoices,Synkronisera alla fakturor
 Sync Offline Cash Movements ({0}),Synkronisera kontantrörelser offline ({0})
@@ -1286,7 +1297,6 @@ Unallocated,Ej allokerad
 Unallocated:,Ej allokerad:
 Unavailable,Ej tillgänglig
 Unknown,Okänd
-Unknown error,Okänt fel
 Unknown Item,Okänt föremål
 Unknown Warehouse,Okänt lager
 Unlock POS,Lås upp POS
@@ -1301,7 +1311,6 @@ Update Price List Rate,Uppdatera prislista
 Updated,Uppdaterad
 Updates and app info that stay out of the cashier flow.,Uppdateringar och appinformation som håller sig utanför kassaflödet.
 Updates automatically,Uppdateras automatiskt
-Upload pending transactions,Ladda upp väntande transaktioner
 Usage,Användning
 Usage Stats,Användningsstatistik
 Use a 4 to 8 digit PIN for cashier switching and terminal unlock.,Använd en 4- till 8-siffrig PIN-kod för att byta kassa och låsa upp terminalen.
@@ -1336,7 +1345,7 @@ Walk-in Customer,Walk-in kund
 Warehouse,Lager
 Warning: High cache usage may affect performance.,Varning: Hög cacheanvändning kan påverka prestandan.
 Warning: High lag may indicate heavy processing or browser slowness.,Varning: Hög fördröjning kan indikera tung bearbetning eller långsamhet i webbläsaren.
-Week Δ,Vecka Δ
+Week ?,Vecka?
 Week-wise,Veckomässigt
 Weight (g),Vikt (g)
 Weight (grams),Vikt (gram)

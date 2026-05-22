@@ -1,4 +1,39 @@
-﻿- Total Unallocated,- Total Unallocated
+POS Awesome,POS Harika
+Fetch Items Directly from Server,Öğeleri Doğrudan Sunucudan Getir
+Menu,Menü
+Actions,Eylemler
+Close Shift,Vardiyayı Kapat
+End current session,Geçerli oturumu sonlandır
+Print Last Invoice,Son Faturayı Yazdır
+Reprint previous transaction,Önceki işlemi yeniden yazdır
+Sync Offline Invoices,Çevrimdışı Faturaları Senkronize Et
+Upload pending transactions,Bekleyen işlemleri yükle
+Go Online,Çevrimiçi Olun
+Go Offline,Çevrimdışı Ol
+Disable offline mode,Çevrimdışı modu devre dışı bırak
+Work without server connection,Sunucu bağlantısı olmadan çalışın
+Clear Cache,Önbelleği Temizle
+Remove local data and refresh,Yerel verileri kaldırın ve yenileyin
+About,Hakkında
+App information,Uygulama bilgileri
+Language,Dil
+Change interface language,Arayüz dilini değiştir
+Light Mode,Işık Modu
+Dark Mode,Karanlık Mod
+Switch theme appearance,Tema görünümünü değiştir
+Logout,Oturumu kapat
+Sign out of session,Oturumdan çıkış yap
+Select Language,Dil Seçiniz
+Choose your preferred language for the POS interface,POS arayüzü için tercih ettiğiniz dili seçin
+Language will be changed to,Dil olarak değiştirilecek
+Cancel,İptal
+Change Language,Dili Değiştir
+Close,Kapat
+Cannot change language - same language selected,Dil değiştirilemiyor - aynı dil seçildi
+Language changed successfully! Reloading...,Dil başarıyla değiştirildi! Yeniden yükleniyor...
+Failed to change language,Dil değiştirilemedi
+Unknown error,Bilinmeyen hata
+- Total Unallocated,- Toplam Dağıtılmamış
 * Required,* Gerekli
 {0} (Qty: {1}),{0} (Adet: {1})
 {0} actions,{0} işlem
@@ -11,7 +46,6 @@
 {0}h ago,{0} saat önce
 {0}m ago,{0} dakika önce
 A POS supervisor is required for this action.,Bu işlem için bir POS sorumlusu gereklidir.
-About,Hakkında
 Access,Erişim
 Account,Hesap
 Account is overdrawn,Hesapta limit aşımı var
@@ -19,7 +53,6 @@ Acknowledge the error to resume scanning,Taramaya devam etmek için hatayı kabu
 Acknowledge the error to resume scanning.,Taramaya devam etmek için hatayı kabul edin.
 Across,karşısında
 Action,Eylem
-Actions,Eylemler
 Active sale,Aktif satış
 add,ekle
 Add items from the selector to start building this sale.,Bu satışı oluşturmaya başlamak için seçiciden öğeler ekleyin.
@@ -55,7 +88,6 @@ Amount already received,Zaten alınan tutar
 Amount exceeds profile cash movement max amount.,"Tutar, profil nakit hareketi maksimum tutarını aşıyor."
 Amount must be greater than zero.,Tutar sıfırdan büyük olmalıdır.
 Amount received from customer,Müşteriden alınan tutar
-App information,Uygulama bilgileri
 Appearance and user-level preferences for the current session.,Geçerli oturum için görünüm ve kullanıcı düzeyindeki tercihler.
 Applied,Uygulandı
 Apply,Uygula
@@ -133,7 +165,6 @@ Camera is busy or blocked by another app/tab. Close other camera apps and try ag
 Camera permission denied. Please allow camera access in your browser settings and refresh the page.,Kamera izni reddedildi. Lütfen tarayıcı ayarlarınızdan kamera erişimine izin verin ve sayfayı yenileyin.
 Camera scanner is locked until the current error is acknowledged,Mevcut hata onaylanana kadar kamera tarayıcısı kilitlenir
 Camera started but the video stream did not load in time. Please try again.,Kamera başladı ancak video akışı zamanında yüklenmedi. Lütfen tekrar deneyin.
-Cancel,İptal
 Cancel cash movement {0}?,{0} nakit hareketi iptal edilsin mi?
 Cancel Payment,Ödemeyi İptal Et
 Cancel Sale,Satışı İptal Et
@@ -184,8 +215,6 @@ Certificate is missing or not trusted. QZ may show confirmation dialogs.,Sertifi
 Certificate is trusted. Silent QZ printing is active.,Sertifika güvenilirdir. Sessiz QZ yazdırma etkin.
 Change,Değiştir
 Change allocation repaired,Değişiklik tahsisi onarıldı
-Change interface language,Arayüz dilini değiştir
-Change Language,Dili Değiştir
 Change Price,Fiyatı Değiştir
 Change Return,İadeyi Değiştir
 Change Returned,Değişiklik Geri Döndü
@@ -204,20 +233,17 @@ Checking...,Kontrol ediliyor...
 Cheque/Reference Date,Çek/Referans Tarihi
 Cheque/Reference No,Çek/Referans No
 Choose the cashier currently operating this terminal.,Şu anda bu terminali işleten kasiyeri seçin.
-Choose your preferred language for the POS interface,POS arayüzü için tercih ettiğiniz dili seçin
 City,Şehir
 Clear,Temizle
 Clear All,Tümünü Temizle
 Clear all barcode items,Tüm barkod öğelerini temizle
 Clear all purchase order items,Tüm satın alma siparişi öğelerini temizle
-Clear Cache,Önbelleği Temizle
 Clear Search,Aramayı Temizle
 Clearing local cache...,Yerel önbellek temizleniyor...
 Click to refresh,Yenilemek için tıklayın
 Client CPU Lag:,İstemci CPU Gecikmesi:
 Client Memory Usage:,İstemci Bellek Kullanımı:
 Client Metrics,Müşteri Metrikleri
-Close,Kapat
 Close about dialog,Hakkında iletişim kutusunu kapat
 Close cashier switcher,Kasiyer değiştiriciyi kapat
 Close closing shift dialog,Vardiya iletişim kutusunu kapat
@@ -233,7 +259,6 @@ Close sales orders dialog,Satış siparişleri iletişim kutusunu kapat
 Close Scanner,Tarayıcıyı Kapat
 Close scanner dialog,Tarayıcı iletişim kutusunu kapat
 Close Settings,Ayarları Kapat
-Close Shift,Vardiyayı Kapat
 Closing Amount,Kapanış Tutarı
 Closing POS Shift,POS Vardiyasını Kapatma
 Closing Snapshot Available,Kapanış Anlık Görüntüsü Mevcut
@@ -318,13 +343,12 @@ Customers not found,Müşteri bulunamadı
 Daily cashier actions without scrolling.,Kaydırmadan günlük kasiyer işlemleri.
 Daily Sales,Günlük Satışlar
 Daily Sales Summary,Günlük Satış Özeti
-Dark Mode,Karanlık Mod
 Data loaded in form. Review and submit.,Veriler forma yüklendi. İnceleyin ve gönderin.
 Database Health,Veritabanı Sağlığı
 Database health affects overall system speed and reliability.,"Veritabanı sağlığı, genel sistem hızını ve güvenilirliğini etkiler."
 Database Info,Veritabanı Bilgisi
 Date,Tarih
-Day Δ,Gün Δ
+Day ?,Gün mü?
 days,günler
 Day-wise (MTD),Gün bazında (MTD)
 Day-wise Movement,Gün Bazında Hareket
@@ -383,7 +407,6 @@ Edited,Düzenlendi
 Employee,Çalışan
 Enable background sync,Arka planda senkronizasyonu etkinleştir
 Enable Customer Display in POS Profile first.,Önce POS Profilinde Müşteri Görüntülemeyi etkinleştirin.
-End current session,Geçerli oturumu sonlandır
 Enter a PIN.,Bir PIN girin.
 Enter a valid grams value,Geçerli bir gram değeri girin
 Enter new price list rate,Yeni fiyat listesi ücretini girin
@@ -468,8 +491,6 @@ Gift card payment,Hediye kartı ödemesi
 Gift card redemption requires an online connection,Hediye kartı kullanımı çevrimiçi bağlantı gerektirir
 Gift card topped up successfully.,Hediye kartına başarıyla yükleme yapıldı.
 Gift Cards,Hediye Kartları
-Go Offline,Çevrimdışı Ol
-Go Online,Çevrimiçi Olun
 Go to Frappe Desk,Frappe Desk'e git
 Grand Total,Genel Toplam
 Gross Margin,Brüt Marj
@@ -552,8 +573,6 @@ json,json
 Just now,Az önce
 Keep offline prerequisites healthy and recover stale data safely.,Çevrimdışı önkoşulları sağlıklı tutun ve eski verileri güvenli bir şekilde kurtarın.
 Labels,Etiketler
-Language,Dil
-Language will be changed to,Dil olarak değiştirilecek
 "Language, theme, terminal tools, and session controls.","Dil, tema, terminal araçları ve oturum kontrolleri."
 Last,Son
 Last 14 Days (Paid vs Pending),Son 14 Gün (Ücretli ve Beklemede)
@@ -565,7 +584,6 @@ Last sync:,Son senkronizasyon:
 Last sync: {0} | ok: {1} | failed: {2} | skipped: {3},Son senkronizasyon: {0} | tamam: {1} | başarısız oldu: {2} | atlandı: {3}
 Latest entries for current shift,Mevcut vardiya için son girişler
 Lead Time,Teslim Süresi
-Light Mode,Işık Modu
 Limited,Sınırlı
 lines,çizgiler
 List,Liste
@@ -594,7 +612,6 @@ localStorage,yerelDepolama
 Location Performance,Konum Performansı
 Locations,Konumlar
 Lock Screen,Kilit Ekranı
-Logout,Oturumu kapat
 Lookup Workflow,Arama İş Akışı
 Loss,Kayıp
 Low,Düşük
@@ -621,7 +638,6 @@ Maximum discount amount for this offer item is {0}.,Bu teklif öğesi için maks
 Maximum discount percentage for this offer item is {0}%.,Bu teklif öğesi için maksimum indirim yüzdesi %{0}'dir.
 Maximum offer quantity is {0}. Quantity adjusted to allowed limit.,Maksimum teklif miktarı {0}'dır. Miktar izin verilen sınıra ayarlandı.
 Medium,Orta
-Menu,Menü
 Method-wise Collections,Yöntemsel Koleksiyonlar
 Minimum allowed rate for this offer item is {0}.,Bu teklif öğesi için izin verilen minimum ücret {0}'dir.
 Minimum Qty,Minimum Adet
@@ -629,7 +645,7 @@ Mobile No,Cep No
 Mode,Mod
 Mode of Payment,Ödeme Şekli
 Month,Ay
-Month Δ,Ay Δ
+Month ?,Ay mı?
 Monthly Profit,Aylık Kâr
 Monthly Sales,Aylık Satışlar
 Monthly Sales Summary,Aylık Satış Özeti
@@ -894,7 +910,6 @@ Print Draft,Taslağı Yazdır
 Print Format (Invoice),Yazdırma Formatı (Fatura)
 Print Format (Order),Yazdırma Formatı (Sipariş)
 Print invoice,Faturayı yazdır
-Print Last Invoice,Son Faturayı Yazdır
 Print Purchase Invoice instead of PO,PO yerine Satın Alma Faturasını Yazdır
 Printer,Yazıcı
 Processed returns impacting the shift totals,Vardiya toplamlarını etkileyen işlenmiş iadeler
@@ -977,7 +992,6 @@ Repaired,Onarıldı
 Repairing change allocation,Değişiklik tahsisinin onarılması
 Repeat Customers,Tekrarlanan Müşteriler
 Repeat Rate,Tekrar Oranı
-Reprint previous transaction,Önceki işlemi yeniden yazdır
 Request,Talep
 Request ID: {0},İstek Kimliği: {0}
 Request Payment,Ödeme İste
@@ -1063,7 +1077,6 @@ Select a printer to use QZ silent printing.,QZ sessiz yazdırmayı kullanmak iç
 Select Batch,Toplu Seç
 Select Columns to Display,Görüntülenecek Sütunları Seçin
 Select items to sell,Satılacak ürünleri seçin
-Select Language,Dil Seçiniz
 Select Payment,Ödemeyi Seçin
 Select Payment Account,Ödeme Hesabını Seçin
 Select printer,Yazıcıyı seçin
@@ -1102,7 +1115,6 @@ Show the active cart on a customer-facing screen,Aktif sepeti müşteriye yönel
 Showing {0}-{1} of {2},{0}-{1} / {2} gösteriliyor
 Showing 0 of 0,0 / 0 gösteriliyor
 Shows the distribution of invoices per currency,Faturaların para birimine göre dağılımını gösterir
-Sign out of session,Oturumdan çıkış yap
 Sign out of the current POS session,Mevcut POS oturumundan çıkış yapın
 Size:,Boyut:
 Skipped Payments,Atlanan Ödemeler
@@ -1125,7 +1137,7 @@ Stock is lower than requested,Stok istenilenden düşük
 Stock is lower than requested:\n{0},Stok istenenden düşük:\n{0}
 Stock Movement Report,Stok Hareket Raporu
 Stock update: {0} has {1} available. Adding {2} will bring the stock below zero.,Stok güncellemesi: {0}'da {1} mevcut. {2} eklemek stoku sıfırın altına getirecektir.
-Submit,Gönder
+Submit,Göndermek
 Submit & Print,Gönder ve Yazdır
 Submit Deposit,Depozito Gönder
 Submit Expense,Gider Gönder
@@ -1150,7 +1162,6 @@ Suppliers not found,Tedarikçi bulunamadı
 Switch Camera,Kamerayı Değiştir
 Switch Cashier,Kasiyeri Değiştir
 Switch the POS appearance theme,POS görünüm temasını değiştirme
-Switch theme appearance,Tema görünümünü değiştir
 Switched to:,Şuraya geçildi:
 Sync All Invoices,Tüm Faturaları Senkronize Et
 Sync Offline Cash Movements ({0}),Çevrimdışı Nakit Hareketlerini Senkronize Et ({0})
@@ -1286,7 +1297,6 @@ Unallocated,Ayrılmamış
 Unallocated:,Ayrılmamış:
 Unavailable,Kullanılamıyor
 Unknown,Bilinmiyor
-Unknown error,Bilinmeyen hata
 Unknown Item,Bilinmeyen Öğe
 Unknown Warehouse,Bilinmeyen Depo
 Unlock POS,POS'un kilidini aç
@@ -1301,7 +1311,6 @@ Update Price List Rate,Fiyat Listesi Fiyatını Güncelle
 Updated,Güncellendi
 Updates and app info that stay out of the cashier flow.,Kasiyer akışının dışında kalan güncellemeler ve uygulama bilgileri.
 Updates automatically,Otomatik olarak güncellenir
-Upload pending transactions,Bekleyen işlemleri yükle
 Usage,Kullanım
 Usage Stats,Kullanım İstatistikleri
 Use a 4 to 8 digit PIN for cashier switching and terminal unlock.,Kasiyer geçişi ve terminal kilidini açmak için 4 ila 8 haneli bir PIN kullanın.
@@ -1336,7 +1345,7 @@ Walk-in Customer,Gelen Müşteri
 Warehouse,Depo
 Warning: High cache usage may affect performance.,Uyarı: Yüksek önbellek kullanımı performansı etkileyebilir.
 Warning: High lag may indicate heavy processing or browser slowness.,"Uyarı: Yüksek gecikme, yoğun işlem veya tarayıcı yavaşlığının göstergesi olabilir."
-Week Δ,Hafta Δ
+Week ?,Hafta ?
 Week-wise,Hafta bazında
 Weight (g),Ağırlık (g)
 Weight (grams),Ağırlık (gram)

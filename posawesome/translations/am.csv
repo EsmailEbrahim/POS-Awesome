@@ -1,504 +1,525 @@
-﻿- Total Unallocated,- Total Unallocated
+POS Awesome,POS ግሩም
+Fetch Items Directly from Server,ዕቃዎችን በቀጥታ ከአገልጋይ ያውጡ
+Menu,ምናሌ
+Actions,ድርጊቶች
+Close Shift,Shift ዝጋ
+End current session,የአሁኑን ክፍለ ጊዜ ጨርስ
+Print Last Invoice,የመጨረሻውን ደረሰኝ አትም
+Reprint previous transaction,ያለፈውን ግብይት እንደገና ያትሙ
+Sync Offline Invoices,ከመስመር ውጭ ደረሰኞች አመሳስል።
+Upload pending transactions,በመጠባበቅ ላይ ያሉ ግብይቶችን ይስቀሉ።
+Go Online,መስመር ላይ ይሂዱ
+Go Offline,ከመስመር ውጭ ይሂዱ
+Disable offline mode,ከመስመር ውጭ ሁነታን አሰናክል
+Work without server connection,ያለ አገልጋይ ግንኙነት ይስሩ
+Clear Cache,መሸጎጫ አጽዳ
+Remove local data and refresh,የአካባቢ ውሂብን ያስወግዱ እና ያድሱ
+About,ስለ
+App information,የመተግበሪያ መረጃ
+Language,ቋንቋ
+Change interface language,የበይነገጽ ቋንቋ ቀይር
+Light Mode,የብርሃን ሁነታ
+Dark Mode,ጨለማ ሁነታ
+Switch theme appearance,ገጽታ ቀይር
+Logout,ውጣ
+Sign out of session,ከክፍለ-ጊዜው ዘግተህ ውጣ
+Select Language,ቋንቋ ይምረጡ
+Choose your preferred language for the POS interface,ለPOS በይነገጽ የመረጡትን ቋንቋ ይምረጡ
+Language will be changed to,ቋንቋ ወደሚለው ይቀየራል።
+Cancel,ሰርዝ
+Change Language,ቋንቋ ቀይር
+Close,ዝጋ
+Cannot change language - same language selected,ቋንቋ መቀየር አይቻልም - ተመሳሳይ ቋንቋ ተመርጧል
+Language changed successfully! Reloading...,ቋንቋ በተሳካ ሁኔታ ተለውጧል! እንደገና በመጫን ላይ...
+Failed to change language,ቋንቋ መቀየር አልተሳካም።
+Unknown error,ያልታወቀ ስህተት
+- Total Unallocated,- ጠቅላላ ያልተመደበ
 * Required,* ያስፈልጋል
 {0} (Qty: {1}),{0} (ካቲ፡ {1})
 {0} actions,{0} ድርጊቶች
-{0} has only {1} in stock. You requested {2}. Adjust quantity or restock.,{0} በክምችት ውስጥ ያለው {1} ብቻ ነው።
-{0} offline invoice{1} pending,እርስዎ {2}ን ጠይቀዋል።
-{0} offline invoice{1} saved as draft,መጠኑን ያስተካክሉ ወይም እንደገና ያስቀምጡ.
-{0} offline invoice{1} synced,{0} ከመስመር ውጭ ደረሰኝ{1} በመጠባበቅ ላይ
-{0}: {1} {2},{0} ከመስመር ውጭ ደረሰኝ{1} እንደ ረቂቅ ተቀምጧል
-{0}d ago,{0} ከመስመር ውጭ ደረሰኝ{1} ተመሳስሏል።
-{0}h ago,{0}፡ {1} {2}
-{0}m ago,ከ{0}ቀ በፊት
-A POS supervisor is required for this action.,ከ{0}ሰ በፊት
-About,ከ{0}ደቂቃ በፊት
-Access,ለዚህ እርምጃ የPOS ተቆጣጣሪ ያስፈልጋል።
-Account,ስለ
-Account is overdrawn,መዳረሻ
-Acknowledge the error to resume scanning,መለያ
-Acknowledge the error to resume scanning.,መለያ ከመጠን በላይ ተበላሽቷል።
-Across,መቃኘትን ለመቀጠል ስህተቱን ይቀበሉ
-Action,መቃኘትን ለመቀጠል ስህተቱን ይቀበሉ።
-Actions,ማዶ
-Active sale,ድርጊት
-add,ድርጊቶች
-Add items from the selector to start building this sale.,ንቁ ሽያጭ
-Add more value to an existing gift card,ጨምር
-Add New Address,ይህንን ሽያጭ መገንባት ለመጀመር ከመራጩ ላይ እቃዎችን ያክሉ።
-Add new customer,አሁን ባለው የስጦታ ካርድ ላይ ተጨማሪ እሴት ያክሉ
-Add on New Line,አዲስ አድራሻ ጨምር
-Add Payment,አዲስ ደንበኛ ያክሉ
-Add payment to invoice,በአዲስ መስመር ላይ ያክሉ
-Add/Edit Coupon Conditions,ክፍያ ጨምር
-Additional Discount,ክፍያ ወደ ደረሰኝ ያክሉ
-Additional Discount %,የኩፖን ሁኔታዎችን ያክሉ/ያርትዑ
-Address Line 1,ተጨማሪ ቅናሽ
-Address not found,ተጨማሪ ቅናሽ %
-Adjust the quantity or enable negative stock to continue.,አድራሻ መስመር 1
-Adjustment,አድራሻ አልተገኘም።
-After returns,መጠኑን ያስተካክሉ ወይም ለመቀጠል አሉታዊ አክሲዮን ያንቁ።
-Against,ማስተካከል
-Against Name,ከተመለሰ በኋላ
-Age Bracket,በመቃወም
-All,በስም ላይ
-All Caught Up!,የዕድሜ ቅንፍ
-All invoices are synchronized,ሁሉም
-All pending invoices are up to date,ሁሉም ተያዘ!
-All Profiles,ሁሉም ደረሰኞች ተመሳስለዋል።
-All Synchronized,ሁሉም በመጠባበቅ ላይ ያሉ ደረሰኞች ወቅታዊ ናቸው።
-All visible invoices are fully settled.,ሁሉም መገለጫዎች
-All Warehouses,ሁሉም የተመሳሰለ
-Allowed UOM is {0},ሁሉም የሚታዩ ደረሰኞች ሙሉ በሙሉ ተረጋግጠዋል።
-Always fetch items from server (ignore local cache),ሁሉም መጋዘኖች
-Amount,የተፈቀደው UOM {0} ነው
-Amount already received,ሁልጊዜ ንጥሎችን ከአገልጋይ ያውጡ (አካባቢያዊ መሸጎጫውን ችላ ይበሉ)
-Amount exceeds profile cash movement max amount.,መጠን
-Amount must be greater than zero.,አስቀድሞ የተቀበለው መጠን
-Amount received from customer,መጠን የመገለጫ የገንዘብ እንቅስቃሴ ከፍተኛ መጠን ይበልጣል።
-App information,መጠኑ ከዜሮ በላይ መሆን አለበት።
-Appearance and user-level preferences for the current session.,ከደንበኛው የተቀበለው መጠን
-Applied,የመተግበሪያ መረጃ
-Apply,ለአሁኑ ክፍለ ጊዜ የእይታ እና የተጠቃሚ ደረጃ ምርጫዎች።
-Apply Gift Card,ተተግብሯል
-Apply Offer,ያመልክቱ
-Apply On,የስጦታ ካርድ ተግብር
-Apply only the amount you want to redeem on this invoice. The remaining balance stays on the card.,ቅናሽ ያመልክቱ
-Apply Redemption,በርቷል ያመልክቱ
-Applying,በዚህ ደረሰኝ ላይ ማስመለስ የሚፈልጉትን መጠን ብቻ ያመልክቱ።
-Apps,ቀሪው ቀሪ ሂሳብ በካርዱ ላይ ይቆያል.
-Are you sure you want to close? All entered data will be lost.,ቤዛን ተግብር
-Attributes (Size/Color),በማመልከት ላይ
-Auto Allocate Payment Amount,መተግበሪያዎች
-Auto Reconcile,እርግጠኛ ነህ መዝጋት ትፈልጋለህ?
-Auto reconciliation completed after payment submit.,ሁሉም የገባው ውሂብ ይጠፋል።
-Auto reconciliation completed. Allocated: {0}{1}. Remaining outstanding: {0}{2}.,ባህሪያት (መጠን/ቀለም)
-Available Actions,የክፍያ መጠን በራስ-ሰር ይመድቡ
-Available QTY,ራስ-ሰር ማስታረቅ
-Available:,ክፍያ ከገባ በኋላ በራስ-ሰር ማስታረቅ ተጠናቀቀ።
-Average Basket,ራስ-ሰር ማስታረቅ ተጠናቀቀ።
-Average Bill,የተመደበው፡ {0}{1}
-Average Ticket,የሚቀረው፡ {0}{2}።
-Avg Bill,የሚገኙ ድርጊቶች
-Avg Invoice,QTY ይገኛል።
-Avg Invoice Profit,ይገኛል፡
-Avg Invoice Value,አማካይ ቅርጫት
-Avg Purchase Frequency,አማካይ ሂሳብ
-Awesome,አማካኝ ቲኬት
-Awesome Dashboard,አማካኝ ቢል
-Awesome Dashboard is disabled for the selected POS Profile.,አማካኝ ደረሰኝ
-Awesome Dashboard is unavailable for the selected scope.,አማካኝ የክፍያ መጠየቂያ ትርፍ
-Awesome Dashboard is visible only to POS supervisors.,አማካይ የክፍያ መጠየቂያ ዋጋ
-Back,አማካይ የግዢ ድግግሞሽ
-Back Office Cash Account,ግሩም
-Back Office Cash Account (Optional Override),ግሩም ዳሽቦርድ
-Back office cash account is required.,ለተመረጠው የPOS መገለጫ ግሩም ዳሽቦርድ ተሰናክሏል።
-Back to {0},ግሩም ዳሽቦርድ ለተመረጠው ወሰን የለም።
-Background processing did not finish in time.,ግሩም ዳሽቦርድ የሚታየው ለPOS ተቆጣጣሪዎች ብቻ ነው።
-Background processing failed for Invoice {0}: {1},ተመለስ
-Background Submission Failed,የኋላ የቢሮ ጥሬ ገንዘብ ሂሳብ
-Background sync interval (seconds),የኋላ ኦፊስ የገንዘብ ሂሳብ (አማራጭ መሻር)
-Balance,የኋላ ቢሮ የገንዘብ ሂሳብ ያስፈልጋል።
-Balance will be updated when connection is restored,ወደ {0} ተመለስ
-Balances still pending,የበስተጀርባ ማቀነባበር በጊዜ አልተጠናቀቀም.
-Barcode,ለክፍያ መጠየቂያ {0}፡ {1} የበስተጀርባ ሂደት አልተሳካም
-Barcode / QR Ready,ዳራ ማስገባት አልተሳካም።
-Barcode Label Printing,የበስተጀርባ ማመሳሰል ክፍተት (ሰከንዶች)
-Base Paid:,ሚዛን
-Base Recv:,ግንኙነቱ ወደነበረበት ሲመለስ ቀሪ ሒሳብ ይዘምናል።
-Base:,ቀሪ ሂሳቦች አሁንም በመጠባበቅ ላይ ናቸው።
-Basic Information,የአሞሌ ኮድ
-Batch,ባርኮድ/QR ዝግጁ
-Batch Information,የአሞሌ መለያ ማተም
-Before any return workflow,የሚከፈልበት መሰረት፡
-Before returns,የመሠረት ማጣቀሻ፡
-Best Day,መሰረት፡
-Best Seller,መሰረታዊ መረጃ
-Book expense or deposit from active shift.,ባች
-Branch / Location-wise Report,ባች መረጃ
-Brand-wise,ከማንኛውም የመመለሻ የስራ ሂደት በፊት
-Breakdown,ከመመለሱ በፊት
-Browse,ምርጥ ቀን
-Build Time:,ምርጥ ሻጭ
-Built with Frappe,ከገቢር ፈረቃ የመዝገብ ወጪ ወይም ተቀማጭ ገንዘብ።
-Bundle,ቅርንጫፍ / አካባቢ-ጥበብ ሪፖርት
-Buying Price,ብራንድ-ጥበብ
-Cache cleared successfully,መከፋፈል
-Cache Usage,አስስ
-cache used,የግንባታ ጊዜ፡-
-Calculating...,በ Frappe የተሰራ
-Camera Access Required,ጥቅል
-Camera access was aborted. Please try again.,የግዢ ዋጋ
-Camera constraints not supported by your device. Trying fallback settings...,መሸጎጫ በተሳካ ሁኔታ ጸድቷል።
-Camera is busy or blocked by another app/tab. Close other camera apps and try again.,የመሸጎጫ አጠቃቀም
-Camera permission denied. Please allow camera access in your browser settings and refresh the page.,ጥቅም ላይ የዋለው መሸጎጫ
-Camera scanner is locked until the current error is acknowledged,በማስላት ላይ...
-Camera started but the video stream did not load in time. Please try again.,የካሜራ መዳረሻ ያስፈልጋል
-Cancel,የካሜራ መዳረሻ ተቋርጧል።
-Cancel cash movement {0}?,እባክዎ እንደገና ይሞክሩ።
-Cancel Payment,የካሜራ ገደቦች በመሣሪያዎ አይደገፉም።
-Cancel Sale,የተመለስ ቅንብሮችን በመሞከር ላይ...
-Cancel Sale ?,ካሜራ ስራ በዝቶበታል ወይም በሌላ መተግበሪያ/ትር ታግዷል።
-Cancelled,ሌሎች የካሜራ መተግበሪያዎችን ዝጋ እና እንደገና ሞክር።
-Cannot add an item with zero or negative quantity.,የካሜራ ፍቃድ ተከልክሏል።
-Cannot clear cache while offline,እባክህ የካሜራ መዳረሻ በአሳሽህ ቅንብሮች ውስጥ ፍቀድ እና ገጹን አድስ።
-Cannot redeem customer credit more than invoice total,የአሁኑ ስህተት እውቅና እስኪያገኝ ድረስ የካሜራ ስካነር ተቆልፏል
-Cannot redeem gift cards more than invoice total,ካሜራ ተጀምሯል ግን የቪዲዮ ዥረቱ በጊዜ አልተጫነም።
-Cannot Save Offline Invoice:,እባክዎ እንደገና ይሞክሩ።
-Cannot Save Offline Payment:,ሰርዝ
-Card,የገንዘብ እንቅስቃሴ ይሰረዝ {0}?
-Card / Online,ክፍያ ሰርዝ
-Card health after the last live lookup,ሽያጩን ሰርዝ
-Cards,ሽያጭ ይሰረዝ?
-Cart,ተሰርዟል።
-Cash,ዜሮ ወይም አሉታዊ መጠን ያለው ንጥል ነገር ማከል አይቻልም።
-Cash back to customers,ከመስመር ውጭ ሆኖ መሸጎጫውን ማጽዳት አይቻልም
-Cash Collections,ከጠቅላላ ደረሰኝ በላይ የደንበኛ ክሬዲት ማስመለስ አይቻልም
-Cash Deposit is disabled for this POS Profile.,የስጦታ ካርዶችን ከክፍያ መጠየቂያ ጠቅላላ በላይ ማስመለስ አይቻልም
-Cash Drawer Snapshot,ከመስመር ውጭ ደረሰኝ ማስቀመጥ አይቻልም፡-
-Cash In Hand,ከመስመር ውጭ ክፍያ መቆጠብ አይቻልም፡-
-Cash Movement,ካርድ
-Cash movement cancelled,ካርድ / መስመር ላይ
-Cash movement deduction applied,ከመጨረሻው የቀጥታ ፍለጋ በኋላ የካርድ ጤና
-Cash movement deleted,ካርዶች
-Cash movement is disabled for this POS Profile.,ጋሪ
-Cash Movement is disabled in current POS Profile.,ጥሬ ገንዘብ
-Cash movement saved offline,ገንዘብ ለደንበኞች ይመለሱ
-Cash movement submitted,የገንዘብ ስብስቦች
-Cash Movements,ለዚህ የPOS መገለጫ የጥሬ ገንዘብ ማስቀመጫ ተሰናክሏል።
-Cash payment cannot be less than invoice total when partial payment is not allowed,የጥሬ ገንዘብ መሳቢያ ቅጽበተ ፎቶ
-Cash returned after payment,ጥሬ ገንዘብ በእጅ
-Cashier,የገንዘብ እንቅስቃሴ
-Cashier Access,የገንዘብ እንቅስቃሴ ተሰርዟል።
-Cashier identity and appearance preferences.,የገንዘብ እንቅስቃሴ ቅነሳ ተተግብሯል።
-Cashier PIN,የገንዘብ እንቅስቃሴ ተሰርዟል።
-Cashier PIN saved successfully.,ለዚህ የPOS መገለጫ የገንዘብ እንቅስቃሴ ተሰናክሏል።
-Cashiers,የገንዘብ እንቅስቃሴ በአሁኑ የPOS መገለጫ ላይ ተሰናክሏል።
-Cashier-wise,የገንዘብ እንቅስቃሴ ከመስመር ውጭ ተቀምጧል
-Categories,የገንዘብ እንቅስቃሴ ገብቷል።
-Category,የገንዘብ እንቅስቃሴዎች
-Category / Brand / Variant Report,በከፊል ክፍያ በማይፈቀድበት ጊዜ የጥሬ ገንዘብ ክፍያ ከጠቅላላ ደረሰኝ ያነሰ ሊሆን አይችልም።
-Category-wise,ገንዘብ ከተከፈለ በኋላ ተመልሷል
-Category-wise Margin,ገንዘብ ተቀባይ
-Certificate,ገንዘብ ተቀባይ መዳረሻ
-Certificate is missing or not trusted. QZ may show confirmation dialogs.,ገንዘብ ተቀባይ ማንነት እና መልክ ምርጫዎች።
-Certificate is trusted. Silent QZ printing is active.,ገንዘብ ተቀባይ ፒን
-Change,ገንዘብ ተቀባይ ፒን በተሳካ ሁኔታ ተቀምጧል።
-Change allocation repaired,ገንዘብ ተቀባዮች
-Change interface language,ገንዘብ ተቀባይ-ጥበበኛ
-Change Language,ምድቦች
-Change Price,ምድብ
-Change Return,ምድብ / የምርት ስም / ተለዋጭ ሪፖርት
-Change Returned,ምድብ-ጥበብ
-Change terminal cashier,ምድብ-ጥበብ ህዳግ
-Charge Heads,የምስክር ወረቀት
-Charges,የምስክር ወረቀት ጠፍቷል ወይም አይታመንም።
-Charges not found,QZ የማረጋገጫ መገናኛዎችን ሊያሳይ ይችላል።
-Check Balance,የምስክር ወረቀት የታመነ ነው።
-Check balance for any card. Supervisors can issue and top up cards here.,ጸጥ ያለ QZ ማተም ገቢር ነው።
-Check balance only,ለውጥ
-Check for new commits,ምደባ ተስተካክሏል።
-Check for Updates,የበይነገጽ ቋንቋ ቀይር
-Check live balance before applying redemption,ቋንቋ ቀይር
-Check live balance before redemption,ዋጋ ቀይር
-Checking...,መመለሻን ቀይር
-Cheque/Reference Date,ለውጥ ተመልሷል
-Cheque/Reference No,ተርሚናል ገንዘብ ተቀባይ ለውጥ
-Choose the cashier currently operating this terminal.,ኃላፊዎች ክፍያ
-Choose your preferred language for the POS interface,ክፍያዎች
-City,ክፍያዎች አልተገኙም።
-Clear,ቀሪ ሂሳብን ያረጋግጡ
-Clear All,ለማንኛውም ካርድ ቀሪ ሂሳብን ያረጋግጡ።
-Clear all barcode items,ተቆጣጣሪዎች እዚህ ካርዶችን ማውጣት እና መሙላት ይችላሉ.
-Clear all purchase order items,ቀሪ ሂሳብን ብቻ ያረጋግጡ
-Clear Cache,አዲስ ቁርጠኝነትን ያረጋግጡ
-Clear Search,ዝማኔዎችን ይመልከቱ
-Clearing local cache...,ማስመለስን ከመተግበሩ በፊት የቀጥታ ቀሪ ሒሳብን ያረጋግጡ
-Click to refresh,ከመቤዠት በፊት የቀጥታ ቀሪ ሒሳብን ያረጋግጡ
-Client CPU Lag:,በማጣራት ላይ...
-Client Memory Usage:,ቼክ/የማጣቀሻ ቀን
-Client Metrics,ቼክ/ማጣቀሻ ቁጥር
-Close,በአሁኑ ጊዜ ይህንን ተርሚናል የሚሠራውን ገንዘብ ተቀባይ ይምረጡ።
-Close about dialog,ለPOS በይነገጽ የመረጡትን ቋንቋ ይምረጡ
-Close cashier switcher,ከተማ
-Close closing shift dialog,ግልጽ
-Close column selector,ሁሉንም አጽዳ
-Close Dialog,ሁሉንም የአሞሌ ኮድ ንጥሎችን ያጽዱ
-Close drafts dialog,ሁሉንም የግዢ ማዘዣ ዕቃዎች ያጽዱ
-Close invoice details dialog,መሸጎጫ አጽዳ
-Close invoice management,ፍለጋን አጽዳ
-Close offline invoices dialog,የአካባቢ መሸጎጫ በማጽዳት ላይ...
-Close packing list dialog,ለማደስ ጠቅ ያድርጉ
-Close returns dialog,የደንበኛ ሲፒዩ መዘግየት፡
-Close sales orders dialog,የደንበኛ ማህደረ ትውስታ አጠቃቀም፡-
-Close Scanner,የደንበኛ መለኪያዎች
-Close scanner dialog,ዝጋ
-Close Settings,ስለ ንግግር ዝጋ
-Close Shift,ገንዘብ ተቀባይ መቀየሪያን ዝጋ
-Closing Amount,የመዝጊያ ፈረቃ ንግግርን ዝጋ
-Closing POS Shift,የአምድ መራጭን ዝጋ
-Closing Snapshot Available,መገናኛን ዝጋ
-Code,የረቂቆች መገናኛን ዝጋ
-Code scanned successfully,የክፍያ መጠየቂያ ዝርዝሮች መገናኛን ዝጋ
-COGS,የክፍያ መጠየቂያ አስተዳደርን ዝጋ
-Collapse item details,ከመስመር ውጭ የክፍያ መጠየቂያዎች መገናኛን ዝጋ
-Collected,የማሸጊያ ዝርዝር መገናኛን ዝጋ
-Cols,የመመለሻ ንግግርን ዝጋ
-Columns,የሽያጭ ትዕዛዞች መገናኛን ዝጋ
-commits,ስካነርን ዝጋ
-Completed and active sales in this range,የስካነር መገናኛን ዝጋ
-Completed returns will appear here.,ቅንብሮችን ዝጋ
-Confirm,Shift ዝጋ
-Confirm Close,የመዝጊያ መጠን
-Confirm Mobile Number,የ POS Shift መዝጋት
-Confirm PIN,የመዝጊያ ቅጽበታዊ ገጽ እይታ ይገኛል።
-Connect,ኮድ
-Connect printer and manage certificate,ኮድ በተሳካ ሁኔታ ተቃኝቷል።
-Connecting to QZ Tray...,COGS
-Connection problem while submitting invoice,የንጥል ዝርዝሮችን ሰብስብ
-Connections:,ተሰብስቧል
-Connectivity and cached prerequisite status were rechecked.,ቆላስይስ
-Continue Editing,አምዶች
-Could not fetch latest balance from server,ያደርጋል
-Count,በዚህ ክልል ውስጥ የተጠናቀቁ እና ንቁ ሽያጮች
-Country,የተጠናቀቁ ተመላሾች እዚህ ይታያሉ።
-Coupon,አረጋግጥ
-Coupons,መዝጋትን ያረጋግጡ
-Cover,የተንቀሳቃሽ ስልክ ቁጥር ያረጋግጡ
-CPU Cores:,ፒን ያረጋግጡ
-Create,ተገናኝ
-Create and load a new prepaid card,አታሚ ያገናኙ እና የምስክር ወረቀት ያቀናብሩ
-Create and preload a new gift card,ከQZ Tray ጋር በመገናኘት ላይ...
-Create Bill,ደረሰኝ በሚያስገቡበት ጊዜ የግንኙነት ችግር
-Create Customer,ግንኙነቶች፡
-Create New Item,ግንኙነት እና የተሸጎጠ ቅድመ ሁኔታ ሁኔታ እንደገና ተረጋግጧል።
-Create or change your PIN,ማረምዎን ይቀጥሉ
-Create PIN,የቅርብ ጊዜ ቀሪ ሂሳብ ከአገልጋይ ማምጣት አልተቻለም
-Create POS Opening Shift,መቁጠር
-Create Purchase Order,ሀገር
-Create Return,ኩፖን
-Create return from invoice,ኩፖኖች
-Create Supplier,ሽፋን
-Credit and Output,ሲፒዩ ኮርሶች፡-
-Credit Note,ፍጠር
-Credit Outstanding,አዲስ የቅድመ ክፍያ ካርድ ይፍጠሩ እና ይጫኑ
-Credit sales remaining to be collected,አዲስ የስጦታ ካርድ ይፍጠሩ እና አስቀድመው ይጫኑ
-Critical,ቢል ፍጠር
-Currency,ደንበኛ ይፍጠሩ
-Current,አዲስ ንጥል ይፍጠሩ
-Current Event Loop Lag:,የእርስዎን ፒን ይፍጠሩ ወይም ይቀይሩ
-Current Month,ፒን ይፍጠሩ
-Current PIN,የPOS መክፈቻ Shift ይፍጠሩ
-Current Profile,የግዢ ትዕዛዝ ይፍጠሩ
-Current redeemable value on the gift card,ተመላሽ ፍጠር
-Current User,ከክፍያ መጠየቂያ ተመላሽ ይፍጠሩ
-Custom,አቅራቢ ይፍጠሩ
-Custom Due Days,ብድር እና ውጤት
-Custom items per page,የብድር ማስታወሻ
-Customer,ክሬዲት የላቀ
-Customer already selected,የክሬዲት ሽያጮች ለመሰብሰብ ይቀራሉ
-Customer Balance,ወሳኝ
-Customer balance unavailable offline,ምንዛሪ
-Customer created successfully.,የአሁኑ
-Customer creation failed.,የአሁኑ ክስተት መዘግየት፡-
-Customer Details,የአሁኑ ወር
-Customer display channel is missing,የአሁኑ ፒን
-Customer display was blocked. Please allow pop-ups for this site.,የአሁኑ መገለጫ
-Customer group is required,በስጦታ ካርዱ ላይ አሁን ሊመለስ የሚችል ዋጋ
-Customer is required to add payment,የአሁኑ ተጠቃሚ
-Customer Name is required,ብጁ
-Customer not selected,ብጁ የፍጻሜ ቀናት
-Customer Report,ብጁ እቃዎች በገጽ
-Customer saved offline,ደንበኛ
-Customer Screen,ደንበኛ አስቀድሞ ተመርጧል
-Customer territory is required,የደንበኛ ሚዛን
-Customer updated successfully.,የደንበኛ ሒሳብ ከመስመር ውጭ አይገኝም
-Customer-facing tools and printer setup.,ደንበኛ በተሳካ ሁኔታ ተፈጥሯል።
-Customers,ደንበኛ መፍጠር አልተሳካም።
-Customers not found,የደንበኛ ዝርዝሮች
-Daily cashier actions without scrolling.,የደንበኛ ማሳያ ቻናል ጠፍቷል
-Daily Sales,የደንበኛ ማሳያ ታግዷል።
-Daily Sales Summary,እባክዎ ለዚህ ጣቢያ ብቅ-ባዮችን ይፍቀዱ።
-Dark Mode,የደንበኛ ቡድን ያስፈልጋል
-Data loaded in form. Review and submit.,ደንበኛው ክፍያ ለመጨመር ይጠየቃል።
-Database Health,የደንበኛ ስም ያስፈልጋል
-Database health affects overall system speed and reliability.,ደንበኛ አልተመረጠም።
-Database Info,የደንበኛ ሪፖርት
-Date,ደንበኛ ከመስመር ውጭ ተቀምጧል
-Day Δ,የደንበኛ ማያ ገጽ
-days,የደንበኛ ክልል ያስፈልጋል
-Day-wise (MTD),ደንበኛ በተሳካ ሁኔታ ዘምኗል።
-Day-wise Movement,ደንበኛን የሚመለከቱ መሳሪያዎች እና የአታሚ ማዋቀር።
-Dead Stock,ደንበኞች
-Dead Stock Items,ደንበኞች አልተገኙም።
-Decrease quantity,ያለማሸብለል ዕለታዊ ገንዘብ ተቀባይ እርምጃዎች።
-Default,ዕለታዊ ሽያጭ
-Default:,ዕለታዊ የሽያጭ ማጠቃለያ
-Delete,ጨለማ ሁነታ
-Delete cancelled cash movement {0}?,በቅጹ ላይ የተጫነ ውሂብ.
-Delete Draft,ይገምግሙ እና ያስገቡ።
-Delete draft invoice,የውሂብ ጎታ ጤና
-Delete draft invoice {0}?,የውሂብ ጎታ ጤና አጠቃላይ የስርዓት ፍጥነት እና አስተማማኝነት ላይ ተጽዕኖ ያሳድራል።
-Delete Invoice,የውሂብ ጎታ መረጃ
-Delete offline invoice,ቀን
-Delivered,ቀን Δ
-Delivery Charges,ቀናት
-Delivery Information,ቀን-ጥበብ (MTD)
-Delivery Note {0} created,የቀን-ጥበብ እንቅስቃሴ
-Delivery note created,የሞተ ክምችት
-Deployed Bundle:,የሞቱ እቃዎች
-Deposit,መጠን ቀንስ
-Description,ነባሪ
-Detailed Supplier Breakdown,ነባሪ፡
-Detecting formats:,ሰርዝ
-Device Memory:,የተሰረዘ የገንዘብ እንቅስቃሴ {0} ይሰረዝ?
-Difference,ረቂቅ ሰርዝ
-Difference (In Company Currency),ረቂቅ ደረሰኝ ሰርዝ
-Disable offline mode first to recheck live connectivity.,ረቂቅ ደረሰኝ ይሰረዝ {0}?
-Disconnect,ደረሰኝ ሰርዝ
-discount,ከመስመር ውጭ ደረሰኝ ሰርዝ
-Discount %,ደረሰ
-Discount / Void / Return Report,የመላኪያ ክፍያዎች
-Discount Amount,የመላኪያ መረጃ
-Discount limited by POS Profile,የማድረሻ ማስታወሻ {0} ተፈጥሯል።
-Discounted Invoices,የማስረከቢያ ማስታወሻ ተፈጥሯል።
-Discounts,የተዘረጋ ቅርቅብ፡
-Dismiss,ተቀማጭ ገንዘብ
-Download Certificate,መግለጫ
-Draft,ዝርዝር የአቅራቢዎች ዝርዝር መግለጫ
-Draft invoice deleted,ቅርጸቶችን በማግኘት ላይ፡
-Draft source,የመሣሪያ ማህደረ ትውስታ፡
-Drafts,ልዩነት
-Due {0},ልዩነት (በኩባንያው ምንዛሪ)
-Due Date,የቀጥታ ግንኙነትን ለመፈተሽ መጀመሪያ ከመስመር ውጭ ሁነታን ያሰናክሉ።
-Duplicate,ግንኙነት አቋርጥ
-Edit customer,ቅናሽ
-Edit discount amount,ቅናሽ %
-Edit discount percentage,ቅናሽ / ባዶነት / የመመለሻ ሪፖርት
-Edit Gift Application,የቅናሽ መጠን
-Edit item name,ቅናሽ በPOS መገለጫ የተገደበ
-Edit quantity,ቅናሽ ደረሰኞች
-Edit rate,ቅናሾች
-Edit unit of measure,አሰናብት
-Edited,የምስክር ወረቀት አውርድ
-Employee,ረቂቅ
-Enable background sync,ረቂቅ ደረሰኝ ተሰርዟል።
-Enable Customer Display in POS Profile first.,ረቂቅ ምንጭ
-End current session,ረቂቆች
-Enter a PIN.,የሚያበቃው {0}
-Enter a valid grams value,የማለቂያ ቀን
-Enter new price list rate,ማባዛት።
-Enter Quantity,ደንበኛን ያርትዑ
-Enter the cashier PIN to continue.,የቅናሽ መጠንን ያርትዑ
-Enter the current PIN first.,የቅናሽ መቶኛን ያርትዑ
-"Enter the current PIN, then choose a new one.",የስጦታ መተግበሪያን ያርትዑ
-Enter valid grams for scale barcode,የንጥል ስም ያርትዑ
-Entries,ብዛትን ያርትዑ
-Error accessing camera:,መጠንን ያርትዑ
-Error calculating prices,የመለኪያ ክፍልን ያርትዑ
-Error fetching customer balance,ተስተካክሏል።
-Error in change calculations!,ሰራተኛ
-Error Loading Data,የበስተጀርባ ማመሳሰልን አንቃ
-Error loading invoice details,መጀመሪያ የደንበኛ ማሳያ በPOS መገለጫ ውስጥ አንቃ።
-Error processing invoice,የአሁኑን ክፍለ ጊዜ ጨርስ
-Error processing payment,ፒን አስገባ።
-Error searching invoices,የሚሰራ ግራም እሴት ያስገቡ
-Error submitting invoice:,አዲስ የዋጋ ዝርዝር ተመን ያስገቡ
-Error submitting invoice: {0},ብዛት ያስገቡ
-Error submitting invoice: No response from server,ለመቀጠል ገንዘብ ተቀባይ ፒን ያስገቡ።
-Error updating currency,መጀመሪያ የአሁኑን ፒን ያስገቡ።
-Error updating item details,የአሁኑን ፒን ያስገቡ እና ከዚያ አዲስ ይምረጡ።
-Est. Purchase,ለሚዛን ባርኮድ የሚሰራ ግራም ያስገቡ
-Est. Value,ግቤቶች
-Event-loop lag measures how busy your browser is. Lower is better.,ካሜራ መድረስ ላይ ስህተት፡-
-Every,ዋጋዎችን በማስላት ላይ ስህተት
-Exchange Rate,የደንበኛ ቀሪ ሒሳብ ማምጣት ላይ ስህተት
-Expand item details,በለውጥ ስሌት ላይ ስህተት!
-Expected Amount (In Company Currency),ውሂብን መጫን ላይ ስህተት
-Expected Cash,የክፍያ መጠየቂያ ዝርዝሮችን መጫን ላይ ስህተት
-Expected cash on hand grouped by currency,የክፍያ መጠየቂያ ሂደት ላይ ስህተት
-Expected vs Actual,ክፍያን በማስኬድ ላይ ስህተት
-Expense,ደረሰኞችን መፈለግ ላይ ስህተት
-Expense Account (Optional Override),ደረሰኝ ማስገባት ላይ ስህተት፡-
-Expense account is required.,ደረሰኝ ማስገባት ላይ ስህተት፡ {0}
-Expenses and deposits posted during this shift,ደረሰኝ ማስገባት ላይ ስህተት፡ ከአገልጋይ ምንም ምላሽ የለም።
-Expired,ምንዛሬን ማዘመን ላይ ስህተት
-Failed to auto reconcile payments.,የንጥል ዝርዝሮችን ማዘመን ላይ ስህተት
-Failed to cancel cash movement,እ.ኤ.አ.
-Failed to clear cache,ግዢ
-Failed to create item,እ.ኤ.አ.
-Failed to create supplier,ዋጋ
-Failed to delete cash movement,የክስተት-ሉፕ መዘግየት አሳሽዎ ምን ያህል ስራ እንደበዛበት ይለካል።
-Failed to generate scale barcode. Using item barcode only.,ዝቅ ማለት ይሻላል።
-Failed to load cash movement context.,እያንዳንዱ
-Failed to load dashboard data.,የምንዛሬ ተመን
-Failed to reload invoice from server,የንጥል ዝርዝሮችን ዘርጋ
-Failed to submit cash movement,የሚጠበቀው መጠን (በኩባንያው ምንዛሪ)
-Failed to sync offline cash movements,የሚጠበቀው ጥሬ ገንዘብ
-Fast cashier actions for active shifts.,የሚጠበቀው ገንዘብ በእጅ ላይ በገንዘብ ተመድቦ
-Fast Moving Items,የሚጠበቀው እና ትክክለኛው
-Fees,ወጪ
-Fetch the latest offline prerequisite updates,የወጪ ሂሳብ (አማራጭ መሻር)
-Find a sales order quickly and load it into the current sale.,የወጪ ሂሳብ ያስፈልጋል።
-Fixing payment amounts for return invoice...,በዚህ ፈረቃ ወቅት የተለጠፈ ወጪ እና ተቀማጭ ገንዘብ
-Flash Off,ጊዜው አልፎበታል።
-Flash On,ክፍያዎችን በራስ-ሰር ማስታረቅ አልተሳካም።
-"For 'Product Bundle' items, Warehouse, Serial No and Batch No will be considered from the 'Packing List' table. If Warehouse and Batch No are same for all packing items for any 'Product Bundle' item, those values can be entered in the main Item table; values will be copied to 'Packing List' table.",የገንዘብ እንቅስቃሴን መሰረዝ አልተሳካም።
-Free,መሸጎጫውን ማጽዳት አልተሳካም።
-Free Qty,ንጥል መፍጠር አልተሳካም።
-Frequency,አቅራቢ መፍጠር አልተሳካም።
-from,የገንዘብ እንቅስቃሴን መሰረዝ አልተሳካም።
-From Date,የመጠን ባርኮድ ማመንጨት አልተሳካም።
-Fulfillment Details,የንጥል ባርኮድ ብቻ መጠቀም።
-Full Name,የገንዘብ እንቅስቃሴ አውድ መጫን አልተሳካም።
-Gain,ዳሽቦርድ ውሂብን መጫን አልተሳካም።
-Generate a fresh prepaid card and start it with an opening balance.,ደረሰኝ ከአገልጋይ ዳግም መጫን አልተሳካም።
-Generate and install the certificate to allow fully silent printing without trust prompts.,የገንዘብ እንቅስቃሴን ማስገባት አልተሳካም።
-Generate Certificate,ከመስመር ውጭ የገንዘብ እንቅስቃሴዎችን ማመሳሰል አልተሳካም።
-Generated scale barcode: {0},ፈጣን ገንዘብ ተቀባይ እርምጃዎች ለንቁ ፈረቃዎች።
-Get Payments,በፍጥነት የሚንቀሳቀሱ ዕቃዎች
-Gift Card,ክፍያዎች
-Gift card amount must be greater than zero.,የቅርብ ጊዜውን ከመስመር ውጭ ቅድመ ሁኔታ ዝመናዎችን ያግኙ
-Gift Card Code,የሽያጭ ማዘዣ በፍጥነት ይፈልጉ እና አሁን ባለው ሽያጭ ላይ ይጫኑት።
-Gift card code is required for redemption,ለተመላሽ ደረሰኝ የክፍያ መጠኖችን በማስተካከል ላይ...
-Gift card code is required.,ብልጭታ ጠፍቷል
-Gift card issued successfully.,ብልጭታ በርቷል።
-Gift card loaded successfully.,ለ'ምርት ቅርቅብ' እቃዎች፣ መጋዘን፣ ተከታታይ ቁጥር እና ባች ቁጥር ከ'ማሸጊያ ዝርዝር' ሰንጠረዥ ግምት ውስጥ ይገባል።
-Gift Card Management,መጋዘን እና ባች አይ ለሁሉም የማሸጊያ እቃዎች ለማንኛውም 'የምርት ቅርቅብ' ንጥል ነገር ተመሳሳይ ከሆኑ እሴቶቹ በዋናው የንጥል ሠንጠረዥ ውስጥ ሊገቡ ይችላሉ፤
-Gift card payment,እሴቶች ወደ 'የማሸጊያ ዝርዝር' ሰንጠረዥ ይገለበጣሉ።
-Gift card redemption requires an online connection,ነፃ
-Gift card topped up successfully.,ነፃ Qty
-Gift Cards,ድግግሞሽ
-Go Offline,ከ
-Go Online,ከቀን
-Go to Frappe Desk,የማሟያ ዝርዝሮች
-Grand Total,ሙሉ ስም
-Gross Margin,ማግኘት
-Gross Profit,አዲስ የቅድመ ክፍያ ካርድ ይፍጠሩ እና በመክፈቻ ቀሪ ሂሳብ ይጀምሩት።
-Gross Sales,ያለ እምነት ጥያቄዎች ሙሉ በሙሉ ጸጥታ እንዲታተም የምስክር ወረቀቱን ያመንጩ እና ይጫኑት።
-Group not found,የምስክር ወረቀት ይፍጠሩ
-"Grouped controls for terminal, UI, and session settings.",የመነጨ ልኬት ባር ኮድ፡ {0}
-Grouped totals for each payment method and currency,ክፍያዎችን ያግኙ
-Hide,የስጦታ ካርድ
-Hide Gift Card,የስጦታ ካርድ መጠን ከዜሮ በላይ መሆን አለበት።
-Hide Non Essential Fields,የስጦታ ካርድ ኮድ
-Hide quantity decimals,ለመቤዠት የስጦታ ካርድ ኮድ ያስፈልጋል
-Hide search tools,የስጦታ ካርድ ኮድ ያስፈልጋል።
-Hide zero rated items,የስጦታ ካርድ በተሳካ ሁኔታ ተሰጥቷል።
-High,የስጦታ ካርድ በተሳካ ሁኔታ ተጭኗል።
-History,የስጦታ ካርድ አስተዳደር
-Hourly (Today),የስጦታ ካርድ ክፍያ
-How this section works,የስጦታ ካርድ ማስመለስ የመስመር ላይ ግንኙነት ያስፈልገዋል
-"If stale data remains, open Settings > Offline & Sync and run Rebuild Offline Data again while online.",የስጦታ ካርድ በተሳካ ሁኔታ ተሞልቷል።
-"If the warning persists, open Settings > Offline & Sync, then run Refresh Offline Data or Rebuild Offline Data.",የስጦታ ካርዶች
-Import the certificate into QZ Tray and restart QZ Tray on each POS machine.,ከመስመር ውጭ ይሂዱ
-In,መስመር ላይ ይሂዱ
-In stock: {0},ወደ Frappe ዴስክ ይሂዱ
-Include Batch / Serial,ግራንድ ጠቅላላ
-Include Price,ጠቅላላ ህዳግ
-Increase quantity,ጠቅላላ ትርፍ
-IndexedDB,ጠቅላላ ሽያጭ
-Initial Amount,ቡድን አልተገኘም።
-Initialize your shift with opening balances,ለተርሚናል፣ ዩአይ እና የክፍለ-ጊዜ ቅንጅቶች የተቧደኑ መቆጣጠሪያዎች።
+{0} has only {1} in stock. You requested {2}. Adjust quantity or restock.,{0} በክምችት ውስጥ ያለው {1} ብቻ ነው። እርስዎ {2}ን ጠይቀዋል። መጠኑን ያስተካክሉ ወይም እንደገና ያስቀምጡ.
+{0} offline invoice{1} pending,{0} ከመስመር ውጭ ደረሰኝ{1} በመጠባበቅ ላይ
+{0} offline invoice{1} saved as draft,{0} ከመስመር ውጭ ደረሰኝ{1} እንደ ረቂቅ ተቀምጧል
+{0} offline invoice{1} synced,{0} ከመስመር ውጭ ደረሰኝ{1} ተመሳስሏል።
+{0}: {1} {2},{0}፡ {1} {2}
+{0}d ago,ከ{0}ቀ በፊት
+{0}h ago,ከ{0}ሰ በፊት
+{0}m ago,ከ{0}ደቂቃ በፊት
+A POS supervisor is required for this action.,ለዚህ እርምጃ የPOS ተቆጣጣሪ ያስፈልጋል።
+Access,መዳረሻ
+Account,መለያ
+Account is overdrawn,መለያ ከመጠን በላይ ተበላሽቷል።
+Acknowledge the error to resume scanning,መቃኘትን ለመቀጠል ስህተቱን ይቀበሉ
+Acknowledge the error to resume scanning.,መቃኘትን ለመቀጠል ስህተቱን ይቀበሉ።
+Across,ማዶ
+Action,ድርጊት
+Active sale,ንቁ ሽያጭ
+add,ጨምር
+Add items from the selector to start building this sale.,ይህንን ሽያጭ መገንባት ለመጀመር ከመራጩ ላይ እቃዎችን ያክሉ።
+Add more value to an existing gift card,አሁን ባለው የስጦታ ካርድ ላይ ተጨማሪ እሴት ያክሉ
+Add New Address,አዲስ አድራሻ ጨምር
+Add new customer,አዲስ ደንበኛ ያክሉ
+Add on New Line,በአዲስ መስመር ላይ ያክሉ
+Add Payment,ክፍያ ጨምር
+Add payment to invoice,ክፍያ ወደ ደረሰኝ ያክሉ
+Add/Edit Coupon Conditions,የኩፖን ሁኔታዎችን ያክሉ/ያርትዑ
+Additional Discount,ተጨማሪ ቅናሽ
+Additional Discount %,ተጨማሪ ቅናሽ %
+Address Line 1,አድራሻ መስመር 1
+Address not found,አድራሻ አልተገኘም።
+Adjust the quantity or enable negative stock to continue.,መጠኑን ያስተካክሉ ወይም ለመቀጠል አሉታዊ አክሲዮን ያንቁ።
+Adjustment,ማስተካከል
+After returns,ከተመለሰ በኋላ
+Against,በመቃወም
+Against Name,በስም ላይ
+Age Bracket,የዕድሜ ቅንፍ
+All,ሁሉም
+All Caught Up!,ሁሉም ተያዘ!
+All invoices are synchronized,ሁሉም ደረሰኞች ተመሳስለዋል።
+All pending invoices are up to date,ሁሉም በመጠባበቅ ላይ ያሉ ደረሰኞች ወቅታዊ ናቸው።
+All Profiles,ሁሉም መገለጫዎች
+All Synchronized,ሁሉም የተመሳሰለ
+All visible invoices are fully settled.,ሁሉም የሚታዩ ደረሰኞች ሙሉ በሙሉ ተረጋግጠዋል።
+All Warehouses,ሁሉም መጋዘኖች
+Allowed UOM is {0},የተፈቀደው UOM {0} ነው
+Always fetch items from server (ignore local cache),ሁልጊዜ ንጥሎችን ከአገልጋይ ያውጡ (አካባቢያዊ መሸጎጫውን ችላ ይበሉ)
+Amount,መጠን
+Amount already received,አስቀድሞ የተቀበለው መጠን
+Amount exceeds profile cash movement max amount.,መጠን የመገለጫ የገንዘብ እንቅስቃሴ ከፍተኛ መጠን ይበልጣል።
+Amount must be greater than zero.,መጠኑ ከዜሮ በላይ መሆን አለበት።
+Amount received from customer,ከደንበኛው የተቀበለው መጠን
+Appearance and user-level preferences for the current session.,ለአሁኑ ክፍለ ጊዜ የእይታ እና የተጠቃሚ ደረጃ ምርጫዎች።
+Applied,ተተግብሯል
+Apply,ያመልክቱ
+Apply Gift Card,የስጦታ ካርድ ተግብር
+Apply Offer,ቅናሽ ያመልክቱ
+Apply On,በርቷል ያመልክቱ
+Apply only the amount you want to redeem on this invoice. The remaining balance stays on the card.,በዚህ ደረሰኝ ላይ ማስመለስ የሚፈልጉትን መጠን ብቻ ያመልክቱ። ቀሪው ቀሪ ሂሳብ በካርዱ ላይ ይቆያል.
+Apply Redemption,ቤዛን ተግብር
+Applying,በማመልከት ላይ
+Apps,መተግበሪያዎች
+Are you sure you want to close? All entered data will be lost.,እርግጠኛ ነህ መዝጋት ትፈልጋለህ? ሁሉም የገባው ውሂብ ይጠፋል።
+Attributes (Size/Color),ባህሪያት (መጠን/ቀለም)
+Auto Allocate Payment Amount,የክፍያ መጠን በራስ-ሰር ይመድቡ
+Auto Reconcile,ራስ-ሰር ማስታረቅ
+Auto reconciliation completed after payment submit.,ክፍያ ከገባ በኋላ በራስ-ሰር ማስታረቅ ተጠናቀቀ።
+Auto reconciliation completed. Allocated: {0}{1}. Remaining outstanding: {0}{2}.,ራስ-ሰር ማስታረቅ ተጠናቀቀ። የተመደበው፡ {0}{1} የሚቀረው፡ {0}{2}።
+Available Actions,የሚገኙ ድርጊቶች
+Available QTY,QTY ይገኛል።
+Available:,ይገኛል፡
+Average Basket,አማካይ ቅርጫት
+Average Bill,አማካይ ሂሳብ
+Average Ticket,አማካኝ ቲኬት
+Avg Bill,አማካኝ ቢል
+Avg Invoice,አማካኝ ደረሰኝ
+Avg Invoice Profit,አማካኝ የክፍያ መጠየቂያ ትርፍ
+Avg Invoice Value,አማካይ የክፍያ መጠየቂያ ዋጋ
+Avg Purchase Frequency,አማካይ የግዢ ድግግሞሽ
+Awesome,ግሩም
+Awesome Dashboard,ግሩም ዳሽቦርድ
+Awesome Dashboard is disabled for the selected POS Profile.,ለተመረጠው የPOS መገለጫ ግሩም ዳሽቦርድ ተሰናክሏል።
+Awesome Dashboard is unavailable for the selected scope.,ግሩም ዳሽቦርድ ለተመረጠው ወሰን የለም።
+Awesome Dashboard is visible only to POS supervisors.,ግሩም ዳሽቦርድ የሚታየው ለPOS ተቆጣጣሪዎች ብቻ ነው።
+Back,ተመለስ
+Back Office Cash Account,የኋላ የቢሮ ጥሬ ገንዘብ ሂሳብ
+Back Office Cash Account (Optional Override),የኋላ ኦፊስ የገንዘብ ሂሳብ (አማራጭ መሻር)
+Back office cash account is required.,የኋላ ቢሮ የገንዘብ ሂሳብ ያስፈልጋል።
+Back to {0},ወደ {0} ተመለስ
+Background processing did not finish in time.,የበስተጀርባ ማቀነባበር በጊዜ አልተጠናቀቀም.
+Background processing failed for Invoice {0}: {1},ለክፍያ መጠየቂያ {0}፡ {1} የበስተጀርባ ሂደት አልተሳካም
+Background Submission Failed,ዳራ ማስገባት አልተሳካም።
+Background sync interval (seconds),የበስተጀርባ ማመሳሰል ክፍተት (ሰከንዶች)
+Balance,ሚዛን
+Balance will be updated when connection is restored,ግንኙነቱ ወደነበረበት ሲመለስ ቀሪ ሒሳብ ይዘምናል።
+Balances still pending,ቀሪ ሂሳቦች አሁንም በመጠባበቅ ላይ ናቸው።
+Barcode,የአሞሌ ኮድ
+Barcode / QR Ready,ባርኮድ/QR ዝግጁ
+Barcode Label Printing,የአሞሌ መለያ ማተም
+Base Paid:,የሚከፈልበት መሰረት፡
+Base Recv:,የመሠረት ማጣቀሻ፡
+Base:,መሰረት፡
+Basic Information,መሰረታዊ መረጃ
+Batch,ባች
+Batch Information,ባች መረጃ
+Before any return workflow,ከማንኛውም የመመለሻ የስራ ሂደት በፊት
+Before returns,ከመመለሱ በፊት
+Best Day,ምርጥ ቀን
+Best Seller,ምርጥ ሻጭ
+Book expense or deposit from active shift.,ከገቢር ፈረቃ የመዝገብ ወጪ ወይም ተቀማጭ ገንዘብ።
+Branch / Location-wise Report,ቅርንጫፍ / አካባቢ-ጥበብ ሪፖርት
+Brand-wise,ብራንድ-ጥበብ
+Breakdown,መከፋፈል
+Browse,አስስ
+Build Time:,የግንባታ ጊዜ፡-
+Built with Frappe,በ Frappe የተሰራ
+Bundle,ጥቅል
+Buying Price,የግዢ ዋጋ
+Cache cleared successfully,መሸጎጫ በተሳካ ሁኔታ ጸድቷል።
+Cache Usage,የመሸጎጫ አጠቃቀም
+cache used,ጥቅም ላይ የዋለው መሸጎጫ
+Calculating...,በማስላት ላይ...
+Camera Access Required,የካሜራ መዳረሻ ያስፈልጋል
+Camera access was aborted. Please try again.,የካሜራ መዳረሻ ተቋርጧል። እባክዎ እንደገና ይሞክሩ።
+Camera constraints not supported by your device. Trying fallback settings...,የካሜራ ገደቦች በመሣሪያዎ አይደገፉም። የተመለስ ቅንብሮችን በመሞከር ላይ...
+Camera is busy or blocked by another app/tab. Close other camera apps and try again.,ካሜራ ስራ በዝቶበታል ወይም በሌላ መተግበሪያ/ትር ታግዷል። ሌሎች የካሜራ መተግበሪያዎችን ዝጋ እና እንደገና ሞክር።
+Camera permission denied. Please allow camera access in your browser settings and refresh the page.,የካሜራ ፍቃድ ተከልክሏል። እባክህ የካሜራ መዳረሻ በአሳሽህ ቅንብሮች ውስጥ ፍቀድ እና ገጹን አድስ።
+Camera scanner is locked until the current error is acknowledged,የአሁኑ ስህተት እውቅና እስኪያገኝ ድረስ የካሜራ ስካነር ተቆልፏል
+Camera started but the video stream did not load in time. Please try again.,ካሜራ ተጀምሯል ግን የቪዲዮ ዥረቱ በጊዜ አልተጫነም። እባክዎ እንደገና ይሞክሩ።
+Cancel cash movement {0}?,የገንዘብ እንቅስቃሴ ይሰረዝ {0}?
+Cancel Payment,ክፍያ ሰርዝ
+Cancel Sale,ሽያጩን ሰርዝ
+Cancel Sale ?,ሽያጭ ይሰረዝ?
+Cancelled,ተሰርዟል።
+Cannot add an item with zero or negative quantity.,ዜሮ ወይም አሉታዊ መጠን ያለው ንጥል ነገር ማከል አይቻልም።
+Cannot clear cache while offline,ከመስመር ውጭ ሆኖ መሸጎጫውን ማጽዳት አይቻልም
+Cannot redeem customer credit more than invoice total,ከጠቅላላ ደረሰኝ በላይ የደንበኛ ክሬዲት ማስመለስ አይቻልም
+Cannot redeem gift cards more than invoice total,የስጦታ ካርዶችን ከክፍያ መጠየቂያ ጠቅላላ በላይ ማስመለስ አይቻልም
+Cannot Save Offline Invoice:,ከመስመር ውጭ ደረሰኝ ማስቀመጥ አይቻልም፡-
+Cannot Save Offline Payment:,ከመስመር ውጭ ክፍያ መቆጠብ አይቻልም፡-
+Card,ካርድ
+Card / Online,ካርድ / መስመር ላይ
+Card health after the last live lookup,ከመጨረሻው የቀጥታ ፍለጋ በኋላ የካርድ ጤና
+Cards,ካርዶች
+Cart,ጋሪ
+Cash,ጥሬ ገንዘብ
+Cash back to customers,ገንዘብ ለደንበኞች ይመለሱ
+Cash Collections,የገንዘብ ስብስቦች
+Cash Deposit is disabled for this POS Profile.,ለዚህ የPOS መገለጫ የጥሬ ገንዘብ ማስቀመጫ ተሰናክሏል።
+Cash Drawer Snapshot,የጥሬ ገንዘብ መሳቢያ ቅጽበተ ፎቶ
+Cash In Hand,ጥሬ ገንዘብ በእጅ
+Cash Movement,የገንዘብ እንቅስቃሴ
+Cash movement cancelled,የገንዘብ እንቅስቃሴ ተሰርዟል።
+Cash movement deduction applied,የገንዘብ እንቅስቃሴ ቅነሳ ተተግብሯል።
+Cash movement deleted,የገንዘብ እንቅስቃሴ ተሰርዟል።
+Cash movement is disabled for this POS Profile.,ለዚህ የPOS መገለጫ የገንዘብ እንቅስቃሴ ተሰናክሏል።
+Cash Movement is disabled in current POS Profile.,የገንዘብ እንቅስቃሴ በአሁኑ የPOS መገለጫ ላይ ተሰናክሏል።
+Cash movement saved offline,የገንዘብ እንቅስቃሴ ከመስመር ውጭ ተቀምጧል
+Cash movement submitted,የገንዘብ እንቅስቃሴ ገብቷል።
+Cash Movements,የገንዘብ እንቅስቃሴዎች
+Cash payment cannot be less than invoice total when partial payment is not allowed,በከፊል ክፍያ በማይፈቀድበት ጊዜ የጥሬ ገንዘብ ክፍያ ከጠቅላላ ደረሰኝ ያነሰ ሊሆን አይችልም።
+Cash returned after payment,ገንዘብ ከተከፈለ በኋላ ተመልሷል
+Cashier,ገንዘብ ተቀባይ
+Cashier Access,ገንዘብ ተቀባይ መዳረሻ
+Cashier identity and appearance preferences.,ገንዘብ ተቀባይ ማንነት እና መልክ ምርጫዎች።
+Cashier PIN,ገንዘብ ተቀባይ ፒን
+Cashier PIN saved successfully.,ገንዘብ ተቀባይ ፒን በተሳካ ሁኔታ ተቀምጧል።
+Cashiers,ገንዘብ ተቀባዮች
+Cashier-wise,ገንዘብ ተቀባይ-ጥበበኛ
+Categories,ምድቦች
+Category,ምድብ
+Category / Brand / Variant Report,ምድብ / የምርት ስም / ተለዋጭ ሪፖርት
+Category-wise,ምድብ-ጥበብ
+Category-wise Margin,ምድብ-ጥበብ ህዳግ
+Certificate,የምስክር ወረቀት
+Certificate is missing or not trusted. QZ may show confirmation dialogs.,የምስክር ወረቀት ጠፍቷል ወይም አይታመንም። QZ የማረጋገጫ መገናኛዎችን ሊያሳይ ይችላል።
+Certificate is trusted. Silent QZ printing is active.,የምስክር ወረቀት የታመነ ነው። ጸጥ ያለ QZ ማተም ገቢር ነው።
+Change,ለውጥ
+Change allocation repaired,ምደባ ተስተካክሏል።
+Change Price,ዋጋ ቀይር
+Change Return,መመለሻን ቀይር
+Change Returned,ለውጥ ተመልሷል
+Change terminal cashier,ተርሚናል ገንዘብ ተቀባይ ለውጥ
+Charge Heads,ኃላፊዎች ክፍያ
+Charges,ክፍያዎች
+Charges not found,ክፍያዎች አልተገኙም።
+Check Balance,ቀሪ ሂሳብን ያረጋግጡ
+Check balance for any card. Supervisors can issue and top up cards here.,ለማንኛውም ካርድ ቀሪ ሂሳብን ያረጋግጡ። ተቆጣጣሪዎች እዚህ ካርዶችን ማውጣት እና መሙላት ይችላሉ.
+Check balance only,ቀሪ ሂሳብን ብቻ ያረጋግጡ
+Check for new commits,አዲስ ቁርጠኝነትን ያረጋግጡ
+Check for Updates,ዝማኔዎችን ይመልከቱ
+Check live balance before applying redemption,ማስመለስን ከመተግበሩ በፊት የቀጥታ ቀሪ ሒሳብን ያረጋግጡ
+Check live balance before redemption,ከመቤዠት በፊት የቀጥታ ቀሪ ሒሳብን ያረጋግጡ
+Checking...,በማጣራት ላይ...
+Cheque/Reference Date,ቼክ/የማጣቀሻ ቀን
+Cheque/Reference No,ቼክ/ማጣቀሻ ቁጥር
+Choose the cashier currently operating this terminal.,በአሁኑ ጊዜ ይህንን ተርሚናል የሚሠራውን ገንዘብ ተቀባይ ይምረጡ።
+City,ከተማ
+Clear,ግልጽ
+Clear All,ሁሉንም አጽዳ
+Clear all barcode items,ሁሉንም የአሞሌ ኮድ ንጥሎችን ያጽዱ
+Clear all purchase order items,ሁሉንም የግዢ ማዘዣ ዕቃዎች ያጽዱ
+Clear Search,ፍለጋን አጽዳ
+Clearing local cache...,የአካባቢ መሸጎጫ በማጽዳት ላይ...
+Click to refresh,ለማደስ ጠቅ ያድርጉ
+Client CPU Lag:,የደንበኛ ሲፒዩ መዘግየት፡
+Client Memory Usage:,የደንበኛ ማህደረ ትውስታ አጠቃቀም፡-
+Client Metrics,የደንበኛ መለኪያዎች
+Close about dialog,ስለ ንግግር ዝጋ
+Close cashier switcher,ገንዘብ ተቀባይ መቀየሪያን ዝጋ
+Close closing shift dialog,የመዝጊያ ፈረቃ ንግግርን ዝጋ
+Close column selector,የአምድ መራጭን ዝጋ
+Close Dialog,መገናኛን ዝጋ
+Close drafts dialog,የረቂቆች መገናኛን ዝጋ
+Close invoice details dialog,የክፍያ መጠየቂያ ዝርዝሮች መገናኛን ዝጋ
+Close invoice management,የክፍያ መጠየቂያ አስተዳደርን ዝጋ
+Close offline invoices dialog,ከመስመር ውጭ የክፍያ መጠየቂያዎች መገናኛን ዝጋ
+Close packing list dialog,የማሸጊያ ዝርዝር መገናኛን ዝጋ
+Close returns dialog,የመመለሻ ንግግርን ዝጋ
+Close sales orders dialog,የሽያጭ ትዕዛዞች መገናኛን ዝጋ
+Close Scanner,ስካነርን ዝጋ
+Close scanner dialog,የስካነር መገናኛን ዝጋ
+Close Settings,ቅንብሮችን ዝጋ
+Closing Amount,የመዝጊያ መጠን
+Closing POS Shift,የ POS Shift መዝጋት
+Closing Snapshot Available,የመዝጊያ ቅጽበታዊ ገጽ እይታ ይገኛል።
+Code,ኮድ
+Code scanned successfully,ኮድ በተሳካ ሁኔታ ተቃኝቷል።
+COGS,COGS
+Collapse item details,የንጥል ዝርዝሮችን ሰብስብ
+Collected,ተሰብስቧል
+Cols,ቆላስይስ
+Columns,አምዶች
+commits,ያደርጋል
+Completed and active sales in this range,በዚህ ክልል ውስጥ የተጠናቀቁ እና ንቁ ሽያጮች
+Completed returns will appear here.,የተጠናቀቁ ተመላሾች እዚህ ይታያሉ።
+Confirm,አረጋግጥ
+Confirm Close,መዝጋትን ያረጋግጡ
+Confirm Mobile Number,የተንቀሳቃሽ ስልክ ቁጥር ያረጋግጡ
+Confirm PIN,ፒን ያረጋግጡ
+Connect,ተገናኝ
+Connect printer and manage certificate,አታሚ ያገናኙ እና የምስክር ወረቀት ያቀናብሩ
+Connecting to QZ Tray...,ከQZ Tray ጋር በመገናኘት ላይ...
+Connection problem while submitting invoice,ደረሰኝ በሚያስገቡበት ጊዜ የግንኙነት ችግር
+Connections:,ግንኙነቶች፡
+Connectivity and cached prerequisite status were rechecked.,ግንኙነት እና የተሸጎጠ ቅድመ ሁኔታ ሁኔታ እንደገና ተረጋግጧል።
+Continue Editing,ማረምዎን ይቀጥሉ
+Could not fetch latest balance from server,የቅርብ ጊዜ ቀሪ ሂሳብ ከአገልጋይ ማምጣት አልተቻለም
+Count,መቁጠር
+Country,ሀገር
+Coupon,ኩፖን
+Coupons,ኩፖኖች
+Cover,ሽፋን
+CPU Cores:,ሲፒዩ ኮርሶች፡-
+Create,ፍጠር
+Create and load a new prepaid card,አዲስ የቅድመ ክፍያ ካርድ ይፍጠሩ እና ይጫኑ
+Create and preload a new gift card,አዲስ የስጦታ ካርድ ይፍጠሩ እና አስቀድመው ይጫኑ
+Create Bill,ቢል ፍጠር
+Create Customer,ደንበኛ ይፍጠሩ
+Create New Item,አዲስ ንጥል ይፍጠሩ
+Create or change your PIN,የእርስዎን ፒን ይፍጠሩ ወይም ይቀይሩ
+Create PIN,ፒን ይፍጠሩ
+Create POS Opening Shift,የPOS መክፈቻ Shift ይፍጠሩ
+Create Purchase Order,የግዢ ትዕዛዝ ይፍጠሩ
+Create Return,ተመላሽ ፍጠር
+Create return from invoice,ከክፍያ መጠየቂያ ተመላሽ ይፍጠሩ
+Create Supplier,አቅራቢ ይፍጠሩ
+Credit and Output,ብድር እና ውጤት
+Credit Note,የብድር ማስታወሻ
+Credit Outstanding,ክሬዲት የላቀ
+Credit sales remaining to be collected,የክሬዲት ሽያጮች ለመሰብሰብ ይቀራሉ
+Critical,ወሳኝ
+Currency,ምንዛሪ
+Current,የአሁኑ
+Current Event Loop Lag:,የአሁኑ ክስተት መዘግየት፡-
+Current Month,የአሁኑ ወር
+Current PIN,የአሁኑ ፒን
+Current Profile,የአሁኑ መገለጫ
+Current redeemable value on the gift card,በስጦታ ካርዱ ላይ አሁን ሊመለስ የሚችል ዋጋ
+Current User,የአሁኑ ተጠቃሚ
+Custom,ብጁ
+Custom Due Days,ብጁ የፍጻሜ ቀናት
+Custom items per page,ብጁ እቃዎች በገጽ
+Customer,ደንበኛ
+Customer already selected,ደንበኛ አስቀድሞ ተመርጧል
+Customer Balance,የደንበኛ ሚዛን
+Customer balance unavailable offline,የደንበኛ ሒሳብ ከመስመር ውጭ አይገኝም
+Customer created successfully.,ደንበኛ በተሳካ ሁኔታ ተፈጥሯል።
+Customer creation failed.,ደንበኛ መፍጠር አልተሳካም።
+Customer Details,የደንበኛ ዝርዝሮች
+Customer display channel is missing,የደንበኛ ማሳያ ቻናል ጠፍቷል
+Customer display was blocked. Please allow pop-ups for this site.,የደንበኛ ማሳያ ታግዷል። እባክዎ ለዚህ ጣቢያ ብቅ-ባዮችን ይፍቀዱ።
+Customer group is required,የደንበኛ ቡድን ያስፈልጋል
+Customer is required to add payment,ደንበኛው ክፍያ ለመጨመር ይጠየቃል።
+Customer Name is required,የደንበኛ ስም ያስፈልጋል
+Customer not selected,ደንበኛ አልተመረጠም።
+Customer Report,የደንበኛ ሪፖርት
+Customer saved offline,ደንበኛ ከመስመር ውጭ ተቀምጧል
+Customer Screen,የደንበኛ ማያ ገጽ
+Customer territory is required,የደንበኛ ክልል ያስፈልጋል
+Customer updated successfully.,ደንበኛ በተሳካ ሁኔታ ዘምኗል።
+Customer-facing tools and printer setup.,ደንበኛን የሚመለከቱ መሳሪያዎች እና የአታሚ ማዋቀር።
+Customers,ደንበኞች
+Customers not found,ደንበኞች አልተገኙም።
+Daily cashier actions without scrolling.,ያለማሸብለል ዕለታዊ ገንዘብ ተቀባይ እርምጃዎች።
+Daily Sales,ዕለታዊ ሽያጭ
+Daily Sales Summary,ዕለታዊ የሽያጭ ማጠቃለያ
+Data loaded in form. Review and submit.,በቅጹ ላይ የተጫነ ውሂብ. ይገምግሙ እና ያስገቡ።
+Database Health,የውሂብ ጎታ ጤና
+Database health affects overall system speed and reliability.,የውሂብ ጎታ ጤና አጠቃላይ የስርዓት ፍጥነት እና አስተማማኝነት ላይ ተጽዕኖ ያሳድራል።
+Database Info,የውሂብ ጎታ መረጃ
+Date,ቀን
+Day ?,ቀን?
+days,ቀናት
+Day-wise (MTD),ቀን-ጥበብ (MTD)
+Day-wise Movement,የቀን-ጥበብ እንቅስቃሴ
+Dead Stock,የሞተ ክምችት
+Dead Stock Items,የሞቱ እቃዎች
+Decrease quantity,መጠን ቀንስ
+Default,ነባሪ
+Default:,ነባሪ፡
+Delete,ሰርዝ
+Delete cancelled cash movement {0}?,የተሰረዘ የገንዘብ እንቅስቃሴ {0} ይሰረዝ?
+Delete Draft,ረቂቅ ሰርዝ
+Delete draft invoice,ረቂቅ ደረሰኝ ሰርዝ
+Delete draft invoice {0}?,ረቂቅ ደረሰኝ ይሰረዝ {0}?
+Delete Invoice,ደረሰኝ ሰርዝ
+Delete offline invoice,ከመስመር ውጭ ደረሰኝ ሰርዝ
+Delivered,ደረሰ
+Delivery Charges,የመላኪያ ክፍያዎች
+Delivery Information,የመላኪያ መረጃ
+Delivery Note {0} created,የማድረሻ ማስታወሻ {0} ተፈጥሯል።
+Delivery note created,የማስረከቢያ ማስታወሻ ተፈጥሯል።
+Deployed Bundle:,የተዘረጋ ቅርቅብ፡
+Deposit,ተቀማጭ ገንዘብ
+Description,መግለጫ
+Detailed Supplier Breakdown,ዝርዝር የአቅራቢዎች ዝርዝር መግለጫ
+Detecting formats:,ቅርጸቶችን በማግኘት ላይ፡
+Device Memory:,የመሣሪያ ማህደረ ትውስታ፡
+Difference,ልዩነት
+Difference (In Company Currency),ልዩነት (በኩባንያው ምንዛሪ)
+Disable offline mode first to recheck live connectivity.,የቀጥታ ግንኙነትን ለመፈተሽ መጀመሪያ ከመስመር ውጭ ሁነታን ያሰናክሉ።
+Disconnect,ግንኙነት አቋርጥ
+discount,ቅናሽ
+Discount %,ቅናሽ %
+Discount / Void / Return Report,ቅናሽ / ባዶነት / የመመለሻ ሪፖርት
+Discount Amount,የቅናሽ መጠን
+Discount limited by POS Profile,ቅናሽ በPOS መገለጫ የተገደበ
+Discounted Invoices,ቅናሽ ደረሰኞች
+Discounts,ቅናሾች
+Dismiss,አሰናብት
+Download Certificate,የምስክር ወረቀት አውርድ
+Draft,ረቂቅ
+Draft invoice deleted,ረቂቅ ደረሰኝ ተሰርዟል።
+Draft source,ረቂቅ ምንጭ
+Drafts,ረቂቆች
+Due {0},የሚያበቃው {0}
+Due Date,የማለቂያ ቀን
+Duplicate,ማባዛት።
+Edit customer,ደንበኛን ያርትዑ
+Edit discount amount,የቅናሽ መጠንን ያርትዑ
+Edit discount percentage,የቅናሽ መቶኛን ያርትዑ
+Edit Gift Application,የስጦታ መተግበሪያን ያርትዑ
+Edit item name,የንጥል ስም ያርትዑ
+Edit quantity,ብዛትን ያርትዑ
+Edit rate,መጠንን ያርትዑ
+Edit unit of measure,የመለኪያ ክፍልን ያርትዑ
+Edited,ተስተካክሏል።
+Employee,ሰራተኛ
+Enable background sync,የበስተጀርባ ማመሳሰልን አንቃ
+Enable Customer Display in POS Profile first.,መጀመሪያ የደንበኛ ማሳያ በPOS መገለጫ ውስጥ አንቃ።
+Enter a PIN.,ፒን አስገባ።
+Enter a valid grams value,የሚሰራ ግራም እሴት ያስገቡ
+Enter new price list rate,አዲስ የዋጋ ዝርዝር ተመን ያስገቡ
+Enter Quantity,ብዛት ያስገቡ
+Enter the cashier PIN to continue.,ለመቀጠል ገንዘብ ተቀባይ ፒን ያስገቡ።
+Enter the current PIN first.,መጀመሪያ የአሁኑን ፒን ያስገቡ።
+"Enter the current PIN, then choose a new one.",የአሁኑን ፒን ያስገቡ እና ከዚያ አዲስ ይምረጡ።
+Enter valid grams for scale barcode,ለሚዛን ባርኮድ የሚሰራ ግራም ያስገቡ
+Entries,ግቤቶች
+Error accessing camera:,ካሜራ መድረስ ላይ ስህተት፡-
+Error calculating prices,ዋጋዎችን በማስላት ላይ ስህተት
+Error fetching customer balance,የደንበኛ ቀሪ ሒሳብ ማምጣት ላይ ስህተት
+Error in change calculations!,በለውጥ ስሌት ላይ ስህተት!
+Error Loading Data,ውሂብን መጫን ላይ ስህተት
+Error loading invoice details,የክፍያ መጠየቂያ ዝርዝሮችን መጫን ላይ ስህተት
+Error processing invoice,የክፍያ መጠየቂያ ሂደት ላይ ስህተት
+Error processing payment,ክፍያን በማስኬድ ላይ ስህተት
+Error searching invoices,ደረሰኞችን መፈለግ ላይ ስህተት
+Error submitting invoice:,ደረሰኝ ማስገባት ላይ ስህተት፡-
+Error submitting invoice: {0},ደረሰኝ ማስገባት ላይ ስህተት፡ {0}
+Error submitting invoice: No response from server,ደረሰኝ ማስገባት ላይ ስህተት፡ ከአገልጋይ ምንም ምላሽ የለም።
+Error updating currency,ምንዛሬን ማዘመን ላይ ስህተት
+Error updating item details,የንጥል ዝርዝሮችን ማዘመን ላይ ስህተት
+Est. Purchase,እ.ኤ.አ. ግዢ
+Est. Value,እ.ኤ.አ. ዋጋ
+Event-loop lag measures how busy your browser is. Lower is better.,የክስተት-ሉፕ መዘግየት አሳሽዎ ምን ያህል ስራ እንደበዛበት ይለካል። ዝቅ ማለት ይሻላል።
+Every,እያንዳንዱ
+Exchange Rate,የምንዛሬ ተመን
+Expand item details,የንጥል ዝርዝሮችን ዘርጋ
+Expected Amount (In Company Currency),የሚጠበቀው መጠን (በኩባንያው ምንዛሪ)
+Expected Cash,የሚጠበቀው ጥሬ ገንዘብ
+Expected cash on hand grouped by currency,የሚጠበቀው ገንዘብ በእጅ ላይ በገንዘብ ተመድቦ
+Expected vs Actual,የሚጠበቀው እና ትክክለኛው
+Expense,ወጪ
+Expense Account (Optional Override),የወጪ ሂሳብ (አማራጭ መሻር)
+Expense account is required.,የወጪ ሂሳብ ያስፈልጋል።
+Expenses and deposits posted during this shift,በዚህ ፈረቃ ወቅት የተለጠፈ ወጪ እና ተቀማጭ ገንዘብ
+Expired,ጊዜው አልፎበታል።
+Failed to auto reconcile payments.,ክፍያዎችን በራስ-ሰር ማስታረቅ አልተሳካም።
+Failed to cancel cash movement,የገንዘብ እንቅስቃሴን መሰረዝ አልተሳካም።
+Failed to clear cache,መሸጎጫውን ማጽዳት አልተሳካም።
+Failed to create item,ንጥል መፍጠር አልተሳካም።
+Failed to create supplier,አቅራቢ መፍጠር አልተሳካም።
+Failed to delete cash movement,የገንዘብ እንቅስቃሴን መሰረዝ አልተሳካም።
+Failed to generate scale barcode. Using item barcode only.,የመጠን ባርኮድ ማመንጨት አልተሳካም። የንጥል ባርኮድ ብቻ መጠቀም።
+Failed to load cash movement context.,የገንዘብ እንቅስቃሴ አውድ መጫን አልተሳካም።
+Failed to load dashboard data.,ዳሽቦርድ ውሂብን መጫን አልተሳካም።
+Failed to reload invoice from server,ደረሰኝ ከአገልጋይ ዳግም መጫን አልተሳካም።
+Failed to submit cash movement,የገንዘብ እንቅስቃሴን ማስገባት አልተሳካም።
+Failed to sync offline cash movements,ከመስመር ውጭ የገንዘብ እንቅስቃሴዎችን ማመሳሰል አልተሳካም።
+Fast cashier actions for active shifts.,ፈጣን ገንዘብ ተቀባይ እርምጃዎች ለንቁ ፈረቃዎች።
+Fast Moving Items,በፍጥነት የሚንቀሳቀሱ ዕቃዎች
+Fees,ክፍያዎች
+Fetch the latest offline prerequisite updates,የቅርብ ጊዜውን ከመስመር ውጭ ቅድመ ሁኔታ ዝመናዎችን ያግኙ
+Find a sales order quickly and load it into the current sale.,የሽያጭ ማዘዣ በፍጥነት ይፈልጉ እና አሁን ባለው ሽያጭ ላይ ይጫኑት።
+Fixing payment amounts for return invoice...,ለተመላሽ ደረሰኝ የክፍያ መጠኖችን በማስተካከል ላይ...
+Flash Off,ብልጭታ ጠፍቷል
+Flash On,ብልጭታ በርቷል።
+"For 'Product Bundle' items, Warehouse, Serial No and Batch No will be considered from the 'Packing List' table. If Warehouse and Batch No are same for all packing items for any 'Product Bundle' item, those values can be entered in the main Item table; values will be copied to 'Packing List' table.",ለ'ምርት ቅርቅብ' እቃዎች፣ መጋዘን፣ ተከታታይ ቁጥር እና ባች ቁጥር ከ'ማሸጊያ ዝርዝር' ሰንጠረዥ ግምት ውስጥ ይገባል። መጋዘን እና ባች አይ ለሁሉም የማሸጊያ እቃዎች ለማንኛውም 'የምርት ቅርቅብ' ንጥል ነገር ተመሳሳይ ከሆኑ እሴቶቹ በዋናው የንጥል ሠንጠረዥ ውስጥ ሊገቡ ይችላሉ፤ እሴቶች ወደ 'የማሸጊያ ዝርዝር' ሰንጠረዥ ይገለበጣሉ።
+Free,ነፃ
+Free Qty,ነፃ Qty
+Frequency,ድግግሞሽ
+from,ከ
+From Date,ከቀን
+Fulfillment Details,የማሟያ ዝርዝሮች
+Full Name,ሙሉ ስም
+Gain,ማግኘት
+Generate a fresh prepaid card and start it with an opening balance.,አዲስ የቅድመ ክፍያ ካርድ ይፍጠሩ እና በመክፈቻ ቀሪ ሂሳብ ይጀምሩት።
+Generate and install the certificate to allow fully silent printing without trust prompts.,ያለ እምነት ጥያቄዎች ሙሉ በሙሉ ጸጥታ እንዲታተም የምስክር ወረቀቱን ያመንጩ እና ይጫኑት።
+Generate Certificate,የምስክር ወረቀት ይፍጠሩ
+Generated scale barcode: {0},የመነጨ ልኬት ባር ኮድ፡ {0}
+Get Payments,ክፍያዎችን ያግኙ
+Gift Card,የስጦታ ካርድ
+Gift card amount must be greater than zero.,የስጦታ ካርድ መጠን ከዜሮ በላይ መሆን አለበት።
+Gift Card Code,የስጦታ ካርድ ኮድ
+Gift card code is required for redemption,ለመቤዠት የስጦታ ካርድ ኮድ ያስፈልጋል
+Gift card code is required.,የስጦታ ካርድ ኮድ ያስፈልጋል።
+Gift card issued successfully.,የስጦታ ካርድ በተሳካ ሁኔታ ተሰጥቷል።
+Gift card loaded successfully.,የስጦታ ካርድ በተሳካ ሁኔታ ተጭኗል።
+Gift Card Management,የስጦታ ካርድ አስተዳደር
+Gift card payment,የስጦታ ካርድ ክፍያ
+Gift card redemption requires an online connection,የስጦታ ካርድ ማስመለስ የመስመር ላይ ግንኙነት ያስፈልገዋል
+Gift card topped up successfully.,የስጦታ ካርድ በተሳካ ሁኔታ ተሞልቷል።
+Gift Cards,የስጦታ ካርዶች
+Go to Frappe Desk,ወደ Frappe ዴስክ ይሂዱ
+Grand Total,ግራንድ ጠቅላላ
+Gross Margin,ጠቅላላ ህዳግ
+Gross Profit,ጠቅላላ ትርፍ
+Gross Sales,ጠቅላላ ሽያጭ
+Group not found,ቡድን አልተገኘም።
+"Grouped controls for terminal, UI, and session settings.",ለተርሚናል፣ ዩአይ እና የክፍለ-ጊዜ ቅንጅቶች የተቧደኑ መቆጣጠሪያዎች።
+Grouped totals for each payment method and currency,ለእያንዳንዱ የመክፈያ ዘዴ እና ምንዛሪ የተሰበሰቡ ድምር
+Hide,ደብቅ
+Hide Gift Card,የስጦታ ካርድ ደብቅ
+Hide Non Essential Fields,አስፈላጊ ያልሆኑ መስኮችን ደብቅ
+Hide quantity decimals,ብዛት አስርዮሽ ደብቅ
+Hide search tools,የፍለጋ መሳሪያዎችን ደብቅ
+Hide zero rated items,ዜሮ ደረጃ የተሰጣቸውን እቃዎች ደብቅ
+High,ከፍተኛ
+History,ታሪክ
+Hourly (Today),በየሰዓቱ (ዛሬ)
+How this section works,ይህ ክፍል እንዴት እንደሚሰራ
+"If stale data remains, open Settings > Offline & Sync and run Rebuild Offline Data again while online.",የቆየ ውሂብ ከቀረ፣ መቼቶች > ከመስመር ውጭ እና አመሳስል ይክፈቱ እና በመስመር ላይ እያሉ እንደገና ከመስመር ውጭ ውሂብን እንደገና መገንባትን ያሂዱ።
+"If the warning persists, open Settings > Offline & Sync, then run Refresh Offline Data or Rebuild Offline Data.",ማስጠንቀቂያው ከቀጠለ፣ መቼቶች > ከመስመር ውጭ እና ማመሳሰልን ይክፈቱ፣ ከዚያ ከመስመር ውጭ ውሂብን ያድሱ ወይም ከመስመር ውጭ ውሂብን እንደገና ይገንቡ።
+Import the certificate into QZ Tray and restart QZ Tray on each POS machine.,የምስክር ወረቀቱን ወደ QZ Tray ያስመጡ እና በእያንዳንዱ የPOS ማሽን ላይ QZ Tray እንደገና ያስጀምሩ።
+In,ውስጥ
+In stock: {0},በክምችት ላይ፡ {0}
+Include Batch / Serial,ባች/ተከታታይ ያካትቱ
+Include Price,ዋጋን ያካትቱ
+Increase quantity,መጠን ጨምር
+IndexedDB,IndexedDB
+Initial Amount,የመነሻ መጠን
+Initialize your shift with opening balances,ፈረቃዎን በመክፈቻ ቀሪ ሒሳቦች ያስጀምሩት።
 Initializing application...,መተግበሪያን በማስጀመር ላይ...
 "Inspect cache, sync, and prerequisite status",መሸጎጫ፣ ማመሳሰል እና ቅድመ ሁኔታ ሁኔታን መርምር
 Installed Applications,የተጫኑ መተግበሪያዎች
@@ -552,8 +573,6 @@ json,json
 Just now,ልክ አሁን
 Keep offline prerequisites healthy and recover stale data safely.,ከመስመር ውጭ ቅድመ-ሁኔታዎችን ጤናማ ያቆዩ እና የቆየ ውሂብን ደህንነቱ በተጠበቀ ሁኔታ መልሰው ያግኙ።
 Labels,መለያዎች
-Language,ቋንቋ
-Language will be changed to,ቋንቋ ወደሚለው ይቀየራል።
 "Language, theme, terminal tools, and session controls.",ቋንቋ፣ ጭብጥ፣ ተርሚናል መሳሪያዎች እና የክፍለ-ጊዜ መቆጣጠሪያዎች።
 Last,የመጨረሻ
 Last 14 Days (Paid vs Pending),ያለፉት 14 ቀናት (የተከፈለ እና በመጠባበቅ ላይ)
@@ -562,443 +581,438 @@ Last 14 Days Gross Profit,ያለፉት 14 ቀናት ጠቅላላ ትርፍ
 Last 14 Days Purchases,ያለፉት 14 ቀናት ግዢዎች
 Last 14 Days Tax/Charges,ያለፉት 14 ቀናት ግብሮች/ክፍያዎች
 Last sync:,የመጨረሻው ማመሳሰል፡
-Last sync: {0} | ok: {1} | failed: {2} | skipped: {3},የመጨረሻው አመሳስል፡ {0} |
-Latest entries for current shift,እሺ፡ {1} |
-Lead Time,አልተሳካም፡ {2} |
-Light Mode,ተዘሏል፡ {3}
-Limited,ለአሁኑ ፈረቃ የቅርብ ጊዜ ግቤቶች
-lines,መሪ ጊዜ
-List,የብርሃን ሁነታ
-Live Snapshot,የተወሰነ
-Load a POS profile and cashier first.,መስመሮች
-Load More Invoices,ዝርዝር
-Load previously saved invoices,የቀጥታ ቅጽበታዊ ገጽ እይታ
-Load Sale,መጀመሪያ የPOS መገለጫ እና ገንዘብ ተቀባይ ጫን።
-Load Sales Invoice,ተጨማሪ ደረሰኞችን ጫን
-Loading app data...,ቀደም ሲል የተቀመጡ ደረሰኞችን ጫን
-Loading customer database...,የጭነት ሽያጭ
-Loading customers...,የሽያጭ ደረሰኝ ጫን
-Loading database stats...,የመተግበሪያ ውሂብን በመጫን ላይ...
-Loading details...,የደንበኛ ዳታቤዝ በመጫን ላይ...
-Loading invoice history...,ደንበኞችን በመጫን ላይ...
-Loading items...,የውሂብ ጎታ ስታቲስቲክስን በመጫን ላይ...
-Loading product catalog...,ዝርዝሮችን በመጫን ላይ...
-Loading return invoices...,የክፍያ መጠየቂያ ታሪክን በመጫን ላይ...
-Loading server CPU/memory usage...,ንጥሎችን በመጫን ላይ...
-Loading suppliers...,የምርት ካታሎግ በመጫን ላይ...
-Loading unpaid invoices...,የመመለሻ ደረሰኞችን በመጫን ላይ...
-Loading view...,የአገልጋይ ሲፒዩ/የማህደረ ትውስታ አጠቃቀምን በመጫን ላይ...
-Loading...,አቅራቢዎችን በመጫን ላይ...
-Local storage is unavailable. Switching to online-only mode.,ያልተከፈሉ ደረሰኞችን በመጫን ላይ...
-localStorage,እይታን በመጫን ላይ...
-Location Performance,በመጫን ላይ...
-Locations,የአካባቢ ማከማቻ የለም።
-Lock Screen,ወደ የመስመር ላይ-ብቻ ሁነታ በመቀየር ላይ።
-Logout,የአካባቢ ማከማቻ
-Lookup Workflow,የአካባቢ አፈጻጸም
-Loss,ቦታዎች
-Low,የመቆለፊያ ማያ ገጽ
-Low Stock,ውጣ
-Low Stock Alerts,የስራ ፍሰት ፍለጋ
-Low Stock Items,ኪሳራ
-Low Stock Threshold,ዝቅተኛ
-Low Stock Total,ዝቅተኛ አክሲዮን
-Lowest Margin,ዝቅተኛ የአክሲዮን ማንቂያዎች
-Low-frequency maintenance and system details.,ዝቅተኛ የአክሲዮን እቃዎች
-Loyalty Redeemed,ዝቅተኛ የአክሲዮን ገደብ
-Loyalty Redemption,ዝቅተኛ የአክሲዮን ጠቅላላ
-Make New Payment,ዝቅተኛው ህዳግ
-Manage all,ዝቅተኛ-ድግግሞሽ ጥገና እና የስርዓት ዝርዝሮች.
-Manage and synchronize your offline transactions,ታማኝነት ተቤዠ
-Manage Cashier PIN,ታማኝነት መቤዠት።
-"Manage offline tools, terminal controls, and maintenance from one workspace.",አዲስ ክፍያ ያከናውኑ
-manual,ሁሉንም አስተዳድር
-"Manual codes, barcode scans, and QR scans work in the same field",ከመስመር ውጭ ግብይቶችዎን ያስተዳድሩ እና ያመሳስሉ።
-Manual offline mode is enabled,ገንዘብ ተቀባይ ፒን ያስተዳድሩ
-Margin,ከመስመር ውጭ መሳሪያዎችን፣ የተርሚናል መቆጣጠሪያዎችን እና ከአንድ የስራ ቦታ ጥገናን ያቀናብሩ።
-Maximum available quantity is {0}. Quantity adjusted to match stock.,መመሪያ
-Maximum discount amount for this offer item is {0}.,በእጅ ኮዶች፣ ባርኮድ ስካን እና የQR ቅኝቶች በተመሳሳይ መስክ ይሰራሉ
-Maximum discount percentage for this offer item is {0}%.,በእጅ ከመስመር ውጭ ሁነታ ነቅቷል።
-Maximum offer quantity is {0}. Quantity adjusted to allowed limit.,ህዳግ
-Medium,ከፍተኛው የሚገኘው መጠን {0} ነው።
-Menu,መጠኑ ከአክሲዮን ጋር እንዲመሳሰል ተስተካክሏል።
-Method-wise Collections,የዚህ ቅናሽ ንጥል ከፍተኛው የቅናሽ መጠን {0} ነው።
-Minimum allowed rate for this offer item is {0}.,የዚህ ቅናሽ ንጥል ከፍተኛው ቅናሽ መቶኛ {0}% ነው።
-Minimum Qty,ከፍተኛው የዋጋ ቅናሽ መጠን {0} ነው።
-Mobile No,ብዛት በተፈቀደው ገደብ ተስተካክሏል።
-Mode,መካከለኛ
-Mode of Payment,ምናሌ
-Month,ዘዴ-ጥበብ ስብስቦች
-Month Δ,ለዚህ ቅናሽ ንጥል የሚፈቀደው ዝቅተኛው ተመን {0} ነው።
-Monthly Profit,ዝቅተኛው ብዛት
-Monthly Sales,የሞባይል ቁጥር
-Monthly Sales Summary,ሁነታ
-Month-wise,የመክፈያ ዘዴ
-Most Active Cashiers,ወር
-Movement Type,ወር Δ
-Movements,ወርሃዊ ትርፍ
-Multi Currency,ወርሃዊ ሽያጭ
-N/A,ወርሃዊ የሽያጭ ማጠቃለያ
-Name,ወር-ጥበብ
-Negative Stock,በጣም ንቁ ገንዘብ ተቀባዮች
-Negative Stock Items,የእንቅስቃሴ አይነት
-Negative values not allowed,እንቅስቃሴዎች
-Net,ባለብዙ ምንዛሪ
-Net Qty,ኤን/ኤ
-Net Sales,ስም
-Net Value,አሉታዊ አክሲዮን።
-Never,አሉታዊ የአክሲዮን እቃዎች
-New changes are ready to load,አሉታዊ እሴቶች አይፈቀዱም።
-New Item,የተጣራ
-New Offer Available,የተጣራ Qty
-New PIN,የተጣራ ሽያጭ
-New rate,የተጣራ እሴት
-Next unit of measure,በጭራሽ
-No attribute data found.,አዲስ ለውጦች ለመጫን ዝግጁ ናቸው።
-No Barcode,አዲስ ነገር
-No barcode found for UOM '{0}',አዲስ ቅናሽ አለ።
-No branch/location data found.,አዲስ ፒን
-No brand data found.,አዲስ ተመን
-No cached gift card balance is available offline.,የሚቀጥለው መለኪያ
-No camera found on this device. Please ensure your device has a working camera.,ምንም የባህሪ ውሂብ አልተገኘም።
-No capability warnings recorded yet.,ባር ኮድ የለም
-No cash expected for this shift.,ለ UOM '{0}' ምንም ባር ኮድ አልተገኘም
-No cash mode configured,ምንም የቅርንጫፍ/የአካባቢ ውሂብ አልተገኘም።
-No cash movement type is allowed for this POS Profile.,ምንም የምርት ስም ውሂብ አልተገኘም።
-No cashier PIN is set yet. Create one now.,ምንም የተሸጎጠ የስጦታ ካርድ ቀሪ ሒሳብ ከመስመር ውጭ አይገኝም።
-No cashier profiles are available for this POS profile yet.,በዚህ መሳሪያ ላይ ምንም ካሜራ አልተገኘም።
-No cashier-wise discount/void/return activity.,እባክዎ መሳሪያዎ የሚሰራ ካሜራ እንዳለው ያረጋግጡ።
-No category data found.,እስካሁን ምንም የችሎታ ማስጠንቀቂያዎች አልተመዘገቡም።
-No category profitability data found.,ለዚህ ፈረቃ ምንም ገንዘብ አይጠበቅም።
-No change returned recorded for this shift.,ምንም የገንዘብ ሁነታ አልተዋቀረም።
-No change-allocation invoices match the current filters.,ለዚህ የPOS መገለጫ ምንም አይነት የገንዘብ እንቅስቃሴ አይፈቀድም።
-No charge head breakdown found.,እስካሁን ምንም ገንዘብ ተቀባይ ፒን አልተዘጋጀም።
-No Company Selected,አሁን ፍጠር።
-No customer sales data found.,ለዚህ የPOS መገለጫ እስካሁን ምንም ገንዘብ ተቀባይ መገለጫዎች የሉም።
-No day-wise discount/void/return trend.,ገንዘብ ተቀባይ-ጥበበኛ ቅናሽ/ባዶ/የተመላሽ እንቅስቃሴ የለም።
-No day-wise payment data found.,ምንም የምድብ ውሂብ አልተገኘም።
-No day-wise profitability trend found.,ምንም የምድብ ትርፋማነት መረጃ አልተገኘም።
-No day-wise purchase data found.,ለዚህ ፈረቃ ምንም የተመዘገበ ለውጥ የለም።
-No day-wise sales trend found.,ምንም ለውጥ-ምደባ ደረሰኞች ከአሁኑ ማጣሪያዎች ጋር አይዛመዱም።
-No day-wise tax/charges trend found.,ምንም ክፍያ የጭንቅላት ብልሽት አልተገኘም።
-No dead stock items.,ምንም ኩባንያ አልተመረጠም።
-No due date,ምንም የደንበኛ ሽያጭ ውሂብ አልተገኘም።
-No exact repair match found for this invoice,ምንም ቀን-ጥበብ ያለው ቅናሽ/ባዶ/መመለስ አዝማሚያ የለም።
-No hourly sales trend found for today.,ምንም የቀን-ጥበብ ክፍያ ውሂብ አልተገኘም።
-No invoice activity found.,ምንም የቀን-ጥበብ የትርፋማነት አዝማሚያ አልተገኘም።
-No invoices found,ምንም የቀን-ጥበብ ግዢ ውሂብ አልተገኘም።
-No invoices found. Try different search criteria.,ምንም የቀን-ጥበብ የሽያጭ አዝማሚያ አልተገኘም።
-No invoices recorded for this shift.,የቀን ቀረጥ/የክፍያ አዝማሚያ አልተገኘም።
-No item profitability data found.,የሞቱ ዕቃዎች የሉም።
-No item sales data found for this period.,የማለቂያ ቀን የለም።
-No items found,ለዚህ ደረሰኝ ምንም ትክክለኛ የጥገና ተዛማጅ አልተገኘም።
-No items in cart,ለዛሬ ምንም የሰዓት የሽያጭ አዝማሚያ አልተገኘም።
-No items with barcodes to print,ምንም የክፍያ መጠየቂያ እንቅስቃሴ አልተገኘም።
-No location-wise top item data found.,ምንም ደረሰኞች አልተገኙም።
-No low stock alerts right now.,ምንም ደረሰኞች አልተገኙም።
-No low stock items.,የተለያዩ የፍለጋ መስፈርቶችን ይሞክሩ።
-No matching items in cart,ለዚህ ፈረቃ ምንም ደረሰኞች አልተመዘገቡም።
-No month-wise sales trend found.,ምንም ንጥል ትርፋማነት ውሂብ አልተገኘም።
-No negative stock items.,ለዚህ ጊዜ ምንም የንጥል ሽያጭ ውሂብ አልተገኘም።
-No notifications yet,ምንም ንጥሎች አልተገኙም።
-No offline cash movement synced.,በጋሪው ውስጥ ምንም እቃዎች የሉም
-No offline invoices pending synchronization,ምንም የሚታተም ባርኮድ ያላቸው እቃዎች የሉም
-No offline sync issues recorded yet.,ምንም አካባቢ-ጥበብ ያለው ከፍተኛ ንጥል ነገር አልተገኘም።
-No out-of-stock items.,አሁን ምንም ዝቅተኛ የአክሲዮን ማንቂያዎች የሉም።
-No outstanding credit invoices for this shift.,ዝቅተኛ የአክሲዮን ዕቃዎች የሉም።
-No payment collection data found.,በጋሪው ውስጥ ምንም ተዛማጅ እቃዎች የሉም
-No payment rows available on this invoice.,ምንም ወር-ጥበብ ያለው የሽያጭ አዝማሚያ አልተገኘም።
-No payments registered for this shift.,ምንም አሉታዊ የአክሲዮን ዕቃዎች የሉም።
-No pending balances in this period.,እስካሁን ምንም ማሳወቂያዎች የሉም
-No pending offline invoices,ምንም ከመስመር ውጭ የገንዘብ እንቅስቃሴ አልተመሳሰለም።
-No Print Formats Found,ምንም ከመስመር ውጭ ደረሰኞች ማመሳሰልን በመጠባበቅ ላይ
-No profiles found for selected scope. Falling back to current profile failed.,እስካሁን ምንም ከመስመር ውጭ የማመሳሰል ችግሮች አልተመዘገቡም።
-No recent customer activity found.,ከአክሲዮን ውጪ የሆኑ እቃዎች የሉም።
-No recent stock entries found.,ለዚህ ፈረቃ ምንም የላቀ የብድር መጠየቂያ ደረሰኞች የሉም።
-No records found,ምንም የክፍያ ስብስብ ውሂብ አልተገኘም።
-No reorder suggestions right now.,በዚህ ደረሰኝ ላይ ምንም የክፍያ ረድፎች አይገኙም።
-No repeat customers in this period.,ለዚህ ፈረቃ ምንም ክፍያዎች አልተመዘገቡም።
-No response from server,በዚህ ጊዜ ውስጥ ምንም በመጠባበቅ ላይ ያሉ ሒሳቦች የሉም።
-No return invoices found,ምንም በመጠባበቅ ላይ ያሉ ከመስመር ውጭ ደረሰኞች የሉም
-No return item trend found.,ምንም የህትመት ቅርጸቶች አልተገኙም።
-No returnable items found for this invoice,ለተመረጠው ወሰን ምንም መገለጫዎች አልተገኙም።
-No returns were processed in this shift.,ወደ የአሁኑ መገለጫ መመለስ አልተሳካም።
-No risk activity found.,ምንም የቅርብ ጊዜ የደንበኛ እንቅስቃሴ አልተገኘም።
-No sales activity found for this period.,ምንም የቅርብ ጊዜ የአክሲዮን ግቤቶች አልተገኙም።
-No slow moving items.,ምንም መዝገቦች አልተገኙም።
-No staff sales activity found.,አሁን ምንም ጥቆማዎችን መደርደር አይቻልም።
-No stock movement for this period.,በዚህ ጊዜ ውስጥ ምንም ተደጋጋሚ ደንበኞች የሉም።
-No submitted cash movements in this shift.,ከአገልጋይ ምንም ምላሽ የለም።
-No supplier purchases found in this month.,ምንም የመመለሻ ደረሰኞች አልተገኙም።
-No suppliers found for this period.,ምንም የመመለሻ ንጥል አዝማሚያ አልተገኘም።
-No sync trigger has run yet in this session.,ለዚህ የክፍያ መጠየቂያ ምንም ሊመለሱ የሚችሉ ንጥሎች አልተገኙም።
-No tax head breakdown found.,በዚህ ፈረቃ ምንም ተመላሽ አልተደረገም።
-No top items found for this location.,ምንም የአደጋ እንቅስቃሴ አልተገኘም።
-No unpaid invoices,ለዚህ ጊዜ ምንም የሽያጭ እንቅስቃሴ አልተገኘም።
-No variant data found.,በዝግታ የሚንቀሳቀሱ ዕቃዎች የሉም።
-No week-wise sales trend found.,ምንም የሰራተኞች ሽያጭ እንቅስቃሴ አልተገኘም።
-No.,ለዚህ ጊዜ ምንም የአክሲዮን እንቅስቃሴ የለም።
-Nobile Number,በዚህ ፈረቃ ምንም የገንዘብ እንቅስቃሴ አልገባም።
-Not available,በዚህ ወር ምንም የአቅራቢ ግዢዎች አልተገኙም።
-Not checked,ለዚህ ጊዜ ምንም አቅራቢዎች አልተገኙም።
-Not selected,በዚህ ክፍለ ጊዜ ምንም የማመሳሰል ቀስቅሴ እስካሁን አልሄደም።
-Not Set,ምንም የታክስ ጭንቅላት ብልሽት አልተገኘም።
-Notifications,ለዚህ አካባቢ ምንም ዋና ነገሮች አልተገኙም።
-Offer,ምንም ያልተከፈሉ ደረሰኞች የሉም
-Offer Applied,ምንም አይነት ውሂብ አልተገኘም።
-Offer criteria exceeded,ምንም ሳምንታዊ የሽያጭ አዝማሚያ አልተገኘም።
-Offer Item,አይ.
-Offer item unavailable,የኖቤል ቁጥር
-Offer Removed,አይገኝም
-Offer UOM cannot be changed,አልተፈተሸም።
-Offer?,አልተመረጠም።
-Offers,አልተዘጋጀም።
-Offline,ማሳወቂያዎች
-Offline & Sync,አቅርቡ
-Offline Capabilities,አቅርቦት ተተግብሯል።
-Offline data status refreshed,የአቅርቦት መስፈርት አልፏል
-Offline diagnostics,እቃ አቅርቡ
-Offline Invoices,የአቅርቦት እቃ አይገኝም
-Offline invoices status,ቅናሽ ተወግዷል
-Offline invoices synced,አቅርቦት UOM ሊቀየር አይችልም።
-Offline Queue: {0},ቅናሽ?
-Offline rebuild guidance,ቅናሾች
-Offline restore is unavailable for this session.,ከመስመር ውጭ
-Offline selling is available with degraded capabilities.,ከመስመር ውጭ እና አስምር
-Offline snapshot does not match the current POS state.,ከመስመር ውጭ ችሎታዎች
-Offline Status,ከመስመር ውጭ የውሂብ ሁኔታ ታድሷል
-"Offline, terminal, and system controls",ከመስመር ውጭ ምርመራዎች
-OK,ከመስመር ውጭ ደረሰኞች
-Online,ከመስመር ውጭ የክፍያ መጠየቂያዎች ሁኔታ
-Open actions menu,ከመስመር ውጭ ደረሰኞች ተመሳስለዋል።
-Open balance to collect,ከመስመር ውጭ ወረፋ፡ {0}
-Open Customer Display,ከመስመር ውጭ መልሶ መገንባት መመሪያ
-Open drawer,ከመስመር ውጭ ወደነበረበት መመለስ ለዚህ ክፍለ ጊዜ የለም።
-Open invoices,ከመስመር ውጭ ሽያጭ ከተበላሹ ችሎታዎች ጋር ይገኛል።
-Open Payments?,ከመስመር ውጭ ቅጽበታዊ ገጽ እይታ አሁን ካለው የPOS ሁኔታ ጋር አይዛመድም።
-Open POS home,ከመስመር ውጭ ሁኔታ
-Open this screen from POS Menu -> Open Customer Display.,ከመስመር ውጭ፣ ተርሚናል እና የስርዓት መቆጣጠሪያዎች
-OpenCV image processing enabled - Enhanced barcode detection,እሺ
-OpenCV image processing unavailable on this device,በመስመር ላይ
-OpenCV Off,የእርምጃዎች ምናሌን ክፈት
-OpenCV On,ለመሰብሰብ ቀሪ ሂሳብን ይክፈቱ
-OpenCV processing disabled,የደንበኛ ማሳያን ክፈት
-Opening Amount,መሳቢያውን ይክፈቱ
-Opening Cash,ደረሰኞችን ክፈት
-options,ክፍያዎችን ክፈት?
-Order,የPOS ቤትን ይክፈቱ
-Original,ይህንን ስክሪን ከPOS Menu -> ክፈት የደንበኛ ማሳያ።
-Other,የክፍት ሲቪ ምስል ማቀናበር ነቅቷል - የተሻሻለ የአሞሌ ኮድ ማግኘት
-Out,የOpenCV ምስል ማቀናበር በዚህ መሳሪያ ላይ የለም።
-Out of Stock,ክፍት ሲቪ ጠፍቷል
-Out of Stock Items,ክፍት ሲቪ በርቷል።
-Outstanding,OpenCV ማቀናበር ተሰናክሏል።
-Outstanding Credit by Currency,የመክፈቻ መጠን
-Overdue,የመክፈቻ ጥሬ ገንዘብ
-Overpayment Change,አማራጮች
-Overpayment change deducted: {0},ማዘዝ
-Packing List,ኦሪጅናል
-Page Format,ሌላ
-Page unavailable offline,ወጣ
-Paid,ከአክሲዮን ውጪ
-Paid (orig):,ከአክሲዮን ውጪ
-Paid Amount,የላቀ
-Paid change cannot be greater than total change!,በመገበያያ ገንዘብ የላቀ ክሬዲት
-Paid:,ዘግይቷል
-Parent Item,የትርፍ ክፍያ ለውጥ
-Partial,የትርፍ ክፍያ ለውጥ ተቀንሷል፡ {0}
-Partly Paid,የማሸጊያ ዝርዝር
-Party Account,የገጽ ቅርጸት
-Party Type,ገጽ ከመስመር ውጭ የለም።
-Pause terminal until next cashier,የተከፈለ
-PAY,የተከፈለ (ኦሪጅ)
-Payment,የተከፈለበት መጠን
-Payment Account,የተከፈለ ለውጥ ከጠቅላላ ለውጥ ሊበልጥ አይችልም!
-Payment entries processed for Invoice {0},የሚከፈልበት፡
-Payment Entry Type,የወላጅ ንጥል
-Payment History,ከፊል
-Payment ID,በከፊል የሚከፈል
-Payment Method Report,የፓርቲ መለያ
-Payment Methods,የድግስ አይነት
-Payment of {0} received successfully.,እስከሚቀጥለው ገንዘብ ተቀባይ ድረስ ተርሚናል ባለበት ያቁሙ
-Payment Progress,ይክፈሉ
-Payment Reconciliation,ክፍያ
-Payment request status could not be retrieved. Please try again,የክፍያ መለያ
-Payment Request took too long to respond. Please try requesting for payment again,ለክፍያ መጠየቂያ {0} የክፍያ ግቤቶች ተካሂደዋል
-Payment saved offline,የክፍያ የመግቢያ ዓይነት
-Payment State,የክፍያ ታሪክ
-Payment Status,የክፍያ መታወቂያ
-Payment submitted but print function could not be executed. Payment name not found.,የክፍያ ስልት ሪፖርት
-Payment submitted.,የመክፈያ ዘዴዎች
-Payment Summary,የ{0} ክፍያ በተሳካ ሁኔታ ደርሷል።
-Payments,የክፍያ ሂደት
-Payments are not open. Do you want to open payments and submit?,የክፍያ ማስታረቅ
-Payments by Mode of Payment,የክፍያ ጥያቄ ሁኔታን መልሶ ማግኘት አልተቻለም።
-PDF,እባክዎ እንደገና ይሞክሩ
-Peak Hour,የክፍያ ጥያቄ ምላሽ ለመስጠት በጣም ረጅም ጊዜ ወስዷል።
-Peak Memory:,እባክዎ እንደገና ክፍያ ለመጠየቅ ይሞክሩ
-Peak Server:,ክፍያ ከመስመር ውጭ ተቀምጧል
-Peak:,የክፍያ ሁኔታ
-Pending,የክፍያ ሁኔታ
-Pending Amount,ክፍያ ገብቷል ነገር ግን የህትመት ተግባር ሊፈጸም አልቻለም።
-Pending count updated from {0} to {1},የክፍያ ስም አልተገኘም።
-Pending Exposure,ክፍያ ገብቷል።
-Pending Invoices,የክፍያ ማጠቃለያ
-Pending Ratio,ክፍያዎች
-Pending Sales,ክፍያዎች ክፍት አይደሉም።
-Pending sales: {0} | Cache usage: {1}%,ክፍያዎችን ከፍተው ማስገባት ይፈልጋሉ?
-Pending Sync,ክፍያዎች በክፍያ ዘዴ
-Pending: {0},ፒዲኤፍ
-Pending: {0} | Synced: {1} | Draft: {2},ከፍተኛ ሰዓት
-Per Page,ከፍተኛ ማህደረ ትውስታ፡
-Personal,ከፍተኛ አገልጋይ፡
-Personal preferences adjust the current cashier experience without changing the active POS route.,ጫፍ፡
-PIN confirmation does not match.,በመጠባበቅ ላይ
-PIN must be 4 to 8 digits.,በመጠባበቅ ላይ ያለ መጠን
-Please add at least one item.,በመጠባበቅ ላይ ያለ ቁጥር ከ{0} ወደ {1} ተዘምኗል
-Please allow camera access to scan codes,በመጠባበቅ ላይ ያለ ተጋላጭነት
-Please enter payment amount,በመጠባበቅ ላይ ያሉ ደረሰኞች
-Please fill all required fields,በመጠባበቅ ላይ ያለ ሬሾ
-Please make a payment or select a payment,በመጠባበቅ ላይ ያሉ ሽያጭዎች
-Please request phone payment or use another payment method,በመጠባበቅ ላይ ያሉ ሽያጮች፡ {0} |
-Please select a customer first,የመሸጎጫ አጠቃቀም፡ {1}%
-Please select a party,ማመሳሰልን በመጠባበቅ ላይ
-Please select a party before reconciling.,በመጠባበቅ ላይ፡ {0}
-Please select a valid movement type.,በመጠባበቅ ላይ፡ {0} |
-Please select an invoice,የሰመረ፡ {1} |
-Please select company before reconciling.,ረቂቅ፡ {2}
-Please set the customer's mobile number,በገጽ
-Please try again or enter the item manually.,ግላዊ
-Please verify the barcode or check the item's availability.,የግል ምርጫዎች የነቃውን የPOS መንገድ ሳይቀይሩ የአሁኑን የገንዘብ ተቀባይ ልምድ ያስተካክላሉ።
-Points,የፒን ማረጋገጫ አይዛመድም።
-Popup blocked. Please allow popups.,ፒን ከ4 እስከ 8 አሃዞች መሆን አለበት።
-POS,እባክዎ ቢያንስ አንድ ንጥል ያክሉ።
-POS controls and maintenance,እባክህ የካሜራውን የቃኝ ኮዶች ፍቀድ
-POS Expense is disabled for this POS Profile.,እባክዎ የክፍያ መጠን ያስገቡ
-POS is running with limited offline prerequisites.,እባክዎ ሁሉንም አስፈላጊ መስኮች ይሙሉ
-POS Profile,እባክዎ ክፍያ ይፈጽሙ ወይም ክፍያ ይምረጡ
-Position the QR code or barcode within the scanning area,እባክዎ የስልክ ክፍያ ይጠይቁ ወይም ሌላ የመክፈያ ዘዴ ይጠቀሙ
-Posting,እባክዎ መጀመሪያ ደንበኛ ይምረጡ
-Posting and Price List,እባክዎ ፓርቲ ይምረጡ
-Posting Date,እባክዎን ከማስታረቅዎ በፊት ፓርቲ ይምረጡ።
-Preparing background sync,እባክዎ ትክክለኛ የእንቅስቃሴ አይነት ይምረጡ።
-"Press OK to continue offline with a warning, or Cancel to retry.",እባክዎ ደረሰኝ ይምረጡ
-Previous unit of measure,እባክዎን ከማስታረቅዎ በፊት ኩባንያ ይምረጡ።
-Price List,እባክዎ የደንበኛውን የሞባይል ቁጥር ያዘጋጁ
-Price List Rate,እባክዎ እንደገና ይሞክሩ ወይም ንጥሉን በእጅ ያስገቡ።
-Price list rate updated locally only,እባክዎን የአሞሌ ኮድ ያረጋግጡ ወይም የንጥሉን ተገኝነት ያረጋግጡ።
-Pricing & Discounts,ነጥቦች
-Pricing Rule,ብቅ ባይ ታግዷል።
-Print,እባክህ ብቅ-ባዮችን ፍቀድ።
-Print Draft,POS
-Print Format (Invoice),የ POS ቁጥጥር እና ጥገና
-Print Format (Order),የPOS ወጪ ለዚህ የPOS መገለጫ ተሰናክሏል።
-Print invoice,POS በተወሰኑ ከመስመር ውጭ ቅድመ ሁኔታዎች እያሄደ ነው።
-Print Last Invoice,የPOS መገለጫ
-Print Purchase Invoice instead of PO,የQR ኮድ ወይም ባርኮድ በፍተሻ ቦታ ውስጥ ያስቀምጡ
-Printer,በመለጠፍ ላይ
-Processed returns impacting the shift totals,መለጠፍ እና የዋጋ ዝርዝር
-Processing Payment,የመለጠፍ ቀን
-Processing payment entries for Invoice {0},የበስተጀርባ ማመሳሰልን በማዘጋጀት ላይ
-Profile,ከመስመር ውጭ በማስጠንቀቂያ ለመቀጠል እሺን ይጫኑ፣ ወይም እንደገና ለመሞከር ሰርዝ።
-Profiles,የቀደመው የመለኪያ አሃድ
-Profit,የዋጋ ዝርዝር
-Profit: Invoice Item Estimate,የዋጋ ዝርዝር ተመን
-Profit: Stock Ledger (COGS),የዋጋ ዝርዝር ተመን በአገር ውስጥ ብቻ ተዘምኗል
-Profitability Report,የዋጋ አሰጣጥ እና ቅናሾች
-Prorated return discount,የዋጋ አሰጣጥ ደንብ
-Purchase Amount,አትም
-Purchase Invoices,ረቂቅ ማተም
-Purchase Order created,የህትመት ቅርጸት (ክፍያ መጠየቂያ)
-Qty,የህትመት ቅርጸት (ትዕዛዝ)
-Qualified,ደረሰኝ አትም
-Quantity,የመጨረሻውን ደረሰኝ አትም
-Quantity exceeds available stock,የግዢ መጠየቂያ ደረሰኝን ከPO ይልቅ አትም።
-Quick Actions,አታሚ
-Quotation {0} is Submitted,በለውጥ ድምር ላይ ተጽእኖ የሚያሳድሩ የተካሄዱ ተመላሾች
-Quotation submitted,ክፍያን በማስኬድ ላይ
-QZ Tray connected.,ለክፍያ መጠየቂያ {0} የክፍያ ግቤቶችን በማስኬድ ላይ
-QZ Tray is manually disconnected. Press Connect to enable it again.,መገለጫ
-QZ Tray is not connected.,መገለጫዎች
-QZ Tray Setup,ትርፍ
-Rate,ትርፍ፡ የክፍያ መጠየቂያ ንጥል ግምት
-Rate adjusted to maximum allowed discount,ትርፍ፡ የአክሲዮን መዝገብ (COGS)
-Ready,ትርፋማነት ሪፖርት
-Ready to resume,የተመጣጠነ የመመለሻ ቅናሽ
-Ready!,የግዢ መጠን
-Real-time POS insights for retail operations.,የግዢ ደረሰኞች
-Rebuild Offline Data,የግዢ ትዕዛዝ ተፈጥሯል።
-Receive,ብዛት
-Receive now,ብቁ
-Received,ብዛት
-Received:,ብዛት ካለው ክምችት አልፏል
-Recent Movement Entries,ፈጣን እርምጃዎች
-Recent updates about your invoices,ጥቅስ {0} ገብቷል።
-Recently Active Customers,ጥቅስ ገብቷል።
-Rechecking connection,QZ Tray ተገናኝቷል።
-Reconcile payment methods and close shift,QZ Tray በእጅ ተቋርጧል።
-Reconciling Payments,እንደገና ለማንቃት Connect የሚለውን ይጫኑ።
-"Reconnect and open this page once while online, then offline refreshes will be able to restore it.",QZ Tray አልተገናኘም።
-Reconnect online to refresh cached offline data from the server.,QZ Tray ማዋቀር
-Recreate local offline prerequisites from scratch,ደረጃ ይስጡ
-Recv:,ከፍተኛው የሚፈቀደው ቅናሽ መጠን ተስተካክሏል።
-Redeem,ዝግጁ
-Redeem / Scan,ከቆመበት ለመቀጠል ዝግጁ
-Redeem Amount,ዝግጁ!
-Redeem Mode,ለችርቻሮ ስራዎች የእውነተኛ ጊዜ POS ግንዛቤዎች።
-Redeemed Amount,ከመስመር ውጭ ውሂብን እንደገና ገንባ
-Redeemed credit cannot be greater than its total.,ተቀበል
-Redemption and Totals,አሁን ተቀበል
-Reference,ተቀብሏል
-Refresh,ተቀብለዋል፡
-Refresh Exchange Rate,የቅርብ ጊዜ እንቅስቃሴ ግቤቶች
-Refresh Offline Data,ስለ ደረሰኞችዎ የቅርብ ጊዜ ዝመናዎች
-Refresh Printers,በቅርብ ጊዜ ንቁ ደንበኞች
-Refund,ግንኙነትን እንደገና በመፈተሽ ላይ
-Release Notes,የክፍያ ዘዴዎችን ያስታርቁ እና ፈረቃን ይዝጉ
-Reload,ክፍያዎችን ማስታረቅ
-Reload customers,በመስመር ላይ እያለ ይህን ገጽ አንድ ጊዜ እንደገና ያገናኙት እና ይክፈቱት፣ ከዚያ ከመስመር ውጭ እድሳት ወደነበረበት መመለስ ይችላል።
-Reload Items,የተሸጎጠ ከመስመር ውጭ ውሂብ ከአገልጋዩ ለማደስ በመስመር ላይ እንደገና ይገናኙ።
-Reload Now,የአካባቢ ከመስመር ውጭ ቅድመ ሁኔታዎችን ከባዶ ፍጠር
-Reload to apply the latest changes. Your current session will be refreshed.,ማጣቀሻ፡
-Reload Workflow,ይዋጁ
-Remarks,ማስመለስ/መቃኘት
-Remarks are required.,የማስመለስ መጠን
-Remove,ማስመለስ ሁነታ
-Remove barcode item,የተወሰደ መጠን
-Remove cached data and reload the POS app,የተወሰደ ክሬዲት ከጠቅላላው ሊበልጥ አይችልም።
-Remove item,ቤዛ እና ድምር
-Remove Offer,ማጣቀሻ
-Reorder / Purchase Suggestions,አድስ
-Repair Candidate,የምንዛሬ ተመንን አድስ
-Repair Change Allocation,ከመስመር ውጭ ውሂብን ያድሱ
-Repair requires an online connection,አታሚዎችን አድስ
-Repaired,ተመላሽ ገንዘብ
-Repairing change allocation,የመልቀቂያ ማስታወሻዎች
-Repeat Customers,ዳግም ጫን
-Repeat Rate,ደንበኞችን እንደገና ይጫኑ
-Reprint previous transaction,ንጥሎችን እንደገና ጫን
-Request,አሁን እንደገና ጫን
-Request ID: {0},የቅርብ ጊዜ ለውጦችን ለመተግበር እንደገና ይጫኑ።
-Request Payment,የአሁኑ ክፍለ ጊዜዎ ይታደሳል።
-Requested route: {0},የስራ ፍሰት እንደገና ጫን
-Required columns cannot be hidden,አስተያየቶች
-Reset,አስተያየት ያስፈልጋል።
-Reset item name,አስወግድ
-Reset to Default,የባርኮድ ንጥል ነገርን ያስወግዱ
-Resource Health,የተሸጎጠ ውሂብን ያስወግዱ እና የPOS መተግበሪያን እንደገና ይጫኑ
-Restricted,ንጥሉን ያስወግዱ
-Restricted operational controls for supervisors only.,ቅናሹን ያስወግዱ
-Retry,የጥቆማ አስተያየቶችን እንደገና ይዘዙ/ይግዙ
-Retry route,ጥገና እጩ
-Return,የጥገና ለውጥ ምደባ
-Return Amount,ጥገና የመስመር ላይ ግንኙነት ያስፈልገዋል
-Return Count,ተስተካክሏል
-Return items must have negative quantities,የለውጥ ምደባን በመጠገን ላይ
-Return total must be negative,ደንበኞችን መድገም
-Return Valid Until,የድግግሞሽ መጠን
-Return window passed,ያለፈውን ግብይት እንደገና ያትሙ
-Return without Invoice,ጥያቄ
+Last sync: {0} | ok: {1} | failed: {2} | skipped: {3},የመጨረሻው አመሳስል፡ {0} | እሺ፡ {1} | አልተሳካም፡ {2} | ተዘሏል፡ {3}
+Latest entries for current shift,ለአሁኑ ፈረቃ የቅርብ ጊዜ ግቤቶች
+Lead Time,መሪ ጊዜ
+Limited,የተወሰነ
+lines,መስመሮች
+List,ዝርዝር
+Live Snapshot,የቀጥታ ቅጽበታዊ ገጽ እይታ
+Load a POS profile and cashier first.,መጀመሪያ የPOS መገለጫ እና ገንዘብ ተቀባይ ጫን።
+Load More Invoices,ተጨማሪ ደረሰኞችን ጫን
+Load previously saved invoices,ቀደም ሲል የተቀመጡ ደረሰኞችን ጫን
+Load Sale,የጭነት ሽያጭ
+Load Sales Invoice,የሽያጭ ደረሰኝ ጫን
+Loading app data...,የመተግበሪያ ውሂብን በመጫን ላይ...
+Loading customer database...,የደንበኛ ዳታቤዝ በመጫን ላይ...
+Loading customers...,ደንበኞችን በመጫን ላይ...
+Loading database stats...,የውሂብ ጎታ ስታቲስቲክስን በመጫን ላይ...
+Loading details...,ዝርዝሮችን በመጫን ላይ...
+Loading invoice history...,የክፍያ መጠየቂያ ታሪክን በመጫን ላይ...
+Loading items...,ንጥሎችን በመጫን ላይ...
+Loading product catalog...,የምርት ካታሎግ በመጫን ላይ...
+Loading return invoices...,የመመለሻ ደረሰኞችን በመጫን ላይ...
+Loading server CPU/memory usage...,የአገልጋይ ሲፒዩ/የማህደረ ትውስታ አጠቃቀምን በመጫን ላይ...
+Loading suppliers...,አቅራቢዎችን በመጫን ላይ...
+Loading unpaid invoices...,ያልተከፈሉ ደረሰኞችን በመጫን ላይ...
+Loading view...,እይታን በመጫን ላይ...
+Loading...,በመጫን ላይ...
+Local storage is unavailable. Switching to online-only mode.,የአካባቢ ማከማቻ የለም። ወደ የመስመር ላይ-ብቻ ሁነታ በመቀየር ላይ።
+localStorage,የአካባቢ ማከማቻ
+Location Performance,የአካባቢ አፈጻጸም
+Locations,ቦታዎች
+Lock Screen,የመቆለፊያ ማያ ገጽ
+Lookup Workflow,የስራ ፍሰት ፍለጋ
+Loss,ኪሳራ
+Low,ዝቅተኛ
+Low Stock,ዝቅተኛ አክሲዮን
+Low Stock Alerts,ዝቅተኛ የአክሲዮን ማንቂያዎች
+Low Stock Items,ዝቅተኛ የአክሲዮን እቃዎች
+Low Stock Threshold,ዝቅተኛ የአክሲዮን ገደብ
+Low Stock Total,ዝቅተኛ የአክሲዮን ጠቅላላ
+Lowest Margin,ዝቅተኛው ህዳግ
+Low-frequency maintenance and system details.,ዝቅተኛ-ድግግሞሽ ጥገና እና የስርዓት ዝርዝሮች.
+Loyalty Redeemed,ታማኝነት ተቤዠ
+Loyalty Redemption,ታማኝነት መቤዠት።
+Make New Payment,አዲስ ክፍያ ያከናውኑ
+Manage all,ሁሉንም አስተዳድር
+Manage and synchronize your offline transactions,ከመስመር ውጭ ግብይቶችዎን ያስተዳድሩ እና ያመሳስሉ።
+Manage Cashier PIN,ገንዘብ ተቀባይ ፒን ያስተዳድሩ
+"Manage offline tools, terminal controls, and maintenance from one workspace.",ከመስመር ውጭ መሳሪያዎችን፣ የተርሚናል መቆጣጠሪያዎችን እና ከአንድ የስራ ቦታ ጥገናን ያቀናብሩ።
+manual,መመሪያ
+"Manual codes, barcode scans, and QR scans work in the same field",በእጅ ኮዶች፣ ባርኮድ ስካን እና የQR ቅኝቶች በተመሳሳይ መስክ ይሰራሉ
+Manual offline mode is enabled,በእጅ ከመስመር ውጭ ሁነታ ነቅቷል።
+Margin,ህዳግ
+Maximum available quantity is {0}. Quantity adjusted to match stock.,ከፍተኛው የሚገኘው መጠን {0} ነው። መጠኑ ከአክሲዮን ጋር እንዲመሳሰል ተስተካክሏል።
+Maximum discount amount for this offer item is {0}.,የዚህ ቅናሽ ንጥል ከፍተኛው የቅናሽ መጠን {0} ነው።
+Maximum discount percentage for this offer item is {0}%.,የዚህ ቅናሽ ንጥል ከፍተኛው ቅናሽ መቶኛ {0}% ነው።
+Maximum offer quantity is {0}. Quantity adjusted to allowed limit.,ከፍተኛው የዋጋ ቅናሽ መጠን {0} ነው። ብዛት በተፈቀደው ገደብ ተስተካክሏል።
+Medium,መካከለኛ
+Method-wise Collections,ዘዴ-ጥበብ ስብስቦች
+Minimum allowed rate for this offer item is {0}.,ለዚህ ቅናሽ ንጥል የሚፈቀደው ዝቅተኛው ተመን {0} ነው።
+Minimum Qty,ዝቅተኛው ብዛት
+Mobile No,የሞባይል ቁጥር
+Mode,ሁነታ
+Mode of Payment,የመክፈያ ዘዴ
+Month,ወር
+Month ?,ወር?
+Monthly Profit,ወርሃዊ ትርፍ
+Monthly Sales,ወርሃዊ ሽያጭ
+Monthly Sales Summary,ወርሃዊ የሽያጭ ማጠቃለያ
+Month-wise,ወር-ጥበብ
+Most Active Cashiers,በጣም ንቁ ገንዘብ ተቀባዮች
+Movement Type,የእንቅስቃሴ አይነት
+Movements,እንቅስቃሴዎች
+Multi Currency,ባለብዙ ምንዛሪ
+N/A,ኤን/ኤ
+Name,ስም
+Negative Stock,አሉታዊ አክሲዮን።
+Negative Stock Items,አሉታዊ የአክሲዮን እቃዎች
+Negative values not allowed,አሉታዊ እሴቶች አይፈቀዱም።
+Net,የተጣራ
+Net Qty,የተጣራ Qty
+Net Sales,የተጣራ ሽያጭ
+Net Value,የተጣራ እሴት
+Never,በጭራሽ
+New changes are ready to load,አዲስ ለውጦች ለመጫን ዝግጁ ናቸው።
+New Item,አዲስ ነገር
+New Offer Available,አዲስ ቅናሽ አለ።
+New PIN,አዲስ ፒን
+New rate,አዲስ ተመን
+Next unit of measure,የሚቀጥለው መለኪያ
+No attribute data found.,ምንም የባህሪ ውሂብ አልተገኘም።
+No Barcode,ባር ኮድ የለም
+No barcode found for UOM '{0}',ለ UOM '{0}' ምንም ባር ኮድ አልተገኘም
+No branch/location data found.,ምንም የቅርንጫፍ/የአካባቢ ውሂብ አልተገኘም።
+No brand data found.,ምንም የምርት ስም ውሂብ አልተገኘም።
+No cached gift card balance is available offline.,ምንም የተሸጎጠ የስጦታ ካርድ ቀሪ ሒሳብ ከመስመር ውጭ አይገኝም።
+No camera found on this device. Please ensure your device has a working camera.,በዚህ መሳሪያ ላይ ምንም ካሜራ አልተገኘም። እባክዎ መሳሪያዎ የሚሰራ ካሜራ እንዳለው ያረጋግጡ።
+No capability warnings recorded yet.,እስካሁን ምንም የችሎታ ማስጠንቀቂያዎች አልተመዘገቡም።
+No cash expected for this shift.,ለዚህ ፈረቃ ምንም ገንዘብ አይጠበቅም።
+No cash mode configured,ምንም የገንዘብ ሁነታ አልተዋቀረም።
+No cash movement type is allowed for this POS Profile.,ለዚህ የPOS መገለጫ ምንም አይነት የገንዘብ እንቅስቃሴ አይፈቀድም።
+No cashier PIN is set yet. Create one now.,እስካሁን ምንም ገንዘብ ተቀባይ ፒን አልተዘጋጀም። አሁን ፍጠር።
+No cashier profiles are available for this POS profile yet.,ለዚህ የPOS መገለጫ እስካሁን ምንም ገንዘብ ተቀባይ መገለጫዎች የሉም።
+No cashier-wise discount/void/return activity.,ገንዘብ ተቀባይ-ጥበበኛ ቅናሽ/ባዶ/የተመላሽ እንቅስቃሴ የለም።
+No category data found.,ምንም የምድብ ውሂብ አልተገኘም።
+No category profitability data found.,ምንም የምድብ ትርፋማነት መረጃ አልተገኘም።
+No change returned recorded for this shift.,ለዚህ ፈረቃ ምንም የተመዘገበ ለውጥ የለም።
+No change-allocation invoices match the current filters.,ምንም ለውጥ-ምደባ ደረሰኞች ከአሁኑ ማጣሪያዎች ጋር አይዛመዱም።
+No charge head breakdown found.,ምንም ክፍያ የጭንቅላት ብልሽት አልተገኘም።
+No Company Selected,ምንም ኩባንያ አልተመረጠም።
+No customer sales data found.,ምንም የደንበኛ ሽያጭ ውሂብ አልተገኘም።
+No day-wise discount/void/return trend.,ምንም ቀን-ጥበብ ያለው ቅናሽ/ባዶ/መመለስ አዝማሚያ የለም።
+No day-wise payment data found.,ምንም የቀን-ጥበብ ክፍያ ውሂብ አልተገኘም።
+No day-wise profitability trend found.,ምንም የቀን-ጥበብ የትርፋማነት አዝማሚያ አልተገኘም።
+No day-wise purchase data found.,ምንም የቀን-ጥበብ ግዢ ውሂብ አልተገኘም።
+No day-wise sales trend found.,ምንም የቀን-ጥበብ የሽያጭ አዝማሚያ አልተገኘም።
+No day-wise tax/charges trend found.,የቀን ቀረጥ/የክፍያ አዝማሚያ አልተገኘም።
+No dead stock items.,የሞቱ ዕቃዎች የሉም።
+No due date,የማለቂያ ቀን የለም።
+No exact repair match found for this invoice,ለዚህ ደረሰኝ ምንም ትክክለኛ የጥገና ተዛማጅ አልተገኘም።
+No hourly sales trend found for today.,ለዛሬ ምንም የሰዓት የሽያጭ አዝማሚያ አልተገኘም።
+No invoice activity found.,ምንም የክፍያ መጠየቂያ እንቅስቃሴ አልተገኘም።
+No invoices found,ምንም ደረሰኞች አልተገኙም።
+No invoices found. Try different search criteria.,ምንም ደረሰኞች አልተገኙም። የተለያዩ የፍለጋ መስፈርቶችን ይሞክሩ።
+No invoices recorded for this shift.,ለዚህ ፈረቃ ምንም ደረሰኞች አልተመዘገቡም።
+No item profitability data found.,ምንም ንጥል ትርፋማነት ውሂብ አልተገኘም።
+No item sales data found for this period.,ለዚህ ጊዜ ምንም የንጥል ሽያጭ ውሂብ አልተገኘም።
+No items found,ምንም ንጥሎች አልተገኙም።
+No items in cart,በጋሪው ውስጥ ምንም እቃዎች የሉም
+No items with barcodes to print,ምንም የሚታተም ባርኮድ ያላቸው እቃዎች የሉም
+No location-wise top item data found.,ምንም አካባቢ-ጥበብ ያለው ከፍተኛ ንጥል ነገር አልተገኘም።
+No low stock alerts right now.,አሁን ምንም ዝቅተኛ የአክሲዮን ማንቂያዎች የሉም።
+No low stock items.,ዝቅተኛ የአክሲዮን ዕቃዎች የሉም።
+No matching items in cart,በጋሪው ውስጥ ምንም ተዛማጅ እቃዎች የሉም
+No month-wise sales trend found.,ምንም ወር-ጥበብ ያለው የሽያጭ አዝማሚያ አልተገኘም።
+No negative stock items.,ምንም አሉታዊ የአክሲዮን ዕቃዎች የሉም።
+No notifications yet,እስካሁን ምንም ማሳወቂያዎች የሉም
+No offline cash movement synced.,ምንም ከመስመር ውጭ የገንዘብ እንቅስቃሴ አልተመሳሰለም።
+No offline invoices pending synchronization,ምንም ከመስመር ውጭ ደረሰኞች ማመሳሰልን በመጠባበቅ ላይ
+No offline sync issues recorded yet.,እስካሁን ምንም ከመስመር ውጭ የማመሳሰል ችግሮች አልተመዘገቡም።
+No out-of-stock items.,ከአክሲዮን ውጪ የሆኑ እቃዎች የሉም።
+No outstanding credit invoices for this shift.,ለዚህ ፈረቃ ምንም የላቀ የብድር መጠየቂያ ደረሰኞች የሉም።
+No payment collection data found.,ምንም የክፍያ ስብስብ ውሂብ አልተገኘም።
+No payment rows available on this invoice.,በዚህ ደረሰኝ ላይ ምንም የክፍያ ረድፎች አይገኙም።
+No payments registered for this shift.,ለዚህ ፈረቃ ምንም ክፍያዎች አልተመዘገቡም።
+No pending balances in this period.,በዚህ ጊዜ ውስጥ ምንም በመጠባበቅ ላይ ያሉ ሒሳቦች የሉም።
+No pending offline invoices,ምንም በመጠባበቅ ላይ ያሉ ከመስመር ውጭ ደረሰኞች የሉም
+No Print Formats Found,ምንም የህትመት ቅርጸቶች አልተገኙም።
+No profiles found for selected scope. Falling back to current profile failed.,ለተመረጠው ወሰን ምንም መገለጫዎች አልተገኙም። ወደ የአሁኑ መገለጫ መመለስ አልተሳካም።
+No recent customer activity found.,ምንም የቅርብ ጊዜ የደንበኛ እንቅስቃሴ አልተገኘም።
+No recent stock entries found.,ምንም የቅርብ ጊዜ የአክሲዮን ግቤቶች አልተገኙም።
+No records found,ምንም መዝገቦች አልተገኙም።
+No reorder suggestions right now.,አሁን ምንም ጥቆማዎችን መደርደር አይቻልም።
+No repeat customers in this period.,በዚህ ጊዜ ውስጥ ምንም ተደጋጋሚ ደንበኞች የሉም።
+No response from server,ከአገልጋይ ምንም ምላሽ የለም።
+No return invoices found,ምንም የመመለሻ ደረሰኞች አልተገኙም።
+No return item trend found.,ምንም የመመለሻ ንጥል አዝማሚያ አልተገኘም።
+No returnable items found for this invoice,ለዚህ የክፍያ መጠየቂያ ምንም ሊመለሱ የሚችሉ ንጥሎች አልተገኙም።
+No returns were processed in this shift.,በዚህ ፈረቃ ምንም ተመላሽ አልተደረገም።
+No risk activity found.,ምንም የአደጋ እንቅስቃሴ አልተገኘም።
+No sales activity found for this period.,ለዚህ ጊዜ ምንም የሽያጭ እንቅስቃሴ አልተገኘም።
+No slow moving items.,በዝግታ የሚንቀሳቀሱ ዕቃዎች የሉም።
+No staff sales activity found.,ምንም የሰራተኞች ሽያጭ እንቅስቃሴ አልተገኘም።
+No stock movement for this period.,ለዚህ ጊዜ ምንም የአክሲዮን እንቅስቃሴ የለም።
+No submitted cash movements in this shift.,በዚህ ፈረቃ ምንም የገንዘብ እንቅስቃሴ አልገባም።
+No supplier purchases found in this month.,በዚህ ወር ምንም የአቅራቢ ግዢዎች አልተገኙም።
+No suppliers found for this period.,ለዚህ ጊዜ ምንም አቅራቢዎች አልተገኙም።
+No sync trigger has run yet in this session.,በዚህ ክፍለ ጊዜ ምንም የማመሳሰል ቀስቅሴ እስካሁን አልሄደም።
+No tax head breakdown found.,ምንም የታክስ ጭንቅላት ብልሽት አልተገኘም።
+No top items found for this location.,ለዚህ አካባቢ ምንም ዋና ነገሮች አልተገኙም።
+No unpaid invoices,ምንም ያልተከፈሉ ደረሰኞች የሉም
+No variant data found.,ምንም አይነት ውሂብ አልተገኘም።
+No week-wise sales trend found.,ምንም ሳምንታዊ የሽያጭ አዝማሚያ አልተገኘም።
+No.,አይ.
+Nobile Number,የኖቤል ቁጥር
+Not available,አይገኝም
+Not checked,አልተፈተሸም።
+Not selected,አልተመረጠም።
+Not Set,አልተዘጋጀም።
+Notifications,ማሳወቂያዎች
+Offer,አቅርቡ
+Offer Applied,አቅርቦት ተተግብሯል።
+Offer criteria exceeded,የአቅርቦት መስፈርት አልፏል
+Offer Item,እቃ አቅርቡ
+Offer item unavailable,የአቅርቦት እቃ አይገኝም
+Offer Removed,ቅናሽ ተወግዷል
+Offer UOM cannot be changed,አቅርቦት UOM ሊቀየር አይችልም።
+Offer?,ቅናሽ?
+Offers,ቅናሾች
+Offline,ከመስመር ውጭ
+Offline & Sync,ከመስመር ውጭ እና አስምር
+Offline Capabilities,ከመስመር ውጭ ችሎታዎች
+Offline data status refreshed,ከመስመር ውጭ የውሂብ ሁኔታ ታድሷል
+Offline diagnostics,ከመስመር ውጭ ምርመራዎች
+Offline Invoices,ከመስመር ውጭ ደረሰኞች
+Offline invoices status,ከመስመር ውጭ የክፍያ መጠየቂያዎች ሁኔታ
+Offline invoices synced,ከመስመር ውጭ ደረሰኞች ተመሳስለዋል።
+Offline Queue: {0},ከመስመር ውጭ ወረፋ፡ {0}
+Offline rebuild guidance,ከመስመር ውጭ መልሶ መገንባት መመሪያ
+Offline restore is unavailable for this session.,ከመስመር ውጭ ወደነበረበት መመለስ ለዚህ ክፍለ ጊዜ የለም።
+Offline selling is available with degraded capabilities.,ከመስመር ውጭ ሽያጭ ከተበላሹ ችሎታዎች ጋር ይገኛል።
+Offline snapshot does not match the current POS state.,ከመስመር ውጭ ቅጽበታዊ ገጽ እይታ አሁን ካለው የPOS ሁኔታ ጋር አይዛመድም።
+Offline Status,ከመስመር ውጭ ሁኔታ
+"Offline, terminal, and system controls",ከመስመር ውጭ፣ ተርሚናል እና የስርዓት መቆጣጠሪያዎች
+OK,እሺ
+Online,በመስመር ላይ
+Open actions menu,የእርምጃዎች ምናሌን ክፈት
+Open balance to collect,ለመሰብሰብ ቀሪ ሂሳብን ይክፈቱ
+Open Customer Display,የደንበኛ ማሳያን ክፈት
+Open drawer,መሳቢያውን ይክፈቱ
+Open invoices,ደረሰኞችን ክፈት
+Open Payments?,ክፍያዎችን ክፈት?
+Open POS home,የPOS ቤትን ይክፈቱ
+Open this screen from POS Menu -> Open Customer Display.,ይህንን ስክሪን ከPOS Menu -> ክፈት የደንበኛ ማሳያ።
+OpenCV image processing enabled - Enhanced barcode detection,የክፍት ሲቪ ምስል ማቀናበር ነቅቷል - የተሻሻለ የአሞሌ ኮድ ማግኘት
+OpenCV image processing unavailable on this device,የOpenCV ምስል ማቀናበር በዚህ መሳሪያ ላይ የለም።
+OpenCV Off,ክፍት ሲቪ ጠፍቷል
+OpenCV On,ክፍት ሲቪ በርቷል።
+OpenCV processing disabled,OpenCV ማቀናበር ተሰናክሏል።
+Opening Amount,የመክፈቻ መጠን
+Opening Cash,የመክፈቻ ጥሬ ገንዘብ
+options,አማራጮች
+Order,እዘዝ
+Original,ኦሪጅናል
+Other,ሌላ
+Out,ወጣ
+Out of Stock,ከአክሲዮን ውጪ
+Out of Stock Items,ከአክሲዮን ውጪ
+Outstanding,የላቀ
+Outstanding Credit by Currency,በመገበያያ ገንዘብ የላቀ ክሬዲት
+Overdue,ዘግይቷል
+Overpayment Change,የትርፍ ክፍያ ለውጥ
+Overpayment change deducted: {0},የትርፍ ክፍያ ለውጥ ተቀንሷል፡ {0}
+Packing List,የማሸጊያ ዝርዝር
+Page Format,የገጽ ቅርጸት
+Page unavailable offline,ገጽ ከመስመር ውጭ የለም።
+Paid,የተከፈለ
+Paid (orig):,የተከፈለ (ኦሪጅ)
+Paid Amount,የተከፈለበት መጠን
+Paid change cannot be greater than total change!,የተከፈለ ለውጥ ከጠቅላላ ለውጥ ሊበልጥ አይችልም!
+Paid:,የሚከፈልበት፡
+Parent Item,የወላጅ ንጥል
+Partial,ከፊል
+Partly Paid,በከፊል የሚከፈል
+Party Account,የፓርቲ መለያ
+Party Type,የድግስ አይነት
+Pause terminal until next cashier,እስከሚቀጥለው ገንዘብ ተቀባይ ድረስ ተርሚናል ባለበት ያቁሙ
+PAY,ይክፈሉ
+Payment,ክፍያ
+Payment Account,የክፍያ መለያ
+Payment entries processed for Invoice {0},ለክፍያ መጠየቂያ {0} የክፍያ ግቤቶች ተካሂደዋል
+Payment Entry Type,የክፍያ የመግቢያ ዓይነት
+Payment History,የክፍያ ታሪክ
+Payment ID,የክፍያ መታወቂያ
+Payment Method Report,የክፍያ ስልት ሪፖርት
+Payment Methods,የመክፈያ ዘዴዎች
+Payment of {0} received successfully.,የ{0} ክፍያ በተሳካ ሁኔታ ደርሷል።
+Payment Progress,የክፍያ ሂደት
+Payment Reconciliation,የክፍያ ማስታረቅ
+Payment request status could not be retrieved. Please try again,የክፍያ ጥያቄ ሁኔታን መልሶ ማግኘት አልተቻለም። እባክዎ እንደገና ይሞክሩ
+Payment Request took too long to respond. Please try requesting for payment again,የክፍያ ጥያቄ ምላሽ ለመስጠት በጣም ረጅም ጊዜ ወስዷል። እባክዎ እንደገና ክፍያ ለመጠየቅ ይሞክሩ
+Payment saved offline,ክፍያ ከመስመር ውጭ ተቀምጧል
+Payment State,የክፍያ ሁኔታ
+Payment Status,የክፍያ ሁኔታ
+Payment submitted but print function could not be executed. Payment name not found.,ክፍያ ገብቷል ነገር ግን የህትመት ተግባር ሊፈጸም አልቻለም። የክፍያ ስም አልተገኘም።
+Payment submitted.,ክፍያ ገብቷል።
+Payment Summary,የክፍያ ማጠቃለያ
+Payments,ክፍያዎች
+Payments are not open. Do you want to open payments and submit?,ክፍያዎች ክፍት አይደሉም። ክፍያዎችን ከፍተው ማስገባት ይፈልጋሉ?
+Payments by Mode of Payment,ክፍያዎች በክፍያ ዘዴ
+PDF,ፒዲኤፍ
+Peak Hour,ከፍተኛ ሰዓት
+Peak Memory:,ከፍተኛ ማህደረ ትውስታ፡
+Peak Server:,ከፍተኛ አገልጋይ፡
+Peak:,ጫፍ፡
+Pending,በመጠባበቅ ላይ
+Pending Amount,በመጠባበቅ ላይ ያለ መጠን
+Pending count updated from {0} to {1},በመጠባበቅ ላይ ያለ ቁጥር ከ{0} ወደ {1} ተዘምኗል
+Pending Exposure,በመጠባበቅ ላይ ያለ ተጋላጭነት
+Pending Invoices,በመጠባበቅ ላይ ያሉ ደረሰኞች
+Pending Ratio,በመጠባበቅ ላይ ያለ ሬሾ
+Pending Sales,በመጠባበቅ ላይ ያሉ ሽያጭዎች
+Pending sales: {0} | Cache usage: {1}%,በመጠባበቅ ላይ ያሉ ሽያጮች፡ {0} | የመሸጎጫ አጠቃቀም፡ {1}%
+Pending Sync,ማመሳሰልን በመጠባበቅ ላይ
+Pending: {0},በመጠባበቅ ላይ፡ {0}
+Pending: {0} | Synced: {1} | Draft: {2},በመጠባበቅ ላይ፡ {0} | የሰመረ፡ {1} | ረቂቅ፡ {2}
+Per Page,በገጽ
+Personal,ግላዊ
+Personal preferences adjust the current cashier experience without changing the active POS route.,የግል ምርጫዎች የነቃውን የPOS መንገድ ሳይቀይሩ የአሁኑን የገንዘብ ተቀባይ ልምድ ያስተካክላሉ።
+PIN confirmation does not match.,የፒን ማረጋገጫ አይዛመድም።
+PIN must be 4 to 8 digits.,ፒን ከ4 እስከ 8 አሃዞች መሆን አለበት።
+Please add at least one item.,እባክዎ ቢያንስ አንድ ንጥል ያክሉ።
+Please allow camera access to scan codes,እባክህ የካሜራውን የቃኝ ኮዶች ፍቀድ
+Please enter payment amount,እባክዎ የክፍያ መጠን ያስገቡ
+Please fill all required fields,እባክዎ ሁሉንም አስፈላጊ መስኮች ይሙሉ
+Please make a payment or select a payment,እባክዎ ክፍያ ይፈጽሙ ወይም ክፍያ ይምረጡ
+Please request phone payment or use another payment method,እባክዎ የስልክ ክፍያ ይጠይቁ ወይም ሌላ የመክፈያ ዘዴ ይጠቀሙ
+Please select a customer first,እባክዎ መጀመሪያ ደንበኛ ይምረጡ
+Please select a party,እባክዎ ፓርቲ ይምረጡ
+Please select a party before reconciling.,እባክዎን ከማስታረቅዎ በፊት ፓርቲ ይምረጡ።
+Please select a valid movement type.,እባክዎ ትክክለኛ የእንቅስቃሴ አይነት ይምረጡ።
+Please select an invoice,እባክዎ ደረሰኝ ይምረጡ
+Please select company before reconciling.,እባክዎን ከማስታረቅዎ በፊት ኩባንያ ይምረጡ።
+Please set the customer's mobile number,እባክዎ የደንበኛውን የሞባይል ቁጥር ያዘጋጁ
+Please try again or enter the item manually.,እባክዎ እንደገና ይሞክሩ ወይም ንጥሉን በእጅ ያስገቡ።
+Please verify the barcode or check the item's availability.,እባክዎን የአሞሌ ኮድ ያረጋግጡ ወይም የንጥሉን ተገኝነት ያረጋግጡ።
+Points,ነጥቦች
+Popup blocked. Please allow popups.,ብቅ ባይ ታግዷል። እባክህ ብቅ-ባዮችን ፍቀድ።
+POS,POS
+POS controls and maintenance,የ POS ቁጥጥር እና ጥገና
+POS Expense is disabled for this POS Profile.,የPOS ወጪ ለዚህ የPOS መገለጫ ተሰናክሏል።
+POS is running with limited offline prerequisites.,POS በተወሰኑ ከመስመር ውጭ ቅድመ ሁኔታዎች እያሄደ ነው።
+POS Profile,የPOS መገለጫ
+Position the QR code or barcode within the scanning area,የQR ኮድ ወይም ባርኮድ በፍተሻ ቦታ ውስጥ ያስቀምጡ
+Posting,በመለጠፍ ላይ
+Posting and Price List,መለጠፍ እና የዋጋ ዝርዝር
+Posting Date,የመለጠፍ ቀን
+Preparing background sync,የበስተጀርባ ማመሳሰልን በማዘጋጀት ላይ
+"Press OK to continue offline with a warning, or Cancel to retry.",ከመስመር ውጭ በማስጠንቀቂያ ለመቀጠል እሺን ይጫኑ፣ ወይም እንደገና ለመሞከር ሰርዝ።
+Previous unit of measure,የቀደመው የመለኪያ አሃድ
+Price List,የዋጋ ዝርዝር
+Price List Rate,የዋጋ ዝርዝር ተመን
+Price list rate updated locally only,የዋጋ ዝርዝር ተመን በአገር ውስጥ ብቻ ተዘምኗል
+Pricing & Discounts,የዋጋ አሰጣጥ እና ቅናሾች
+Pricing Rule,የዋጋ አሰጣጥ ደንብ
+Print,አትም
+Print Draft,ረቂቅ ማተም
+Print Format (Invoice),የህትመት ቅርጸት (ክፍያ መጠየቂያ)
+Print Format (Order),የህትመት ቅርጸት (ትዕዛዝ)
+Print invoice,ደረሰኝ አትም
+Print Purchase Invoice instead of PO,የግዢ መጠየቂያ ደረሰኝን ከPO ይልቅ አትም።
+Printer,አታሚ
+Processed returns impacting the shift totals,በለውጥ ድምር ላይ ተጽእኖ የሚያሳድሩ የተካሄዱ ተመላሾች
+Processing Payment,ክፍያን በማስኬድ ላይ
+Processing payment entries for Invoice {0},ለክፍያ መጠየቂያ {0} የክፍያ ግቤቶችን በማስኬድ ላይ
+Profile,መገለጫ
+Profiles,መገለጫዎች
+Profit,ትርፍ
+Profit: Invoice Item Estimate,ትርፍ፡ የክፍያ መጠየቂያ ንጥል ግምት
+Profit: Stock Ledger (COGS),ትርፍ፡ የአክሲዮን መዝገብ (COGS)
+Profitability Report,ትርፋማነት ሪፖርት
+Prorated return discount,የተመጣጠነ የመመለሻ ቅናሽ
+Purchase Amount,የግዢ መጠን
+Purchase Invoices,የግዢ ደረሰኞች
+Purchase Order created,የግዢ ትዕዛዝ ተፈጥሯል።
+Qty,ብዛት
+Qualified,ብቁ
+Quantity,ብዛት
+Quantity exceeds available stock,ብዛት ካለው ክምችት አልፏል
+Quick Actions,ፈጣን እርምጃዎች
+Quotation {0} is Submitted,ጥቅስ {0} ገብቷል።
+Quotation submitted,ጥቅስ ገብቷል።
+QZ Tray connected.,QZ Tray ተገናኝቷል።
+QZ Tray is manually disconnected. Press Connect to enable it again.,QZ Tray በእጅ ተቋርጧል። እንደገና ለማንቃት Connect የሚለውን ይጫኑ።
+QZ Tray is not connected.,QZ Tray አልተገናኘም።
+QZ Tray Setup,QZ Tray ማዋቀር
+Rate,ደረጃ ይስጡ
+Rate adjusted to maximum allowed discount,ከፍተኛው የሚፈቀደው ቅናሽ መጠን ተስተካክሏል።
+Ready,ዝግጁ
+Ready to resume,ከቆመበት ለመቀጠል ዝግጁ
+Ready!,ዝግጁ!
+Real-time POS insights for retail operations.,ለችርቻሮ ስራዎች የእውነተኛ ጊዜ POS ግንዛቤዎች።
+Rebuild Offline Data,ከመስመር ውጭ ውሂብን እንደገና ገንባ
+Receive,ተቀበል
+Receive now,አሁን ተቀበል
+Received,ተቀብሏል
+Received:,ተቀብለዋል፡
+Recent Movement Entries,የቅርብ ጊዜ እንቅስቃሴ ግቤቶች
+Recent updates about your invoices,ስለ ደረሰኞችዎ የቅርብ ጊዜ ዝመናዎች
+Recently Active Customers,በቅርብ ጊዜ ንቁ ደንበኞች
+Rechecking connection,ግንኙነትን እንደገና በመፈተሽ ላይ
+Reconcile payment methods and close shift,የክፍያ ዘዴዎችን ያስታርቁ እና ፈረቃን ይዝጉ
+Reconciling Payments,ክፍያዎችን ማስታረቅ
+"Reconnect and open this page once while online, then offline refreshes will be able to restore it.",በመስመር ላይ እያለ ይህን ገጽ አንድ ጊዜ እንደገና ያገናኙት እና ይክፈቱት፣ ከዚያ ከመስመር ውጭ እድሳት ወደነበረበት መመለስ ይችላል።
+Reconnect online to refresh cached offline data from the server.,የተሸጎጠ ከመስመር ውጭ ውሂብ ከአገልጋዩ ለማደስ በመስመር ላይ እንደገና ይገናኙ።
+Recreate local offline prerequisites from scratch,የአካባቢ ከመስመር ውጭ ቅድመ ሁኔታዎችን ከባዶ ፍጠር
+Recv:,ማጣቀሻ፡
+Redeem,ይዋጁ
+Redeem / Scan,ማስመለስ/መቃኘት
+Redeem Amount,የማስመለስ መጠን
+Redeem Mode,ማስመለስ ሁነታ
+Redeemed Amount,የተወሰደ መጠን
+Redeemed credit cannot be greater than its total.,የተወሰደ ክሬዲት ከጠቅላላው ሊበልጥ አይችልም።
+Redemption and Totals,ቤዛ እና ድምር
+Reference,ማጣቀሻ
+Refresh,አድስ
+Refresh Exchange Rate,የምንዛሬ ተመንን አድስ
+Refresh Offline Data,ከመስመር ውጭ ውሂብን ያድሱ
+Refresh Printers,አታሚዎችን አድስ
+Refund,ተመላሽ ገንዘብ
+Release Notes,የመልቀቂያ ማስታወሻዎች
+Reload,ዳግም ጫን
+Reload customers,ደንበኞችን እንደገና ይጫኑ
+Reload Items,ንጥሎችን እንደገና ጫን
+Reload Now,አሁን እንደገና ጫን
+Reload to apply the latest changes. Your current session will be refreshed.,የቅርብ ጊዜ ለውጦችን ለመተግበር እንደገና ይጫኑ። የአሁኑ ክፍለ ጊዜዎ ይታደሳል።
+Reload Workflow,የስራ ፍሰት እንደገና ጫን
+Remarks,አስተያየቶች
+Remarks are required.,አስተያየት ያስፈልጋል።
+Remove,አስወግድ
+Remove barcode item,የባርኮድ ንጥል ነገርን ያስወግዱ
+Remove cached data and reload the POS app,የተሸጎጠ ውሂብን ያስወግዱ እና የPOS መተግበሪያን እንደገና ይጫኑ
+Remove item,ንጥሉን ያስወግዱ
+Remove Offer,ቅናሹን ያስወግዱ
+Reorder / Purchase Suggestions,የጥቆማ አስተያየቶችን እንደገና ይዘዙ/ይግዙ
+Repair Candidate,ጥገና እጩ
+Repair Change Allocation,የጥገና ለውጥ ምደባ
+Repair requires an online connection,ጥገና የመስመር ላይ ግንኙነት ያስፈልገዋል
+Repaired,ተስተካክሏል
+Repairing change allocation,የለውጥ ምደባን በመጠገን ላይ
+Repeat Customers,ደንበኞችን መድገም
+Repeat Rate,የድግግሞሽ መጠን
+Request,ጥያቄ
+Request ID: {0},የጥያቄ መታወቂያ፡ {0}
+Request Payment,ክፍያ ይጠይቁ
+Requested route: {0},የተጠየቀ መንገድ፡ {0}
+Required columns cannot be hidden,የሚፈለጉ አምዶች ሊደበቁ አይችሉም
+Reset,ዳግም አስጀምር
+Reset item name,የንጥል ስም ዳግም ያስጀምሩ
+Reset to Default,ወደ ነባሪ ዳግም አስጀምር
+Resource Health,የመርጃ ጤና
+Restricted,የተገደበ
+Restricted operational controls for supervisors only.,ለተቆጣጣሪዎች ብቻ የተከለከሉ የአሠራር መቆጣጠሪያዎች።
+Retry,እንደገና ይሞክሩ
+Retry route,መንገድ እንደገና ይሞክሩ
+Return,ተመለስ
+Return Amount,የመመለሻ መጠን
+Return Count,የመመለሻ ብዛት
+Return items must have negative quantities,የተመለሱ ዕቃዎች አሉታዊ መጠን ሊኖራቸው ይገባል።
+Return total must be negative,ጠቅላላ መመለስ አሉታዊ መሆን አለበት።
+Return Valid Until,እስከተሰራ ድረስ መመለስ
+Return window passed,የመመለሻ መስኮት አልፏል
+Return without Invoice,ያለ ደረሰኝ ይመለሱ
 Returns,ይመለሳል
 Returns / Voids / Discounts,ተመላሾች / ባዶዎች / ቅናሾች
 Returns by Currency,በገንዘብ ተመላሾች
@@ -1023,331 +1037,326 @@ Save Settings,ቅንብሮችን አስቀምጥ
 Save the selected printer as the POS Profile default so it shows automatically on this setup.,የተመረጠውን አታሚ እንደ POS መገለጫ ነባሪ ያስቀምጡ ስለዚህ በዚህ ማዋቀር ላይ በራስ-ሰር ይታያል።
 Saved as draft because: {0},እንደ ረቂቅ ተቀምጧል ምክንያቱም፡ {0}
 Saving...,በማስቀመጥ ላይ...
-Scale barcode detected. Quantity here is the number of labels to print.,የመጠን ባርኮድ ተገኝቷል።
-Scale barcode settings are not configured. Using item barcode only.,እዚህ ያለው ብዛት የሚታተም የመለያዎች ብዛት ነው።
-Scale template barcode is missing for this item/UOM. Using item barcode only.,የመጠን ባርኮድ ቅንጅቶች አልተዋቀሩም።
-Scan an existing card and top it up without leaving the payment flow.,የንጥል ባርኮድ ብቻ መጠቀም።
-Scan Error,ለዚህ ንጥል ነገር/UOM የመጠን አብነት ባር ኮድ ጠፍቷል።
-Scan or enter a gift card code to check balance or redeem.,የንጥል ባርኮድ ብቻ መጠቀም።
-Scan or paste the card code below.,ያለውን ካርድ ይቃኙ እና የክፍያውን ፍሰት ሳይለቁ ይሙሉት።
-Scan QR Code/Barcode,የፍተሻ ስህተት
-Scan with camera,ቀሪ ሂሳብን ለመፈተሽ ወይም ለመውሰድ የስጦታ ካርድ ኮድ ይቃኙ ወይም ያስገቡ።
-Scan-First Flow,ከታች ያለውን የካርድ ኮድ ይቃኙ ወይም ይለጥፉ።
-Scanned Code:,QR ኮድ/ባርኮድ ይቃኙ
-Scanning for: {0},በካሜራ ይቃኙ
-Scanning items,ቅኝት-የመጀመሪያው ፍሰት
-Scan-Ready,የተቃኘ ኮድ፡-
-Scope,ለ፡ {0} በመቃኘት ላይ
-Scope: All Profiles,ንጥሎችን በመቃኘት ላይ
-Scope: Current Profile,ቅኝት-ዝግጁ
-Scope: Specific Profile,ወሰን
-Search,ወሰን፡ ሁሉም መገለጫዎች
-Search Account,ወሰን፡ የአሁን መገለጫ
-Search an invoice and continue the return flow without extra steps.,ወሰን፡ የተወሰነ መገለጫ
-Search customer,ፈልግ
-Search invoices or customers,መለያ ይፈልጉ
-Search item,ደረሰኝ ይፈልጉ እና ያለ ተጨማሪ እርምጃዎች የመመለሻ ፍሰቱን ይቀጥሉ።
-Search item / code,ደንበኛን ይፈልጉ
-Search items or barcode,ደረሰኞችን ወይም ደንበኞችን ይፈልጉ
-Search Mpesa Payments,ንጥል ይፈልጉ
-Search return invoices or customers,ንጥል / ኮድ ይፈልጉ
-Search supplier,ንጥሎችን ወይም ባርኮድ ይፈልጉ
-Search unpaid invoices or customers,የMpesa ክፍያዎችን ይፈልጉ
-Secure context (HTTPS or localhost) is required for camera access.,ተመላሽ ደረሰኞችን ወይም ደንበኞችን ይፈልጉ
-Secure context (HTTPS) required for camera access. Please use HTTPS to access the camera.,አቅራቢ ይፈልጉ
-Select,ያልተከፈሉ ደረሰኞችን ወይም ደንበኞችን ይፈልጉ
-Select a cashier first.,ለካሜራ መዳረሻ ደህንነቱ የተጠበቀ አውድ (ኤችቲቲፒኤስ ወይም የአካባቢ አስተናጋጅ) ያስፈልጋል።
-Select a customer,ለካሜራ መዳረሻ ደህንነቱ የተጠበቀ አውድ (ኤችቲቲፒኤስ) ያስፈልጋል።
-Select a customer to use coupon,እባክዎ ካሜራውን ለመድረስ HTTPS ይጠቀሙ።
-Select a printer to use QZ silent printing.,ይምረጡ
-Select Batch,መጀመሪያ ገንዘብ ተቀባይ ይምረጡ።
-Select Columns to Display,ደንበኛ ይምረጡ
-Select items to sell,ኩፖን ለመጠቀም ደንበኛን ይምረጡ
-Select Language,QZ ጸጥ ማተምን ለመጠቀም አታሚ ይምረጡ።
-Select Payment,ባች ይምረጡ
-Select Payment Account,የሚታዩትን አምዶች ይምረጡ
-Select printer,የሚሸጡ ዕቃዎችን ይምረጡ
-Select Return Invoice,ቋንቋ ይምረጡ
-Select S.O,ክፍያ ይምረጡ
-Select Sales Orders,የክፍያ መለያ ይምረጡ
-Select the cashier who is taking over this terminal.,አታሚ ይምረጡ
-Selected,ተመላሽ ደረሰኝ ይምረጡ
-Selected movement type is not allowed by POS Profile.,ኤስ.ኦን ይምረጡ
-Selected Payments,የሽያጭ ትዕዛዞችን ይምረጡ
-Sensitive actions kept away from quick taps.,ይህንን ተርሚናል የሚረከበውን ገንዘብ ተቀባይ ይምረጡ።
-Serial,ተመርጧል
-Serial Numbers,የተመረጠው የእንቅስቃሴ አይነት በPOS መገለጫ አይፈቀድም።
-Server CPU Usage:,የተመረጡ ክፍያዎች
-Server Health,ሚስጥራዊነት ያላቸው ድርጊቶች ከፈጣን ቧንቧዎች ይርቃሉ።
-Server Memory Usage:,ተከታታይ
-Server Metrics,ተከታታይ ቁጥሮች
-Server Uptime:,የአገልጋይ ሲፒዩ አጠቃቀም፡-
-Service Charges,የአገልጋይ ጤና
-Session,የአገልጋይ ማህደረ ትውስታ አጠቃቀም፡-
-Set each cashier PIN in the User form and keep terminal members assigned in POS Profile User.,የአገልጋይ መለኪያዎች
-Settings,የአገልጋይ ቆይታ፡
-Settings in this section update the POS workspace without changing the current route.,የአገልግሎት ክፍያዎች
-Setup complete!,ክፍለ ጊዜ
-Share,እያንዳንዱን ገንዘብ ተቀባይ ፒን በተጠቃሚ ቅፅ ውስጥ ያዘጋጁ እና የተርሚናል አባላትን በPOS መገለጫ ተጠቃሚ ውስጥ ያስቀምጡ።
-Shared terminal,ቅንብሮች
-Shift Closed Snapshot,በዚህ ክፍል ውስጥ ያሉ ቅንብሮች የአሁኑን መንገድ ሳይቀይሩ የPOS የስራ ቦታን ያዘምኑ።
-Shift Overview,ማዋቀሩ ተጠናቅቋል!
-Show,አጋራ
-Show cart on customer-facing screen,የተጋራ ተርሚናል
-Show last invoice rate,Shift ዝግ ቅጽበታዊ ገጽ እይታ
-Show rate info,Shift አጠቃላይ እይታ
-Show Repair Candidates,አሳይ
-Show search tools,ጋሪን ደንበኛን በሚመለከት ስክሪን ላይ አሳይ
-Show the active cart on a customer-facing screen,የመጨረሻውን የክፍያ መጠየቂያ መጠን አሳይ
-Showing {0}-{1} of {2},የታሪፍ መረጃን አሳይ
-Showing 0 of 0,የጥገና እጩዎችን አሳይ
-Shows the distribution of invoices per currency,የፍለጋ መሳሪያዎችን አሳይ
-Sign out of session,ገቢር ጋሪውን ደንበኛ በሚመለከት ስክሪን ላይ አሳይ
-Sign out of the current POS session,ከ{2} {0}-{1} በማሳየት ላይ
-Size:,0 ከ 0 በማሳየት ላይ
-Skipped Payments,የክፍያ መጠየቂያዎችን በየምንዛሪ ስርጭት ያሳያል
-Skipping items without barcodes,ከክፍለ-ጊዜው ዘግተህ ውጣ
-Slow Moving,ከአሁኑ የPOS ክፍለ ጊዜ ዘግተህ ውጣ
-Slow Moving Items,መጠን፡
-Slow Queries:,የተዘለሉ ክፍያዎች
-Sold,ያለ ባርኮድ ዕቃዎችን መዝለል
-Source,ቀስ ብሎ መንቀሳቀስ
-Source Cash Account (Optional Override),ቀስ ብለው የሚንቀሳቀሱ ዕቃዎች
-Source Ex. Rate:,ቀርፋፋ ጥያቄዎች፡-
-Source Rate:,የተሸጠ
-Specific Profile,ምንጭ
-Split Invoices,የምንጭ ጥሬ ገንዘብ ሂሳብ (አማራጭ መሻር)
-Staff / Cashier Performance Report,ምንጭ Ex.
-Status,ደረጃ፡
-Stock,የምንጭ ዋጋ፡-
-Stock Information,የተወሰነ መገለጫ
-Stock is lower than requested,የተከፋፈሉ ደረሰኞች
-Stock is lower than requested:\n{0},ሠራተኞች / ገንዘብ ተቀባይ አፈጻጸም ሪፖርት
-Stock Movement Report,ሁኔታ
-Stock update: {0} has {1} available. Adding {2} will bring the stock below zero.,አክሲዮን
-Submit,የአክሲዮን መረጃ
-Submit & Print,አክሲዮን ከተጠየቀው ያነሰ ነው።
-Submit Deposit,አክሲዮን ከተጠየቀው ያነሰ ነው፡\n{0}
-Submit Expense,የአክሲዮን እንቅስቃሴ ሪፖርት
-Submitted,የአክሲዮን ማዘመኛ፡ {0} {1} ይገኛል።
-Submitted Cash Movements,{2} ማከል አክሲዮኑን ከዜሮ በታች ያደርገዋል።
-Submitted entries,አስገባ
-Successfully scanned:,አስገባ እና አትም
-Suggested,ተቀማጭ ገንዘብ ያስገቡ
-Suggested Qty,ወጪ አስገባ
-Supervisor Access,ገብቷል።
-Supervisor permissions unlock issuance and reloads,የቀረቡ የገንዘብ እንቅስቃሴዎች
-Supervisor Tools,የገቡት ግቤቶች
-Supplier,በተሳካ ሁኔታ ተቃኝቷል፡-
-Supplier and dates are required.,የተጠቆመ
-Supplier Invoices,የተጠቆመ Qty
-Supplier is required.,ተቆጣጣሪ መዳረሻ
-Supplier name is required,የተቆጣጣሪ ፈቃዶች መስጠትን እና ዳግም መጫንን ይከፍታሉ
-Supplier Payments,ተቆጣጣሪ መሳሪያዎች
-Supplier Purchase Summary,አቅራቢ
-Suppliers,አቅራቢ እና ቀናት ያስፈልጋል።
-Suppliers not found,የአቅራቢ ደረሰኞች
-Switch Camera,አቅራቢ ያስፈልጋል።
-Switch Cashier,የአቅራቢ ስም ያስፈልጋል
-Switch the POS appearance theme,የአቅራቢ ክፍያዎች
-Switch theme appearance,የአቅራቢ ግዢ ማጠቃለያ
-Switched to:,አቅራቢዎች
-Sync All Invoices,አቅራቢዎች አልተገኙም።
-Sync Offline Cash Movements ({0}),ካሜራ ቀይር
-Sync Offline Sales,ገንዘብ ተቀባይ ቀይር
-Synced {0} offline cash movement(s).,የPOS መልክ ገጽታን ይቀይሩ
-Syncing items in background,ገጽታ ቀይር
-System / Diagnostics,ተቀይሯል ወደ፡
-"System actions are low-frequency maintenance controls such as app info, support diagnostics, and session controls.",ሁሉንም ደረሰኞች አመሳስል።
-System Information,ከመስመር ውጭ የገንዘብ እንቅስቃሴዎችን ያመሳስሉ ({0})
-System Status,ከመስመር ውጭ ሽያጭ አመሳስል።
-Tables:,የሰመረ {0} ከመስመር ውጭ የገንዘብ እንቅስቃሴ(ዎች)።
-Tap the button below to redeem a gift card during checkout.,ንጥሎችን ከበስተጀርባ በማመሳሰል ላይ
-Target,ስርዓት / ምርመራ
-Target Ex. Rate:,የስርዓት እርምጃዎች እንደ የመተግበሪያ መረጃ፣ የድጋፍ ምርመራዎች እና የክፍለ-ጊዜ መቆጣጠሪያዎች ያሉ ዝቅተኛ-ድግግሞሽ የጥገና ቁጥጥሮች ናቸው።
-Target Rate:,የስርዓት መረጃ
-Tax,የስርዓት ሁኔታ
-Tax / Charges Report,ጠረጴዛዎች፡
-Tax Heads,በመውጣት ወቅት የስጦታ ካርድን ለመውሰድ ከታች ያለውን ቁልፍ ይንኩ።
-Taxable Amount,ዒላማ
-Tendered,ኢላማ Ex.
-Terminal,ደረጃ፡
-Terminal & Devices,የዒላማ መጠን፡
-Terminal locked,ግብር
-"Terminal tools affect this checkout station, customer-facing displays, and future printer/device controls.",የግብር / ክፍያዎች ሪፖርት
-Territory not found,የግብር ኃላፊዎች
-The amount paid is not complete,የሚከፈል መጠን
-The app stores data locally for offline use. This is called cache.,በጨረታ ቀርቧል
-The invoice stayed in draft. Please review and submit it manually.,ተርሚናል
-The maximum discount allowed is,ተርሚናል እና መሳሪያዎች
-The quantity for {0} has been adjusted to the maximum available stock.,ተርሚናል ተቆልፏል
-The system could not retrieve the item details. Please try again.,የተርሚናል መሳሪያዎች በዚህ የፍተሻ ጣቢያ፣ ደንበኛ ፊት ለፊት የሚታዩ ማሳያዎች እና የወደፊት የአታሚ/የመሳሪያ ቁጥጥሮች ላይ ተጽእኖ ያሳድራሉ።
-These invoices will be synced when connection is restored,ግዛት አልተገኘም።
-This action now opens inside the settings workspace.,የተከፈለው መጠን አልተጠናቀቀም
-This coupon already used !,መተግበሪያው ከመስመር ውጭ ለመጠቀም ውሂብን በአካባቢው ያከማቻል።
-This invoice does not need change-allocation repair,ይህ መሸጎጫ ይባላል።
-This invoice is already repaired,ደረሰኙ በረቂቅ ውስጥ ቆየ።
-This is an item template. Please choose a variant.,እባክዎን ይገምግሙ እና በእጅ ያስገቡት።
-this item,የሚፈቀደው ከፍተኛ ቅናሽ ነው።
-This POS page could not be opened offline because its code was not cached on this terminal yet.,የ{0} መጠን ወደ ከፍተኛው ክምችት ተስተካክሏል።
-This Serial Number {0} has already been added!,ስርዓቱ የንጥል ዝርዝሮችን ሰርስሮ ማውጣት አልቻለም።
-Threshold,እባክዎ እንደገና ይሞክሩ።
-Time,ግንኙነቱ ወደነበረበት ሲመለስ እነዚህ ደረሰኞች ይሰምራሉ።
-Tip: Clear cache regularly to free up space and keep the app fast.,ይህ እርምጃ አሁን በቅንብሮች የስራ ቦታ ውስጥ ይከፈታል።
-Tip: Close unused tabs or apps to reduce lag.,ይህ ኩፖን አስቀድሞ ጥቅም ላይ ውሏል!
-Tip: Monitor slow queries and table size for optimal performance.,ይህ የክፍያ መጠየቂያ ለውጥ-ምደባ ጥገና አያስፈልገውም
-To Be Paid,ይህ ደረሰኝ አስቀድሞ ተስተካክሏል።
-To Date,ይህ የንጥል አብነት ነው።
-Today,እባክዎ ተለዋጭ ይምረጡ።
-Today Profit,ይህ ንጥል
-Today Sales,ይህ የPOS ገጽ ከመስመር ውጭ ሊከፈት አልቻለም ምክንያቱም ኮዱ በዚህ ተርሚናል ላይ እስካሁን አልተሸጎጠም።
-Toggle navigation drawer,ይህ መለያ ቁጥር {0} አስቀድሞ ታክሏል!
-Toggle Theme,ገደብ
-Tools,ጊዜ
-Tools for customer-facing screens and terminal-specific actions.,ጠቃሚ ምክር ቦታ ለማስለቀቅ እና መተግበሪያውን በፍጥነት ለማቆየት መሸጎጫውን በመደበኛነት ያጽዱ።
-Top Brand,ጠቃሚ ምክር፡ መዘግየትን ለመቀነስ ጥቅም ላይ ያልዋሉ ትሮችን ወይም መተግበሪያዎችን ዝጋ።
-Top Category,ጠቃሚ ምክር፡ ለተመቻቸ አፈጻጸም ዘገምተኛ መጠይቆችን እና የሰንጠረዡን መጠን ተቆጣጠር።
-Top Charge Head,የሚከፈልበት
-Top Customers,እስከ ዛሬ
-Top Discount,ዛሬ
-Top Items by Location,የዛሬ ትርፍ
-Top Margin,የዛሬ ሽያጭ
-Top Pending,የአሰሳ መሳቢያን ቀይር
-Top Profit Item,ገጽታ ቀያይር
-Top Return Items,መሳሪያዎች
-Top Sales by Cashier,መሳሪያዎች ለደንበኛ ፊት ለፊት ማያ ገጾች እና ተርሚናል-ተኮር እርምጃዎች።
-Top Supplier,ከፍተኛ የምርት ስም
-Top Suppliers by Spend,ከፍተኛ ምድብ
-Top Tables,ከፍተኛ ክፍያ ኃላፊ
-Top Tax Head,ከፍተኛ ደንበኞች
-Top Up Amount,ከፍተኛ ቅናሽ
-Top Up Card,ከፍተኛ እቃዎች በቦታ
-Top Up Mode,ከፍተኛ ህዳግ
-Top Variant,ከፍተኛ በመጠባበቅ ላይ
-Total,ከፍተኛ ትርፍ ንጥል
-Total Amount,ከፍተኛ የመመለሻ ዕቃዎች
-Total Change,ከፍተኛ ሽያጭ በካሼር
-Total Charges,ከፍተኛ አቅራቢ
-Total In,ከፍተኛ አቅራቢዎች በወጪ
-Total Invoices,ከፍተኛ ጠረጴዛዎች
-Total Items,ከፍተኛ የግብር ኃላፊ
-Total Mpesa,የተጨመረው መጠን
-Total Out,ከፍተኛ ካርድ
-Total Payments,ወደላይ ሁነታ
-Total Purchase,ከፍተኛ ተለዋጭ
-Total Selected :,ጠቅላላ
+Scale barcode detected. Quantity here is the number of labels to print.,የመጠን ባርኮድ ተገኝቷል። እዚህ ያለው ብዛት የሚታተም የመለያዎች ብዛት ነው።
+Scale barcode settings are not configured. Using item barcode only.,የመጠን ባርኮድ ቅንጅቶች አልተዋቀሩም። የንጥል ባርኮድ ብቻ መጠቀም።
+Scale template barcode is missing for this item/UOM. Using item barcode only.,ለዚህ ንጥል ነገር/UOM የመጠን አብነት ባር ኮድ ጠፍቷል። የንጥል ባርኮድ ብቻ መጠቀም።
+Scan an existing card and top it up without leaving the payment flow.,ያለውን ካርድ ይቃኙ እና የክፍያውን ፍሰት ሳይለቁ ይሙሉት።
+Scan Error,የፍተሻ ስህተት
+Scan or enter a gift card code to check balance or redeem.,ቀሪ ሂሳብን ለመፈተሽ ወይም ለመውሰድ የስጦታ ካርድ ኮድ ይቃኙ ወይም ያስገቡ።
+Scan or paste the card code below.,ከታች ያለውን የካርድ ኮድ ይቃኙ ወይም ይለጥፉ።
+Scan QR Code/Barcode,QR ኮድ/ባርኮድ ይቃኙ
+Scan with camera,በካሜራ ይቃኙ
+Scan-First Flow,ቅኝት-የመጀመሪያው ፍሰት
+Scanned Code:,የተቃኘ ኮድ፡-
+Scanning for: {0},ለ፡ {0} በመቃኘት ላይ
+Scanning items,ንጥሎችን በመቃኘት ላይ
+Scan-Ready,ቅኝት-ዝግጁ
+Scope,ወሰን
+Scope: All Profiles,ወሰን፡ ሁሉም መገለጫዎች
+Scope: Current Profile,ወሰን፡ የአሁን መገለጫ
+Scope: Specific Profile,ወሰን፡ የተወሰነ መገለጫ
+Search,ፈልግ
+Search Account,መለያ ይፈልጉ
+Search an invoice and continue the return flow without extra steps.,ደረሰኝ ይፈልጉ እና ያለ ተጨማሪ እርምጃዎች የመመለሻ ፍሰቱን ይቀጥሉ።
+Search customer,ደንበኛን ይፈልጉ
+Search invoices or customers,ደረሰኞችን ወይም ደንበኞችን ይፈልጉ
+Search item,ንጥል ይፈልጉ
+Search item / code,ንጥል / ኮድ ይፈልጉ
+Search items or barcode,ንጥሎችን ወይም ባርኮድ ይፈልጉ
+Search Mpesa Payments,የMpesa ክፍያዎችን ይፈልጉ
+Search return invoices or customers,ተመላሽ ደረሰኞችን ወይም ደንበኞችን ይፈልጉ
+Search supplier,አቅራቢ ይፈልጉ
+Search unpaid invoices or customers,ያልተከፈሉ ደረሰኞችን ወይም ደንበኞችን ይፈልጉ
+Secure context (HTTPS or localhost) is required for camera access.,ለካሜራ መዳረሻ ደህንነቱ የተጠበቀ አውድ (ኤችቲቲፒኤስ ወይም የአካባቢ አስተናጋጅ) ያስፈልጋል።
+Secure context (HTTPS) required for camera access. Please use HTTPS to access the camera.,ለካሜራ መዳረሻ ደህንነቱ የተጠበቀ አውድ (ኤችቲቲፒኤስ) ያስፈልጋል። እባክዎ ካሜራውን ለመድረስ HTTPS ይጠቀሙ።
+Select,ይምረጡ
+Select a cashier first.,መጀመሪያ ገንዘብ ተቀባይ ይምረጡ።
+Select a customer,ደንበኛ ይምረጡ
+Select a customer to use coupon,ኩፖን ለመጠቀም ደንበኛን ይምረጡ
+Select a printer to use QZ silent printing.,QZ ጸጥ ማተምን ለመጠቀም አታሚ ይምረጡ።
+Select Batch,ባች ይምረጡ
+Select Columns to Display,የሚታዩትን አምዶች ይምረጡ
+Select items to sell,የሚሸጡ ዕቃዎችን ይምረጡ
+Select Payment,ክፍያ ይምረጡ
+Select Payment Account,የክፍያ መለያ ይምረጡ
+Select printer,አታሚ ይምረጡ
+Select Return Invoice,ተመላሽ ደረሰኝ ይምረጡ
+Select S.O,ኤስ.ኦን ይምረጡ
+Select Sales Orders,የሽያጭ ትዕዛዞችን ይምረጡ
+Select the cashier who is taking over this terminal.,ይህንን ተርሚናል የሚረከበውን ገንዘብ ተቀባይ ይምረጡ።
+Selected,ተመርጧል
+Selected movement type is not allowed by POS Profile.,የተመረጠው የእንቅስቃሴ አይነት በPOS መገለጫ አይፈቀድም።
+Selected Payments,የተመረጡ ክፍያዎች
+Sensitive actions kept away from quick taps.,ሚስጥራዊነት ያላቸው ድርጊቶች ከፈጣን ቧንቧዎች ይርቃሉ።
+Serial,ተከታታይ
+Serial Numbers,ተከታታይ ቁጥሮች
+Server CPU Usage:,የአገልጋይ ሲፒዩ አጠቃቀም፡-
+Server Health,የአገልጋይ ጤና
+Server Memory Usage:,የአገልጋይ ማህደረ ትውስታ አጠቃቀም፡-
+Server Metrics,የአገልጋይ መለኪያዎች
+Server Uptime:,የአገልጋይ ቆይታ፡
+Service Charges,የአገልግሎት ክፍያዎች
+Session,ክፍለ ጊዜ
+Set each cashier PIN in the User form and keep terminal members assigned in POS Profile User.,እያንዳንዱን ገንዘብ ተቀባይ ፒን በተጠቃሚ ቅፅ ውስጥ ያዘጋጁ እና የተርሚናል አባላትን በPOS መገለጫ ተጠቃሚ ውስጥ ያስቀምጡ።
+Settings,ቅንብሮች
+Settings in this section update the POS workspace without changing the current route.,በዚህ ክፍል ውስጥ ያሉ ቅንብሮች የአሁኑን መንገድ ሳይቀይሩ የPOS የስራ ቦታን ያዘምኑ።
+Setup complete!,ማዋቀሩ ተጠናቅቋል!
+Share,አጋራ
+Shared terminal,የተጋራ ተርሚናል
+Shift Closed Snapshot,Shift ዝግ ቅጽበታዊ ገጽ እይታ
+Shift Overview,Shift አጠቃላይ እይታ
+Show,አሳይ
+Show cart on customer-facing screen,ጋሪን ደንበኛን በሚመለከት ስክሪን ላይ አሳይ
+Show last invoice rate,የመጨረሻውን የክፍያ መጠየቂያ መጠን አሳይ
+Show rate info,የታሪፍ መረጃን አሳይ
+Show Repair Candidates,የጥገና እጩዎችን አሳይ
+Show search tools,የፍለጋ መሳሪያዎችን አሳይ
+Show the active cart on a customer-facing screen,ገቢር ጋሪውን ደንበኛ በሚመለከት ስክሪን ላይ አሳይ
+Showing {0}-{1} of {2},ከ{2} {0}-{1} በማሳየት ላይ
+Showing 0 of 0,0 ከ 0 በማሳየት ላይ
+Shows the distribution of invoices per currency,የክፍያ መጠየቂያዎችን በየምንዛሪ ስርጭት ያሳያል
+Sign out of the current POS session,ከአሁኑ የPOS ክፍለ ጊዜ ዘግተህ ውጣ
+Size:,መጠን፡
+Skipped Payments,የተዘለሉ ክፍያዎች
+Skipping items without barcodes,ያለ ባርኮድ ዕቃዎችን መዝለል
+Slow Moving,ቀስ ብሎ መንቀሳቀስ
+Slow Moving Items,ቀስ ብለው የሚንቀሳቀሱ ዕቃዎች
+Slow Queries:,ቀርፋፋ ጥያቄዎች፡-
+Sold,የተሸጠ
+Source,ምንጭ
+Source Cash Account (Optional Override),የምንጭ ጥሬ ገንዘብ ሂሳብ (አማራጭ መሻር)
+Source Ex. Rate:,ምንጭ Ex. ደረጃ፡
+Source Rate:,የምንጭ ዋጋ፡-
+Specific Profile,የተወሰነ መገለጫ
+Split Invoices,የተከፋፈሉ ደረሰኞች
+Staff / Cashier Performance Report,ሠራተኞች / ገንዘብ ተቀባይ አፈጻጸም ሪፖርት
+Status,ሁኔታ
+Stock,አክሲዮን
+Stock Information,የአክሲዮን መረጃ
+Stock is lower than requested,አክሲዮን ከተጠየቀው ያነሰ ነው።
+Stock is lower than requested:\n{0},አክሲዮን ከተጠየቀው ያነሰ ነው፡\n{0}
+Stock Movement Report,የአክሲዮን እንቅስቃሴ ሪፖርት
+Stock update: {0} has {1} available. Adding {2} will bring the stock below zero.,የአክሲዮን ማዘመኛ፡ {0} {1} ይገኛል። {2} ማከል አክሲዮኑን ከዜሮ በታች ያደርገዋል።
+Submit,አስገባ
+Submit & Print,አስገባ እና አትም
+Submit Deposit,ተቀማጭ ገንዘብ ያስገቡ
+Submit Expense,ወጪ አስገባ
+Submitted,ገብቷል።
+Submitted Cash Movements,የቀረቡ የገንዘብ እንቅስቃሴዎች
+Submitted entries,የገቡት ግቤቶች
+Successfully scanned:,በተሳካ ሁኔታ ተቃኝቷል፡-
+Suggested,የተጠቆመ
+Suggested Qty,የተጠቆመ Qty
+Supervisor Access,ተቆጣጣሪ መዳረሻ
+Supervisor permissions unlock issuance and reloads,የተቆጣጣሪ ፈቃዶች መስጠትን እና ዳግም መጫንን ይከፍታሉ
+Supervisor Tools,ተቆጣጣሪ መሳሪያዎች
+Supplier,አቅራቢ
+Supplier and dates are required.,አቅራቢ እና ቀናት ያስፈልጋል።
+Supplier Invoices,የአቅራቢ ደረሰኞች
+Supplier is required.,አቅራቢ ያስፈልጋል።
+Supplier name is required,የአቅራቢ ስም ያስፈልጋል
+Supplier Payments,የአቅራቢ ክፍያዎች
+Supplier Purchase Summary,የአቅራቢ ግዢ ማጠቃለያ
+Suppliers,አቅራቢዎች
+Suppliers not found,አቅራቢዎች አልተገኙም።
+Switch Camera,ካሜራ ቀይር
+Switch Cashier,ገንዘብ ተቀባይ ቀይር
+Switch the POS appearance theme,የPOS መልክ ገጽታን ይቀይሩ
+Switched to:,ተቀይሯል ወደ፡
+Sync All Invoices,ሁሉንም ደረሰኞች አመሳስል።
+Sync Offline Cash Movements ({0}),ከመስመር ውጭ የገንዘብ እንቅስቃሴዎችን ያመሳስሉ ({0})
+Sync Offline Sales,ከመስመር ውጭ ሽያጭ አመሳስል።
+Synced {0} offline cash movement(s).,የሰመረ {0} ከመስመር ውጭ የገንዘብ እንቅስቃሴ(ዎች)።
+Syncing items in background,ንጥሎችን ከበስተጀርባ በማመሳሰል ላይ
+System / Diagnostics,ስርዓት / ምርመራ
+"System actions are low-frequency maintenance controls such as app info, support diagnostics, and session controls.",የስርዓት እርምጃዎች እንደ የመተግበሪያ መረጃ፣ የድጋፍ ምርመራዎች እና የክፍለ-ጊዜ መቆጣጠሪያዎች ያሉ ዝቅተኛ-ድግግሞሽ የጥገና ቁጥጥሮች ናቸው።
+System Information,የስርዓት መረጃ
+System Status,የስርዓት ሁኔታ
+Tables:,ጠረጴዛዎች፡
+Tap the button below to redeem a gift card during checkout.,በመውጣት ወቅት የስጦታ ካርድን ለመውሰድ ከታች ያለውን ቁልፍ ይንኩ።
+Target,ዒላማ
+Target Ex. Rate:,ኢላማ Ex. ደረጃ፡
+Target Rate:,የዒላማ መጠን፡
+Tax,ግብር
+Tax / Charges Report,የግብር / ክፍያዎች ሪፖርት
+Tax Heads,የግብር ኃላፊዎች
+Taxable Amount,የሚከፈል መጠን
+Tendered,በጨረታ ቀርቧል
+Terminal,ተርሚናል
+Terminal & Devices,ተርሚናል እና መሳሪያዎች
+Terminal locked,ተርሚናል ተቆልፏል
+"Terminal tools affect this checkout station, customer-facing displays, and future printer/device controls.",የተርሚናል መሳሪያዎች በዚህ የፍተሻ ጣቢያ፣ ደንበኛ ፊት ለፊት የሚታዩ ማሳያዎች እና የወደፊት የአታሚ/የመሳሪያ ቁጥጥሮች ላይ ተጽእኖ ያሳድራሉ።
+Territory not found,ግዛት አልተገኘም።
+The amount paid is not complete,የተከፈለው መጠን አልተጠናቀቀም
+The app stores data locally for offline use. This is called cache.,መተግበሪያው ከመስመር ውጭ ለመጠቀም ውሂብን በአካባቢው ያከማቻል። ይህ መሸጎጫ ይባላል።
+The invoice stayed in draft. Please review and submit it manually.,ደረሰኙ በረቂቅ ውስጥ ቆየ። እባክዎን ይገምግሙ እና በእጅ ያስገቡት።
+The maximum discount allowed is,የሚፈቀደው ከፍተኛ ቅናሽ ነው።
+The quantity for {0} has been adjusted to the maximum available stock.,የ{0} መጠን ወደ ከፍተኛው ክምችት ተስተካክሏል።
+The system could not retrieve the item details. Please try again.,ስርዓቱ የንጥል ዝርዝሮችን ሰርስሮ ማውጣት አልቻለም። እባክዎ እንደገና ይሞክሩ።
+These invoices will be synced when connection is restored,ግንኙነቱ ወደነበረበት ሲመለስ እነዚህ ደረሰኞች ይሰምራሉ።
+This action now opens inside the settings workspace.,ይህ እርምጃ አሁን በቅንብሮች የስራ ቦታ ውስጥ ይከፈታል።
+This coupon already used !,ይህ ኩፖን አስቀድሞ ጥቅም ላይ ውሏል!
+This invoice does not need change-allocation repair,ይህ የክፍያ መጠየቂያ ለውጥ-ምደባ ጥገና አያስፈልገውም
+This invoice is already repaired,ይህ ደረሰኝ አስቀድሞ ተስተካክሏል።
+This is an item template. Please choose a variant.,ይህ የንጥል አብነት ነው። እባክዎ ተለዋጭ ይምረጡ።
+this item,ይህ ንጥል
+This POS page could not be opened offline because its code was not cached on this terminal yet.,ይህ የPOS ገጽ ከመስመር ውጭ ሊከፈት አልቻለም ምክንያቱም ኮዱ በዚህ ተርሚናል ላይ እስካሁን አልተሸጎጠም።
+This Serial Number {0} has already been added!,ይህ መለያ ቁጥር {0} አስቀድሞ ታክሏል!
+Threshold,ገደብ
+Time,ጊዜ
+Tip: Clear cache regularly to free up space and keep the app fast.,ጠቃሚ ምክር ቦታ ለማስለቀቅ እና መተግበሪያውን በፍጥነት ለማቆየት መሸጎጫውን በመደበኛነት ያጽዱ።
+Tip: Close unused tabs or apps to reduce lag.,ጠቃሚ ምክር፡ መዘግየትን ለመቀነስ ጥቅም ላይ ያልዋሉ ትሮችን ወይም መተግበሪያዎችን ዝጋ።
+Tip: Monitor slow queries and table size for optimal performance.,ጠቃሚ ምክር፡ ለተመቻቸ አፈጻጸም ዘገምተኛ መጠይቆችን እና የሰንጠረዡን መጠን ተቆጣጠር።
+To Be Paid,የሚከፈልበት
+To Date,እስከ ዛሬ
+Today,ዛሬ
+Today Profit,የዛሬ ትርፍ
+Today Sales,የዛሬ ሽያጭ
+Toggle navigation drawer,የአሰሳ መሳቢያን ቀይር
+Toggle Theme,ገጽታ ቀያይር
+Tools,መሳሪያዎች
+Tools for customer-facing screens and terminal-specific actions.,መሳሪያዎች ለደንበኛ ፊት ለፊት ማያ ገጾች እና ተርሚናል-ተኮር እርምጃዎች።
+Top Brand,ከፍተኛ የምርት ስም
+Top Category,ከፍተኛ ምድብ
+Top Charge Head,ከፍተኛ ክፍያ ኃላፊ
+Top Customers,ከፍተኛ ደንበኞች
+Top Discount,ከፍተኛ ቅናሽ
+Top Items by Location,ከፍተኛ እቃዎች በቦታ
+Top Margin,ከፍተኛ ህዳግ
+Top Pending,ከፍተኛ በመጠባበቅ ላይ
+Top Profit Item,ከፍተኛ ትርፍ ንጥል
+Top Return Items,ከፍተኛ የመመለሻ ዕቃዎች
+Top Sales by Cashier,ከፍተኛ ሽያጭ በካሼር
+Top Supplier,ከፍተኛ አቅራቢ
+Top Suppliers by Spend,ከፍተኛ አቅራቢዎች በወጪ
+Top Tables,ከፍተኛ ጠረጴዛዎች
+Top Tax Head,ከፍተኛ የግብር ኃላፊ
+Top Up Amount,የተጨመረው መጠን
+Top Up Card,ከፍተኛ ካርድ
+Top Up Mode,ወደላይ ሁነታ
+Top Variant,ከፍተኛ ተለዋጭ
+Total,ጠቅላላ
+Total Amount,ጠቅላላ መጠን
+Total Change,አጠቃላይ ለውጥ
+Total Charges,ጠቅላላ ክፍያዎች
+Total In,ጠቅላላ ውስጥ
+Total Invoices,ጠቅላላ ደረሰኞች
+Total Items,ጠቅላላ ዕቃዎች
+Total Mpesa,ጠቅላላ Mpesa
+Total Out,ጠቅላላ ውጭ
+Total Payments,ጠቅላላ ክፍያዎች
+Total Purchase,ጠቅላላ ግዢ
+Total Selected :,ጠቅላላ የተመረጡ:
 Total Size,ጠቅላላ መጠን
-Total Stock Qty,አጠቃላይ ለውጥ
-Total:,ጠቅላላ ክፍያዎች
-Totals by Invoice Currency,ጠቅላላ ውስጥ
-Track how much cash was handed back to customers,ጠቅላላ ደረሰኞች
-"Track recent sales, collect unpaid balances, and reopen saved work",ጠቅላላ ዕቃዎች
-Transaction ID,ጠቅላላ Mpesa
-Transfer,ጠቅላላ ውጭ
-Try a different search term or clear the cart search.,ጠቅላላ ክፍያዎች
-Try adjusting your search or filters,ጠቅላላ ግዢ
-Try another source or refresh the list.,ጠቅላላ የተመረጡ:
-Try changing the date range or status filter.,ጠቅላላ መጠን
-Type,ጠቅላላ የአክሲዮን ብዛት
-Unable to access camera even with basic settings. Please check your camera permissions and device compatibility.,ጠቅላላ፡
-Unable to add offer item {0}. Please refresh and try again.,ድምር በክፍያ መጠየቂያ ምንዛሪ
-Unable to add offer item. Please refresh and try again.,ምን ያህል ጥሬ ገንዘብ ለደንበኞች እንደተመለሰ ይከታተሉ
-Unable to add scanned item.,የቅርብ ጊዜ ሽያጮችን ይከታተሉ፣ ያልተከፈሉ ቀሪ ሂሳቦችን ይሰብስቡ እና የተቀመጠ ስራን እንደገና ይክፈቱ
-Unable to create purchase order,የግብይት መታወቂያ
-Unable to delete draft invoice,ማስተላለፍ
-Unable to fetch documents,የተለየ የፍለጋ ቃል ይሞክሩ ወይም የካርቱን ፍለጋ ያጽዱ።
-Unable to fetch draft orders,ፍለጋዎን ወይም ማጣሪያዎን ለማስተካከል ይሞክሩ
-Unable to fetch invoice history,ሌላ ምንጭ ይሞክሩ ወይም ዝርዝሩን ያድሱ።
-Unable to fetch M-Pesa payments,የቀን ክልልን ወይም የሁኔታ ማጣሪያን ለመቀየር ይሞክሩ።
-Unable to fetch sales orders,ዓይነት
-Unable to fetch unpaid invoices,በመሰረታዊ ቅንጅቶች እንኳን ካሜራን መድረስ አልተቻለም።
-Unable to generate scale barcode,እባክህ የካሜራህን ፈቃዶች እና የመሣሪያ ተኳሃኝነትን ተመልከት።
-Unable to issue gift card.,የቅናሽ ንጥል {0}ን ማከል አልተቻለም።
-Unable to load cashier PIN status.,እባክዎ ያድሱ እና እንደገና ይሞክሩ።
-Unable to load document,የዋጋ አቅርቦትን ማከል አልተቻለም።
-Unable to load draft invoice,እባክዎ ያድሱ እና እንደገና ይሞክሩ።
-Unable to load gift card balance.,የተቃኘ ንጥል ነገር ማከል አልተቻለም።
-Unable to load invoice details,የግዢ ትዕዛዝ መፍጠር አልተቻለም
-Unable to load parked order,ረቂቅ ደረሰኝ መሰረዝ አልተቻለም
-Unable to load the selected sales order,ሰነዶችን ማምጣት አልተቻለም
-Unable to prepare document,ረቂቅ ትዕዛዞችን ማምጣት አልተቻለም
-Unable to prepare return invoice,የክፍያ መጠየቂያ ታሪክ ማምጣት አልተቻለም
-Unable to print draft invoice,የM-Pesa ክፍያዎችን ማምጣት አልተቻለም
-Unable to print submitted invoice,የሽያጭ ትዕዛዞችን ማምጣት አልተቻለም
-Unable to process document action,ያልተከፈሉ ደረሰኞችን ማምጣት አልተቻለም
-Unable to repair change allocation,የመጠን ባር ኮድ መፍጠር አልተቻለም
-Unable to save cashier PIN.,የስጦታ ካርድ መስጠት አልተቻለም።
-Unable to save the rate to the backend price list,ገንዘብ ተቀባይ ፒን ሁኔታን መጫን አልተቻለም።
-Unable to submit invoice,ሰነድ መጫን አልተቻለም
-Unable to submit the selected payment,ረቂቅ ደረሰኝ መጫን አልተቻለም
-Unable to top up gift card.,የስጦታ ካርድ ቀሪ ሒሳብ መጫን አልተቻለም።
-Unable to verify cashier PIN.,የክፍያ መጠየቂያ ዝርዝሮችን መጫን አልተቻለም
-Unallocated,የቆመ ትዕዛዝ መጫን አልተቻለም
-Unallocated:,የተመረጠውን የሽያጭ ትዕዛዝ መጫን አልተቻለም
-Unavailable,ሰነድ ማዘጋጀት አልተቻለም
-Unknown,የመመለሻ ደረሰኝ ማዘጋጀት አልተቻለም
-Unknown error,ረቂቅ ደረሰኝ ማተም አልተቻለም
-Unknown Item,የቀረበውን ደረሰኝ ማተም አልተቻለም
-Unknown Warehouse,የሰነድ እርምጃን ማካሄድ አልተቻለም
-Unlock POS,የለውጥ ምደባን መጠገን አልተቻለም
-Unpaid,ገንዘብ ተቀባይ ፒን ማስቀመጥ አልተቻለም።
-"Unselected payments stay unallocated first, then auto reconcile after submit.",ታሪፉን ወደ ኋላ የዋጋ ዝርዝር ማስቀመጥ አልተቻለም
-UOM,ደረሰኝ ማስገባት አልተቻለም
-UOM not found,የተመረጠውን ክፍያ ማስገባት አልተቻለም
-Update available,የስጦታ ካርድ መሙላት አልተቻለም።
-Update Customer,ገንዘብ ተቀባይ ፒን ማረጋገጥ አልተቻለም።
-Update PIN,ያልተመደበ
-Update Price List Rate,ያልተመደበ፡
-Updated,አይገኝም
-Updates and app info that stay out of the cashier flow.,ያልታወቀ
-Updates automatically,ያልታወቀ ስህተት
-Upload pending transactions,ያልታወቀ ንጥል
-Usage,ያልታወቀ መጋዘን
-Usage Stats,POSን ይክፈቱ
-Use a 4 to 8 digit PIN for cashier switching and terminal unlock.,ያልተከፈለ
-Use Cashier,ያልተመረጡ ክፍያዎች መጀመሪያ ሳይመደቡ ይቆያሉ፣ ከዚያ ካስገቡ በኋላ በራስ-ሰር ይታረቃሉ።
-Use date range to search for older invoices,ዩኦኤም
-"Use one field for manual code entry, barcode scans, or QR scans.",UOM አልተገኘም።
-"Use one workflow for balance checks, new issuance, and top ups without leaving POS.",ማዘመን አለ።
-"Use this section when cached prerequisite data needs a refresh, rebuild, or diagnostics review.",ደንበኛን ያዘምኑ
-Use Western numerals,ፒን ያዘምኑ
-Used:,የዋጋ ዝርዝር ደረጃን ያዘምኑ
-Using basic camera settings due to device limitations,ተዘምኗል
-Using cached customer balance,ከገንዘብ ተቀባይ ፍሰት ውጭ የሚቆዩ ዝማኔዎች እና የመተግበሪያ መረጃ።
-Valid until,በራስ ሰር ይዘምናል።
-Variance %,በመጠባበቅ ላይ ያሉ ግብይቶችን ይስቀሉ።
-Variants,አጠቃቀም
-Variant-wise,የአጠቃቀም ስታቲስቲክስ
-Verify closing amounts for each payment method,ለካሼር መቀየር እና ተርሚናል ለመክፈት ከ4 እስከ 8 አሃዝ ፒን ይጠቀሙ።
-View all,ገንዘብ ተቀባይ ተጠቀም
-View app information and current build details,የቆዩ ደረሰኞችን ለመፈለግ የቀን ክልልን ይጠቀሙ
-View Data Diagnostics,በእጅ ኮድ ለማስገባት፣ የአሞሌ ኮድ ስካን ወይም የQR ስካን ለማድረግ አንድ መስክ ይጠቀሙ።
-View Details,ከPOS ሳትለቁ ለቀሪ ሒሳብ ፍተሻ፣ ለአዲስ እትም እና ለተጨማሪ ክፍያ አንድ የስራ ፍሰት ይጠቀሙ።
-View invoice details,የተሸጎጠ ቅድመ ሁኔታ ውሂብ ማደስ፣ እንደገና መገንባት ወይም የምርመራ ግምገማ ሲፈልግ ይህንን ክፍል ይጠቀሙ።
-View notifications,የምዕራባዊ ቁጥሮችን ተጠቀም
-View offline invoices,ጥቅም ላይ የዋለ፡
-View restricted POS insights,በመሳሪያ ውስንነት ምክንያት መሰረታዊ የካሜራ ቅንብሮችን መጠቀም
-Void Amount,የተሸጎጠ የደንበኛ ሒሳብ በመጠቀም
-Void Count,ድረስ የሚሰራ
-Voids,ልዩነት %
-Waiting for cart items,ተለዋጮች
-Waiting for payment...,ተለዋጭ-ጥበብ
-Walk-in Customer,ለእያንዳንዱ የመክፈያ ዘዴ የመዝጊያ መጠኖችን ያረጋግጡ
-Warehouse,ሁሉንም ይመልከቱ
-Warning: High cache usage may affect performance.,የመተግበሪያ መረጃ እና ወቅታዊ የግንባታ ዝርዝሮችን ይመልከቱ
-Warning: High lag may indicate heavy processing or browser slowness.,ዳታ ዲያግኖስቲክስን ይመልከቱ
-Week Δ,ዝርዝሮችን ይመልከቱ
-Week-wise,የክፍያ መጠየቂያ ዝርዝሮችን ይመልከቱ
-Weight (g),ማሳወቂያዎችን ይመልከቱ
-Weight (grams),ከመስመር ውጭ ደረሰኞችን ይመልከቱ
-We'll let you know if an invoice fails to submit,የተገደቡ የPOS ግንዛቤዎችን ይመልከቱ
-Workflow,ባዶ መጠን
-Write off amount cannot exceed the POS profile maximum of {0},ባዶ ቆጠራ
-Write off amount exceeds the allowed limit ({0}). Please add payment for the remaining amount.,ባዶዎች
-Yes,የጋሪ እቃዎችን በመጠበቅ ላይ
-"Yes, Cancel sale",ክፍያ በመጠበቅ ላይ...
-"Yes, Close",የመግቢያ ደንበኛ
-You are not allowed to print draft invoices,መጋዘን
-You are offline. Add Payment will work again when the connection is restored.,ማስጠንቀቂያ፡ ከፍተኛ የመሸጎጫ አጠቃቀም አፈፃፀሙን ሊጎዳ ይችላል።
-You have no notifications right now,ማስጠንቀቂያ፡ ከፍተኛ መዘግየት ከባድ ሂደትን ወይም የአሳሽ ፍጥነትን ሊያመለክት ይችላል።
-Your Cart,ሳምንት Δ
+Total Stock Qty,ጠቅላላ የአክሲዮን ብዛት
+Total:,ጠቅላላ፡
+Totals by Invoice Currency,ድምር በክፍያ መጠየቂያ ምንዛሪ
+Track how much cash was handed back to customers,ምን ያህል ጥሬ ገንዘብ ለደንበኞች እንደተመለሰ ይከታተሉ
+"Track recent sales, collect unpaid balances, and reopen saved work",የቅርብ ጊዜ ሽያጮችን ይከታተሉ፣ ያልተከፈሉ ቀሪ ሂሳቦችን ይሰብስቡ እና የተቀመጠ ስራን እንደገና ይክፈቱ
+Transaction ID,የግብይት መታወቂያ
+Transfer,ማስተላለፍ
+Try a different search term or clear the cart search.,የተለየ የፍለጋ ቃል ይሞክሩ ወይም የካርቱን ፍለጋ ያጽዱ።
+Try adjusting your search or filters,ፍለጋዎን ወይም ማጣሪያዎን ለማስተካከል ይሞክሩ
+Try another source or refresh the list.,ሌላ ምንጭ ይሞክሩ ወይም ዝርዝሩን ያድሱ።
+Try changing the date range or status filter.,የቀን ክልልን ወይም የሁኔታ ማጣሪያን ለመቀየር ይሞክሩ።
+Type,ዓይነት
+Unable to access camera even with basic settings. Please check your camera permissions and device compatibility.,በመሰረታዊ ቅንጅቶች እንኳን ካሜራን መድረስ አልተቻለም። እባክህ የካሜራህን ፈቃዶች እና የመሣሪያ ተኳሃኝነትን ተመልከት።
+Unable to add offer item {0}. Please refresh and try again.,የቅናሽ ንጥል {0}ን ማከል አልተቻለም። እባክዎ ያድሱ እና እንደገና ይሞክሩ።
+Unable to add offer item. Please refresh and try again.,የዋጋ አቅርቦትን ማከል አልተቻለም። እባክዎ ያድሱ እና እንደገና ይሞክሩ።
+Unable to add scanned item.,የተቃኘ ንጥል ነገር ማከል አልተቻለም።
+Unable to create purchase order,የግዢ ትዕዛዝ መፍጠር አልተቻለም
+Unable to delete draft invoice,ረቂቅ ደረሰኝ መሰረዝ አልተቻለም
+Unable to fetch documents,ሰነዶችን ማምጣት አልተቻለም
+Unable to fetch draft orders,ረቂቅ ትዕዛዞችን ማምጣት አልተቻለም
+Unable to fetch invoice history,የክፍያ መጠየቂያ ታሪክ ማምጣት አልተቻለም
+Unable to fetch M-Pesa payments,የM-Pesa ክፍያዎችን ማምጣት አልተቻለም
+Unable to fetch sales orders,የሽያጭ ትዕዛዞችን ማምጣት አልተቻለም
+Unable to fetch unpaid invoices,ያልተከፈሉ ደረሰኞችን ማምጣት አልተቻለም
+Unable to generate scale barcode,የመጠን ባር ኮድ መፍጠር አልተቻለም
+Unable to issue gift card.,የስጦታ ካርድ መስጠት አልተቻለም።
+Unable to load cashier PIN status.,ገንዘብ ተቀባይ ፒን ሁኔታን መጫን አልተቻለም።
+Unable to load document,ሰነድ መጫን አልተቻለም
+Unable to load draft invoice,ረቂቅ ደረሰኝ መጫን አልተቻለም
+Unable to load gift card balance.,የስጦታ ካርድ ቀሪ ሒሳብ መጫን አልተቻለም።
+Unable to load invoice details,የክፍያ መጠየቂያ ዝርዝሮችን መጫን አልተቻለም
+Unable to load parked order,የቆመ ትዕዛዝ መጫን አልተቻለም
+Unable to load the selected sales order,የተመረጠውን የሽያጭ ትዕዛዝ መጫን አልተቻለም
+Unable to prepare document,ሰነድ ማዘጋጀት አልተቻለም
+Unable to prepare return invoice,የመመለሻ ደረሰኝ ማዘጋጀት አልተቻለም
+Unable to print draft invoice,ረቂቅ ደረሰኝ ማተም አልተቻለም
+Unable to print submitted invoice,የቀረበውን ደረሰኝ ማተም አልተቻለም
+Unable to process document action,የሰነድ እርምጃን ማካሄድ አልተቻለም
+Unable to repair change allocation,የለውጥ ምደባን መጠገን አልተቻለም
+Unable to save cashier PIN.,ገንዘብ ተቀባይ ፒን ማስቀመጥ አልተቻለም።
+Unable to save the rate to the backend price list,ታሪፉን ወደ ኋላ የዋጋ ዝርዝር ማስቀመጥ አልተቻለም
+Unable to submit invoice,ደረሰኝ ማስገባት አልተቻለም
+Unable to submit the selected payment,የተመረጠውን ክፍያ ማስገባት አልተቻለም
+Unable to top up gift card.,የስጦታ ካርድ መሙላት አልተቻለም።
+Unable to verify cashier PIN.,ገንዘብ ተቀባይ ፒን ማረጋገጥ አልተቻለም።
+Unallocated,ያልተመደበ
+Unallocated:,ያልተመደበ፡
+Unavailable,አይገኝም
+Unknown,ያልታወቀ
+Unknown Item,ያልታወቀ ንጥል
+Unknown Warehouse,ያልታወቀ መጋዘን
+Unlock POS,POSን ይክፈቱ
+Unpaid,ያልተከፈለ
+"Unselected payments stay unallocated first, then auto reconcile after submit.",ያልተመረጡ ክፍያዎች መጀመሪያ ሳይመደቡ ይቆያሉ፣ ከዚያ ካስገቡ በኋላ በራስ-ሰር ይታረቃሉ።
+UOM,ዩኦኤም
+UOM not found,UOM አልተገኘም።
+Update available,ማዘመን አለ።
+Update Customer,ደንበኛን ያዘምኑ
+Update PIN,ፒን ያዘምኑ
+Update Price List Rate,የዋጋ ዝርዝር ደረጃን ያዘምኑ
+Updated,ተዘምኗል
+Updates and app info that stay out of the cashier flow.,ከገንዘብ ተቀባይ ፍሰት ውጭ የሚቆዩ ዝማኔዎች እና የመተግበሪያ መረጃ።
+Updates automatically,በራስ ሰር ይዘምናል።
+Usage,አጠቃቀም
+Usage Stats,የአጠቃቀም ስታቲስቲክስ
+Use a 4 to 8 digit PIN for cashier switching and terminal unlock.,ለካሼር መቀያየር እና ተርሚናል ለመክፈት ከ4 እስከ 8 አሃዝ ፒን ይጠቀሙ።
+Use Cashier,ገንዘብ ተቀባይ ተጠቀም
+Use date range to search for older invoices,የቆዩ ደረሰኞችን ለመፈለግ የቀን ክልልን ይጠቀሙ
+"Use one field for manual code entry, barcode scans, or QR scans.",በእጅ ኮድ ለማስገባት፣ የአሞሌ ኮድ ስካን ወይም የQR ስካን ለማድረግ አንድ መስክ ይጠቀሙ።
+"Use one workflow for balance checks, new issuance, and top ups without leaving POS.",ከPOS ሳትለቁ ለቀሪ ሒሳብ ፍተሻ፣ ለአዲስ እትም እና ለተጨማሪ ክፍያ አንድ የስራ ፍሰት ይጠቀሙ።
+"Use this section when cached prerequisite data needs a refresh, rebuild, or diagnostics review.",የተሸጎጠ ቅድመ ሁኔታ ውሂብ ማደስ፣ እንደገና መገንባት ወይም የምርመራ ግምገማ ሲፈልግ ይህንን ክፍል ይጠቀሙ።
+Use Western numerals,የምዕራባዊ ቁጥሮችን ተጠቀም
+Used:,ጥቅም ላይ የዋለ፡
+Using basic camera settings due to device limitations,በመሳሪያ ውስንነት ምክንያት መሰረታዊ የካሜራ ቅንብሮችን መጠቀም
+Using cached customer balance,የተሸጎጠ የደንበኛ ሒሳብ በመጠቀም
+Valid until,ድረስ የሚሰራ
+Variance %,ልዩነት %
+Variants,ተለዋጮች
+Variant-wise,ተለዋጭ-ጥበብ
+Verify closing amounts for each payment method,ለእያንዳንዱ የመክፈያ ዘዴ የመዝጊያ መጠኖችን ያረጋግጡ
+View all,ሁሉንም ይመልከቱ
+View app information and current build details,የመተግበሪያ መረጃ እና ወቅታዊ የግንባታ ዝርዝሮችን ይመልከቱ
+View Data Diagnostics,ዳታ ዲያግኖስቲክስን ይመልከቱ
+View Details,ዝርዝሮችን ይመልከቱ
+View invoice details,የክፍያ መጠየቂያ ዝርዝሮችን ይመልከቱ
+View notifications,ማሳወቂያዎችን ይመልከቱ
+View offline invoices,ከመስመር ውጭ ደረሰኞችን ይመልከቱ
+View restricted POS insights,የተገደቡ የPOS ግንዛቤዎችን ይመልከቱ
+Void Amount,ባዶ መጠን
+Void Count,ባዶ ቆጠራ
+Voids,ባዶዎች
+Waiting for cart items,የጋሪ እቃዎችን በመጠበቅ ላይ
+Waiting for payment...,ክፍያ በመጠበቅ ላይ...
+Walk-in Customer,የመግቢያ ደንበኛ
+Warehouse,መጋዘን
+Warning: High cache usage may affect performance.,ማስጠንቀቂያ፡ ከፍተኛ የመሸጎጫ አጠቃቀም አፈፃፀሙን ሊጎዳ ይችላል።
+Warning: High lag may indicate heavy processing or browser slowness.,ማስጠንቀቂያ፡ ከፍተኛ መዘግየት ከባድ ሂደትን ወይም የአሳሽ ፍጥነትን ሊያመለክት ይችላል።
+Week ?,ሳምንት ፧
+Week-wise,በሳምንቱ-ጥበብ
+Weight (g),ክብደት (ሰ)
+Weight (grams),ክብደት (ግራም)
+We'll let you know if an invoice fails to submit,ደረሰኝ ማስገባት ካልቻለ እናሳውቅዎታለን
+Workflow,የስራ ፍሰት
+Write off amount cannot exceed the POS profile maximum of {0},የጽሑፍ መጠን ከPOS መገለጫ ከፍተኛው {0} መብለጥ አይችልም
+Write off amount exceeds the allowed limit ({0}). Please add payment for the remaining amount.,የጽሑፍ መጠን ከተፈቀደው ገደብ ({0}) ይበልጣል። እባክዎ ለቀሪው መጠን ክፍያ ይጨምሩ።
+Yes,አዎ
+"Yes, Cancel sale",አዎ፣ ሽያጩን ሰርዝ
+"Yes, Close",አዎ ዝጋ
+You are not allowed to print draft invoices,ረቂቅ ደረሰኞችን ማተም አልተፈቀደልዎም።
+You are offline. Add Payment will work again when the connection is restored.,ከመስመር ውጭ ነዎት። ግንኙነቱ ወደነበረበት ሲመለስ ክፍያ አክል እንደገና ይሰራል።
+You have no notifications right now,አሁን ምንም ማሳወቂያዎች የሉዎትም።
+Your Cart,የእርስዎ ጋሪ

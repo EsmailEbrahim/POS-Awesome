@@ -1,4 +1,39 @@
-﻿- Total Unallocated,- Total Unallocated
+POS Awesome,Ajoyib POS
+Fetch Items Directly from Server,To'g'ridan-to'g'ri serverdan elementlarni olish
+Menu,Menyu
+Actions,Harakatlar
+Close Shift,Shiftni yopish
+End current session,Joriy seansni tugatish
+Print Last Invoice,Oxirgi hisob-fakturani chop eting
+Reprint previous transaction,Oldingi tranzaksiyani qayta chop etish
+Sync Offline Invoices,Oflayn hisob-fakturalarni sinxronlash
+Upload pending transactions,Kutilayotgan tranzaksiyalarni yuklang
+Go Online,Onlayn o'tish
+Go Offline,Oflayn rejimga o'tish
+Disable offline mode,Oflayn rejimni o'chiring
+Work without server connection,Serverga ulanmasdan ishlash
+Clear Cache,Keshni tozalash
+Remove local data and refresh,Mahalliy ma'lumotlarni o'chiring va yangilang
+About,Haqida
+App information,Ilova ma'lumotlari
+Language,Til
+Change interface language,Interfeys tilini o'zgartiring
+Light Mode,Nur rejimi
+Dark Mode,Qorong'i rejim
+Switch theme appearance,Mavzu ko'rinishini o'zgartirish
+Logout,Chiqish
+Sign out of session,Sessiyadan chiqish
+Select Language,Tilni tanlang
+Choose your preferred language for the POS interface,POS interfeysi uchun sizga yoqqan tilni tanlang
+Language will be changed to,Til quyidagiga o'zgartiriladi
+Cancel,Bekor qilish
+Change Language,Tilni o'zgartirish
+Close,Yopish
+Cannot change language - same language selected,Tilni o'zgartirib bo'lmaydi - bir xil til tanlangan
+Language changed successfully! Reloading...,Til muvaffaqiyatli o'zgartirildi! Qayta yuklanmoqda...
+Failed to change language,Tilni o‘zgartirib bo‘lmadi
+Unknown error,Noma'lum xato
+- Total Unallocated,- Jami taqsimlanmagan
 * Required,* Majburiy
 {0} (Qty: {1}),{0} (Majmi: {1})
 {0} actions,{0} ta amal
@@ -11,7 +46,6 @@
 {0}h ago,{0}soat oldin
 {0}m ago,{0}daq oldin
 A POS supervisor is required for this action.,Bu amal uchun POS nazoratchisi talab qilinadi.
-About,Haqida
 Access,Kirish
 Account,Hisob
 Account is overdrawn,Hisob ortiqcha ishlangan
@@ -19,7 +53,6 @@ Acknowledge the error to resume scanning,Skanerlashni davom ettirish uchun xaton
 Acknowledge the error to resume scanning.,Skanerlashni davom ettirish uchun xatoni tan oling.
 Across,Bo'ylab
 Action,Harakat
-Actions,Harakatlar
 Active sale,Faol savdo
 add,qo'shish
 Add items from the selector to start building this sale.,Ushbu savdoni yaratishni boshlash uchun selektordan narsalarni qo'shing.
@@ -55,7 +88,6 @@ Amount already received,Qabul qilingan miqdor
 Amount exceeds profile cash movement max amount.,Miqdori naqd pul harakatining maksimal miqdoridan oshib ketdi.
 Amount must be greater than zero.,Miqdor noldan katta bo'lishi kerak.
 Amount received from customer,Mijozdan olingan miqdor
-App information,Ilova ma'lumotlari
 Appearance and user-level preferences for the current session.,Joriy seans uchun tashqi ko'rinish va foydalanuvchi darajasidagi imtiyozlar.
 Applied,Qo'llaniladi
 Apply,Murojaat qiling
@@ -133,7 +165,6 @@ Camera is busy or blocked by another app/tab. Close other camera apps and try ag
 Camera permission denied. Please allow camera access in your browser settings and refresh the page.,Kamera ruxsati rad etildi. Brauzer sozlamalarida kameraga kirishga ruxsat bering va sahifani yangilang.
 Camera scanner is locked until the current error is acknowledged,Kamera skaneri joriy xato tasdiqlanmaguncha qulflanadi
 Camera started but the video stream did not load in time. Please try again.,"Kamera ishga tushdi, lekin video oqimi o‘z vaqtida yuklanmadi. Iltimos, qayta urinib koʻring."
-Cancel,Bekor qilish
 Cancel cash movement {0}?,Naqd pul harakati {0} bekor qilinsinmi?
 Cancel Payment,To'lovni bekor qilish
 Cancel Sale,Sotishni bekor qilish
@@ -184,8 +215,6 @@ Certificate is missing or not trusted. QZ may show confirmation dialogs.,Sertifi
 Certificate is trusted. Silent QZ printing is active.,Sertifikat ishonchli. Ovozsiz QZ bosib chiqarish faol.
 Change,O'zgartirish
 Change allocation repaired,O'zgartirish taqsimoti tuzatildi
-Change interface language,Interfeys tilini o'zgartiring
-Change Language,Tilni o'zgartirish
 Change Price,Narxni o'zgartirish
 Change Return,Qaytishni o'zgartirish
 Change Returned,O'zgartirish qaytarildi
@@ -204,20 +233,17 @@ Checking...,Tekshirilmoqda...
 Cheque/Reference Date,Chek/Ma'lumotnoma sanasi
 Cheque/Reference No,Chek/Ma'lumotnoma raqami
 Choose the cashier currently operating this terminal.,Hozirda ushbu terminalda ishlaydigan kassirni tanlang.
-Choose your preferred language for the POS interface,POS interfeysi uchun sizga yoqqan tilni tanlang
 City,Shahar
 Clear,Toza
 Clear All,Hammasini tozalash
 Clear all barcode items,Barcha shtrix-kod elementlarini tozalang
 Clear all purchase order items,Buyurtmaning barcha elementlarini tozalang
-Clear Cache,Keshni tozalash
 Clear Search,Qidiruvni tozalash
 Clearing local cache...,Mahalliy kesh tozalanmoqda...
 Click to refresh,Yangilash uchun bosing
 Client CPU Lag:,Mijoz protsessorining kechikishi:
 Client Memory Usage:,Mijoz xotirasidan foydalanish:
 Client Metrics,Mijoz ko'rsatkichlari
-Close,Yopish
 Close about dialog,Haqida muloqot oynasini yoping
 Close cashier switcher,Kassir almashtirgichni yoping
 Close closing shift dialog,Shiftni yopish dialogini yoping
@@ -233,7 +259,6 @@ Close sales orders dialog,Savdo buyurtmalari dialogini yoping
 Close Scanner,Skanerni yoping
 Close scanner dialog,Skaner dialogini yoping
 Close Settings,Sozlamalarni yoping
-Close Shift,Shiftni yopish
 Closing Amount,Yakunlovchi miqdor
 Closing POS Shift,POS Shiftni yopish
 Closing Snapshot Available,Yakunlovchi surat mavjud
@@ -318,13 +343,12 @@ Customers not found,Mijozlar topilmadi
 Daily cashier actions without scrolling.,Kundalik kassir harakatlari aylanmasdan.
 Daily Sales,Kundalik savdo
 Daily Sales Summary,Kundalik savdo xulosasi
-Dark Mode,Qorong'i rejim
 Data loaded in form. Review and submit.,Ma'lumotlar shaklda yuklangan. Ko'rib chiqing va yuboring.
 Database Health,Ma'lumotlar bazasi salomatligi
 Database health affects overall system speed and reliability.,Ma'lumotlar bazasining holati umumiy tizim tezligi va ishonchliligiga ta'sir qiladi.
 Database Info,Ma'lumotlar bazasi haqida ma'lumot
 Date,Sana
-Day Δ,D kuni
+Day ?,Kun?
 days,kunlar
 Day-wise (MTD),Kun bo'yi (MTD)
 Day-wise Movement,Kun bo'yi harakat
@@ -383,7 +407,6 @@ Edited,Tahrirlangan
 Employee,Xodim
 Enable background sync,Fon sinxronlashni yoqish
 Enable Customer Display in POS Profile first.,Avval POS profilida mijoz ko‘rinishini yoqing.
-End current session,Joriy seansni tugatish
 Enter a PIN.,PIN kodni kiriting.
 Enter a valid grams value,Yaroqli gramm qiymatini kiriting
 Enter new price list rate,Yangi narxlar ro'yxatini kiriting
@@ -468,8 +491,6 @@ Gift card payment,Sovg'a kartasi to'lovi
 Gift card redemption requires an online connection,Sovg'a kartasini sotib olish uchun onlayn ulanish kerak
 Gift card topped up successfully.,Sovg'a kartasi muvaffaqiyatli to'ldirildi.
 Gift Cards,Sovg'a kartalari
-Go Offline,Oflayn rejimga o'tish
-Go Online,Onlayn o'tish
 Go to Frappe Desk,Frappe stoliga o'ting
 Grand Total,Umumiy jami
 Gross Margin,Yalpi marja
@@ -552,8 +573,6 @@ json,json
 Just now,Hozir
 Keep offline prerequisites healthy and recover stale data safely.,Oflayn shartlarni sog'lom saqlang va eskirgan ma'lumotlarni xavfsiz tiklang.
 Labels,Yorliqlar
-Language,Til
-Language will be changed to,Til quyidagiga o'zgartiriladi
 "Language, theme, terminal tools, and session controls.","Til, mavzu, terminal vositalari va seans boshqaruvlari."
 Last,Oxirgi
 Last 14 Days (Paid vs Pending),Oxirgi 14 kun (Toʻlangan va kutilayotgan)
@@ -565,7 +584,6 @@ Last sync:,Oxirgi sinxronlash:
 Last sync: {0} | ok: {1} | failed: {2} | skipped: {3},Oxirgi sinxronlash: {0} | yaxshi: {1} | muvaffaqiyatsiz: {2} | o'tkazib yuborilgan: {3}
 Latest entries for current shift,Joriy siljish uchun so'nggi yozuvlar
 Lead Time,Yetkazib berish vaqti
-Light Mode,Nur rejimi
 Limited,Cheklangan
 lines,chiziqlar
 List,Roʻyxat
@@ -594,7 +612,6 @@ localStorage,localStorage
 Location Performance,Joylashuv samaradorligi
 Locations,Joylar
 Lock Screen,Ekranni qulflash
-Logout,Chiqish
 Lookup Workflow,Ish jarayonini qidirish
 Loss,Yo'qotish
 Low,Past
@@ -621,7 +638,6 @@ Maximum discount amount for this offer item is {0}.,Ushbu taklif mahsuloti uchun
 Maximum discount percentage for this offer item is {0}%.,Ushbu taklif elementi uchun maksimal chegirma foizi {0}%.
 Maximum offer quantity is {0}. Quantity adjusted to allowed limit.,Maksimal taklif miqdori: {0}. Miqdor ruxsat etilgan chegaraga sozlangan.
 Medium,O'rta
-Menu,Menyu
 Method-wise Collections,Uslubiy to'plamlar
 Minimum allowed rate for this offer item is {0}.,Ushbu taklif elementi uchun ruxsat etilgan minimal narx: {0}.
 Minimum Qty,Minimal miqdor
@@ -629,7 +645,7 @@ Mobile No,Mobil raqami
 Mode,Rejim
 Mode of Payment,To'lov tartibi
 Month,Oy
-Month Δ,Oy D
+Month ?,Oy?
 Monthly Profit,Oylik foyda
 Monthly Sales,Oylik savdo
 Monthly Sales Summary,Oylik savdo xulosasi
@@ -894,7 +910,6 @@ Print Draft,Qoralamani chop etish
 Print Format (Invoice),Chop etish formati (hisob-faktura)
 Print Format (Order),Chop etish formati (buyurtma)
 Print invoice,Hisob-fakturani chop etish
-Print Last Invoice,Oxirgi hisob-fakturani chop eting
 Print Purchase Invoice instead of PO,PO o'rniga sotib olish fakturasini chop eting
 Printer,Printer
 Processed returns impacting the shift totals,Qayta ishlangan daromadlar siljishlar summasiga ta'sir qiladi
@@ -977,7 +992,6 @@ Repaired,Ta'mirlangan
 Repairing change allocation,O'zgarishlarni taqsimlashni tuzatish
 Repeat Customers,Takroriy mijozlar
 Repeat Rate,Takrorlash tezligi
-Reprint previous transaction,Oldingi tranzaksiyani qayta chop etish
 Request,So'rov
 Request ID: {0},So‘rov identifikatori: {0}
 Request Payment,To'lovni talab qilish
@@ -1063,7 +1077,6 @@ Select a printer to use QZ silent printing.,QZ ovozsiz chop etishdan foydalanish
 Select Batch,To'plamni tanlang
 Select Columns to Display,Ko'rsatish uchun ustunlarni tanlang
 Select items to sell,Sotish uchun narsalarni tanlang
-Select Language,Tilni tanlang
 Select Payment,To'lovni tanlang
 Select Payment Account,To'lov hisobini tanlang
 Select printer,Printerni tanlang
@@ -1102,7 +1115,6 @@ Show the active cart on a customer-facing screen,Mijozlarga qaragan ekranda faol
 Showing {0}-{1} of {2},{0}-{1}/{2} ko‘rsatilmoqda
 Showing 0 of 0,0 dan 0 ko‘rsatilmoqda
 Shows the distribution of invoices per currency,Valyuta bo'yicha hisob-fakturalarning taqsimlanishini ko'rsatadi
-Sign out of session,Sessiyadan chiqish
 Sign out of the current POS session,Joriy POS seansidan chiqing
 Size:,Hajmi:
 Skipped Payments,Oʻtkazib yuborilgan toʻlovlar
@@ -1150,7 +1162,6 @@ Suppliers not found,Yetkazib beruvchilar topilmadi
 Switch Camera,Kamerani almashtirish
 Switch Cashier,Kassirni almashtirish
 Switch the POS appearance theme,POS ko'rinishi mavzusini o'zgartiring
-Switch theme appearance,Mavzu ko'rinishini o'zgartirish
 Switched to:,Quyidagiga almashtirildi:
 Sync All Invoices,Barcha hisob-fakturalarni sinxronlash
 Sync Offline Cash Movements ({0}),Oflayn pul oʻtkazmalarini sinxronlash ({0})
@@ -1286,7 +1297,6 @@ Unallocated,Taqsimlanmagan
 Unallocated:,Taqsimlanmagan:
 Unavailable,Mavjud emas
 Unknown,Noma'lum
-Unknown error,Noma'lum xato
 Unknown Item,Noma'lum element
 Unknown Warehouse,Noma'lum ombor
 Unlock POS,POS qulfini ochish
@@ -1301,7 +1311,6 @@ Update Price List Rate,Narxlar roʻyxatini yangilash
 Updated,Yangilangan
 Updates and app info that stay out of the cashier flow.,Kassir oqimidan chetda qoladigan yangilanishlar va ilova ma'lumotlari.
 Updates automatically,Avtomatik yangilanadi
-Upload pending transactions,Kutilayotgan tranzaksiyalarni yuklang
 Usage,Foydalanish
 Usage Stats,Foydalanish statistikasi
 Use a 4 to 8 digit PIN for cashier switching and terminal unlock.,Kassirni almashtirish va terminal qulfini ochish uchun 4 dan 8 gacha bo'lgan PIN-koddan foydalaning.
@@ -1336,7 +1345,7 @@ Walk-in Customer,Kirish mijozi
 Warehouse,Ombor
 Warning: High cache usage may affect performance.,Ogohlantirish: Yuqori keshdan foydalanish ishlashga ta'sir qilishi mumkin.
 Warning: High lag may indicate heavy processing or browser slowness.,Ogohlantirish: Yuqori kechikish og'ir ishlov berish yoki brauzer sekinligini ko'rsatishi mumkin.
-Week Δ,Hafta D
+Week ?,Hafta?
 Week-wise,Hafta bo'yicha
 Weight (g),Og'irligi (g)
 Weight (grams),Og'irligi (gramm)

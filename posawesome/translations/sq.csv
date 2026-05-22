@@ -1,4 +1,39 @@
-﻿- Total Unallocated,- Total Unallocated
+POS Awesome,POS E mrekullueshme
+Fetch Items Directly from Server,Merr artikujt direkt nga serveri
+Menu,Menyja
+Actions,Veprimet
+Close Shift,Mbyll Shift
+End current session,Përfundoni seancën aktuale
+Print Last Invoice,Printoni faturën e fundit
+Reprint previous transaction,Riprintoni transaksionin e mëparshëm
+Sync Offline Invoices,Sinkronizoni faturat jashtë linje
+Upload pending transactions,Ngarko transaksionet në pritje
+Go Online,Shko Online
+Go Offline,Shko jashtë linje
+Disable offline mode,Çaktivizo modalitetin jashtë linje
+Work without server connection,Punoni pa lidhje serveri
+Clear Cache,Pastro cache
+Remove local data and refresh,Hiqni të dhënat lokale dhe rifreskoni
+About,Rreth
+App information,Informacioni i aplikacionit
+Language,Gjuha
+Change interface language,Ndryshoni gjuhën e ndërfaqes
+Light Mode,Modaliteti i dritës
+Dark Mode,Modaliteti i errët
+Switch theme appearance,Ndërro pamjen e temës
+Logout,Dilni
+Sign out of session,Dil nga sesioni
+Select Language,Zgjidhni gjuhën
+Choose your preferred language for the POS interface,Zgjidhni gjuhën tuaj të preferuar për ndërfaqen POS
+Language will be changed to,Gjuha do të ndryshohet në
+Cancel,Anulo
+Change Language,Ndrysho gjuhën
+Close,Mbylle
+Cannot change language - same language selected,Gjuha nuk mund të ndryshohet - e njëjta gjuhë është zgjedhur
+Language changed successfully! Reloading...,Gjuha ndryshoi me sukses! Po ringarkohet...
+Failed to change language,Ndryshimi i gjuhës dështoi
+Unknown error,Gabim i panjohur
+- Total Unallocated,- Gjithsej të pashpërndara
 * Required,* E detyrueshme
 {0} (Qty: {1}),{0} (Sasia: {1})
 {0} actions,{0} veprime
@@ -11,7 +46,6 @@
 {0}h ago,{0} orë më parë
 {0}m ago,{0} minuta më parë
 A POS supervisor is required for this action.,Për këtë veprim kërkohet një mbikëqyrës POS.
-About,Rreth
 Access,Qasja
 Account,Llogaria
 Account is overdrawn,Llogaria është e mbitërhequr
@@ -19,7 +53,6 @@ Acknowledge the error to resume scanning,Pranoni gabimin për të rifilluar skan
 Acknowledge the error to resume scanning.,Pranoni gabimin për të rifilluar skanimin.
 Across,Përtej
 Action,Veprimi
-Actions,Veprimet
 Active sale,Shitje aktive
 add,shtoni
 Add items from the selector to start building this sale.,Shto artikuj nga përzgjedhësi për të filluar ndërtimin e kësaj shitje.
@@ -55,7 +88,6 @@ Amount already received,Shuma e marrë tashmë
 Amount exceeds profile cash movement max amount.,Shuma tejkalon shumën maksimale të lëvizjes së parave të profilit.
 Amount must be greater than zero.,Shuma duhet të jetë më e madhe se zero.
 Amount received from customer,Shuma e marrë nga klienti
-App information,Informacioni i aplikacionit
 Appearance and user-level preferences for the current session.,Paraqitja dhe preferencat e nivelit të përdoruesit për sesionin aktual.
 Applied,Aplikuar
 Apply,Aplikoni
@@ -133,7 +165,6 @@ Camera is busy or blocked by another app/tab. Close other camera apps and try ag
 Camera permission denied. Please allow camera access in your browser settings and refresh the page.,Leja e kamerës u refuzua. Lejo qasjen e kamerës në cilësimet e shfletuesit dhe rifresko faqen.
 Camera scanner is locked until the current error is acknowledged,Skaneri i kamerës është i kyçur derisa të pranohet gabimi aktual
 Camera started but the video stream did not load in time. Please try again.,Kamera filloi por transmetimi i videos nuk u ngarkua në kohë. Ju lutemi provoni përsëri.
-Cancel,Anulo
 Cancel cash movement {0}?,Të anulohet lëvizja e parave të gatshme {0}?
 Cancel Payment,Anuloni pagesën
 Cancel Sale,Anulo shitjen
@@ -184,8 +215,6 @@ Certificate is missing or not trusted. QZ may show confirmation dialogs.,Certifi
 Certificate is trusted. Silent QZ printing is active.,Certifikata është e besueshme. Printimi i heshtur QZ është aktiv.
 Change,Ndryshimi
 Change allocation repaired,Riparimi i ndarjes së ndryshimit
-Change interface language,Ndryshoni gjuhën e ndërfaqes
-Change Language,Ndrysho gjuhën
 Change Price,Ndrysho Çmimi
 Change Return,Ndrysho Kthimin
 Change Returned,Ndryshimi u kthye
@@ -204,20 +233,17 @@ Checking...,Po kontrollon...
 Cheque/Reference Date,Çeku/Data e referencës
 Cheque/Reference No,Çeku/Referenca nr
 Choose the cashier currently operating this terminal.,Zgjidhni arkëtarin që operon aktualisht në këtë terminal.
-Choose your preferred language for the POS interface,Zgjidhni gjuhën tuaj të preferuar për ndërfaqen POS
 City,Qyteti
 Clear,E qartë
 Clear All,Pastro të gjitha
 Clear all barcode items,Pastro të gjithë artikujt e barkodit
 Clear all purchase order items,Pastro të gjithë artikujt e porosisë së blerjes
-Clear Cache,Pastro cache
 Clear Search,Pastro kërkimin
 Clearing local cache...,Po pastrohet memoria e memories lokale...
 Click to refresh,Klikoni për të rifreskuar
 Client CPU Lag:,Vonesa e CPU-së së klientit:
 Client Memory Usage:,Përdorimi i memories së klientit:
 Client Metrics,Metrika e klientit
-Close,Mbylle
 Close about dialog,Mbyll dialogun rreth
 Close cashier switcher,Mbylle ndërruesin e arkës
 Close closing shift dialog,Mbyll dialogun e mbylljes së ndërrimit
@@ -233,7 +259,6 @@ Close sales orders dialog,Mbyll dialogun e porosive të shitjeve
 Close Scanner,Mbylle skanerin
 Close scanner dialog,Mbyll dialogun e skanerit
 Close Settings,Mbyllni Cilësimet
-Close Shift,Mbyll Shift
 Closing Amount,Shuma e mbylljes
 Closing POS Shift,Mbyllja e POS Shift
 Closing Snapshot Available,Disponohet fotografia mbyllëse
@@ -318,13 +343,12 @@ Customers not found,Klientët nuk u gjetën
 Daily cashier actions without scrolling.,Veprimet e përditshme të arkës pa lëvizje.
 Daily Sales,Shitjet Ditore
 Daily Sales Summary,Përmbledhje e shitjeve ditore
-Dark Mode,Modaliteti i errët
 Data loaded in form. Review and submit.,Të dhënat e ngarkuara në formë. Rishikoni dhe dorëzoni.
 Database Health,Baza e të dhënave Shëndeti
 Database health affects overall system speed and reliability.,Shëndeti i bazës së të dhënave ndikon në shpejtësinë dhe besueshmërinë e përgjithshme të sistemit.
 Database Info,Informacion mbi bazën e të dhënave
 Date,Data
-Day Δ,Dita Δ
+Day ?,Dita ?
 days,ditë
 Day-wise (MTD),Gjatë ditës (MTD)
 Day-wise Movement,Lëvizja e ditës
@@ -383,7 +407,6 @@ Edited,Redaktuar
 Employee,Punonjës
 Enable background sync,Aktivizo sinkronizimin e sfondit
 Enable Customer Display in POS Profile first.,Aktivizo fillimisht shfaqjen e klientit në profilin POS.
-End current session,Përfundoni seancën aktuale
 Enter a PIN.,Futni një PIN.
 Enter a valid grams value,Fut një vlerë të vlefshme gram
 Enter new price list rate,Fut tarifën e re të listës së çmimeve
@@ -468,8 +491,6 @@ Gift card payment,Pagesa me kartë dhuratë
 Gift card redemption requires an online connection,Shlyerja e kartës së dhuratës kërkon një lidhje në internet
 Gift card topped up successfully.,Karta e dhuratës u mbush me sukses.
 Gift Cards,Kartat e dhuratave
-Go Offline,Shko jashtë linje
-Go Online,Shko Online
 Go to Frappe Desk,Shkoni te Frappe Desk
 Grand Total,Totali i Madh
 Gross Margin,Marzhi bruto
@@ -552,8 +573,6 @@ json,json
 Just now,Vetëm tani
 Keep offline prerequisites healthy and recover stale data safely.,Mbani të shëndetshme parakushtet jashtë linje dhe rikuperoni të dhënat e vjetruara në mënyrë të sigurt.
 Labels,Etiketat
-Language,Gjuha
-Language will be changed to,Gjuha do të ndryshohet në
 "Language, theme, terminal tools, and session controls.","Gjuha, tema, mjetet e terminalit dhe kontrollet e sesionit."
 Last,E fundit
 Last 14 Days (Paid vs Pending),14 ditët e fundit (të paguara kundrejt në pritje)
@@ -565,7 +584,6 @@ Last sync:,Sinkronizimi i fundit:
 Last sync: {0} | ok: {1} | failed: {2} | skipped: {3},Sinkronizimi i fundit: {0} | në rregull: {1} | dështoi: {2} | kapërceu: {3}
 Latest entries for current shift,Regjistrimet më të fundit për ndërrimin aktual
 Lead Time,Koha e udhëheqjes
-Light Mode,Modaliteti i dritës
 Limited,I kufizuar
 lines,linjat
 List,Lista
@@ -594,7 +612,6 @@ localStorage,ruajtja lokale
 Location Performance,Performanca e vendndodhjes
 Locations,Vendndodhjet
 Lock Screen,Kyçja e ekranit
-Logout,Dilni
 Lookup Workflow,Kërkimi i rrjedhës së punës
 Loss,Humbje
 Low,E ulët
@@ -611,7 +628,7 @@ Make New Payment,Bëni një pagesë të re
 Manage all,Menaxhoni të gjitha
 Manage and synchronize your offline transactions,Menaxhoni dhe sinkronizoni transaksionet tuaja jashtë linje
 Manage Cashier PIN,Menaxho PIN-in e arkëtarit
-"Manage offline tools, terminal controls, and maintenance from one workspace.","Menaxho mjetet jashtë linje, kontrollet e terminalit dhe mirëmbajtjen nga një hapësirë pune."
+"Manage offline tools, terminal controls, and maintenance from one workspace.","Menaxho mjetet jashtë linje, kontrollet e terminalit dhe mirëmbajtjen nga një hapësirë ​​pune."
 manual,manual
 "Manual codes, barcode scans, and QR scans work in the same field","Kodet manuale, skanimet e barkodit dhe skanimet QR funksionojnë në të njëjtën fushë"
 Manual offline mode is enabled,Modaliteti manual jashtë linje është aktivizuar
@@ -621,7 +638,6 @@ Maximum discount amount for this offer item is {0}.,Shuma maksimale e zbritjes p
 Maximum discount percentage for this offer item is {0}%.,Përqindja maksimale e zbritjes për këtë artikull oferte është {0}%.
 Maximum offer quantity is {0}. Quantity adjusted to allowed limit.,Sasia maksimale e ofertës është {0}. Sasia e rregulluar në kufirin e lejuar.
 Medium,E mesme
-Menu,Menyja
 Method-wise Collections,Koleksione sipas metodës
 Minimum allowed rate for this offer item is {0}.,Tarifa minimale e lejuar për këtë artikull oferte është {0}.
 Minimum Qty,Sasia minimale
@@ -629,7 +645,7 @@ Mobile No,Nr celulari
 Mode,Modaliteti
 Mode of Payment,Mënyra e pagesës
 Month,muaj
-Month Δ,Muaji Δ
+Month ?,muaj ?
 Monthly Profit,Fitimi mujor
 Monthly Sales,Shitjet mujore
 Monthly Sales Summary,Përmbledhja e Shitjeve Mujore
@@ -894,7 +910,6 @@ Print Draft,Printo draft
 Print Format (Invoice),Formati i printimit (faturë)
 Print Format (Order),Formati i printimit (porosi)
 Print invoice,Shtypni faturë
-Print Last Invoice,Printoni faturën e fundit
 Print Purchase Invoice instead of PO,Printoni faturën e blerjes në vend të PO
 Printer,Printer
 Processed returns impacting the shift totals,Kthimet e përpunuara që ndikojnë në totalet e ndërrimit
@@ -977,7 +992,6 @@ Repaired,Riparuar
 Repairing change allocation,Riparimi i alokimit të ndryshimit
 Repeat Customers,Konsumatorë të përsëritur
 Repeat Rate,Shpejtësia e Përsëritjes
-Reprint previous transaction,Riprintoni transaksionin e mëparshëm
 Request,Kërkesa
 Request ID: {0},ID-ja e kërkesës: {0}
 Request Payment,Kërkoni pagesë
@@ -1063,7 +1077,6 @@ Select a printer to use QZ silent printing.,Zgjidhni një printer për të përd
 Select Batch,Zgjidhni Batch
 Select Columns to Display,Zgjidhni Kolonat për të shfaqur
 Select items to sell,Zgjidhni artikujt për të shitur
-Select Language,Zgjidhni gjuhën
 Select Payment,Zgjidhni Pagesa
 Select Payment Account,Zgjidhni llogarinë e pagesës
 Select printer,Zgjidhni printerin
@@ -1102,7 +1115,6 @@ Show the active cart on a customer-facing screen,Shfaq karrocën aktive në një
 Showing {0}-{1} of {2},Po shfaqen {0}-{1} nga {2}
 Showing 0 of 0,Duke shfaqur 0 nga 0
 Shows the distribution of invoices per currency,Tregon shpërndarjen e faturave për monedhë
-Sign out of session,Dil nga sesioni
 Sign out of the current POS session,Dilni nga sesioni aktual i POS-it
 Size:,Madhësia:
 Skipped Payments,Pagesat e anashkaluara
@@ -1150,7 +1162,6 @@ Suppliers not found,Furnizuesit nuk u gjetën
 Switch Camera,Ndërroni kamerën
 Switch Cashier,Ndërroni arkë
 Switch the POS appearance theme,Ndrysho temën e paraqitjes së POS-it
-Switch theme appearance,Ndërro pamjen e temës
 Switched to:,Kaloi në:
 Sync All Invoices,Sinkronizoni të gjitha faturat
 Sync Offline Cash Movements ({0}),Sinkronizoni lëvizjet e parave jashtë linje ({0})
@@ -1286,7 +1297,6 @@ Unallocated,Të pashpërndara
 Unallocated:,Të pashpërndara:
 Unavailable,I padisponueshëm
 Unknown,E panjohur
-Unknown error,Gabim i panjohur
 Unknown Item,Artikull i panjohur
 Unknown Warehouse,Magazina e panjohur
 Unlock POS,Zhbllokoni POS
@@ -1301,7 +1311,6 @@ Update Price List Rate,Përditëso normën e listës së çmimeve
 Updated,Përditësuar
 Updates and app info that stay out of the cashier flow.,Përditësimet dhe informacionet e aplikacioneve që qëndrojnë jashtë fluksit të arkëtarëve.
 Updates automatically,Përditësohet automatikisht
-Upload pending transactions,Ngarko transaksionet në pritje
 Usage,Përdorimi
 Usage Stats,Statistikat e Përdorimit
 Use a 4 to 8 digit PIN for cashier switching and terminal unlock.,Përdorni një PIN 4 deri në 8 shifra për ndërrimin e arkës dhe shkyçjen e terminalit.
@@ -1336,7 +1345,7 @@ Walk-in Customer,Klient i përhershëm
 Warehouse,Magazina
 Warning: High cache usage may affect performance.,Paralajmërim: Përdorimi i lartë i cache-it mund të ndikojë në performancën.
 Warning: High lag may indicate heavy processing or browser slowness.,Paralajmërim: Vonesa e lartë mund të tregojë përpunim të rëndë ose ngadalësi të shfletuesit.
-Week Δ,Java Δ
+Week ?,Javë ?
 Week-wise,Sipas javës
 Weight (g),Pesha (g)
 Weight (grams),Pesha (gram)

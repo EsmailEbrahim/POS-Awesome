@@ -1,504 +1,525 @@
-﻿- Total Unallocated,- Total Unallocated
+POS Awesome,POS Skvělé
+Fetch Items Directly from Server,Načítání položek přímo ze serveru
+Menu,Menu
+Actions,Akce
+Close Shift,Zavřete Shift
+End current session,Ukončit aktuální relaci
+Print Last Invoice,Tisk poslední faktury
+Reprint previous transaction,Znovu vytiskněte předchozí transakci
+Sync Offline Invoices,Synchronizujte offline faktury
+Upload pending transactions,Nahrajte čekající transakce
+Go Online,Přejít online
+Go Offline,Přejít offline
+Disable offline mode,Zakázat režim offline
+Work without server connection,Pracujte bez připojení k serveru
+Clear Cache,Vymazat mezipaměť
+Remove local data and refresh,Odstraňte místní data a obnovte je
+About,O
+App information,Informace o aplikaci
+Language,Jazyk
+Change interface language,Změnit jazyk rozhraní
+Light Mode,Světelný režim
+Dark Mode,Tmavý režim
+Switch theme appearance,Přepnout vzhled motivu
+Logout,Odhlášení
+Sign out of session,Odhlaste se z relace
+Select Language,Vyberte Jazyk
+Choose your preferred language for the POS interface,Vyberte preferovaný jazyk pro rozhraní POS
+Language will be changed to,Jazyk bude změněn na
+Cancel,Zrušit
+Change Language,Změnit jazyk
+Close,Zavřít
+Cannot change language - same language selected,Nelze změnit jazyk – byl vybrán stejný jazyk
+Language changed successfully! Reloading...,Jazyk úspěšně změněn! Znovu načítání...
+Failed to change language,Změna jazyka se nezdařila
+Unknown error,Neznámá chyba
+- Total Unallocated,- Celkem nepřiděleno
 * Required,* Vyžadováno
 {0} (Qty: {1}),{0} (množství: {1})
 {0} actions,{0} akcí
-{0} has only {1} in stock. You requested {2}. Adjust quantity or restock.,{0} má na skladě pouze {1}.
-{0} offline invoice{1} pending,Požádali jste o {2}.
-{0} offline invoice{1} saved as draft,Upravte množství nebo doplňte zásoby.
-{0} offline invoice{1} synced,{0} faktura offline{1} čeká na vyřízení
-{0}: {1} {2},{0}offline faktura{1} uložena jako koncept
-{0}d ago,{0} offline faktura{1} byla synchronizována
-{0}h ago,{0}: {1} {2}
-{0}m ago,před {0} d
-A POS supervisor is required for this action.,před {0}h
-About,před {0} m
-Access,Pro tuto akci je nutný supervizor POS.
-Account,O
-Account is overdrawn,Přístup
-Acknowledge the error to resume scanning,účet
-Acknowledge the error to resume scanning.,Účet je přečerpaný
-Across,Potvrďte chybu a pokračujte ve skenování
-Action,Potvrďte chybu a pokračujte ve skenování.
-Actions,Napříč
-Active sale,Akce
-add,Akce
-Add items from the selector to start building this sale.,Aktivní prodej
-Add more value to an existing gift card,přidat
-Add New Address,Přidejte položky ze selektoru a začněte vytvářet tento výprodej.
-Add new customer,Přidejte další hodnotu ke stávající dárkové kartě
-Add on New Line,Přidat novou adresu
-Add Payment,Přidat nového zákazníka
-Add payment to invoice,Přidat na nový řádek
-Add/Edit Coupon Conditions,Přidat platbu
-Additional Discount,Přidejte platbu na fakturu
-Additional Discount %,Přidat/upravit podmínky kupónu
-Address Line 1,Dodatečná sleva
-Address not found,Dodatečná sleva %
-Adjust the quantity or enable negative stock to continue.,Řádek adresy 1
-Adjustment,Adresa nenalezena
-After returns,"Upravte množství nebo povolte negativní zásoby, abyste mohli pokračovat."
-Against,Úprava
-Against Name,Po návratech
-Age Bracket,Proti
-All,Proti Jménu
-All Caught Up!,Věková závorka
-All invoices are synchronized,všechny
-All pending invoices are up to date,Vše zachyceno!
-All Profiles,Všechny faktury jsou synchronizovány
-All Synchronized,Všechny nevyřízené faktury jsou aktuální
-All visible invoices are fully settled.,Všechny profily
-All Warehouses,Vše synchronizováno
-Allowed UOM is {0},Všechny viditelné faktury jsou plně uhrazeny.
-Always fetch items from server (ignore local cache),Všechny sklady
-Amount,Povolená UOM je {0}
-Amount already received,Vždy načítat položky ze serveru (ignorovat místní mezipaměť)
-Amount exceeds profile cash movement max amount.,Částka
-Amount must be greater than zero.,Částka již přijata
-Amount received from customer,Částka přesahuje maximální částku pohybu hotovosti profilu.
-App information,Částka musí být větší než nula.
-Appearance and user-level preferences for the current session.,Částka přijatá od zákazníka
-Applied,Informace o aplikaci
-Apply,Předvolby vzhledu a uživatelské úrovně pro aktuální relaci.
-Apply Gift Card,Aplikováno
-Apply Offer,Použít
-Apply On,Použít dárkovou kartu
-Apply only the amount you want to redeem on this invoice. The remaining balance stays on the card.,Použít nabídku
-Apply Redemption,Použít na
-Applying,"Na této faktuře použijte pouze částku, kterou chcete proplatit."
-Apps,Zbývající zůstatek zůstává na kartě.
-Are you sure you want to close? All entered data will be lost.,Použít vyplacení
-Attributes (Size/Color),Uplatňuje se
-Auto Allocate Payment Amount,Aplikace
-Auto Reconcile,Opravdu chcete zavřít?
-Auto reconciliation completed after payment submit.,Všechna zadaná data budou ztracena.
-Auto reconciliation completed. Allocated: {0}{1}. Remaining outstanding: {0}{2}.,Atributy (velikost/barva)
-Available Actions,Automaticky přidělit částku platby
-Available QTY,Automatické sladění
-Available:,Automatické odsouhlasení bylo dokončeno po odeslání platby.
-Average Basket,Automatické odsouhlasení dokončeno.
-Average Bill,Přiděleno: {0}{1}.
-Average Ticket,Zbývající nevyřízené: {0}{2}.
-Avg Bill,Dostupné akce
-Avg Invoice,Dostupné množství
-Avg Invoice Profit,K dispozici:
-Avg Invoice Value,Průměrný košík
-Avg Purchase Frequency,Průměrný účet
-Awesome,Průměrná vstupenka
-Awesome Dashboard,Prům. účet
-Awesome Dashboard is disabled for the selected POS Profile.,Prům. faktura
-Awesome Dashboard is unavailable for the selected scope.,Průměrný zisk z faktury
-Awesome Dashboard is visible only to POS supervisors.,Prům. hodnota faktury
-Back,Prům. frekvence nákupů
-Back Office Cash Account,Úžasné
-Back Office Cash Account (Optional Override),Úžasný řídicí panel
-Back office cash account is required.,Awesome Dashboard je pro vybraný profil POS deaktivován.
-Back to {0},Awesome Dashboard není pro vybraný rozsah k dispozici.
-Background processing did not finish in time.,Awesome Dashboard je viditelný pouze pro vedoucí POS.
-Background processing failed for Invoice {0}: {1},Zpět
-Background Submission Failed,Hotovostní účet Back Office
-Background sync interval (seconds),Hotovostní účet Back Office (volitelné přepsání)
-Balance,Je vyžadován hotovostní účet v back office.
-Balance will be updated when connection is restored,Zpět na {0}
-Balances still pending,Zpracování na pozadí nebylo dokončeno včas.
-Barcode,Zpracování na pozadí pro fakturu {0} se nezdařilo: {1}
-Barcode / QR Ready,Odeslání na pozadí se nezdařilo
-Barcode Label Printing,Interval synchronizace na pozadí (sekundy)
-Base Paid:,Rovnováha
-Base Recv:,Zůstatek bude aktualizován po obnovení připojení
-Base:,Zůstatky stále nevyřízené
-Basic Information,Čárový kód
-Batch,Čárový kód / QR Ready
-Batch Information,Tisk štítků s čárovým kódem
-Before any return workflow,Základní zaplaceno:
-Before returns,Základní příjem:
-Best Day,základ:
-Best Seller,Základní informace
-Book expense or deposit from active shift.,Dávka
-Branch / Location-wise Report,Informace o šarži
-Brand-wise,Před jakýmkoli návratovým pracovním postupem
-Breakdown,Před návraty
-Browse,Nejlepší den
-Build Time:,Nejprodávanější
-Built with Frappe,Zaúčtovat útratu nebo zálohu z aktivní směny.
-Bundle,Zpráva o pobočkách / lokalitě
-Buying Price,Značkově
-Cache cleared successfully,Členění
-Cache Usage,Procházet
-cache used,Doba sestavení:
-Calculating...,Postaveno pomocí Frappe
-Camera Access Required,Svazek
-Camera access was aborted. Please try again.,Kupní cena
-Camera constraints not supported by your device. Trying fallback settings...,Mezipaměť byla úspěšně vymazána
-Camera is busy or blocked by another app/tab. Close other camera apps and try again.,Využití mezipaměti
-Camera permission denied. Please allow camera access in your browser settings and refresh the page.,použitá mezipaměť
-Camera scanner is locked until the current error is acknowledged,Počítání...
-Camera started but the video stream did not load in time. Please try again.,Je vyžadován přístup k fotoaparátu
-Cancel,Přístup ke kameře byl přerušen.
-Cancel cash movement {0}?,Zkuste to prosím znovu.
-Cancel Payment,Omezení fotoaparátu nejsou vaším zařízením podporována.
-Cancel Sale,Zkouším záložní nastavení...
-Cancel Sale ?,Fotoaparát je zaneprázdněn nebo blokován jinou aplikací/kartou.
-Cancelled,Zavřete ostatní aplikace fotoaparátu a zkuste to znovu.
-Cannot add an item with zero or negative quantity.,Povolení fotoaparátu odepřeno.
-Cannot clear cache while offline,V nastavení prohlížeče povolte přístup k fotoaparátu a obnovte stránku.
-Cannot redeem customer credit more than invoice total,"Skener fotoaparátu je uzamčen, dokud není aktuální chyba potvrzena"
-Cannot redeem gift cards more than invoice total,"Kamera se spustila, ale video se nenačetlo včas."
-Cannot Save Offline Invoice:,Zkuste to prosím znovu.
-Cannot Save Offline Payment:,Zrušit
-Card,Zrušit pohyb hotovosti {0}?
-Card / Online,Zrušit platbu
-Card health after the last live lookup,Zrušit prodej
-Cards,Zrušit prodej?
-Cart,Zrušeno
-Cash,Nelze přidat položku s nulovým nebo záporným množstvím.
-Cash back to customers,V režimu offline nelze vymazat mezipaměť
-Cash Collections,"Zákaznický kredit nelze uplatnit více, než je celková částka faktury"
-Cash Deposit is disabled for this POS Profile.,"Nelze uplatnit více dárkových karet, než je celková fakturovaná částka"
-Cash Drawer Snapshot,Nelze uložit offline fakturu:
-Cash In Hand,Nelze uložit platbu offline:
-Cash Movement,Card
-Cash movement cancelled,Karta / Online
-Cash movement deduction applied,Stav karty po posledním živém vyhledávání
-Cash movement deleted,Karty
-Cash movement is disabled for this POS Profile.,Košík
-Cash Movement is disabled in current POS Profile.,Hotovost
-Cash movement saved offline,Hotovost zpět zákazníkům
-Cash movement submitted,Sbírky hotovosti
-Cash Movements,Vklad hotovosti je pro tento profil POS zakázán.
-Cash payment cannot be less than invoice total when partial payment is not allowed,Snímek peněžní zásuvky
-Cash returned after payment,Hotovost V Ruce
-Cashier,Pohyb hotovosti
-Cashier Access,Pohyb hotovosti byl zrušen
-Cashier identity and appearance preferences.,Uplatněna srážka z pohybu hotovosti
-Cashier PIN,Hotovostní pohyb smazán
-Cashier PIN saved successfully.,Pohyb hotovosti je pro tento profil POS zakázán.
-Cashiers,Pohyb hotovosti je v aktuálním profilu POS zakázán.
-Cashier-wise,Hotovostní pohyb uložen offline
-Categories,Hotovostní pohyb předložen
-Category,Peněžní pohyby
-Category / Brand / Variant Report,"Hotovostní platba nesmí být nižší než celková fakturovaná částka, pokud není povolena částečná platba"
-Category-wise,Hotovost vrácena po zaplacení
-Category-wise Margin,Pokladník
-Certificate,Přístup k pokladně
-Certificate is missing or not trusted. QZ may show confirmation dialogs.,Identita pokladníka a preference vzhledu.
-Certificate is trusted. Silent QZ printing is active.,PIN pokladny
-Change,PIN pokladny byl úspěšně uložen.
-Change allocation repaired,Pokladní
-Change interface language,Pokladní
-Change Language,Kategorie
-Change Price,Kategorie
-Change Return,Přehled kategorie / značky / varianty
-Change Returned,Podle kategorií
-Change terminal cashier,Marže podle kategorií
-Charge Heads,Certifikát
-Charges,Certifikát chybí nebo není důvěryhodný.
-Charges not found,QZ může zobrazit potvrzovací dialogy.
-Check Balance,Certifikát je důvěryhodný.
-Check balance for any card. Supervisors can issue and top up cards here.,Je aktivní tichý tisk QZ.
-Check balance only,Změna
-Check for new commits,Změna přidělení opravena
-Check for Updates,Změnit jazyk rozhraní
-Check live balance before applying redemption,Změnit jazyk
-Check live balance before redemption,Změnit cenu
-Checking...,Změnit návrat
-Cheque/Reference Date,Změna vrácena
-Cheque/Reference No,Změňte pokladního terminálu
-Choose the cashier currently operating this terminal.,Nabíjecí hlavy
-Choose your preferred language for the POS interface,Poplatky
-City,Poplatky nebyly nalezeny
-Clear,Zkontrolujte zůstatek
-Clear All,Zkontrolujte zůstatek na jakékoli kartě.
-Clear all barcode items,Nadřízení zde mohou vydávat a dobíjet karty.
-Clear all purchase order items,Zkontrolujte pouze zůstatek
-Clear Cache,Zkontrolujte nové odevzdání
-Clear Search,Zkontrolujte aktualizace
-Clearing local cache...,Před uplatněním vyplacení zkontrolujte aktuální zůstatek
-Click to refresh,Před uplatněním zkontrolujte aktuální zůstatek
-Client CPU Lag:,Kontrola...
-Client Memory Usage:,Šek/referenční datum
-Client Metrics,Šek/Referenční č
-Close,"Vyberte pokladníka, který aktuálně obsluhuje tento terminál."
-Close about dialog,Vyberte preferovaný jazyk pro rozhraní POS
-Close cashier switcher,město
-Close closing shift dialog,Jasný
-Close column selector,Vymazat vše
-Close Dialog,Vymažte všechny položky čárového kódu
-Close drafts dialog,Vymažte všechny položky nákupní objednávky
-Close invoice details dialog,Vymazat mezipaměť
-Close invoice management,Vymazat vyhledávání
-Close offline invoices dialog,Mazání místní mezipaměti...
-Close packing list dialog,Kliknutím obnovíte
-Close returns dialog,Zpoždění CPU klienta:
-Close sales orders dialog,Využití paměti klienta:
-Close Scanner,Klientské metriky
-Close scanner dialog,Zavřít
-Close Settings,Zavřít dialogové okno Informace
-Close Shift,Zavřete přepínač pokladny
-Closing Amount,Zavřít dialogové okno zavření posunu
-Closing POS Shift,Zavřít výběr sloupců
-Closing Snapshot Available,Zavřít dialog
-Code,Zavřít dialog konceptů
-Code scanned successfully,Zavřít dialogové okno podrobností faktury
-COGS,Zavřete správu faktur
-Collapse item details,Zavřít dialogové okno faktur offline
-Collected,Zavřít dialogové okno seznamu balení
-Cols,Zavřít dialogové okno vrácení
-Columns,Zavřete dialog prodejních objednávek
-commits,Zavřete skener
-Completed and active sales in this range,Zavřete dialogové okno skeneru
-Completed returns will appear here.,Zavřete Nastavení
-Confirm,Zavřete Shift
-Confirm Close,Závěrečná částka
-Confirm Mobile Number,Zavírání POS Shift
-Confirm PIN,K dispozici je závěrečný snímek
-Connect,kód
-Connect printer and manage certificate,Kód byl úspěšně naskenován
-Connecting to QZ Tray...,COGS
-Connection problem while submitting invoice,Sbalit podrobnosti položky
-Connections:,Sebráno
-Connectivity and cached prerequisite status were rechecked.,plk
-Continue Editing,Sloupce
-Could not fetch latest balance from server,zavazuje
-Count,Dokončený a aktivní prodej v tomto sortimentu
-Country,Zde se zobrazí dokončené výnosy.
-Coupon,Potvrďte
-Coupons,Potvrďte Zavřít
-Cover,Potvrďte mobilní číslo
-CPU Cores:,Potvrďte PIN
-Create,Připojte se
-Create and load a new prepaid card,Připojte tiskárnu a spravujte certifikát
-Create and preload a new gift card,Připojování k zásobníku QZ...
-Create Bill,Problém s připojením při odesílání faktury
-Create Customer,Spojení:
-Create New Item,Konektivita a stav předpokladů v mezipaměti byly znovu zkontrolovány.
-Create or change your PIN,Pokračovat v úpravách
-Create PIN,Nelze načíst nejnovější zůstatek ze serveru
-Create POS Opening Shift,Počítejte
-Create Purchase Order,země
-Create Return,kupon
-Create return from invoice,kupony
-Create Supplier,Kryt
-Credit and Output,Jádra CPU:
-Credit Note,Vytvořit
-Credit Outstanding,Vytvořte a načtěte novou předplacenou kartu
-Credit sales remaining to be collected,Vytvořte a předem načtěte novou dárkovou kartu
-Critical,Vytvořit Billa
-Currency,Vytvořit zákazníka
-Current,Vytvořit novou položku
-Current Event Loop Lag:,Vytvořte nebo změňte svůj PIN
-Current Month,Vytvořte PIN
-Current PIN,Vytvořte otevírací směnu POS
-Current Profile,Vytvořit objednávku
-Current redeemable value on the gift card,Vytvořit návrat
-Current User,Vytvořte návratku z faktury
-Custom,Vytvořit dodavatele
-Custom Due Days,Kredit a výstup
-Custom items per page,Kreditní poznámka
-Customer,Nesplacený úvěr
-Customer already selected,Zbývá vyzvednout prodej kreditů
-Customer Balance,Kritické
-Customer balance unavailable offline,Měna
-Customer created successfully.,Aktuální
-Customer creation failed.,Prodleva smyčky aktuální události:
-Customer Details,Aktuální měsíc
-Customer display channel is missing,Aktuální PIN
-Customer display was blocked. Please allow pop-ups for this site.,Aktuální profil
-Customer group is required,Aktuální hodnota na dárkové kartě
-Customer is required to add payment,Aktuální uživatel
-Customer Name is required,Vlastní
-Customer not selected,Vlastní termíny splatnosti
-Customer Report,Vlastní položky na stránku
-Customer saved offline,Zákazník
-Customer Screen,Zákazník je již vybrán
-Customer territory is required,Zůstatek zákazníků
-Customer updated successfully.,Zákaznický zůstatek není k dispozici offline
-Customer-facing tools and printer setup.,Zákazník byl úspěšně vytvořen.
-Customers,Vytvoření zákazníka se nezdařilo.
-Customers not found,Podrobnosti o zákazníkovi
-Daily cashier actions without scrolling.,Chybí kanál zákaznické reklamy
-Daily Sales,Zákaznický displej byl zablokován.
-Daily Sales Summary,Povolte prosím vyskakovací okna pro tento web.
-Dark Mode,Skupina zákazníků je povinná
-Data loaded in form. Review and submit.,Zákazník je povinen přidat platbu
-Database Health,Jméno zákazníka je povinné
-Database health affects overall system speed and reliability.,Zákazník není vybrán
-Database Info,Zákaznická zpráva
-Date,Zákazník uložen offline
-Day Δ,Zákaznická obrazovka
-days,Území zákazníka je povinné
-Day-wise (MTD),Zákazník byl úspěšně aktualizován.
-Day-wise Movement,Nástroje pro zákazníky a nastavení tiskárny.
-Dead Stock,Zákazníci
-Dead Stock Items,Zákazníci nenalezeni
-Decrease quantity,Denní pokladní akce bez rolování.
-Default,Denní prodej
-Default:,Denní přehled prodeje
-Delete,Tmavý režim
-Delete cancelled cash movement {0}?,Data načtena ve formě.
-Delete Draft,Zkontrolujte a odešlete.
-Delete draft invoice,Stav databáze
-Delete draft invoice {0}?,Stav databáze ovlivňuje celkovou rychlost a spolehlivost systému.
-Delete Invoice,Informace o databázi
-Delete offline invoice,Datum
-Delivered,Den Δ
-Delivery Charges,dní
-Delivery Information,Denně (MTD)
-Delivery Note {0} created,Denní pohyb
-Delivery note created,Dead Stock
-Deployed Bundle:,Mrtvé skladové položky
-Deposit,Snížit množství
-Description,Výchozí
-Detailed Supplier Breakdown,Výchozí:
-Detecting formats:,Smazat
-Device Memory:,Smazat zrušený peněžní pohyb {0}?
-Difference,Smazat koncept
-Difference (In Company Currency),Smazat návrh faktury
-Disable offline mode first to recheck live connectivity.,Smazat koncept faktury {0}?
-Disconnect,Smazat fakturu
-discount,Smazat offline fakturu
-Discount %,Doručeno
-Discount / Void / Return Report,Poplatky za doručení
-Discount Amount,Informace o doručení
-Discount limited by POS Profile,Dodací list {0} byl vytvořen
-Discounted Invoices,Dodací list vytvořen
-Discounts,Nasazený balíček:
-Dismiss,Záloha
-Download Certificate,Popis
-Draft,Podrobný rozpis dodavatelů
-Draft invoice deleted,Detekce formátů:
-Draft source,Paměť zařízení:
-Drafts,Rozdíl
-Due {0},Rozdíl (ve firemní měně)
-Due Date,Nejprve vypněte režim offline a znovu zkontrolujte živé připojení.
-Duplicate,Odpojit
-Edit customer,sleva
-Edit discount amount,sleva %
-Edit discount percentage,Sleva / Neplatné / Zpráva o vrácení
-Edit Gift Application,Částka slevy
-Edit item name,Sleva omezena profilem POS
-Edit quantity,Zlevněné faktury
-Edit rate,slevy
-Edit unit of measure,Odmítnout
-Edited,Stáhnout certifikát
-Employee,Koncept
-Enable background sync,Návrh faktury byl smazán
-Enable Customer Display in POS Profile first.,Zdroj návrhu
-End current session,Koncepty
-Enter a PIN.,Termín: {0}
-Enter a valid grams value,Datum splatnosti
-Enter new price list rate,Duplicitní
-Enter Quantity,Upravit zákazníka
-Enter the cashier PIN to continue.,Upravit výši slevy
-Enter the current PIN first.,Upravit procento slevy
-"Enter the current PIN, then choose a new one.",Upravit žádost o dárek
-Enter valid grams for scale barcode,Upravit název položky
-Entries,Upravit množství
-Error accessing camera:,Upravit sazbu
-Error calculating prices,Upravit měrnou jednotku
-Error fetching customer balance,Upraveno
-Error in change calculations!,Zaměstnanec
-Error Loading Data,Povolit synchronizaci na pozadí
-Error loading invoice details,Nejprve povolte zobrazení zákazníka v profilu POS.
-Error processing invoice,Ukončit aktuální relaci
-Error processing payment,Zadejte PIN.
-Error searching invoices,Zadejte platnou hodnotu v gramech
-Error submitting invoice:,Zadejte novou ceníkovou sazbu
-Error submitting invoice: {0},Zadejte Množství
-Error submitting invoice: No response from server,"Chcete-li pokračovat, zadejte PIN pokladníka."
-Error updating currency,Nejprve zadejte aktuální PIN.
-Error updating item details,Zadejte aktuální PIN a poté vyberte nový.
-Est. Purchase,Zadejte platné gramy pro čárový kód váhy
-Est. Value,Příspěvky
-Event-loop lag measures how busy your browser is. Lower is better.,Chyba při přístupu k fotoaparátu:
-Every,Chyba při výpočtu cen
-Exchange Rate,Chyba při načítání zůstatku zákazníka
-Expand item details,Chyba ve výpočtech změn!
-Expected Amount (In Company Currency),Chyba při načítání dat
-Expected Cash,Chyba při načítání podrobností faktury
-Expected cash on hand grouped by currency,Chyba při zpracování faktury
-Expected vs Actual,Chyba při zpracování platby
-Expense,Chyba při vyhledávání faktur
-Expense Account (Optional Override),Chyba při odesílání faktury:
-Expense account is required.,Chyba při odesílání faktury: {0}
-Expenses and deposits posted during this shift,Chyba při odesílání faktury: Žádná odpověď ze serveru
-Expired,Při aktualizaci měny došlo k chybě
-Failed to auto reconcile payments.,Při aktualizaci podrobností položky došlo k chybě
-Failed to cancel cash movement,Odhad.
-Failed to clear cache,Nákup
-Failed to create item,Odhad.
-Failed to create supplier,Hodnota
-Failed to delete cash movement,"Prodleva smyčky událostí měří, jak je váš prohlížeč zaneprázdněn."
-Failed to generate scale barcode. Using item barcode only.,Nižší je lepší.
-Failed to load cash movement context.,Každý
-Failed to load dashboard data.,Směnný kurz
-Failed to reload invoice from server,Rozbalte podrobnosti položky
-Failed to submit cash movement,Očekávaná částka (v měně společnosti)
-Failed to sync offline cash movements,Očekávaná hotovost
-Fast cashier actions for active shifts.,Očekávaná hotovost na pokladně seskupená podle měny
-Fast Moving Items,Očekávané versus skutečné
-Fees,Výdaj
-Fetch the latest offline prerequisite updates,Výdajový účet (volitelné přepsání)
-Find a sales order quickly and load it into the current sale.,Je vyžadován výdajový účet.
-Fixing payment amounts for return invoice...,Výdaje a zálohy zaúčtované během této směny
-Flash Off,Platnost vypršela
-Flash On,Automatické odsouhlasení plateb se nezdařilo.
-"For 'Product Bundle' items, Warehouse, Serial No and Batch No will be considered from the 'Packing List' table. If Warehouse and Batch No are same for all packing items for any 'Product Bundle' item, those values can be entered in the main Item table; values will be copied to 'Packing List' table.",Nepodařilo se zrušit pohyb hotovosti
-Free,Vymazání mezipaměti se nezdařilo
-Free Qty,Položku se nepodařilo vytvořit
-Frequency,Nepodařilo se vytvořit dodavatele
-from,Nepodařilo se odstranit pohyb hotovosti
-From Date,Vygenerování čárového kódu váhy se nezdařilo.
-Fulfillment Details,Pouze pomocí čárového kódu položky.
-Full Name,Nepodařilo se načíst kontext pohybu hotovosti.
-Gain,Nepodařilo se načíst data řídicího panelu.
-Generate a fresh prepaid card and start it with an opening balance.,Znovu načtení faktury ze serveru se nezdařilo
-Generate and install the certificate to allow fully silent printing without trust prompts.,Nepodařilo se odeslat pohyb hotovosti
-Generate Certificate,Synchronizace offline peněžních pohybů se nezdařila
-Generated scale barcode: {0},Rychlé pokladní akce pro aktivní směny.
-Get Payments,Rychle se pohybující položky
-Gift Card,Poplatky
-Gift card amount must be greater than zero.,Stáhněte si nejnovější aktualizace předpokladů offline
-Gift Card Code,Rychle najděte prodejní objednávku a načtěte ji do aktuálního prodeje.
-Gift card code is required for redemption,Oprava částek platby pro vrácenou fakturu...
-Gift card code is required.,Flash Off
-Gift card issued successfully.,Blesk zapnutý
-Gift card loaded successfully.,"U položek 'Produktový balíček' budou v tabulce 'Seznam balení' zohledněny sklad, sériové číslo a číslo šarže."
-Gift Card Management,"Pokud jsou číslo skladu a šarže stejné pro všechny položky balení pro libovolnou položku „Svazek produktů“, lze tyto hodnoty zadat do hlavní tabulky položek;"
-Gift card payment,hodnoty budou zkopírovány do tabulky 'Packing List'.
-Gift card redemption requires an online connection,Zdarma
-Gift card topped up successfully.,Volné množství
-Gift Cards,Frekvence
-Go Offline,od
-Go Online,Od data
-Go to Frappe Desk,Podrobnosti o plnění
-Grand Total,Celé jméno
-Gross Margin,zisk
-Gross Profit,Vygenerujte novou předplacenou kartu a spusťte ji s počátečním zůstatkem.
-Gross Sales,"Vygenerujte a nainstalujte certifikát, abyste umožnili zcela tichý tisk bez dotazů na důvěru."
-Group not found,Vygenerovat certifikát
-"Grouped controls for terminal, UI, and session settings.",Vygenerovaný čárový kód váhy: {0}
-Grouped totals for each payment method and currency,Získejte platby
-Hide,Dárkový poukaz
-Hide Gift Card,Částka dárkové karty musí být větší než nula.
-Hide Non Essential Fields,Kód dárkové karty
-Hide quantity decimals,Pro uplatnění je vyžadován kód dárkové karty
-Hide search tools,Je vyžadován kód dárkové karty.
-Hide zero rated items,Dárkový poukaz byl úspěšně vydán.
-High,Dárková karta byla úspěšně načtena.
-History,Správa dárkových karet
-Hourly (Today),Platba dárkovou kartou
-How this section works,Uplatnění dárkové karty vyžaduje online připojení
-"If stale data remains, open Settings > Offline & Sync and run Rebuild Offline Data again while online.",Dárkový poukaz byl úspěšně dobit.
-"If the warning persists, open Settings > Offline & Sync, then run Refresh Offline Data or Rebuild Offline Data.",Dárkové poukázky
-Import the certificate into QZ Tray and restart QZ Tray on each POS machine.,Přejít offline
-In,Přejít online
-In stock: {0},Přejděte na Frappe Desk
-Include Batch / Serial,Celkový součet
-Include Price,Hrubá marže
-Increase quantity,Hrubý zisk
-IndexedDB,Hrubý prodej
-Initial Amount,Skupina nenalezena
-Initialize your shift with opening balances,"Seskupené ovládací prvky pro nastavení terminálu, uživatelského rozhraní a relace."
+{0} has only {1} in stock. You requested {2}. Adjust quantity or restock.,{0} má na skladě pouze {1}. Požádali jste o {2}. Upravte množství nebo doplňte zásoby.
+{0} offline invoice{1} pending,{0} faktura offline{1} čeká na vyřízení
+{0} offline invoice{1} saved as draft,{0}offline faktura{1} uložena jako koncept
+{0} offline invoice{1} synced,{0} offline faktura{1} byla synchronizována
+{0}: {1} {2},{0}: {1} {2}
+{0}d ago,před {0} d
+{0}h ago,před {0}h
+{0}m ago,před {0} m
+A POS supervisor is required for this action.,Pro tuto akci je nutný supervizor POS.
+Access,Přístup
+Account,účet
+Account is overdrawn,Účet je přečerpaný
+Acknowledge the error to resume scanning,Potvrďte chybu a pokračujte ve skenování
+Acknowledge the error to resume scanning.,Potvrďte chybu a pokračujte ve skenování.
+Across,Napříč
+Action,Akce
+Active sale,Aktivní prodej
+add,přidat
+Add items from the selector to start building this sale.,Přidejte položky ze selektoru a začněte vytvářet tento výprodej.
+Add more value to an existing gift card,Přidejte další hodnotu ke stávající dárkové kartě
+Add New Address,Přidat novou adresu
+Add new customer,Přidat nového zákazníka
+Add on New Line,Přidat na nový řádek
+Add Payment,Přidat platbu
+Add payment to invoice,Přidejte platbu na fakturu
+Add/Edit Coupon Conditions,Přidat/upravit podmínky kupónu
+Additional Discount,Dodatečná sleva
+Additional Discount %,Dodatečná sleva %
+Address Line 1,Řádek adresy 1
+Address not found,Adresa nenalezena
+Adjust the quantity or enable negative stock to continue.,"Upravte množství nebo povolte negativní zásoby, abyste mohli pokračovat."
+Adjustment,Úprava
+After returns,Po návratech
+Against,Proti
+Against Name,Proti Jménu
+Age Bracket,Věková závorka
+All,všechny
+All Caught Up!,Vše zachyceno!
+All invoices are synchronized,Všechny faktury jsou synchronizovány
+All pending invoices are up to date,Všechny nevyřízené faktury jsou aktuální
+All Profiles,Všechny profily
+All Synchronized,Vše synchronizováno
+All visible invoices are fully settled.,Všechny viditelné faktury jsou plně uhrazeny.
+All Warehouses,Všechny sklady
+Allowed UOM is {0},Povolená UOM je {0}
+Always fetch items from server (ignore local cache),Vždy načítat položky ze serveru (ignorovat místní mezipaměť)
+Amount,Částka
+Amount already received,Částka již přijata
+Amount exceeds profile cash movement max amount.,Částka přesahuje maximální částku pohybu hotovosti profilu.
+Amount must be greater than zero.,Částka musí být větší než nula.
+Amount received from customer,Částka přijatá od zákazníka
+Appearance and user-level preferences for the current session.,Předvolby vzhledu a uživatelské úrovně pro aktuální relaci.
+Applied,Aplikováno
+Apply,Použít
+Apply Gift Card,Použít dárkovou kartu
+Apply Offer,Použít nabídku
+Apply On,Použít na
+Apply only the amount you want to redeem on this invoice. The remaining balance stays on the card.,"Na této faktuře použijte pouze částku, kterou chcete proplatit. Zbývající zůstatek zůstává na kartě."
+Apply Redemption,Použít vyplacení
+Applying,Uplatňuje se
+Apps,Aplikace
+Are you sure you want to close? All entered data will be lost.,Opravdu chcete zavřít? Všechna zadaná data budou ztracena.
+Attributes (Size/Color),Atributy (velikost/barva)
+Auto Allocate Payment Amount,Automaticky přidělit částku platby
+Auto Reconcile,Automatické sladění
+Auto reconciliation completed after payment submit.,Automatické odsouhlasení bylo dokončeno po odeslání platby.
+Auto reconciliation completed. Allocated: {0}{1}. Remaining outstanding: {0}{2}.,Automatické odsouhlasení dokončeno. Přiděleno: {0}{1}. Zbývající nevyřízené: {0}{2}.
+Available Actions,Dostupné akce
+Available QTY,Dostupné množství
+Available:,K dispozici:
+Average Basket,Průměrný košík
+Average Bill,Průměrný účet
+Average Ticket,Průměrná vstupenka
+Avg Bill,Prům. účet
+Avg Invoice,Prům. faktura
+Avg Invoice Profit,Průměrný zisk z faktury
+Avg Invoice Value,Prům. hodnota faktury
+Avg Purchase Frequency,Prům. frekvence nákupů
+Awesome,Úžasné
+Awesome Dashboard,Úžasný řídicí panel
+Awesome Dashboard is disabled for the selected POS Profile.,Awesome Dashboard je pro vybraný profil POS deaktivován.
+Awesome Dashboard is unavailable for the selected scope.,Awesome Dashboard není pro vybraný rozsah k dispozici.
+Awesome Dashboard is visible only to POS supervisors.,Awesome Dashboard je viditelný pouze pro vedoucí POS.
+Back,Zpět
+Back Office Cash Account,Hotovostní účet Back Office
+Back Office Cash Account (Optional Override),Hotovostní účet Back Office (volitelné přepsání)
+Back office cash account is required.,Je vyžadován hotovostní účet v back office.
+Back to {0},Zpět na {0}
+Background processing did not finish in time.,Zpracování na pozadí nebylo dokončeno včas.
+Background processing failed for Invoice {0}: {1},Zpracování na pozadí pro fakturu {0} se nezdařilo: {1}
+Background Submission Failed,Odeslání na pozadí se nezdařilo
+Background sync interval (seconds),Interval synchronizace na pozadí (sekundy)
+Balance,Rovnováha
+Balance will be updated when connection is restored,Zůstatek bude aktualizován po obnovení připojení
+Balances still pending,Zůstatky stále nevyřízené
+Barcode,Čárový kód
+Barcode / QR Ready,Čárový kód / QR Ready
+Barcode Label Printing,Tisk štítků s čárovým kódem
+Base Paid:,Základní zaplaceno:
+Base Recv:,Základní příjem:
+Base:,základ:
+Basic Information,Základní informace
+Batch,Dávka
+Batch Information,Informace o šarži
+Before any return workflow,Před jakýmkoli návratovým pracovním postupem
+Before returns,Před návraty
+Best Day,Nejlepší den
+Best Seller,Nejprodávanější
+Book expense or deposit from active shift.,Zaúčtovat útratu nebo zálohu z aktivní směny.
+Branch / Location-wise Report,Zpráva o pobočkách / lokalitě
+Brand-wise,Značkově
+Breakdown,Členění
+Browse,Procházet
+Build Time:,Doba sestavení:
+Built with Frappe,Postaveno pomocí Frappe
+Bundle,Svazek
+Buying Price,Kupní cena
+Cache cleared successfully,Mezipaměť byla úspěšně vymazána
+Cache Usage,Využití mezipaměti
+cache used,použitá mezipaměť
+Calculating...,Počítání...
+Camera Access Required,Je vyžadován přístup k fotoaparátu
+Camera access was aborted. Please try again.,Přístup ke kameře byl přerušen. Zkuste to prosím znovu.
+Camera constraints not supported by your device. Trying fallback settings...,Omezení fotoaparátu nejsou vaším zařízením podporována. Zkouším záložní nastavení...
+Camera is busy or blocked by another app/tab. Close other camera apps and try again.,Fotoaparát je zaneprázdněn nebo blokován jinou aplikací/kartou. Zavřete ostatní aplikace fotoaparátu a zkuste to znovu.
+Camera permission denied. Please allow camera access in your browser settings and refresh the page.,Povolení fotoaparátu odepřeno. V nastavení prohlížeče povolte přístup k fotoaparátu a obnovte stránku.
+Camera scanner is locked until the current error is acknowledged,"Skener fotoaparátu je uzamčen, dokud není aktuální chyba potvrzena"
+Camera started but the video stream did not load in time. Please try again.,"Kamera se spustila, ale video se nenačetlo včas. Zkuste to prosím znovu."
+Cancel cash movement {0}?,Zrušit pohyb hotovosti {0}?
+Cancel Payment,Zrušit platbu
+Cancel Sale,Zrušit prodej
+Cancel Sale ?,Zrušit prodej?
+Cancelled,Zrušeno
+Cannot add an item with zero or negative quantity.,Nelze přidat položku s nulovým nebo záporným množstvím.
+Cannot clear cache while offline,V režimu offline nelze vymazat mezipaměť
+Cannot redeem customer credit more than invoice total,"Zákaznický kredit nelze uplatnit více, než je celková částka faktury"
+Cannot redeem gift cards more than invoice total,"Nelze uplatnit více dárkových karet, než je celková fakturovaná částka"
+Cannot Save Offline Invoice:,Nelze uložit offline fakturu:
+Cannot Save Offline Payment:,Nelze uložit platbu offline:
+Card,Card
+Card / Online,Karta / Online
+Card health after the last live lookup,Stav karty po posledním živém vyhledávání
+Cards,Karty
+Cart,Košík
+Cash,Hotovost
+Cash back to customers,Hotovost zpět zákazníkům
+Cash Collections,Sbírky hotovosti
+Cash Deposit is disabled for this POS Profile.,Vklad hotovosti je pro tento profil POS zakázán.
+Cash Drawer Snapshot,Snímek peněžní zásuvky
+Cash In Hand,Hotovost V Ruce
+Cash Movement,Pohyb hotovosti
+Cash movement cancelled,Pohyb hotovosti byl zrušen
+Cash movement deduction applied,Uplatněna srážka z pohybu hotovosti
+Cash movement deleted,Hotovostní pohyb smazán
+Cash movement is disabled for this POS Profile.,Pohyb hotovosti je pro tento profil POS zakázán.
+Cash Movement is disabled in current POS Profile.,Pohyb hotovosti je v aktuálním profilu POS zakázán.
+Cash movement saved offline,Hotovostní pohyb uložen offline
+Cash movement submitted,Hotovostní pohyb předložen
+Cash Movements,Peněžní pohyby
+Cash payment cannot be less than invoice total when partial payment is not allowed,"Hotovostní platba nesmí být nižší než celková fakturovaná částka, pokud není povolena částečná platba"
+Cash returned after payment,Hotovost vrácena po zaplacení
+Cashier,Pokladník
+Cashier Access,Přístup k pokladně
+Cashier identity and appearance preferences.,Identita pokladníka a preference vzhledu.
+Cashier PIN,PIN pokladny
+Cashier PIN saved successfully.,PIN pokladny byl úspěšně uložen.
+Cashiers,Pokladní
+Cashier-wise,Pokladní
+Categories,Kategorie
+Category,Kategorie
+Category / Brand / Variant Report,Přehled kategorie / značky / varianty
+Category-wise,Podle kategorií
+Category-wise Margin,Marže podle kategorií
+Certificate,Certifikát
+Certificate is missing or not trusted. QZ may show confirmation dialogs.,Certifikát chybí nebo není důvěryhodný. QZ může zobrazit potvrzovací dialogy.
+Certificate is trusted. Silent QZ printing is active.,Certifikát je důvěryhodný. Je aktivní tichý tisk QZ.
+Change,Změna
+Change allocation repaired,Změna přidělení opravena
+Change Price,Změnit cenu
+Change Return,Změnit návrat
+Change Returned,Změna vrácena
+Change terminal cashier,Změňte pokladního terminálu
+Charge Heads,Nabíjecí hlavy
+Charges,Poplatky
+Charges not found,Poplatky nebyly nalezeny
+Check Balance,Zkontrolujte zůstatek
+Check balance for any card. Supervisors can issue and top up cards here.,Zkontrolujte zůstatek na jakékoli kartě. Nadřízení zde mohou vydávat a dobíjet karty.
+Check balance only,Zkontrolujte pouze zůstatek
+Check for new commits,Zkontrolujte nové odevzdání
+Check for Updates,Zkontrolujte aktualizace
+Check live balance before applying redemption,Před uplatněním vyplacení zkontrolujte aktuální zůstatek
+Check live balance before redemption,Před uplatněním zkontrolujte aktuální zůstatek
+Checking...,Kontrola...
+Cheque/Reference Date,Šek/referenční datum
+Cheque/Reference No,Šek/Referenční č
+Choose the cashier currently operating this terminal.,"Vyberte pokladníka, který aktuálně obsluhuje tento terminál."
+City,město
+Clear,Jasný
+Clear All,Vymazat vše
+Clear all barcode items,Vymažte všechny položky čárového kódu
+Clear all purchase order items,Vymažte všechny položky nákupní objednávky
+Clear Search,Vymazat vyhledávání
+Clearing local cache...,Mazání místní mezipaměti...
+Click to refresh,Kliknutím obnovíte
+Client CPU Lag:,Zpoždění CPU klienta:
+Client Memory Usage:,Využití paměti klienta:
+Client Metrics,Klientské metriky
+Close about dialog,Zavřít dialogové okno Informace
+Close cashier switcher,Zavřete přepínač pokladny
+Close closing shift dialog,Zavřít dialogové okno zavření posunu
+Close column selector,Zavřít výběr sloupců
+Close Dialog,Zavřít dialog
+Close drafts dialog,Zavřít dialog konceptů
+Close invoice details dialog,Zavřít dialogové okno podrobností faktury
+Close invoice management,Zavřete správu faktur
+Close offline invoices dialog,Zavřít dialogové okno faktur offline
+Close packing list dialog,Zavřít dialogové okno seznamu balení
+Close returns dialog,Zavřít dialogové okno vrácení
+Close sales orders dialog,Zavřete dialog prodejních objednávek
+Close Scanner,Zavřete skener
+Close scanner dialog,Zavřete dialogové okno skeneru
+Close Settings,Zavřete Nastavení
+Closing Amount,Závěrečná částka
+Closing POS Shift,Zavírání POS Shift
+Closing Snapshot Available,K dispozici je závěrečný snímek
+Code,kód
+Code scanned successfully,Kód byl úspěšně naskenován
+COGS,COGS
+Collapse item details,Sbalit podrobnosti položky
+Collected,Sebráno
+Cols,plk
+Columns,Sloupce
+commits,zavazuje
+Completed and active sales in this range,Dokončený a aktivní prodej v tomto sortimentu
+Completed returns will appear here.,Zde se zobrazí dokončené výnosy.
+Confirm,Potvrďte
+Confirm Close,Potvrďte Zavřít
+Confirm Mobile Number,Potvrďte mobilní číslo
+Confirm PIN,Potvrďte PIN
+Connect,Připojte se
+Connect printer and manage certificate,Připojte tiskárnu a spravujte certifikát
+Connecting to QZ Tray...,Připojování k zásobníku QZ...
+Connection problem while submitting invoice,Problém s připojením při odesílání faktury
+Connections:,Spojení:
+Connectivity and cached prerequisite status were rechecked.,Konektivita a stav předpokladů v mezipaměti byly znovu zkontrolovány.
+Continue Editing,Pokračovat v úpravách
+Could not fetch latest balance from server,Nelze načíst nejnovější zůstatek ze serveru
+Count,Počítejte
+Country,země
+Coupon,kupon
+Coupons,kupony
+Cover,Kryt
+CPU Cores:,Jádra CPU:
+Create,Vytvořit
+Create and load a new prepaid card,Vytvořte a načtěte novou předplacenou kartu
+Create and preload a new gift card,Vytvořte a předem načtěte novou dárkovou kartu
+Create Bill,Vytvořit Billa
+Create Customer,Vytvořit zákazníka
+Create New Item,Vytvořit novou položku
+Create or change your PIN,Vytvořte nebo změňte svůj PIN
+Create PIN,Vytvořte PIN
+Create POS Opening Shift,Vytvořte otevírací směnu POS
+Create Purchase Order,Vytvořit objednávku
+Create Return,Vytvořit návrat
+Create return from invoice,Vytvořte návratku z faktury
+Create Supplier,Vytvořit dodavatele
+Credit and Output,Kredit a výstup
+Credit Note,Kreditní poznámka
+Credit Outstanding,Nesplacený úvěr
+Credit sales remaining to be collected,Zbývá vyzvednout prodej kreditů
+Critical,Kritické
+Currency,Měna
+Current,Aktuální
+Current Event Loop Lag:,Prodleva smyčky aktuální události:
+Current Month,Aktuální měsíc
+Current PIN,Aktuální PIN
+Current Profile,Aktuální profil
+Current redeemable value on the gift card,Aktuální hodnota na dárkové kartě
+Current User,Aktuální uživatel
+Custom,Vlastní
+Custom Due Days,Vlastní termíny splatnosti
+Custom items per page,Vlastní položky na stránku
+Customer,Zákazník
+Customer already selected,Zákazník je již vybrán
+Customer Balance,Zůstatek zákazníků
+Customer balance unavailable offline,Zákaznický zůstatek není k dispozici offline
+Customer created successfully.,Zákazník byl úspěšně vytvořen.
+Customer creation failed.,Vytvoření zákazníka se nezdařilo.
+Customer Details,Podrobnosti o zákazníkovi
+Customer display channel is missing,Chybí kanál zákaznické reklamy
+Customer display was blocked. Please allow pop-ups for this site.,Zákaznický displej byl zablokován. Povolte prosím vyskakovací okna pro tento web.
+Customer group is required,Skupina zákazníků je povinná
+Customer is required to add payment,Zákazník je povinen přidat platbu
+Customer Name is required,Jméno zákazníka je povinné
+Customer not selected,Zákazník není vybrán
+Customer Report,Zákaznická zpráva
+Customer saved offline,Zákazník uložen offline
+Customer Screen,Zákaznická obrazovka
+Customer territory is required,Území zákazníka je povinné
+Customer updated successfully.,Zákazník byl úspěšně aktualizován.
+Customer-facing tools and printer setup.,Nástroje pro zákazníky a nastavení tiskárny.
+Customers,Zákazníci
+Customers not found,Zákazníci nenalezeni
+Daily cashier actions without scrolling.,Denní pokladní akce bez rolování.
+Daily Sales,Denní prodej
+Daily Sales Summary,Denní přehled prodeje
+Data loaded in form. Review and submit.,Data načtena ve formě. Zkontrolujte a odešlete.
+Database Health,Stav databáze
+Database health affects overall system speed and reliability.,Stav databáze ovlivňuje celkovou rychlost a spolehlivost systému.
+Database Info,Informace o databázi
+Date,Datum
+Day ?,den?
+days,dní
+Day-wise (MTD),Denně (MTD)
+Day-wise Movement,Denní pohyb
+Dead Stock,Dead Stock
+Dead Stock Items,Mrtvé skladové položky
+Decrease quantity,Snížit množství
+Default,Výchozí
+Default:,Výchozí:
+Delete,Smazat
+Delete cancelled cash movement {0}?,Smazat zrušený peněžní pohyb {0}?
+Delete Draft,Smazat koncept
+Delete draft invoice,Smazat návrh faktury
+Delete draft invoice {0}?,Smazat koncept faktury {0}?
+Delete Invoice,Smazat fakturu
+Delete offline invoice,Smazat offline fakturu
+Delivered,Doručeno
+Delivery Charges,Poplatky za doručení
+Delivery Information,Informace o doručení
+Delivery Note {0} created,Dodací list {0} byl vytvořen
+Delivery note created,Dodací list vytvořen
+Deployed Bundle:,Nasazený balíček:
+Deposit,Záloha
+Description,Popis
+Detailed Supplier Breakdown,Podrobný rozpis dodavatelů
+Detecting formats:,Detekce formátů:
+Device Memory:,Paměť zařízení:
+Difference,Rozdíl
+Difference (In Company Currency),Rozdíl (ve firemní měně)
+Disable offline mode first to recheck live connectivity.,Nejprve vypněte režim offline a znovu zkontrolujte živé připojení.
+Disconnect,Odpojit
+discount,sleva
+Discount %,sleva %
+Discount / Void / Return Report,Sleva / Neplatné / Zpráva o vrácení
+Discount Amount,Částka slevy
+Discount limited by POS Profile,Sleva omezena profilem POS
+Discounted Invoices,Zlevněné faktury
+Discounts,slevy
+Dismiss,Odmítnout
+Download Certificate,Stáhnout certifikát
+Draft,Koncept
+Draft invoice deleted,Návrh faktury byl smazán
+Draft source,Zdroj návrhu
+Drafts,Koncepty
+Due {0},Termín: {0}
+Due Date,Datum splatnosti
+Duplicate,Duplicitní
+Edit customer,Upravit zákazníka
+Edit discount amount,Upravit výši slevy
+Edit discount percentage,Upravit procento slevy
+Edit Gift Application,Upravit žádost o dárek
+Edit item name,Upravit název položky
+Edit quantity,Upravit množství
+Edit rate,Upravit sazbu
+Edit unit of measure,Upravit měrnou jednotku
+Edited,Upraveno
+Employee,Zaměstnanec
+Enable background sync,Povolit synchronizaci na pozadí
+Enable Customer Display in POS Profile first.,Nejprve povolte zobrazení zákazníka v profilu POS.
+Enter a PIN.,Zadejte PIN.
+Enter a valid grams value,Zadejte platnou hodnotu v gramech
+Enter new price list rate,Zadejte novou ceníkovou sazbu
+Enter Quantity,Zadejte Množství
+Enter the cashier PIN to continue.,"Chcete-li pokračovat, zadejte PIN pokladníka."
+Enter the current PIN first.,Nejprve zadejte aktuální PIN.
+"Enter the current PIN, then choose a new one.",Zadejte aktuální PIN a poté vyberte nový.
+Enter valid grams for scale barcode,Zadejte platné gramy pro čárový kód váhy
+Entries,Příspěvky
+Error accessing camera:,Chyba při přístupu k fotoaparátu:
+Error calculating prices,Chyba při výpočtu cen
+Error fetching customer balance,Chyba při načítání zůstatku zákazníka
+Error in change calculations!,Chyba ve výpočtech změn!
+Error Loading Data,Chyba při načítání dat
+Error loading invoice details,Chyba při načítání podrobností faktury
+Error processing invoice,Chyba při zpracování faktury
+Error processing payment,Chyba při zpracování platby
+Error searching invoices,Chyba při vyhledávání faktur
+Error submitting invoice:,Chyba při odesílání faktury:
+Error submitting invoice: {0},Chyba při odesílání faktury: {0}
+Error submitting invoice: No response from server,Chyba při odesílání faktury: Žádná odpověď ze serveru
+Error updating currency,Při aktualizaci měny došlo k chybě
+Error updating item details,Při aktualizaci podrobností položky došlo k chybě
+Est. Purchase,Odhad. Nákup
+Est. Value,Odhad. Hodnota
+Event-loop lag measures how busy your browser is. Lower is better.,"Prodleva smyčky událostí měří, jak je váš prohlížeč zaneprázdněn. Nižší je lepší."
+Every,Každý
+Exchange Rate,Směnný kurz
+Expand item details,Rozbalte podrobnosti položky
+Expected Amount (In Company Currency),Očekávaná částka (v měně společnosti)
+Expected Cash,Očekávaná hotovost
+Expected cash on hand grouped by currency,Očekávaná hotovost na pokladně seskupená podle měny
+Expected vs Actual,Očekávané versus skutečné
+Expense,Výdaj
+Expense Account (Optional Override),Výdajový účet (volitelné přepsání)
+Expense account is required.,Je vyžadován výdajový účet.
+Expenses and deposits posted during this shift,Výdaje a zálohy zaúčtované během této směny
+Expired,Platnost vypršela
+Failed to auto reconcile payments.,Automatické odsouhlasení plateb se nezdařilo.
+Failed to cancel cash movement,Nepodařilo se zrušit pohyb hotovosti
+Failed to clear cache,Vymazání mezipaměti se nezdařilo
+Failed to create item,Položku se nepodařilo vytvořit
+Failed to create supplier,Nepodařilo se vytvořit dodavatele
+Failed to delete cash movement,Nepodařilo se odstranit pohyb hotovosti
+Failed to generate scale barcode. Using item barcode only.,Vygenerování čárového kódu váhy se nezdařilo. Pouze pomocí čárového kódu položky.
+Failed to load cash movement context.,Nepodařilo se načíst kontext pohybu hotovosti.
+Failed to load dashboard data.,Nepodařilo se načíst data řídicího panelu.
+Failed to reload invoice from server,Znovu načtení faktury ze serveru se nezdařilo
+Failed to submit cash movement,Nepodařilo se odeslat pohyb hotovosti
+Failed to sync offline cash movements,Synchronizace offline peněžních pohybů se nezdařila
+Fast cashier actions for active shifts.,Rychlé pokladní akce pro aktivní směny.
+Fast Moving Items,Rychle se pohybující položky
+Fees,Poplatky
+Fetch the latest offline prerequisite updates,Stáhněte si nejnovější aktualizace předpokladů offline
+Find a sales order quickly and load it into the current sale.,Rychle najděte prodejní objednávku a načtěte ji do aktuálního prodeje.
+Fixing payment amounts for return invoice...,Oprava částek platby pro vrácenou fakturu...
+Flash Off,Flash Off
+Flash On,Blesk zapnutý
+"For 'Product Bundle' items, Warehouse, Serial No and Batch No will be considered from the 'Packing List' table. If Warehouse and Batch No are same for all packing items for any 'Product Bundle' item, those values can be entered in the main Item table; values will be copied to 'Packing List' table.","U položek 'Produktový balíček' budou v tabulce 'Seznam balení' zohledněny sklad, sériové číslo a číslo šarže. Pokud jsou číslo skladu a šarže stejné pro všechny položky balení pro libovolnou položku „Svazek produktů“, lze tyto hodnoty zadat do hlavní tabulky položek; hodnoty budou zkopírovány do tabulky 'Packing List'."
+Free,Zdarma
+Free Qty,Volné množství
+Frequency,Frekvence
+from,od
+From Date,Od data
+Fulfillment Details,Podrobnosti o plnění
+Full Name,Celé jméno
+Gain,zisk
+Generate a fresh prepaid card and start it with an opening balance.,Vygenerujte novou předplacenou kartu a spusťte ji s počátečním zůstatkem.
+Generate and install the certificate to allow fully silent printing without trust prompts.,"Vygenerujte a nainstalujte certifikát, abyste umožnili zcela tichý tisk bez dotazů na důvěru."
+Generate Certificate,Vygenerovat certifikát
+Generated scale barcode: {0},Vygenerovaný čárový kód váhy: {0}
+Get Payments,Získejte platby
+Gift Card,Dárkový poukaz
+Gift card amount must be greater than zero.,Částka dárkové karty musí být větší než nula.
+Gift Card Code,Kód dárkové karty
+Gift card code is required for redemption,Pro uplatnění je vyžadován kód dárkové karty
+Gift card code is required.,Je vyžadován kód dárkové karty.
+Gift card issued successfully.,Dárkový poukaz byl úspěšně vydán.
+Gift card loaded successfully.,Dárková karta byla úspěšně načtena.
+Gift Card Management,Správa dárkových karet
+Gift card payment,Platba dárkovou kartou
+Gift card redemption requires an online connection,Uplatnění dárkové karty vyžaduje online připojení
+Gift card topped up successfully.,Dárkový poukaz byl úspěšně dobit.
+Gift Cards,Dárkové poukázky
+Go to Frappe Desk,Přejděte na Frappe Desk
+Grand Total,Celkový součet
+Gross Margin,Hrubá marže
+Gross Profit,Hrubý zisk
+Gross Sales,Hrubý prodej
+Group not found,Skupina nenalezena
+"Grouped controls for terminal, UI, and session settings.","Seskupené ovládací prvky pro nastavení terminálu, uživatelského rozhraní a relace."
+Grouped totals for each payment method and currency,Seskupené součty pro každou platební metodu a měnu
+Hide,Skrýt
+Hide Gift Card,Skrýt dárkový poukaz
+Hide Non Essential Fields,Skrýt nepodstatná pole
+Hide quantity decimals,Skrýt počet desetinných míst
+Hide search tools,Skrýt vyhledávací nástroje
+Hide zero rated items,Skrýt položky s nulovým hodnocením
+High,Vysoká
+History,Historie
+Hourly (Today),Každou hodinu (dnes)
+How this section works,Jak tato sekce funguje
+"If stale data remains, open Settings > Offline & Sync and run Rebuild Offline Data again while online.","Pokud zastaralá data zůstanou, otevřete Nastavení > Offline a synchronizace a znovu spusťte Obnovit offline data, když jste online."
+"If the warning persists, open Settings > Offline & Sync, then run Refresh Offline Data or Rebuild Offline Data.","Pokud varování přetrvává, otevřete Nastavení > Offline a synchronizace a poté spusťte Obnovit data offline nebo Znovu vytvořit data offline."
+Import the certificate into QZ Tray and restart QZ Tray on each POS machine.,Importujte certifikát do QZ Tray a restartujte QZ Tray na každém POS stroji.
+In,In
+In stock: {0},Skladem: {0}
+Include Batch / Serial,Zahrnout dávkové / sériové
+Include Price,Zahrnout cenu
+Increase quantity,Zvyšte množství
+IndexedDB,IndexovanáDB
+Initial Amount,Počáteční částka
+Initialize your shift with opening balances,Inicializujte směnu počátečními zůstatky
 Initializing application...,Inicializace aplikace...
 "Inspect cache, sync, and prerequisite status","Zkontrolujte mezipaměť, synchronizaci a stav předpokladů"
 Installed Applications,Nainstalované aplikace
@@ -552,8 +573,6 @@ json,json
 Just now,Právě teď
 Keep offline prerequisites healthy and recover stale data safely.,Udržujte v pořádku předpoklady offline a bezpečně obnovujte zastaralá data.
 Labels,Štítky
-Language,Jazyk
-Language will be changed to,Jazyk bude změněn na
 "Language, theme, terminal tools, and session controls.","Jazyk, téma, terminálové nástroje a ovládací prvky relace."
 Last,Poslední
 Last 14 Days (Paid vs Pending),Posledních 14 dní (zaplaceno vs. nevyřízené)
@@ -562,443 +581,438 @@ Last 14 Days Gross Profit,Hrubý zisk za posledních 14 dní
 Last 14 Days Purchases,Nákupy za posledních 14 dní
 Last 14 Days Tax/Charges,Daň/poplatky za posledních 14 dní
 Last sync:,Poslední synchronizace:
-Last sync: {0} | ok: {1} | failed: {2} | skipped: {3},Poslední synchronizace: {0} |
-Latest entries for current shift,dobře: {1} |
-Lead Time,neúspěšné: {2} |
-Light Mode,přeskočeno: {3}
-Limited,Nejnovější záznamy pro aktuální směnu
-lines,Dodací lhůta
-List,Světelný režim
-Live Snapshot,Omezené
-Load a POS profile and cashier first.,linky
-Load More Invoices,Seznam
-Load previously saved invoices,Živý snímek
-Load Sale,Nejprve načtěte POS profil a pokladnu.
-Load Sales Invoice,Načíst další faktury
-Loading app data...,Načíst dříve uložené faktury
-Loading customer database...,Prodej nákladu
-Loading customers...,Načíst prodejní fakturu
-Loading database stats...,Načítání dat aplikace...
-Loading details...,Načítání databáze zákazníků...
-Loading invoice history...,Načítání zákazníků...
-Loading items...,Načítání statistik databáze...
-Loading product catalog...,Načítání podrobností...
-Loading return invoices...,Načítání historie faktur...
-Loading server CPU/memory usage...,Načítání položek...
-Loading suppliers...,Načítání katalogu produktů...
-Loading unpaid invoices...,Načítání vrácených faktur...
-Loading view...,Načítání využití CPU/paměti serveru...
-Loading...,Načítání dodavatelů...
-Local storage is unavailable. Switching to online-only mode.,Načítání nezaplacených faktur...
-localStorage,Načítání zobrazení...
-Location Performance,Načítání...
-Locations,Místní úložiště není k dispozici.
-Lock Screen,Přepnutí do režimu pouze online.
-Logout,localStorage
-Lookup Workflow,Výkon umístění
-Loss,Místa
-Low,Uzamknout obrazovku
-Low Stock,Odhlášení
-Low Stock Alerts,Pracovní postup vyhledávání
-Low Stock Items,Ztráta
-Low Stock Threshold,Nízká
-Low Stock Total,Nízké zásoby
-Lowest Margin,Upozornění na nízké zásoby
-Low-frequency maintenance and system details.,Nízko skladové položky
-Loyalty Redeemed,Nízký skladový práh
-Loyalty Redemption,Nízké zásoby celkem
-Make New Payment,Nejnižší marže
-Manage all,Nízkofrekvenční údržba a detaily systému.
-Manage and synchronize your offline transactions,Věrnost vykoupena
-Manage Cashier PIN,Vykoupení za věrnost
-"Manage offline tools, terminal controls, and maintenance from one workspace.",Proveďte novou platbu
-manual,Spravovat vše
-"Manual codes, barcode scans, and QR scans work in the same field",Spravujte a synchronizujte své offline transakce
-Manual offline mode is enabled,Správa PIN pokladny
-Margin,"Spravujte offline nástroje, ovládací prvky terminálu a údržbu z jednoho pracovního prostoru."
-Maximum available quantity is {0}. Quantity adjusted to match stock.,manuál
-Maximum discount amount for this offer item is {0}.,"Ruční kódy, skenování čárových kódů a skenování QR pracují ve stejném poli"
-Maximum discount percentage for this offer item is {0}%.,Je povolen manuální režim offline
-Maximum offer quantity is {0}. Quantity adjusted to allowed limit.,Marže
-Medium,Maximální dostupné množství je {0}.
-Menu,Množství přizpůsobeno skladovým zásobám.
-Method-wise Collections,Maximální výše slevy pro tuto položku nabídky je {0}.
-Minimum allowed rate for this offer item is {0}.,Maximální procento slevy pro tuto položku nabídky je {0} %.
-Minimum Qty,Maximální nabízené množství je {0}.
-Mobile No,Množství upraveno na povolený limit.
-Mode,Střední
-Mode of Payment,Menu
-Month,Metodické sbírky
-Month Δ,Minimální povolená sazba pro tuto položku nabídky je {0}.
-Monthly Profit,Minimální množství
-Monthly Sales,Mobil č
-Monthly Sales Summary,Režim
-Month-wise,Způsob platby
-Most Active Cashiers,měsíc
-Movement Type,Měsíc Δ
-Movements,Měsíční zisk
-Multi Currency,Měsíční prodeje
-N/A,Měsíční přehled prodeje
-Name,Měsíčně
-Negative Stock,Nejaktivnější pokladníci
-Negative Stock Items,Typ pohybu
-Negative values not allowed,Pohyby
-Net,Více měn
-Net Qty,N/A
-Net Sales,Jméno
-Net Value,Negativní akcie
-Never,Negativní skladové položky
-New changes are ready to load,Záporné hodnoty nejsou povoleny
-New Item,Net
-New Offer Available,Čisté množství
-New PIN,Čistý prodej
-New rate,Čistá hodnota
-Next unit of measure,Nikdy
-No attribute data found.,Nové změny jsou připraveny k načtení
-No Barcode,Nová položka
-No barcode found for UOM '{0}',K dispozici nová nabídka
-No branch/location data found.,Nový PIN
-No brand data found.,Nová sazba
-No cached gift card balance is available offline.,Další měrná jednotka
-No camera found on this device. Please ensure your device has a working camera.,Nebyla nalezena žádná atributová data.
-No capability warnings recorded yet.,Žádný čárový kód
-No cash expected for this shift.,Pro MJ '{0}' nebyl nalezen žádný čárový kód
-No cash mode configured,Nebyly nalezeny žádné údaje o pobočce/poloze.
-No cash movement type is allowed for this POS Profile.,Nebyla nalezena žádná data o značce.
-No cashier PIN is set yet. Create one now.,Žádný zůstatek dárkové karty v mezipaměti není k dispozici offline.
-No cashier profiles are available for this POS profile yet.,Na tomto zařízení nebyla nalezena žádná kamera.
-No cashier-wise discount/void/return activity.,"Ujistěte se, že vaše zařízení má funkční fotoaparát."
-No category data found.,Dosud nebyla zaznamenána žádná varování týkající se schopností.
-No category profitability data found.,Za tuto směnu se neočekávají žádné peníze.
-No change returned recorded for this shift.,Není nakonfigurován žádný hotovostní režim
-No change-allocation invoices match the current filters.,Pro tento profil POS není povolen žádný typ pohybu hotovosti.
-No charge head breakdown found.,Zatím není nastaven žádný PIN pokladníka.
-No Company Selected,Vytvořte si jej nyní.
-No customer sales data found.,Pro tento profil POS zatím nejsou k dispozici žádné profily pokladníků.
-No day-wise discount/void/return trend.,Žádná pokladní činnost se slevou/neplatností/vracením.
-No day-wise payment data found.,Nebyla nalezena žádná data kategorie.
-No day-wise profitability trend found.,Nebyla nalezena žádná data o ziskovosti kategorie.
-No day-wise purchase data found.,Pro tuto směnu nebyla zaznamenána žádná vrácená změna.
-No day-wise sales trend found.,Aktuálním filtrům neodpovídají žádné faktury s alokací.
-No day-wise tax/charges trend found.,Nebyla nalezena žádná porucha nabíjecí hlavy.
-No dead stock items.,Není vybrána žádná společnost
-No due date,Nebyly nalezeny žádné údaje o prodeji zákazníků.
-No exact repair match found for this invoice,Žádný denní trend slev/neplatnosti/vrácení.
-No hourly sales trend found for today.,Nebyly nalezeny žádné denní platební údaje.
-No invoice activity found.,Nebyl nalezen žádný denní trend ziskovosti.
-No invoices found,Nebyly nalezeny žádné údaje o nákupech za den.
-No invoices found. Try different search criteria.,Nebyl nalezen žádný denní trend prodeje.
-No invoices recorded for this shift.,Nebyl nalezen žádný denní trend daní/poplatků.
-No item profitability data found.,Žádné mrtvé skladové položky.
-No item sales data found for this period.,Žádné datum splatnosti
-No items found,Pro tuto fakturu nebyla nalezena přesná shoda opravy
-No items in cart,Pro dnešek nebyl nalezen žádný hodinový trend prodeje.
-No items with barcodes to print,Nebyla nalezena žádná fakturační aktivita.
-No location-wise top item data found.,Nebyly nalezeny žádné faktury
-No low stock alerts right now.,Nebyly nalezeny žádné faktury.
-No low stock items.,Zkuste jiná kritéria vyhledávání.
-No matching items in cart,Za tuto směnu nejsou evidovány žádné faktury.
-No month-wise sales trend found.,Nebyla nalezena žádná data ziskovosti položky.
-No negative stock items.,Pro toto období nebyly nalezeny žádné údaje o prodeji zboží.
-No notifications yet,Nebyly nalezeny žádné položky
-No offline cash movement synced.,Žádné položky v košíku
-No offline invoices pending synchronization,Žádné položky s čárovými kódy k tisku
-No offline sync issues recorded yet.,Nebyla nalezena žádná data o top položce z hlediska polohy.
-No out-of-stock items.,Momentálně žádná upozornění na nízké zásoby.
-No outstanding credit invoices for this shift.,Žádné skladové položky.
-No payment collection data found.,Žádné odpovídající položky v košíku
-No payment rows available on this invoice.,Nebyl nalezen žádný měsíční trend prodeje.
-No payments registered for this shift.,Žádné záporné skladové položky.
-No pending balances in this period.,Zatím žádná upozornění
-No pending offline invoices,Není synchronizován žádný offline pohyb hotovosti.
-No Print Formats Found,Žádné offline faktury čekající na synchronizaci
-No profiles found for selected scope. Falling back to current profile failed.,Dosud nebyly zaznamenány žádné problémy se synchronizací offline.
-No recent customer activity found.,"Žádné zboží, které není skladem."
-No recent stock entries found.,Žádné neuhrazené kreditní faktury za tuto směnu.
-No records found,Nebyla nalezena žádná data o inkasu plateb.
-No reorder suggestions right now.,Na této faktuře nejsou k dispozici žádné řádky plateb.
-No repeat customers in this period.,Pro tuto směnu nejsou zaregistrovány žádné platby.
-No response from server,V tomto období nejsou žádné nevyřízené zůstatky.
-No return invoices found,Žádné nevyřízené offline faktury
-No return item trend found.,Nebyly nalezeny žádné tiskové formáty
-No returnable items found for this invoice,Pro vybraný rozsah nebyly nalezeny žádné profily.
-No returns were processed in this shift.,Návrat k aktuálnímu profilu se nezdařil.
-No risk activity found.,Nebyla nalezena žádná nedávná aktivita zákazníka.
-No sales activity found for this period.,Nebyly nalezeny žádné nedávné položky akcií.
-No slow moving items.,Nebyly nalezeny žádné záznamy
-No staff sales activity found.,Momentálně žádné návrhy na změnu pořadí.
-No stock movement for this period.,V tomto období žádní opakovaní zákazníci.
-No submitted cash movements in this shift.,Žádná odpověď ze serveru
-No supplier purchases found in this month.,Nebyly nalezeny žádné vratné faktury
-No suppliers found for this period.,Nebyl nalezen žádný trend vrácení položky.
-No sync trigger has run yet in this session.,Pro tuto fakturu nebyly nalezeny žádné vratné položky
-No tax head breakdown found.,V této směně nebyly zpracovány žádné vratky.
-No top items found for this location.,Nebyla nalezena žádná riziková aktivita.
-No unpaid invoices,Pro toto období nebyla nalezena žádná prodejní aktivita.
-No variant data found.,Žádné pomalu se pohybující položky.
-No week-wise sales trend found.,Nebyla nalezena žádná prodejní aktivita zaměstnanců.
-No.,V tomto období nedošlo k žádnému pohybu zásob.
-Nobile Number,V této směně nebyly odeslány žádné peněžní pohyby.
-Not available,V tomto měsíci nebyly nalezeny žádné nákupy dodavatele.
-Not checked,Pro toto období nebyli nalezeni žádní dodavatelé.
-Not selected,V této relaci ještě nebylo spuštěno žádné spouštěč synchronizace.
-Not Set,Nebyl nalezen žádný rozpis daňové hlavy.
-Notifications,Pro toto místo nebyly nalezeny žádné nejlepší položky.
-Offer,Žádné nezaplacené faktury
-Offer Applied,Nebyla nalezena žádná data variant.
-Offer criteria exceeded,Nebyl nalezen žádný týdenní trend prodeje.
-Offer Item,Ne.
-Offer item unavailable,Nobile číslo
-Offer Removed,Není k dispozici
-Offer UOM cannot be changed,Nekontrolováno
-Offer?,Nevybráno
-Offers,Nenastaveno
-Offline,Oznámení
-Offline & Sync,Nabídka
-Offline Capabilities,Nabídka použita
-Offline data status refreshed,Kritéria nabídky překročena
-Offline diagnostics,Nabídka položky
-Offline Invoices,Položka nabídky není k dispozici
-Offline invoices status,Nabídka odstraněna
-Offline invoices synced,Nabídku MJ nelze změnit
-Offline Queue: {0},Nabídka?
-Offline rebuild guidance,Nabídky
-Offline restore is unavailable for this session.,Offline
-Offline selling is available with degraded capabilities.,Offline a synchronizace
-Offline snapshot does not match the current POS state.,Možnosti offline
-Offline Status,Stav offline dat byl obnoven
-"Offline, terminal, and system controls",Offline diagnostika
-OK,Offline faktury
-Online,Stav offline faktur
-Open actions menu,Offline faktury byly synchronizovány
-Open balance to collect,Fronta offline: {0}
-Open Customer Display,Návod na přestavbu offline
-Open drawer,Obnovení offline není pro tuto relaci dostupné.
-Open invoices,Offline prodej je dostupný s omezenými možnostmi.
-Open Payments?,Offline snímek neodpovídá aktuálnímu stavu POS.
-Open POS home,Stav offline
-Open this screen from POS Menu -> Open Customer Display.,"Offline, terminál a ovládání systému"
-OpenCV image processing enabled - Enhanced barcode detection,OK
-OpenCV image processing unavailable on this device,Online
-OpenCV Off,Otevřete nabídku akcí
-OpenCV On,Otevřený zůstatek pro výběr
-OpenCV processing disabled,Otevřete zákaznický displej
-Opening Amount,Otevřete zásuvku
-Opening Cash,Otevřené faktury
-options,Otevřít platby?
-Order,Otevřete domovskou stránku POS
-Original,Otevřete tuto obrazovku z nabídky POS -> Otevřít zákaznický displej.
-Other,Zpracování obrazu OpenCV povoleno – Vylepšená detekce čárových kódů
-Out,Zpracování obrázků OpenCV na tomto zařízení není k dispozici
-Out of Stock,OpenCV vypnuto
-Out of Stock Items,Zapnuto OpenCV
-Outstanding,Zpracování OpenCV zakázáno
-Outstanding Credit by Currency,Počáteční částka
-Overdue,Otevření hotovosti
-Overpayment Change,možnosti
-Overpayment change deducted: {0},Objednat
-Packing List,Původní
-Page Format,Jiné
-Page unavailable offline,Ven
-Paid,Není skladem
-Paid (orig):,Vyprodané položky
-Paid Amount,Vynikající
-Paid change cannot be greater than total change!,Nesplacený úvěr podle měn
-Paid:,Po splatnosti
-Parent Item,Změna přeplatku
-Partial,Odečtena změna přeplatku: {0}
-Partly Paid,Seznam balení
-Party Account,Formát stránky
-Party Type,Stránka není dostupná offline
-Pause terminal until next cashier,Zaplaceno
-PAY,Zaplaceno (orig.):
-Payment,Zaplacená částka
-Payment Account,Placená změna nemůže být větší než celková změna!
-Payment entries processed for Invoice {0},Zaplaceno:
-Payment Entry Type,Nadřazená položka
-Payment History,Částečná
-Payment ID,Částečně zaplaceno
-Payment Method Report,Účet strany
-Payment Methods,Typ strany
-Payment of {0} received successfully.,Pozastavit terminál do příštího pokladníka
-Payment Progress,ZAPLATIT
-Payment Reconciliation,Platba
-Payment request status could not be retrieved. Please try again,Platební účet
-Payment Request took too long to respond. Please try requesting for payment again,Platební záznamy zpracované pro fakturu {0}
-Payment saved offline,Typ zadání platby
-Payment State,Historie plateb
-Payment Status,ID platby
-Payment submitted but print function could not be executed. Payment name not found.,Zpráva o způsobu platby
-Payment submitted.,Platební metody
-Payment Summary,Platba ve výši {0} byla úspěšně přijata.
-Payments,Průběh platby
-Payments are not open. Do you want to open payments and submit?,Odsouhlasení plateb
-Payments by Mode of Payment,Stav žádosti o platbu se nepodařilo načíst.
-PDF,Zkuste to prosím znovu
-Peak Hour,Odpověď na žádost o platbu trvala příliš dlouho.
-Peak Memory:,Zkuste prosím požádat o platbu znovu
-Peak Server:,Platba uložena offline
-Peak:,Stát platby
-Pending,Stav platby
-Pending Amount,"Platba byla odeslána, ale funkci tisku nelze provést."
-Pending count updated from {0} to {1},Název platby nebyl nalezen.
-Pending Exposure,Platba odeslána.
-Pending Invoices,Přehled plateb
-Pending Ratio,Platby
-Pending Sales,Platby nejsou otevřené.
-Pending sales: {0} | Cache usage: {1}%,Chcete otevřít platby a odeslat?
-Pending Sync,Platby podle způsobu platby
-Pending: {0},PDF
-Pending: {0} | Synced: {1} | Draft: {2},Špičková hodina
-Per Page,Špičková paměť:
-Personal,Špičkový server:
-Personal preferences adjust the current cashier experience without changing the active POS route.,Vrchol:
-PIN confirmation does not match.,Čeká na vyřízení
-PIN must be 4 to 8 digits.,Čekající částka
-Please add at least one item.,Počet nevyřízených položek byl aktualizován z {0} na {1}
-Please allow camera access to scan codes,Čeká na expozici
-Please enter payment amount,Nevyřízené faktury
-Please fill all required fields,Poměr čekajících na vyřízení
-Please make a payment or select a payment,Čekající prodej
-Please request phone payment or use another payment method,Nevyřízené prodeje: {0} |
-Please select a customer first,Využití mezipaměti: {1} %
-Please select a party,Čeká na synchronizaci
-Please select a party before reconciling.,Nevyřízeno: {0}
-Please select a valid movement type.,Nevyřízeno: {0} |
-Please select an invoice,Synchronizováno: {1} |
-Please select company before reconciling.,Koncept: {2}
-Please set the customer's mobile number,Na stránku
-Please try again or enter the item manually.,Osobní
-Please verify the barcode or check the item's availability.,Osobní preference upraví aktuální prostředí pokladního beze změny aktivní POS trasy.
-Points,Potvrzení PIN se neshoduje.
-Popup blocked. Please allow popups.,PIN musí mít 4 až 8 číslic.
-POS,Přidejte alespoň jednu položku.
-POS controls and maintenance,Povolte přístup fotoaparátu ke skenování kódů
-POS Expense is disabled for this POS Profile.,Zadejte částku platby
-POS is running with limited offline prerequisites.,Vyplňte prosím všechna povinná pole
-POS Profile,Proveďte prosím platbu nebo vyberte platbu
-Position the QR code or barcode within the scanning area,Požádejte o platbu telefonicky nebo použijte jinou platební metodu
-Posting,Nejprve prosím vyberte zákazníka
-Posting and Price List,Vyberte stranu
-Posting Date,Před odsouhlasením prosím vyberte stranu.
-Preparing background sync,Vyberte prosím platný typ pohybu.
-"Press OK to continue offline with a warning, or Cancel to retry.",Vyberte prosím fakturu
-Previous unit of measure,Před odsouhlasením prosím vyberte společnost.
-Price List,Nastavte prosím mobilní číslo zákazníka
-Price List Rate,Zkuste to znovu nebo zadejte položku ručně.
-Price list rate updated locally only,Prosím ověřte čárový kód nebo ověřte dostupnost položky.
-Pricing & Discounts,Body
-Pricing Rule,Vyskakovací okno zablokováno.
-Print,Povolte prosím vyskakovací okna.
-Print Draft,POS
-Print Format (Invoice),POS kontroly a údržba
-Print Format (Order),Náklady na POS jsou pro tento profil POS zakázány.
-Print invoice,POS běží s omezenými offline předpoklady.
-Print Last Invoice,POS profil
-Print Purchase Invoice instead of PO,Umístěte QR kód nebo čárový kód do oblasti skenování
-Printer,Odesílání
-Processed returns impacting the shift totals,Zaúčtování a ceník
-Processing Payment,Datum zveřejnění
-Processing payment entries for Invoice {0},Příprava synchronizace na pozadí
-Profile,Stisknutím tlačítka OK pokračujte v režimu offline s varováním nebo stisknutím tlačítka Zrušit akci opakujte.
-Profiles,Předchozí měrná jednotka
-Profit,Ceník
-Profit: Invoice Item Estimate,Ceník Sazba
-Profit: Stock Ledger (COGS),Sazba ceníku aktualizována pouze lokálně
-Profitability Report,Ceny a slevy
-Prorated return discount,Cenové pravidlo
-Purchase Amount,Tisk
-Purchase Invoices,Vytisknout koncept
-Purchase Order created,Formát tisku (faktura)
-Qty,Formát tisku (objednávka)
-Qualified,Vytisknout fakturu
-Quantity,Tisk poslední faktury
-Quantity exceeds available stock,Vytiskněte nákupní fakturu místo objednávky
-Quick Actions,Tiskárna
-Quotation {0} is Submitted,Zpracované výnosy ovlivňující celkové směny
-Quotation submitted,Zpracování platby
-QZ Tray connected.,Zpracování záznamů plateb pro fakturu {0}
-QZ Tray is manually disconnected. Press Connect to enable it again.,Profil
-QZ Tray is not connected.,Profily
-QZ Tray Setup,zisk
-Rate,Zisk: Odhad položky faktury
-Rate adjusted to maximum allowed discount,Zisk: Skladová kniha (COGS)
-Ready,Zpráva o ziskovosti
-Ready to resume,Poměrná sleva na vrácení
-Ready!,Částka nákupu
-Real-time POS insights for retail operations.,Nákupní faktury
-Rebuild Offline Data,Objednávka vytvořena
-Receive,množství
-Receive now,Kvalifikovaný
-Received,množství
-Received:,Množství převyšuje dostupné zásoby
-Recent Movement Entries,Rychlé akce
-Recent updates about your invoices,Nabídka {0} je odeslána
-Recently Active Customers,Nabídka předložena
-Rechecking connection,Zásobník QZ připojen.
-Reconcile payment methods and close shift,Zásobník QZ je ručně odpojen.
-Reconciling Payments,"Chcete-li jej znovu aktivovat, stiskněte tlačítko Připojit."
-"Reconnect and open this page once while online, then offline refreshes will be able to restore it.",Zásobník QZ není připojen.
-Reconnect online to refresh cached offline data from the server.,Nastavení zásobníku QZ
-Recreate local offline prerequisites from scratch,sazba
-Recv:,Sazba upravena na maximální povolenou slevu
-Redeem,Připraveno
-Redeem / Scan,Připraveno k obnovení
-Redeem Amount,Připraveno!
-Redeem Mode,Statistiky POS v reálném čase pro maloobchodní operace.
-Redeemed Amount,Znovu sestavit offline data
-Redeemed credit cannot be greater than its total.,Příjem
-Redemption and Totals,Přijmout nyní
-Reference,Přijato
-Refresh,Přijato:
-Refresh Exchange Rate,Nedávné záznamy o pohybu
-Refresh Offline Data,Nedávné aktualizace vašich faktur
-Refresh Printers,Nedávno aktivní zákazníci
-Refund,Opětovná kontrola připojení
-Release Notes,Sladit platební metody a uzavřít směnu
-Reload,Odsouhlasení plateb
-Reload customers,"Znovu se připojte a otevřete tuto stránku, když jste online, a poté ji budete moci obnovit offline aktualizacemi."
-Reload Items,Znovu se připojte online a obnovte offline data uložená v mezipaměti ze serveru.
-Reload Now,Znovu vytvořte místní offline předpoklady od začátku
-Reload to apply the latest changes. Your current session will be refreshed.,Recv:
-Reload Workflow,Uplatnit
-Remarks,Uplatnit / Skenovat
-Remarks are required.,Částka pro uplatnění
-Remove,Režim uplatnění
-Remove barcode item,Uplatněná částka
-Remove cached data and reload the POS app,Uplatněný kredit nemůže být vyšší než jeho celková částka.
-Remove item,Odkup a součty
-Remove Offer,Reference
-Reorder / Purchase Suggestions,Obnovit
-Repair Candidate,Obnovit směnný kurz
-Repair Change Allocation,Obnovit data offline
-Repair requires an online connection,Obnovit tiskárny
-Repaired,Vrácení peněz
-Repairing change allocation,Poznámky k vydání
-Repeat Customers,Znovu načíst
-Repeat Rate,Znovu načíst zákazníky
-Reprint previous transaction,Znovu načíst položky
-Request,Znovu načíst
-Request ID: {0},"Chcete-li použít nejnovější změny, znovu načtěte."
-Request Payment,Vaše aktuální relace bude obnovena.
-Requested route: {0},Znovu načíst pracovní postup
-Required columns cannot be hidden,Poznámky
-Reset,Poznámky jsou povinné.
-Reset item name,Odebrat
-Reset to Default,Odstraňte položku čárového kódu
-Resource Health,Odstraňte data z mezipaměti a znovu načtěte aplikaci POS
-Restricted,Odebrat položku
-Restricted operational controls for supervisors only.,Odebrat nabídku
-Retry,Změna objednávky / návrhy na nákup
-Retry route,Kandidát na opravu
-Return,Opravit alokaci změn
-Return Amount,Oprava vyžaduje online připojení
-Return Count,Opraveno
-Return items must have negative quantities,Oprava alokace změn
-Return total must be negative,Opakovaní zákazníci
-Return Valid Until,Rychlost opakování
-Return window passed,Znovu vytiskněte předchozí transakci
-Return without Invoice,Žádost
+Last sync: {0} | ok: {1} | failed: {2} | skipped: {3},Poslední synchronizace: {0} | dobře: {1} | neúspěšné: {2} | přeskočeno: {3}
+Latest entries for current shift,Nejnovější záznamy pro aktuální směnu
+Lead Time,Dodací lhůta
+Limited,Omezené
+lines,linky
+List,Seznam
+Live Snapshot,Živý snímek
+Load a POS profile and cashier first.,Nejprve načtěte POS profil a pokladnu.
+Load More Invoices,Načíst další faktury
+Load previously saved invoices,Načíst dříve uložené faktury
+Load Sale,Prodej nákladu
+Load Sales Invoice,Načíst prodejní fakturu
+Loading app data...,Načítání dat aplikace...
+Loading customer database...,Načítání databáze zákazníků...
+Loading customers...,Načítání zákazníků...
+Loading database stats...,Načítání statistik databáze...
+Loading details...,Načítání podrobností...
+Loading invoice history...,Načítání historie faktur...
+Loading items...,Načítání položek...
+Loading product catalog...,Načítání katalogu produktů...
+Loading return invoices...,Načítání vrácených faktur...
+Loading server CPU/memory usage...,Načítání využití CPU/paměti serveru...
+Loading suppliers...,Načítání dodavatelů...
+Loading unpaid invoices...,Načítání nezaplacených faktur...
+Loading view...,Načítání zobrazení...
+Loading...,Načítání...
+Local storage is unavailable. Switching to online-only mode.,Místní úložiště není k dispozici. Přepnutí do režimu pouze online.
+localStorage,localStorage
+Location Performance,Výkon umístění
+Locations,Místa
+Lock Screen,Uzamknout obrazovku
+Lookup Workflow,Pracovní postup vyhledávání
+Loss,Ztráta
+Low,Nízká
+Low Stock,Nízké zásoby
+Low Stock Alerts,Upozornění na nízké zásoby
+Low Stock Items,Nízko skladové položky
+Low Stock Threshold,Nízký skladový práh
+Low Stock Total,Nízké zásoby celkem
+Lowest Margin,Nejnižší marže
+Low-frequency maintenance and system details.,Nízkofrekvenční údržba a detaily systému.
+Loyalty Redeemed,Věrnost vykoupena
+Loyalty Redemption,Vykoupení za věrnost
+Make New Payment,Proveďte novou platbu
+Manage all,Spravovat vše
+Manage and synchronize your offline transactions,Spravujte a synchronizujte své offline transakce
+Manage Cashier PIN,Správa PIN pokladny
+"Manage offline tools, terminal controls, and maintenance from one workspace.","Spravujte offline nástroje, ovládací prvky terminálu a údržbu z jednoho pracovního prostoru."
+manual,manuál
+"Manual codes, barcode scans, and QR scans work in the same field","Ruční kódy, skenování čárových kódů a skenování QR pracují ve stejném poli"
+Manual offline mode is enabled,Je povolen manuální režim offline
+Margin,Marže
+Maximum available quantity is {0}. Quantity adjusted to match stock.,Maximální dostupné množství je {0}. Množství přizpůsobeno skladovým zásobám.
+Maximum discount amount for this offer item is {0}.,Maximální výše slevy pro tuto položku nabídky je {0}.
+Maximum discount percentage for this offer item is {0}%.,Maximální procento slevy pro tuto položku nabídky je {0} %.
+Maximum offer quantity is {0}. Quantity adjusted to allowed limit.,Maximální nabízené množství je {0}. Množství upraveno na povolený limit.
+Medium,Střední
+Method-wise Collections,Metodické sbírky
+Minimum allowed rate for this offer item is {0}.,Minimální povolená sazba pro tuto položku nabídky je {0}.
+Minimum Qty,Minimální množství
+Mobile No,Mobil č
+Mode,Režim
+Mode of Payment,Způsob platby
+Month,měsíc
+Month ?,měsíc?
+Monthly Profit,Měsíční zisk
+Monthly Sales,Měsíční prodeje
+Monthly Sales Summary,Měsíční přehled prodeje
+Month-wise,Měsíčně
+Most Active Cashiers,Nejaktivnější pokladníci
+Movement Type,Typ pohybu
+Movements,Pohyby
+Multi Currency,Více měn
+N/A,N/A
+Name,Jméno
+Negative Stock,Negativní akcie
+Negative Stock Items,Negativní skladové položky
+Negative values not allowed,Záporné hodnoty nejsou povoleny
+Net,Net
+Net Qty,Čisté množství
+Net Sales,Čistý prodej
+Net Value,Čistá hodnota
+Never,Nikdy
+New changes are ready to load,Nové změny jsou připraveny k načtení
+New Item,Nová položka
+New Offer Available,K dispozici nová nabídka
+New PIN,Nový PIN
+New rate,Nová sazba
+Next unit of measure,Další měrná jednotka
+No attribute data found.,Nebyla nalezena žádná atributová data.
+No Barcode,Žádný čárový kód
+No barcode found for UOM '{0}',Pro MJ '{0}' nebyl nalezen žádný čárový kód
+No branch/location data found.,Nebyly nalezeny žádné údaje o pobočce/poloze.
+No brand data found.,Nebyla nalezena žádná data o značce.
+No cached gift card balance is available offline.,Žádný zůstatek dárkové karty v mezipaměti není k dispozici offline.
+No camera found on this device. Please ensure your device has a working camera.,"Na tomto zařízení nebyla nalezena žádná kamera. Ujistěte se, že vaše zařízení má funkční fotoaparát."
+No capability warnings recorded yet.,Dosud nebyla zaznamenána žádná varování týkající se schopností.
+No cash expected for this shift.,Za tuto směnu se neočekávají žádné peníze.
+No cash mode configured,Není nakonfigurován žádný hotovostní režim
+No cash movement type is allowed for this POS Profile.,Pro tento profil POS není povolen žádný typ pohybu hotovosti.
+No cashier PIN is set yet. Create one now.,Zatím není nastaven žádný PIN pokladníka. Vytvořte si jej nyní.
+No cashier profiles are available for this POS profile yet.,Pro tento profil POS zatím nejsou k dispozici žádné profily pokladníků.
+No cashier-wise discount/void/return activity.,Žádná pokladní činnost se slevou/neplatností/vracením.
+No category data found.,Nebyla nalezena žádná data kategorie.
+No category profitability data found.,Nebyla nalezena žádná data o ziskovosti kategorie.
+No change returned recorded for this shift.,Pro tuto směnu nebyla zaznamenána žádná vrácená změna.
+No change-allocation invoices match the current filters.,Aktuálním filtrům neodpovídají žádné faktury s alokací.
+No charge head breakdown found.,Nebyla nalezena žádná porucha nabíjecí hlavy.
+No Company Selected,Není vybrána žádná společnost
+No customer sales data found.,Nebyly nalezeny žádné údaje o prodeji zákazníků.
+No day-wise discount/void/return trend.,Žádný denní trend slev/neplatnosti/vrácení.
+No day-wise payment data found.,Nebyly nalezeny žádné denní platební údaje.
+No day-wise profitability trend found.,Nebyl nalezen žádný denní trend ziskovosti.
+No day-wise purchase data found.,Nebyly nalezeny žádné údaje o nákupech za den.
+No day-wise sales trend found.,Nebyl nalezen žádný denní trend prodeje.
+No day-wise tax/charges trend found.,Nebyl nalezen žádný denní trend daní/poplatků.
+No dead stock items.,Žádné mrtvé skladové položky.
+No due date,Žádné datum splatnosti
+No exact repair match found for this invoice,Pro tuto fakturu nebyla nalezena přesná shoda opravy
+No hourly sales trend found for today.,Pro dnešek nebyl nalezen žádný hodinový trend prodeje.
+No invoice activity found.,Nebyla nalezena žádná fakturační aktivita.
+No invoices found,Nebyly nalezeny žádné faktury
+No invoices found. Try different search criteria.,Nebyly nalezeny žádné faktury. Zkuste jiná kritéria vyhledávání.
+No invoices recorded for this shift.,Za tuto směnu nejsou evidovány žádné faktury.
+No item profitability data found.,Nebyla nalezena žádná data ziskovosti položky.
+No item sales data found for this period.,Pro toto období nebyly nalezeny žádné údaje o prodeji zboží.
+No items found,Nebyly nalezeny žádné položky
+No items in cart,Žádné položky v košíku
+No items with barcodes to print,Žádné položky s čárovými kódy k tisku
+No location-wise top item data found.,Nebyla nalezena žádná data o top položce z hlediska polohy.
+No low stock alerts right now.,Momentálně žádná upozornění na nízké zásoby.
+No low stock items.,Žádné skladové položky.
+No matching items in cart,Žádné odpovídající položky v košíku
+No month-wise sales trend found.,Nebyl nalezen žádný měsíční trend prodeje.
+No negative stock items.,Žádné záporné skladové položky.
+No notifications yet,Zatím žádná upozornění
+No offline cash movement synced.,Není synchronizován žádný offline pohyb hotovosti.
+No offline invoices pending synchronization,Žádné offline faktury čekající na synchronizaci
+No offline sync issues recorded yet.,Dosud nebyly zaznamenány žádné problémy se synchronizací offline.
+No out-of-stock items.,"Žádné zboží, které není skladem."
+No outstanding credit invoices for this shift.,Žádné neuhrazené kreditní faktury za tuto směnu.
+No payment collection data found.,Nebyla nalezena žádná data o inkasu plateb.
+No payment rows available on this invoice.,Na této faktuře nejsou k dispozici žádné řádky plateb.
+No payments registered for this shift.,Pro tuto směnu nejsou zaregistrovány žádné platby.
+No pending balances in this period.,V tomto období nejsou žádné nevyřízené zůstatky.
+No pending offline invoices,Žádné nevyřízené offline faktury
+No Print Formats Found,Nebyly nalezeny žádné tiskové formáty
+No profiles found for selected scope. Falling back to current profile failed.,Pro vybraný rozsah nebyly nalezeny žádné profily. Návrat k aktuálnímu profilu se nezdařil.
+No recent customer activity found.,Nebyla nalezena žádná nedávná aktivita zákazníka.
+No recent stock entries found.,Nebyly nalezeny žádné nedávné položky akcií.
+No records found,Nebyly nalezeny žádné záznamy
+No reorder suggestions right now.,Momentálně žádné návrhy na změnu pořadí.
+No repeat customers in this period.,V tomto období žádní opakovaní zákazníci.
+No response from server,Žádná odpověď ze serveru
+No return invoices found,Nebyly nalezeny žádné vratné faktury
+No return item trend found.,Nebyl nalezen žádný trend vrácení položky.
+No returnable items found for this invoice,Pro tuto fakturu nebyly nalezeny žádné vratné položky
+No returns were processed in this shift.,V této směně nebyly zpracovány žádné vratky.
+No risk activity found.,Nebyla nalezena žádná riziková aktivita.
+No sales activity found for this period.,Pro toto období nebyla nalezena žádná prodejní aktivita.
+No slow moving items.,Žádné pomalu se pohybující položky.
+No staff sales activity found.,Nebyla nalezena žádná prodejní aktivita zaměstnanců.
+No stock movement for this period.,V tomto období nedošlo k žádnému pohybu zásob.
+No submitted cash movements in this shift.,V této směně nebyly odeslány žádné peněžní pohyby.
+No supplier purchases found in this month.,V tomto měsíci nebyly nalezeny žádné nákupy dodavatele.
+No suppliers found for this period.,Pro toto období nebyli nalezeni žádní dodavatelé.
+No sync trigger has run yet in this session.,V této relaci ještě nebylo spuštěno žádné spouštěč synchronizace.
+No tax head breakdown found.,Nebyl nalezen žádný rozpis daňové hlavy.
+No top items found for this location.,Pro toto místo nebyly nalezeny žádné nejlepší položky.
+No unpaid invoices,Žádné nezaplacené faktury
+No variant data found.,Nebyla nalezena žádná data variant.
+No week-wise sales trend found.,Nebyl nalezen žádný týdenní trend prodeje.
+No.,Ne.
+Nobile Number,Nobile číslo
+Not available,Není k dispozici
+Not checked,Nekontrolováno
+Not selected,Nevybráno
+Not Set,Nenastaveno
+Notifications,Oznámení
+Offer,Nabídka
+Offer Applied,Nabídka použita
+Offer criteria exceeded,Kritéria nabídky překročena
+Offer Item,Nabídka položky
+Offer item unavailable,Položka nabídky není k dispozici
+Offer Removed,Nabídka odstraněna
+Offer UOM cannot be changed,Nabídku MJ nelze změnit
+Offer?,Nabídka?
+Offers,Nabídky
+Offline,Offline
+Offline & Sync,Offline a synchronizace
+Offline Capabilities,Možnosti offline
+Offline data status refreshed,Stav offline dat byl obnoven
+Offline diagnostics,Offline diagnostika
+Offline Invoices,Offline faktury
+Offline invoices status,Stav offline faktur
+Offline invoices synced,Offline faktury byly synchronizovány
+Offline Queue: {0},Fronta offline: {0}
+Offline rebuild guidance,Návod na přestavbu offline
+Offline restore is unavailable for this session.,Obnovení offline není pro tuto relaci dostupné.
+Offline selling is available with degraded capabilities.,Offline prodej je dostupný s omezenými možnostmi.
+Offline snapshot does not match the current POS state.,Offline snímek neodpovídá aktuálnímu stavu POS.
+Offline Status,Stav offline
+"Offline, terminal, and system controls","Offline, terminál a ovládání systému"
+OK,OK
+Online,Online
+Open actions menu,Otevřete nabídku akcí
+Open balance to collect,Otevřený zůstatek pro výběr
+Open Customer Display,Otevřete zákaznický displej
+Open drawer,Otevřete zásuvku
+Open invoices,Otevřené faktury
+Open Payments?,Otevřít platby?
+Open POS home,Otevřete domovskou stránku POS
+Open this screen from POS Menu -> Open Customer Display.,Otevřete tuto obrazovku z nabídky POS -> Otevřít zákaznický displej.
+OpenCV image processing enabled - Enhanced barcode detection,Zpracování obrazu OpenCV povoleno – Vylepšená detekce čárových kódů
+OpenCV image processing unavailable on this device,Zpracování obrázků OpenCV na tomto zařízení není k dispozici
+OpenCV Off,OpenCV vypnuto
+OpenCV On,Zapnuto OpenCV
+OpenCV processing disabled,Zpracování OpenCV zakázáno
+Opening Amount,Počáteční částka
+Opening Cash,Otevření hotovosti
+options,možnosti
+Order,Objednat
+Original,Původní
+Other,Jiné
+Out,Ven
+Out of Stock,Není skladem
+Out of Stock Items,Vyprodané položky
+Outstanding,Vynikající
+Outstanding Credit by Currency,Nesplacený úvěr podle měn
+Overdue,Po splatnosti
+Overpayment Change,Změna přeplatku
+Overpayment change deducted: {0},Odečtena změna přeplatku: {0}
+Packing List,Seznam balení
+Page Format,Formát stránky
+Page unavailable offline,Stránka není dostupná offline
+Paid,Zaplaceno
+Paid (orig):,Zaplaceno (orig.):
+Paid Amount,Zaplacená částka
+Paid change cannot be greater than total change!,Placená změna nemůže být větší než celková změna!
+Paid:,Zaplaceno:
+Parent Item,Nadřazená položka
+Partial,Částečná
+Partly Paid,Částečně zaplaceno
+Party Account,Účet strany
+Party Type,Typ strany
+Pause terminal until next cashier,Pozastavit terminál do příštího pokladníka
+PAY,ZAPLATIT
+Payment,Platba
+Payment Account,Platební účet
+Payment entries processed for Invoice {0},Platební záznamy zpracované pro fakturu {0}
+Payment Entry Type,Typ zadání platby
+Payment History,Historie plateb
+Payment ID,ID platby
+Payment Method Report,Zpráva o způsobu platby
+Payment Methods,Platební metody
+Payment of {0} received successfully.,Platba ve výši {0} byla úspěšně přijata.
+Payment Progress,Průběh platby
+Payment Reconciliation,Odsouhlasení plateb
+Payment request status could not be retrieved. Please try again,Stav žádosti o platbu se nepodařilo načíst. Zkuste to prosím znovu
+Payment Request took too long to respond. Please try requesting for payment again,Odpověď na žádost o platbu trvala příliš dlouho. Zkuste prosím požádat o platbu znovu
+Payment saved offline,Platba uložena offline
+Payment State,Stát platby
+Payment Status,Stav platby
+Payment submitted but print function could not be executed. Payment name not found.,"Platba byla odeslána, ale funkci tisku nelze provést. Název platby nebyl nalezen."
+Payment submitted.,Platba odeslána.
+Payment Summary,Přehled plateb
+Payments,Platby
+Payments are not open. Do you want to open payments and submit?,Platby nejsou otevřené. Chcete otevřít platby a odeslat?
+Payments by Mode of Payment,Platby podle způsobu platby
+PDF,PDF
+Peak Hour,Špičková hodina
+Peak Memory:,Špičková paměť:
+Peak Server:,Špičkový server:
+Peak:,Vrchol:
+Pending,Čeká na vyřízení
+Pending Amount,Čekající částka
+Pending count updated from {0} to {1},Počet nevyřízených položek byl aktualizován z {0} na {1}
+Pending Exposure,Čeká na expozici
+Pending Invoices,Nevyřízené faktury
+Pending Ratio,Poměr čekajících na vyřízení
+Pending Sales,Čekající prodej
+Pending sales: {0} | Cache usage: {1}%,Nevyřízené prodeje: {0} | Využití mezipaměti: {1} %
+Pending Sync,Čeká na synchronizaci
+Pending: {0},Nevyřízeno: {0}
+Pending: {0} | Synced: {1} | Draft: {2},Nevyřízeno: {0} | Synchronizováno: {1} | Koncept: {2}
+Per Page,Na stránku
+Personal,Osobní
+Personal preferences adjust the current cashier experience without changing the active POS route.,Osobní preference upraví aktuální prostředí pokladního beze změny aktivní POS trasy.
+PIN confirmation does not match.,Potvrzení PIN se neshoduje.
+PIN must be 4 to 8 digits.,PIN musí mít 4 až 8 číslic.
+Please add at least one item.,Přidejte alespoň jednu položku.
+Please allow camera access to scan codes,Povolte přístup fotoaparátu ke skenování kódů
+Please enter payment amount,Zadejte částku platby
+Please fill all required fields,Vyplňte prosím všechna povinná pole
+Please make a payment or select a payment,Proveďte prosím platbu nebo vyberte platbu
+Please request phone payment or use another payment method,Požádejte o platbu telefonicky nebo použijte jinou platební metodu
+Please select a customer first,Nejprve prosím vyberte zákazníka
+Please select a party,Vyberte stranu
+Please select a party before reconciling.,Před odsouhlasením prosím vyberte stranu.
+Please select a valid movement type.,Vyberte prosím platný typ pohybu.
+Please select an invoice,Vyberte prosím fakturu
+Please select company before reconciling.,Před odsouhlasením prosím vyberte společnost.
+Please set the customer's mobile number,Nastavte prosím mobilní číslo zákazníka
+Please try again or enter the item manually.,Zkuste to znovu nebo zadejte položku ručně.
+Please verify the barcode or check the item's availability.,Prosím ověřte čárový kód nebo ověřte dostupnost položky.
+Points,Body
+Popup blocked. Please allow popups.,Vyskakovací okno zablokováno. Povolte prosím vyskakovací okna.
+POS,POS
+POS controls and maintenance,POS kontroly a údržba
+POS Expense is disabled for this POS Profile.,Náklady na POS jsou pro tento profil POS zakázány.
+POS is running with limited offline prerequisites.,POS běží s omezenými offline předpoklady.
+POS Profile,POS profil
+Position the QR code or barcode within the scanning area,Umístěte QR kód nebo čárový kód do oblasti skenování
+Posting,Odesílání
+Posting and Price List,Zaúčtování a ceník
+Posting Date,Datum zveřejnění
+Preparing background sync,Příprava synchronizace na pozadí
+"Press OK to continue offline with a warning, or Cancel to retry.",Stisknutím tlačítka OK pokračujte v režimu offline s varováním nebo stisknutím tlačítka Zrušit akci opakujte.
+Previous unit of measure,Předchozí měrná jednotka
+Price List,Ceník
+Price List Rate,Ceník Sazba
+Price list rate updated locally only,Sazba ceníku aktualizována pouze lokálně
+Pricing & Discounts,Ceny a slevy
+Pricing Rule,Cenové pravidlo
+Print,Tisk
+Print Draft,Vytisknout koncept
+Print Format (Invoice),Formát tisku (faktura)
+Print Format (Order),Formát tisku (objednávka)
+Print invoice,Vytisknout fakturu
+Print Purchase Invoice instead of PO,Vytiskněte nákupní fakturu místo objednávky
+Printer,Tiskárna
+Processed returns impacting the shift totals,Zpracované výnosy ovlivňující celkové směny
+Processing Payment,Zpracování platby
+Processing payment entries for Invoice {0},Zpracování záznamů plateb pro fakturu {0}
+Profile,Profil
+Profiles,Profily
+Profit,zisk
+Profit: Invoice Item Estimate,Zisk: Odhad položky faktury
+Profit: Stock Ledger (COGS),Zisk: Skladová kniha (COGS)
+Profitability Report,Zpráva o ziskovosti
+Prorated return discount,Poměrná sleva na vrácení
+Purchase Amount,Částka nákupu
+Purchase Invoices,Nákupní faktury
+Purchase Order created,Objednávka vytvořena
+Qty,množství
+Qualified,Kvalifikovaný
+Quantity,množství
+Quantity exceeds available stock,Množství převyšuje dostupné zásoby
+Quick Actions,Rychlé akce
+Quotation {0} is Submitted,Nabídka {0} je odeslána
+Quotation submitted,Nabídka předložena
+QZ Tray connected.,Zásobník QZ připojen.
+QZ Tray is manually disconnected. Press Connect to enable it again.,"Zásobník QZ je ručně odpojen. Chcete-li jej znovu aktivovat, stiskněte tlačítko Připojit."
+QZ Tray is not connected.,Zásobník QZ není připojen.
+QZ Tray Setup,Nastavení zásobníku QZ
+Rate,sazba
+Rate adjusted to maximum allowed discount,Sazba upravena na maximální povolenou slevu
+Ready,Připraveno
+Ready to resume,Připraveno k obnovení
+Ready!,Připraveno!
+Real-time POS insights for retail operations.,Statistiky POS v reálném čase pro maloobchodní operace.
+Rebuild Offline Data,Znovu sestavit offline data
+Receive,Příjem
+Receive now,Přijmout nyní
+Received,Přijato
+Received:,Přijato:
+Recent Movement Entries,Nedávné záznamy o pohybu
+Recent updates about your invoices,Nedávné aktualizace vašich faktur
+Recently Active Customers,Nedávno aktivní zákazníci
+Rechecking connection,Opětovná kontrola připojení
+Reconcile payment methods and close shift,Sladit platební metody a uzavřít směnu
+Reconciling Payments,Odsouhlasení plateb
+"Reconnect and open this page once while online, then offline refreshes will be able to restore it.","Znovu se připojte a otevřete tuto stránku, když jste online, a poté ji budete moci obnovit offline aktualizacemi."
+Reconnect online to refresh cached offline data from the server.,Znovu se připojte online a obnovte offline data uložená v mezipaměti ze serveru.
+Recreate local offline prerequisites from scratch,Znovu vytvořte místní offline předpoklady od začátku
+Recv:,Recv:
+Redeem,Uplatnit
+Redeem / Scan,Uplatnit / Skenovat
+Redeem Amount,Částka pro uplatnění
+Redeem Mode,Režim uplatnění
+Redeemed Amount,Uplatněná částka
+Redeemed credit cannot be greater than its total.,Uplatněný kredit nemůže být vyšší než jeho celková částka.
+Redemption and Totals,Odkup a součty
+Reference,Reference
+Refresh,Obnovit
+Refresh Exchange Rate,Obnovit směnný kurz
+Refresh Offline Data,Obnovit data offline
+Refresh Printers,Obnovit tiskárny
+Refund,Vrácení peněz
+Release Notes,Poznámky k vydání
+Reload,Znovu načíst
+Reload customers,Znovu načíst zákazníky
+Reload Items,Znovu načíst položky
+Reload Now,Znovu načíst
+Reload to apply the latest changes. Your current session will be refreshed.,"Chcete-li použít nejnovější změny, znovu načtěte. Vaše aktuální relace bude obnovena."
+Reload Workflow,Znovu načíst pracovní postup
+Remarks,Poznámky
+Remarks are required.,Poznámky jsou povinné.
+Remove,Odebrat
+Remove barcode item,Odstraňte položku čárového kódu
+Remove cached data and reload the POS app,Odstraňte data z mezipaměti a znovu načtěte aplikaci POS
+Remove item,Odebrat položku
+Remove Offer,Odebrat nabídku
+Reorder / Purchase Suggestions,Změna objednávky / návrhy na nákup
+Repair Candidate,Kandidát na opravu
+Repair Change Allocation,Opravit alokaci změn
+Repair requires an online connection,Oprava vyžaduje online připojení
+Repaired,Opraveno
+Repairing change allocation,Oprava alokace změn
+Repeat Customers,Opakovaní zákazníci
+Repeat Rate,Rychlost opakování
+Request,Žádost
+Request ID: {0},ID požadavku: {0}
+Request Payment,Žádost o platbu
+Requested route: {0},Požadovaná trasa: {0}
+Required columns cannot be hidden,Požadované sloupce nelze skrýt
+Reset,Resetovat
+Reset item name,Resetovat název položky
+Reset to Default,Obnovit výchozí
+Resource Health,Zdroj Zdraví
+Restricted,Omezeno
+Restricted operational controls for supervisors only.,Omezené provozní kontroly pouze pro dozorce.
+Retry,Zkuste to znovu
+Retry route,Zkuste trasu znovu
+Return,Návrat
+Return Amount,Vrácená částka
+Return Count,Počet návratů
+Return items must have negative quantities,Vrácené položky musí mít záporná množství
+Return total must be negative,Celková návratnost musí být záporná
+Return Valid Until,Návrat platí do
+Return window passed,Návratové okno prošlo
+Return without Invoice,Vrácení bez faktury
 Returns,Návraty
 Returns / Voids / Discounts,Vrácení / neplatnost / slevy
 Returns by Currency,Vrácení podle měny
@@ -1023,331 +1037,326 @@ Save Settings,Uložit nastavení
 Save the selected printer as the POS Profile default so it shows automatically on this setup.,"Uložte vybranou tiskárnu jako výchozí profil POS, aby se v tomto nastavení automaticky zobrazila."
 Saved as draft because: {0},"Uloženo jako koncept, protože: {0}"
 Saving...,Ukládání...
-Scale barcode detected. Quantity here is the number of labels to print.,Byl zjištěn čárový kód stupnice.
-Scale barcode settings are not configured. Using item barcode only.,Množství zde udává počet štítků k tisku.
-Scale template barcode is missing for this item/UOM. Using item barcode only.,Nastavení čárového kódu stupnice není nakonfigurováno.
-Scan an existing card and top it up without leaving the payment flow.,Pouze pomocí čárového kódu položky.
-Scan Error,U této položky/MJ chybí čárový kód šablony měřítka.
-Scan or enter a gift card code to check balance or redeem.,Pouze pomocí čárového kódu položky.
-Scan or paste the card code below.,"Naskenujte stávající kartu a dobijte ji, aniž byste opustili platební tok."
-Scan QR Code/Barcode,Chyba skenování
-Scan with camera,Naskenujte nebo zadejte kód dárkové karty pro kontrolu zůstatku nebo uplatnění.
-Scan-First Flow,Naskenujte nebo vložte níže uvedený kód karty.
-Scanned Code:,Naskenujte QR kód/čárový kód
-Scanning for: {0},Skenujte fotoaparátem
-Scanning items,Scan-First Flow
-Scan-Ready,Naskenovaný kód:
-Scope,Vyhledávání: {0}
-Scope: All Profiles,Skenování položek
-Scope: Current Profile,Připraveno pro skenování
-Scope: Specific Profile,Rozsah
-Search,Rozsah: Všechny profily
-Search Account,Rozsah: Aktuální profil
-Search an invoice and continue the return flow without extra steps.,Rozsah: Specifický profil
-Search customer,Hledat
-Search invoices or customers,Vyhledat účet
-Search item,Vyhledejte fakturu a pokračujte ve zpětném toku bez dalších kroků.
-Search item / code,Vyhledejte zákazníka
-Search items or barcode,Vyhledávejte faktury nebo zákazníky
-Search Mpesa Payments,Vyhledat položku
-Search return invoices or customers,Vyhledat položku / kód
-Search supplier,Vyhledejte položky nebo čárový kód
-Search unpaid invoices or customers,Hledat Mpesa Payments
-Secure context (HTTPS or localhost) is required for camera access.,Vyhledávejte vrácené faktury nebo zákazníky
-Secure context (HTTPS) required for camera access. Please use HTTPS to access the camera.,Hledat dodavatele
-Select,Hledejte nezaplacené faktury nebo zákazníky
-Select a cashier first.,Pro přístup ke kameře je vyžadován zabezpečený kontext (HTTPS nebo localhost).
-Select a customer,Pro přístup k fotoaparátu je vyžadován zabezpečený kontext (HTTPS).
-Select a customer to use coupon,Pro přístup ke kameře použijte HTTPS.
-Select a printer to use QZ silent printing.,Vyberte
-Select Batch,Nejprve vyberte pokladníka.
-Select Columns to Display,Vyberte zákazníka
-Select items to sell,"Vyberte zákazníka, který má kupón použít"
-Select Language,Vyberte tiskárnu pro použití tichého tisku QZ.
-Select Payment,Vyberte možnost Dávka
-Select Payment Account,Vyberte Sloupce k zobrazení
-Select printer,Vyberte položky k prodeji
-Select Return Invoice,Vyberte Jazyk
-Select S.O,Vyberte Platba
-Select Sales Orders,Vyberte Platební účet
-Select the cashier who is taking over this terminal.,Vyberte tiskárnu
-Selected,Vyberte možnost Vrátit fakturu
-Selected movement type is not allowed by POS Profile.,Vyberte S.O
-Selected Payments,Vyberte Prodejní objednávky
-Sensitive actions kept away from quick taps.,"Vyberte pokladníka, který přebírá tento terminál."
-Serial,Vybráno
-Serial Numbers,Profil POS nepovoluje vybraný typ pohybu.
-Server CPU Usage:,Vybrané platby
-Server Health,Citlivé akce se vyhýbají rychlým klepnutím.
-Server Memory Usage:,sériový
-Server Metrics,Sériová čísla
-Server Uptime:,Využití CPU serveru:
-Service Charges,Stav serveru
-Session,Využití paměti serveru:
-Set each cashier PIN in the User form and keep terminal members assigned in POS Profile User.,Metriky serveru
-Settings,Doba provozu serveru:
-Settings in this section update the POS workspace without changing the current route.,Servisní poplatky
-Setup complete!,Relace
-Share,Nastavte každý PIN pokladníka ve formuláři Uživatel a ponechte členy terminálu přiřazené v Profilu POS Uživatel.
-Shared terminal,Nastavení
-Shift Closed Snapshot,Nastavení v této části aktualizuje pracovní prostor POS bez změny aktuální trasy.
-Shift Overview,Nastavení dokončeno!
-Show,Sdílejte
-Show cart on customer-facing screen,Sdílený terminál
-Show last invoice rate,Snímek zavřeno Shift
-Show rate info,Přehled směn
-Show Repair Candidates,Zobrazit
-Show search tools,Ukažte košík na obrazovce před zákazníkem
-Show the active cart on a customer-facing screen,Zobrazit kurz poslední faktury
-Showing {0}-{1} of {2},Zobrazit informace o sazbě
-Showing 0 of 0,Zobrazit kandidáty na opravu
-Shows the distribution of invoices per currency,Zobrazit vyhledávací nástroje
-Sign out of session,Ukažte aktivní košík na obrazovce pro zákazníky
-Sign out of the current POS session,Zobrazeno {0}–{1} z {2}
-Size:,Zobrazuje se 0 z 0
-Skipped Payments,Zobrazuje rozložení faktur podle měny
-Skipping items without barcodes,Odhlaste se z relace
-Slow Moving,Odhlaste se z aktuální relace POS
-Slow Moving Items,Velikost:
-Slow Queries:,Přeskočené platby
-Sold,Přeskakování položek bez čárových kódů
-Source,Pomalý pohyb
-Source Cash Account (Optional Override),Pomalu se pohybující položky
-Source Ex. Rate:,Pomalé dotazy:
-Source Rate:,Prodáno
-Specific Profile,Zdroj
-Split Invoices,Zdrojový peněžní účet (volitelné přepsání)
-Staff / Cashier Performance Report,Zdroj Př.
-Status,sazba:
-Stock,Zdrojová sazba:
-Stock Information,Specifický profil
-Stock is lower than requested,Rozdělit faktury
-Stock is lower than requested:\n{0},Zpráva o výkonu zaměstnanců / pokladny
-Stock Movement Report,Stav
-Stock update: {0} has {1} available. Adding {2} will bring the stock below zero.,skladem
-Submit,Informace o akciích
-Submit & Print,Zásoby jsou nižší než požadované
-Submit Deposit,"Zásoby jsou nižší, než je požadováno:\n{0}"
-Submit Expense,Zpráva o pohybu zásob
-Submitted,Aktualizace zásob: {0} má k dispozici {1}.
-Submitted Cash Movements,Přidání {2} sníží zásoby pod nulu.
-Submitted entries,Odeslat
-Successfully scanned:,Odeslat a vytisknout
-Suggested,Odeslat zálohu
-Suggested Qty,Odeslat výdaj
-Supervisor Access,Odesláno
-Supervisor permissions unlock issuance and reloads,Odeslané peněžní pohyby
-Supervisor Tools,Odeslané příspěvky
-Supplier,Úspěšně naskenováno:
-Supplier and dates are required.,Doporučeno
-Supplier Invoices,Doporučené množství
-Supplier is required.,Přístup správce
-Supplier name is required,Oprávnění nadřízeného odemknou vydání a znovu načte
-Supplier Payments,Nástroje supervizora
-Supplier Purchase Summary,Dodavatel
-Suppliers,Dodavatel a termíny jsou povinné.
-Suppliers not found,Dodavatelské faktury
-Switch Camera,Dodavatel je povinný.
-Switch Cashier,Jméno dodavatele je povinné
-Switch the POS appearance theme,Dodavatelské platby
-Switch theme appearance,Souhrn nákupu dodavatele
-Switched to:,Dodavatelé
-Sync All Invoices,Dodavatelé nenalezeni
-Sync Offline Cash Movements ({0}),Přepnout fotoaparát
-Sync Offline Sales,Přepnout pokladnu
-Synced {0} offline cash movement(s).,Přepněte téma vzhledu POS
-Syncing items in background,Přepnout vzhled motivu
-System / Diagnostics,Přepnuto na:
-"System actions are low-frequency maintenance controls such as app info, support diagnostics, and session controls.",Synchronizovat všechny faktury
-System Information,Synchronizovat peněžní pohyby offline ({0})
-System Status,Synchronizace offline prodeje
-Tables:,Synchronizováno {0} offline peněžních pohybů.
-Tap the button below to redeem a gift card during checkout.,Synchronizace položek na pozadí
-Target,Systém / Diagnostika
-Target Ex. Rate:,"Systémové akce jsou nízkofrekvenční ovládací prvky údržby, jako jsou informace o aplikacích, diagnostika podpory a ovládací prvky relací."
-Target Rate:,Systémové informace
-Tax,Stav systému
-Tax / Charges Report,Tabulky:
-Tax Heads,Klepnutím na tlačítko níže uplatníte dárkovou kartu při placení.
-Taxable Amount,Cíl
-Tendered,Cíl Př.
-Terminal,sazba:
-Terminal & Devices,Cílová sazba:
-Terminal locked,daň
-"Terminal tools affect this checkout station, customer-facing displays, and future printer/device controls.",Zpráva o daních / poplatcích
-Territory not found,Daňové hlavy
-The amount paid is not complete,Zdanitelná částka
-The app stores data locally for offline use. This is called cache.,Nabízeno
-The invoice stayed in draft. Please review and submit it manually.,Terminál
-The maximum discount allowed is,Terminál a zařízení
-The quantity for {0} has been adjusted to the maximum available stock.,Terminál uzamčen
-The system could not retrieve the item details. Please try again.,"Terminálové nástroje ovlivňují tuto pokladní stanici, displeje pro zákazníky a budoucí ovládací prvky tiskárny/zařízení."
-These invoices will be synced when connection is restored,Území nenalezeno
-This action now opens inside the settings workspace.,Vyplacená částka není úplná
-This coupon already used !,Aplikace ukládá data lokálně pro použití offline.
-This invoice does not need change-allocation repair,Tomu se říká cache.
-This invoice is already repaired,Faktura zůstala v návrhu.
-This is an item template. Please choose a variant.,Zkontrolujte a odešlete jej ručně.
-this item,Maximální povolená sleva je
-This POS page could not be opened offline because its code was not cached on this terminal yet.,Množství pro {0} bylo upraveno na maximální dostupné zásoby.
-This Serial Number {0} has already been added!,Systém nemohl získat podrobnosti o položce.
-Threshold,Zkuste to prosím znovu.
-Time,Tyto faktury budou synchronizovány po obnovení připojení
-Tip: Clear cache regularly to free up space and keep the app fast.,Tato akce se nyní otevře v pracovním prostoru nastavení.
-Tip: Close unused tabs or apps to reduce lag.,Tento kupón je již použit!
-Tip: Monitor slow queries and table size for optimal performance.,Tato faktura nevyžaduje opravu změny alokace
-To Be Paid,Tato faktura je již opravena
-To Date,Toto je šablona položky.
-Today,Vyberte prosím variantu.
-Today Profit,tuto položku
-Today Sales,"Tuto stránku POS nelze otevřít offline, protože její kód ještě nebyl uložen v mezipaměti tohoto terminálu."
-Toggle navigation drawer,Toto sériové číslo {0} již bylo přidáno!
-Toggle Theme,Práh
-Tools,Čas
-Tools for customer-facing screens and terminal-specific actions.,"Tip: Pravidelně vymazávejte mezipaměť, abyste uvolnili místo a udrželi aplikaci rychlou."
-Top Brand,"Tip: Zavřete nepoužívané karty nebo aplikace, abyste zkrátili zpoždění."
-Top Category,Tip: Pro optimální výkon sledujte pomalé dotazy a velikost tabulky.
-Top Charge Head,Být zaplacen
-Top Customers,K dnešnímu dni
-Top Discount,dnes
-Top Items by Location,Dnes Zisk
-Top Margin,Dnes Prodeje
-Top Pending,Přepnout navigační vysouvací panel
-Top Profit Item,Přepnout motiv
-Top Return Items,Nástroje
-Top Sales by Cashier,Nástroje pro zákaznické obrazovky a akce specifické pro terminál.
-Top Supplier,Top Značka
-Top Suppliers by Spend,Nejlepší kategorie
-Top Tables,Horní nabíjecí hlava
-Top Tax Head,Nejlepší zákazníci
-Top Up Amount,Top sleva
-Top Up Card,Nejlepší položky podle umístění
-Top Up Mode,Horní okraj
-Top Variant,Nahoru Nevyřízeno
-Total,Nejvyšší zisková položka
-Total Amount,Top položky pro vrácení
-Total Change,Nejlepší prodeje od pokladny
-Total Charges,Top dodavatel
-Total In,Nejlepší dodavatelé podle útraty
-Total Invoices,Top tabulky
-Total Items,Nejvyšší daňový vedoucí
-Total Mpesa,Částka dobití
-Total Out,Dobíjejte kartu
-Total Payments,Režim dobíjení
-Total Purchase,Top Varianta
-Total Selected :,Celkem
-Total Size,Celková částka
-Total Stock Qty,Celková změna
-Total:,Celkové poplatky
-Totals by Invoice Currency,Celkem In
-Track how much cash was handed back to customers,Celkem faktur
-"Track recent sales, collect unpaid balances, and reopen saved work",Celkem položek
-Transaction ID,Celkem Mpesa
-Transfer,Total Out
-Try a different search term or clear the cart search.,Celkové platby
-Try adjusting your search or filters,Celkový nákup
-Try another source or refresh the list.,Celkem vybrané:
-Try changing the date range or status filter.,Celková velikost
-Type,Celkové skladové množství
-Unable to access camera even with basic settings. Please check your camera permissions and device compatibility.,Celkem:
-Unable to add offer item {0}. Please refresh and try again.,Součty podle měny faktury
-Unable to add offer item. Please refresh and try again.,"Sledujte, kolik hotovosti bylo předáno zpět zákazníkům"
-Unable to add scanned item.,"Sledujte nedávné prodeje, sbírejte nezaplacené zůstatky a znovu otevřete uloženou práci"
-Unable to create purchase order,ID transakce
-Unable to delete draft invoice,Přenést
-Unable to fetch documents,Zkuste jiný hledaný výraz nebo vymažte vyhledávání v košíku.
-Unable to fetch draft orders,Zkuste upravit vyhledávání nebo filtry
-Unable to fetch invoice history,Zkuste jiný zdroj nebo obnovte seznam.
-Unable to fetch M-Pesa payments,Zkuste změnit období nebo filtr stavu.
-Unable to fetch sales orders,Typ
-Unable to fetch unpaid invoices,Nelze přistupovat k fotoaparátu ani se základním nastavením.
-Unable to generate scale barcode,Zkontrolujte prosím oprávnění k fotoaparátu a kompatibilitu zařízení.
-Unable to issue gift card.,Nelze přidat položku nabídky {0}.
-Unable to load cashier PIN status.,Obnovte stránku a zkuste to znovu.
-Unable to load document,Nelze přidat položku nabídky.
-Unable to load draft invoice,Obnovte stránku a zkuste to znovu.
-Unable to load gift card balance.,Nelze přidat naskenovanou položku.
-Unable to load invoice details,Nelze vytvořit nákupní objednávku
-Unable to load parked order,Koncept faktury nelze smazat
-Unable to load the selected sales order,Nelze načíst dokumenty
-Unable to prepare document,Nelze načíst koncepty objednávek
-Unable to prepare return invoice,Nelze načíst historii faktur
-Unable to print draft invoice,Nelze načíst platby M-Pesa
-Unable to print submitted invoice,Nelze načíst prodejní objednávky
-Unable to process document action,Nelze načíst nezaplacené faktury
-Unable to repair change allocation,Nelze vygenerovat čárový kód váhy
-Unable to save cashier PIN.,Nelze vydat dárkovou kartu.
-Unable to save the rate to the backend price list,Nelze načíst stav PIN pokladníka.
-Unable to submit invoice,Dokument nelze načíst
-Unable to submit the selected payment,Koncept faktury nelze načíst
-Unable to top up gift card.,Nelze načíst zůstatek dárkové karty.
-Unable to verify cashier PIN.,Nelze načíst podrobnosti faktury
-Unallocated,Nelze načíst zaparkovanou objednávku
-Unallocated:,Nelze načíst vybranou prodejní objednávku
-Unavailable,Nelze připravit dokument
-Unknown,Nelze připravit zpětnou fakturu
-Unknown error,Koncept faktury nelze vytisknout
-Unknown Item,Odeslanou fakturu nelze vytisknout
-Unknown Warehouse,Nelze zpracovat akci dokumentu
-Unlock POS,Nelze opravit přidělení změn
-Unpaid,PIN pokladníka nelze uložit.
-"Unselected payments stay unallocated first, then auto reconcile after submit.",Sazbu nelze uložit do backendového ceníku
-UOM,Nelze odeslat fakturu
-UOM not found,Vybranou platbu nelze odeslat
-Update available,Nelze dobít dárkovou kartu.
-Update Customer,Nelze ověřit PIN pokladníka.
-Update PIN,Nepřiděleno
-Update Price List Rate,Nepřiděleno:
-Updated,Není k dispozici
-Updates and app info that stay out of the cashier flow.,Neznámý
-Updates automatically,Neznámá chyba
-Upload pending transactions,Neznámá položka
-Usage,Neznámý sklad
-Usage Stats,Odemkněte POS
-Use a 4 to 8 digit PIN for cashier switching and terminal unlock.,Nezaplaceno
-Use Cashier,"Nevybrané platby zůstanou nejprve nepřiděleny, poté se po odeslání automaticky odsouhlasí."
-Use date range to search for older invoices,UOM
-"Use one field for manual code entry, barcode scans, or QR scans.",UOM nebyl nalezen
-"Use one workflow for balance checks, new issuance, and top ups without leaving POS.",Aktualizace k dispozici
-"Use this section when cached prerequisite data needs a refresh, rebuild, or diagnostics review.",Aktualizovat zákazníka
-Use Western numerals,Aktualizujte PIN
-Used:,Aktualizovat sazbu ceníku
-Using basic camera settings due to device limitations,Aktualizováno
-Using cached customer balance,"Aktualizace a informace o aplikacích, které zůstávají mimo tok pokladny."
-Valid until,Aktualizace automaticky
-Variance %,Nahrajte čekající transakce
-Variants,Využití
-Variant-wise,Statistiky použití
-Verify closing amounts for each payment method,Pro přepínání pokladního a odemykání terminálu použijte 4 až 8místný PIN.
-View all,Použijte Pokladnu
-View app information and current build details,K vyhledání starších faktur použijte časové období
-View Data Diagnostics,"Pro ruční zadávání kódu, skenování čárových kódů nebo skenování QR použijte jedno pole."
-View Details,"Použijte jeden pracovní postup pro kontrolu zůstatků, nové vydání a dobíjení, aniž byste museli opustit POS."
-View invoice details,"Tuto část použijte, když data nezbytných předpokladů uložená v mezipaměti potřebují aktualizaci, nové sestavení nebo kontrolu diagnostiky."
-View notifications,Používejte západní číslice
-View offline invoices,Použité:
-View restricted POS insights,Použití základního nastavení fotoaparátu kvůli omezením zařízení
-Void Amount,Pomocí mezipaměti zůstatku zákazníků
-Void Count,Platí do
-Voids,% rozptylu
-Waiting for cart items,Varianty
-Waiting for payment...,Variantně
-Walk-in Customer,Ověřte konečné částky pro každý způsob platby
-Warehouse,Zobrazit vše
-Warning: High cache usage may affect performance.,Zobrazte informace o aplikaci a podrobnosti o aktuálním sestavení
-Warning: High lag may indicate heavy processing or browser slowness.,Zobrazit diagnostiku dat
-Week Δ,Zobrazit podrobnosti
-Week-wise,Zobrazit podrobnosti faktury
-Weight (g),Zobrazit oznámení
-Weight (grams),Zobrazit offline faktury
-We'll let you know if an invoice fails to submit,Zobrazit omezené statistiky POS
-Workflow,Prázdná částka
-Write off amount cannot exceed the POS profile maximum of {0},Prázdný počet
-Write off amount exceeds the allowed limit ({0}). Please add payment for the remaining amount.,Prázdniny
-Yes,Čekání na položky košíku
-"Yes, Cancel sale",Čekání na platbu...
-"Yes, Close",Příchozí zákazník
-You are not allowed to print draft invoices,Skladiště
-You are offline. Add Payment will work again when the connection is restored.,Upozornění: Vysoké využití mezipaměti může ovlivnit výkon.
-You have no notifications right now,Varování: Vysoká prodleva může znamenat náročné zpracování nebo pomalost prohlížeče.
-Your Cart,Týden Δ
+Scale barcode detected. Quantity here is the number of labels to print.,Byl zjištěn čárový kód stupnice. Množství zde udává počet štítků k tisku.
+Scale barcode settings are not configured. Using item barcode only.,Nastavení čárového kódu stupnice není nakonfigurováno. Pouze pomocí čárového kódu položky.
+Scale template barcode is missing for this item/UOM. Using item barcode only.,U této položky/MJ chybí čárový kód šablony měřítka. Pouze pomocí čárového kódu položky.
+Scan an existing card and top it up without leaving the payment flow.,"Naskenujte stávající kartu a dobijte ji, aniž byste opustili platební tok."
+Scan Error,Chyba skenování
+Scan or enter a gift card code to check balance or redeem.,Naskenujte nebo zadejte kód dárkové karty pro kontrolu zůstatku nebo uplatnění.
+Scan or paste the card code below.,Naskenujte nebo vložte níže uvedený kód karty.
+Scan QR Code/Barcode,Naskenujte QR kód/čárový kód
+Scan with camera,Skenujte fotoaparátem
+Scan-First Flow,Scan-First Flow
+Scanned Code:,Naskenovaný kód:
+Scanning for: {0},Vyhledávání: {0}
+Scanning items,Skenování položek
+Scan-Ready,Připraveno pro skenování
+Scope,Rozsah
+Scope: All Profiles,Rozsah: Všechny profily
+Scope: Current Profile,Rozsah: Aktuální profil
+Scope: Specific Profile,Rozsah: Specifický profil
+Search,Hledat
+Search Account,Vyhledat účet
+Search an invoice and continue the return flow without extra steps.,Vyhledejte fakturu a pokračujte ve zpětném toku bez dalších kroků.
+Search customer,Vyhledejte zákazníka
+Search invoices or customers,Vyhledávejte faktury nebo zákazníky
+Search item,Vyhledat položku
+Search item / code,Vyhledat položku / kód
+Search items or barcode,Vyhledejte položky nebo čárový kód
+Search Mpesa Payments,Hledat Mpesa Payments
+Search return invoices or customers,Vyhledávejte vrácené faktury nebo zákazníky
+Search supplier,Hledat dodavatele
+Search unpaid invoices or customers,Hledejte nezaplacené faktury nebo zákazníky
+Secure context (HTTPS or localhost) is required for camera access.,Pro přístup ke kameře je vyžadován zabezpečený kontext (HTTPS nebo localhost).
+Secure context (HTTPS) required for camera access. Please use HTTPS to access the camera.,Pro přístup k fotoaparátu je vyžadován zabezpečený kontext (HTTPS). Pro přístup ke kameře použijte HTTPS.
+Select,Vyberte
+Select a cashier first.,Nejprve vyberte pokladníka.
+Select a customer,Vyberte zákazníka
+Select a customer to use coupon,"Vyberte zákazníka, který má kupón použít"
+Select a printer to use QZ silent printing.,Vyberte tiskárnu pro použití tichého tisku QZ.
+Select Batch,Vyberte možnost Dávka
+Select Columns to Display,Vyberte Sloupce k zobrazení
+Select items to sell,Vyberte položky k prodeji
+Select Payment,Vyberte Platba
+Select Payment Account,Vyberte Platební účet
+Select printer,Vyberte tiskárnu
+Select Return Invoice,Vyberte možnost Vrátit fakturu
+Select S.O,Vyberte S.O
+Select Sales Orders,Vyberte Prodejní objednávky
+Select the cashier who is taking over this terminal.,"Vyberte pokladníka, který přebírá tento terminál."
+Selected,Vybráno
+Selected movement type is not allowed by POS Profile.,Profil POS nepovoluje vybraný typ pohybu.
+Selected Payments,Vybrané platby
+Sensitive actions kept away from quick taps.,Citlivé akce se vyhýbají rychlým klepnutím.
+Serial,sériový
+Serial Numbers,Sériová čísla
+Server CPU Usage:,Využití CPU serveru:
+Server Health,Stav serveru
+Server Memory Usage:,Využití paměti serveru:
+Server Metrics,Metriky serveru
+Server Uptime:,Doba provozu serveru:
+Service Charges,Servisní poplatky
+Session,Relace
+Set each cashier PIN in the User form and keep terminal members assigned in POS Profile User.,Nastavte každý PIN pokladníka ve formuláři Uživatel a ponechte členy terminálu přiřazené v Profilu POS Uživatel.
+Settings,Nastavení
+Settings in this section update the POS workspace without changing the current route.,Nastavení v této části aktualizuje pracovní prostor POS bez změny aktuální trasy.
+Setup complete!,Nastavení dokončeno!
+Share,Sdílejte
+Shared terminal,Sdílený terminál
+Shift Closed Snapshot,Snímek zavřeno Shift
+Shift Overview,Přehled směn
+Show,Zobrazit
+Show cart on customer-facing screen,Ukažte košík na obrazovce před zákazníkem
+Show last invoice rate,Zobrazit kurz poslední faktury
+Show rate info,Zobrazit informace o sazbě
+Show Repair Candidates,Zobrazit kandidáty na opravu
+Show search tools,Zobrazit vyhledávací nástroje
+Show the active cart on a customer-facing screen,Ukažte aktivní košík na obrazovce pro zákazníky
+Showing {0}-{1} of {2},Zobrazeno {0}–{1} z {2}
+Showing 0 of 0,Zobrazuje se 0 z 0
+Shows the distribution of invoices per currency,Zobrazuje rozložení faktur podle měny
+Sign out of the current POS session,Odhlaste se z aktuální relace POS
+Size:,Velikost:
+Skipped Payments,Přeskočené platby
+Skipping items without barcodes,Přeskakování položek bez čárových kódů
+Slow Moving,Pomalý pohyb
+Slow Moving Items,Pomalu se pohybující položky
+Slow Queries:,Pomalé dotazy:
+Sold,Prodáno
+Source,Zdroj
+Source Cash Account (Optional Override),Zdrojový peněžní účet (volitelné přepsání)
+Source Ex. Rate:,Zdroj Př. sazba:
+Source Rate:,Zdrojová sazba:
+Specific Profile,Specifický profil
+Split Invoices,Rozdělit faktury
+Staff / Cashier Performance Report,Zpráva o výkonu zaměstnanců / pokladny
+Status,Stav
+Stock,skladem
+Stock Information,Informace o akciích
+Stock is lower than requested,Zásoby jsou nižší než požadované
+Stock is lower than requested:\n{0},"Zásoby jsou nižší, než je požadováno:\n{0}"
+Stock Movement Report,Zpráva o pohybu zásob
+Stock update: {0} has {1} available. Adding {2} will bring the stock below zero.,Aktualizace zásob: {0} má k dispozici {1}. Přidání {2} sníží zásoby pod nulu.
+Submit,Předložit
+Submit & Print,Odeslat a vytisknout
+Submit Deposit,Odeslat zálohu
+Submit Expense,Odeslat výdaj
+Submitted,Odesláno
+Submitted Cash Movements,Odeslané peněžní pohyby
+Submitted entries,Odeslané příspěvky
+Successfully scanned:,Úspěšně naskenováno:
+Suggested,Doporučeno
+Suggested Qty,Doporučené množství
+Supervisor Access,Přístup správce
+Supervisor permissions unlock issuance and reloads,Oprávnění nadřízeného odemknou vydání a znovu načte
+Supervisor Tools,Nástroje supervizora
+Supplier,Dodavatel
+Supplier and dates are required.,Dodavatel a termíny jsou povinné.
+Supplier Invoices,Dodavatelské faktury
+Supplier is required.,Dodavatel je povinný.
+Supplier name is required,Jméno dodavatele je povinné
+Supplier Payments,Dodavatelské platby
+Supplier Purchase Summary,Souhrn nákupu dodavatele
+Suppliers,Dodavatelé
+Suppliers not found,Dodavatelé nenalezeni
+Switch Camera,Přepnout fotoaparát
+Switch Cashier,Přepnout pokladnu
+Switch the POS appearance theme,Přepněte téma vzhledu POS
+Switched to:,Přepnuto na:
+Sync All Invoices,Synchronizovat všechny faktury
+Sync Offline Cash Movements ({0}),Synchronizovat peněžní pohyby offline ({0})
+Sync Offline Sales,Synchronizace offline prodeje
+Synced {0} offline cash movement(s).,Synchronizováno {0} offline peněžních pohybů.
+Syncing items in background,Synchronizace položek na pozadí
+System / Diagnostics,Systém / Diagnostika
+"System actions are low-frequency maintenance controls such as app info, support diagnostics, and session controls.","Systémové akce jsou nízkofrekvenční ovládací prvky údržby, jako jsou informace o aplikacích, diagnostika podpory a ovládací prvky relací."
+System Information,Systémové informace
+System Status,Stav systému
+Tables:,Tabulky:
+Tap the button below to redeem a gift card during checkout.,Klepnutím na tlačítko níže uplatníte dárkovou kartu při placení.
+Target,Cíl
+Target Ex. Rate:,Cíl Př. sazba:
+Target Rate:,Cílová sazba:
+Tax,daň
+Tax / Charges Report,Zpráva o daních / poplatcích
+Tax Heads,Daňové hlavy
+Taxable Amount,Zdanitelná částka
+Tendered,Nabízeno
+Terminal,Terminál
+Terminal & Devices,Terminál a zařízení
+Terminal locked,Terminál uzamčen
+"Terminal tools affect this checkout station, customer-facing displays, and future printer/device controls.","Terminálové nástroje ovlivňují tuto pokladní stanici, displeje pro zákazníky a budoucí ovládací prvky tiskárny/zařízení."
+Territory not found,Území nenalezeno
+The amount paid is not complete,Vyplacená částka není úplná
+The app stores data locally for offline use. This is called cache.,Aplikace ukládá data lokálně pro použití offline. Tomu se říká cache.
+The invoice stayed in draft. Please review and submit it manually.,Faktura zůstala v návrhu. Zkontrolujte a odešlete jej ručně.
+The maximum discount allowed is,Maximální povolená sleva je
+The quantity for {0} has been adjusted to the maximum available stock.,Množství pro {0} bylo upraveno na maximální dostupné zásoby.
+The system could not retrieve the item details. Please try again.,Systém nemohl získat podrobnosti o položce. Zkuste to prosím znovu.
+These invoices will be synced when connection is restored,Tyto faktury budou synchronizovány po obnovení připojení
+This action now opens inside the settings workspace.,Tato akce se nyní otevře v pracovním prostoru nastavení.
+This coupon already used !,Tento kupón je již použit!
+This invoice does not need change-allocation repair,Tato faktura nevyžaduje opravu změny alokace
+This invoice is already repaired,Tato faktura je již opravena
+This is an item template. Please choose a variant.,Toto je šablona položky. Vyberte prosím variantu.
+this item,tuto položku
+This POS page could not be opened offline because its code was not cached on this terminal yet.,"Tuto stránku POS nelze otevřít offline, protože její kód ještě nebyl uložen v mezipaměti tohoto terminálu."
+This Serial Number {0} has already been added!,Toto sériové číslo {0} již bylo přidáno!
+Threshold,Práh
+Time,Čas
+Tip: Clear cache regularly to free up space and keep the app fast.,"Tip: Pravidelně vymazávejte mezipaměť, abyste uvolnili místo a udrželi aplikaci rychlou."
+Tip: Close unused tabs or apps to reduce lag.,"Tip: Zavřete nepoužívané karty nebo aplikace, abyste zkrátili zpoždění."
+Tip: Monitor slow queries and table size for optimal performance.,Tip: Pro optimální výkon sledujte pomalé dotazy a velikost tabulky.
+To Be Paid,Být zaplacen
+To Date,K dnešnímu dni
+Today,dnes
+Today Profit,Dnes Zisk
+Today Sales,Dnes Prodeje
+Toggle navigation drawer,Přepnout navigační vysouvací panel
+Toggle Theme,Přepnout motiv
+Tools,Nástroje
+Tools for customer-facing screens and terminal-specific actions.,Nástroje pro zákaznické obrazovky a akce specifické pro terminál.
+Top Brand,Top Značka
+Top Category,Nejlepší kategorie
+Top Charge Head,Horní nabíjecí hlava
+Top Customers,Nejlepší zákazníci
+Top Discount,Top sleva
+Top Items by Location,Nejlepší položky podle umístění
+Top Margin,Horní okraj
+Top Pending,Nahoru Nevyřízeno
+Top Profit Item,Nejvyšší zisková položka
+Top Return Items,Top položky pro vrácení
+Top Sales by Cashier,Nejlepší prodeje od pokladny
+Top Supplier,Top dodavatel
+Top Suppliers by Spend,Nejlepší dodavatelé podle útraty
+Top Tables,Top tabulky
+Top Tax Head,Nejvyšší daňový vedoucí
+Top Up Amount,Částka dobití
+Top Up Card,Dobíjejte kartu
+Top Up Mode,Režim dobíjení
+Top Variant,Top Varianta
+Total,Celkem
+Total Amount,Celková částka
+Total Change,Celková změna
+Total Charges,Celkové poplatky
+Total In,Celkem In
+Total Invoices,Celkem faktur
+Total Items,Celkem položek
+Total Mpesa,Celkem Mpesa
+Total Out,Total Out
+Total Payments,Celkové platby
+Total Purchase,Celkový nákup
+Total Selected :,Celkem vybrané:
+Total Size,Celková velikost
+Total Stock Qty,Celkové skladové množství
+Total:,Celkem:
+Totals by Invoice Currency,Součty podle měny faktury
+Track how much cash was handed back to customers,"Sledujte, kolik hotovosti bylo předáno zpět zákazníkům"
+"Track recent sales, collect unpaid balances, and reopen saved work","Sledujte nedávné prodeje, sbírejte nezaplacené zůstatky a znovu otevřete uloženou práci"
+Transaction ID,ID transakce
+Transfer,Přenést
+Try a different search term or clear the cart search.,Zkuste jiný hledaný výraz nebo vymažte vyhledávání v košíku.
+Try adjusting your search or filters,Zkuste upravit vyhledávání nebo filtry
+Try another source or refresh the list.,Zkuste jiný zdroj nebo obnovte seznam.
+Try changing the date range or status filter.,Zkuste změnit období nebo filtr stavu.
+Type,Typ
+Unable to access camera even with basic settings. Please check your camera permissions and device compatibility.,Nelze přistupovat k fotoaparátu ani se základním nastavením. Zkontrolujte prosím oprávnění k fotoaparátu a kompatibilitu zařízení.
+Unable to add offer item {0}. Please refresh and try again.,Nelze přidat položku nabídky {0}. Obnovte stránku a zkuste to znovu.
+Unable to add offer item. Please refresh and try again.,Nelze přidat položku nabídky. Obnovte stránku a zkuste to znovu.
+Unable to add scanned item.,Nelze přidat naskenovanou položku.
+Unable to create purchase order,Nelze vytvořit nákupní objednávku
+Unable to delete draft invoice,Koncept faktury nelze smazat
+Unable to fetch documents,Nelze načíst dokumenty
+Unable to fetch draft orders,Nelze načíst koncepty objednávek
+Unable to fetch invoice history,Nelze načíst historii faktur
+Unable to fetch M-Pesa payments,Nelze načíst platby M-Pesa
+Unable to fetch sales orders,Nelze načíst prodejní objednávky
+Unable to fetch unpaid invoices,Nelze načíst nezaplacené faktury
+Unable to generate scale barcode,Nelze vygenerovat čárový kód váhy
+Unable to issue gift card.,Nelze vydat dárkovou kartu.
+Unable to load cashier PIN status.,Nelze načíst stav PIN pokladníka.
+Unable to load document,Dokument nelze načíst
+Unable to load draft invoice,Koncept faktury nelze načíst
+Unable to load gift card balance.,Nelze načíst zůstatek dárkové karty.
+Unable to load invoice details,Nelze načíst podrobnosti faktury
+Unable to load parked order,Nelze načíst zaparkovanou objednávku
+Unable to load the selected sales order,Nelze načíst vybranou prodejní objednávku
+Unable to prepare document,Nelze připravit dokument
+Unable to prepare return invoice,Nelze připravit zpětnou fakturu
+Unable to print draft invoice,Koncept faktury nelze vytisknout
+Unable to print submitted invoice,Odeslanou fakturu nelze vytisknout
+Unable to process document action,Nelze zpracovat akci dokumentu
+Unable to repair change allocation,Nelze opravit přidělení změn
+Unable to save cashier PIN.,PIN pokladníka nelze uložit.
+Unable to save the rate to the backend price list,Sazbu nelze uložit do backendového ceníku
+Unable to submit invoice,Nelze odeslat fakturu
+Unable to submit the selected payment,Vybranou platbu nelze odeslat
+Unable to top up gift card.,Nelze dobít dárkovou kartu.
+Unable to verify cashier PIN.,Nelze ověřit PIN pokladníka.
+Unallocated,Nepřiděleno
+Unallocated:,Nepřiděleno:
+Unavailable,Není k dispozici
+Unknown,Neznámý
+Unknown Item,Neznámá položka
+Unknown Warehouse,Neznámý sklad
+Unlock POS,Odemkněte POS
+Unpaid,Nezaplaceno
+"Unselected payments stay unallocated first, then auto reconcile after submit.","Nevybrané platby zůstanou nejprve nepřiděleny, poté se po odeslání automaticky odsouhlasí."
+UOM,UOM
+UOM not found,UOM nebyl nalezen
+Update available,Aktualizace k dispozici
+Update Customer,Aktualizovat zákazníka
+Update PIN,Aktualizujte PIN
+Update Price List Rate,Aktualizovat sazbu ceníku
+Updated,Aktualizováno
+Updates and app info that stay out of the cashier flow.,"Aktualizace a informace o aplikacích, které zůstávají mimo tok pokladny."
+Updates automatically,Aktualizace automaticky
+Usage,Využití
+Usage Stats,Statistiky použití
+Use a 4 to 8 digit PIN for cashier switching and terminal unlock.,Pro přepínání pokladního a odemykání terminálu použijte 4 až 8místný PIN.
+Use Cashier,Použijte Pokladnu
+Use date range to search for older invoices,K vyhledání starších faktur použijte časové období
+"Use one field for manual code entry, barcode scans, or QR scans.","Pro ruční zadávání kódu, skenování čárových kódů nebo skenování QR použijte jedno pole."
+"Use one workflow for balance checks, new issuance, and top ups without leaving POS.","Použijte jeden pracovní postup pro kontrolu zůstatků, nové vydání a dobíjení, aniž byste museli opustit POS."
+"Use this section when cached prerequisite data needs a refresh, rebuild, or diagnostics review.","Tuto část použijte, když data nezbytných předpokladů uložená v mezipaměti potřebují aktualizaci, nové sestavení nebo kontrolu diagnostiky."
+Use Western numerals,Používejte západní číslice
+Used:,Použité:
+Using basic camera settings due to device limitations,Použití základního nastavení fotoaparátu kvůli omezením zařízení
+Using cached customer balance,Pomocí mezipaměti zůstatku zákazníků
+Valid until,Platí do
+Variance %,% rozptylu
+Variants,Varianty
+Variant-wise,Variantně
+Verify closing amounts for each payment method,Ověřte konečné částky pro každý způsob platby
+View all,Zobrazit vše
+View app information and current build details,Zobrazte informace o aplikaci a podrobnosti o aktuálním sestavení
+View Data Diagnostics,Zobrazit diagnostiku dat
+View Details,Zobrazit podrobnosti
+View invoice details,Zobrazit podrobnosti faktury
+View notifications,Zobrazit oznámení
+View offline invoices,Zobrazit offline faktury
+View restricted POS insights,Zobrazit omezené statistiky POS
+Void Amount,Prázdná částka
+Void Count,Prázdný počet
+Voids,Prázdniny
+Waiting for cart items,Čekání na položky košíku
+Waiting for payment...,Čekání na platbu...
+Walk-in Customer,Příchozí zákazník
+Warehouse,Skladiště
+Warning: High cache usage may affect performance.,Upozornění: Vysoké využití mezipaměti může ovlivnit výkon.
+Warning: High lag may indicate heavy processing or browser slowness.,Varování: Vysoká prodleva může znamenat náročné zpracování nebo pomalost prohlížeče.
+Week ?,týden?
+Week-wise,Týdně
+Weight (g),Hmotnost (g)
+Weight (grams),Hmotnost (gramy)
+We'll let you know if an invoice fails to submit,"Pokud se nepodaří odeslat fakturu, dáme vám vědět"
+Workflow,Pracovní postup
+Write off amount cannot exceed the POS profile maximum of {0},Odepsaná částka nesmí překročit maximální hodnotu profilu POS {0}
+Write off amount exceeds the allowed limit ({0}). Please add payment for the remaining amount.,Odepsaná částka překračuje povolený limit ({0}). Přidejte prosím platbu za zbývající částku.
+Yes,Ano
+"Yes, Cancel sale","Ano, zrušit prodej"
+"Yes, Close","Ano, zavřít"
+You are not allowed to print draft invoices,Nemáte povoleno tisknout návrhy faktur
+You are offline. Add Payment will work again when the connection is restored.,Jste offline. Po obnovení připojení bude funkce Add Payment znovu fungovat.
+You have no notifications right now,Momentálně nemáte žádná oznámení
+Your Cart,Váš košík

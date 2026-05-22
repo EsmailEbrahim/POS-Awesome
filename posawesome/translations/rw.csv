@@ -1,4 +1,39 @@
-﻿- Total Unallocated,- Total Unallocated
+POS Awesome,POS Igitangaje
+Fetch Items Directly from Server,Shakisha Ibintu Biturutse kuri Seriveri
+Menu,Ibikubiyemo
+Actions,Ibikorwa
+Close Shift,Funga Shift
+End current session,Kurangiza isomo ryubu
+Print Last Invoice,Shira inyemezabuguzi ya nyuma
+Reprint previous transaction,Ongera usubiremo ibyakozwe mbere
+Sync Offline Invoices,Guhuza inyemezabuguzi zitagaragara
+Upload pending transactions,Kuramo ibicuruzwa bitegereje
+Go Online,Jya kumurongo
+Go Offline,Genda kumurongo
+Disable offline mode,Hagarika uburyo bwa interineti
+Work without server connection,Kora udafite seriveri ihuza
+Clear Cache,Kuraho Cache
+Remove local data and refresh,Kuraho amakuru yaho hanyuma ugarure
+About,Ibyerekeye
+App information,Ibisobanuro
+Language,Ururimi
+Change interface language,Hindura imvugo yimbere
+Light Mode,Uburyo bworoshye
+Dark Mode,Uburyo bwijimye
+Switch theme appearance,Hindura insanganyamatsiko
+Logout,Kwinjira
+Sign out of session,Sohora hanze
+Select Language,Hitamo Ururimi
+Choose your preferred language for the POS interface,Hitamo ururimi ukunda kuri interineti ya POS
+Language will be changed to,Ururimi ruzahindurwa kuri
+Cancel,Kureka
+Change Language,Hindura Ururimi
+Close,Funga
+Cannot change language - same language selected,Ntushobora guhindura ururimi - ururimi rumwe rwatoranijwe
+Language changed successfully! Reloading...,Ururimi rwahindutse neza! Gusubiramo ...
+Failed to change language,Kunanirwa guhindura imvugo
+Unknown error,Ikosa ritazwi
+- Total Unallocated,- Igabanywa ryose
 * Required,* Birasabwa
 {0} (Qty: {1}),{0} (Qty: {1})
 {0} actions,{0} ibikorwa
@@ -11,7 +46,6 @@
 {0}h ago,{0} h ishize
 {0}m ago,{0} m ishize
 A POS supervisor is required for this action.,Umuyobozi wa POS arasabwa iki gikorwa.
-About,Ibyerekeye
 Access,Kwinjira
 Account,Konti
 Account is overdrawn,Konti irarenze
@@ -19,7 +53,6 @@ Acknowledge the error to resume scanning,Emera ikosa ryo gukomeza gusikana
 Acknowledge the error to resume scanning.,Emera ikosa ryo gukomeza gusikana.
 Across,Hirya no hino
 Action,Igikorwa
-Actions,Ibikorwa
 Active sale,Kugurisha neza
 add,ongeraho
 Add items from the selector to start building this sale.,Ongeramo ibintu byatoranijwe kugirango utangire kubaka iri gurisha.
@@ -55,7 +88,6 @@ Amount already received,Amafaranga yamaze kwakirwa
 Amount exceeds profile cash movement max amount.,Umubare urenze umwirondoro w'amafaranga menshi.
 Amount must be greater than zero.,Umubare ugomba kuba urenze zeru.
 Amount received from customer,Amafaranga yakiriwe n'umukiriya
-App information,Ibisobanuro
 Appearance and user-level preferences for the current session.,Kugaragara hamwe nu mukoresha-urwego rwicyiciro cyubu.
 Applied,Bikoreshwa
 Apply,Koresha
@@ -133,7 +165,6 @@ Camera is busy or blocked by another app/tab. Close other camera apps and try ag
 Camera permission denied. Please allow camera access in your browser settings and refresh the page.,Uruhushya rwa Kamera rwanze. Nyamuneka wemerere kamera mumashusho yawe hanyuma ushireho page.
 Camera scanner is locked until the current error is acknowledged,Kamera scaneri ifunze kugeza ikosa ryemewe
 Camera started but the video stream did not load in time. Please try again.,Kamera yatangiye ariko amashusho ya videwo ntabwo yikoreye igihe. Nyamuneka gerageza.
-Cancel,Kureka
 Cancel cash movement {0}?,Kureka kugenda amafaranga {0}?
 Cancel Payment,Hagarika kwishyura
 Cancel Sale,Kureka kugurisha
@@ -184,8 +215,6 @@ Certificate is missing or not trusted. QZ may show confirmation dialogs.,Icyemez
 Certificate is trusted. Silent QZ printing is active.,Icyemezo cyizewe. Gucecekesha QZ icapiro rirakora.
 Change,Hindura
 Change allocation repaired,Guhindura amafaranga yatanzwe
-Change interface language,Hindura imvugo yimbere
-Change Language,Hindura Ururimi
 Change Price,Hindura Igiciro
 Change Return,Hindura Garuka
 Change Returned,Impinduka Yagarutse
@@ -204,20 +233,17 @@ Checking...,Kugenzura ...
 Cheque/Reference Date,Kugenzura / Itariki Itariki
 Cheque/Reference No,Reba / Reba Oya
 Choose the cashier currently operating this terminal.,Hitamo kashi ikora ubu terminal.
-Choose your preferred language for the POS interface,Hitamo ururimi ukunda kuri interineti ya POS
 City,Umujyi
 Clear,Biragaragara
 Clear All,Kuraho Byose
 Clear all barcode items,Kuraho ibintu byose bya barcode
 Clear all purchase order items,Kuraho ibintu byose byaguzwe
-Clear Cache,Kuraho Cache
 Clear Search,Gushakisha neza
 Clearing local cache...,Kuraho cache yaho ...
 Click to refresh,Kanda kugirango ugarure
 Client CPU Lag:,Umukiriya CPU Lag:
 Client Memory Usage:,Ikoreshwa ry'Urwibutso rw'abakiriya:
 Client Metrics,Ibipimo by'abakiriya
-Close,Funga
 Close about dialog,Funga hafi y'ibiganiro
 Close cashier switcher,Funga kashi
 Close closing shift dialog,Gufunga gufunga ibiganiro
@@ -233,7 +259,6 @@ Close sales orders dialog,Funga ibicuruzwa byo kugurisha
 Close Scanner,Funga Scaneri
 Close scanner dialog,Funga scaneri ikiganiro
 Close Settings,Funga Igenamiterere
-Close Shift,Funga Shift
 Closing Amount,Amafaranga yo gufunga
 Closing POS Shift,Gufunga POS Shift
 Closing Snapshot Available,Gufunga Snapshot Iraboneka
@@ -318,13 +343,12 @@ Customers not found,Abakiriya ntibabonetse
 Daily cashier actions without scrolling.,Ibikorwa bya kashi ya buri munsi nta kuzunguruka.
 Daily Sales,Igurishwa rya buri munsi
 Daily Sales Summary,Incamake yo kugurisha buri munsi
-Dark Mode,Uburyo bwijimye
 Data loaded in form. Review and submit.,Amakuru yuzuye muburyo. Subiramo kandi utange.
 Database Health,Ubuzima bwububiko
 Database health affects overall system speed and reliability.,Ubuzima bwububiko bugira ingaruka kuri sisitemu muri rusange no kwizerwa.
 Database Info,Ububikoshingiro
 Date,Itariki
-Day Δ,Umunsi Δ
+Day ?,Umunsi?
 days,iminsi
 Day-wise (MTD),Umunsi (MTD)
 Day-wise Movement,Umunsi-Umunsi
@@ -383,7 +407,6 @@ Edited,Byahinduwe
 Employee,Umukozi
 Enable background sync,Gushoboza guhuza ibice
 Enable Customer Display in POS Profile first.,Gushoboza kwerekana abakiriya mubisobanuro bya POS mbere.
-End current session,Kurangiza isomo ryubu
 Enter a PIN.,Injira PIN.
 Enter a valid grams value,Injiza garama yemewe
 Enter new price list rate,Injiza igiciro gishya cyurutonde
@@ -468,8 +491,6 @@ Gift card payment,Kwishura ikarita
 Gift card redemption requires an online connection,Gucungura ikarita yimpano bisaba guhuza kumurongo
 Gift card topped up successfully.,Ikarita yimpano yazamutse neza.
 Gift Cards,Ikarita y'impano
-Go Offline,Genda kumurongo
-Go Online,Jya kumurongo
 Go to Frappe Desk,Jya kuri Frappe
 Grand Total,Igiteranyo Cyuzuye
 Gross Margin,Amafaranga menshi
@@ -552,8 +573,6 @@ json,json
 Just now,Ubu
 Keep offline prerequisites healthy and recover stale data safely.,Komeza kumurongo wa ngombwa kugirango ugire ubuzima bwiza kandi ugarure amakuru ashaje neza.
 Labels,Ibirango
-Language,Ururimi
-Language will be changed to,Ururimi ruzahindurwa kuri
 "Language, theme, terminal tools, and session controls.","Ururimi, insanganyamatsiko, ibikoresho byanyuma, hamwe nigenzura."
 Last,Icya nyuma
 Last 14 Days (Paid vs Pending),Iminsi 14 Yanyuma (Yishyuwe vs Biteganijwe)
@@ -565,7 +584,6 @@ Last sync:,Sync ya nyuma:
 Last sync: {0} | ok: {1} | failed: {2} | skipped: {3},Guhuza kwa nyuma: {0} | ok: {1} | byananiye: {2} | gusimbuka: {3}
 Latest entries for current shift,Ibyanditswe byanyuma kugirango uhindurwe
 Lead Time,Kuyobora Igihe
-Light Mode,Uburyo bworoshye
 Limited,Ntarengwa
 lines,imirongo
 List,Urutonde
@@ -594,7 +612,6 @@ localStorage,Ububiko
 Location Performance,Imikorere yaho
 Locations,Ahantu
 Lock Screen,Funga Mugaragaza
-Logout,Kwinjira
 Lookup Workflow,Reba Akazi
 Loss,Igihombo
 Low,Hasi
@@ -621,7 +638,6 @@ Maximum discount amount for this offer item is {0}.,Umubare ntarengwa wo kugaban
 Maximum discount percentage for this offer item is {0}%.,Umubare ntarengwa wo kugabanyirizwa iki kintu ni {0}%.
 Maximum offer quantity is {0}. Quantity adjusted to allowed limit.,Umubare ntarengwa watanzwe ni {0}. Umubare wahinduwe ntarengwa.
 Medium,Hagati
-Menu,Ibikubiyemo
 Method-wise Collections,Uburyo bukusanyirijwe hamwe
 Minimum allowed rate for this offer item is {0}.,Igipimo ntarengwa cyemewe kuri iki kintu gitangwa ni {0}.
 Minimum Qty,Ntarengwa Qty
@@ -629,7 +645,7 @@ Mobile No,Terefone Oya
 Mode,Uburyo
 Mode of Payment,Uburyo bwo Kwishura
 Month,Ukwezi
-Month Δ,Ukwezi Δ
+Month ?,Ukwezi?
 Monthly Profit,Inyungu ya buri kwezi
 Monthly Sales,Kugurisha buri kwezi
 Monthly Sales Summary,Incamake yo kugurisha buri kwezi
@@ -894,7 +910,6 @@ Print Draft,Shushanya Inyandiko
 Print Format (Invoice),Icapa Imiterere (Inyemezabuguzi)
 Print Format (Order),Shira Imiterere (Iteka)
 Print invoice,Shira inyemezabuguzi
-Print Last Invoice,Shira inyemezabuguzi ya nyuma
 Print Purchase Invoice instead of PO,Shira inyemezabuguzi yo kugura aho kuba PO
 Printer,Mucapyi
 Processed returns impacting the shift totals,Inyungu zitunganijwe zigira ingaruka kuri shift zose
@@ -977,7 +992,6 @@ Repaired,Yasanwe
 Repairing change allocation,Gusana ibyagabanijwe
 Repeat Customers,Subiramo abakiriya
 Repeat Rate,Subiramo igipimo
-Reprint previous transaction,Ongera usubiremo ibyakozwe mbere
 Request,Gusaba
 Request ID: {0},Gusaba ID: {0}
 Request Payment,Saba ubwishyu
@@ -1063,7 +1077,6 @@ Select a printer to use QZ silent printing.,Hitamo printer kugirango ukoreshe QZ
 Select Batch,Hitamo Batch
 Select Columns to Display,Hitamo Inkingi Kugaragaza
 Select items to sell,Hitamo ibintu byo kugurisha
-Select Language,Hitamo Ururimi
 Select Payment,Hitamo Kwishura
 Select Payment Account,Hitamo Konti yo Kwishura
 Select printer,Hitamo printer
@@ -1102,7 +1115,6 @@ Show the active cart on a customer-facing screen,Erekana igare rikora kuri ecran
 Showing {0}-{1} of {2},Kwerekana {0} - {1} ya {2}
 Showing 0 of 0,Kwerekana 0 ya 0
 Shows the distribution of invoices per currency,Erekana ikwirakwizwa rya fagitire ku ifaranga
-Sign out of session,Sohora hanze
 Sign out of the current POS session,Sohora hanze ya POS isomo
 Size:,Ingano:
 Skipped Payments,Yasibye Kwishura
@@ -1150,7 +1162,6 @@ Suppliers not found,Abatanga isoko ntibabonetse
 Switch Camera,Hindura Kamera
 Switch Cashier,Hindura Cashier
 Switch the POS appearance theme,Hindura insanganyamatsiko ya POS
-Switch theme appearance,Hindura insanganyamatsiko
 Switched to:,Yahinduwe kuri:
 Sync All Invoices,Guhuza inyemezabuguzi zose
 Sync Offline Cash Movements ({0}),Guhuza Offline Amafaranga Yimuka ({0})
@@ -1286,7 +1297,6 @@ Unallocated,Ntibagabanijwe
 Unallocated:,Ntibagabanijwe:
 Unavailable,Ntibishoboka
 Unknown,Ntazwi
-Unknown error,Ikosa ritazwi
 Unknown Item,Ikintu kitazwi
 Unknown Warehouse,Ububiko butazwi
 Unlock POS,Fungura POS
@@ -1301,7 +1311,6 @@ Update Price List Rate,Kuvugurura Igiciro Urutonde
 Updated,Yavuguruwe
 Updates and app info that stay out of the cashier flow.,Kuvugurura hamwe namakuru ya porogaramu ataguma hanze ya cashier.
 Updates automatically,Kuvugurura mu buryo bwikora
-Upload pending transactions,Kuramo ibicuruzwa bitegereje
 Usage,Ikoreshwa
 Usage Stats,Imibare ikoreshwa
 Use a 4 to 8 digit PIN for cashier switching and terminal unlock.,Koresha imibare 4 kugeza kuri 8 PIN kugirango uhindure cashier no gufungura terminal.
@@ -1336,7 +1345,7 @@ Walk-in Customer,Kugenda-Umukiriya
 Warehouse,Ububiko
 Warning: High cache usage may affect performance.,Icyitonderwa: Gukoresha cache nyinshi bishobora guhindura imikorere.
 Warning: High lag may indicate heavy processing or browser slowness.,Icyitonderwa: Gutinda cyane birashobora kwerekana gutunganya cyane cyangwa gutinda kwa mushakisha.
-Week Δ,Icyumweru Δ
+Week ?,Icyumweru?
 Week-wise,Icyumweru
 Weight (g),Ibiro (g)
 Weight (grams),Uburemere (garama)

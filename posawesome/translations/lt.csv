@@ -1,4 +1,39 @@
-﻿- Total Unallocated,- Total Unallocated
+POS Awesome,POS Nuostabus
+Fetch Items Directly from Server,Gaukite elementus tiesiai iš serverio
+Menu,Meniu
+Actions,Veiksmai
+Close Shift,Uždaryti Shift
+End current session,Baigti dabartinę sesiją
+Print Last Invoice,Spausdinti paskutinę sąskaitą faktūrą
+Reprint previous transaction,Perspausdinti ankstesnę operaciją
+Sync Offline Invoices,Sinchronizuokite sąskaitas faktūras neprisijungus
+Upload pending transactions,Įkelti laukiančias operacijas
+Go Online,Prisijunkite
+Go Offline,Atsijungti
+Disable offline mode,Išjungti režimą neprisijungus
+Work without server connection,Darbas be serverio ryšio
+Clear Cache,Išvalyti talpyklą
+Remove local data and refresh,Pašalinkite vietinius duomenis ir atnaujinkite
+About,Apie
+App information,Programos informacija
+Language,Kalba
+Change interface language,Keisti sąsajos kalbą
+Light Mode,Šviesos režimas
+Dark Mode,Tamsusis režimas
+Switch theme appearance,Perjungti temos išvaizdą
+Logout,Atsijungti
+Sign out of session,Atsijunkite nuo sesijos
+Select Language,Pasirinkite Kalba
+Choose your preferred language for the POS interface,Pasirinkite pageidaujamą POS sąsajos kalbą
+Language will be changed to,Kalba bus pakeista į
+Cancel,Atšaukti
+Change Language,Keisti kalbą
+Close,Uždaryti
+Cannot change language - same language selected,Negalima pakeisti kalbos – pasirinkta ta pati kalba
+Language changed successfully! Reloading...,Kalba sėkmingai pakeista! Įkeliama iš naujo...
+Failed to change language,Nepavyko pakeisti kalbos
+Unknown error,Nežinoma klaida
+- Total Unallocated,- Iš viso nepaskirstyta
 * Required,* Privaloma
 {0} (Qty: {1}),{0} (kiekis: {1})
 {0} actions,{0} veiksmai
@@ -11,7 +46,6 @@
 {0}h ago,prieš {0} val
 {0}m ago,prieš {0} min
 A POS supervisor is required for this action.,Šiam veiksmui reikalingas POS prižiūrėtojas.
-About,Apie
 Access,Prieiga
 Account,sąskaita
 Account is overdrawn,Sąskaita perpildyta
@@ -19,7 +53,6 @@ Acknowledge the error to resume scanning,"Patvirtinkite klaidą, kad atnaujintum
 Acknowledge the error to resume scanning.,"Patvirtinkite klaidą, kad atnaujintumėte nuskaitymą."
 Across,Skersai
 Action,Veiksmas
-Actions,Veiksmai
 Active sale,Aktyvus pardavimas
 add,pridėti
 Add items from the selector to start building this sale.,"Pridėkite prekių iš parinkiklio, kad pradėtumėte rengti šį išpardavimą."
@@ -55,7 +88,6 @@ Amount already received,Suma jau gauta
 Amount exceeds profile cash movement max amount.,Suma viršija profilio grynųjų pinigų judėjimo maksimalią sumą.
 Amount must be greater than zero.,Suma turi būti didesnė už nulį.
 Amount received from customer,Iš kliento gauta suma
-App information,Programos informacija
 Appearance and user-level preferences for the current session.,Dabartinės sesijos išvaizda ir vartotojo lygio nuostatos.
 Applied,Taikoma
 Apply,Taikyti
@@ -133,7 +165,6 @@ Camera is busy or blocked by another app/tab. Close other camera apps and try ag
 Camera permission denied. Please allow camera access in your browser settings and refresh the page.,Fotoaparato leidimas atmestas. Leiskite pasiekti fotoaparatą naršyklės nustatymuose ir atnaujinkite puslapį.
 Camera scanner is locked until the current error is acknowledged,"Kameros skaitytuvas užrakinamas, kol nepatvirtinama esama klaida"
 Camera started but the video stream did not load in time. Please try again.,"Fotoaparatas paleistas, bet vaizdo srautas nebuvo įkeltas laiku. Bandykite dar kartą."
-Cancel,Atšaukti
 Cancel cash movement {0}?,Atšaukti grynųjų pinigų judėjimą {0}?
 Cancel Payment,Atšaukti mokėjimą
 Cancel Sale,Atšaukti išpardavimą
@@ -184,8 +215,6 @@ Certificate is missing or not trusted. QZ may show confirmation dialogs.,Trūkst
 Certificate is trusted. Silent QZ printing is active.,Sertifikatas patikimas. Įjungtas tylus QZ spausdinimas.
 Change,Keisti
 Change allocation repaired,Pakeitimo paskirstymas suremontuotas
-Change interface language,Keisti sąsajos kalbą
-Change Language,Keisti kalbą
 Change Price,Keisti Kainą
 Change Return,Keisti grąžinimą
 Change Returned,Pakeitimas grąžintas
@@ -204,20 +233,17 @@ Checking...,Tikrinama...
 Cheque/Reference Date,Čekis / nuorodos data
 Cheque/Reference No,Čekis/nuorodos Nr
 Choose the cashier currently operating this terminal.,"Pasirinkite kasininkę, kuri šiuo metu valdo šį terminalą."
-Choose your preferred language for the POS interface,Pasirinkite pageidaujamą POS sąsajos kalbą
 City,Miestas
 Clear,Aišku
 Clear All,Išvalyti viską
 Clear all barcode items,Išvalykite visus brūkšninio kodo elementus
 Clear all purchase order items,Išvalykite visas pirkimo užsakymo prekes
-Clear Cache,Išvalyti talpyklą
 Clear Search,Išvalyti paiešką
 Clearing local cache...,Išvaloma vietinė talpykla...
 Click to refresh,Spustelėkite norėdami atnaujinti
 Client CPU Lag:,Kliento procesoriaus delsa:
 Client Memory Usage:,Kliento atminties naudojimas:
 Client Metrics,Kliento metrika
-Close,Uždaryti
 Close about dialog,Uždaryti apie dialogą
 Close cashier switcher,Uždarykite kasininko keitiklį
 Close closing shift dialog,Uždaryti perjungimo dialogo langą
@@ -233,7 +259,6 @@ Close sales orders dialog,Uždaryti pardavimo užsakymų dialogo langą
 Close Scanner,Uždarykite skaitytuvą
 Close scanner dialog,Uždaryti skaitytuvo dialogo langą
 Close Settings,Uždaryti Nustatymai
-Close Shift,Uždaryti Shift
 Closing Amount,Uždarymo suma
 Closing POS Shift,POS Shift uždarymas
 Closing Snapshot Available,Galima uždarymo momentinė nuotrauka
@@ -318,13 +343,12 @@ Customers not found,Klientai nerasta
 Daily cashier actions without scrolling.,Kasdieniai kasos veiksmai be slinkimo.
 Daily Sales,Kasdieniai pardavimai
 Daily Sales Summary,Dienos pardavimų suvestinė
-Dark Mode,Tamsusis režimas
 Data loaded in form. Review and submit.,Duomenys įkelti į formą. Peržiūrėkite ir pateikite.
 Database Health,Duomenų bazės sveikata
 Database health affects overall system speed and reliability.,Duomenų bazės būklė turi įtakos bendram sistemos greičiui ir patikimumui.
 Database Info,Duomenų bazės informacija
 Date,Data
-Day Δ,Diena Δ
+Day ?,Diena?
 days,dienų
 Day-wise (MTD),Dienos požiūriu (MTD)
 Day-wise Movement,Dienos išmintingas judėjimas
@@ -383,7 +407,6 @@ Edited,Redaguota
 Employee,Darbuotojas
 Enable background sync,Įgalinti foninį sinchronizavimą
 Enable Customer Display in POS Profile first.,Pirmiausia įgalinkite klientų rodymą POS profilyje.
-End current session,Baigti dabartinę sesiją
 Enter a PIN.,Įveskite PIN kodą.
 Enter a valid grams value,Įveskite galiojančią reikšmę gramais
 Enter new price list rate,Įveskite naują kainoraštį
@@ -468,8 +491,6 @@ Gift card payment,Apmokėjimas dovanų kortele
 Gift card redemption requires an online connection,"Norint išpirkti dovanų kortelę, reikalingas internetinis ryšys"
 Gift card topped up successfully.,Dovanų kortelė sėkmingai papildyta.
 Gift Cards,Dovanų kortelės
-Go Offline,Atsijungti
-Go Online,Prisijunkite
 Go to Frappe Desk,Eikite į „Frappe“ stalą
 Grand Total,Didžioji suma
 Gross Margin,Bendroji marža
@@ -552,8 +573,6 @@ json,json
 Just now,Tik dabar
 Keep offline prerequisites healthy and recover stale data safely.,Palaikykite neprisijungus būtinas sąlygas ir saugiai atkurkite pasenusius duomenis.
 Labels,Etiketės
-Language,Kalba
-Language will be changed to,Kalba bus pakeista į
 "Language, theme, terminal tools, and session controls.","Kalba, tema, terminalo įrankiai ir seanso valdikliai."
 Last,Paskutinis
 Last 14 Days (Paid vs Pending),Paskutinės 14 dienų (sumokėta ir laukianti)
@@ -565,7 +584,6 @@ Last sync:,Paskutinis sinchronizavimas:
 Last sync: {0} | ok: {1} | failed: {2} | skipped: {3},Paskutinis sinchronizavimas: {0} | gerai: {1} | nepavyko: {2} | praleista: {3}
 Latest entries for current shift,Naujausi dabartinės pamainos įrašai
 Lead Time,Pristatymo laikas
-Light Mode,Šviesos režimas
 Limited,Ribotas
 lines,linijos
 List,Sąrašas
@@ -594,7 +612,6 @@ localStorage,vietinė saugykla
 Location Performance,Vietos našumas
 Locations,Vietos
 Lock Screen,Užrakinimo ekranas
-Logout,Atsijungti
 Lookup Workflow,Paieškos darbo eiga
 Loss,Pralaimėjimas
 Low,Žemas
@@ -621,7 +638,6 @@ Maximum discount amount for this offer item is {0}.,Didžiausia šios pasiūlymo
 Maximum discount percentage for this offer item is {0}%.,Didžiausia šios pasiūlymo prekės nuolaidos procentinė dalis yra {0}%.
 Maximum offer quantity is {0}. Quantity adjusted to allowed limit.,Didžiausias pasiūlymo kiekis yra {0}. Kiekis pakoreguotas iki leidžiamo limito.
 Medium,Vidutinis
-Menu,Meniu
 Method-wise Collections,Metodinės kolekcijos
 Minimum allowed rate for this offer item is {0}.,Mažiausia leistina šios pasiūlymo prekės kaina yra {0}.
 Minimum Qty,Minimalus kiekis
@@ -629,7 +645,7 @@ Mobile No,Mobiliojo Nr
 Mode,Režimas
 Mode of Payment,Mokėjimo būdas
 Month,Mėnuo
-Month Δ,Mėnuo Δ
+Month ?,mėnuo?
 Monthly Profit,Mėnesio pelnas
 Monthly Sales,Mėnesio pardavimai
 Monthly Sales Summary,Mėnesio pardavimų suvestinė
@@ -894,7 +910,6 @@ Print Draft,Spausdinti juodraštį
 Print Format (Invoice),Spausdinimo formatas (sąskaita faktūra)
 Print Format (Order),Spausdinimo formatas (užsakymas)
 Print invoice,Spausdinti sąskaitą faktūrą
-Print Last Invoice,Spausdinti paskutinę sąskaitą faktūrą
 Print Purchase Invoice instead of PO,Spausdinti pirkimo sąskaitą faktūrą vietoj PO
 Printer,Spausdintuvas
 Processed returns impacting the shift totals,"Apdorotos grąžos, turinčios įtakos pamainų sumoms"
@@ -977,7 +992,6 @@ Repaired,Suremontuota
 Repairing change allocation,Pakeitimų paskirstymo taisymas
 Repeat Customers,Pakartotiniai klientai
 Repeat Rate,Pakartojimo dažnis
-Reprint previous transaction,Perspausdinti ankstesnę operaciją
 Request,Prašymas
 Request ID: {0},Užklausos ID: {0}
 Request Payment,Prašyti mokėjimo
@@ -1063,7 +1077,6 @@ Select a printer to use QZ silent printing.,"Pasirinkite spausdintuvą, kad gal�
 Select Batch,Pasirinkite Paketas
 Select Columns to Display,Pasirinkite rodytini stulpeliai
 Select items to sell,"Pasirinkite prekes, kurias norite parduoti"
-Select Language,Pasirinkite Kalba
 Select Payment,Pasirinkite Mokėjimas
 Select Payment Account,Pasirinkite Mokėjimo sąskaita
 Select printer,Pasirinkite spausdintuvą
@@ -1102,7 +1115,6 @@ Show the active cart on a customer-facing screen,Rodyti aktyvų krepšelį į kl
 Showing {0}-{1} of {2},Rodoma {0}-{1} iš {2}
 Showing 0 of 0,Rodoma 0 iš 0
 Shows the distribution of invoices per currency,Rodo sąskaitų faktūrų pasiskirstymą pagal valiutą
-Sign out of session,Atsijunkite nuo sesijos
 Sign out of the current POS session,Atsijunkite nuo dabartinės POS sesijos
 Size:,Dydis:
 Skipped Payments,Praleisti mokėjimai
@@ -1150,7 +1162,6 @@ Suppliers not found,Tiekėjai nerasta
 Switch Camera,Perjungti fotoaparatą
 Switch Cashier,Perjungti kasą
 Switch the POS appearance theme,Perjunkite POS išvaizdos temą
-Switch theme appearance,Perjungti temos išvaizdą
 Switched to:,Perjungta į:
 Sync All Invoices,Sinchronizuoti visas sąskaitas faktūras
 Sync Offline Cash Movements ({0}),Sinchronizuoti grynųjų pinigų judėjimą neprisijungus ({0})
@@ -1286,7 +1297,6 @@ Unallocated,Nepaskirstyta
 Unallocated:,Nepaskirstyta:
 Unavailable,Nepasiekiamas
 Unknown,Nežinoma
-Unknown error,Nežinoma klaida
 Unknown Item,Nežinomas daiktas
 Unknown Warehouse,Nežinomas sandėlis
 Unlock POS,Atrakinkite POS
@@ -1301,7 +1311,6 @@ Update Price List Rate,Atnaujinti kainoraštį
 Updated,Atnaujinta
 Updates and app info that stay out of the cashier flow.,"Atnaujinimai ir programų informacija, kurios nepatenka į kasos srautą."
 Updates automatically,Atnaujina automatiškai
-Upload pending transactions,Įkelti laukiančias operacijas
 Usage,Naudojimas
 Usage Stats,Naudojimo statistika
 Use a 4 to 8 digit PIN for cashier switching and terminal unlock.,"Naudokite 4–8 skaitmenų PIN kodą, kad perjungtumėte kasą ir atrakintumėte terminalą."
@@ -1336,7 +1345,7 @@ Walk-in Customer,„Walk-in“ klientas
 Warehouse,Sandėlis
 Warning: High cache usage may affect performance.,Įspėjimas: didelis talpyklos naudojimas gali turėti įtakos našumui.
 Warning: High lag may indicate heavy processing or browser slowness.,Įspėjimas: didelė delsa gali rodyti sunkų apdorojimą arba lėtą naršyklę.
-Week Δ,Savaitė Δ
+Week ?,Savaitė?
 Week-wise,Savaitės požiūriu
 Weight (g),Svoris (g)
 Weight (grams),Svoris (gramais)

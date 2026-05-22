@@ -1,4 +1,39 @@
-﻿- Total Unallocated,- Total Unallocated
+POS Awesome,POS Super
+Fetch Items Directly from Server,Pridobite predmete neposredno s strežnika
+Menu,meni
+Actions,Dejanja
+Close Shift,Zapri Shift
+End current session,Končaj trenutno sejo
+Print Last Invoice,Natisni zadnji račun
+Reprint previous transaction,Ponovno natisnite prejšnjo transakcijo
+Sync Offline Invoices,Sinhronizirajte račune brez povezave
+Upload pending transactions,Naloži čakajoče transakcije
+Go Online,Pojdite na splet
+Go Offline,Pojdi brez povezave
+Disable offline mode,Onemogoči način brez povezave
+Work without server connection,Delajte brez povezave s strežnikom
+Clear Cache,Počisti predpomnilnik
+Remove local data and refresh,Odstranite lokalne podatke in osvežite
+About,O tem
+App information,Informacije o aplikaciji
+Language,Jezik
+Change interface language,Spremenite jezik vmesnika
+Light Mode,Svetlobni način
+Dark Mode,Temni način
+Switch theme appearance,Preklopi videz teme
+Logout,Odjava
+Sign out of session,Odjava iz seje
+Select Language,Izberite Jezik
+Choose your preferred language for the POS interface,Izberite želeni jezik za vmesnik POS
+Language will be changed to,Jezik bo spremenjen v
+Cancel,Prekliči
+Change Language,Spremeni jezik
+Close,Zapri
+Cannot change language - same language selected,Jezika ni mogoče spremeniti – izbran je isti jezik
+Language changed successfully! Reloading...,Jezik je bil uspešno spremenjen! Ponovno nalaganje ...
+Failed to change language,Jezika ni bilo mogoče spremeniti
+Unknown error,Neznana napaka
+- Total Unallocated,- Skupaj nedodeljeno
 * Required,* Obvezno
 {0} (Qty: {1}),{0} (količina: {1})
 {0} actions,{0} dejanj
@@ -11,7 +46,6 @@
 {0}h ago,pred {0} h
 {0}m ago,pred {0}m
 A POS supervisor is required for this action.,Za to dejanje je potreben nadzornik POS.
-About,O tem
 Access,Dostop
 Account,Račun
 Account is overdrawn,Račun je prekoračen
@@ -19,7 +53,6 @@ Acknowledge the error to resume scanning,Za nadaljevanje skeniranja potrdite nap
 Acknowledge the error to resume scanning.,Za nadaljevanje skeniranja potrdite napako.
 Across,Čez
 Action,Akcija
-Actions,Dejanja
 Active sale,Aktivna prodaja
 add,dodati
 Add items from the selector to start building this sale.,"Dodajte predmete iz izbirnika, da začnete graditi to prodajo."
@@ -55,7 +88,6 @@ Amount already received,Znesek je že prejet
 Amount exceeds profile cash movement max amount.,Znesek presega največji znesek gibanja gotovine v profilu.
 Amount must be greater than zero.,Znesek mora biti večji od nič.
 Amount received from customer,"Znesek, prejet od stranke"
-App information,Informacije o aplikaciji
 Appearance and user-level preferences for the current session.,Videz in nastavitve na ravni uporabnika za trenutno sejo.
 Applied,Uporabljeno
 Apply,Prijavite se
@@ -133,7 +165,6 @@ Camera is busy or blocked by another app/tab. Close other camera apps and try ag
 Camera permission denied. Please allow camera access in your browser settings and refresh the page.,Dovoljenje za kamero zavrnjeno. Dovolite dostop do kamere v nastavitvah brskalnika in osvežite stran.
 Camera scanner is locked until the current error is acknowledged,"Optični bralnik kamere je zaklenjen, dokler ni potrjena trenutna napaka"
 Camera started but the video stream did not load in time. Please try again.,"Kamera se je zagnala, vendar se video tok ni pravočasno naložil. prosim poskusite znova"
-Cancel,Prekliči
 Cancel cash movement {0}?,Želite preklicati prenos gotovine {0}?
 Cancel Payment,Prekliči plačilo
 Cancel Sale,Prekliči prodajo
@@ -184,8 +215,6 @@ Certificate is missing or not trusted. QZ may show confirmation dialogs.,Certifi
 Certificate is trusted. Silent QZ printing is active.,Certifikat je zaupanja vreden. Aktivno je tiho tiskanje QZ.
 Change,spremeniti
 Change allocation repaired,Sprememba dodelitve popravljena
-Change interface language,Spremenite jezik vmesnika
-Change Language,Spremeni jezik
 Change Price,Spremeni ceno
 Change Return,Spremeni Vrnitev
 Change Returned,Sprememba vrnjena
@@ -204,20 +233,17 @@ Checking...,Preverjanje ...
 Cheque/Reference Date,Ček/referenčni datum
 Cheque/Reference No,Ček/referenčna št
 Choose the cashier currently operating this terminal.,"Izberite blagajnika, ki trenutno upravlja s tem terminalom."
-Choose your preferred language for the POS interface,Izberite želeni jezik za vmesnik POS
 City,Mesto
 Clear,jasno
 Clear All,Počisti vse
 Clear all barcode items,Počisti vse elemente črtne kode
 Clear all purchase order items,Počisti vse elemente naročila
-Clear Cache,Počisti predpomnilnik
 Clear Search,Počisti iskanje
 Clearing local cache...,Brisanje lokalnega predpomnilnika ...
 Click to refresh,Kliknite za osvežitev
 Client CPU Lag:,Zaostajanje procesorja odjemalca:
 Client Memory Usage:,Uporaba pomnilnika odjemalca:
 Client Metrics,Meritve strank
-Close,Zapri
 Close about dialog,Zapri pogovorno okno o tem
 Close cashier switcher,Zapri menjalnik blagajn
 Close closing shift dialog,Zapri pogovorno okno za zapiranje izmene
@@ -233,7 +259,6 @@ Close sales orders dialog,Zapri pogovorno okno prodajnih naročil
 Close Scanner,Zapri Scanner
 Close scanner dialog,Zapri pogovorno okno optičnega bralnika
 Close Settings,Zapri nastavitve
-Close Shift,Zapri Shift
 Closing Amount,Končni znesek
 Closing POS Shift,Zapiranje POS izmene
 Closing Snapshot Available,Na voljo zaključni posnetek
@@ -318,13 +343,12 @@ Customers not found,Stranke niso bile najdene
 Daily cashier actions without scrolling.,Dnevna blagajniška dejanja brez drsenja.
 Daily Sales,Dnevna prodaja
 Daily Sales Summary,Dnevni povzetek prodaje
-Dark Mode,Temni način
 Data loaded in form. Review and submit.,Podatki naloženi v obrazec. Preglejte in oddajte.
 Database Health,Zdravje baze podatkov
 Database health affects overall system speed and reliability.,Zdravje baze podatkov vpliva na splošno hitrost in zanesljivost sistema.
 Database Info,Informacije o bazi podatkov
 Date,Datum
-Day Δ,dan Δ
+Day ?,dan?
 days,dni
 Day-wise (MTD),Dnevno (MTD)
 Day-wise Movement,Dnevno gibanje
@@ -383,7 +407,6 @@ Edited,Urejeno
 Employee,Zaposleni
 Enable background sync,Omogoči sinhronizacijo v ozadju
 Enable Customer Display in POS Profile first.,Najprej omogočite prikaz stranke v profilu POS.
-End current session,Končaj trenutno sejo
 Enter a PIN.,Vnesite PIN.
 Enter a valid grams value,Vnesite veljavno vrednost v gramih
 Enter new price list rate,Vnesite novo ceno cenika
@@ -468,8 +491,6 @@ Gift card payment,Plačilo z darilno kartico
 Gift card redemption requires an online connection,Za unovčenje darilne kartice je potrebna spletna povezava
 Gift card topped up successfully.,Darilna kartica je bila uspešno napolnjena.
 Gift Cards,Darilne kartice
-Go Offline,Pojdi brez povezave
-Go Online,Pojdite na splet
 Go to Frappe Desk,Pojdite na Frappe Desk
 Grand Total,Skupni seštevek
 Gross Margin,Bruto marža
@@ -552,8 +573,6 @@ json,json
 Just now,Pravkar
 Keep offline prerequisites healthy and recover stale data safely.,Ohranite predpogoje brez povezave in varno obnovite zastarele podatke.
 Labels,Etikete
-Language,Jezik
-Language will be changed to,Jezik bo spremenjen v
 "Language, theme, terminal tools, and session controls.","Jezik, tema, terminalska orodja in kontrolniki sej."
 Last,Zadnji
 Last 14 Days (Paid vs Pending),Zadnjih 14 dni (plačano ali čakajoče)
@@ -565,7 +584,6 @@ Last sync:,Zadnja sinhronizacija:
 Last sync: {0} | ok: {1} | failed: {2} | skipped: {3},Zadnja sinhronizacija: {0} | ok: {1} | neuspešno: {2} | preskočeno: {3}
 Latest entries for current shift,Zadnji vnosi za trenutno izmeno
 Lead Time,Čas izvedbe
-Light Mode,Svetlobni način
 Limited,Omejeno
 lines,vrstice
 List,Seznam
@@ -594,7 +612,6 @@ localStorage,localStorage
 Location Performance,Učinkovitost lokacije
 Locations,Lokacije
 Lock Screen,Zaklenjeni zaslon
-Logout,Odjava
 Lookup Workflow,Potek dela iskanja
 Loss,Izguba
 Low,Nizka
@@ -621,7 +638,6 @@ Maximum discount amount for this offer item is {0}.,Najvišji znesek popusta za 
 Maximum discount percentage for this offer item is {0}%.,Najvišji odstotek popusta za ta izdelek ponudbe je {0}%.
 Maximum offer quantity is {0}. Quantity adjusted to allowed limit.,Največja ponudbena količina je {0}. Količina prilagojena dovoljeni meji.
 Medium,Srednje
-Menu,meni
 Method-wise Collections,Zbirke po metodi
 Minimum allowed rate for this offer item is {0}.,Najnižja dovoljena cena za to ponudbo je {0}.
 Minimum Qty,Najmanjša količina
@@ -629,7 +645,7 @@ Mobile No,Mobilna št
 Mode,Način
 Mode of Payment,Način plačila
 Month,mesec
-Month Δ,Mesec Δ
+Month ?,mesec?
 Monthly Profit,Mesečni dobiček
 Monthly Sales,Mesečna prodaja
 Monthly Sales Summary,Mesečni povzetek prodaje
@@ -894,7 +910,6 @@ Print Draft,Natisni osnutek
 Print Format (Invoice),Oblika tiskanja (račun)
 Print Format (Order),Oblika tiskanja (vrstni red)
 Print invoice,Natisnite račun
-Print Last Invoice,Natisni zadnji račun
 Print Purchase Invoice instead of PO,Natisnite račun za nakup namesto naročilnice
 Printer,Tiskalnik
 Processed returns impacting the shift totals,"Obdelana vračila, ki vplivajo na vsote izmene"
@@ -977,7 +992,6 @@ Repaired,Popravljeno
 Repairing change allocation,Popravljanje dodelitve sprememb
 Repeat Customers,Ponavljajoče se stranke
 Repeat Rate,Hitrost ponavljanja
-Reprint previous transaction,Ponovno natisnite prejšnjo transakcijo
 Request,Zahteva
 Request ID: {0},ID zahteve: {0}
 Request Payment,Zahtevaj plačilo
@@ -1063,7 +1077,6 @@ Select a printer to use QZ silent printing.,Izberite tiskalnik za uporabo tihega
 Select Batch,Izberite Paket
 Select Columns to Display,Izberite Stolpci za prikaz
 Select items to sell,Izberite predmete za prodajo
-Select Language,Izberite Jezik
 Select Payment,Izberite Plačilo
 Select Payment Account,Izberite Plačilni račun
 Select printer,Izberite tiskalnik
@@ -1102,7 +1115,6 @@ Show the active cart on a customer-facing screen,"Prikažite aktivni voziček na
 Showing {0}-{1} of {2},Prikaz {0}-{1} od {2}
 Showing 0 of 0,Prikaz 0 od 0
 Shows the distribution of invoices per currency,Prikazuje porazdelitev računov po valutah
-Sign out of session,Odjava iz seje
 Sign out of the current POS session,Odjavite se iz trenutne seje POS
 Size:,Velikost:
 Skipped Payments,Preskočena plačila
@@ -1150,7 +1162,6 @@ Suppliers not found,Dobavitelji niso bili najdeni
 Switch Camera,Preklopi kamero
 Switch Cashier,Preklop blagajne
 Switch the POS appearance theme,Preklopite temo videza POS
-Switch theme appearance,Preklopi videz teme
 Switched to:,Preklopljeno na:
 Sync All Invoices,Sinhroniziraj vse račune
 Sync Offline Cash Movements ({0}),Sinhronizacija gotovinskih premikov brez povezave ({0})
@@ -1286,7 +1297,6 @@ Unallocated,Nedodeljeno
 Unallocated:,Nedodeljeno:
 Unavailable,Ni na voljo
 Unknown,Neznano
-Unknown error,Neznana napaka
 Unknown Item,Neznan predmet
 Unknown Warehouse,Neznano skladišče
 Unlock POS,Odkleni POS
@@ -1301,7 +1311,6 @@ Update Price List Rate,Posodobi tečaj cenika
 Updated,Posodobljeno
 Updates and app info that stay out of the cashier flow.,"Posodobitve in informacije o aplikacijah, ki ostanejo izven toka blagajne."
 Updates automatically,Posodablja se samodejno
-Upload pending transactions,Naloži čakajoče transakcije
 Usage,Uporaba
 Usage Stats,Statistika uporabe
 Use a 4 to 8 digit PIN for cashier switching and terminal unlock.,Za zamenjavo blagajne in odklepanje terminala uporabite 4- do 8-mestno kodo PIN.
@@ -1336,7 +1345,7 @@ Walk-in Customer,Vhodna stranka
 Warehouse,Skladišče
 Warning: High cache usage may affect performance.,Opozorilo: Velika poraba predpomnilnika lahko vpliva na zmogljivost.
 Warning: High lag may indicate heavy processing or browser slowness.,Opozorilo: velik zamik lahko pomeni težko obdelavo ali počasnost brskalnika.
-Week Δ,Teden Δ
+Week ?,teden?
 Week-wise,Tedensko gledano
 Weight (g),Teža (g)
 Weight (grams),Teža (grami)

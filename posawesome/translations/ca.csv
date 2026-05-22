@@ -1,504 +1,525 @@
-﻿- Total Unallocated,- Total Unallocated
+POS Awesome,POS Genial
+Fetch Items Directly from Server,Obteniu elements directament del servidor
+Menu,Menú
+Actions,Accions
+Close Shift,Tanca el canvi
+End current session,Finalitza la sessió actual
+Print Last Invoice,Imprimeix l'última factura
+Reprint previous transaction,Reimprimeix la transacció anterior
+Sync Offline Invoices,Sincronitza les factures fora de línia
+Upload pending transactions,Penja transaccions pendents
+Go Online,Anar en línia
+Go Offline,Anar fora de línia
+Disable offline mode,Desactiva el mode fora de línia
+Work without server connection,Treballar sense connexió al servidor
+Clear Cache,Esborra la memòria cau
+Remove local data and refresh,Elimina les dades locals i actualitza
+About,Sobre
+App information,Informació de l'aplicació
+Language,Llengua
+Change interface language,Canvia l'idioma de la interfície
+Light Mode,Mode de llum
+Dark Mode,Mode fosc
+Switch theme appearance,Canvia l'aparença del tema
+Logout,Tanca la sessió
+Sign out of session,Tanca la sessió
+Select Language,Seleccioneu Idioma
+Choose your preferred language for the POS interface,Trieu el vostre idioma preferit per a la interfície de TPV
+Language will be changed to,Es canviarà l'idioma a
+Cancel,Cancel·la
+Change Language,Canviar Idioma
+Close,Tancar
+Cannot change language - same language selected,No es pot canviar l'idioma - el mateix idioma seleccionat
+Language changed successfully! Reloading...,L'idioma ha canviat correctament! S'està tornant a carregar...
+Failed to change language,No s'ha pogut canviar l'idioma
+Unknown error,Error desconegut
+- Total Unallocated,- Total no assignat
 * Required,* Obligatori
 {0} (Qty: {1}),{0} (Quantitat: {1})
 {0} actions,{0} accions
-{0} has only {1} in stock. You requested {2}. Adjust quantity or restock.,{0} només té {1} en estoc.
-{0} offline invoice{1} pending,Heu sol·licitat {2}.
-{0} offline invoice{1} saved as draft,Ajustar la quantitat o reposar.
-{0} offline invoice{1} synced,{0}factura fora de línia{1} pendent
-{0}: {1} {2},La {0} factura fora de línia{1} s'ha desat com a esborrany
-{0}d ago,{0} factura fora de línia{1} sincronitzada
-{0}h ago,{0}: {1} {2}
-{0}m ago,fa {0} dies
-A POS supervisor is required for this action.,fa {0}h
-About,fa {0}m
-Access,Es requereix un supervisor de TPV per a aquesta acció.
-Account,Sobre
-Account is overdrawn,Accés
-Acknowledge the error to resume scanning,Compte
-Acknowledge the error to resume scanning.,El compte està en excés
-Across,Confirmeu l'error per reprendre l'escaneig
-Action,Confirmeu l'error per reprendre l'escaneig.
-Actions,A través
-Active sale,Acció
-add,Accions
-Add items from the selector to start building this sale.,Venda activa
-Add more value to an existing gift card,afegir
-Add New Address,Afegiu articles del selector per començar a crear aquesta venda.
-Add new customer,Afegiu més valor a una targeta regal existent
-Add on New Line,Afegeix una adreça nova
-Add Payment,Afegeix un client nou
-Add payment to invoice,Afegeix a New Line
-Add/Edit Coupon Conditions,Afegeix el pagament
-Additional Discount,Afegiu el pagament a la factura
-Additional Discount %,Afegeix/Edita les condicions del cupó
-Address Line 1,Descompte addicional
-Address not found,% de descompte addicional
-Adjust the quantity or enable negative stock to continue.,Línia d'adreça 1
-Adjustment,No s'ha trobat l'adreça
-After returns,Ajusteu la quantitat o activeu l'estoc negatiu per continuar.
-Against,Ajust
-Against Name,Després de les tornades
-Age Bracket,En contra
-All,Contra Nom
-All Caught Up!,Tranxa d'edat
-All invoices are synchronized,Tots
-All pending invoices are up to date,Tots atrapats!
-All Profiles,Totes les factures estan sincronitzades
-All Synchronized,Totes les factures pendents estan actualitzades
-All visible invoices are fully settled.,Tots els perfils
-All Warehouses,Tot sincronitzat
-Allowed UOM is {0},Totes les factures visibles estan totalment liquidades.
-Always fetch items from server (ignore local cache),Tots els Magatzems
-Amount,UOM permesa és {0}
-Amount already received,Obteniu sempre els elements del servidor (ignoreu la memòria cau local)
-Amount exceeds profile cash movement max amount.,Import
-Amount must be greater than zero.,Import ja rebut
-Amount received from customer,L'import supera l'import màxim del moviment d'efectiu del perfil.
-App information,La quantitat ha de ser superior a zero.
-Appearance and user-level preferences for the current session.,Import rebut del client
-Applied,Informació de l'aplicació
-Apply,Aparença i preferències a nivell d'usuari per a la sessió actual.
-Apply Gift Card,Aplicat
-Apply Offer,Aplicar
-Apply On,Aplica la Targeta Regal
-Apply only the amount you want to redeem on this invoice. The remaining balance stays on the card.,Aplica l'oferta
-Apply Redemption,Aplicar activat
-Applying,Apliqueu només l'import que voleu bescanviar en aquesta factura.
-Apps,El saldo restant es manté a la targeta.
-Are you sure you want to close? All entered data will be lost.,Aplica la redempció
-Attributes (Size/Color),Aplicant
-Auto Allocate Payment Amount,Aplicacions
-Auto Reconcile,Esteu segur que voleu tancar?
-Auto reconciliation completed after payment submit.,Es perdran totes les dades introduïdes.
-Auto reconciliation completed. Allocated: {0}{1}. Remaining outstanding: {0}{2}.,Atributs (mida/color)
-Available Actions,Assigna automàticament l'import del pagament
-Available QTY,Reconciliació automàtica
-Available:,La conciliació automàtica s'ha completat després de l'enviament del pagament.
-Average Basket,S'ha completat la reconciliació automàtica.
-Average Bill,Assignat: {0}{1}.
-Average Ticket,Restant pendents: {0}{2}.
-Avg Bill,Accions disponibles
-Avg Invoice,QTY disponible
-Avg Invoice Profit,Disponible:
-Avg Invoice Value,Cistella mitjana
-Avg Purchase Frequency,Factura mitjana
-Awesome,Bitllet mitjà
-Awesome Dashboard,Factura mitjana
-Awesome Dashboard is disabled for the selected POS Profile.,Factura mitjana
-Awesome Dashboard is unavailable for the selected scope.,Benefici mitjà de la factura
-Awesome Dashboard is visible only to POS supervisors.,Valor mitjà de la factura
-Back,Freqüència mitjana de compra
-Back Office Cash Account,Genial
-Back Office Cash Account (Optional Override),Tauler de control impressionant
-Back office cash account is required.,Awesome Dashboard està desactivat per al perfil de POS seleccionat.
-Back to {0},Awesome Dashboard no està disponible per a l'àmbit seleccionat.
-Background processing did not finish in time.,Awesome Dashboard només és visible per als supervisors de TPV.
-Background processing failed for Invoice {0}: {1},Enrere
-Background Submission Failed,Compte d'efectiu del Back Office
-Background sync interval (seconds),Compte d'efectiu del Back Office (modificació opcional)
-Balance,Es requereix un compte d'efectiu de back office.
-Balance will be updated when connection is restored,Torna a {0}
-Balances still pending,El processament en segon pla no va acabar a temps.
-Barcode,No s'ha pogut processar en segon pla per a la factura {0}: {1}
-Barcode / QR Ready,No s'ha pogut enviar en segon pla
-Barcode Label Printing,Interval de sincronització de fons (segons)
-Base Paid:,Balanç
-Base Recv:,El saldo s'actualitzarà quan es restableixi la connexió
-Base:,Saldos encara pendents
-Basic Information,Codi de barres
-Batch,Codi de barres / QR llest
-Batch Information,Impressió d'etiquetes de codi de barres
-Before any return workflow,Base pagada:
-Before returns,Rec. base:
-Best Day,Base:
-Best Seller,Informació bàsica
-Book expense or deposit from active shift.,Lot
-Branch / Location-wise Report,Informació del lot
-Brand-wise,Abans de qualsevol flux de treball de retorn
-Breakdown,Abans de les tornades
-Browse,El millor dia
-Build Time:,El més venut
-Built with Frappe,Reserva de despeses o ingrés des del torn actiu.
-Bundle,Informe d'oficina / ubicació
-Buying Price,En termes de marca
-Cache cleared successfully,Avaria
-Cache Usage,Navega
-cache used,Temps de construcció:
-Calculating...,Construït amb Frappe
-Camera Access Required,Paquet
-Camera access was aborted. Please try again.,Preu de compra
-Camera constraints not supported by your device. Trying fallback settings...,La memòria cau s'ha esborrat correctament
-Camera is busy or blocked by another app/tab. Close other camera apps and try again.,Ús de la memòria cau
-Camera permission denied. Please allow camera access in your browser settings and refresh the page.,memòria cau utilitzada
-Camera scanner is locked until the current error is acknowledged,Calculant...
-Camera started but the video stream did not load in time. Please try again.,Accés a la càmera requerit
-Cancel,S'ha cancel·lat l'accés a la càmera.
-Cancel cash movement {0}?,"Si us plau, torna-ho a provar."
-Cancel Payment,El vostre dispositiu no admet les restriccions de la càmera.
-Cancel Sale,S'està provant la configuració alternativa...
-Cancel Sale ?,La càmera està ocupada o bloquejada per una altra aplicació o pestanya.
-Cancelled,Tanca altres aplicacions de càmera i torna-ho a provar.
-Cannot add an item with zero or negative quantity.,S'ha denegat el permís de la càmera.
-Cannot clear cache while offline,Permet l'accés a la càmera a la configuració del navegador i actualitza la pàgina.
-Cannot redeem customer credit more than invoice total,L'escàner de la càmera està bloquejat fins que es reconeix l'error actual
-Cannot redeem gift cards more than invoice total,"La càmera va començar, però el flux de vídeo no es va carregar a temps."
-Cannot Save Offline Invoice:,"Si us plau, torna-ho a provar."
-Cannot Save Offline Payment:,Cancel·la
-Card,Cancel·lar el moviment d'efectiu {0}?
-Card / Online,Cancel·la el pagament
-Card health after the last live lookup,Cancel·la la venda
-Cards,Cancel·lar la venda?
-Cart,Cancel·lat
-Cash,No es pot afegir un article amb una quantitat zero o negativa.
-Cash back to customers,No es pot esborrar la memòria cau sense connexió
-Cash Collections,No es pot bescanviar el crèdit del client més del total de la factura
-Cash Deposit is disabled for this POS Profile.,No es poden bescanviar targetes regal més del total de la factura
-Cash Drawer Snapshot,No es pot desar la factura fora de línia:
-Cash In Hand,No es pot desar el pagament fora de línia:
-Cash Movement,Targeta
-Cash movement cancelled,Targeta / En línia
-Cash movement deduction applied,Estat de la targeta després de l'última cerca en directe
-Cash movement deleted,Targetes
-Cash movement is disabled for this POS Profile.,Carro
-Cash Movement is disabled in current POS Profile.,Efectiu
-Cash movement saved offline,Devolució de diners en efectiu als clients
-Cash movement submitted,Recaptacions en efectiu
-Cash Movements,El dipòsit en efectiu està desactivat per a aquest perfil de TPV.
-Cash payment cannot be less than invoice total when partial payment is not allowed,Instantània del calaix d'efectiu
-Cash returned after payment,Diners en mà
-Cashier,Moviment d'Efectiu
-Cashier Access,S'ha cancel·lat el moviment d'efectiu
-Cashier identity and appearance preferences.,S'ha aplicat la deducció de moviment d'efectiu
-Cashier PIN,S'ha suprimit el moviment d'efectiu
-Cashier PIN saved successfully.,El moviment d'efectiu està desactivat per a aquest perfil de TPV.
-Cashiers,El moviment d'efectiu està desactivat al perfil de TPV actual.
-Cashier-wise,Moviment d'efectiu desat fora de línia
-Categories,Moviment d'efectiu enviat
-Category,Moviments d'Efectiu
-Category / Brand / Variant Report,El pagament en efectiu no pot ser inferior al total de la factura quan no es permet el pagament parcial
-Category-wise,Es retorna l'efectiu després del pagament
-Category-wise Margin,Caixer
-Certificate,Accés al caixer
-Certificate is missing or not trusted. QZ may show confirmation dialogs.,Preferències d'identitat i aspecte del caixer.
-Certificate is trusted. Silent QZ printing is active.,PIN del caixer
-Change,El PIN del caixer s'ha desat correctament.
-Change allocation repaired,Caixers
-Change interface language,A nivell de caixer
-Change Language,Categories
-Change Price,Categoria
-Change Return,Categoria / Marca / Informe de variants
-Change Returned,Per categories
-Change terminal cashier,Marge per categoria
-Charge Heads,Certificat
-Charges,Falta el certificat o no és de confiança.
-Charges not found,QZ pot mostrar diàlegs de confirmació.
-Check Balance,El certificat és de confiança.
-Check balance for any card. Supervisors can issue and top up cards here.,La impressió QZ silenciosa està activa.
-Check balance only,Canviar
-Check for new commits,S'ha reparat el canvi d'assignació
-Check for Updates,Canvia l'idioma de la interfície
-Check live balance before applying redemption,Canviar Idioma
-Check live balance before redemption,Canvia el preu
-Checking...,Canvia Retorn
-Cheque/Reference Date,S'ha tornat el canvi
-Cheque/Reference No,Canvi de caixer terminal
-Choose the cashier currently operating this terminal.,Caps de càrrega
-Choose your preferred language for the POS interface,Càrrecs
-City,No s'han trobat càrrecs
-Clear,Comproveu el saldo
-Clear All,Comproveu el saldo de qualsevol targeta.
-Clear all barcode items,Els supervisors poden emetre i recarregar targetes aquí.
-Clear all purchase order items,Consulta només el saldo
-Clear Cache,Comproveu si hi ha noves commits
-Clear Search,Comproveu si hi ha actualitzacions
-Clearing local cache...,Comproveu el saldo real abans d'aplicar el bescanvi
-Click to refresh,Comproveu el saldo real abans del bescanvi
-Client CPU Lag:,S'està comprovant...
-Client Memory Usage:,Data del xec/referència
-Client Metrics,Xec/núm. de referència
-Close,Trieu el caixer que opera actualment aquest terminal.
-Close about dialog,Trieu el vostre idioma preferit per a la interfície de TPV
-Close cashier switcher,Ciutat
-Close closing shift dialog,Clar
-Close column selector,Esborra-ho tot
-Close Dialog,Esborra tots els elements del codi de barres
-Close drafts dialog,Esborra tots els articles de la comanda de compra
-Close invoice details dialog,Esborra la memòria cau
-Close invoice management,Esborra la cerca
-Close offline invoices dialog,S'està esborrant la memòria cau local...
-Close packing list dialog,Feu clic per actualitzar
-Close returns dialog,Retard de la CPU del client:
-Close sales orders dialog,Ús de memòria del client:
-Close Scanner,Mètriques de client
-Close scanner dialog,Tancar
-Close Settings,Tanca sobre el diàleg
-Close Shift,Tanqueu el commutador de caixa
-Closing Amount,Tanca el diàleg de tancament del torn
-Closing POS Shift,Tanca el selector de columnes
-Closing Snapshot Available,Tanca el diàleg
-Code,Tanca el diàleg d'esborranys
-Code scanned successfully,Tanca el diàleg de detalls de la factura
-COGS,Tanca la gestió de les factures
-Collapse item details,Tanca el quadre de diàleg de les factures fora de línia
-Collected,Tanca el diàleg de la llista d'embalatge
-Cols,Tanca el diàleg de retorn
-Columns,Tanca el diàleg de comandes de venda
-commits,Tanca l'escàner
-Completed and active sales in this range,Tanca el diàleg de l'escàner
-Completed returns will appear here.,Tanca Configuració
-Confirm,Tanca el canvi
-Confirm Close,Import de tancament
-Confirm Mobile Number,Tancant torn de POS
-Confirm PIN,Instantània de tancament disponible
-Connect,Codi
-Connect printer and manage certificate,El codi s'ha escanejat correctament
-Connecting to QZ Tray...,COGS
-Connection problem while submitting invoice,Replega els detalls de l'element
-Connections:,Recollida
-Connectivity and cached prerequisite status were rechecked.,Cols
-Continue Editing,Columnes
-Could not fetch latest balance from server,es compromet
-Count,Vendes acabades i actives en aquesta gamma
-Country,Les devolucions completades apareixeran aquí.
-Coupon,Confirmeu
-Coupons,Confirmeu Tancar
-Cover,Confirmeu el número de mòbil
-CPU Cores:,Confirmeu el PIN
-Create,Connecta't
-Create and load a new prepaid card,Connecteu la impressora i gestioneu el certificat
-Create and preload a new gift card,S'està connectant a la safata QZ...
-Create Bill,Problema de connexió durant l'enviament de la factura
-Create Customer,Connexions:
-Create New Item,La connectivitat i l'estat dels requisits previs de la memòria cau es van tornar a comprovar.
-Create or change your PIN,Continuar editant
-Create PIN,No s'ha pogut obtenir l'últim saldo del servidor
-Create POS Opening Shift,Compte
-Create Purchase Order,País
-Create Return,Cupó
-Create return from invoice,Cupons
-Create Supplier,Portada
-Credit and Output,Nuclis de CPU:
-Credit Note,Crear
-Credit Outstanding,Creeu i carregueu una targeta de prepagament nova
-Credit sales remaining to be collected,Creeu i precarregueu una targeta regal nova
-Critical,Crea Bill
-Currency,Crear client
-Current,Crea un element nou
-Current Event Loop Lag:,Creeu o canvieu el vostre PIN
-Current Month,Crea el PIN
-Current PIN,Crea un torn d'obertura de TPV
-Current Profile,Crear comanda de compra
-Current redeemable value on the gift card,Crea retorn
-Current User,Crear devolució a partir de la factura
-Custom,Crea un proveïdor
-Custom Due Days,Crèdit i sortida
-Custom items per page,Nota de crèdit
-Customer,Crèdit pendent
-Customer already selected,Les vendes de crèdit queden per cobrar
-Customer Balance,Crític
-Customer balance unavailable offline,Moneda
-Customer created successfully.,Actual
-Customer creation failed.,Retard del bucle de l'esdeveniment actual:
-Customer Details,Mes actual
-Customer display channel is missing,PIN actual
-Customer display was blocked. Please allow pop-ups for this site.,Perfil actual
-Customer group is required,Valor bescanviable actual de la targeta regal
-Customer is required to add payment,Usuari actual
-Customer Name is required,Personalitzat
-Customer not selected,Dies de venciment personalitzats
-Customer Report,Elements personalitzats per pàgina
-Customer saved offline,Client
-Customer Screen,Client ja seleccionat
-Customer territory is required,Balanç del client
-Customer updated successfully.,El saldo del client no està disponible fora de línia
-Customer-facing tools and printer setup.,Client creat correctament.
-Customers,La creació del client ha fallat.
-Customers not found,Dades del client
-Daily cashier actions without scrolling.,Falta el canal de visualització del client
-Daily Sales,S'ha bloquejat la visualització del client.
-Daily Sales Summary,Permet les finestres emergents per a aquest lloc.
-Dark Mode,Es requereix un grup de clients
-Data loaded in form. Review and submit.,El client ha d'afegir el pagament
-Database Health,El nom del client és obligatori
-Database health affects overall system speed and reliability.,Client no seleccionat
-Database Info,Informe del client
-Date,El client s'ha desat fora de línia
-Day Δ,Pantalla del client
-days,Es requereix el territori del client
-Day-wise (MTD),El client s'ha actualitzat correctament.
-Day-wise Movement,Eines per al client i configuració de la impressora.
-Dead Stock,Clients
-Dead Stock Items,No s'han trobat clients
-Decrease quantity,Accions diàries del caixer sense desplaçar-se.
-Default,Vendes diàries
-Default:,Resum de vendes diàries
-Delete,Mode fosc
-Delete cancelled cash movement {0}?,Dades carregades en formulari.
-Delete Draft,Revisa i envia.
-Delete draft invoice,Salut de la base de dades
-Delete draft invoice {0}?,La salut de la base de dades afecta la velocitat i la fiabilitat generals del sistema.
-Delete Invoice,Informació de la base de dades
-Delete offline invoice,Data
-Delivered,Dia Δ
-Delivery Charges,dies
-Delivery Information,Per dia (MTD)
-Delivery Note {0} created,Moviment diürn
-Delivery note created,Stock mort
-Deployed Bundle:,Articles d'estoc mort
-Deposit,Disminuir la quantitat
-Description,Per defecte
-Detailed Supplier Breakdown,Per defecte:
-Detecting formats:,Suprimeix
-Device Memory:,Vols suprimir el moviment d'efectiu cancel·lat {0}?
-Difference,Suprimeix l'esborrany
-Difference (In Company Currency),Esborra l'esborrany de la factura
-Disable offline mode first to recheck live connectivity.,Vols suprimir l'esborrany de factura {0}?
-Disconnect,Elimina la factura
-discount,Suprimeix la factura fora de línia
-Discount %,Lliurat
-Discount / Void / Return Report,Despeses d'enviament
-Discount Amount,Informació de lliurament
-Discount limited by POS Profile,S'ha creat la nota de lliurament {0}
-Discounted Invoices,S'ha creat l'albarà
-Discounts,Paquet desplegat:
-Dismiss,Dipòsit
-Download Certificate,Descripció
-Draft,Desglossament detallat dels proveïdors
-Draft invoice deleted,Detecció de formats:
-Draft source,Memòria del dispositiu:
-Drafts,Diferència
-Due {0},Diferència (en moneda de l'empresa)
-Due Date,Desactiveu primer el mode fora de línia per tornar a comprovar la connectivitat en directe.
-Duplicate,Desconnecta
-Edit customer,descompte
-Edit discount amount,% de descompte
-Edit discount percentage,Informe de descompte / anul·lació / devolució
-Edit Gift Application,Import del descompte
-Edit item name,Descompte limitat pel perfil POS
-Edit quantity,Factures amb descompte
-Edit rate,Descomptes
-Edit unit of measure,Descartar
-Edited,Descarregar certificat
-Employee,Esborrany
-Enable background sync,S'ha suprimit l'esborrany de la factura
-Enable Customer Display in POS Profile first.,Font de l'esborrany
-End current session,Esborranys
-Enter a PIN.,Venciment {0}
-Enter a valid grams value,Data de venciment
-Enter new price list rate,Duplicat
-Enter Quantity,Edita client
-Enter the cashier PIN to continue.,Edita l'import del descompte
-Enter the current PIN first.,Edita el percentatge de descompte
-"Enter the current PIN, then choose a new one.",Edita l'aplicació de regal
-Enter valid grams for scale barcode,Edita el nom de l'element
-Entries,Edita la quantitat
-Error accessing camera:,Edita la tarifa
-Error calculating prices,Edita la unitat de mesura
-Error fetching customer balance,Editat
-Error in change calculations!,Empleat
-Error Loading Data,Activa la sincronització en segon pla
-Error loading invoice details,Activeu primer la visualització del client al perfil de TPV.
-Error processing invoice,Finalitza la sessió actual
-Error processing payment,Introduïu un PIN.
-Error searching invoices,Introduïu un valor de grams vàlid
-Error submitting invoice:,Introduïu una nova tarifa de llista de preus
-Error submitting invoice: {0},Introduïu la quantitat
-Error submitting invoice: No response from server,Introduïu el PIN del caixer per continuar.
-Error updating currency,Introduïu primer el PIN actual.
-Error updating item details,"Introduïu el PIN actual i, a continuació, trieu-ne un de nou."
-Est. Purchase,Introduïu grams vàlids per al codi de barres de l'escala
-Est. Value,Entrades
-Event-loop lag measures how busy your browser is. Lower is better.,Error en accedir a la càmera:
-Every,Error en calcular els preus
-Exchange Rate,S'ha produït un error en obtenir el saldo del client
-Expand item details,Error en els càlculs de canvis!
-Expected Amount (In Company Currency),Error en carregar les dades
-Expected Cash,S'ha produït un error en carregar els detalls de la factura
-Expected cash on hand grouped by currency,Error en processar la factura
-Expected vs Actual,S'ha produït un error en processar el pagament
-Expense,S'ha produït un error en cercar les factures
-Expense Account (Optional Override),Error en enviar la factura:
-Expense account is required.,Error en enviar la factura: {0}
-Expenses and deposits posted during this shift,Error en enviar la factura: no hi ha resposta del servidor
-Expired,S'ha produït un error en actualitzar la moneda
-Failed to auto reconcile payments.,S'ha produït un error en actualitzar els detalls de l'element
-Failed to cancel cash movement,Est.
-Failed to clear cache,Compra
-Failed to create item,Est.
-Failed to create supplier,Valor
-Failed to delete cash movement,El retard del bucle d'esdeveniment mesura l'ocupació del vostre navegador.
-Failed to generate scale barcode. Using item barcode only.,Més baix és millor.
-Failed to load cash movement context.,Cadascú
-Failed to load dashboard data.,Taxa de canvi
-Failed to reload invoice from server,Amplieu els detalls de l'element
-Failed to submit cash movement,Import previst (en moneda de l'empresa)
-Failed to sync offline cash movements,Efectiu esperat
-Fast cashier actions for active shifts.,Efectiu en caixa esperat agrupat per moneda
-Fast Moving Items,Esperat vs Real
-Fees,Despesa
-Fetch the latest offline prerequisite updates,Compte de despeses (anul·lació opcional)
-Find a sales order quickly and load it into the current sale.,Es requereix un compte de despeses.
-Fixing payment amounts for return invoice...,Despeses i dipòsits registrats durant aquest torn
-Flash Off,Caducat
-Flash On,No s'han pogut conciliar els pagaments automàticament.
-"For 'Product Bundle' items, Warehouse, Serial No and Batch No will be considered from the 'Packing List' table. If Warehouse and Batch No are same for all packing items for any 'Product Bundle' item, those values can be entered in the main Item table; values will be copied to 'Packing List' table.",No s'ha pogut cancel·lar el moviment d'efectiu
-Free,No s'ha pogut esborrar la memòria cau
-Free Qty,No s'ha pogut crear l'element
-Frequency,No s'ha pogut crear el proveïdor
-from,No s'ha pogut suprimir el moviment d'efectiu
-From Date,No s'ha pogut generar el codi de barres de l'escala.
-Fulfillment Details,Utilitza només el codi de barres de l'article.
-Full Name,No s'ha pogut carregar el context de moviment d'efectiu.
-Gain,No s'han pogut carregar les dades del tauler.
-Generate a fresh prepaid card and start it with an opening balance.,No s'ha pogut tornar a carregar la factura des del servidor
-Generate and install the certificate to allow fully silent printing without trust prompts.,No s'ha pogut enviar el moviment d'efectiu
-Generate Certificate,No s'han pogut sincronitzar els moviments d'efectiu fora de línia
-Generated scale barcode: {0},Accions ràpides de caixer per a torns actius.
-Get Payments,Elements en moviment ràpid
-Gift Card,Tarifes
-Gift card amount must be greater than zero.,Obteniu les darreres actualitzacions de requisits previs fora de línia
-Gift Card Code,Trobeu una comanda de venda ràpidament i carregueu-la a la venda actual.
-Gift card code is required for redemption,S'estan fixant els imports de pagament per a la factura de devolució...
-Gift card code is required.,Flash apagat
-Gift card issued successfully.,Flash activat
-Gift card loaded successfully.,"Per als articles del ""Paquet de productes"", el número de magatzem, el número de sèrie i el número de lot es tindran en compte a la taula ""Llista d'embalatge""."
-Gift Card Management,"Si el magatzem i el número de lot són iguals per a tots els articles d'embalatge per a qualsevol article del ""Paquet de productes"", aquests valors es poden introduir a la taula d'articles principal;"
-Gift card payment,"els valors es copiaran a la taula ""Llista d'embalatge""."
-Gift card redemption requires an online connection,Gratuït
-Gift card topped up successfully.,Quantitat gratuïta
-Gift Cards,Freqüència
-Go Offline,des de
-Go Online,Des de la data
-Go to Frappe Desk,Detalls de compliment
-Grand Total,Nom complet
-Gross Margin,Guanyar
-Gross Profit,Genereu una nova targeta de prepagament i comenceu-la amb un saldo d'obertura.
-Gross Sales,Genereu i instal·leu el certificat per permetre una impressió totalment silenciosa sense indicacions de confiança.
-Group not found,Generar certificat
-"Grouped controls for terminal, UI, and session settings.",Codi de barres d'escala generat: {0}
-Grouped totals for each payment method and currency,Obteniu pagaments
-Hide,Targeta Regal
-Hide Gift Card,L'import de la targeta regal ha de ser superior a zero.
-Hide Non Essential Fields,Codi de la targeta regal
-Hide quantity decimals,El codi de la targeta regal és necessari per bescanviar-lo
-Hide search tools,El codi de la targeta regal és obligatori.
-Hide zero rated items,Targeta regal emesa correctament.
-High,La targeta regal s'ha carregat correctament.
-History,Gestió de targetes regal
-Hourly (Today),Pagament amb targeta regal
-How this section works,El bescanvi de la targeta regal requereix una connexió en línia
-"If stale data remains, open Settings > Offline & Sync and run Rebuild Offline Data again while online.",La targeta regal s'ha recarregat correctament.
-"If the warning persists, open Settings > Offline & Sync, then run Refresh Offline Data or Rebuild Offline Data.",Targetes Regal
-Import the certificate into QZ Tray and restart QZ Tray on each POS machine.,Anar fora de línia
-In,Anar en línia
-In stock: {0},Aneu a Frappe Desk
-Include Batch / Serial,Gran Total
-Include Price,Marge brut
-Increase quantity,Benefici brut
-IndexedDB,Vendes brutes
-Initial Amount,No s'ha trobat el grup
-Initialize your shift with opening balances,"Controls agrupats per a la configuració del terminal, la interfície d'usuari i la sessió."
+{0} has only {1} in stock. You requested {2}. Adjust quantity or restock.,{0} només té {1} en estoc. Heu sol·licitat {2}. Ajustar la quantitat o reposar.
+{0} offline invoice{1} pending,{0}factura fora de línia{1} pendent
+{0} offline invoice{1} saved as draft,La {0} factura fora de línia{1} s'ha desat com a esborrany
+{0} offline invoice{1} synced,{0} factura fora de línia{1} sincronitzada
+{0}: {1} {2},{0}: {1} {2}
+{0}d ago,fa {0} dies
+{0}h ago,fa {0}h
+{0}m ago,fa {0}m
+A POS supervisor is required for this action.,Es requereix un supervisor de TPV per a aquesta acció.
+Access,Accés
+Account,Compte
+Account is overdrawn,El compte està en excés
+Acknowledge the error to resume scanning,Confirmeu l'error per reprendre l'escaneig
+Acknowledge the error to resume scanning.,Confirmeu l'error per reprendre l'escaneig.
+Across,A través
+Action,Acció
+Active sale,Venda activa
+add,afegir
+Add items from the selector to start building this sale.,Afegiu articles del selector per començar a crear aquesta venda.
+Add more value to an existing gift card,Afegiu més valor a una targeta regal existent
+Add New Address,Afegeix una adreça nova
+Add new customer,Afegeix un client nou
+Add on New Line,Afegeix a New Line
+Add Payment,Afegeix el pagament
+Add payment to invoice,Afegiu el pagament a la factura
+Add/Edit Coupon Conditions,Afegeix/Edita les condicions del cupó
+Additional Discount,Descompte addicional
+Additional Discount %,% de descompte addicional
+Address Line 1,Línia d'adreça 1
+Address not found,No s'ha trobat l'adreça
+Adjust the quantity or enable negative stock to continue.,Ajusteu la quantitat o activeu l'estoc negatiu per continuar.
+Adjustment,Ajust
+After returns,Després de les tornades
+Against,En contra
+Against Name,Contra Nom
+Age Bracket,Tranxa d'edat
+All,Tots
+All Caught Up!,Tots atrapats!
+All invoices are synchronized,Totes les factures estan sincronitzades
+All pending invoices are up to date,Totes les factures pendents estan actualitzades
+All Profiles,Tots els perfils
+All Synchronized,Tot sincronitzat
+All visible invoices are fully settled.,Totes les factures visibles estan totalment liquidades.
+All Warehouses,Tots els Magatzems
+Allowed UOM is {0},UOM permesa és {0}
+Always fetch items from server (ignore local cache),Obteniu sempre els elements del servidor (ignoreu la memòria cau local)
+Amount,Import
+Amount already received,Import ja rebut
+Amount exceeds profile cash movement max amount.,L'import supera l'import màxim del moviment d'efectiu del perfil.
+Amount must be greater than zero.,La quantitat ha de ser superior a zero.
+Amount received from customer,Import rebut del client
+Appearance and user-level preferences for the current session.,Aparença i preferències a nivell d'usuari per a la sessió actual.
+Applied,Aplicat
+Apply,Aplicar
+Apply Gift Card,Aplica la Targeta Regal
+Apply Offer,Aplica l'oferta
+Apply On,Aplicar activat
+Apply only the amount you want to redeem on this invoice. The remaining balance stays on the card.,Apliqueu només l'import que voleu bescanviar en aquesta factura. El saldo restant es manté a la targeta.
+Apply Redemption,Aplica la redempció
+Applying,Aplicant
+Apps,Aplicacions
+Are you sure you want to close? All entered data will be lost.,Esteu segur que voleu tancar? Es perdran totes les dades introduïdes.
+Attributes (Size/Color),Atributs (mida/color)
+Auto Allocate Payment Amount,Assigna automàticament l'import del pagament
+Auto Reconcile,Reconciliació automàtica
+Auto reconciliation completed after payment submit.,La conciliació automàtica s'ha completat després de l'enviament del pagament.
+Auto reconciliation completed. Allocated: {0}{1}. Remaining outstanding: {0}{2}.,S'ha completat la reconciliació automàtica. Assignat: {0}{1}. Restant pendents: {0}{2}.
+Available Actions,Accions disponibles
+Available QTY,QTY disponible
+Available:,Disponible:
+Average Basket,Cistella mitjana
+Average Bill,Factura mitjana
+Average Ticket,Bitllet mitjà
+Avg Bill,Factura mitjana
+Avg Invoice,Factura mitjana
+Avg Invoice Profit,Benefici mitjà de la factura
+Avg Invoice Value,Valor mitjà de la factura
+Avg Purchase Frequency,Freqüència mitjana de compra
+Awesome,Genial
+Awesome Dashboard,Tauler de control impressionant
+Awesome Dashboard is disabled for the selected POS Profile.,Awesome Dashboard està desactivat per al perfil de POS seleccionat.
+Awesome Dashboard is unavailable for the selected scope.,Awesome Dashboard no està disponible per a l'àmbit seleccionat.
+Awesome Dashboard is visible only to POS supervisors.,Awesome Dashboard només és visible per als supervisors de TPV.
+Back,Enrere
+Back Office Cash Account,Compte d'efectiu del Back Office
+Back Office Cash Account (Optional Override),Compte d'efectiu del Back Office (modificació opcional)
+Back office cash account is required.,Es requereix un compte d'efectiu de back office.
+Back to {0},Torna a {0}
+Background processing did not finish in time.,El processament en segon pla no va acabar a temps.
+Background processing failed for Invoice {0}: {1},No s'ha pogut processar en segon pla per a la factura {0}: {1}
+Background Submission Failed,No s'ha pogut enviar en segon pla
+Background sync interval (seconds),Interval de sincronització de fons (segons)
+Balance,Balanç
+Balance will be updated when connection is restored,El saldo s'actualitzarà quan es restableixi la connexió
+Balances still pending,Saldos encara pendents
+Barcode,Codi de barres
+Barcode / QR Ready,Codi de barres / QR llest
+Barcode Label Printing,Impressió d'etiquetes de codi de barres
+Base Paid:,Base pagada:
+Base Recv:,Rec. base:
+Base:,Base:
+Basic Information,Informació bàsica
+Batch,Lot
+Batch Information,Informació del lot
+Before any return workflow,Abans de qualsevol flux de treball de retorn
+Before returns,Abans de les tornades
+Best Day,El millor dia
+Best Seller,El més venut
+Book expense or deposit from active shift.,Reserva de despeses o ingrés des del torn actiu.
+Branch / Location-wise Report,Informe d'oficina / ubicació
+Brand-wise,En termes de marca
+Breakdown,Avaria
+Browse,Navega
+Build Time:,Temps de construcció:
+Built with Frappe,Construït amb Frappe
+Bundle,Paquet
+Buying Price,Preu de compra
+Cache cleared successfully,La memòria cau s'ha esborrat correctament
+Cache Usage,Ús de la memòria cau
+cache used,memòria cau utilitzada
+Calculating...,Calculant...
+Camera Access Required,Accés a la càmera requerit
+Camera access was aborted. Please try again.,"S'ha cancel·lat l'accés a la càmera. Si us plau, torna-ho a provar."
+Camera constraints not supported by your device. Trying fallback settings...,El vostre dispositiu no admet les restriccions de la càmera. S'està provant la configuració alternativa...
+Camera is busy or blocked by another app/tab. Close other camera apps and try again.,La càmera està ocupada o bloquejada per una altra aplicació o pestanya. Tanca altres aplicacions de càmera i torna-ho a provar.
+Camera permission denied. Please allow camera access in your browser settings and refresh the page.,S'ha denegat el permís de la càmera. Permet l'accés a la càmera a la configuració del navegador i actualitza la pàgina.
+Camera scanner is locked until the current error is acknowledged,L'escàner de la càmera està bloquejat fins que es reconeix l'error actual
+Camera started but the video stream did not load in time. Please try again.,"La càmera va començar, però el flux de vídeo no es va carregar a temps. Si us plau, torna-ho a provar."
+Cancel cash movement {0}?,Cancel·lar el moviment d'efectiu {0}?
+Cancel Payment,Cancel·la el pagament
+Cancel Sale,Cancel·la la venda
+Cancel Sale ?,Cancel·lar la venda?
+Cancelled,Cancel·lat
+Cannot add an item with zero or negative quantity.,No es pot afegir un article amb una quantitat zero o negativa.
+Cannot clear cache while offline,No es pot esborrar la memòria cau sense connexió
+Cannot redeem customer credit more than invoice total,No es pot bescanviar el crèdit del client més del total de la factura
+Cannot redeem gift cards more than invoice total,No es poden bescanviar targetes regal més del total de la factura
+Cannot Save Offline Invoice:,No es pot desar la factura fora de línia:
+Cannot Save Offline Payment:,No es pot desar el pagament fora de línia:
+Card,Targeta
+Card / Online,Targeta / En línia
+Card health after the last live lookup,Estat de la targeta després de l'última cerca en directe
+Cards,Targetes
+Cart,Carro
+Cash,Efectiu
+Cash back to customers,Devolució de diners en efectiu als clients
+Cash Collections,Recaptacions en efectiu
+Cash Deposit is disabled for this POS Profile.,El dipòsit en efectiu està desactivat per a aquest perfil de TPV.
+Cash Drawer Snapshot,Instantània del calaix d'efectiu
+Cash In Hand,Diners en mà
+Cash Movement,Moviment d'Efectiu
+Cash movement cancelled,S'ha cancel·lat el moviment d'efectiu
+Cash movement deduction applied,S'ha aplicat la deducció de moviment d'efectiu
+Cash movement deleted,S'ha suprimit el moviment d'efectiu
+Cash movement is disabled for this POS Profile.,El moviment d'efectiu està desactivat per a aquest perfil de TPV.
+Cash Movement is disabled in current POS Profile.,El moviment d'efectiu està desactivat al perfil de TPV actual.
+Cash movement saved offline,Moviment d'efectiu desat fora de línia
+Cash movement submitted,Moviment d'efectiu enviat
+Cash Movements,Moviments d'Efectiu
+Cash payment cannot be less than invoice total when partial payment is not allowed,El pagament en efectiu no pot ser inferior al total de la factura quan no es permet el pagament parcial
+Cash returned after payment,Es retorna l'efectiu després del pagament
+Cashier,Caixer
+Cashier Access,Accés al caixer
+Cashier identity and appearance preferences.,Preferències d'identitat i aspecte del caixer.
+Cashier PIN,PIN del caixer
+Cashier PIN saved successfully.,El PIN del caixer s'ha desat correctament.
+Cashiers,Caixers
+Cashier-wise,A nivell de caixer
+Categories,Categories
+Category,Categoria
+Category / Brand / Variant Report,Categoria / Marca / Informe de variants
+Category-wise,Per categories
+Category-wise Margin,Marge per categoria
+Certificate,Certificat
+Certificate is missing or not trusted. QZ may show confirmation dialogs.,Falta el certificat o no és de confiança. QZ pot mostrar diàlegs de confirmació.
+Certificate is trusted. Silent QZ printing is active.,El certificat és de confiança. La impressió QZ silenciosa està activa.
+Change,Canviar
+Change allocation repaired,S'ha reparat el canvi d'assignació
+Change Price,Canvia el preu
+Change Return,Canvia Retorn
+Change Returned,S'ha tornat el canvi
+Change terminal cashier,Canvi de caixer terminal
+Charge Heads,Caps de càrrega
+Charges,Càrrecs
+Charges not found,No s'han trobat càrrecs
+Check Balance,Comproveu el saldo
+Check balance for any card. Supervisors can issue and top up cards here.,Comproveu el saldo de qualsevol targeta. Els supervisors poden emetre i recarregar targetes aquí.
+Check balance only,Consulta només el saldo
+Check for new commits,Comproveu si hi ha noves commits
+Check for Updates,Comproveu si hi ha actualitzacions
+Check live balance before applying redemption,Comproveu el saldo real abans d'aplicar el bescanvi
+Check live balance before redemption,Comproveu el saldo real abans del bescanvi
+Checking...,S'està comprovant...
+Cheque/Reference Date,Data del xec/referència
+Cheque/Reference No,Xec/núm. de referència
+Choose the cashier currently operating this terminal.,Trieu el caixer que opera actualment aquest terminal.
+City,Ciutat
+Clear,Clar
+Clear All,Esborra-ho tot
+Clear all barcode items,Esborra tots els elements del codi de barres
+Clear all purchase order items,Esborra tots els articles de la comanda de compra
+Clear Search,Esborra la cerca
+Clearing local cache...,S'està esborrant la memòria cau local...
+Click to refresh,Feu clic per actualitzar
+Client CPU Lag:,Retard de la CPU del client:
+Client Memory Usage:,Ús de memòria del client:
+Client Metrics,Mètriques de client
+Close about dialog,Tanca sobre el diàleg
+Close cashier switcher,Tanqueu el commutador de caixa
+Close closing shift dialog,Tanca el diàleg de tancament del torn
+Close column selector,Tanca el selector de columnes
+Close Dialog,Tanca el diàleg
+Close drafts dialog,Tanca el diàleg d'esborranys
+Close invoice details dialog,Tanca el diàleg de detalls de la factura
+Close invoice management,Tanca la gestió de les factures
+Close offline invoices dialog,Tanca el quadre de diàleg de les factures fora de línia
+Close packing list dialog,Tanca el diàleg de la llista d'embalatge
+Close returns dialog,Tanca el diàleg de retorn
+Close sales orders dialog,Tanca el diàleg de comandes de venda
+Close Scanner,Tanca l'escàner
+Close scanner dialog,Tanca el diàleg de l'escàner
+Close Settings,Tanca Configuració
+Closing Amount,Import de tancament
+Closing POS Shift,Tancant torn de POS
+Closing Snapshot Available,Instantània de tancament disponible
+Code,Codi
+Code scanned successfully,El codi s'ha escanejat correctament
+COGS,COGS
+Collapse item details,Replega els detalls de l'element
+Collected,Recollida
+Cols,Cols
+Columns,Columnes
+commits,es compromet
+Completed and active sales in this range,Vendes acabades i actives en aquesta gamma
+Completed returns will appear here.,Les devolucions completades apareixeran aquí.
+Confirm,Confirmeu
+Confirm Close,Confirmeu Tancar
+Confirm Mobile Number,Confirmeu el número de mòbil
+Confirm PIN,Confirmeu el PIN
+Connect,Connecta't
+Connect printer and manage certificate,Connecteu la impressora i gestioneu el certificat
+Connecting to QZ Tray...,S'està connectant a la safata QZ...
+Connection problem while submitting invoice,Problema de connexió durant l'enviament de la factura
+Connections:,Connexions:
+Connectivity and cached prerequisite status were rechecked.,La connectivitat i l'estat dels requisits previs de la memòria cau es van tornar a comprovar.
+Continue Editing,Continuar editant
+Could not fetch latest balance from server,No s'ha pogut obtenir l'últim saldo del servidor
+Count,Compte
+Country,País
+Coupon,Cupó
+Coupons,Cupons
+Cover,Portada
+CPU Cores:,Nuclis de CPU:
+Create,Crear
+Create and load a new prepaid card,Creeu i carregueu una targeta de prepagament nova
+Create and preload a new gift card,Creeu i precarregueu una targeta regal nova
+Create Bill,Crea Bill
+Create Customer,Crear client
+Create New Item,Crea un element nou
+Create or change your PIN,Creeu o canvieu el vostre PIN
+Create PIN,Crea el PIN
+Create POS Opening Shift,Crea un torn d'obertura de TPV
+Create Purchase Order,Crear comanda de compra
+Create Return,Crea retorn
+Create return from invoice,Crear devolució a partir de la factura
+Create Supplier,Crea un proveïdor
+Credit and Output,Crèdit i sortida
+Credit Note,Nota de crèdit
+Credit Outstanding,Crèdit pendent
+Credit sales remaining to be collected,Les vendes de crèdit queden per cobrar
+Critical,Crític
+Currency,Moneda
+Current,Actual
+Current Event Loop Lag:,Retard del bucle de l'esdeveniment actual:
+Current Month,Mes actual
+Current PIN,PIN actual
+Current Profile,Perfil actual
+Current redeemable value on the gift card,Valor bescanviable actual de la targeta regal
+Current User,Usuari actual
+Custom,Personalitzat
+Custom Due Days,Dies de venciment personalitzats
+Custom items per page,Elements personalitzats per pàgina
+Customer,Client
+Customer already selected,Client ja seleccionat
+Customer Balance,Balanç del client
+Customer balance unavailable offline,El saldo del client no està disponible fora de línia
+Customer created successfully.,Client creat correctament.
+Customer creation failed.,La creació del client ha fallat.
+Customer Details,Dades del client
+Customer display channel is missing,Falta el canal de visualització del client
+Customer display was blocked. Please allow pop-ups for this site.,S'ha bloquejat la visualització del client. Permet les finestres emergents per a aquest lloc.
+Customer group is required,Es requereix un grup de clients
+Customer is required to add payment,El client ha d'afegir el pagament
+Customer Name is required,El nom del client és obligatori
+Customer not selected,Client no seleccionat
+Customer Report,Informe del client
+Customer saved offline,El client s'ha desat fora de línia
+Customer Screen,Pantalla del client
+Customer territory is required,Es requereix el territori del client
+Customer updated successfully.,El client s'ha actualitzat correctament.
+Customer-facing tools and printer setup.,Eines per al client i configuració de la impressora.
+Customers,Clients
+Customers not found,No s'han trobat clients
+Daily cashier actions without scrolling.,Accions diàries del caixer sense desplaçar-se.
+Daily Sales,Vendes diàries
+Daily Sales Summary,Resum de vendes diàries
+Data loaded in form. Review and submit.,Dades carregades en formulari. Revisa i envia.
+Database Health,Salut de la base de dades
+Database health affects overall system speed and reliability.,La salut de la base de dades afecta la velocitat i la fiabilitat generals del sistema.
+Database Info,Informació de la base de dades
+Date,Data
+Day ?,dia?
+days,dies
+Day-wise (MTD),Per dia (MTD)
+Day-wise Movement,Moviment diürn
+Dead Stock,Stock mort
+Dead Stock Items,Articles d'estoc mort
+Decrease quantity,Disminuir la quantitat
+Default,Per defecte
+Default:,Per defecte:
+Delete,Suprimeix
+Delete cancelled cash movement {0}?,Vols suprimir el moviment d'efectiu cancel·lat {0}?
+Delete Draft,Suprimeix l'esborrany
+Delete draft invoice,Esborra l'esborrany de la factura
+Delete draft invoice {0}?,Vols suprimir l'esborrany de factura {0}?
+Delete Invoice,Elimina la factura
+Delete offline invoice,Suprimeix la factura fora de línia
+Delivered,Lliurat
+Delivery Charges,Despeses d'enviament
+Delivery Information,Informació de lliurament
+Delivery Note {0} created,S'ha creat la nota de lliurament {0}
+Delivery note created,S'ha creat l'albarà
+Deployed Bundle:,Paquet desplegat:
+Deposit,Dipòsit
+Description,Descripció
+Detailed Supplier Breakdown,Desglossament detallat dels proveïdors
+Detecting formats:,Detecció de formats:
+Device Memory:,Memòria del dispositiu:
+Difference,Diferència
+Difference (In Company Currency),Diferència (en moneda de l'empresa)
+Disable offline mode first to recheck live connectivity.,Desactiveu primer el mode fora de línia per tornar a comprovar la connectivitat en directe.
+Disconnect,Desconnecta
+discount,descompte
+Discount %,% de descompte
+Discount / Void / Return Report,Informe de descompte / anul·lació / devolució
+Discount Amount,Import del descompte
+Discount limited by POS Profile,Descompte limitat pel perfil POS
+Discounted Invoices,Factures amb descompte
+Discounts,Descomptes
+Dismiss,Descartar
+Download Certificate,Descarregar certificat
+Draft,Esborrany
+Draft invoice deleted,S'ha suprimit l'esborrany de la factura
+Draft source,Font de l'esborrany
+Drafts,Esborranys
+Due {0},Venciment {0}
+Due Date,Data de venciment
+Duplicate,Duplicat
+Edit customer,Edita client
+Edit discount amount,Edita l'import del descompte
+Edit discount percentage,Edita el percentatge de descompte
+Edit Gift Application,Edita l'aplicació de regal
+Edit item name,Edita el nom de l'element
+Edit quantity,Edita la quantitat
+Edit rate,Edita la tarifa
+Edit unit of measure,Edita la unitat de mesura
+Edited,Editat
+Employee,Empleat
+Enable background sync,Activa la sincronització en segon pla
+Enable Customer Display in POS Profile first.,Activeu primer la visualització del client al perfil de TPV.
+Enter a PIN.,Introduïu un PIN.
+Enter a valid grams value,Introduïu un valor de grams vàlid
+Enter new price list rate,Introduïu una nova tarifa de llista de preus
+Enter Quantity,Introduïu la quantitat
+Enter the cashier PIN to continue.,Introduïu el PIN del caixer per continuar.
+Enter the current PIN first.,Introduïu primer el PIN actual.
+"Enter the current PIN, then choose a new one.","Introduïu el PIN actual i, a continuació, trieu-ne un de nou."
+Enter valid grams for scale barcode,Introduïu grams vàlids per al codi de barres de l'escala
+Entries,Entrades
+Error accessing camera:,Error en accedir a la càmera:
+Error calculating prices,Error en calcular els preus
+Error fetching customer balance,S'ha produït un error en obtenir el saldo del client
+Error in change calculations!,Error en els càlculs de canvis!
+Error Loading Data,Error en carregar les dades
+Error loading invoice details,S'ha produït un error en carregar els detalls de la factura
+Error processing invoice,Error en processar la factura
+Error processing payment,S'ha produït un error en processar el pagament
+Error searching invoices,S'ha produït un error en cercar les factures
+Error submitting invoice:,Error en enviar la factura:
+Error submitting invoice: {0},Error en enviar la factura: {0}
+Error submitting invoice: No response from server,Error en enviar la factura: no hi ha resposta del servidor
+Error updating currency,S'ha produït un error en actualitzar la moneda
+Error updating item details,S'ha produït un error en actualitzar els detalls de l'element
+Est. Purchase,Est. Compra
+Est. Value,Est. Valor
+Event-loop lag measures how busy your browser is. Lower is better.,El retard del bucle d'esdeveniment mesura l'ocupació del vostre navegador. Més baix és millor.
+Every,Cadascú
+Exchange Rate,Taxa de canvi
+Expand item details,Amplieu els detalls de l'element
+Expected Amount (In Company Currency),Import previst (en moneda de l'empresa)
+Expected Cash,Efectiu esperat
+Expected cash on hand grouped by currency,Efectiu en caixa esperat agrupat per moneda
+Expected vs Actual,Esperat vs Real
+Expense,Despesa
+Expense Account (Optional Override),Compte de despeses (anul·lació opcional)
+Expense account is required.,Es requereix un compte de despeses.
+Expenses and deposits posted during this shift,Despeses i dipòsits registrats durant aquest torn
+Expired,Caducat
+Failed to auto reconcile payments.,No s'han pogut conciliar els pagaments automàticament.
+Failed to cancel cash movement,No s'ha pogut cancel·lar el moviment d'efectiu
+Failed to clear cache,No s'ha pogut esborrar la memòria cau
+Failed to create item,No s'ha pogut crear l'element
+Failed to create supplier,No s'ha pogut crear el proveïdor
+Failed to delete cash movement,No s'ha pogut suprimir el moviment d'efectiu
+Failed to generate scale barcode. Using item barcode only.,No s'ha pogut generar el codi de barres de l'escala. Utilitza només el codi de barres de l'article.
+Failed to load cash movement context.,No s'ha pogut carregar el context de moviment d'efectiu.
+Failed to load dashboard data.,No s'han pogut carregar les dades del tauler.
+Failed to reload invoice from server,No s'ha pogut tornar a carregar la factura des del servidor
+Failed to submit cash movement,No s'ha pogut enviar el moviment d'efectiu
+Failed to sync offline cash movements,No s'han pogut sincronitzar els moviments d'efectiu fora de línia
+Fast cashier actions for active shifts.,Accions ràpides de caixer per a torns actius.
+Fast Moving Items,Elements en moviment ràpid
+Fees,Tarifes
+Fetch the latest offline prerequisite updates,Obteniu les darreres actualitzacions de requisits previs fora de línia
+Find a sales order quickly and load it into the current sale.,Trobeu una comanda de venda ràpidament i carregueu-la a la venda actual.
+Fixing payment amounts for return invoice...,S'estan fixant els imports de pagament per a la factura de devolució...
+Flash Off,Flash apagat
+Flash On,Flash activat
+"For 'Product Bundle' items, Warehouse, Serial No and Batch No will be considered from the 'Packing List' table. If Warehouse and Batch No are same for all packing items for any 'Product Bundle' item, those values can be entered in the main Item table; values will be copied to 'Packing List' table.","Per als articles del ""Paquet de productes"", el número de magatzem, el número de sèrie i el número de lot es tindran en compte a la taula ""Llista d'embalatge"". Si el magatzem i el número de lot són iguals per a tots els articles d'embalatge per a qualsevol article del ""Paquet de productes"", aquests valors es poden introduir a la taula d'articles principal; els valors es copiaran a la taula ""Llista d'embalatge""."
+Free,Gratuït
+Free Qty,Quantitat gratuïta
+Frequency,Freqüència
+from,des de
+From Date,Des de la data
+Fulfillment Details,Detalls de compliment
+Full Name,Nom complet
+Gain,Guanyar
+Generate a fresh prepaid card and start it with an opening balance.,Genereu una nova targeta de prepagament i comenceu-la amb un saldo d'obertura.
+Generate and install the certificate to allow fully silent printing without trust prompts.,Genereu i instal·leu el certificat per permetre una impressió totalment silenciosa sense indicacions de confiança.
+Generate Certificate,Generar certificat
+Generated scale barcode: {0},Codi de barres d'escala generat: {0}
+Get Payments,Obteniu pagaments
+Gift Card,Targeta Regal
+Gift card amount must be greater than zero.,L'import de la targeta regal ha de ser superior a zero.
+Gift Card Code,Codi de la targeta regal
+Gift card code is required for redemption,El codi de la targeta regal és necessari per bescanviar-lo
+Gift card code is required.,El codi de la targeta regal és obligatori.
+Gift card issued successfully.,Targeta regal emesa correctament.
+Gift card loaded successfully.,La targeta regal s'ha carregat correctament.
+Gift Card Management,Gestió de targetes regal
+Gift card payment,Pagament amb targeta regal
+Gift card redemption requires an online connection,El bescanvi de la targeta regal requereix una connexió en línia
+Gift card topped up successfully.,La targeta regal s'ha recarregat correctament.
+Gift Cards,Targetes Regal
+Go to Frappe Desk,Aneu a Frappe Desk
+Grand Total,Gran Total
+Gross Margin,Marge brut
+Gross Profit,Benefici brut
+Gross Sales,Vendes brutes
+Group not found,No s'ha trobat el grup
+"Grouped controls for terminal, UI, and session settings.","Controls agrupats per a la configuració del terminal, la interfície d'usuari i la sessió."
+Grouped totals for each payment method and currency,Totals agrupats per a cada mètode de pagament i moneda
+Hide,Amaga
+Hide Gift Card,Amaga la targeta regal
+Hide Non Essential Fields,Amaga els camps no essencials
+Hide quantity decimals,Amaga nombres decimals de quantitat
+Hide search tools,Amaga les eines de cerca
+Hide zero rated items,Amaga els elements amb puntuació zero
+High,Alt
+History,Història
+Hourly (Today),Cada hora (avui)
+How this section works,Com funciona aquesta secció
+"If stale data remains, open Settings > Offline & Sync and run Rebuild Offline Data again while online.","Si queden dades obsoletes, obriu Configuració > Fora de línia i sincronització i torneu a executar Reconstrueix dades fora de línia mentre esteu en línia."
+"If the warning persists, open Settings > Offline & Sync, then run Refresh Offline Data or Rebuild Offline Data.","Si l'avís continua, obriu Configuració > Fora de línia i sincronització i, a continuació, executeu Actualitza dades fora de línia o Reconstrueix dades fora de línia."
+Import the certificate into QZ Tray and restart QZ Tray on each POS machine.,Importeu el certificat a la safata QZ i reinicieu la safata QZ a cada màquina TPV.
+In,En
+In stock: {0},En estoc: {0}
+Include Batch / Serial,Inclou lot / sèrie
+Include Price,Inclou el preu
+Increase quantity,Augmentar la quantitat
+IndexedDB,Base de dades indexada
+Initial Amount,Import Inicial
+Initialize your shift with opening balances,Inicieu el vostre torn amb els saldos d'obertura
 Initializing application...,S'està inicialitzant l'aplicació...
 "Inspect cache, sync, and prerequisite status","Inspeccioneu la memòria cau, la sincronització i l'estat dels requisits previs"
 Installed Applications,Aplicacions instal·lades
@@ -552,8 +573,6 @@ json,json
 Just now,Just ara
 Keep offline prerequisites healthy and recover stale data safely.,Manteniu els requisits previs fora de línia i recupereu les dades obsoletes de manera segura.
 Labels,Etiquetes
-Language,Llengua
-Language will be changed to,Es canviarà l'idioma a
 "Language, theme, terminal tools, and session controls.","Idioma, tema, eines de terminal i controls de sessió."
 Last,Darrer
 Last 14 Days (Paid vs Pending),Últims 14 dies (pagats o pendents)
@@ -562,443 +581,438 @@ Last 14 Days Gross Profit,Benefici brut dels últims 14 dies
 Last 14 Days Purchases,Compres dels últims 14 dies
 Last 14 Days Tax/Charges,Últims 14 dies Impostos/Càrrecs
 Last sync:,Última sincronització:
-Last sync: {0} | ok: {1} | failed: {2} | skipped: {3},Última sincronització: {0} |
-Latest entries for current shift,d'acord: {1} |
-Lead Time,fallat: {2} |
-Light Mode,omès: {3}
-Limited,Últimes entrades per al torn actual
-lines,Temps d'execució
-List,Mode de llum
-Live Snapshot,Limitat
-Load a POS profile and cashier first.,línies
-Load More Invoices,Llista
-Load previously saved invoices,Instantània en directe
-Load Sale,Carregueu primer un perfil de TPV i un caixer.
-Load Sales Invoice,Carregueu més factures
-Loading app data...,Carregueu les factures desades anteriorment
-Loading customer database...,Venda de càrrega
-Loading customers...,Carregueu la factura de venda
-Loading database stats...,S'estan carregant les dades de l'aplicació...
-Loading details...,S'està carregant la base de dades de clients...
-Loading invoice history...,S'estan carregant clients...
-Loading items...,S'estan carregant les estadístiques de la base de dades...
-Loading product catalog...,S'estan carregant els detalls...
-Loading return invoices...,S'està carregant l'historial de factures...
-Loading server CPU/memory usage...,S'estan carregant elements...
-Loading suppliers...,S'està carregant el catàleg de productes...
-Loading unpaid invoices...,S'estan carregant les factures de devolució...
-Loading view...,S'està carregant l'ús de la CPU/memoria del servidor...
-Loading...,Carregant proveïdors...
-Local storage is unavailable. Switching to online-only mode.,S'estan carregant factures sense pagar...
-localStorage,S'està carregant la vista...
-Location Performance,Carregant...
-Locations,L'emmagatzematge local no està disponible.
-Lock Screen,Canvi al mode només en línia.
-Logout,emmagatzematge local
-Lookup Workflow,Rendiment de la ubicació
-Loss,Ubicacions
-Low,Pantalla de bloqueig
-Low Stock,Tanca la sessió
-Low Stock Alerts,Flux de treball de cerca
-Low Stock Items,Pèrdua
-Low Stock Threshold,Baixa
-Low Stock Total,Estoc baix
-Lowest Margin,Alertes d'existències baixes
-Low-frequency maintenance and system details.,Articles amb estoc baix
-Loyalty Redeemed,Llindar d'existències baixes
-Loyalty Redemption,Total d'existències baixes
-Make New Payment,Marge més baix
-Manage all,Manteniment de baixa freqüència i detalls del sistema.
-Manage and synchronize your offline transactions,Lleialtat bescanviada
-Manage Cashier PIN,Redempció de lleialtat
-"Manage offline tools, terminal controls, and maintenance from one workspace.",Feu un nou pagament
-manual,Gestionar-ho tot
-"Manual codes, barcode scans, and QR scans work in the same field",Gestioneu i sincronitzeu les vostres transaccions fora de línia
-Manual offline mode is enabled,Gestioneu el PIN del caixer
-Margin,"Gestioneu les eines fora de línia, els controls de terminal i el manteniment des d'un sol espai de treball."
-Maximum available quantity is {0}. Quantity adjusted to match stock.,manual
-Maximum discount amount for this offer item is {0}.,"Els codis manuals, els escanejos de codis de barres i els escanejos QR funcionen en el mateix camp"
-Maximum discount percentage for this offer item is {0}%.,El mode manual fora de línia està activat
-Maximum offer quantity is {0}. Quantity adjusted to allowed limit.,Marge
-Medium,La quantitat màxima disponible és {0}.
-Menu,Quantitat ajustada per coincidir amb l'estoc.
-Method-wise Collections,L'import màxim de descompte per a aquest article de l'oferta és de {0}.
-Minimum allowed rate for this offer item is {0}.,El percentatge de descompte màxim per a aquest article de l'oferta és del {0}%.
-Minimum Qty,La quantitat màxima d'oferta és {0}.
-Mobile No,Quantitat ajustada al límit permès.
-Mode,Mitjana
-Mode of Payment,Menú
-Month,Col·leccions metodològiques
-Month Δ,La tarifa mínima permesa per a aquest article de l'oferta és {0}.
-Monthly Profit,Quantitat mínima
-Monthly Sales,Mòbil núm
-Monthly Sales Summary,Mode
-Month-wise,Modalitat de pagament
-Most Active Cashiers,Mes
-Movement Type,Mes Δ
-Movements,Benefici mensual
-Multi Currency,Vendes mensuals
-N/A,Resum de vendes mensuals
-Name,Mesualment
-Negative Stock,Els caixers més actius
-Negative Stock Items,Tipus de moviment
-Negative values not allowed,Moviments
-Net,Multimoneda
-Net Qty,N/A
-Net Sales,Nom
-Net Value,Estoc negatiu
-Never,Articles en estoc negatius
-New changes are ready to load,No es permeten valors negatius
-New Item,Net
-New Offer Available,Quantitat neta
-New PIN,Vendes netes
-New rate,Valor net
-Next unit of measure,Mai
-No attribute data found.,Els nous canvis estan preparats per carregar
-No Barcode,Article nou
-No barcode found for UOM '{0}',Nova oferta disponible
-No branch/location data found.,PIN nou
-No brand data found.,Nova tarifa
-No cached gift card balance is available offline.,Següent unitat de mesura
-No camera found on this device. Please ensure your device has a working camera.,No s'han trobat dades d'atributs.
-No capability warnings recorded yet.,Sense codi de barres
-No cash expected for this shift.,"No s'ha trobat cap codi de barres per a la UOM ""{0}"""
-No cash mode configured,No s'han trobat dades de sucursal/ubicació.
-No cash movement type is allowed for this POS Profile.,No s'han trobat dades de marca.
-No cashier PIN is set yet. Create one now.,No hi ha cap saldo de targeta regal emmagatzemat a la memòria cau sense connexió.
-No cashier profiles are available for this POS profile yet.,No s'ha trobat cap càmera en aquest dispositiu.
-No cashier-wise discount/void/return activity.,Assegureu-vos que el vostre dispositiu tingui una càmera que funcioni.
-No category data found.,Encara no s'han registrat cap advertiment de capacitat.
-No category profitability data found.,No s'esperen diners en efectiu per aquest torn.
-No change returned recorded for this shift.,No s'ha configurat cap mode d'efectiu
-No change-allocation invoices match the current filters.,No es permet cap tipus de moviment d'efectiu per a aquest perfil de TPV.
-No charge head breakdown found.,Encara no s'ha establert cap PIN de caixer.
-No Company Selected,Creeu-ne un ara.
-No customer sales data found.,Encara no hi ha cap perfil de caixer disponible per a aquest perfil de TPV.
-No day-wise discount/void/return trend.,No hi ha cap activitat de descompte/nul·lació/devolució per al caixer.
-No day-wise payment data found.,No s'han trobat dades de categoria.
-No day-wise profitability trend found.,No s'han trobat dades de rendibilitat de categoria.
-No day-wise purchase data found.,No s'ha registrat cap canvi per a aquest torn.
-No day-wise sales trend found.,No hi ha cap factura d'assignació de canvis que coincideixi amb els filtres actuals.
-No day-wise tax/charges trend found.,No s'ha trobat cap desglossament del cap de càrrega.
-No dead stock items.,No s'ha seleccionat cap empresa
-No due date,No s'han trobat dades de vendes de clients.
-No exact repair match found for this invoice,No hi ha tendència diària de descompte/nul·lació/devolució.
-No hourly sales trend found for today.,No s'han trobat dades de pagament diaris.
-No invoice activity found.,No s'ha trobat cap tendència de rendibilitat diària.
-No invoices found,No s'han trobat dades de compra diària.
-No invoices found. Try different search criteria.,No s'ha trobat cap tendència de vendes diària.
-No invoices recorded for this shift.,No s'ha trobat cap tendència diària d'impostos/càrrecs.
-No item profitability data found.,No hi ha articles en estoc mort.
-No item sales data found for this period.,Sense data de venciment
-No items found,No s'ha trobat cap coincidència exacta de reparació per a aquesta factura
-No items in cart,No s'ha trobat cap tendència de vendes per hora per avui.
-No items with barcodes to print,No s'ha trobat cap activitat de factura.
-No location-wise top item data found.,No s'han trobat factures
-No low stock alerts right now.,No s'han trobat factures.
-No low stock items.,Proveu diferents criteris de cerca.
-No matching items in cart,No s'han registrat factures per a aquest torn.
-No month-wise sales trend found.,No s'han trobat dades de rendibilitat de l'article.
-No negative stock items.,No s'han trobat dades de vendes d'articles per a aquest període.
-No notifications yet,No s'han trobat elements
-No offline cash movement synced.,No hi ha articles al carretó
-No offline invoices pending synchronization,No hi ha articles amb codis de barres per imprimir
-No offline sync issues recorded yet.,No s'han trobat dades de l'element superior segons la ubicació.
-No out-of-stock items.,No hi ha alertes d'existències baixes ara mateix.
-No outstanding credit invoices for this shift.,No hi ha articles amb estoc baix.
-No payment collection data found.,No hi ha articles coincidents al carretó
-No payment rows available on this invoice.,No s'ha trobat cap tendència mensual de vendes.
-No payments registered for this shift.,No hi ha articles d'estoc negatiu.
-No pending balances in this period.,Encara no hi ha notificacions
-No pending offline invoices,No s'ha sincronitzat cap moviment d'efectiu fora de línia.
-No Print Formats Found,No hi ha factures fora de línia pendents de sincronització
-No profiles found for selected scope. Falling back to current profile failed.,Encara no s'ha registrat cap problema de sincronització fora de línia.
-No recent customer activity found.,No hi ha articles exhaurits.
-No recent stock entries found.,No hi ha factures de crèdit pendents d'aquest torn.
-No records found,No s'han trobat dades de cobrament de pagaments.
-No reorder suggestions right now.,No hi ha cap fila de pagament disponible en aquesta factura.
-No repeat customers in this period.,No s'han registrat pagaments per a aquest torn.
-No response from server,No hi ha saldos pendents en aquest període.
-No return invoices found,No hi ha factures fora de línia pendents
-No return item trend found.,No s'han trobat formats d'impressió
-No returnable items found for this invoice,No s'han trobat perfils per a l'àmbit seleccionat.
-No returns were processed in this shift.,No s'ha pogut tornar al perfil actual.
-No risk activity found.,No s'ha trobat cap activitat recent del client.
-No sales activity found for this period.,No s'han trobat entrades d'estoc recents.
-No slow moving items.,No s'han trobat registres
-No staff sales activity found.,No hi ha cap suggeriment de reordenar ara mateix.
-No stock movement for this period.,No hi ha clients repetits en aquest període.
-No submitted cash movements in this shift.,Cap resposta del servidor
-No supplier purchases found in this month.,No s'han trobat factures de devolució
-No suppliers found for this period.,No s'ha trobat cap tendència d'article de retorn.
-No sync trigger has run yet in this session.,No s'han trobat articles retornables per a aquesta factura
-No tax head breakdown found.,En aquest torn no s'ha processat cap devolució.
-No top items found for this location.,No s'ha trobat cap activitat de risc.
-No unpaid invoices,No s'ha trobat cap activitat de vendes per a aquest període.
-No variant data found.,No hi ha elements de moviment lent.
-No week-wise sales trend found.,No s'ha trobat cap activitat de vendes de personal.
-No.,No hi ha moviment d'accions per a aquest període.
-Nobile Number,No s'han presentat moviments d'efectiu en aquest torn.
-Not available,No s'han trobat compres a proveïdors durant aquest mes.
-Not checked,No s'han trobat proveïdors per a aquest període.
-Not selected,Encara no s'ha executat cap activador de sincronització en aquesta sessió.
-Not Set,No s'ha trobat cap desglossament fiscal.
-Notifications,No s'han trobat articles principals per a aquesta ubicació.
-Offer,No hi ha factures impagades
-Offer Applied,No s'han trobat dades de variants.
-Offer criteria exceeded,No s'ha trobat cap tendència de vendes setmanal.
-Offer Item,No.
-Offer item unavailable,Número noble
-Offer Removed,No disponible
-Offer UOM cannot be changed,No comprovat
-Offer?,No seleccionat
-Offers,No establert
-Offline,Notificacions
-Offline & Sync,Oferta
-Offline Capabilities,Oferta aplicada
-Offline data status refreshed,S'han superat els criteris de l'oferta
-Offline diagnostics,Element d'oferta
-Offline Invoices,L'article de l'oferta no està disponible
-Offline invoices status,Oferta eliminada
-Offline invoices synced,La UOM de l'oferta no es pot canviar
-Offline Queue: {0},Oferta?
-Offline rebuild guidance,Ofertes
-Offline restore is unavailable for this session.,Fora de línia
-Offline selling is available with degraded capabilities.,Sense connexió i sincronització
-Offline snapshot does not match the current POS state.,Capacitats fora de línia
-Offline Status,S'ha actualitzat l'estat de les dades fora de línia
-"Offline, terminal, and system controls",Diagnòstic fora de línia
-OK,Factures fora de línia
-Online,Estat de les factures fora de línia
-Open actions menu,Les factures fora de línia s'han sincronitzat
-Open balance to collect,Cua fora de línia: {0}
-Open Customer Display,Guia de reconstrucció fora de línia
-Open drawer,La restauració fora de línia no està disponible per a aquesta sessió.
-Open invoices,La venda fora de línia està disponible amb capacitats degradades.
-Open Payments?,La instantània fora de línia no coincideix amb l'estat actual del TPV.
-Open POS home,Estat fora de línia
-Open this screen from POS Menu -> Open Customer Display.,"Controls fora de línia, de terminal i del sistema"
-OpenCV image processing enabled - Enhanced barcode detection,D'acord
-OpenCV image processing unavailable on this device,En línia
-OpenCV Off,Obre el menú d'accions
-OpenCV On,Saldo obert per cobrar
-OpenCV processing disabled,Obriu la pantalla del client
-Opening Amount,Obriu el calaix
-Opening Cash,Factures obertes
-options,Pagaments oberts?
-Order,Obre POS home
-Original,Obriu aquesta pantalla des del menú POS -> Obre la pantalla del client.
-Other,Processament d'imatges OpenCV habilitat - Detecció de codi de barres millorada
-Out,El processament d'imatges OpenCV no està disponible en aquest dispositiu
-Out of Stock,OpenCV desactivat
-Out of Stock Items,OpenCV activat
-Outstanding,Processament d'OpenCV desactivat
-Outstanding Credit by Currency,Import d'obertura
-Overdue,Obertura en efectiu
-Overpayment Change,opcions
-Overpayment change deducted: {0},Ordre
-Packing List,Original
-Page Format,Altres
-Page unavailable offline,Fora
-Paid,Esgotat
-Paid (orig):,Articles sense estoc
-Paid Amount,Destacat
-Paid change cannot be greater than total change!,Crèdit pendent per moneda
-Paid:,Endarrerit
-Parent Item,Canvi de sobrepagament
-Partial,Canvi de sobrepagament deduït: {0}
-Partly Paid,Llista d'embalatge
-Party Account,Format de pàgina
-Party Type,Pàgina no disponible fora de línia
-Pause terminal until next cashier,Pagat
-PAY,Pagat (orig):
-Payment,Import pagat
-Payment Account,El canvi pagat no pot ser superior al canvi total!
-Payment entries processed for Invoice {0},Pagat:
-Payment Entry Type,Element pare
-Payment History,Parcial
-Payment ID,Parcialment pagat
-Payment Method Report,Compte del partit
-Payment Methods,Tipus de festa
-Payment of {0} received successfully.,Pausa el terminal fins al següent caixer
-Payment Progress,PAGAR
-Payment Reconciliation,Pagament
-Payment request status could not be retrieved. Please try again,Compte de pagament
-Payment Request took too long to respond. Please try requesting for payment again,Entrades de pagament processades per a la factura {0}
-Payment saved offline,Tipus d'entrada de pagament
-Payment State,Historial de pagaments
-Payment Status,ID de pagament
-Payment submitted but print function could not be executed. Payment name not found.,Informe de forma de pagament
-Payment submitted.,Mètodes de pagament
-Payment Summary,El pagament de {0} s'ha rebut correctament.
-Payments,Progrés de pagament
-Payments are not open. Do you want to open payments and submit?,Conciliació de pagaments
-Payments by Mode of Payment,No s'ha pogut recuperar l'estat de la sol·licitud de pagament.
-PDF,"Si us plau, torna-ho a provar"
-Peak Hour,La sol·licitud de pagament ha trigat massa a respondre.
-Peak Memory:,"Si us plau, prova de tornar a sol·licitar el pagament"
-Peak Server:,Pagament desat fora de línia
-Peak:,Estat de pagament
-Pending,Estat de pagament
-Pending Amount,S'ha enviat el pagament però no s'ha pogut executar la funció d'impressió.
-Pending count updated from {0} to {1},No s'ha trobat el nom del pagament.
-Pending Exposure,Pagament enviat.
-Pending Invoices,Resum de pagament
-Pending Ratio,Pagaments
-Pending Sales,Els pagaments no estan oberts.
-Pending sales: {0} | Cache usage: {1}%,Vols obrir pagaments i enviar-los?
-Pending Sync,Pagaments per Mode de Pagament
-Pending: {0},PDF
-Pending: {0} | Synced: {1} | Draft: {2},Hora punta
-Per Page,Memòria màxima:
-Personal,Servidor màxim:
-Personal preferences adjust the current cashier experience without changing the active POS route.,Pic:
-PIN confirmation does not match.,Pendent
-PIN must be 4 to 8 digits.,Import pendent
-Please add at least one item.,Recompte pendent actualitzat de {0} a {1}
-Please allow camera access to scan codes,Exposició pendent
-Please enter payment amount,Factures pendents
-Please fill all required fields,Relació pendent
-Please make a payment or select a payment,Vendes pendents
-Please request phone payment or use another payment method,Vendes pendents: {0} |
-Please select a customer first,Ús de la memòria cau: {1}%
-Please select a party,Sincronització pendent
-Please select a party before reconciling.,Pendent: {0}
-Please select a valid movement type.,Pendent: {0} |
-Please select an invoice,Sincronitzat: {1} |
-Please select company before reconciling.,Esborrany: {2}
-Please set the customer's mobile number,Per pàgina
-Please try again or enter the item manually.,Personal
-Please verify the barcode or check the item's availability.,Les preferències personals ajusten l'experiència actual del caixer sense canviar la ruta activa del TPV.
-Points,La confirmació del PIN no coincideix.
-Popup blocked. Please allow popups.,El PIN ha de tenir entre 4 i 8 dígits.
-POS,"Si us plau, afegiu almenys un element."
-POS controls and maintenance,Permet l'accés de la càmera per escanejar codis
-POS Expense is disabled for this POS Profile.,Introduïu l'import del pagament
-POS is running with limited offline prerequisites.,"Si us plau, ompliu tots els camps obligatoris"
-POS Profile,Feu un pagament o seleccioneu un pagament
-Position the QR code or barcode within the scanning area,Sol·liciteu el pagament per telèfon o utilitzeu un altre mètode de pagament
-Posting,Seleccioneu primer un client
-Posting and Price List,Seleccioneu una festa
-Posting Date,"Si us plau, seleccioneu un partit abans de reconciliar."
-Preparing background sync,Seleccioneu un tipus de moviment vàlid.
-"Press OK to continue offline with a warning, or Cancel to retry.",Seleccioneu una factura
-Previous unit of measure,Seleccioneu l'empresa abans de conciliar.
-Price List,Definiu el número de mòbil del client
-Price List Rate,Torneu-ho a provar o introduïu l'element manualment.
-Price list rate updated locally only,Verifiqueu el codi de barres o comproveu la disponibilitat de l'article.
-Pricing & Discounts,Punts
-Pricing Rule,S'ha bloquejat la finestra emergent.
-Print,Permet les finestres emergents.
-Print Draft,TPV
-Print Format (Invoice),Controls i manteniment de TPV
-Print Format (Order),La despesa de TPV està desactivada per a aquest perfil de TPV.
-Print invoice,El TPV s'està executant amb requisits previs fora de línia limitats.
-Print Last Invoice,Perfil TPV
-Print Purchase Invoice instead of PO,Col·loqueu el codi QR o el codi de barres dins de l'àrea d'escaneig
-Printer,Publicació
-Processed returns impacting the shift totals,Publicació i llista de preus
-Processing Payment,Data de publicació
-Processing payment entries for Invoice {0},S'està preparant la sincronització en segon pla
-Profile,Premeu D'acord per continuar sense connexió amb un avís o Cancel·la per tornar-ho a provar.
-Profiles,Unitat de mesura anterior
-Profit,Llista de preus
-Profit: Invoice Item Estimate,Tarifa llista de preus
-Profit: Stock Ledger (COGS),Tarifa de la llista de preus actualitzada només localment
-Profitability Report,Preus i descomptes
-Prorated return discount,Regla de preus
-Purchase Amount,Imprimeix
-Purchase Invoices,Imprimeix esborrany
-Purchase Order created,Format d'impressió (factura)
-Qty,Format d'impressió (comanda)
-Qualified,Imprimeix la factura
-Quantity,Imprimeix l'última factura
-Quantity exceeds available stock,Imprimiu la factura de compra en lloc de la comanda
-Quick Actions,Impressora
-Quotation {0} is Submitted,Devolucions processades que afecten els totals del torn
-Quotation submitted,Processament de pagament
-QZ Tray connected.,Processament d'entrades de pagament per a la factura {0}
-QZ Tray is manually disconnected. Press Connect to enable it again.,Perfil
-QZ Tray is not connected.,Perfils
-QZ Tray Setup,Benefici
-Rate,Benefici: Estimació de l'article de la factura
-Rate adjusted to maximum allowed discount,Beneficis: llibre de valors (COGS)
-Ready,Informe de rendibilitat
-Ready to resume,Descompte de devolució prorratejada
-Ready!,Import de la compra
-Real-time POS insights for retail operations.,Factures de compra
-Rebuild Offline Data,S'ha creat la comanda de compra
-Receive,Quantitat
-Receive now,Qualificada
-Received,Quantitat
-Received:,La quantitat supera l'estoc disponible
-Recent Movement Entries,Accions ràpides
-Recent updates about your invoices,S'ha enviat la cotització {0}
-Recently Active Customers,S'ha enviat el pressupost
-Rechecking connection,Safata QZ connectada.
-Reconcile payment methods and close shift,La safata QZ es desconnecta manualment.
-Reconciling Payments,Premeu Connecta per tornar-lo a activar.
-"Reconnect and open this page once while online, then offline refreshes will be able to restore it.",La safata QZ no està connectada.
-Reconnect online to refresh cached offline data from the server.,Configuració de la safata QZ
-Recreate local offline prerequisites from scratch,Taxa
-Recv:,Tarifa ajustada al descompte màxim permès
-Redeem,A punt
-Redeem / Scan,A punt per reprendre
-Redeem Amount,A punt!
-Redeem Mode,Estadístiques de TPV en temps real per a operacions minoristes.
-Redeemed Amount,Reconstrueix les dades fora de línia
-Redeemed credit cannot be greater than its total.,Rebre
-Redemption and Totals,Rebeu ara
-Reference,Rebut
-Refresh,Rebut:
-Refresh Exchange Rate,Entrades recents de moviment
-Refresh Offline Data,Actualitzacions recents sobre les vostres factures
-Refresh Printers,Clients actius recentment
-Refund,Tornant a comprovar la connexió
-Release Notes,Conciliar les formes de pagament i tancar el torn
-Reload,Conciliació de pagaments
-Reload customers,"Torneu a connectar i obriu aquesta pàgina una vegada mentre estigui en línia, després les actualitzacions fora de línia la podran restaurar."
-Reload Items,Torneu a connectar-vos en línia per actualitzar les dades fora de línia emmagatzemades a la memòria cau del servidor.
-Reload Now,Recrea els requisits previs locals fora de línia des de zero
-Reload to apply the latest changes. Your current session will be refreshed.,Recv:
-Reload Workflow,Bescanviar
-Remarks,Bescanviar / escanejar
-Remarks are required.,Canvia l'import
-Remove,Mode de bescanvi
-Remove barcode item,Import bescanviat
-Remove cached data and reload the POS app,El crèdit bescanviat no pot ser superior al seu total.
-Remove item,Redempció i totals
-Remove Offer,Referència
-Reorder / Purchase Suggestions,Actualitza
-Repair Candidate,Actualitzar el tipus de canvi
-Repair Change Allocation,Actualitza les dades fora de línia
-Repair requires an online connection,Actualitzar impressores
-Repaired,Devolució
-Repairing change allocation,Notes de la versió
-Repeat Customers,Torna a carregar
-Repeat Rate,Torna a carregar clients
-Reprint previous transaction,Torna a carregar elements
-Request,Torna a carregar ara
-Request ID: {0},Torneu a carregar per aplicar els darrers canvis.
-Request Payment,La vostra sessió actual s'actualitzarà.
-Requested route: {0},Recarrega el flux de treball
-Required columns cannot be hidden,Observacions
-Reset,Cal fer comentaris.
-Reset item name,Eliminar
-Reset to Default,Elimina l'element del codi de barres
-Resource Health,Elimina les dades emmagatzemades a la memòria cau i torna a carregar l'aplicació TPV
-Restricted,Elimina l'element
-Restricted operational controls for supervisors only.,Elimina l'oferta
-Retry,Reordenar / Suggeriments de compra
-Retry route,Candidat a la reparació
-Return,Reparació de l'assignació de canvis
-Return Amount,La reparació requereix una connexió en línia
-Return Count,Reparat
-Return items must have negative quantities,Reparació de l'assignació de canvis
-Return total must be negative,Clients repetits
-Return Valid Until,Velocitat de repetició
-Return window passed,Reimprimeix la transacció anterior
-Return without Invoice,Sol·licitud
+Last sync: {0} | ok: {1} | failed: {2} | skipped: {3},Última sincronització: {0} | d'acord: {1} | fallat: {2} | omès: {3}
+Latest entries for current shift,Últimes entrades per al torn actual
+Lead Time,Temps d'execució
+Limited,Limitat
+lines,línies
+List,Llista
+Live Snapshot,Instantània en directe
+Load a POS profile and cashier first.,Carregueu primer un perfil de TPV i un caixer.
+Load More Invoices,Carregueu més factures
+Load previously saved invoices,Carregueu les factures desades anteriorment
+Load Sale,Venda de càrrega
+Load Sales Invoice,Carregueu la factura de venda
+Loading app data...,S'estan carregant les dades de l'aplicació...
+Loading customer database...,S'està carregant la base de dades de clients...
+Loading customers...,S'estan carregant clients...
+Loading database stats...,S'estan carregant les estadístiques de la base de dades...
+Loading details...,S'estan carregant els detalls...
+Loading invoice history...,S'està carregant l'historial de factures...
+Loading items...,S'estan carregant elements...
+Loading product catalog...,S'està carregant el catàleg de productes...
+Loading return invoices...,S'estan carregant les factures de devolució...
+Loading server CPU/memory usage...,S'està carregant l'ús de la CPU/memoria del servidor...
+Loading suppliers...,Carregant proveïdors...
+Loading unpaid invoices...,S'estan carregant factures sense pagar...
+Loading view...,S'està carregant la vista...
+Loading...,Carregant...
+Local storage is unavailable. Switching to online-only mode.,L'emmagatzematge local no està disponible. Canvi al mode només en línia.
+localStorage,emmagatzematge local
+Location Performance,Rendiment de la ubicació
+Locations,Ubicacions
+Lock Screen,Pantalla de bloqueig
+Lookup Workflow,Flux de treball de cerca
+Loss,Pèrdua
+Low,Baixa
+Low Stock,Estoc baix
+Low Stock Alerts,Alertes d'existències baixes
+Low Stock Items,Articles amb estoc baix
+Low Stock Threshold,Llindar d'existències baixes
+Low Stock Total,Total d'existències baixes
+Lowest Margin,Marge més baix
+Low-frequency maintenance and system details.,Manteniment de baixa freqüència i detalls del sistema.
+Loyalty Redeemed,Lleialtat bescanviada
+Loyalty Redemption,Redempció de lleialtat
+Make New Payment,Feu un nou pagament
+Manage all,Gestionar-ho tot
+Manage and synchronize your offline transactions,Gestioneu i sincronitzeu les vostres transaccions fora de línia
+Manage Cashier PIN,Gestioneu el PIN del caixer
+"Manage offline tools, terminal controls, and maintenance from one workspace.","Gestioneu les eines fora de línia, els controls de terminal i el manteniment des d'un sol espai de treball."
+manual,manual
+"Manual codes, barcode scans, and QR scans work in the same field","Els codis manuals, els escanejos de codis de barres i els escanejos QR funcionen en el mateix camp"
+Manual offline mode is enabled,El mode manual fora de línia està activat
+Margin,Marge
+Maximum available quantity is {0}. Quantity adjusted to match stock.,La quantitat màxima disponible és {0}. Quantitat ajustada per coincidir amb l'estoc.
+Maximum discount amount for this offer item is {0}.,L'import màxim de descompte per a aquest article de l'oferta és de {0}.
+Maximum discount percentage for this offer item is {0}%.,El percentatge de descompte màxim per a aquest article de l'oferta és del {0}%.
+Maximum offer quantity is {0}. Quantity adjusted to allowed limit.,La quantitat màxima d'oferta és {0}. Quantitat ajustada al límit permès.
+Medium,Mitjana
+Method-wise Collections,Col·leccions metodològiques
+Minimum allowed rate for this offer item is {0}.,La tarifa mínima permesa per a aquest article de l'oferta és {0}.
+Minimum Qty,Quantitat mínima
+Mobile No,Mòbil núm
+Mode,Mode
+Mode of Payment,Modalitat de pagament
+Month,Mes
+Month ?,Mes?
+Monthly Profit,Benefici mensual
+Monthly Sales,Vendes mensuals
+Monthly Sales Summary,Resum de vendes mensuals
+Month-wise,Mesualment
+Most Active Cashiers,Els caixers més actius
+Movement Type,Tipus de moviment
+Movements,Moviments
+Multi Currency,Multimoneda
+N/A,N/A
+Name,Nom
+Negative Stock,Estoc negatiu
+Negative Stock Items,Articles en estoc negatius
+Negative values not allowed,No es permeten valors negatius
+Net,Net
+Net Qty,Quantitat neta
+Net Sales,Vendes netes
+Net Value,Valor net
+Never,Mai
+New changes are ready to load,Els nous canvis estan preparats per carregar
+New Item,Article nou
+New Offer Available,Nova oferta disponible
+New PIN,PIN nou
+New rate,Nova tarifa
+Next unit of measure,Següent unitat de mesura
+No attribute data found.,No s'han trobat dades d'atributs.
+No Barcode,Sense codi de barres
+No barcode found for UOM '{0}',"No s'ha trobat cap codi de barres per a la UOM ""{0}"""
+No branch/location data found.,No s'han trobat dades de sucursal/ubicació.
+No brand data found.,No s'han trobat dades de marca.
+No cached gift card balance is available offline.,No hi ha cap saldo de targeta regal emmagatzemat a la memòria cau sense connexió.
+No camera found on this device. Please ensure your device has a working camera.,No s'ha trobat cap càmera en aquest dispositiu. Assegureu-vos que el vostre dispositiu tingui una càmera que funcioni.
+No capability warnings recorded yet.,Encara no s'han registrat cap advertiment de capacitat.
+No cash expected for this shift.,No s'esperen diners en efectiu per aquest torn.
+No cash mode configured,No s'ha configurat cap mode d'efectiu
+No cash movement type is allowed for this POS Profile.,No es permet cap tipus de moviment d'efectiu per a aquest perfil de TPV.
+No cashier PIN is set yet. Create one now.,Encara no s'ha establert cap PIN de caixer. Creeu-ne un ara.
+No cashier profiles are available for this POS profile yet.,Encara no hi ha cap perfil de caixer disponible per a aquest perfil de TPV.
+No cashier-wise discount/void/return activity.,No hi ha cap activitat de descompte/nul·lació/devolució per al caixer.
+No category data found.,No s'han trobat dades de categoria.
+No category profitability data found.,No s'han trobat dades de rendibilitat de categoria.
+No change returned recorded for this shift.,No s'ha registrat cap canvi per a aquest torn.
+No change-allocation invoices match the current filters.,No hi ha cap factura d'assignació de canvis que coincideixi amb els filtres actuals.
+No charge head breakdown found.,No s'ha trobat cap desglossament del cap de càrrega.
+No Company Selected,No s'ha seleccionat cap empresa
+No customer sales data found.,No s'han trobat dades de vendes de clients.
+No day-wise discount/void/return trend.,No hi ha tendència diària de descompte/nul·lació/devolució.
+No day-wise payment data found.,No s'han trobat dades de pagament diaris.
+No day-wise profitability trend found.,No s'ha trobat cap tendència de rendibilitat diària.
+No day-wise purchase data found.,No s'han trobat dades de compra diària.
+No day-wise sales trend found.,No s'ha trobat cap tendència de vendes diària.
+No day-wise tax/charges trend found.,No s'ha trobat cap tendència diària d'impostos/càrrecs.
+No dead stock items.,No hi ha articles en estoc mort.
+No due date,Sense data de venciment
+No exact repair match found for this invoice,No s'ha trobat cap coincidència exacta de reparació per a aquesta factura
+No hourly sales trend found for today.,No s'ha trobat cap tendència de vendes per hora per avui.
+No invoice activity found.,No s'ha trobat cap activitat de factura.
+No invoices found,No s'han trobat factures
+No invoices found. Try different search criteria.,No s'han trobat factures. Proveu diferents criteris de cerca.
+No invoices recorded for this shift.,No s'han registrat factures per a aquest torn.
+No item profitability data found.,No s'han trobat dades de rendibilitat de l'article.
+No item sales data found for this period.,No s'han trobat dades de vendes d'articles per a aquest període.
+No items found,No s'han trobat elements
+No items in cart,No hi ha articles al carretó
+No items with barcodes to print,No hi ha articles amb codis de barres per imprimir
+No location-wise top item data found.,No s'han trobat dades de l'element superior segons la ubicació.
+No low stock alerts right now.,No hi ha alertes d'existències baixes ara mateix.
+No low stock items.,No hi ha articles amb estoc baix.
+No matching items in cart,No hi ha articles coincidents al carretó
+No month-wise sales trend found.,No s'ha trobat cap tendència mensual de vendes.
+No negative stock items.,No hi ha articles d'estoc negatiu.
+No notifications yet,Encara no hi ha notificacions
+No offline cash movement synced.,No s'ha sincronitzat cap moviment d'efectiu fora de línia.
+No offline invoices pending synchronization,No hi ha factures fora de línia pendents de sincronització
+No offline sync issues recorded yet.,Encara no s'ha registrat cap problema de sincronització fora de línia.
+No out-of-stock items.,No hi ha articles exhaurits.
+No outstanding credit invoices for this shift.,No hi ha factures de crèdit pendents d'aquest torn.
+No payment collection data found.,No s'han trobat dades de cobrament de pagaments.
+No payment rows available on this invoice.,No hi ha cap fila de pagament disponible en aquesta factura.
+No payments registered for this shift.,No s'han registrat pagaments per a aquest torn.
+No pending balances in this period.,No hi ha saldos pendents en aquest període.
+No pending offline invoices,No hi ha factures fora de línia pendents
+No Print Formats Found,No s'han trobat formats d'impressió
+No profiles found for selected scope. Falling back to current profile failed.,No s'han trobat perfils per a l'àmbit seleccionat. No s'ha pogut tornar al perfil actual.
+No recent customer activity found.,No s'ha trobat cap activitat recent del client.
+No recent stock entries found.,No s'han trobat entrades d'estoc recents.
+No records found,No s'han trobat registres
+No reorder suggestions right now.,No hi ha cap suggeriment de reordenar ara mateix.
+No repeat customers in this period.,No hi ha clients repetits en aquest període.
+No response from server,Cap resposta del servidor
+No return invoices found,No s'han trobat factures de devolució
+No return item trend found.,No s'ha trobat cap tendència d'article de retorn.
+No returnable items found for this invoice,No s'han trobat articles retornables per a aquesta factura
+No returns were processed in this shift.,En aquest torn no s'ha processat cap devolució.
+No risk activity found.,No s'ha trobat cap activitat de risc.
+No sales activity found for this period.,No s'ha trobat cap activitat de vendes per a aquest període.
+No slow moving items.,No hi ha elements de moviment lent.
+No staff sales activity found.,No s'ha trobat cap activitat de vendes de personal.
+No stock movement for this period.,No hi ha moviment d'accions per a aquest període.
+No submitted cash movements in this shift.,No s'han presentat moviments d'efectiu en aquest torn.
+No supplier purchases found in this month.,No s'han trobat compres a proveïdors durant aquest mes.
+No suppliers found for this period.,No s'han trobat proveïdors per a aquest període.
+No sync trigger has run yet in this session.,Encara no s'ha executat cap activador de sincronització en aquesta sessió.
+No tax head breakdown found.,No s'ha trobat cap desglossament fiscal.
+No top items found for this location.,No s'han trobat articles principals per a aquesta ubicació.
+No unpaid invoices,No hi ha factures impagades
+No variant data found.,No s'han trobat dades de variants.
+No week-wise sales trend found.,No s'ha trobat cap tendència de vendes setmanal.
+No.,No.
+Nobile Number,Número noble
+Not available,No disponible
+Not checked,No comprovat
+Not selected,No seleccionat
+Not Set,No establert
+Notifications,Notificacions
+Offer,Oferta
+Offer Applied,Oferta aplicada
+Offer criteria exceeded,S'han superat els criteris de l'oferta
+Offer Item,Element d'oferta
+Offer item unavailable,L'article de l'oferta no està disponible
+Offer Removed,Oferta eliminada
+Offer UOM cannot be changed,La UOM de l'oferta no es pot canviar
+Offer?,Oferta?
+Offers,Ofertes
+Offline,Fora de línia
+Offline & Sync,Sense connexió i sincronització
+Offline Capabilities,Capacitats fora de línia
+Offline data status refreshed,S'ha actualitzat l'estat de les dades fora de línia
+Offline diagnostics,Diagnòstic fora de línia
+Offline Invoices,Factures fora de línia
+Offline invoices status,Estat de les factures fora de línia
+Offline invoices synced,Les factures fora de línia s'han sincronitzat
+Offline Queue: {0},Cua fora de línia: {0}
+Offline rebuild guidance,Guia de reconstrucció fora de línia
+Offline restore is unavailable for this session.,La restauració fora de línia no està disponible per a aquesta sessió.
+Offline selling is available with degraded capabilities.,La venda fora de línia està disponible amb capacitats degradades.
+Offline snapshot does not match the current POS state.,La instantània fora de línia no coincideix amb l'estat actual del TPV.
+Offline Status,Estat fora de línia
+"Offline, terminal, and system controls","Controls fora de línia, de terminal i del sistema"
+OK,D'acord
+Online,En línia
+Open actions menu,Obre el menú d'accions
+Open balance to collect,Saldo obert per cobrar
+Open Customer Display,Obriu la pantalla del client
+Open drawer,Obriu el calaix
+Open invoices,Factures obertes
+Open Payments?,Pagaments oberts?
+Open POS home,Obre POS home
+Open this screen from POS Menu -> Open Customer Display.,Obriu aquesta pantalla des del menú POS -> Obre la pantalla del client.
+OpenCV image processing enabled - Enhanced barcode detection,Processament d'imatges OpenCV habilitat - Detecció de codi de barres millorada
+OpenCV image processing unavailable on this device,El processament d'imatges OpenCV no està disponible en aquest dispositiu
+OpenCV Off,OpenCV desactivat
+OpenCV On,OpenCV activat
+OpenCV processing disabled,Processament d'OpenCV desactivat
+Opening Amount,Import d'obertura
+Opening Cash,Obertura en efectiu
+options,opcions
+Order,Ordre
+Original,Original
+Other,Altres
+Out,Fora
+Out of Stock,Esgotat
+Out of Stock Items,Articles sense estoc
+Outstanding,Destacat
+Outstanding Credit by Currency,Crèdit pendent per moneda
+Overdue,Endarrerit
+Overpayment Change,Canvi de sobrepagament
+Overpayment change deducted: {0},Canvi de sobrepagament deduït: {0}
+Packing List,Llista d'embalatge
+Page Format,Format de pàgina
+Page unavailable offline,Pàgina no disponible fora de línia
+Paid,Pagat
+Paid (orig):,Pagat (orig):
+Paid Amount,Import pagat
+Paid change cannot be greater than total change!,El canvi pagat no pot ser superior al canvi total!
+Paid:,Pagat:
+Parent Item,Element pare
+Partial,Parcial
+Partly Paid,Parcialment pagat
+Party Account,Compte del partit
+Party Type,Tipus de festa
+Pause terminal until next cashier,Pausa el terminal fins al següent caixer
+PAY,PAGAR
+Payment,Pagament
+Payment Account,Compte de pagament
+Payment entries processed for Invoice {0},Entrades de pagament processades per a la factura {0}
+Payment Entry Type,Tipus d'entrada de pagament
+Payment History,Historial de pagaments
+Payment ID,ID de pagament
+Payment Method Report,Informe de forma de pagament
+Payment Methods,Mètodes de pagament
+Payment of {0} received successfully.,El pagament de {0} s'ha rebut correctament.
+Payment Progress,Progrés de pagament
+Payment Reconciliation,Conciliació de pagaments
+Payment request status could not be retrieved. Please try again,"No s'ha pogut recuperar l'estat de la sol·licitud de pagament. Si us plau, torna-ho a provar"
+Payment Request took too long to respond. Please try requesting for payment again,"La sol·licitud de pagament ha trigat massa a respondre. Si us plau, prova de tornar a sol·licitar el pagament"
+Payment saved offline,Pagament desat fora de línia
+Payment State,Estat de pagament
+Payment Status,Estat de pagament
+Payment submitted but print function could not be executed. Payment name not found.,S'ha enviat el pagament però no s'ha pogut executar la funció d'impressió. No s'ha trobat el nom del pagament.
+Payment submitted.,Pagament enviat.
+Payment Summary,Resum de pagament
+Payments,Pagaments
+Payments are not open. Do you want to open payments and submit?,Els pagaments no estan oberts. Vols obrir pagaments i enviar-los?
+Payments by Mode of Payment,Pagaments per Mode de Pagament
+PDF,PDF
+Peak Hour,Hora punta
+Peak Memory:,Memòria màxima:
+Peak Server:,Servidor màxim:
+Peak:,Pic:
+Pending,Pendent
+Pending Amount,Import pendent
+Pending count updated from {0} to {1},Recompte pendent actualitzat de {0} a {1}
+Pending Exposure,Exposició pendent
+Pending Invoices,Factures pendents
+Pending Ratio,Relació pendent
+Pending Sales,Vendes pendents
+Pending sales: {0} | Cache usage: {1}%,Vendes pendents: {0} | Ús de la memòria cau: {1}%
+Pending Sync,Sincronització pendent
+Pending: {0},Pendent: {0}
+Pending: {0} | Synced: {1} | Draft: {2},Pendent: {0} | Sincronitzat: {1} | Esborrany: {2}
+Per Page,Per pàgina
+Personal,Personal
+Personal preferences adjust the current cashier experience without changing the active POS route.,Les preferències personals ajusten l'experiència actual del caixer sense canviar la ruta activa del TPV.
+PIN confirmation does not match.,La confirmació del PIN no coincideix.
+PIN must be 4 to 8 digits.,El PIN ha de tenir entre 4 i 8 dígits.
+Please add at least one item.,"Si us plau, afegiu almenys un element."
+Please allow camera access to scan codes,Permet l'accés de la càmera per escanejar codis
+Please enter payment amount,Introduïu l'import del pagament
+Please fill all required fields,"Si us plau, ompliu tots els camps obligatoris"
+Please make a payment or select a payment,Feu un pagament o seleccioneu un pagament
+Please request phone payment or use another payment method,Sol·liciteu el pagament per telèfon o utilitzeu un altre mètode de pagament
+Please select a customer first,Seleccioneu primer un client
+Please select a party,Seleccioneu una festa
+Please select a party before reconciling.,"Si us plau, seleccioneu un partit abans de reconciliar."
+Please select a valid movement type.,Seleccioneu un tipus de moviment vàlid.
+Please select an invoice,Seleccioneu una factura
+Please select company before reconciling.,Seleccioneu l'empresa abans de conciliar.
+Please set the customer's mobile number,Definiu el número de mòbil del client
+Please try again or enter the item manually.,Torneu-ho a provar o introduïu l'element manualment.
+Please verify the barcode or check the item's availability.,Verifiqueu el codi de barres o comproveu la disponibilitat de l'article.
+Points,Punts
+Popup blocked. Please allow popups.,S'ha bloquejat la finestra emergent. Permet les finestres emergents.
+POS,TPV
+POS controls and maintenance,Controls i manteniment de TPV
+POS Expense is disabled for this POS Profile.,La despesa de TPV està desactivada per a aquest perfil de TPV.
+POS is running with limited offline prerequisites.,El TPV s'està executant amb requisits previs fora de línia limitats.
+POS Profile,Perfil TPV
+Position the QR code or barcode within the scanning area,Col·loqueu el codi QR o el codi de barres dins de l'àrea d'escaneig
+Posting,Publicació
+Posting and Price List,Publicació i llista de preus
+Posting Date,Data de publicació
+Preparing background sync,S'està preparant la sincronització en segon pla
+"Press OK to continue offline with a warning, or Cancel to retry.",Premeu D'acord per continuar sense connexió amb un avís o Cancel·la per tornar-ho a provar.
+Previous unit of measure,Unitat de mesura anterior
+Price List,Llista de preus
+Price List Rate,Tarifa llista de preus
+Price list rate updated locally only,Tarifa de la llista de preus actualitzada només localment
+Pricing & Discounts,Preus i descomptes
+Pricing Rule,Regla de preus
+Print,Imprimeix
+Print Draft,Imprimeix esborrany
+Print Format (Invoice),Format d'impressió (factura)
+Print Format (Order),Format d'impressió (comanda)
+Print invoice,Imprimeix la factura
+Print Purchase Invoice instead of PO,Imprimiu la factura de compra en lloc de la comanda
+Printer,Impressora
+Processed returns impacting the shift totals,Devolucions processades que afecten els totals del torn
+Processing Payment,Processament de pagament
+Processing payment entries for Invoice {0},Processament d'entrades de pagament per a la factura {0}
+Profile,Perfil
+Profiles,Perfils
+Profit,Benefici
+Profit: Invoice Item Estimate,Benefici: Estimació de l'article de la factura
+Profit: Stock Ledger (COGS),Beneficis: llibre de valors (COGS)
+Profitability Report,Informe de rendibilitat
+Prorated return discount,Descompte de devolució prorratejada
+Purchase Amount,Import de la compra
+Purchase Invoices,Factures de compra
+Purchase Order created,S'ha creat la comanda de compra
+Qty,Quantitat
+Qualified,Qualificada
+Quantity,Quantitat
+Quantity exceeds available stock,La quantitat supera l'estoc disponible
+Quick Actions,Accions ràpides
+Quotation {0} is Submitted,S'ha enviat la cotització {0}
+Quotation submitted,S'ha enviat el pressupost
+QZ Tray connected.,Safata QZ connectada.
+QZ Tray is manually disconnected. Press Connect to enable it again.,La safata QZ es desconnecta manualment. Premeu Connecta per tornar-lo a activar.
+QZ Tray is not connected.,La safata QZ no està connectada.
+QZ Tray Setup,Configuració de la safata QZ
+Rate,Taxa
+Rate adjusted to maximum allowed discount,Tarifa ajustada al descompte màxim permès
+Ready,A punt
+Ready to resume,A punt per reprendre
+Ready!,A punt!
+Real-time POS insights for retail operations.,Estadístiques de TPV en temps real per a operacions minoristes.
+Rebuild Offline Data,Reconstrueix les dades fora de línia
+Receive,Rebre
+Receive now,Rebeu ara
+Received,Rebut
+Received:,Rebut:
+Recent Movement Entries,Entrades recents de moviment
+Recent updates about your invoices,Actualitzacions recents sobre les vostres factures
+Recently Active Customers,Clients actius recentment
+Rechecking connection,Tornant a comprovar la connexió
+Reconcile payment methods and close shift,Conciliar les formes de pagament i tancar el torn
+Reconciling Payments,Conciliació de pagaments
+"Reconnect and open this page once while online, then offline refreshes will be able to restore it.","Torneu a connectar i obriu aquesta pàgina una vegada mentre estigui en línia, després les actualitzacions fora de línia la podran restaurar."
+Reconnect online to refresh cached offline data from the server.,Torneu a connectar-vos en línia per actualitzar les dades fora de línia emmagatzemades a la memòria cau del servidor.
+Recreate local offline prerequisites from scratch,Recrea els requisits previs locals fora de línia des de zero
+Recv:,Recv:
+Redeem,Bescanviar
+Redeem / Scan,Bescanviar / escanejar
+Redeem Amount,Canvia l'import
+Redeem Mode,Mode de bescanvi
+Redeemed Amount,Import bescanviat
+Redeemed credit cannot be greater than its total.,El crèdit bescanviat no pot ser superior al seu total.
+Redemption and Totals,Redempció i totals
+Reference,Referència
+Refresh,Actualitza
+Refresh Exchange Rate,Actualitzar el tipus de canvi
+Refresh Offline Data,Actualitza les dades fora de línia
+Refresh Printers,Actualitzar impressores
+Refund,Devolució
+Release Notes,Notes de la versió
+Reload,Torna a carregar
+Reload customers,Torna a carregar clients
+Reload Items,Torna a carregar elements
+Reload Now,Torna a carregar ara
+Reload to apply the latest changes. Your current session will be refreshed.,Torneu a carregar per aplicar els darrers canvis. La vostra sessió actual s'actualitzarà.
+Reload Workflow,Recarrega el flux de treball
+Remarks,Observacions
+Remarks are required.,Cal fer comentaris.
+Remove,Eliminar
+Remove barcode item,Elimina l'element del codi de barres
+Remove cached data and reload the POS app,Elimina les dades emmagatzemades a la memòria cau i torna a carregar l'aplicació TPV
+Remove item,Elimina l'element
+Remove Offer,Elimina l'oferta
+Reorder / Purchase Suggestions,Reordenar / Suggeriments de compra
+Repair Candidate,Candidat a la reparació
+Repair Change Allocation,Reparació de l'assignació de canvis
+Repair requires an online connection,La reparació requereix una connexió en línia
+Repaired,Reparat
+Repairing change allocation,Reparació de l'assignació de canvis
+Repeat Customers,Clients repetits
+Repeat Rate,Velocitat de repetició
+Request,Sol·licitud
+Request ID: {0},Identificador de sol·licitud: {0}
+Request Payment,Sol·licitar el pagament
+Requested route: {0},Ruta sol·licitada: {0}
+Required columns cannot be hidden,Les columnes necessàries no es poden amagar
+Reset,Restableix
+Reset item name,Restableix el nom de l'element
+Reset to Default,Restableix al valor predeterminat
+Resource Health,Salut dels recursos
+Restricted,Restringit
+Restricted operational controls for supervisors only.,Controls operatius restringits només per a supervisors.
+Retry,Torna-ho a provar
+Retry route,Torna a provar la ruta
+Return,Tornar
+Return Amount,Import de retorn
+Return Count,Recompte de retorns
+Return items must have negative quantities,Els articles de retorn han de tenir quantitats negatives
+Return total must be negative,El total de retorn ha de ser negatiu
+Return Valid Until,Devolució vàlida fins a
+Return window passed,La finestra de retorn ha passat
+Return without Invoice,Devolució sense factura
 Returns,Devolucions
 Returns / Voids / Discounts,Devolucions / Anul·lació / Descomptes
 Returns by Currency,Devolucions per moneda
@@ -1023,331 +1037,326 @@ Save Settings,Desa la configuració
 Save the selected printer as the POS Profile default so it shows automatically on this setup.,Deseu la impressora seleccionada com a perfil POS predeterminat perquè es mostri automàticament en aquesta configuració.
 Saved as draft because: {0},S'ha desat com a esborrany perquè: {0}
 Saving...,S'està desant...
-Scale barcode detected. Quantity here is the number of labels to print.,S'ha detectat el codi de barres de l'escala.
-Scale barcode settings are not configured. Using item barcode only.,La quantitat aquí és el nombre d'etiquetes a imprimir.
-Scale template barcode is missing for this item/UOM. Using item barcode only.,La configuració del codi de barres de l'escala no està configurada.
-Scan an existing card and top it up without leaving the payment flow.,Utilitza només el codi de barres de l'article.
-Scan Error,Falta el codi de barres de la plantilla d'escala per a aquest article/UOM.
-Scan or enter a gift card code to check balance or redeem.,Utilitza només el codi de barres de l'article.
-Scan or paste the card code below.,Escaneja una targeta existent i recarrega-la sense sortir del flux de pagament.
-Scan QR Code/Barcode,Error d'escaneig
-Scan with camera,Escaneja o introdueix un codi de targeta regal per comprovar el saldo o bescanviar.
-Scan-First Flow,Escaneja o enganxa el codi de la targeta a continuació.
-Scanned Code:,Escaneja el codi QR/codi de barres
-Scanning for: {0},Escaneja amb càmera
-Scanning items,Escaneig-Primer flux
-Scan-Ready,Codi escanejat:
-Scope,Buscant: {0}
-Scope: All Profiles,Escaneig d'elements
-Scope: Current Profile,A punt per a l'escaneig
-Scope: Specific Profile,Àmbit
-Search,Àmbit: Tots els perfils
-Search Account,Àmbit: Perfil actual
-Search an invoice and continue the return flow without extra steps.,Àmbit: Perfil específic
-Search customer,Cerca
-Search invoices or customers,Compte de cerca
-Search item,Cerqueu una factura i continueu el flux de devolució sense passos addicionals.
-Search item / code,Cerca client
-Search items or barcode,Cerca factures o clients
-Search Mpesa Payments,Cerca element
-Search return invoices or customers,Cerca element/codi
-Search supplier,Cerca articles o codi de barres
-Search unpaid invoices or customers,Cerca Mpesa Payments
-Secure context (HTTPS or localhost) is required for camera access.,Cerca factures de devolució o clients
-Secure context (HTTPS) required for camera access. Please use HTTPS to access the camera.,Cerca proveïdor
-Select,Cerca factures o clients impagats
-Select a cashier first.,Cal un context segur (HTTPS o localhost) per accedir a la càmera.
-Select a customer,Es requereix un context segur (HTTPS) per accedir a la càmera.
-Select a customer to use coupon,Utilitzeu HTTPS per accedir a la càmera.
-Select a printer to use QZ silent printing.,Seleccioneu
-Select Batch,Seleccioneu primer un caixer.
-Select Columns to Display,Seleccioneu un client
-Select items to sell,Seleccioneu un client per utilitzar el cupó
-Select Language,Seleccioneu una impressora per utilitzar la impressió silenciosa QZ.
-Select Payment,Seleccioneu Lot
-Select Payment Account,Seleccioneu Columnes per mostrar
-Select printer,Seleccioneu articles per vendre
-Select Return Invoice,Seleccioneu Idioma
-Select S.O,Seleccioneu Pagament
-Select Sales Orders,Seleccioneu Compte de pagament
-Select the cashier who is taking over this terminal.,Seleccioneu la impressora
-Selected,Seleccioneu Devolució de la factura
-Selected movement type is not allowed by POS Profile.,Seleccioneu S.O
-Selected Payments,Seleccioneu Comandes de venda
-Sensitive actions kept away from quick taps.,Seleccioneu el caixer que es fa càrrec d'aquest terminal.
-Serial,Seleccionat
-Serial Numbers,El perfil de TPV no permet el tipus de moviment seleccionat.
-Server CPU Usage:,Pagaments seleccionats
-Server Health,Accions sensibles allunyades dels tocs ràpids.
-Server Memory Usage:,Serial
-Server Metrics,Números de sèrie
-Server Uptime:,Ús de la CPU del servidor:
-Service Charges,Salut del servidor
-Session,Ús de memòria del servidor:
-Set each cashier PIN in the User form and keep terminal members assigned in POS Profile User.,Mètriques del servidor
-Settings,Temps de funcionament del servidor:
-Settings in this section update the POS workspace without changing the current route.,Costos de servei
-Setup complete!,Sessió
-Share,Establiu el PIN de cada caixer al formulari d'usuari i mantingueu assignats els membres del terminal al perfil d'usuari del TPV.
-Shared terminal,Configuració
-Shift Closed Snapshot,La configuració d'aquesta secció actualitza l'espai de treball del TPV sense canviar la ruta actual.
-Shift Overview,Configuració completa!
-Show,Comparteix
-Show cart on customer-facing screen,Terminal compartit
-Show last invoice rate,Instantània tancada amb Maj
-Show rate info,Visió general del torn
-Show Repair Candidates,Mostra
-Show search tools,Mostra el carretó a la pantalla orientada al client
-Show the active cart on a customer-facing screen,Mostra la tarifa de l'última factura
-Showing {0}-{1} of {2},Mostra la informació de la tarifa
-Showing 0 of 0,Mostra els candidats a la reparació
-Shows the distribution of invoices per currency,Mostra les eines de cerca
-Sign out of session,Mostra el carretó actiu en una pantalla orientada al client
-Sign out of the current POS session,Es mostren {0}-{1} de {2}
-Size:,Mostrant 0 de 0
-Skipped Payments,Mostra la distribució de les factures per moneda
-Skipping items without barcodes,Tanca la sessió
-Slow Moving,Tanqueu la sessió de la sessió de TPV actual
-Slow Moving Items,Mida:
-Slow Queries:,Pagaments saltats
-Sold,Saltant articles sense codis de barres
-Source,Moviment lent
-Source Cash Account (Optional Override),Elements de moviment lent
-Source Ex. Rate:,Consultes lentes:
-Source Rate:,Vengut
-Specific Profile,Font
-Split Invoices,Compte d'efectiu d'origen (substitució opcional)
-Staff / Cashier Performance Report,Font Ex.
-Status,Valoració:
-Stock,Tarifa font:
-Stock Information,Perfil específic
-Stock is lower than requested,Dividir les factures
-Stock is lower than requested:\n{0},Informe de rendiment del personal / caixer
-Stock Movement Report,Estat
-Stock update: {0} has {1} available. Adding {2} will bring the stock below zero.,Estoc
-Submit,Informació d'estoc
-Submit & Print,L'estoc és inferior al sol·licitat
-Submit Deposit,L'estoc és inferior al sol·licitat:\n{0}
-Submit Expense,Informe de moviment d'accions
-Submitted,Actualització d'estoc: {0} té {1} disponible.
-Submitted Cash Movements,"Si afegiu {2}, l'estoc baixarà de zero."
-Submitted entries,Envia
-Successfully scanned:,Envia i imprimeix
-Suggested,Presentar Dipòsit
-Suggested Qty,Presentar la despesa
-Supervisor Access,Presentat
-Supervisor permissions unlock issuance and reloads,Moviments d'efectiu presentats
-Supervisor Tools,Entrades enviades
-Supplier,Escanejat correctament:
-Supplier and dates are required.,Suggerit
-Supplier Invoices,Quantitat suggerida
-Supplier is required.,Accés del supervisor
-Supplier name is required,Els permisos del supervisor desbloquegen l'emissió i les recàrregues
-Supplier Payments,Eines del supervisor
-Supplier Purchase Summary,Proveïdor
-Suppliers,Es requereix proveïdor i dates.
-Suppliers not found,Factures de proveïdors
-Switch Camera,Es requereix proveïdor.
-Switch Cashier,El nom del proveïdor és obligatori
-Switch the POS appearance theme,Pagaments a proveïdors
-Switch theme appearance,Resum de la compra del proveïdor
-Switched to:,Proveïdors
-Sync All Invoices,No s'han trobat proveïdors
-Sync Offline Cash Movements ({0}),Canvia càmera
-Sync Offline Sales,Canvi de caixer
-Synced {0} offline cash movement(s).,Canvia el tema d'aparença del TPV
-Syncing items in background,Canvia l'aparença del tema
-System / Diagnostics,S'ha canviat a:
-"System actions are low-frequency maintenance controls such as app info, support diagnostics, and session controls.",Sincronitza totes les factures
-System Information,Sincronitza els moviments d'efectiu fora de línia ({0})
-System Status,Sincronitza les vendes fora de línia
-Tables:,S'han sincronitzat {0} moviments d'efectiu fora de línia.
-Tap the button below to redeem a gift card during checkout.,Sincronització d'elements en segon pla
-Target,Sistema / Diagnòstic
-Target Ex. Rate:,"Les accions del sistema són controls de manteniment de baixa freqüència, com ara informació de l'aplicació, diagnòstics de suport i controls de sessió."
-Target Rate:,Informació del sistema
-Tax,Estat del sistema
-Tax / Charges Report,Taules:
-Tax Heads,Toqueu el botó següent per bescanviar una targeta regal durant la compra.
-Taxable Amount,Objectiu
-Tendered,Objectiu Ex.
-Terminal,Valoració:
-Terminal & Devices,Tarifa objectiu:
-Terminal locked,Impost
-"Terminal tools affect this checkout station, customer-facing displays, and future printer/device controls.",Informe d'Impostos / Càrrecs
-Territory not found,Caps fiscals
-The amount paid is not complete,Import imposable
-The app stores data locally for offline use. This is called cache.,Licitat
-The invoice stayed in draft. Please review and submit it manually.,Terminal
-The maximum discount allowed is,Terminal i dispositius
-The quantity for {0} has been adjusted to the maximum available stock.,Terminal bloquejat
-The system could not retrieve the item details. Please try again.,"Les eines del terminal afecten aquesta estació de pagament, les pantalles orientades al client i els futurs controls d'impressores/dispositius."
-These invoices will be synced when connection is restored,No s'ha trobat el territori
-This action now opens inside the settings workspace.,L'import pagat no està complet
-This coupon already used !,L'aplicació emmagatzema dades localment per utilitzar-les fora de línia.
-This invoice does not need change-allocation repair,Això s'anomena memòria cau.
-This invoice is already repaired,La factura va quedar en esborrany.
-This is an item template. Please choose a variant.,Reviseu-lo i envieu-lo manualment.
-this item,El descompte màxim permès és
-This POS page could not be opened offline because its code was not cached on this terminal yet.,La quantitat de {0} s'ha ajustat a l'estoc màxim disponible.
-This Serial Number {0} has already been added!,El sistema no ha pogut recuperar els detalls de l'element.
-Threshold,"Si us plau, torna-ho a provar."
-Time,Aquestes factures es sincronitzaran quan es restableixi la connexió
-Tip: Clear cache regularly to free up space and keep the app fast.,Aquesta acció ara s'obre a l'espai de treball de configuració.
-Tip: Close unused tabs or apps to reduce lag.,Aquest cupó ja s'ha utilitzat!
-Tip: Monitor slow queries and table size for optimal performance.,Aquesta factura no necessita reparació d'assignació de canvis
-To Be Paid,Aquesta factura ja està reparada
-To Date,Aquesta és una plantilla d'element.
-Today,"Si us plau, trieu una variant."
-Today Profit,aquest article
-Today Sales,Aquesta pàgina de TPV no s'ha pogut obrir fora de línia perquè el seu codi encara no s'ha guardat a la memòria cau en aquest terminal.
-Toggle navigation drawer,Aquest número de sèrie {0} ja s'ha afegit!
-Toggle Theme,Llindar
-Tools,Temps
-Tools for customer-facing screens and terminal-specific actions.,Consell: esborra la memòria cau regularment per alliberar espai i mantenir l'aplicació ràpida.
-Top Brand,Consell: tanqueu les pestanyes o aplicacions no utilitzades per reduir el retard.
-Top Category,Consell: superviseu les consultes lentes i la mida de la taula per obtenir un rendiment òptim.
-Top Charge Head,A Pagar
-Top Customers,Fins a la data
-Top Discount,Avui
-Top Items by Location,Avui guany
-Top Margin,Vendes d'avui
-Top Pending,Canvia el calaix de navegació
-Top Profit Item,Canvia el tema
-Top Return Items,Eines
-Top Sales by Cashier,Eines per a pantalles orientades al client i accions específiques del terminal.
-Top Supplier,Marca Top
-Top Suppliers by Spend,Categoria superior
-Top Tables,Cap de càrrega superior
-Top Tax Head,Clients principals
-Top Up Amount,Descompte superior
-Top Up Card,Elements principals per ubicació
-Top Up Mode,Marge superior
-Top Variant,Top Pendent
-Total,Element de benefici superior
-Total Amount,Articles de tornada superiors
-Total Change,Màximes vendes per caixer
-Total Charges,Proveïdor superior
-Total In,Principals proveïdors per despesa
-Total Invoices,Taules superiors
-Total Items,Cap superior fiscal
-Total Mpesa,Import de recàrrega
-Total Out,Targeta de recàrrega
-Total Payments,Mode de recàrrega
-Total Purchase,Variant superior
-Total Selected :,Total
-Total Size,Import total
-Total Stock Qty,Canvi total
-Total:,Càrregues totals
-Totals by Invoice Currency,Total d'entrada
-Track how much cash was handed back to customers,Total de factures
-"Track recent sales, collect unpaid balances, and reopen saved work",Total d'articles
-Transaction ID,Total Mpesa
-Transfer,Total de sortida
-Try a different search term or clear the cart search.,Pagaments totals
-Try adjusting your search or filters,Compra total
-Try another source or refresh the list.,Total seleccionats:
-Try changing the date range or status filter.,Mida total
-Type,Quantitat total d'estoc
-Unable to access camera even with basic settings. Please check your camera permissions and device compatibility.,Total:
-Unable to add offer item {0}. Please refresh and try again.,Totals per moneda de factura
-Unable to add offer item. Please refresh and try again.,Feu un seguiment de la quantitat d'efectiu retornat als clients
-Unable to add scanned item.,"Feu un seguiment de les vendes recents, recolliu els saldos impagats i torneu a obrir el treball desat"
-Unable to create purchase order,Identificador de transacció
-Unable to delete draft invoice,Transferència
-Unable to fetch documents,Prova un terme de cerca diferent o esborra la cerca del carretó.
-Unable to fetch draft orders,Proveu d'ajustar la cerca o els filtres
-Unable to fetch invoice history,Proveu una altra font o actualitzeu la llista.
-Unable to fetch M-Pesa payments,Proveu de canviar l'interval de dates o el filtre d'estat.
-Unable to fetch sales orders,Tipus
-Unable to fetch unpaid invoices,No es pot accedir a la càmera fins i tot amb la configuració bàsica.
-Unable to generate scale barcode,Comproveu els permisos de la càmera i la compatibilitat del dispositiu.
-Unable to issue gift card.,No es pot afegir l'element d'oferta {0}.
-Unable to load cashier PIN status.,Actualitzeu i torneu-ho a provar.
-Unable to load document,No es pot afegir l'element de l'oferta.
-Unable to load draft invoice,Actualitzeu i torneu-ho a provar.
-Unable to load gift card balance.,No es pot afegir l'element escanejat.
-Unable to load invoice details,No es pot crear la comanda de compra
-Unable to load parked order,No es pot suprimir l'esborrany de la factura
-Unable to load the selected sales order,No es poden recuperar els documents
-Unable to prepare document,No es poden obtenir esborranys de comandes
-Unable to prepare return invoice,No es pot obtenir l'historial de factures
-Unable to print draft invoice,No es poden recuperar els pagaments de M-Pesa
-Unable to print submitted invoice,No es poden recuperar les comandes de venda
-Unable to process document action,No s'han pogut recuperar les factures no pagades
-Unable to repair change allocation,No es pot generar el codi de barres d'escala
-Unable to save cashier PIN.,No es pot emetre la targeta regal.
-Unable to save the rate to the backend price list,No es pot carregar l'estat del PIN del caixer.
-Unable to submit invoice,No es pot carregar el document
-Unable to submit the selected payment,No es pot carregar l'esborrany de la factura
-Unable to top up gift card.,No es pot carregar el saldo de la targeta regal.
-Unable to verify cashier PIN.,No es poden carregar els detalls de la factura
-Unallocated,No es pot carregar la comanda aparcada
-Unallocated:,No es pot carregar la comanda de venda seleccionada
-Unavailable,No es pot preparar el document
-Unknown,No es pot preparar la factura de devolució
-Unknown error,No es pot imprimir l'esborrany de la factura
-Unknown Item,No es pot imprimir la factura enviada
-Unknown Warehouse,No es pot processar l'acció del document
-Unlock POS,No es pot reparar l'assignació de canvis
-Unpaid,No es pot desar el PIN del caixer.
-"Unselected payments stay unallocated first, then auto reconcile after submit.",No es pot desar la tarifa a la llista de preus de fons
-UOM,No s'ha pogut enviar la factura
-UOM not found,No es pot enviar el pagament seleccionat
-Update available,No es pot recarregar la targeta regal.
-Update Customer,No es pot verificar el PIN del caixer.
-Update PIN,No assignat
-Update Price List Rate,No assignat:
-Updated,No disponible
-Updates and app info that stay out of the cashier flow.,Desconegut
-Updates automatically,Error desconegut
-Upload pending transactions,Element desconegut
-Usage,Magatzem desconegut
-Usage Stats,Desbloqueja el TPV
-Use a 4 to 8 digit PIN for cashier switching and terminal unlock.,Sense pagar
-Use Cashier,Els pagaments no seleccionats no s'assignen primer i després es reconcilien automàticament després d'enviar-los.
-Use date range to search for older invoices,UOM
-"Use one field for manual code entry, barcode scans, or QR scans.",No s'ha trobat UOM
-"Use one workflow for balance checks, new issuance, and top ups without leaving POS.",Actualització disponible
-"Use this section when cached prerequisite data needs a refresh, rebuild, or diagnostics review.",Actualitzar el client
-Use Western numerals,Actualitza el PIN
-Used:,Actualitza la tarifa de la llista de preus
-Using basic camera settings due to device limitations,Actualitzat
-Using cached customer balance,Actualitzacions i informació d'aplicacions que es mantenen fora del flux de caixa.
-Valid until,Actualitzacions automàticament
-Variance %,Penja transaccions pendents
-Variants,Ús
-Variant-wise,Estadístiques d'ús
-Verify closing amounts for each payment method,Utilitzeu un PIN de 4 a 8 dígits per canviar el caixer i desbloquejar el terminal.
-View all,Utilitzeu el caixer
-View app information and current build details,Utilitzeu l'interval de dates per cercar factures més antigues
-View Data Diagnostics,"Utilitzeu un camp per introduir codi manualment, escanejar codis de barres o escanejar QR."
-View Details,"Utilitzeu un flux de treball per a comprovacions de saldo, emissió nova i recàrregues sense sortir del TPV."
-View invoice details,"Utilitzeu aquesta secció quan les dades de requisits previs emmagatzemades a la memòria cau necessiten una actualització, una reconstrucció o una revisió de diagnòstic."
-View notifications,Utilitzeu números occidentals
-View offline invoices,Usat:
-View restricted POS insights,Ús de la configuració bàsica de la càmera a causa de les limitacions del dispositiu
-Void Amount,Utilitzant el saldo del client en memòria cau
-Void Count,Vàlid fins a
-Voids,% de variància
-Waiting for cart items,Variants
-Waiting for payment...,En termes de variants
-Walk-in Customer,Verifiqueu els imports de tancament per a cada forma de pagament
-Warehouse,Veure-ho tot
-Warning: High cache usage may affect performance.,Consulta la informació de l'aplicació i els detalls de la compilació actual
-Warning: High lag may indicate heavy processing or browser slowness.,Visualitza el diagnòstic de dades
-Week Δ,Veure detalls
-Week-wise,Veure els detalls de la factura
-Weight (g),Veure notificacions
-Weight (grams),Veure les factures fora de línia
-We'll let you know if an invoice fails to submit,Consulta les estadístiques de TPV restringits
-Workflow,Import nul
-Write off amount cannot exceed the POS profile maximum of {0},Recompte de buits
-Write off amount exceeds the allowed limit ({0}). Please add payment for the remaining amount.,Buits
-Yes,Esperant els articles del carretó
-"Yes, Cancel sale",Esperant el pagament...
-"Yes, Close",Client d'entrada
-You are not allowed to print draft invoices,Magatzem
-You are offline. Add Payment will work again when the connection is restored.,Avís: l'ús elevat de la memòria cau pot afectar el rendiment.
-You have no notifications right now,Avís: un alt retard pot indicar un processament intens o una lentitud del navegador.
-Your Cart,Setmana Δ
+Scale barcode detected. Quantity here is the number of labels to print.,S'ha detectat el codi de barres de l'escala. La quantitat aquí és el nombre d'etiquetes a imprimir.
+Scale barcode settings are not configured. Using item barcode only.,La configuració del codi de barres de l'escala no està configurada. Utilitza només el codi de barres de l'article.
+Scale template barcode is missing for this item/UOM. Using item barcode only.,Falta el codi de barres de la plantilla d'escala per a aquest article/UOM. Utilitza només el codi de barres de l'article.
+Scan an existing card and top it up without leaving the payment flow.,Escaneja una targeta existent i recarrega-la sense sortir del flux de pagament.
+Scan Error,Error d'escaneig
+Scan or enter a gift card code to check balance or redeem.,Escaneja o introdueix un codi de targeta regal per comprovar el saldo o bescanviar.
+Scan or paste the card code below.,Escaneja o enganxa el codi de la targeta a continuació.
+Scan QR Code/Barcode,Escaneja el codi QR/codi de barres
+Scan with camera,Escaneja amb càmera
+Scan-First Flow,Escaneig-Primer flux
+Scanned Code:,Codi escanejat:
+Scanning for: {0},Buscant: {0}
+Scanning items,Escaneig d'elements
+Scan-Ready,A punt per a l'escaneig
+Scope,Àmbit
+Scope: All Profiles,Àmbit: Tots els perfils
+Scope: Current Profile,Àmbit: Perfil actual
+Scope: Specific Profile,Àmbit: Perfil específic
+Search,Cerca
+Search Account,Compte de cerca
+Search an invoice and continue the return flow without extra steps.,Cerqueu una factura i continueu el flux de devolució sense passos addicionals.
+Search customer,Cerca client
+Search invoices or customers,Cerca factures o clients
+Search item,Cerca element
+Search item / code,Cerca element/codi
+Search items or barcode,Cerca articles o codi de barres
+Search Mpesa Payments,Cerca Mpesa Payments
+Search return invoices or customers,Cerca factures de devolució o clients
+Search supplier,Cerca proveïdor
+Search unpaid invoices or customers,Cerca factures o clients impagats
+Secure context (HTTPS or localhost) is required for camera access.,Cal un context segur (HTTPS o localhost) per accedir a la càmera.
+Secure context (HTTPS) required for camera access. Please use HTTPS to access the camera.,Es requereix un context segur (HTTPS) per accedir a la càmera. Utilitzeu HTTPS per accedir a la càmera.
+Select,Seleccioneu
+Select a cashier first.,Seleccioneu primer un caixer.
+Select a customer,Seleccioneu un client
+Select a customer to use coupon,Seleccioneu un client per utilitzar el cupó
+Select a printer to use QZ silent printing.,Seleccioneu una impressora per utilitzar la impressió silenciosa QZ.
+Select Batch,Seleccioneu Lot
+Select Columns to Display,Seleccioneu Columnes per mostrar
+Select items to sell,Seleccioneu articles per vendre
+Select Payment,Seleccioneu Pagament
+Select Payment Account,Seleccioneu Compte de pagament
+Select printer,Seleccioneu la impressora
+Select Return Invoice,Seleccioneu Devolució de la factura
+Select S.O,Seleccioneu S.O
+Select Sales Orders,Seleccioneu Comandes de venda
+Select the cashier who is taking over this terminal.,Seleccioneu el caixer que es fa càrrec d'aquest terminal.
+Selected,Seleccionat
+Selected movement type is not allowed by POS Profile.,El perfil de TPV no permet el tipus de moviment seleccionat.
+Selected Payments,Pagaments seleccionats
+Sensitive actions kept away from quick taps.,Accions sensibles allunyades dels tocs ràpids.
+Serial,Serial
+Serial Numbers,Números de sèrie
+Server CPU Usage:,Ús de la CPU del servidor:
+Server Health,Salut del servidor
+Server Memory Usage:,Ús de memòria del servidor:
+Server Metrics,Mètriques del servidor
+Server Uptime:,Temps de funcionament del servidor:
+Service Charges,Costos de servei
+Session,Sessió
+Set each cashier PIN in the User form and keep terminal members assigned in POS Profile User.,Establiu el PIN de cada caixer al formulari d'usuari i mantingueu assignats els membres del terminal al perfil d'usuari del TPV.
+Settings,Configuració
+Settings in this section update the POS workspace without changing the current route.,La configuració d'aquesta secció actualitza l'espai de treball del TPV sense canviar la ruta actual.
+Setup complete!,Configuració completa!
+Share,Comparteix
+Shared terminal,Terminal compartit
+Shift Closed Snapshot,Instantània tancada amb Maj
+Shift Overview,Visió general del torn
+Show,Mostra
+Show cart on customer-facing screen,Mostra el carretó a la pantalla orientada al client
+Show last invoice rate,Mostra la tarifa de l'última factura
+Show rate info,Mostra la informació de la tarifa
+Show Repair Candidates,Mostra els candidats a la reparació
+Show search tools,Mostra les eines de cerca
+Show the active cart on a customer-facing screen,Mostra el carretó actiu en una pantalla orientada al client
+Showing {0}-{1} of {2},Es mostren {0}-{1} de {2}
+Showing 0 of 0,Mostrant 0 de 0
+Shows the distribution of invoices per currency,Mostra la distribució de les factures per moneda
+Sign out of the current POS session,Tanqueu la sessió de la sessió de TPV actual
+Size:,Mida:
+Skipped Payments,Pagaments saltats
+Skipping items without barcodes,Saltant articles sense codis de barres
+Slow Moving,Moviment lent
+Slow Moving Items,Elements de moviment lent
+Slow Queries:,Consultes lentes:
+Sold,Vengut
+Source,Font
+Source Cash Account (Optional Override),Compte d'efectiu d'origen (substitució opcional)
+Source Ex. Rate:,Font Ex. Valoració:
+Source Rate:,Tarifa font:
+Specific Profile,Perfil específic
+Split Invoices,Dividir les factures
+Staff / Cashier Performance Report,Informe de rendiment del personal / caixer
+Status,Estat
+Stock,Estoc
+Stock Information,Informació d'estoc
+Stock is lower than requested,L'estoc és inferior al sol·licitat
+Stock is lower than requested:\n{0},L'estoc és inferior al sol·licitat:\n{0}
+Stock Movement Report,Informe de moviment d'accions
+Stock update: {0} has {1} available. Adding {2} will bring the stock below zero.,"Actualització d'estoc: {0} té {1} disponible. Si afegiu {2}, l'estoc baixarà de zero."
+Submit,Envia
+Submit & Print,Envia i imprimeix
+Submit Deposit,Presentar Dipòsit
+Submit Expense,Presentar la despesa
+Submitted,Presentat
+Submitted Cash Movements,Moviments d'efectiu presentats
+Submitted entries,Entrades enviades
+Successfully scanned:,Escanejat correctament:
+Suggested,Suggerit
+Suggested Qty,Quantitat suggerida
+Supervisor Access,Accés del supervisor
+Supervisor permissions unlock issuance and reloads,Els permisos del supervisor desbloquegen l'emissió i les recàrregues
+Supervisor Tools,Eines del supervisor
+Supplier,Proveïdor
+Supplier and dates are required.,Es requereix proveïdor i dates.
+Supplier Invoices,Factures de proveïdors
+Supplier is required.,Es requereix proveïdor.
+Supplier name is required,El nom del proveïdor és obligatori
+Supplier Payments,Pagaments a proveïdors
+Supplier Purchase Summary,Resum de la compra del proveïdor
+Suppliers,Proveïdors
+Suppliers not found,No s'han trobat proveïdors
+Switch Camera,Canvia càmera
+Switch Cashier,Canvi de caixer
+Switch the POS appearance theme,Canvia el tema d'aparença del TPV
+Switched to:,S'ha canviat a:
+Sync All Invoices,Sincronitza totes les factures
+Sync Offline Cash Movements ({0}),Sincronitza els moviments d'efectiu fora de línia ({0})
+Sync Offline Sales,Sincronitza les vendes fora de línia
+Synced {0} offline cash movement(s).,S'han sincronitzat {0} moviments d'efectiu fora de línia.
+Syncing items in background,Sincronització d'elements en segon pla
+System / Diagnostics,Sistema / Diagnòstic
+"System actions are low-frequency maintenance controls such as app info, support diagnostics, and session controls.","Les accions del sistema són controls de manteniment de baixa freqüència, com ara informació de l'aplicació, diagnòstics de suport i controls de sessió."
+System Information,Informació del sistema
+System Status,Estat del sistema
+Tables:,Taules:
+Tap the button below to redeem a gift card during checkout.,Toqueu el botó següent per bescanviar una targeta regal durant la compra.
+Target,Objectiu
+Target Ex. Rate:,Objectiu Ex. Valoració:
+Target Rate:,Tarifa objectiu:
+Tax,Impost
+Tax / Charges Report,Informe d'Impostos / Càrrecs
+Tax Heads,Caps fiscals
+Taxable Amount,Import imposable
+Tendered,Licitat
+Terminal,Terminal
+Terminal & Devices,Terminal i dispositius
+Terminal locked,Terminal bloquejat
+"Terminal tools affect this checkout station, customer-facing displays, and future printer/device controls.","Les eines del terminal afecten aquesta estació de pagament, les pantalles orientades al client i els futurs controls d'impressores/dispositius."
+Territory not found,No s'ha trobat el territori
+The amount paid is not complete,L'import pagat no està complet
+The app stores data locally for offline use. This is called cache.,L'aplicació emmagatzema dades localment per utilitzar-les fora de línia. Això s'anomena memòria cau.
+The invoice stayed in draft. Please review and submit it manually.,La factura va quedar en esborrany. Reviseu-lo i envieu-lo manualment.
+The maximum discount allowed is,El descompte màxim permès és
+The quantity for {0} has been adjusted to the maximum available stock.,La quantitat de {0} s'ha ajustat a l'estoc màxim disponible.
+The system could not retrieve the item details. Please try again.,"El sistema no ha pogut recuperar els detalls de l'element. Si us plau, torna-ho a provar."
+These invoices will be synced when connection is restored,Aquestes factures es sincronitzaran quan es restableixi la connexió
+This action now opens inside the settings workspace.,Aquesta acció ara s'obre a l'espai de treball de configuració.
+This coupon already used !,Aquest cupó ja s'ha utilitzat!
+This invoice does not need change-allocation repair,Aquesta factura no necessita reparació d'assignació de canvis
+This invoice is already repaired,Aquesta factura ja està reparada
+This is an item template. Please choose a variant.,"Aquesta és una plantilla d'element. Si us plau, trieu una variant."
+this item,aquest article
+This POS page could not be opened offline because its code was not cached on this terminal yet.,Aquesta pàgina de TPV no s'ha pogut obrir fora de línia perquè el seu codi encara no s'ha guardat a la memòria cau en aquest terminal.
+This Serial Number {0} has already been added!,Aquest número de sèrie {0} ja s'ha afegit!
+Threshold,Llindar
+Time,Temps
+Tip: Clear cache regularly to free up space and keep the app fast.,Consell: esborra la memòria cau regularment per alliberar espai i mantenir l'aplicació ràpida.
+Tip: Close unused tabs or apps to reduce lag.,Consell: tanqueu les pestanyes o aplicacions no utilitzades per reduir el retard.
+Tip: Monitor slow queries and table size for optimal performance.,Consell: superviseu les consultes lentes i la mida de la taula per obtenir un rendiment òptim.
+To Be Paid,A Pagar
+To Date,Fins a la data
+Today,Avui
+Today Profit,Avui guany
+Today Sales,Vendes d'avui
+Toggle navigation drawer,Canvia el calaix de navegació
+Toggle Theme,Canvia el tema
+Tools,Eines
+Tools for customer-facing screens and terminal-specific actions.,Eines per a pantalles orientades al client i accions específiques del terminal.
+Top Brand,Marca Top
+Top Category,Categoria superior
+Top Charge Head,Cap de càrrega superior
+Top Customers,Clients principals
+Top Discount,Descompte superior
+Top Items by Location,Elements principals per ubicació
+Top Margin,Marge superior
+Top Pending,Top Pendent
+Top Profit Item,Element de benefici superior
+Top Return Items,Articles de tornada superiors
+Top Sales by Cashier,Màximes vendes per caixer
+Top Supplier,Proveïdor superior
+Top Suppliers by Spend,Principals proveïdors per despesa
+Top Tables,Taules superiors
+Top Tax Head,Cap superior fiscal
+Top Up Amount,Import de recàrrega
+Top Up Card,Targeta de recàrrega
+Top Up Mode,Mode de recàrrega
+Top Variant,Variant superior
+Total,Total
+Total Amount,Import total
+Total Change,Canvi total
+Total Charges,Càrregues totals
+Total In,Total d'entrada
+Total Invoices,Total de factures
+Total Items,Total d'articles
+Total Mpesa,Total Mpesa
+Total Out,Total de sortida
+Total Payments,Pagaments totals
+Total Purchase,Compra total
+Total Selected :,Total seleccionats:
+Total Size,Mida total
+Total Stock Qty,Quantitat total d'estoc
+Total:,Total:
+Totals by Invoice Currency,Totals per moneda de factura
+Track how much cash was handed back to customers,Feu un seguiment de la quantitat d'efectiu retornat als clients
+"Track recent sales, collect unpaid balances, and reopen saved work","Feu un seguiment de les vendes recents, recolliu els saldos impagats i torneu a obrir el treball desat"
+Transaction ID,Identificador de transacció
+Transfer,Transferència
+Try a different search term or clear the cart search.,Prova un terme de cerca diferent o esborra la cerca del carretó.
+Try adjusting your search or filters,Proveu d'ajustar la cerca o els filtres
+Try another source or refresh the list.,Proveu una altra font o actualitzeu la llista.
+Try changing the date range or status filter.,Proveu de canviar l'interval de dates o el filtre d'estat.
+Type,Tipus
+Unable to access camera even with basic settings. Please check your camera permissions and device compatibility.,No es pot accedir a la càmera fins i tot amb la configuració bàsica. Comproveu els permisos de la càmera i la compatibilitat del dispositiu.
+Unable to add offer item {0}. Please refresh and try again.,No es pot afegir l'element d'oferta {0}. Actualitzeu i torneu-ho a provar.
+Unable to add offer item. Please refresh and try again.,No es pot afegir l'element de l'oferta. Actualitzeu i torneu-ho a provar.
+Unable to add scanned item.,No es pot afegir l'element escanejat.
+Unable to create purchase order,No es pot crear la comanda de compra
+Unable to delete draft invoice,No es pot suprimir l'esborrany de la factura
+Unable to fetch documents,No es poden recuperar els documents
+Unable to fetch draft orders,No es poden obtenir esborranys de comandes
+Unable to fetch invoice history,No es pot obtenir l'historial de factures
+Unable to fetch M-Pesa payments,No es poden recuperar els pagaments de M-Pesa
+Unable to fetch sales orders,No es poden recuperar les comandes de venda
+Unable to fetch unpaid invoices,No s'han pogut recuperar les factures no pagades
+Unable to generate scale barcode,No es pot generar el codi de barres d'escala
+Unable to issue gift card.,No es pot emetre la targeta regal.
+Unable to load cashier PIN status.,No es pot carregar l'estat del PIN del caixer.
+Unable to load document,No es pot carregar el document
+Unable to load draft invoice,No es pot carregar l'esborrany de la factura
+Unable to load gift card balance.,No es pot carregar el saldo de la targeta regal.
+Unable to load invoice details,No es poden carregar els detalls de la factura
+Unable to load parked order,No es pot carregar la comanda aparcada
+Unable to load the selected sales order,No es pot carregar la comanda de venda seleccionada
+Unable to prepare document,No es pot preparar el document
+Unable to prepare return invoice,No es pot preparar la factura de devolució
+Unable to print draft invoice,No es pot imprimir l'esborrany de la factura
+Unable to print submitted invoice,No es pot imprimir la factura enviada
+Unable to process document action,No es pot processar l'acció del document
+Unable to repair change allocation,No es pot reparar l'assignació de canvis
+Unable to save cashier PIN.,No es pot desar el PIN del caixer.
+Unable to save the rate to the backend price list,No es pot desar la tarifa a la llista de preus de fons
+Unable to submit invoice,No s'ha pogut enviar la factura
+Unable to submit the selected payment,No es pot enviar el pagament seleccionat
+Unable to top up gift card.,No es pot recarregar la targeta regal.
+Unable to verify cashier PIN.,No es pot verificar el PIN del caixer.
+Unallocated,No assignat
+Unallocated:,No assignat:
+Unavailable,No disponible
+Unknown,Desconegut
+Unknown Item,Element desconegut
+Unknown Warehouse,Magatzem desconegut
+Unlock POS,Desbloqueja el TPV
+Unpaid,Sense pagar
+"Unselected payments stay unallocated first, then auto reconcile after submit.",Els pagaments no seleccionats no s'assignen primer i després es reconcilien automàticament després d'enviar-los.
+UOM,UOM
+UOM not found,No s'ha trobat UOM
+Update available,Actualització disponible
+Update Customer,Actualitzar el client
+Update PIN,Actualitza el PIN
+Update Price List Rate,Actualitza la tarifa de la llista de preus
+Updated,Actualitzat
+Updates and app info that stay out of the cashier flow.,Actualitzacions i informació d'aplicacions que es mantenen fora del flux de caixa.
+Updates automatically,Actualitzacions automàticament
+Usage,Ús
+Usage Stats,Estadístiques d'ús
+Use a 4 to 8 digit PIN for cashier switching and terminal unlock.,Utilitzeu un PIN de 4 a 8 dígits per canviar el caixer i desbloquejar el terminal.
+Use Cashier,Utilitzeu el caixer
+Use date range to search for older invoices,Utilitzeu l'interval de dates per cercar factures més antigues
+"Use one field for manual code entry, barcode scans, or QR scans.","Utilitzeu un camp per introduir codi manualment, escanejar codis de barres o escanejar QR."
+"Use one workflow for balance checks, new issuance, and top ups without leaving POS.","Utilitzeu un flux de treball per a comprovacions de saldo, emissió nova i recàrregues sense sortir del TPV."
+"Use this section when cached prerequisite data needs a refresh, rebuild, or diagnostics review.","Utilitzeu aquesta secció quan les dades de requisits previs emmagatzemades a la memòria cau necessiten una actualització, una reconstrucció o una revisió de diagnòstic."
+Use Western numerals,Utilitzeu números occidentals
+Used:,Usat:
+Using basic camera settings due to device limitations,Ús de la configuració bàsica de la càmera a causa de les limitacions del dispositiu
+Using cached customer balance,Utilitzant el saldo del client en memòria cau
+Valid until,Vàlid fins a
+Variance %,% de variància
+Variants,Variants
+Variant-wise,En termes de variants
+Verify closing amounts for each payment method,Verifiqueu els imports de tancament per a cada forma de pagament
+View all,Veure-ho tot
+View app information and current build details,Consulta la informació de l'aplicació i els detalls de la compilació actual
+View Data Diagnostics,Visualitza el diagnòstic de dades
+View Details,Veure detalls
+View invoice details,Veure els detalls de la factura
+View notifications,Veure notificacions
+View offline invoices,Veure les factures fora de línia
+View restricted POS insights,Consulta les estadístiques de TPV restringits
+Void Amount,Import nul
+Void Count,Recompte de buits
+Voids,Buits
+Waiting for cart items,Esperant els articles del carretó
+Waiting for payment...,Esperant el pagament...
+Walk-in Customer,Client d'entrada
+Warehouse,Magatzem
+Warning: High cache usage may affect performance.,Avís: l'ús elevat de la memòria cau pot afectar el rendiment.
+Warning: High lag may indicate heavy processing or browser slowness.,Avís: un alt retard pot indicar un processament intens o una lentitud del navegador.
+Week ?,Setmana?
+Week-wise,Per setmana
+Weight (g),Pes (g)
+Weight (grams),Pes (grams)
+We'll let you know if an invoice fails to submit,T'informarem si no s'envia una factura
+Workflow,Flux de treball
+Write off amount cannot exceed the POS profile maximum of {0},L'import de la cancel·lació no pot superar el màxim del perfil de TPV de {0}
+Write off amount exceeds the allowed limit ({0}). Please add payment for the remaining amount.,La quantitat de cancel·lació supera el límit permès ({0}). Afegiu el pagament per l'import restant.
+Yes,Sí
+"Yes, Cancel sale","Sí, cancel·la la venda"
+"Yes, Close","Sí, a prop"
+You are not allowed to print draft invoices,No teniu permís per imprimir esborranys de factures
+You are offline. Add Payment will work again when the connection is restored.,Estàs fora de línia. Add Payment tornarà a funcionar quan es restableixi la connexió.
+You have no notifications right now,No tens notificacions ara mateix
+Your Cart,El teu carretó

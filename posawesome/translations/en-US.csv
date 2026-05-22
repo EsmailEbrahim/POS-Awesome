@@ -1,4 +1,39 @@
-﻿- Total Unallocated,﻿- Total Unallocated
+POS Awesome,POS Awesome
+Fetch Items Directly from Server,Fetch Items Directly from Server
+Menu,Menu
+Actions,Actions
+Close Shift,Close Shift
+End current session,End current session
+Print Last Invoice,Print Last Invoice
+Reprint previous transaction,Reprint previous transaction
+Sync Offline Invoices,Sync Offline Invoices
+Upload pending transactions,Upload pending transactions
+Go Online,Go Online
+Go Offline,Go Offline
+Disable offline mode,Disable offline mode
+Work without server connection,Work without server connection
+Clear Cache,Clear Cache
+Remove local data and refresh,Remove local data and refresh
+About,About
+App information,App information
+Language,Language
+Change interface language,Change interface language
+Light Mode,Light Mode
+Dark Mode,Dark Mode
+Switch theme appearance,Switch theme appearance
+Logout,Logout
+Sign out of session,Sign out of session
+Select Language,Select Language
+Choose your preferred language for the POS interface,Choose your preferred language for the POS interface
+Language will be changed to,Language will be changed to
+Cancel,Cancel
+Change Language,Change Language
+Close,Close
+Cannot change language - same language selected,Cannot change language - same language selected
+Language changed successfully! Reloading...,Language changed successfully! Reloading...
+Failed to change language,Failed to change language
+Unknown error,Unknown error
+- Total Unallocated,- Total Unallocated
 * Required,* Required
 {0} (Qty: {1}),{0} (Qty: {1})
 {0} actions,{0} actions
@@ -11,7 +46,6 @@
 {0}h ago,{0}h ago
 {0}m ago,{0}m ago
 A POS supervisor is required for this action.,A POS supervisor is required for this action.
-About,About
 Access,Access
 Account,Account
 Account is overdrawn,Account is overdrawn
@@ -19,7 +53,6 @@ Acknowledge the error to resume scanning,Acknowledge the error to resume scannin
 Acknowledge the error to resume scanning.,Acknowledge the error to resume scanning.
 Across,Across
 Action,Action
-Actions,Actions
 Active sale,Active sale
 add,add
 Add items from the selector to start building this sale.,Add items from the selector to start building this sale.
@@ -55,7 +88,6 @@ Amount already received,Amount already received
 Amount exceeds profile cash movement max amount.,Amount exceeds profile cash movement max amount.
 Amount must be greater than zero.,Amount must be greater than zero.
 Amount received from customer,Amount received from customer
-App information,App information
 Appearance and user-level preferences for the current session.,Appearance and user-level preferences for the current session.
 Applied,Applied
 Apply,Apply
@@ -133,7 +165,6 @@ Camera is busy or blocked by another app/tab. Close other camera apps and try ag
 Camera permission denied. Please allow camera access in your browser settings and refresh the page.,Camera permission denied. Please allow camera access in your browser settings and refresh the page.
 Camera scanner is locked until the current error is acknowledged,Camera scanner is locked until the current error is acknowledged
 Camera started but the video stream did not load in time. Please try again.,Camera started but the video stream did not load in time. Please try again.
-Cancel,Cancel
 Cancel cash movement {0}?,Cancel cash movement {0}?
 Cancel Payment,Cancel Payment
 Cancel Sale,Cancel Sale
@@ -184,8 +215,6 @@ Certificate is missing or not trusted. QZ may show confirmation dialogs.,Certifi
 Certificate is trusted. Silent QZ printing is active.,Certificate is trusted. Silent QZ printing is active.
 Change,Change
 Change allocation repaired,Change allocation repaired
-Change interface language,Change interface language
-Change Language,Change Language
 Change Price,Change Price
 Change Return,Change Return
 Change Returned,Change Returned
@@ -204,20 +233,17 @@ Checking...,Checking...
 Cheque/Reference Date,Cheque/Reference Date
 Cheque/Reference No,Cheque/Reference No
 Choose the cashier currently operating this terminal.,Choose the cashier currently operating this terminal.
-Choose your preferred language for the POS interface,Choose your preferred language for the POS interface
 City,City
 Clear,Clear
 Clear All,Clear All
 Clear all barcode items,Clear all barcode items
 Clear all purchase order items,Clear all purchase order items
-Clear Cache,Clear Cache
 Clear Search,Clear Search
 Clearing local cache...,Clearing local cache...
 Click to refresh,Click to refresh
 Client CPU Lag:,Client CPU Lag:
 Client Memory Usage:,Client Memory Usage:
 Client Metrics,Client Metrics
-Close,Close
 Close about dialog,Close about dialog
 Close cashier switcher,Close cashier switcher
 Close closing shift dialog,Close closing shift dialog
@@ -233,7 +259,6 @@ Close sales orders dialog,Close sales orders dialog
 Close Scanner,Close Scanner
 Close scanner dialog,Close scanner dialog
 Close Settings,Close Settings
-Close Shift,Close Shift
 Closing Amount,Closing Amount
 Closing POS Shift,Closing POS Shift
 Closing Snapshot Available,Closing Snapshot Available
@@ -318,13 +343,12 @@ Customers not found,Customers not found
 Daily cashier actions without scrolling.,Daily cashier actions without scrolling.
 Daily Sales,Daily Sales
 Daily Sales Summary,Daily Sales Summary
-Dark Mode,Dark Mode
 Data loaded in form. Review and submit.,Data loaded in form. Review and submit.
 Database Health,Database Health
 Database health affects overall system speed and reliability.,Database health affects overall system speed and reliability.
 Database Info,Database Info
 Date,Date
-Day Δ,Day Δ
+Day ?,Day ?
 days,days
 Day-wise (MTD),Day-wise (MTD)
 Day-wise Movement,Day-wise Movement
@@ -383,7 +407,6 @@ Edited,Edited
 Employee,Employee
 Enable background sync,Enable background sync
 Enable Customer Display in POS Profile first.,Enable Customer Display in POS Profile first.
-End current session,End current session
 Enter a PIN.,Enter a PIN.
 Enter a valid grams value,Enter a valid grams value
 Enter new price list rate,Enter new price list rate
@@ -468,8 +491,6 @@ Gift card payment,Gift card payment
 Gift card redemption requires an online connection,Gift card redemption requires an online connection
 Gift card topped up successfully.,Gift card topped up successfully.
 Gift Cards,Gift Cards
-Go Offline,Go Offline
-Go Online,Go Online
 Go to Frappe Desk,Go to Frappe Desk
 Grand Total,Grand Total
 Gross Margin,Gross Margin
@@ -552,8 +573,6 @@ json,json
 Just now,Just now
 Keep offline prerequisites healthy and recover stale data safely.,Keep offline prerequisites healthy and recover stale data safely.
 Labels,Labels
-Language,Language
-Language will be changed to,Language will be changed to
 "Language, theme, terminal tools, and session controls.","Language, theme, terminal tools, and session controls."
 Last,Last
 Last 14 Days (Paid vs Pending),Last 14 Days (Paid vs Pending)
@@ -565,7 +584,6 @@ Last sync:,Last sync:
 Last sync: {0} | ok: {1} | failed: {2} | skipped: {3},Last sync: {0} | ok: {1} | failed: {2} | skipped: {3}
 Latest entries for current shift,Latest entries for current shift
 Lead Time,Lead Time
-Light Mode,Light Mode
 Limited,Limited
 lines,lines
 List,List
@@ -594,7 +612,6 @@ localStorage,localStorage
 Location Performance,Location Performance
 Locations,Locations
 Lock Screen,Lock Screen
-Logout,Logout
 Lookup Workflow,Lookup Workflow
 Loss,Loss
 Low,Low
@@ -621,7 +638,6 @@ Maximum discount amount for this offer item is {0}.,Maximum discount amount for 
 Maximum discount percentage for this offer item is {0}%.,Maximum discount percentage for this offer item is {0}%.
 Maximum offer quantity is {0}. Quantity adjusted to allowed limit.,Maximum offer quantity is {0}. Quantity adjusted to allowed limit.
 Medium,Medium
-Menu,Menu
 Method-wise Collections,Method-wise Collections
 Minimum allowed rate for this offer item is {0}.,Minimum allowed rate for this offer item is {0}.
 Minimum Qty,Minimum Qty
@@ -629,7 +645,7 @@ Mobile No,Mobile No
 Mode,Mode
 Mode of Payment,Mode of Payment
 Month,Month
-Month Δ,Month Δ
+Month ?,Month ?
 Monthly Profit,Monthly Profit
 Monthly Sales,Monthly Sales
 Monthly Sales Summary,Monthly Sales Summary
@@ -894,7 +910,6 @@ Print Draft,Print Draft
 Print Format (Invoice),Print Format (Invoice)
 Print Format (Order),Print Format (Order)
 Print invoice,Print invoice
-Print Last Invoice,Print Last Invoice
 Print Purchase Invoice instead of PO,Print Purchase Invoice instead of PO
 Printer,Printer
 Processed returns impacting the shift totals,Processed returns impacting the shift totals
@@ -977,7 +992,6 @@ Repaired,Repaired
 Repairing change allocation,Repairing change allocation
 Repeat Customers,Repeat Customers
 Repeat Rate,Repeat Rate
-Reprint previous transaction,Reprint previous transaction
 Request,Request
 Request ID: {0},Request ID: {0}
 Request Payment,Request Payment
@@ -1063,7 +1077,6 @@ Select a printer to use QZ silent printing.,Select a printer to use QZ silent pr
 Select Batch,Select Batch
 Select Columns to Display,Select Columns to Display
 Select items to sell,Select items to sell
-Select Language,Select Language
 Select Payment,Select Payment
 Select Payment Account,Select Payment Account
 Select printer,Select printer
@@ -1102,7 +1115,6 @@ Show the active cart on a customer-facing screen,Show the active cart on a custo
 Showing {0}-{1} of {2},Showing {0}-{1} of {2}
 Showing 0 of 0,Showing 0 of 0
 Shows the distribution of invoices per currency,Shows the distribution of invoices per currency
-Sign out of session,Sign out of session
 Sign out of the current POS session,Sign out of the current POS session
 Size:,Size:
 Skipped Payments,Skipped Payments
@@ -1150,7 +1162,6 @@ Suppliers not found,Suppliers not found
 Switch Camera,Switch Camera
 Switch Cashier,Switch Cashier
 Switch the POS appearance theme,Switch the POS appearance theme
-Switch theme appearance,Switch theme appearance
 Switched to:,Switched to:
 Sync All Invoices,Sync All Invoices
 Sync Offline Cash Movements ({0}),Sync Offline Cash Movements ({0})
@@ -1286,7 +1297,6 @@ Unallocated,Unallocated
 Unallocated:,Unallocated:
 Unavailable,Unavailable
 Unknown,Unknown
-Unknown error,Unknown error
 Unknown Item,Unknown Item
 Unknown Warehouse,Unknown Warehouse
 Unlock POS,Unlock POS
@@ -1301,7 +1311,6 @@ Update Price List Rate,Update Price List Rate
 Updated,Updated
 Updates and app info that stay out of the cashier flow.,Updates and app info that stay out of the cashier flow.
 Updates automatically,Updates automatically
-Upload pending transactions,Upload pending transactions
 Usage,Usage
 Usage Stats,Usage Stats
 Use a 4 to 8 digit PIN for cashier switching and terminal unlock.,Use a 4 to 8 digit PIN for cashier switching and terminal unlock.
@@ -1336,7 +1345,7 @@ Walk-in Customer,Walk-in Customer
 Warehouse,Warehouse
 Warning: High cache usage may affect performance.,Warning: High cache usage may affect performance.
 Warning: High lag may indicate heavy processing or browser slowness.,Warning: High lag may indicate heavy processing or browser slowness.
-Week Δ,Week Δ
+Week ?,Week ?
 Week-wise,Week-wise
 Weight (g),Weight (g)
 Weight (grams),Weight (grams)

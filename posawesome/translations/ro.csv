@@ -1,4 +1,39 @@
-﻿- Total Unallocated,- Total Unallocated
+POS Awesome,POS Minunat
+Fetch Items Directly from Server,Preluați elementele direct de pe server
+Menu,Meniu
+Actions,Acțiuni
+Close Shift,Închide Shift
+End current session,Încheiați sesiunea curentă
+Print Last Invoice,Tipăriți ultima factură
+Reprint previous transaction,Retipărește tranzacția anterioară
+Sync Offline Invoices,Sincronizați facturile offline
+Upload pending transactions,Încărcați tranzacții în așteptare
+Go Online,Accesați online
+Go Offline,Intră offline
+Disable offline mode,Dezactivați modul offline
+Work without server connection,Lucrați fără conexiune la server
+Clear Cache,Goliți memoria cache
+Remove local data and refresh,Eliminați datele locale și reîmprospătați
+About,Despre
+App information,Informații despre aplicație
+Language,Limba
+Change interface language,Schimbați limba interfeței
+Light Mode,Modul de lumină
+Dark Mode,Modul întunecat
+Switch theme appearance,Schimbați aspectul temei
+Logout,Deconectare
+Sign out of session,Deconectați-vă de la sesiune
+Select Language,Selectați Limbă
+Choose your preferred language for the POS interface,Alegeți limba preferată pentru interfața POS
+Language will be changed to,Limba va fi schimbată în
+Cancel,Anulează
+Change Language,Schimbați limba
+Close,Închide
+Cannot change language - same language selected,Nu se poate schimba limba - aceeași limbă a fost selectată
+Language changed successfully! Reloading...,Limba s-a schimbat cu succes! Se reîncarcă...
+Failed to change language,Nu s-a putut schimba limba
+Unknown error,Eroare necunoscută
+- Total Unallocated,- Total nealocat
 * Required,* Obligatoriu
 {0} (Qty: {1}),{0} (Cantitate: {1})
 {0} actions,{0} acțiuni
@@ -11,7 +46,6 @@
 {0}h ago,acum {0}h
 {0}m ago,acum {0} m
 A POS supervisor is required for this action.,Pentru această acțiune este necesar un supervizor POS.
-About,Despre
 Access,Acces
 Account,Cont
 Account is overdrawn,Contul este depășit
@@ -19,7 +53,6 @@ Acknowledge the error to resume scanning,Confirmați eroarea pentru a relua scan
 Acknowledge the error to resume scanning.,Confirmați eroarea pentru a relua scanarea.
 Across,Peste tot
 Action,Acțiune
-Actions,Acțiuni
 Active sale,Vânzare activă
 add,adaugă
 Add items from the selector to start building this sale.,Adăugați articole din selector pentru a începe să construiți această vânzare.
@@ -55,7 +88,6 @@ Amount already received,Suma primita deja
 Amount exceeds profile cash movement max amount.,Suma depășește suma maximă a mișcării de numerar de profil.
 Amount must be greater than zero.,Suma trebuie să fie mai mare decât zero.
 Amount received from customer,Suma primita de la client
-App information,Informații despre aplicație
 Appearance and user-level preferences for the current session.,Aspect și preferințe la nivel de utilizator pentru sesiunea curentă.
 Applied,Aplicat
 Apply,Aplicați
@@ -133,7 +165,6 @@ Camera is busy or blocked by another app/tab. Close other camera apps and try ag
 Camera permission denied. Please allow camera access in your browser settings and refresh the page.,Permisiunea camerei a fost refuzată. Vă rugăm să permiteți accesul camerei în setările browserului dvs. și să reîmprospătați pagina.
 Camera scanner is locked until the current error is acknowledged,Scanerul camerei este blocat până când eroarea curentă este confirmată
 Camera started but the video stream did not load in time. Please try again.,"Camera a pornit, dar fluxul video nu s-a încărcat la timp. Vă rugăm să încercați din nou."
-Cancel,Anulează
 Cancel cash movement {0}?,Anulați mișcarea de numerar {0}?
 Cancel Payment,Anulați plata
 Cancel Sale,Anulează vânzarea
@@ -184,8 +215,6 @@ Certificate is missing or not trusted. QZ may show confirmation dialogs.,Certifi
 Certificate is trusted. Silent QZ printing is active.,Certificatul este de încredere. Imprimarea QZ silențioasă este activă.
 Change,Schimbare
 Change allocation repaired,Modificarea alocării a fost reparată
-Change interface language,Schimbați limba interfeței
-Change Language,Schimbați limba
 Change Price,Schimbați prețul
 Change Return,Schimbați Retur
 Change Returned,Schimbarea a revenit
@@ -204,20 +233,17 @@ Checking...,Se verifică...
 Cheque/Reference Date,Cec/Data de referință
 Cheque/Reference No,Cec/Nr
 Choose the cashier currently operating this terminal.,Alegeți casieria care operează în prezent acest terminal.
-Choose your preferred language for the POS interface,Alegeți limba preferată pentru interfața POS
 City,Orașul
 Clear,Clar
 Clear All,Ștergeți tot
 Clear all barcode items,Ștergeți toate elementele codurilor de bare
 Clear all purchase order items,Ștergeți toate articolele comenzii de achiziție
-Clear Cache,Goliți memoria cache
 Clear Search,Ștergeți căutarea
 Clearing local cache...,Se golește memoria cache locală...
 Click to refresh,Faceți clic pentru a reîmprospăta
 Client CPU Lag:,Întârziere CPU client:
 Client Memory Usage:,Utilizarea memoriei clientului:
 Client Metrics,Valorile clientului
-Close,Închide
 Close about dialog,Închideți despre dialog
 Close cashier switcher,Închideți comutatorul de casierie
 Close closing shift dialog,Închideți dialogul de închidere a turei
@@ -233,7 +259,6 @@ Close sales orders dialog,Închideți dialogul de comenzi de vânzare
 Close Scanner,Închideți scanerul
 Close scanner dialog,Închideți dialogul scanerului
 Close Settings,Închide Setări
-Close Shift,Închide Shift
 Closing Amount,Suma de închidere
 Closing POS Shift,Închiderea POS Shift
 Closing Snapshot Available,Instantaneu de închidere disponibil
@@ -318,13 +343,12 @@ Customers not found,Clienți nu au fost găsiți
 Daily cashier actions without scrolling.,Acțiuni zilnice ale casieriei fără defilare.
 Daily Sales,Vânzări zilnice
 Daily Sales Summary,Rezumatul zilnic al vânzărilor
-Dark Mode,Modul întunecat
 Data loaded in form. Review and submit.,Date încărcate în formular. Examinați și trimiteți.
 Database Health,Sănătatea bazei de date
 Database health affects overall system speed and reliability.,Sănătatea bazei de date afectează viteza generală și fiabilitatea sistemului.
 Database Info,Informații baza de date
 Date,Data
-Day Δ,Ziua Δ
+Day ?,Ziua?
 days,zile
 Day-wise (MTD),În funcție de zi (MTD)
 Day-wise Movement,Mișcarea în funcție de zi
@@ -383,7 +407,6 @@ Edited,Editat
 Employee,Angajat
 Enable background sync,Activați sincronizarea în fundal
 Enable Customer Display in POS Profile first.,Activați mai întâi afișarea clientului în profilul POS.
-End current session,Încheiați sesiunea curentă
 Enter a PIN.,Introduceți un PIN.
 Enter a valid grams value,Introduceți o valoare validă în grame
 Enter new price list rate,Introduceți noul tarif de listă de prețuri
@@ -468,8 +491,6 @@ Gift card payment,Plata prin card cadou
 Gift card redemption requires an online connection,Valorificarea cardului cadou necesită o conexiune online
 Gift card topped up successfully.,Cardul cadou a fost încărcat cu succes.
 Gift Cards,Carduri cadou
-Go Offline,Intră offline
-Go Online,Accesați online
 Go to Frappe Desk,Du-te la Frappe Desk
 Grand Total,Total mare
 Gross Margin,Marja brută
@@ -552,8 +573,6 @@ json,json
 Just now,Chiar acum
 Keep offline prerequisites healthy and recover stale data safely.,Păstrați condițiile prealabile offline sănătoase și recuperați datele învechite în siguranță.
 Labels,Etichete
-Language,Limba
-Language will be changed to,Limba va fi schimbată în
 "Language, theme, terminal tools, and session controls.","Limbă, temă, instrumente terminale și controale de sesiune."
 Last,Ultimul
 Last 14 Days (Paid vs Pending),Ultimele 14 zile (plătit vs în așteptare)
@@ -565,7 +584,6 @@ Last sync:,Ultima sincronizare:
 Last sync: {0} | ok: {1} | failed: {2} | skipped: {3},Ultima sincronizare: {0} | ok: {1} | a eșuat: {2} | omis: {3}
 Latest entries for current shift,Ultimele intrări pentru schimbul curent
 Lead Time,Timp de livrare
-Light Mode,Modul de lumină
 Limited,Limitat
 lines,linii
 List,Lista
@@ -594,7 +612,6 @@ localStorage,LocalStorage
 Location Performance,Performanța locației
 Locations,Locații
 Lock Screen,Blocare ecran
-Logout,Deconectare
 Lookup Workflow,Flux de lucru de căutare
 Loss,Pierdere
 Low,Scăzut
@@ -621,7 +638,6 @@ Maximum discount amount for this offer item is {0}.,Suma maximă de reducere pen
 Maximum discount percentage for this offer item is {0}%.,Procentul maxim de reducere pentru acest articol ofertă este de {0}%.
 Maximum offer quantity is {0}. Quantity adjusted to allowed limit.,Cantitatea maximă de ofertă este de {0}. Cantitatea ajustată la limita permisă.
 Medium,Mediu
-Menu,Meniu
 Method-wise Collections,Colecții din punct de vedere al metodelor
 Minimum allowed rate for this offer item is {0}.,Rata minimă permisă pentru acest articol ofertă este de {0}.
 Minimum Qty,Cantitate minima
@@ -629,7 +645,7 @@ Mobile No,mobil nr
 Mode,Modul
 Mode of Payment,Modalitate de plată
 Month,luna
-Month Δ,Luna Δ
+Month ?,luna?
 Monthly Profit,Profit lunar
 Monthly Sales,Vânzări lunare
 Monthly Sales Summary,Rezumatul vânzărilor lunare
@@ -894,7 +910,6 @@ Print Draft,Imprimare ciornă
 Print Format (Invoice),Format de imprimare (factură)
 Print Format (Order),Format de imprimare (comanda)
 Print invoice,Imprimați factura
-Print Last Invoice,Tipăriți ultima factură
 Print Purchase Invoice instead of PO,Imprimați factura de achiziție în loc de OP
 Printer,Imprimanta
 Processed returns impacting the shift totals,Retururi procesate care afectează totalul schimburilor
@@ -977,7 +992,6 @@ Repaired,Reparat
 Repairing change allocation,Repararea alocării modificărilor
 Repeat Customers,Clienți repetați
 Repeat Rate,Rata de repetare
-Reprint previous transaction,Retipărește tranzacția anterioară
 Request,Cerere
 Request ID: {0},ID cerere: {0}
 Request Payment,Solicitați Plata
@@ -1063,7 +1077,6 @@ Select a printer to use QZ silent printing.,Selectați o imprimantă pentru a ut
 Select Batch,Selectați lot
 Select Columns to Display,Selectați Coloane de afișat
 Select items to sell,Selectați articolele de vândut
-Select Language,Selectați Limbă
 Select Payment,Selectați Plată
 Select Payment Account,Selectați Cont de plată
 Select printer,Selectați imprimanta
@@ -1102,7 +1115,6 @@ Show the active cart on a customer-facing screen,Afișați coșul activ pe un ec
 Showing {0}-{1} of {2},Se afișează {0}-{1} din {2}
 Showing 0 of 0,Se afișează 0 din 0
 Shows the distribution of invoices per currency,Afișează distribuția facturilor pe monedă
-Sign out of session,Deconectați-vă de la sesiune
 Sign out of the current POS session,Deconectați-vă de la sesiunea curentă POS
 Size:,Dimensiune:
 Skipped Payments,Plăți omise
@@ -1150,7 +1162,6 @@ Suppliers not found,Furnizori nu au fost găsiti
 Switch Camera,Comutați camera
 Switch Cashier,Schimbă casieria
 Switch the POS appearance theme,Schimbați tema aspectului POS
-Switch theme appearance,Schimbați aspectul temei
 Switched to:,S-a schimbat la:
 Sync All Invoices,Sincronizați toate facturile
 Sync Offline Cash Movements ({0}),Sincronizați mișcările de numerar offline ({0})
@@ -1286,7 +1297,6 @@ Unallocated,Nealocate
 Unallocated:,Nealocate:
 Unavailable,Indisponibil
 Unknown,Necunoscut
-Unknown error,Eroare necunoscută
 Unknown Item,Element necunoscut
 Unknown Warehouse,Depozit necunoscut
 Unlock POS,Deblocați POS
@@ -1301,7 +1311,6 @@ Update Price List Rate,Actualizați tariful listei de prețuri
 Updated,Actualizat
 Updates and app info that stay out of the cashier flow.,Actualizări și informații despre aplicație care rămân în afara fluxului de casierie.
 Updates automatically,Se actualizează automat
-Upload pending transactions,Încărcați tranzacții în așteptare
 Usage,Utilizare
 Usage Stats,Statistici de utilizare
 Use a 4 to 8 digit PIN for cashier switching and terminal unlock.,Utilizați un PIN din 4 până la 8 cifre pentru comutarea casieriei și deblocarea terminalului.
@@ -1336,7 +1345,7 @@ Walk-in Customer,Client cu intrare
 Warehouse,Depozit
 Warning: High cache usage may affect performance.,Avertisment: utilizarea ridicată a memoriei cache poate afecta performanța.
 Warning: High lag may indicate heavy processing or browser slowness.,Avertisment: întârzierea mare poate indica procesarea grea sau încetinirea browserului.
-Week Δ,Săptămâna Δ
+Week ?,Săptămâna?
 Week-wise,Săptămânal
 Weight (g),Greutate (g)
 Weight (grams),Greutate (grame)
