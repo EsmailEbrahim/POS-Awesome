@@ -1,0 +1,1353 @@
+﻿- Total Unallocated,- Total Unallocated
+* Required,* Pakollinen
+{0} (Qty: {1}),{0} (määrä: {1})
+{0} actions,{0} toimintoa
+{0} has only {1} in stock. You requested {2}. Adjust quantity or restock.,{0} on vain {1} varastossa.
+{0} offline invoice{1} pending,Pyysit {2}.
+{0} offline invoice{1} saved as draft,Säädä määrää tai lisää varastoja.
+{0} offline invoice{1} synced,{0} offline-lasku{1} odottaa
+{0}: {1} {2},{0} offline-lasku{1} tallennettu luonnoksena
+{0}d ago,{0} offline-lasku{1} synkronoitu
+{0}h ago,{0}: {1} {2}
+{0}m ago,{0} p sitten
+A POS supervisor is required for this action.,{0} h sitten
+About,{0} min sitten
+Access,Tätä toimintoa varten tarvitaan POS-valvoja.
+Account,Tietoja
+Account is overdrawn,Pääsy
+Acknowledge the error to resume scanning,Tili
+Acknowledge the error to resume scanning.,Tili on ylitäytetty
+Across,Jatka skannausta kuittaamalla virhe
+Action,Jatka skannausta kuittaamalla virhe.
+Actions,Poikki
+Active sale,Toiminta
+add,Toiminnot
+Add items from the selector to start building this sale.,Aktiivinen myynti
+Add more value to an existing gift card,lisää
+Add New Address,Lisää kohteita valitsimesta aloittaaksesi tämän myynnin.
+Add new customer,Lisää arvoa olemassa olevaan lahjakorttiin
+Add on New Line,Lisää uusi osoite
+Add Payment,Lisää uusi asiakas
+Add payment to invoice,Lisää uuteen riviin
+Add/Edit Coupon Conditions,Lisää maksu
+Additional Discount,Lisää maksu laskuun
+Additional Discount %,Lisää/muokkaa kuponkien ehtoja
+Address Line 1,Lisäalennus
+Address not found,Lisäalennus %
+Adjust the quantity or enable negative stock to continue.,Osoiterivi 1
+Adjustment,Osoitetta ei löydy
+After returns,Säädä määrää tai salli negatiivinen varasto jatkaa.
+Against,Säätö
+Against Name,Palauksien jälkeen
+Age Bracket,vastaan
+All,Nimeä vastaan
+All Caught Up!,Ikäraja
+All invoices are synchronized,Kaikki
+All pending invoices are up to date,Kaikki kiinni!
+All Profiles,Kaikki laskut synkronoidaan
+All Synchronized,Kaikki odottavat laskut ovat ajan tasalla
+All visible invoices are fully settled.,Kaikki profiilit
+All Warehouses,Kaikki synkronoitu
+Allowed UOM is {0},Kaikki näkyvät laskut ovat täysin maksettuja.
+Always fetch items from server (ignore local cache),Kaikki varastot
+Amount,Sallittu UOM on {0}
+Amount already received,Hae aina kohteet palvelimelta (ohita paikallinen välimuisti)
+Amount exceeds profile cash movement max amount.,Summa
+Amount must be greater than zero.,Summa jo saatu
+Amount received from customer,Summa ylittää profiilin kassaliikkeen enimmäissumman.
+App information,Summan on oltava suurempi kuin nolla.
+Appearance and user-level preferences for the current session.,Asiakkaalta saatu summa
+Applied,Sovelluksen tiedot
+Apply,Nykyisen istunnon ulkoasu ja käyttäjätason asetukset.
+Apply Gift Card,Sovellettu
+Apply Offer,Käytä
+Apply On,Käytä lahjakorttia
+Apply only the amount you want to redeem on this invoice. The remaining balance stays on the card.,Käytä tarjous
+Apply Redemption,Käytä päälle
+Applying,Käytä tähän laskuun vain lunastettava summa.
+Apps,Jäljellä oleva saldo jää kortille.
+Are you sure you want to close? All entered data will be lost.,Käytä Lunastus
+Attributes (Size/Color),Hakeminen
+Auto Allocate Payment Amount,Sovellukset
+Auto Reconcile,Haluatko varmasti sulkea?
+Auto reconciliation completed after payment submit.,Kaikki syötetyt tiedot menetetään.
+Auto reconciliation completed. Allocated: {0}{1}. Remaining outstanding: {0}{2}.,Ominaisuudet (koko/väri)
+Available Actions,Maksusumman automaattinen kohdistaminen
+Available QTY,Automaattinen sovitus
+Available:,Automaattinen täsmäytys suoritettu maksun lähettämisen jälkeen.
+Average Basket,Automaattinen täsmäytys suoritettu.
+Average Bill,Jaettu: {0}{1}.
+Average Ticket,Jäljellä: {0}{2}.
+Avg Bill,Käytettävissä olevat toiminnot
+Avg Invoice,Saatavilla Kpl
+Avg Invoice Profit,Saatavilla:
+Avg Invoice Value,Keskimääräinen kori
+Avg Purchase Frequency,Keskimääräinen lasku
+Awesome,Keskimääräinen lippu
+Awesome Dashboard,Keskim. lasku
+Awesome Dashboard is disabled for the selected POS Profile.,Keskimääräinen lasku
+Awesome Dashboard is unavailable for the selected scope.,Keskimääräinen laskun voitto
+Awesome Dashboard is visible only to POS supervisors.,Laskun keskiarvo
+Back,Keskimääräinen ostotiheys
+Back Office Cash Account,Mahtavaa
+Back Office Cash Account (Optional Override),Upea hallintapaneeli
+Back office cash account is required.,Awesome Dashboard ei ole käytössä valitussa POS-profiilissa.
+Back to {0},Awesome Dashboard ei ole saatavilla valitulle laajuudelle.
+Background processing did not finish in time.,Awesome Dashboard näkyy vain POS-valvojille.
+Background processing failed for Invoice {0}: {1},Takaisin
+Background Submission Failed,Back Officen kassatili
+Background sync interval (seconds),Back Officen kassatili (valinnainen ohitus)
+Balance,Back office -kassatili vaaditaan.
+Balance will be updated when connection is restored,Takaisin {0}
+Balances still pending,Taustakäsittely ei päättynyt ajoissa.
+Barcode,Taustakäsittely epäonnistui laskulle {0}: {1}
+Barcode / QR Ready,Taustalähetys epäonnistui
+Barcode Label Printing,Taustasynkronointiväli (sekuntia)
+Base Paid:,Tasapaino
+Base Recv:,"Saldo päivitetään, kun yhteys palautetaan"
+Base:,Saldot edelleen odottavat
+Basic Information,Viivakoodi
+Batch,Viivakoodi / QR-valmius
+Batch Information,Viivakooditarrojen tulostus
+Before any return workflow,Perus maksettu:
+Before returns,Perusvastaanotto:
+Best Day,Perus:
+Best Seller,Perustiedot
+Book expense or deposit from active shift.,Erä
+Branch / Location-wise Report,Erätiedot
+Brand-wise,Ennen paluutyönkulkua
+Breakdown,Ennen paluuta
+Browse,Paras päivä
+Build Time:,Paras myyjä
+Built with Frappe,Varauskulu tai talletus aktiivisesta vuorosta.
+Bundle,Haara / sijaintikohtainen raportti
+Buying Price,Brändikohtaisesti
+Cache cleared successfully,Erittely
+Cache Usage,Selaa
+cache used,Rakennusaika:
+Calculating...,Rakennettu Frappella
+Camera Access Required,Paketti
+Camera access was aborted. Please try again.,Ostohinta
+Camera constraints not supported by your device. Trying fallback settings...,Välimuisti tyhjennetty onnistuneesti
+Camera is busy or blocked by another app/tab. Close other camera apps and try again.,Välimuistin käyttö
+Camera permission denied. Please allow camera access in your browser settings and refresh the page.,välimuisti käytetty
+Camera scanner is locked until the current error is acknowledged,Lasketaan...
+Camera started but the video stream did not load in time. Please try again.,Kameran käyttö vaaditaan
+Cancel,Kameran käyttö keskeytettiin.
+Cancel cash movement {0}?,Yritä uudelleen.
+Cancel Payment,Laitteesi ei tue kameran rajoituksia.
+Cancel Sale,Yritetään varaasetuksia...
+Cancel Sale ?,Kamera on varattu tai toinen sovellus/välilehti estää sen.
+Cancelled,Sulje muut kamerasovellukset ja yritä uudelleen.
+Cannot add an item with zero or negative quantity.,Kameran lupa evätty.
+Cannot clear cache while offline,Salli kameran käyttö selaimesi asetuksista ja päivitä sivu.
+Cannot redeem customer credit more than invoice total,"Kameraskanneri on lukittu, kunnes nykyinen virhe kuitataan"
+Cannot redeem gift cards more than invoice total,"Kamera käynnistyi, mutta videovirta ei latautunut ajoissa."
+Cannot Save Offline Invoice:,Yritä uudelleen.
+Cannot Save Offline Payment:,Peruuta
+Card,Perutaanko käteissiirto {0}?
+Card / Online,Peruuta maksu
+Card health after the last live lookup,Peruuta myynti
+Cards,Peruuta myynti?
+Cart,Peruutettu
+Cash,"Ei voi lisätä tuotetta, jonka määrä on nolla tai negatiivinen."
+Cash back to customers,Välimuistia ei voi tyhjentää offline-tilassa
+Cash Collections,Asiakasluottoa ei voi lunastaa enempää kuin laskun kokonaissumma
+Cash Deposit is disabled for this POS Profile.,Lahjakortteja ei voi lunastaa enempää kuin laskun kokonaissumma
+Cash Drawer Snapshot,Offline-laskua ei voi tallentaa:
+Cash In Hand,Offline-maksua ei voi tallentaa:
+Cash Movement,kortti
+Cash movement cancelled,Kortti / Online
+Cash movement deduction applied,Kortin kunto viimeisen reaaliaikaisen haun jälkeen
+Cash movement deleted,Kortit
+Cash movement is disabled for this POS Profile.,Kärry
+Cash Movement is disabled in current POS Profile.,käteistä
+Cash movement saved offline,Rahat takaisin asiakkaille
+Cash movement submitted,Käteiskokoelmat
+Cash Movements,Käteistalletus on poistettu käytöstä tässä POS-profiilissa.
+Cash payment cannot be less than invoice total when partial payment is not allowed,Kassalaatikon tilannekuva
+Cash returned after payment,Käteistä Kädessä
+Cashier,Kassaliikenteessä
+Cashier Access,Käteissiirto peruttu
+Cashier identity and appearance preferences.,Kassaliikenteestä tehty vähennys
+Cashier PIN,Kassaliike poistettu
+Cashier PIN saved successfully.,Rahansiirto on estetty tässä POS-profiilissa.
+Cashiers,Cash Movement on poistettu käytöstä nykyisessä POS-profiilissa.
+Cashier-wise,Kassaliike tallennettu offline-tilaan
+Categories,Käteissiirto lähetetty
+Category,Kassaliikkeet
+Category / Brand / Variant Report,"Käteismaksu ei voi olla pienempi kuin laskun loppusumma, kun osamaksu ei ole sallittu"
+Category-wise,Käteinen palautettu maksun jälkeen
+Category-wise Margin,Kassa
+Certificate,Kassapääsy
+Certificate is missing or not trusted. QZ may show confirmation dialogs.,Kassan identiteetti ja ulkonäköasetukset.
+Certificate is trusted. Silent QZ printing is active.,Kassan PIN-koodi
+Change,Kassan PIN-koodi tallennettu onnistuneesti.
+Change allocation repaired,Kassat
+Change interface language,Kassan kannalta
+Change Language,Luokat
+Change Price,Luokka
+Change Return,Luokka/Brändi/Varianttiraportti
+Change Returned,Luokkakohtaisesti
+Change terminal cashier,Kategoriakohtainen marginaali
+Charge Heads,Todistus
+Charges,Varmenne puuttuu tai siihen ei luoteta.
+Charges not found,QZ saattaa näyttää vahvistusikkunat.
+Check Balance,Sertifikaatti on luotettava.
+Check balance for any card. Supervisors can issue and top up cards here.,Hiljainen QZ-tulostus on aktiivinen.
+Check balance only,Muuta
+Check for new commits,Muutoskohde korjattu
+Check for Updates,Vaihda käyttöliittymän kieli
+Check live balance before applying redemption,Vaihda kieli
+Check live balance before redemption,Muuta hintaa
+Checking...,Muuta palautusta
+Cheque/Reference Date,Muutos palautettu
+Cheque/Reference No,Vaihda terminaalin kassa
+Choose the cashier currently operating this terminal.,Latauspäät
+Choose your preferred language for the POS interface,Maksut
+City,Maksuja ei löytynyt
+Clear,Tarkista saldo
+Clear All,Tarkista minkä tahansa kortin saldo.
+Clear all barcode items,Valvojat voivat myöntää ja täydentää kortteja täällä.
+Clear all purchase order items,Tarkista vain saldo
+Clear Cache,Tarkista uudet sitoumukset
+Clear Search,Tarkista päivitykset
+Clearing local cache...,Tarkista live-saldo ennen lunastuksen käyttämistä
+Click to refresh,Tarkista live-saldo ennen lunastusta
+Client CPU Lag:,Tarkistetaan...
+Client Memory Usage:,Sekki/viitepäivämäärä
+Client Metrics,Sekki/viitenumero
+Close,"Valitse kassa, joka tällä hetkellä käyttää tätä terminaalia."
+Close about dialog,Valitse haluamasi kieli POS-käyttöliittymälle
+Close cashier switcher,Kaupunki
+Close closing shift dialog,Selkeä
+Close column selector,Tyhjennä kaikki
+Close Dialog,Tyhjennä kaikki viivakoodikohteet
+Close drafts dialog,Tyhjennä kaikki ostotilauksen tuotteet
+Close invoice details dialog,Tyhjennä välimuisti
+Close invoice management,Tyhjennä haku
+Close offline invoices dialog,Tyhjennetään paikallista välimuistia...
+Close packing list dialog,Päivitä napsauttamalla
+Close returns dialog,Asiakasprosessorin viive:
+Close sales orders dialog,Asiakkaan muistin käyttö:
+Close Scanner,Asiakasmittarit
+Close scanner dialog,Sulje
+Close Settings,Sulje dialogi
+Close Shift,Sulje kassan vaihtaja
+Closing Amount,Sulje vaihtoikkunan sulkeminen
+Closing POS Shift,Sulje sarakkeen valitsin
+Closing Snapshot Available,Sulje valintaikkuna
+Code,Sulje luonnosten valintaikkuna
+Code scanned successfully,Sulje laskun tietojen valintaikkuna
+COGS,Sulje laskujen hallinta
+Collapse item details,Sulje offline-laskujen valintaikkuna
+Collected,Sulje pakkausluettelon valintaikkuna
+Cols,Sulje palautusikkuna
+Columns,Sulje myyntitilausten valintaikkuna
+commits,Sulje skanneri
+Completed and active sales in this range,Sulje skannerin valintaikkuna
+Completed returns will appear here.,Sulje Asetukset
+Confirm,Sulje Shift
+Confirm Close,Sulkemissumma
+Confirm Mobile Number,Suljetaan POS Shift
+Confirm PIN,Sulkeva tilannekuva saatavilla
+Connect,Koodi
+Connect printer and manage certificate,Koodi skannattu onnistuneesti
+Connecting to QZ Tray...,COGS
+Connection problem while submitting invoice,Tiivistä kohteen tiedot
+Connections:,Kerätty
+Connectivity and cached prerequisite status were rechecked.,Cols
+Continue Editing,Sarakkeet
+Could not fetch latest balance from server,sitoutuu
+Count,Valmistunut ja aktiivinen myynti tällä alueella
+Country,Valmiit palautukset näkyvät täällä.
+Coupon,Vahvista
+Coupons,Vahvista Sulje
+Cover,Vahvista matkapuhelinnumero
+CPU Cores:,Vahvista PIN
+Create,Yhdistä
+Create and load a new prepaid card,Yhdistä tulostin ja hallitse varmennetta
+Create and preload a new gift card,Yhdistetään QZ-lokeroon...
+Create Bill,Yhteysongelma laskua lähetettäessä
+Create Customer,Liitännät:
+Create New Item,Yhteydet ja välimuistin edellytystila tarkistettiin uudelleen.
+Create or change your PIN,Jatka muokkaamista
+Create PIN,Viimeisintä saldoa ei voitu hakea palvelimelta
+Create POS Opening Shift,Count
+Create Purchase Order,Maa
+Create Return,Kuponki
+Create return from invoice,Kupongit
+Create Supplier,Kansi
+Credit and Output,CPU-ytimet:
+Credit Note,Luo
+Credit Outstanding,Luo ja lataa uusi prepaid-kortti
+Credit sales remaining to be collected,Luo ja esilataa uusi lahjakortti
+Critical,Luo Bill
+Currency,Luo asiakas
+Current,Luo uusi kohde
+Current Event Loop Lag:,Luo tai muuta PIN-koodi
+Current Month,Luo PIN-koodi
+Current PIN,Luo POS Opening Shift
+Current Profile,Luo ostotilaus
+Current redeemable value on the gift card,Luo palautus
+Current User,Luo palautus laskusta
+Custom,Luo toimittaja
+Custom Due Days,Luotto ja tuotanto
+Custom items per page,Luottoilmoitus
+Customer,Luotto erinomainen
+Customer already selected,Luottomyyntejä on vielä kerättävä
+Customer Balance,Kriittinen
+Customer balance unavailable offline,Valuutta
+Customer created successfully.,Nykyinen
+Customer creation failed.,Nykyisen tapahtumasilmukan viive:
+Customer Details,Kuluva kuukausi
+Customer display channel is missing,Nykyinen PIN-koodi
+Customer display was blocked. Please allow pop-ups for this site.,Nykyinen profiili
+Customer group is required,Tämänhetkinen lunastusarvo lahjakortilla
+Customer is required to add payment,Nykyinen käyttäjä
+Customer Name is required,Mukautettu
+Customer not selected,Mukautetut eräpäivät
+Customer Report,Mukautetut tuotteet sivulla
+Customer saved offline,Asiakas
+Customer Screen,Asiakas on jo valittu
+Customer territory is required,Asiakassaldo
+Customer updated successfully.,Asiakassaldo ei ole käytettävissä offline-tilassa
+Customer-facing tools and printer setup.,Asiakas luotiin onnistuneesti.
+Customers,Asiakkaan luominen epäonnistui.
+Customers not found,Asiakkaan tiedot
+Daily cashier actions without scrolling.,Asiakkaan näyttökanava puuttuu
+Daily Sales,Asiakasnäyttö estettiin.
+Daily Sales Summary,Salli ponnahdusikkunat tälle sivustolle.
+Dark Mode,Asiakasryhmä vaaditaan
+Data loaded in form. Review and submit.,Asiakkaan on lisättävä maksu
+Database Health,Asiakkaan nimi vaaditaan
+Database health affects overall system speed and reliability.,Asiakasta ei ole valittu
+Database Info,Asiakasraportti
+Date,Asiakas tallennettu offline-tilaan
+Day Δ,Asiakasnäyttö
+days,Asiakkaan alue vaaditaan
+Day-wise (MTD),Asiakas päivitetty onnistuneesti.
+Day-wise Movement,Asiakkaalle suunnatut työkalut ja tulostimen asennus.
+Dead Stock,Asiakkaat
+Dead Stock Items,Asiakkaita ei löytynyt
+Decrease quantity,Päivittäiset kassatoiminnot ilman vierittämistä.
+Default,Päivittäinen myynti
+Default:,Päivittäinen myyntiyhteenveto
+Delete,Tumma tila
+Delete cancelled cash movement {0}?,Tiedot ladattu lomakkeeseen.
+Delete Draft,Tarkista ja lähetä.
+Delete draft invoice,Tietokannan terveys
+Delete draft invoice {0}?,Tietokannan kunto vaikuttaa järjestelmän yleiseen nopeuteen ja luotettavuuteen.
+Delete Invoice,Tietokannan tiedot
+Delete offline invoice,Päivämäärä
+Delivered,Päivä Δ
+Delivery Charges,päivää
+Delivery Information,Päiväkohtainen (MTD)
+Delivery Note {0} created,Päivän viisas liike
+Delivery note created,Kuollut varasto
+Deployed Bundle:,Kuolleet varastotuotteet
+Deposit,Vähennä määrää
+Description,Oletus
+Detailed Supplier Breakdown,Oletus:
+Detecting formats:,Poista
+Device Memory:,Poistetaanko peruutettu käteissiirto {0}?
+Difference,Poista luonnos
+Difference (In Company Currency),Poista laskuluonnos
+Disable offline mode first to recheck live connectivity.,Poistetaanko laskuluonnos {0}?
+Disconnect,Poista lasku
+discount,Poista offline-lasku
+Discount %,Toimitettu
+Discount / Void / Return Report,Toimituskulut
+Discount Amount,Toimitustiedot
+Discount limited by POS Profile,Lähetysilmoitus {0} luotu
+Discounted Invoices,Toimitustodistus luotu
+Discounts,Käyttöön otettu paketti:
+Dismiss,Talletus
+Download Certificate,Kuvaus
+Draft,Yksityiskohtainen toimittajien erittely
+Draft invoice deleted,Tunnistetaan muotoja:
+Draft source,Laitteen muisti:
+Drafts,Ero
+Due {0},Ero (yrityksen valuutassa)
+Due Date,"Poista offline-tila käytöstä ensin, jotta voit tarkistaa live-yhteyden uudelleen."
+Duplicate,Katkaise yhteys
+Edit customer,alennus
+Edit discount amount,Alennus %
+Edit discount percentage,Alennus / mitätöinti / palautusraportti
+Edit Gift Application,Alennussumma
+Edit item name,Alennus on rajoitettu POS-profiilin mukaan
+Edit quantity,Alennetut laskut
+Edit rate,Alennukset
+Edit unit of measure,Hylkää
+Edited,Lataa sertifikaatti
+Employee,Luonnos
+Enable background sync,Laskuluonnos poistettu
+Enable Customer Display in POS Profile first.,Luonnoslähde
+End current session,Luonnokset
+Enter a PIN.,Eräpäivä {0}
+Enter a valid grams value,Eräpäivä
+Enter new price list rate,Kopioi
+Enter Quantity,Muokkaa asiakasta
+Enter the cashier PIN to continue.,Muokkaa alennuksen määrää
+Enter the current PIN first.,Muokkaa alennusprosenttia
+"Enter the current PIN, then choose a new one.",Muokkaa lahjahakemusta
+Enter valid grams for scale barcode,Muokkaa kohteen nimeä
+Entries,Muokkaa määrää
+Error accessing camera:,Muokkaa kurssia
+Error calculating prices,Muokkaa mittayksikköä
+Error fetching customer balance,Muokattu
+Error in change calculations!,Työntekijä
+Error Loading Data,Ota taustasynkronointi käyttöön
+Error loading invoice details,Ota Asiakkaan näyttö käyttöön POS-profiilissa ensin.
+Error processing invoice,Lopeta nykyinen istunto
+Error processing payment,Anna PIN-koodi.
+Error searching invoices,Anna kelvollinen gramma-arvo
+Error submitting invoice:,Syötä uusi hinnastohinta
+Error submitting invoice: {0},Syötä määrä
+Error submitting invoice: No response from server,Syötä kassan PIN-koodi jatkaaksesi.
+Error updating currency,Syötä ensin nykyinen PIN-koodi.
+Error updating item details,Anna nykyinen PIN-koodi ja valitse sitten uusi.
+Est. Purchase,Anna vaa'an viivakoodin kelvolliset grammat
+Est. Value,merkinnät
+Event-loop lag measures how busy your browser is. Lower is better.,Virhe käytettäessä kameraa:
+Every,Virhe laskettaessa hintoja
+Exchange Rate,Virhe haettaessa asiakkaan saldoa
+Expand item details,Virhe muutoslaskelmissa!
+Expected Amount (In Company Currency),Virhe ladattaessa tietoja
+Expected Cash,Virhe ladattaessa laskun tietoja
+Expected cash on hand grouped by currency,Virhe laskun käsittelyssä
+Expected vs Actual,Virhe maksun käsittelyssä
+Expense,Virhe haettaessa laskuja
+Expense Account (Optional Override),Virhe laskun lähettämisessä:
+Expense account is required.,Virhe laskun lähettämisessä: {0}
+Expenses and deposits posted during this shift,Virhe laskun lähettämisessä: Ei vastausta palvelimelta
+Expired,Virhe valuutan päivityksessä
+Failed to auto reconcile payments.,Virhe päivitettäessä tuotteen tietoja
+Failed to cancel cash movement,Arvioitu
+Failed to clear cache,Osta
+Failed to create item,Arvioitu
+Failed to create supplier,Arvo
+Failed to delete cash movement,"Tapahtumasilmukan viive mittaa, kuinka kiireinen selaimesi on."
+Failed to generate scale barcode. Using item barcode only.,Alempi on parempi.
+Failed to load cash movement context.,Jokainen
+Failed to load dashboard data.,Valuuttakurssi
+Failed to reload invoice from server,Laajenna tuotteen tiedot
+Failed to submit cash movement,Odotettu summa (yrityksen valuutassa)
+Failed to sync offline cash movements,Odotettu käteinen
+Fast cashier actions for active shifts.,Odotettavissa oleva käteinen ryhmitelty valuutan mukaan
+Fast Moving Items,Odotettu vs todellinen
+Fees,Kustannukset
+Fetch the latest offline prerequisite updates,Kulutustili (valinnainen ohitus)
+Find a sales order quickly and load it into the current sale.,Kulutustili vaaditaan.
+Fixing payment amounts for return invoice...,Tämän muutoksen aikana kirjatut kulut ja talletukset
+Flash Off,Vanhentunut
+Flash On,Maksujen automaattinen täsmäytys epäonnistui.
+"For 'Product Bundle' items, Warehouse, Serial No and Batch No will be considered from the 'Packing List' table. If Warehouse and Batch No are same for all packing items for any 'Product Bundle' item, those values can be entered in the main Item table; values will be copied to 'Packing List' table.",Käteissiirron peruuttaminen epäonnistui
+Free,Välimuistin tyhjennys epäonnistui
+Free Qty,Kohteen luominen epäonnistui
+Frequency,Toimittajan luominen epäonnistui
+from,Käteisliikkeen poistaminen epäonnistui
+From Date,Mittakaavaviivakoodin luominen epäonnistui.
+Fulfillment Details,Käytä vain tuotteen viivakoodia.
+Full Name,Käteisliikekontekstin lataaminen epäonnistui.
+Gain,Kojelaudan tietojen lataaminen epäonnistui.
+Generate a fresh prepaid card and start it with an opening balance.,Laskun lataaminen uudelleen palvelimelta epäonnistui
+Generate and install the certificate to allow fully silent printing without trust prompts.,Käteissiirron lähettäminen epäonnistui
+Generate Certificate,Offline-kassaliikkeiden synkronointi epäonnistui
+Generated scale barcode: {0},Nopeat kassatoimet aktiivisiin työvuoroihin.
+Get Payments,Nopeasti liikkuvat kohteet
+Gift Card,Maksut
+Gift card amount must be greater than zero.,Hae uusimmat offline-edellytysten päivitykset
+Gift Card Code,Etsi myyntitilaus nopeasti ja lataa se nykyiseen myyntiin.
+Gift card code is required for redemption,Korjataan palautuslaskun maksusummia...
+Gift card code is required.,Salama pois päältä
+Gift card issued successfully.,Salama päällä
+Gift card loaded successfully.,"""Tuotepaketin"" nimikkeille ""Pakkausluettelo""-taulukosta otetaan huomioon varasto, sarjanumero ja eränumero."
+Gift Card Management,"Jos varasto- ja eränumero ovat samat kaikille tuotenippunimikkeen pakkausnimikkeille, nämä arvot voidaan syöttää päätuotetaulukkoon."
+Gift card payment,arvot kopioidaan Pakkausluettelo-taulukkoon.
+Gift card redemption requires an online connection,Ilmainen
+Gift card topped up successfully.,Ilmainen määrä
+Gift Cards,Taajuus
+Go Offline,alkaen
+Go Online,Päivämäärästä alkaen
+Go to Frappe Desk,Toteutustiedot
+Grand Total,Koko nimi
+Gross Margin,Voitto
+Gross Profit,Luo uusi prepaid-kortti ja aloita se aloitussaldolla.
+Gross Sales,Luo ja asenna varmenne mahdollistaaksesi täysin äänettömän tulostuksen ilman luottamuskehotteita.
+Group not found,Luo sertifikaatti
+"Grouped controls for terminal, UI, and session settings.",Luotu mittakaavaviivakoodi: {0}
+Grouped totals for each payment method and currency,Hanki maksuja
+Hide,Lahjakortti
+Hide Gift Card,Lahjakortin summan on oltava suurempi kuin nolla.
+Hide Non Essential Fields,Lahjakortin koodi
+Hide quantity decimals,Lunastamiseen tarvitaan lahjakortin koodi
+Hide search tools,Lahjakortin koodi vaaditaan.
+Hide zero rated items,Lahjakortti myönnetty onnistuneesti.
+High,Lahjakortti ladattu onnistuneesti.
+History,Lahjakorttien hallinta
+Hourly (Today),Lahjakorttimaksu
+How this section works,Lahjakortin lunastus vaatii verkkoyhteyden
+"If stale data remains, open Settings > Offline & Sync and run Rebuild Offline Data again while online.",Lahjakortin täyttö onnistui.
+"If the warning persists, open Settings > Offline & Sync, then run Refresh Offline Data or Rebuild Offline Data.",Lahjakortit
+Import the certificate into QZ Tray and restart QZ Tray on each POS machine.,Siirry offline-tilaan
+In,Siirry Online-tilaan
+In stock: {0},Mene Frappe Deskiin
+Include Batch / Serial,Yhteensä
+Include Price,Bruttokate
+Increase quantity,Bruttovoitto
+IndexedDB,Bruttomyynti
+Initial Amount,Ryhmää ei löydy
+Initialize your shift with opening balances,"Ryhmitellyt säätimet päätteen, käyttöliittymän ja istunnon asetuksille."
+Initializing application...,Alustetaan sovellusta...
+"Inspect cache, sync, and prerequisite status","Tarkista välimuistin, synkronoinnin ja edellytysten tila"
+Installed Applications,Asennetut sovellukset
+Insufficient stock:\n{0},Riittämätön varasto:\n{0}
+Invalid rate,Virheellinen hinta
+Inventory Status Report,Varaston tilaraportti
+Invoice,Lasku
+Invoice {0} is Submitted,Lasku {0} on lähetetty
+Invoice {0} processed successfully,Lasku {0} käsitelty onnistuneesti
+Invoice {0} submission failed,Laskun {0} lähetys epäonnistui
+Invoice {0} was already submitted,Lasku {0} on jo lähetetty
+Invoice Adjustments,Laskun oikaisut
+Invoice Change,Laskun muutos
+Invoice Details,Laskun tiedot
+Invoice is still in draft after background submission.,Lasku on vielä luonnoksessa taustalähetyksen jälkeen.
+Invoice Items,Laskun erät
+Invoice Management,Laskujen hallinta
+Invoice Mgmt,Lasku Mgmt
+Invoice saved offline,Lasku tallennettu offline-tilaan
+Invoice submission failed,Laskun lähetys epäonnistui
+Invoice Submitted,Lasku lähetetty
+"Invoice value settled by loyalty points, not cash collection","Laskun arvo maksetaan kanta-asiakaspisteillä, ei käteisellä"
+Invoices,Laskut
+Invoices already past due date,Laskut ovat jo erääntyneet
+Invoices saved as POS Invoices,Laskut tallennettu POS-laskuina
+Invoices still carrying balances,Laskuissa on vielä saldoa
+Issue Mode,Ongelmatila
+Issue New Card,Myönnä uusi kortti
+Issue Workflow,Ongelman työnkulku
+"Issue, top up, and check","Ilmoita, täytä ja tarkista"
+Item,Tuote
+Item / Product Sales Report,Tuote / tuote myyntiraportti
+Item {0} added to invoice,Tuote {0} lisätty laskuun
+Item '{0}' has no barcode,Kohteessa {0} ei ole viivakoodia
+Item Code,Tuotekoodi
+Item created successfully,Kohteen luominen onnistui
+Item is out of stock,Tuote on loppu
+Item Name,Tuotteen nimi
+Item not found,Kohdetta ei löydy
+Item order updated,Tuotejärjestys päivitetty
+Item Selector Settings,Kohteen valitsimen asetukset
+Items,Tuotteet
+Items added in POS will appear here automatically.,POS:iin lisätyt tuotteet näkyvät täällä automaattisesti.
+Items added to invoice,Tuotteet lisätty laskuun
+Items per page,Kohteita per sivu
+Items Sold,Myydyt tuotteet
+Items/Invoice,Tuotteet/lasku
+Item-wise Profitability,Kohteiden kannalta kannattavuus
+Journal Entry,Päiväkirjamerkintä
+json,json
+Just now,Juuri nyt
+Keep offline prerequisites healthy and recover stale data safely.,Pidä offline-edellytykset kunnossa ja palauta vanhentuneet tiedot turvallisesti.
+Labels,Tarrat
+Language,Kieli
+Language will be changed to,Kieleksi vaihdetaan
+"Language, theme, terminal tools, and session controls.","Kieli, teema, päätetyökalut ja istunnon ohjaimet."
+Last,Viimeinen
+Last 14 Days (Paid vs Pending),Viimeiset 14 päivää (maksettu vs. odottava)
+Last 14 Days Activity,Viimeisen 14 päivän toiminta
+Last 14 Days Gross Profit,Viimeisen 14 päivän bruttovoitto
+Last 14 Days Purchases,Viimeisen 14 päivän ostokset
+Last 14 Days Tax/Charges,Viimeisten 14 päivän verot/maksut
+Last sync:,Viimeisin synkronointi:
+Last sync: {0} | ok: {1} | failed: {2} | skipped: {3},Viimeisin synkronointi: {0} |
+Latest entries for current shift,ok: {1} |
+Lead Time,epäonnistui: {2} |
+Light Mode,ohitettu: {3}
+Limited,Uusimmat merkinnät nykyiseen vuoroon
+lines,Toimitusaika
+List,Valotila
+Live Snapshot,Rajoitettu
+Load a POS profile and cashier first.,rivit
+Load More Invoices,Luettelo
+Load previously saved invoices,Live Snapshot
+Load Sale,Lataa ensin POS-profiili ja kassa.
+Load Sales Invoice,Lataa lisää laskuja
+Loading app data...,Lataa aiemmin tallennetut laskut
+Loading customer database...,Load Sale
+Loading customers...,Lataa myyntilasku
+Loading database stats...,Ladataan sovellustietoja...
+Loading details...,Ladataan asiakastietokantaa...
+Loading invoice history...,Ladataan asiakkaita...
+Loading items...,Ladataan tietokannan tilastoja...
+Loading product catalog...,Ladataan tietoja...
+Loading return invoices...,Ladataan laskuhistoriaa...
+Loading server CPU/memory usage...,Ladataan kohteita...
+Loading suppliers...,Ladataan tuoteluetteloa...
+Loading unpaid invoices...,Ladataan palautuslaskuja...
+Loading view...,Ladataan palvelimen suorittimen/muistin käyttöä...
+Loading...,Ladataan toimittajia...
+Local storage is unavailable. Switching to online-only mode.,Ladataan maksamattomia laskuja...
+localStorage,Ladataan näkymää...
+Location Performance,Ladataan...
+Locations,Paikallinen tallennustila ei ole käytettävissä.
+Lock Screen,Vaihtaminen vain online -tilaan.
+Logout,localStorage
+Lookup Workflow,Sijainnin suorituskyky
+Loss,Sijainnit
+Low,Lukitusnäyttö
+Low Stock,Kirjaudu ulos
+Low Stock Alerts,Haun työnkulku
+Low Stock Items,Tappio
+Low Stock Threshold,Matala
+Low Stock Total,Alhainen varasto
+Lowest Margin,Alhaisen varaston hälytykset
+Low-frequency maintenance and system details.,Alhaiset tuotteet
+Loyalty Redeemed,Alhainen varastokynnys
+Loyalty Redemption,Alhainen varasto yhteensä
+Make New Payment,Alin marginaali
+Manage all,Matalataajuinen huolto ja järjestelmätiedot.
+Manage and synchronize your offline transactions,Uskollisuus lunastettu
+Manage Cashier PIN,Uskollisuuden lunastus
+"Manage offline tools, terminal controls, and maintenance from one workspace.",Tee uusi maksu
+manual,Hallitse kaikkia
+"Manual codes, barcode scans, and QR scans work in the same field",Hallitse ja synkronoi offline-tapahtumiasi
+Manual offline mode is enabled,Hallinnoi kassan PIN-koodia
+Margin,"Hallitse offline-työkaluja, päätteiden ohjaimia ja ylläpitoa yhdestä työtilasta."
+Maximum available quantity is {0}. Quantity adjusted to match stock.,manuaalinen
+Maximum discount amount for this offer item is {0}.,"Manuaaliset koodit, viivakoodiskannaukset ja QR-skannaukset toimivat samalla alalla"
+Maximum discount percentage for this offer item is {0}%.,Manuaalinen offline-tila on käytössä
+Maximum offer quantity is {0}. Quantity adjusted to allowed limit.,Marginaali
+Medium,Suurin käytettävissä oleva määrä on {0}.
+Menu,Määrä mukautettu vastaamaan varastoa.
+Method-wise Collections,Tämän tarjoustuotteen enimmäisalennussumma on {0}.
+Minimum allowed rate for this offer item is {0}.,Tämän tarjoustuotteen enimmäisalennusprosentti on {0}%.
+Minimum Qty,Tarjouksen enimmäismäärä on {0}.
+Mobile No,Määrä säädetty sallittuun rajaan.
+Mode,Keskikokoinen
+Mode of Payment,Valikko
+Month,Menetelmäkohtaiset kokoelmat
+Month Δ,Tämän tarjoustuotteen pienin sallittu hinta on {0}.
+Monthly Profit,Minimimäärä
+Monthly Sales,Matkapuhelin nro
+Monthly Sales Summary,tila
+Month-wise,Maksutapa
+Most Active Cashiers,Kuukausi
+Movement Type,Kuukausi Δ
+Movements,Kuukauden voitto
+Multi Currency,Kuukausimyynti
+N/A,Kuukauden myyntiyhteenveto
+Name,Kuukausittain
+Negative Stock,Aktiivisimmat kassat
+Negative Stock Items,Liikkeen tyyppi
+Negative values not allowed,Liikkeet
+Net,Monivaluutta
+Net Qty,Ei käytössä
+Net Sales,Nimi
+Net Value,Negatiivinen osake
+Never,Negatiiviset varastotuotteet
+New changes are ready to load,Negatiiviset arvot eivät ole sallittuja
+New Item,Net
+New Offer Available,Nettomäärä
+New PIN,Liikevaihto
+New rate,Nettoarvo
+Next unit of measure,Ei koskaan
+No attribute data found.,Uudet muutokset ovat valmiita latautumaan
+No Barcode,Uusi kohde
+No barcode found for UOM '{0}',Uusi tarjous saatavilla
+No branch/location data found.,Uusi PIN
+No brand data found.,Uusi korko
+No cached gift card balance is available offline.,Seuraava mittayksikkö
+No camera found on this device. Please ensure your device has a working camera.,Attribuuttitietoja ei löytynyt.
+No capability warnings recorded yet.,Ei viivakoodia
+No cash expected for this shift.,Viivakoodia ei löytynyt UOM:lle '{0}'
+No cash mode configured,Haara-/sijaintitietoja ei löytynyt.
+No cash movement type is allowed for this POS Profile.,Bränditietoja ei löytynyt.
+No cashier PIN is set yet. Create one now.,Välimuistissa oleva lahjakorttisaldo ei ole käytettävissä offline-tilassa.
+No cashier profiles are available for this POS profile yet.,Tästä laitteesta ei löytynyt kameraa.
+No cashier-wise discount/void/return activity.,"Varmista, että laitteessasi on toimiva kamera."
+No category data found.,Kykyvaroituksia ei ole vielä tallennettu.
+No category profitability data found.,Rahaa ei odoteta tälle vaihdolle.
+No change returned recorded for this shift.,Käteistilaa ei ole määritetty
+No change-allocation invoices match the current filters.,Mitään käteisliiketyyppiä ei sallita tälle POS-profiilille.
+No charge head breakdown found.,Kassan PIN-koodia ei ole vielä asetettu.
+No Company Selected,Luo sellainen nyt.
+No customer sales data found.,Tälle POS-profiilille ei ole vielä saatavilla kassaprofiileja.
+No day-wise discount/void/return trend.,Ei kassakohtaista alennus-/ mitätöinti-/palautustoimintoa.
+No day-wise payment data found.,Luokkatietoja ei löytynyt.
+No day-wise profitability trend found.,Luokan kannattavuustietoja ei löytynyt.
+No day-wise purchase data found.,Tälle vuorolle ei palautettu muutoksia.
+No day-wise sales trend found.,Yksikään muutoskohdistuslasku ei vastaa nykyisiä suodattimia.
+No day-wise tax/charges trend found.,Latauspään vikaa ei löytynyt.
+No dead stock items.,Yritystä ei ole valittu
+No due date,Asiakasmyyntitietoja ei löytynyt.
+No exact repair match found for this invoice,Ei päiväkohtaista alennus-/poisto-/palautustrendiä.
+No hourly sales trend found for today.,Päiväkohtaisia ​​maksutietoja ei löytynyt.
+No invoice activity found.,Päiväkohtaista kannattavuustrendiä ei löytynyt.
+No invoices found,Päiväkohtaisia ​​ostotietoja ei löytynyt.
+No invoices found. Try different search criteria.,Päiväkohtaista myyntitrendiä ei löytynyt.
+No invoices recorded for this shift.,Päiväkohtaista vero-/maksutrendiä ei löytynyt.
+No item profitability data found.,Ei kuolleita varastotuotteita.
+No item sales data found for this period.,Ei eräpäivää
+No items found,Tälle laskulle ei löytynyt tarkkaa korjausosumaa
+No items in cart,Tuntikohtaista myyntitrendiä ei löytynyt tälle päivälle.
+No items with barcodes to print,Laskutustoimintaa ei löytynyt.
+No location-wise top item data found.,Laskuja ei löytynyt
+No low stock alerts right now.,Laskuja ei löytynyt.
+No low stock items.,Kokeile erilaisia ​​hakuehtoja.
+No matching items in cart,Tästä vaihdosta ei ole kirjattu laskuja.
+No month-wise sales trend found.,Tuotteen kannattavuustietoja ei löytynyt.
+No negative stock items.,Tälle ajanjaksolle ei löytynyt tuotemyyntitietoja.
+No notifications yet,Kohteita ei löytynyt
+No offline cash movement synced.,Ei tuotteita ostoskorissa
+No offline invoices pending synchronization,"Ei kohteita, joissa on tulostettava viivakoodi"
+No offline sync issues recorded yet.,Sijaintikohtaisia huipputuotetietoja ei löytynyt.
+No out-of-stock items.,Ei varoituksia alhaisista varastoista juuri nyt.
+No outstanding credit invoices for this shift.,Ei vähissä varastossa olevia tuotteita.
+No payment collection data found.,Ei vastaavia tuotteita ostoskorissa
+No payment rows available on this invoice.,Kuukausittaista myyntitrendiä ei löytynyt.
+No payments registered for this shift.,Ei negatiivisia varastotuotteita.
+No pending balances in this period.,Ei vielä ilmoituksia
+No pending offline invoices,Ei synkronoituja offline-käteissiirtoja.
+No Print Formats Found,Ei synkronointia odottavia offline-laskuja
+No profiles found for selected scope. Falling back to current profile failed.,Offline-synkronointiongelmia ei ole vielä tallennettu.
+No recent customer activity found.,Ei lopputuotteita.
+No recent stock entries found.,Ei maksamattomia luottolaskuja tälle siirrolle.
+No records found,Maksunkeräystietoja ei löytynyt.
+No reorder suggestions right now.,Tässä laskussa ei ole maksurivejä.
+No repeat customers in this period.,Tälle vuorolle ei ole rekisteröity maksuja.
+No response from server,Ei odottavia saldoja tällä kaudella.
+No return invoices found,Ei odottavia offline-laskuja
+No return item trend found.,Tulostusmuotoja ei löytynyt
+No returnable items found for this invoice,Valitulle laajuudelle ei löytynyt profiileja.
+No returns were processed in this shift.,Paluu nykyiseen profiiliin epäonnistui.
+No risk activity found.,Viimeaikaista asiakastoimintaa ei löytynyt.
+No sales activity found for this period.,Viimeaikaisia ​​osakemerkintöjä ei löytynyt.
+No slow moving items.,Tietueita ei löytynyt
+No staff sales activity found.,Ei tilausehdotuksia juuri nyt.
+No stock movement for this period.,Ei toistuvia asiakkaita tänä aikana.
+No submitted cash movements in this shift.,Ei vastausta palvelimelta
+No supplier purchases found in this month.,Palautuslaskuja ei löytynyt
+No suppliers found for this period.,Palautustuotetrendiä ei löytynyt.
+No sync trigger has run yet in this session.,Tälle laskulle ei löytynyt palautettavia tuotteita
+No tax head breakdown found.,Tässä vuorossa ei käsitelty palautuksia.
+No top items found for this location.,Riskitoimintaa ei löytynyt.
+No unpaid invoices,Myyntitoimintaa ei löytynyt tälle ajanjaksolle.
+No variant data found.,Ei hitaasti liikkuvia esineitä.
+No week-wise sales trend found.,Henkilöstön myyntitoimintaa ei löytynyt.
+No.,Ei varastoliikettä tälle ajanjaksolle.
+Nobile Number,Ei toimitettuja käteissiirtoja tässä vuorossa.
+Not available,Toimittajien ostoja ei löytynyt tässä kuussa.
+Not checked,Toimittajia ei löytynyt tälle ajanjaksolle.
+Not selected,Tässä istunnossa ei ole vielä suoritettu synkronointitriggeriä.
+Not Set,Veropääerittelyä ei löytynyt.
+Notifications,Tälle sijainnille ei löytynyt huipputuotteita.
+Offer,Ei maksamattomia laskuja
+Offer Applied,Varianttitietoja ei löytynyt.
+Offer criteria exceeded,Viikkokohtaista myyntitrendiä ei löytynyt.
+Offer Item,Ei
+Offer item unavailable,Nobilen numero
+Offer Removed,Ei saatavilla
+Offer UOM cannot be changed,Ei tarkistettu
+Offer?,Ei valittu
+Offers,Ei asetettu
+Offline,Ilmoitukset
+Offline & Sync,Tarjoa
+Offline Capabilities,Tarjous voimassa
+Offline data status refreshed,Tarjouskriteerit ylittyivät
+Offline diagnostics,Tarjouskohde
+Offline Invoices,Tarjoustuote ei ole saatavilla
+Offline invoices status,Tarjous poistettu
+Offline invoices synced,Tarjouksen UOM:a ei voi muuttaa
+Offline Queue: {0},Tarjoa?
+Offline rebuild guidance,Tarjoukset
+Offline restore is unavailable for this session.,Offline-tilassa
+Offline selling is available with degraded capabilities.,Offline ja synkronointi
+Offline snapshot does not match the current POS state.,Offline-ominaisuudet
+Offline Status,Offline-tietojen tila päivitetty
+"Offline, terminal, and system controls",Offline-diagnostiikka
+OK,Offline-laskut
+Online,Offline-laskujen tila
+Open actions menu,Offline-laskut synkronoitu
+Open balance to collect,Offline-jono: {0}
+Open Customer Display,Offline-uudelleenrakennusohjeet
+Open drawer,Offline-palautus ei ole käytettävissä tälle istunnolle.
+Open invoices,Offline-myynti on saatavilla heikentyneillä ominaisuuksilla.
+Open Payments?,Offline-tilannekuva ei vastaa nykyistä POS-tilaa.
+Open POS home,Offline-tila
+Open this screen from POS Menu -> Open Customer Display.,"Offline-, pääte- ja järjestelmäohjaimet"
+OpenCV image processing enabled - Enhanced barcode detection,OK
+OpenCV image processing unavailable on this device,verkossa
+OpenCV Off,Avaa toimintovalikko
+OpenCV On,Avaa saldo kerättäväksi
+OpenCV processing disabled,Avaa Asiakasnäyttö
+Opening Amount,Avaa laatikko
+Opening Cash,Avoimet laskut
+options,Avaa maksut?
+Order,Avaa POS-etusivu
+Original,Avaa tämä näyttö POS-valikosta -> Avaa asiakasnäyttö.
+Other,OpenCV-kuvankäsittely käytössä - Parannettu viivakoodin tunnistus
+Out,OpenCV-kuvankäsittely ei ole käytettävissä tällä laitteella
+Out of Stock,OpenCV pois päältä
+Out of Stock Items,OpenCV päällä
+Outstanding,OpenCV-käsittely pois käytöstä
+Outstanding Credit by Currency,Avausmäärä
+Overdue,Rahan avaaminen
+Overpayment Change,vaihtoehtoja
+Overpayment change deducted: {0},Tilaa
+Packing List,Alkuperäinen
+Page Format,muu
+Page unavailable offline,Ulos
+Paid,Loppunut varastosta
+Paid (orig):,Loppuneet tuotteet
+Paid Amount,Erinomaista
+Paid change cannot be greater than total change!,Eräs luotto valuutan mukaan
+Paid:,Myöhässä
+Parent Item,Ylimaksun muutos
+Partial,Ylimääräisen maksun muutos vähennetty: {0}
+Partly Paid,Pakkausluettelo
+Party Account,Sivun muoto
+Party Type,Sivu ei ole käytettävissä offline-tilassa
+Pause terminal until next cashier,Maksettu
+PAY,Maksettu (alkuperäinen):
+Payment,Maksettu summa
+Payment Account,Maksettu muutos ei voi olla suurempi kuin kokonaismuutos!
+Payment entries processed for Invoice {0},Maksettu:
+Payment Entry Type,Päätuote
+Payment History,Osittainen
+Payment ID,Osittain maksettu
+Payment Method Report,Puolueen tili
+Payment Methods,Juhlatyyppi
+Payment of {0} received successfully.,Keskeytä terminaali seuraavaan kassaan asti
+Payment Progress,MAKSAA
+Payment Reconciliation,Maksu
+Payment request status could not be retrieved. Please try again,Maksutili
+Payment Request took too long to respond. Please try requesting for payment again,Laskun {0} maksukirjaukset käsitelty
+Payment saved offline,Maksun kirjaustyyppi
+Payment State,Maksuhistoria
+Payment Status,Maksutunnus
+Payment submitted but print function could not be executed. Payment name not found.,Maksutaparaportti
+Payment submitted.,Maksutavat
+Payment Summary,Maksu {0} vastaanotettu onnistuneesti.
+Payments,Maksun edistyminen
+Payments are not open. Do you want to open payments and submit?,Maksujen täsmäytys
+Payments by Mode of Payment,Maksupyynnön tilaa ei voitu hakea.
+PDF,Yritä uudelleen
+Peak Hour,Maksupyyntöön vastaaminen kesti liian kauan.
+Peak Memory:,Yritä pyytää maksua uudelleen
+Peak Server:,Maksu tallennettu offline-tilaan
+Peak:,Maksutila
+Pending,Maksun tila
+Pending Amount,"Maksu lähetetty, mutta tulostustoimintoa ei voitu suorittaa."
+Pending count updated from {0} to {1},Maksun nimeä ei löydy.
+Pending Exposure,Maksu lähetetty.
+Pending Invoices,Maksujen yhteenveto
+Pending Ratio,Maksut
+Pending Sales,Maksut eivät ole auki.
+Pending sales: {0} | Cache usage: {1}%,Haluatko avata maksut ja lähettää?
+Pending Sync,Maksut maksutavalla
+Pending: {0},PDF
+Pending: {0} | Synced: {1} | Draft: {2},Huipputunti
+Per Page,Huippumuisti:
+Personal,Huippupalvelin:
+Personal preferences adjust the current cashier experience without changing the active POS route.,Huippu:
+PIN confirmation does not match.,Odottaa
+PIN must be 4 to 8 digits.,Odottava summa
+Please add at least one item.,Odotusarvo päivitetty arvosta {0} arvoon {1}
+Please allow camera access to scan codes,Odottaa altistusta
+Please enter payment amount,Odottavat laskut
+Please fill all required fields,Odottava suhde
+Please make a payment or select a payment,Odottava myynti
+Please request phone payment or use another payment method,Odottavat myynnit: {0} |
+Please select a customer first,Välimuistin käyttö: {1} %
+Please select a party,Odottaa synkronointia
+Please select a party before reconciling.,Odottaa: {0}
+Please select a valid movement type.,Odottaa: {0} |
+Please select an invoice,Synkronoitu: {1} |
+Please select company before reconciling.,Luonnos: {2}
+Please set the customer's mobile number,Sivua kohden
+Please try again or enter the item manually.,Henkilökohtainen
+Please verify the barcode or check the item's availability.,Henkilökohtaiset asetukset säätävät nykyistä kassakokemusta muuttamatta aktiivista POS-reittiä.
+Points,PIN-vahvistus ei täsmää.
+Popup blocked. Please allow popups.,PIN-koodissa on oltava 4–8 numeroa.
+POS,Lisää vähintään yksi kohde.
+POS controls and maintenance,Anna kameralle pääsy koodien skannaukseen
+POS Expense is disabled for this POS Profile.,Anna maksun summa
+POS is running with limited offline prerequisites.,Täytä kaikki vaaditut kentät
+POS Profile,Ole hyvä ja suorita maksu tai valitse maksu
+Position the QR code or barcode within the scanning area,Pyydä puhelinmaksu tai käytä muuta maksutapaa
+Posting,Valitse ensin asiakas
+Posting and Price List,Valitse puolue
+Posting Date,Valitse osapuoli ennen sovittelua.
+Preparing background sync,Valitse kelvollinen liiketyyppi.
+"Press OK to continue offline with a warning, or Cancel to retry.",Valitse lasku
+Previous unit of measure,Valitse yritys ennen sovittelua.
+Price List,Ole hyvä ja aseta asiakkaan matkapuhelinnumero
+Price List Rate,Yritä uudelleen tai kirjoita kohde manuaalisesti.
+Price list rate updated locally only,Tarkista viivakoodi tai tuotteen saatavuus.
+Pricing & Discounts,Pisteet
+Pricing Rule,Ponnahdusikkuna estetty.
+Print,Salli ponnahdusikkunat.
+Print Draft,POS
+Print Format (Invoice),POS-hallinta ja huolto
+Print Format (Order),POS-kulut on poistettu käytöstä tässä POS-profiilissa.
+Print invoice,POS toimii rajoitetuin offline-edellytyksin.
+Print Last Invoice,POS-profiili
+Print Purchase Invoice instead of PO,Aseta QR-koodi tai viivakoodi skannausalueelle
+Printer,Lähettäminen
+Processed returns impacting the shift totals,Postitus ja hinnasto
+Processing Payment,Lähetyspäivämäärä
+Processing payment entries for Invoice {0},Taustasynkronointia valmistellaan
+Profile,Jatka offline-tilassa varoituksen kanssa painamalla OK tai yritä uudelleen painamalla Peruuta.
+Profiles,Edellinen mittayksikkö
+Profit,Hinnasto
+Profit: Invoice Item Estimate,Hinnastohinta
+Profit: Stock Ledger (COGS),Hinnasto päivitetty vain paikallisesti
+Profitability Report,Hinnoittelu & Alennukset
+Prorated return discount,Hinnoittelusääntö
+Purchase Amount,Tulosta
+Purchase Invoices,Tulosta luonnos
+Purchase Order created,Tulostusmuoto (lasku)
+Qty,Tulostusmuoto (tilaus)
+Qualified,Tulosta lasku
+Quantity,Tulosta viimeinen lasku
+Quantity exceeds available stock,Tulosta ostolasku tilauksen sijaan
+Quick Actions,Tulostin
+Quotation {0} is Submitted,"Käsitellyt palautukset, jotka vaikuttavat työvuorojen kokonaissummaan"
+Quotation submitted,Maksua käsitellään
+QZ Tray connected.,Käsitellään laskun {0} maksumerkintöjä
+QZ Tray is manually disconnected. Press Connect to enable it again.,Profiili
+QZ Tray is not connected.,Profiilit
+QZ Tray Setup,Voitto
+Rate,Voitto: Laskun eräarvio
+Rate adjusted to maximum allowed discount,Voitto: Osakekirjanpito (COGS)
+Ready,Kannattavuusraportti
+Ready to resume,Suhteellinen palautusalennus
+Ready!,Ostosumma
+Real-time POS insights for retail operations.,Ostolaskut
+Rebuild Offline Data,Ostotilaus luotu
+Receive,Määrä
+Receive now,Pätevä
+Received,Määrä
+Received:,Määrä ylittää saatavilla olevan varaston
+Recent Movement Entries,Nopeat toiminnot
+Recent updates about your invoices,Tarjous {0} on lähetetty
+Recently Active Customers,Tarjous lähetetty
+Rechecking connection,QZ Lokero kytketty.
+Reconcile payment methods and close shift,QZ-lokero on irrotettu manuaalisesti.
+Reconciling Payments,Ota se uudelleen käyttöön painamalla Yhdistä.
+"Reconnect and open this page once while online, then offline refreshes will be able to restore it.",QZ-lokeroa ei ole kytketty.
+Reconnect online to refresh cached offline data from the server.,QZ-lokeron asetukset
+Recreate local offline prerequisites from scratch,Rate
+Recv:,Hinta säädetty enimmäisalennukseen
+Redeem,Valmis
+Redeem / Scan,Valmiina jatkamaan
+Redeem Amount,Valmis!
+Redeem Mode,Reaaliaikaiset POS-tiedot vähittäiskaupan toiminnasta.
+Redeemed Amount,Rakenna offline-tiedot uudelleen
+Redeemed credit cannot be greater than its total.,Vastaanota
+Redemption and Totals,Vastaanota nyt
+Reference,Vastaanotettu
+Refresh,Vastaanotettu:
+Refresh Exchange Rate,Viimeaikaiset liikemerkinnät
+Refresh Offline Data,Viimeisimmät päivitykset laskuistasi
+Refresh Printers,Äskettäin aktiiviset asiakkaat
+Refund,Yhteyden tarkistaminen uudelleen
+Release Notes,Yhdistä maksutavat ja sulje työvuoro
+Reload,Maksujen täsmäyttäminen
+Reload customers,"Muodosta yhteys uudelleen ja avaa tämä sivu kerran ollessasi online-tilassa, jolloin offline-päivitykset voivat palauttaa sen."
+Reload Items,Muodosta online-yhteys uudelleen päivittääksesi välimuistissa olevat offline-tiedot palvelimesta.
+Reload Now,Luo paikalliset offline-edellytykset tyhjästä
+Reload to apply the latest changes. Your current session will be refreshed.,Vastaus:
+Reload Workflow,Lunasta
+Remarks,Lunasta / Skannaa
+Remarks are required.,Lunastussumma
+Remove,Lunasta tila
+Remove barcode item,Lunastettu summa
+Remove cached data and reload the POS app,Lunastettu luotto ei voi olla suurempi kuin sen kokonaissumma.
+Remove item,Lunastus ja summat
+Remove Offer,Viite
+Reorder / Purchase Suggestions,Päivitä
+Repair Candidate,Päivitä valuuttakurssi
+Repair Change Allocation,Päivitä offline-tiedot
+Repair requires an online connection,Päivitä tulostimet
+Repaired,Hyvitys
+Repairing change allocation,Julkaisutiedot
+Repeat Customers,Lataa uudelleen
+Repeat Rate,Lataa asiakkaat uudelleen
+Reprint previous transaction,Lataa tuotteet uudelleen
+Request,Lataa nyt uudelleen
+Request ID: {0},Lataa uusimmat muutokset käyttöön.
+Request Payment,Nykyinen istuntosi päivitetään.
+Requested route: {0},Lataa työnkulku uudelleen
+Required columns cannot be hidden,Huomautuksia
+Reset,Huomautuksia tarvitaan.
+Reset item name,Poista
+Reset to Default,Poista viivakoodikohde
+Resource Health,Poista välimuistissa olevat tiedot ja lataa POS-sovellus uudelleen
+Restricted,Poista kohde
+Restricted operational controls for supervisors only.,Poista tarjous
+Retry,Uudelleentilaus/ostoehdotukset
+Retry route,Korjausehdokas
+Return,Korjausmuutosten määrä
+Return Amount,Korjaus vaatii verkkoyhteyden
+Return Count,Korjattu
+Return items must have negative quantities,Muutoskohteen korjaaminen
+Return total must be negative,Toistuvia asiakkaita
+Return Valid Until,Toistonopeus
+Return window passed,Tulosta edellinen tapahtuma uudelleen
+Return without Invoice,Pyyntö
+Returns,Palauttaa
+Returns / Voids / Discounts,Palautukset / mitätöinnit / alennukset
+Returns by Currency,Palautukset valuutan mukaan
+Revenue,Tulot
+Review shift totals before submitting the closing entry,Tarkista työvuorojen kokonaissummat ennen kuin lähetät loppumerkinnän
+Round Off,Pyöristää
+Rows,Rivit
+Rows:,Rivit:
+Rule,Sääntö
+Sale,Myynti
+Sales,Myynti
+Sales Order {0} is Submitted,Myyntitilaus {0} on lähetetty
+Sales Person and Print,Myyjä ja painatus
+Sales Person not found,Myyjää ei löydy
+Sales processed,Myynti käsitelty
+Sales Return,Myynnin palautus
+Sales Trend Report,Myyntitrendiraportti
+Save,Tallenna
+Save & Clear,Tallenna ja tyhjennä
+Save as POS Profile Default,Tallenna POS-profiilin oletusasetukseksi
+Save Settings,Tallenna asetukset
+Save the selected printer as the POS Profile default so it shows automatically on this setup.,"Tallenna valittu tulostin POS-profiilin oletusasetukseksi, jotta se näkyy automaattisesti tässä asetuksessa."
+Saved as draft because: {0},"Tallennettu luonnoksena, koska: {0}"
+Saving...,Tallennetaan...
+Scale barcode detected. Quantity here is the number of labels to print.,Mittakaavaviivakoodi havaittu.
+Scale barcode settings are not configured. Using item barcode only.,Määrä tässä on tulostettavien tarrojen määrä.
+Scale template barcode is missing for this item/UOM. Using item barcode only.,Mittakaavaviivakoodiasetuksia ei ole määritetty.
+Scan an existing card and top it up without leaving the payment flow.,Käytä vain tuotteen viivakoodia.
+Scan Error,Mittakaavamallin viivakoodi puuttuu tästä tuotteesta/UOM:sta.
+Scan or enter a gift card code to check balance or redeem.,Käytä vain tuotteen viivakoodia.
+Scan or paste the card code below.,Skannaa olemassa oleva kortti ja lataa se poistumatta maksuvirrasta.
+Scan QR Code/Barcode,Skannausvirhe
+Scan with camera,Skannaa tai syötä lahjakortin koodi tarkistaaksesi saldon tai lunastaaksesi.
+Scan-First Flow,Skannaa tai liitä kortin koodi alla.
+Scanned Code:,Skannaa QR-koodi/viivakoodi
+Scanning for: {0},Skannaa kameralla
+Scanning items,Scan-First Flow
+Scan-Ready,Skannattu koodi:
+Scope,Haetaan: {0}
+Scope: All Profiles,Kohteiden skannaus
+Scope: Current Profile,Skannausvalmis
+Scope: Specific Profile,Laajuus
+Search,Laajuus: Kaikki profiilit
+Search Account,Laajuus: Nykyinen profiili
+Search an invoice and continue the return flow without extra steps.,Soveltamisala: Tietty profiili
+Search customer,Etsi
+Search invoices or customers,Hae tiliä
+Search item,Hae lasku ja jatka paluukulkua ilman ylimääräisiä vaiheita.
+Search item / code,Hae asiakasta
+Search items or barcode,Hae laskuja tai asiakkaita
+Search Mpesa Payments,Etsi kohde
+Search return invoices or customers,Etsi kohde / koodi
+Search supplier,Hae kohteita tai viivakoodia
+Search unpaid invoices or customers,Hae Mpesa Paymentsista
+Secure context (HTTPS or localhost) is required for camera access.,Hae palautuslaskuja tai asiakkaita
+Secure context (HTTPS) required for camera access. Please use HTTPS to access the camera.,Etsi toimittaja
+Select,Hae maksamattomia laskuja tai asiakkaita
+Select a cashier first.,Kameran käyttö edellyttää suojattua kontekstia (HTTPS tai localhost).
+Select a customer,Kameran käyttö edellyttää suojattua kontekstia (HTTPS).
+Select a customer to use coupon,Käytä HTTPS:ää päästäksesi kameraan.
+Select a printer to use QZ silent printing.,Valitse
+Select Batch,Valitse ensin kassa.
+Select Columns to Display,Valitse asiakas
+Select items to sell,Valitse kuponkia käyttävä asiakas
+Select Language,"Valitse tulostin, jolla käytetään QZ-hiljaista tulostusta."
+Select Payment,Valitse Erä
+Select Payment Account,Valitse Näytettävät sarakkeet
+Select printer,Valitse myytävät kohteet
+Select Return Invoice,Valitse Kieli
+Select S.O,Valitse Maksu
+Select Sales Orders,Valitse Maksutili
+Select the cashier who is taking over this terminal.,Valitse tulostin
+Selected,Valitse Palautuslasku
+Selected movement type is not allowed by POS Profile.,Valitse S.O
+Selected Payments,Valitse Myyntitilaukset
+Sensitive actions kept away from quick taps.,"Valitse kassa, joka ottaa tämän terminaalin haltuunsa."
+Serial,Valittu
+Serial Numbers,POS-profiili ei salli valittua liiketyyppiä.
+Server CPU Usage:,Valitut maksut
+Server Health,Herkät toiminnot pidettiin poissa nopeista napautuksista.
+Server Memory Usage:,Sarja
+Server Metrics,Sarjanumerot
+Server Uptime:,Palvelimen CPU:n käyttö:
+Service Charges,Palvelimen terveys
+Session,Palvelimen muistin käyttö:
+Set each cashier PIN in the User form and keep terminal members assigned in POS Profile User.,Palvelimen mittarit
+Settings,Palvelimen käyttöaika:
+Settings in this section update the POS workspace without changing the current route.,Palvelumaksut
+Setup complete!,Istunto
+Share,Aseta jokainen kassan PIN-koodi Käyttäjä-lomakkeeseen ja säilytä terminaalin jäsenet määritettyinä POS Profile User -sovelluksessa.
+Shared terminal,Asetukset
+Shift Closed Snapshot,Tämän osion asetukset päivittävät POS-työtilan muuttamatta nykyistä reittiä.
+Shift Overview,Asennus valmis!
+Show,Jaa
+Show cart on customer-facing screen,Jaettu terminaali
+Show last invoice rate,Vaihto Suljettu tilannekuva
+Show rate info,Vaihteen yleiskatsaus
+Show Repair Candidates,Näytä
+Show search tools,Näytä ostoskori asiakkaalle päin olevalla näytöllä
+Show the active cart on a customer-facing screen,Näytä viimeinen laskun hinta
+Showing {0}-{1} of {2},Näytä hintatiedot
+Showing 0 of 0,Näytä korjausehdokkaat
+Shows the distribution of invoices per currency,Näytä hakutyökalut
+Sign out of session,Näytä aktiivinen ostoskori asiakkaalle päin olevalla näytöllä
+Sign out of the current POS session,Näytetään {0}-{1}/{2}
+Size:,Näytetään 0/0
+Skipped Payments,Näyttää laskujen jakautumisen valuuttakohtaisesti
+Skipping items without barcodes,Kirjaudu ulos istunnosta
+Slow Moving,Kirjaudu ulos nykyisestä POS-istunnosta
+Slow Moving Items,Koko:
+Slow Queries:,Ohitetut maksut
+Sold,Kohteiden ohittaminen ilman viivakoodeja
+Source,Hidas Liikkuminen
+Source Cash Account (Optional Override),Hitaasti liikkuvat kohteet
+Source Ex. Rate:,Hitaat kyselyt:
+Source Rate:,myyty
+Specific Profile,lähde
+Split Invoices,Lähdekassatili (valinnainen ohitus)
+Staff / Cashier Performance Report,Lähde esim.
+Status,Arvostele:
+Stock,Lähteen hinta:
+Stock Information,Tietty profiili
+Stock is lower than requested,Jaetut laskut
+Stock is lower than requested:\n{0},Henkilökunnan/kassan suoritusraportti
+Stock Movement Report,Tila
+Stock update: {0} has {1} available. Adding {2} will bring the stock below zero.,Stock
+Submit,Varastotiedot
+Submit & Print,Varasto on pyydettyä pienempi
+Submit Deposit,Varasto on pyydettyä pienempi:\n{0}
+Submit Expense,Osakeliikeraportti
+Submitted,Varastopäivitys: {0} on saatavilla {1}.
+Submitted Cash Movements,Lisäämällä {2} osakkeen arvo alle nollan.
+Submitted entries,Lähetä
+Successfully scanned:,Lähetä ja tulosta
+Suggested,Lähetä talletus
+Suggested Qty,Lähetä kulut
+Supervisor Access,Lähetetty
+Supervisor permissions unlock issuance and reloads,Lähetetyt kassasiirrot
+Supervisor Tools,Lähetetyt merkinnät
+Supplier,Skannattu onnistuneesti:
+Supplier and dates are required.,Ehdotettu
+Supplier Invoices,Suositeltu määrä
+Supplier is required.,Valvojan pääsy
+Supplier name is required,Valvojan käyttöoikeudet vapauttavat myöntämisen ja uudelleenlataukset
+Supplier Payments,Valvojan työkalut
+Supplier Purchase Summary,Toimittaja
+Suppliers,Toimittaja ja päivämäärät vaaditaan.
+Suppliers not found,Toimittajan laskut
+Switch Camera,Toimittaja vaaditaan.
+Switch Cashier,Toimittajan nimi vaaditaan
+Switch the POS appearance theme,Toimittajan maksut
+Switch theme appearance,Toimittajan ostoyhteenveto
+Switched to:,Toimittajat
+Sync All Invoices,Toimittajia ei löydy
+Sync Offline Cash Movements ({0}),Vaihda kameraa
+Sync Offline Sales,Vaihda kassaa
+Synced {0} offline cash movement(s).,Vaihda POS-ulkoasuteemaa
+Syncing items in background,Vaihda teeman ulkoasua
+System / Diagnostics,Vaihdettu:
+"System actions are low-frequency maintenance controls such as app info, support diagnostics, and session controls.",Synkronoi kaikki laskut
+System Information,Synkronoi offline-käteisliikkeet ({0})
+System Status,Synkronoi offline-myynti
+Tables:,Synkronoitu {0} offline-käteisliikettä.
+Tap the button below to redeem a gift card during checkout.,Synkronoidaan kohteita taustalla
+Target,Järjestelmä / Diagnostiikka
+Target Ex. Rate:,"Järjestelmätoiminnot ovat matalataajuisia ylläpitoohjaimia, kuten sovellustietoja, tukidiagnostiikkaa ja istunnon hallintaa."
+Target Rate:,Järjestelmätiedot
+Tax,Järjestelmän tila
+Tax / Charges Report,Taulukot:
+Tax Heads,Napauta alla olevaa painiketta lunastaaksesi lahjakortin kassalla.
+Taxable Amount,Kohde
+Tendered,Kohde esim.
+Terminal,Arvostele:
+Terminal & Devices,Tavoiteprosentti:
+Terminal locked,Tax
+"Terminal tools affect this checkout station, customer-facing displays, and future printer/device controls.",Vero-/maksuraportti
+Territory not found,Veropäälliköt
+The amount paid is not complete,Verotettava määrä
+The app stores data locally for offline use. This is called cache.,Tarjottu
+The invoice stayed in draft. Please review and submit it manually.,Terminaali
+The maximum discount allowed is,Pääte ja laitteet
+The quantity for {0} has been adjusted to the maximum available stock.,Pääte lukittu
+The system could not retrieve the item details. Please try again.,"Päätetyökalut vaikuttavat tähän kassaasemaan, asiakkaisiin päin oleviin näyttöihin ja tuleviin tulostimien/laitteiden ohjaimiin."
+These invoices will be synced when connection is restored,Aluetta ei löydy
+This action now opens inside the settings workspace.,Maksettu summa ei ole täydellinen
+This coupon already used !,Sovellus tallentaa tiedot paikallisesti offline-käyttöä varten.
+This invoice does not need change-allocation repair,Tätä kutsutaan välimuistiksi.
+This invoice is already repaired,Lasku jäi luonnokseen.
+This is an item template. Please choose a variant.,Tarkista ja lähetä se manuaalisesti.
+this item,Suurin sallittu alennus on
+This POS page could not be opened offline because its code was not cached on this terminal yet.,Tuotteen {0} määrä on säädetty enimmäismäärään.
+This Serial Number {0} has already been added!,Järjestelmä ei voinut hakea tuotteen tietoja.
+Threshold,Yritä uudelleen.
+Time,"Nämä laskut synkronoidaan, kun yhteys palautetaan"
+Tip: Clear cache regularly to free up space and keep the app fast.,Tämä toiminto avautuu nyt asetusten työtilaan.
+Tip: Close unused tabs or apps to reduce lag.,Tämä kuponki on jo käytetty!
+Tip: Monitor slow queries and table size for optimal performance.,Tämä lasku ei vaadi muutos-allokointikorjausta
+To Be Paid,Tämä lasku on jo korjattu
+To Date,Tämä on esinemalli.
+Today,Valitse vaihtoehto.
+Today Profit,tämä kohde
+Today Sales,"Tätä POS-sivua ei voitu avata offline-tilassa, koska sen koodia ei ole vielä tallennettu tämän päätteen välimuistiin."
+Toggle navigation drawer,Tämä sarjanumero {0} on jo lisätty!
+Toggle Theme,Kynnys
+Tools,Aika
+Tools for customer-facing screens and terminal-specific actions.,Vinkki: Tyhjennä välimuisti säännöllisesti vapauttaaksesi tilaa ja pitääksesi sovelluksen nopeana.
+Top Brand,Vinkki: Sulje käyttämättömät välilehdet tai sovellukset vähentääksesi viivettä.
+Top Category,Vinkki: Tarkkaile hitaita kyselyitä ja taulukon kokoa optimaalisen suorituskyvyn saavuttamiseksi.
+Top Charge Head,Maksettava
+Top Customers,Päivämäärään
+Top Discount,Tänään
+Top Items by Location,Tänään voitto
+Top Margin,Tänään myynti
+Top Pending,Vaihda navigointilaatikkoa
+Top Profit Item,Vaihda teema
+Top Return Items,Työkalut
+Top Sales by Cashier,Työkaluja asiakaskohtaisiin näyttöihin ja päätekohtaisiin toimintoihin.
+Top Supplier,Huippumerkki
+Top Suppliers by Spend,Huippuluokka
+Top Tables,Ylälatauspää
+Top Tax Head,Huippuasiakkaat
+Top Up Amount,Huippualennus
+Top Up Card,Suosituimmat tuotteet sijainnin mukaan
+Top Up Mode,Ylämarginaali
+Top Variant,Yläosa Odottaa
+Total,Paras voittoerä
+Total Amount,Parhaat palautustuotteet
+Total Change,Parhaat myynnit kassalta
+Total Charges,Huipputoimittaja
+Total In,Parhaat toimittajat kulutuksen mukaan
+Total Invoices,Top taulukot
+Total Items,Ylin veropäällikkö
+Total Mpesa,Täydennysmäärä
+Total Out,Täyttökortti
+Total Payments,Täyttötila
+Total Purchase,Huippuvariantti
+Total Selected :,Yhteensä
+Total Size,Kokonaismäärä
+Total Stock Qty,Kokonaismuutos
+Total:,Kokonaiskulut
+Totals by Invoice Currency,Yhteensä sisään
+Track how much cash was handed back to customers,Laskut yhteensä
+"Track recent sales, collect unpaid balances, and reopen saved work",Tuotteita yhteensä
+Transaction ID,Yhteensä Mpesa
+Transfer,Total Out
+Try a different search term or clear the cart search.,Maksut yhteensä
+Try adjusting your search or filters,Kokonaisosto
+Try another source or refresh the list.,Valitut yhteensä:
+Try changing the date range or status filter.,Kokonaiskoko
+Type,Varastomäärä yhteensä
+Unable to access camera even with basic settings. Please check your camera permissions and device compatibility.,Yhteensä:
+Unable to add offer item {0}. Please refresh and try again.,Loppusummat laskun valuutan mukaan
+Unable to add offer item. Please refresh and try again.,"Seuraa, kuinka paljon käteistä palautettiin asiakkaille"
+Unable to add scanned item.,"Seuraa viimeaikaisia myyntiä, kerää maksamattomat saldot ja avaa tallennetut työt uudelleen"
+Unable to create purchase order,Tapahtumatunnus
+Unable to delete draft invoice,Siirto
+Unable to fetch documents,Kokeile toista hakutermiä tai tyhjennä ostoskorin haku.
+Unable to fetch draft orders,Yritä säätää hakuasi tai suodattimia
+Unable to fetch invoice history,Kokeile toista lähdettä tai päivitä luettelo.
+Unable to fetch M-Pesa payments,Yritä muuttaa ajanjaksoa tai tilasuodatinta.
+Unable to fetch sales orders,Kirjoita
+Unable to fetch unpaid invoices,Kameraan ei pääse edes perusasetuksista.
+Unable to generate scale barcode,Tarkista kameran käyttöoikeudet ja laitteen yhteensopivuus.
+Unable to issue gift card.,Tarjouskohdetta {0} ei voi lisätä.
+Unable to load cashier PIN status.,Päivitä ja yritä uudelleen.
+Unable to load document,Tarjouskohdetta ei voi lisätä.
+Unable to load draft invoice,Päivitä ja yritä uudelleen.
+Unable to load gift card balance.,Skannatun kohteen lisääminen ei onnistu.
+Unable to load invoice details,Ostotilauksen luominen epäonnistui
+Unable to load parked order,Laskuluonnosta ei voi poistaa
+Unable to load the selected sales order,Asiakirjoja ei voi noutaa
+Unable to prepare document,Tilausluonnoksia ei voi noutaa
+Unable to prepare return invoice,Laskuhistorian nouto epäonnistui
+Unable to print draft invoice,M-Pesa-maksuja ei voi noutaa
+Unable to print submitted invoice,Myyntitilauksia ei voi noutaa
+Unable to process document action,Maksamattomia laskuja ei voi noutaa
+Unable to repair change allocation,Mittakaavaviivakoodin luominen ei onnistu
+Unable to save cashier PIN.,Lahjakortin myöntäminen ei onnistu.
+Unable to save the rate to the backend price list,Kassan PIN-koodin tilaa ei voi ladata.
+Unable to submit invoice,Asiakirjaa ei voi ladata
+Unable to submit the selected payment,Laskuluonnosta ei voi ladata
+Unable to top up gift card.,Lahjakortin saldon lataaminen epäonnistui.
+Unable to verify cashier PIN.,Laskun tietoja ei voi ladata
+Unallocated,Pysäköityä tilausta ei voi ladata
+Unallocated:,Valittua myyntitilausta ei voi ladata
+Unavailable,Asiakirjaa ei voi valmistella
+Unknown,Palautuslaskua ei voi laatia
+Unknown error,Laskuluonnosta ei voi tulostaa
+Unknown Item,Lähetettyä laskua ei voi tulostaa
+Unknown Warehouse,Asiakirjan toimintoa ei voida käsitellä
+Unlock POS,Muutoksen kohdistusta ei voida korjata
+Unpaid,Kassan PIN-koodia ei voi tallentaa.
+"Unselected payments stay unallocated first, then auto reconcile after submit.",Hintaa ei voi tallentaa taustahinnastoon
+UOM,Laskua ei voi lähettää
+UOM not found,Valittua maksua ei voi lähettää
+Update available,Lahjakorttia ei voi ladata.
+Update Customer,Kassan PIN-koodia ei voi vahvistaa.
+Update PIN,Kohdistamaton
+Update Price List Rate,Kohdistamaton:
+Updated,Ei saatavilla
+Updates and app info that stay out of the cashier flow.,Tuntematon
+Updates automatically,Tuntematon virhe
+Upload pending transactions,Tuntematon kohde
+Usage,Tuntematon varasto
+Usage Stats,Avaa POS
+Use a 4 to 8 digit PIN for cashier switching and terminal unlock.,Maksamaton
+Use Cashier,"Valitsemattomat maksut jäävät ensin kohdentamattomiksi, minkä jälkeen ne täsmäytetään automaattisesti lähetyksen jälkeen."
+Use date range to search for older invoices,UOM
+"Use one field for manual code entry, barcode scans, or QR scans.",UOM ei löytynyt
+"Use one workflow for balance checks, new issuance, and top ups without leaving POS.",Päivitys saatavilla
+"Use this section when cached prerequisite data needs a refresh, rebuild, or diagnostics review.",Päivitä asiakas
+Use Western numerals,Päivitä PIN-koodi
+Used:,Päivitä hinnaston hinta
+Using basic camera settings due to device limitations,Päivitetty
+Using cached customer balance,"Päivitykset ja sovellustiedot, jotka pysyvät poissa kassavirrasta."
+Valid until,Päivittyy automaattisesti
+Variance %,Lataa odottavat tapahtumat
+Variants,Käyttö
+Variant-wise,Käyttötilastot
+Verify closing amounts for each payment method,Käytä 4–8-numeroista PIN-koodia kassan vaihtamiseen ja päätteen lukituksen avaamiseen.
+View all,Käytä kassaa
+View app information and current build details,Käytä ajanjaksoa vanhempien laskujen etsimiseen
+View Data Diagnostics,"Käytä yhtä kenttää manuaaliseen koodin syöttämiseen, viivakoodiskannaukseen tai QR-skannaukseen."
+View Details,"Käytä yhtä työnkulkua saldon tarkastamiseen, uusiin liikkeeseenlaskuihin ja lisäyksiin poistumatta myyntipisteestä."
+View invoice details,"Käytä tätä osaa, kun välimuistiin tallennetut ennakkotiedot tarvitsevat päivityksen, uudelleenmuodostuksen tai diagnostiikkatarkistuksen."
+View notifications,Käytä länsimaisia numeroita
+View offline invoices,Käytetty:
+View restricted POS insights,Kameran perusasetusten käyttäminen laiterajoitusten vuoksi
+Void Amount,Välimuistissa olevan asiakassaldon käyttö
+Void Count,Voimassa asti
+Voids,Varianssi %
+Waiting for cart items,Vaihtoehdot
+Waiting for payment...,Variantin kannalta
+Walk-in Customer,Tarkista kunkin maksutavan loppusummat
+Warehouse,Näytä kaikki
+Warning: High cache usage may affect performance.,Näytä sovelluksen tiedot ja nykyiset koontitiedot
+Warning: High lag may indicate heavy processing or browser slowness.,Näytä Data Diagnostics
+Week Δ,Näytä tiedot
+Week-wise,Katso laskun tiedot
+Weight (g),Näytä ilmoitukset
+Weight (grams),Tarkastele offline-laskuja
+We'll let you know if an invoice fails to submit,Tarkastele rajoitettuja myyntipistetietoja
+Workflow,Mitätön määrä
+Write off amount cannot exceed the POS profile maximum of {0},Void Count
+Write off amount exceeds the allowed limit ({0}). Please add payment for the remaining amount.,Tyhjiöt
+Yes,Ostoskori tuotteita odotellessa
+"Yes, Cancel sale",Maksua odotellessa...
+"Yes, Close",Kävelevä asiakas
+You are not allowed to print draft invoices,Varasto
+You are offline. Add Payment will work again when the connection is restored.,Varoitus: Runsas välimuistin käyttö voi vaikuttaa suorituskykyyn.
+You have no notifications right now,Varoitus: Suuri viive voi tarkoittaa raskasta käsittelyä tai selaimen hitautta.
+Your Cart,Viikko Δ

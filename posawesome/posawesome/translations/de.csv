@@ -1,0 +1,1353 @@
+﻿- Total Unallocated,- Total Unallocated
+* Required,* Erforderlich
+{0} (Qty: {1}),{0} (Menge: {1})
+{0} actions,{0} Aktionen
+{0} has only {1} in stock. You requested {2}. Adjust quantity or restock.,{0} hat nur {1} auf Lager.
+{0} offline invoice{1} pending,Sie haben {2} angefordert.
+{0} offline invoice{1} saved as draft,Menge anpassen oder auffüllen.
+{0} offline invoice{1} synced,{0}Offline-Rechnung{1} ausstehend
+{0}: {1} {2},{0}Offline-Rechnung{1} als Entwurf gespeichert
+{0}d ago,{0}Offline-Rechnung{1} synchronisiert
+{0}h ago,{0}: {1} {2}
+{0}m ago,Vor {0}Tagen
+A POS supervisor is required for this action.,Vor {0}h
+About,Vor {0}m
+Access,Für diese Aktion ist ein POS-Supervisor erforderlich.
+Account,Über
+Account is overdrawn,Zugang
+Acknowledge the error to resume scanning,Konto
+Acknowledge the error to resume scanning.,Konto ist überzogen
+Across,"Bestätigen Sie den Fehler, um den Scanvorgang fortzusetzen"
+Action,"Bestätigen Sie den Fehler, um den Scanvorgang fortzusetzen."
+Actions,Quer
+Active sale,Aktion
+add,Aktionen
+Add items from the selector to start building this sale.,Aktiver Verkauf
+Add more value to an existing gift card,hinzufügen
+Add New Address,"Fügen Sie Artikel aus der Auswahl hinzu, um mit dem Aufbau dieses Verkaufs zu beginnen."
+Add new customer,Fügen Sie einer bestehenden Geschenkkarte mehr Wert hinzu
+Add on New Line,Neue Adresse hinzufügen
+Add Payment,Neuen Kunden hinzufügen
+Add payment to invoice,Neue Zeile hinzufügen
+Add/Edit Coupon Conditions,Zahlung hinzufügen
+Additional Discount,Zahlung zur Rechnung hinzufügen
+Additional Discount %,Gutscheinbedingungen hinzufügen/bearbeiten
+Address Line 1,Zusätzlicher Rabatt
+Address not found,Zusätzlicher Rabatt %
+Adjust the quantity or enable negative stock to continue.,Adresszeile 1
+Adjustment,Adresse nicht gefunden
+After returns,"Passen Sie die Menge an oder aktivieren Sie den negativen Bestand, um fortzufahren."
+Against,Anpassung
+Against Name,Nach Rückkehr
+Age Bracket,Gegen
+All,Gegen den Namen
+All Caught Up!,Altersgruppe
+All invoices are synchronized,Alle
+All pending invoices are up to date,Alles eingeholt!
+All Profiles,Alle Rechnungen werden synchronisiert
+All Synchronized,Alle ausstehenden Rechnungen sind auf dem neuesten Stand
+All visible invoices are fully settled.,Alle Profile
+All Warehouses,Alles synchronisiert
+Allowed UOM is {0},Alle sichtbaren Rechnungen sind vollständig beglichen.
+Always fetch items from server (ignore local cache),Alle Lager
+Amount,Zulässige Maßeinheit ist {0}
+Amount already received,Elemente immer vom Server abrufen (lokalen Cache ignorieren)
+Amount exceeds profile cash movement max amount.,Betrag
+Amount must be greater than zero.,Betrag bereits erhalten
+Amount received from customer,Der Betrag übersteigt den Maximalbetrag der Bargeldbewegung im Profil.
+App information,Der Betrag muss größer als Null sein.
+Appearance and user-level preferences for the current session.,Vom Kunden erhaltener Betrag
+Applied,App-Informationen
+Apply,Darstellung und Präferenzen auf Benutzerebene für die aktuelle Sitzung.
+Apply Gift Card,Angewendet
+Apply Offer,Bewerben
+Apply On,Geschenkkarte anwenden
+Apply only the amount you want to redeem on this invoice. The remaining balance stays on the card.,Angebot anwenden
+Apply Redemption,Bewerben Sie sich am
+Applying,"Wenden Sie auf dieser Rechnung nur den Betrag an, den Sie einlösen möchten."
+Apps,Der Restbetrag verbleibt auf der Karte.
+Are you sure you want to close? All entered data will be lost.,Erlösung anwenden
+Attributes (Size/Color),Bewerben
+Auto Allocate Payment Amount,Apps
+Auto Reconcile,Möchten Sie wirklich schließen?
+Auto reconciliation completed after payment submit.,Alle eingegebenen Daten gehen verloren.
+Auto reconciliation completed. Allocated: {0}{1}. Remaining outstanding: {0}{2}.,Attribute (Größe/Farbe)
+Available Actions,Zahlungsbetrag automatisch zuweisen
+Available QTY,Automatischer Abgleich
+Available:,Der automatische Abgleich wurde nach dem Absenden der Zahlung abgeschlossen.
+Average Basket,Automatischer Abgleich abgeschlossen.
+Average Bill,Zugewiesen: {0}{1}.
+Average Ticket,Verbleibend ausstehend: {0}{2}.
+Avg Bill,Verfügbare Aktionen
+Avg Invoice,Verfügbare Menge
+Avg Invoice Profit,Verfügbar:
+Avg Invoice Value,Durchschnittlicher Korb
+Avg Purchase Frequency,Durchschnittliche Rechnung
+Awesome,Durchschnittliches Ticket
+Awesome Dashboard,Durchschn. Rechnung
+Awesome Dashboard is disabled for the selected POS Profile.,Durchschnittliche Rechnung
+Awesome Dashboard is unavailable for the selected scope.,Durchschnittlicher Rechnungsgewinn
+Awesome Dashboard is visible only to POS supervisors.,Durchschnittlicher Rechnungswert
+Back,Durchschnittliche Kaufhäufigkeit
+Back Office Cash Account,Großartig
+Back Office Cash Account (Optional Override),Tolles Dashboard
+Back office cash account is required.,Awesome Dashboard ist für das ausgewählte POS-Profil deaktiviert.
+Back to {0},Awesome Dashboard ist für den ausgewählten Bereich nicht verfügbar.
+Background processing did not finish in time.,Awesome Dashboard ist nur für POS-Supervisoren sichtbar.
+Background processing failed for Invoice {0}: {1},Zurück
+Background Submission Failed,Backoffice-Geldkonto
+Background sync interval (seconds),Backoffice-Geldkonto (optionale Überschreibung)
+Balance,Ein Back-Office-Geldkonto ist erforderlich.
+Balance will be updated when connection is restored,Zurück zu {0}
+Balances still pending,Die Hintergrundverarbeitung wurde nicht rechtzeitig abgeschlossen.
+Barcode,Hintergrundverarbeitung für Rechnung {0} fehlgeschlagen: {1}
+Barcode / QR Ready,Hintergrundübermittlung fehlgeschlagen
+Barcode Label Printing,Hintergrundsynchronisierungsintervall (Sekunden)
+Base Paid:,Gleichgewicht
+Base Recv:,"Der Kontostand wird aktualisiert, sobald die Verbindung wiederhergestellt ist"
+Base:,Es stehen noch Restbeträge aus
+Basic Information,Barcode
+Batch,Barcode-/QR-fähig
+Batch Information,Drucken von Barcode-Etiketten
+Before any return workflow,Grundbezahlung:
+Before returns,Basisempfang:
+Best Day,Basis:
+Best Seller,Grundlegende Informationen
+Book expense or deposit from active shift.,Charge
+Branch / Location-wise Report,Chargeninformationen
+Brand-wise,Vor jedem Rückgabe-Workflow
+Breakdown,Vor der Rückkehr
+Browse,Bester Tag
+Build Time:,Bestseller
+Built with Frappe,Buchen Sie Ausgaben oder Anzahlungen aus der aktiven Schicht.
+Bundle,Filial-/standortbezogener Bericht
+Buying Price,Markenmäßig
+Cache cleared successfully,Zusammenbruch
+Cache Usage,Durchsuchen
+cache used,Bauzeit:
+Calculating...,Gebaut mit Frappe
+Camera Access Required,Bündel
+Camera access was aborted. Please try again.,Kaufpreis
+Camera constraints not supported by your device. Trying fallback settings...,Cache erfolgreich geleert
+Camera is busy or blocked by another app/tab. Close other camera apps and try again.,Cache-Nutzung
+Camera permission denied. Please allow camera access in your browser settings and refresh the page.,Cache verwendet
+Camera scanner is locked until the current error is acknowledged,Berechnen...
+Camera started but the video stream did not load in time. Please try again.,Kamerazugriff erforderlich
+Cancel,Der Kamerazugriff wurde abgebrochen.
+Cancel cash movement {0}?,Bitte versuchen Sie es erneut.
+Cancel Payment,Kameraeinschränkungen werden von Ihrem Gerät nicht unterstützt.
+Cancel Sale,Fallback-Einstellungen werden ausprobiert...
+Cancel Sale ?,Die Kamera ist beschäftigt oder wird von einer anderen App/einem anderen Tab blockiert.
+Cancelled,Schließen Sie andere Kamera-Apps und versuchen Sie es erneut.
+Cannot add an item with zero or negative quantity.,Kameraberechtigung verweigert.
+Cannot clear cache while offline,Bitte erlauben Sie den Kamerazugriff in Ihren Browsereinstellungen und aktualisieren Sie die Seite.
+Cannot redeem customer credit more than invoice total,"Der Kamerascanner ist gesperrt, bis der aktuelle Fehler quittiert wird"
+Cannot redeem gift cards more than invoice total,"Die Kamera wurde gestartet, aber der Videostream wurde nicht rechtzeitig geladen."
+Cannot Save Offline Invoice:,Bitte versuchen Sie es erneut.
+Cannot Save Offline Payment:,Abbrechen
+Card,Bargeldbewegung {0} stornieren?
+Card / Online,Zahlung stornieren
+Card health after the last live lookup,Verkauf abbrechen
+Cards,Verkauf abbrechen?
+Cart,Abgesagt
+Cash,Es kann kein Artikel mit einer Null- oder negativen Menge hinzugefügt werden.
+Cash back to customers,Der Cache kann offline nicht geleert werden
+Cash Collections,Das Kundenguthaben kann nicht über den Rechnungsbetrag hinaus eingelöst werden
+Cash Deposit is disabled for this POS Profile.,Geschenkkarten können nicht über den Rechnungsbetrag hinaus eingelöst werden
+Cash Drawer Snapshot,Offline-Rechnung kann nicht gespeichert werden:
+Cash In Hand,Offline-Zahlung kann nicht gespeichert werden:
+Cash Movement,Karte
+Cash movement cancelled,Karte / Online
+Cash movement deduction applied,Kartenzustand nach der letzten Live-Suche
+Cash movement deleted,Karten
+Cash movement is disabled for this POS Profile.,Warenkorb
+Cash Movement is disabled in current POS Profile.,Bargeld
+Cash movement saved offline,Cashback an Kunden
+Cash movement submitted,Bargeldsammlungen
+Cash Movements,Die Bareinzahlung ist für dieses POS-Profil deaktiviert.
+Cash payment cannot be less than invoice total when partial payment is not allowed,Schnappschuss der Kassenschublade
+Cash returned after payment,Bargeld in der Hand
+Cashier,Bargeldbewegung
+Cashier Access,Bargeldbewegung abgebrochen
+Cashier identity and appearance preferences.,Es wurde ein Barbewegungsabzug angewendet
+Cashier PIN,Bargeldbewegung gelöscht
+Cashier PIN saved successfully.,Der Bargeldverkehr ist für dieses POS-Profil deaktiviert.
+Cashiers,Die Bargeldbewegung ist im aktuellen POS-Profil deaktiviert.
+Cashier-wise,Bargeldbewegung offline gespeichert
+Categories,Bargeldbewegung übermittelt
+Category,Bargeldbewegungen
+Category / Brand / Variant Report,"Die Barzahlung darf nicht unter dem Rechnungsbetrag liegen, wenn eine Teilzahlung nicht zulässig ist"
+Category-wise,Nach der Zahlung wird Bargeld zurückerstattet
+Category-wise Margin,Kassierer
+Certificate,Zugang zur Kasse
+Certificate is missing or not trusted. QZ may show confirmation dialogs.,Identitäts- und Aussehenspräferenzen des Kassierers.
+Certificate is trusted. Silent QZ printing is active.,Kassierer-PIN
+Change,Kassierer-PIN erfolgreich gespeichert.
+Change allocation repaired,Kassierer
+Change interface language,Kassierertechnisch
+Change Language,Kategorien
+Change Price,Kategorie
+Change Return,Kategorie-/Marken-/Variantenbericht
+Change Returned,Kategoriemäßig
+Change terminal cashier,Kategoriebezogene Marge
+Charge Heads,Zertifikat
+Charges,Das Zertifikat fehlt oder ist nicht vertrauenswürdig.
+Charges not found,QZ zeigt möglicherweise Bestätigungsdialoge an.
+Check Balance,Das Zertifikat ist vertrauenswürdig.
+Check balance for any card. Supervisors can issue and top up cards here.,Der stille QZ-Druck ist aktiv.
+Check balance only,Veränderung
+Check for new commits,Änderungszuordnung repariert
+Check for Updates,Ändern Sie die Sprache der Benutzeroberfläche
+Check live balance before applying redemption,Sprache ändern
+Check live balance before redemption,Preis ändern
+Checking...,Rückgabe ändern
+Cheque/Reference Date,Wechselgeld zurückgegeben
+Cheque/Reference No,Terminalkassierer wechseln
+Choose the cashier currently operating this terminal.,Ladeköpfe
+Choose your preferred language for the POS interface,Gebühren
+City,Gebühren nicht gefunden
+Clear,Überprüfen Sie den Kontostand
+Clear All,Überprüfen Sie den Kontostand für jede Karte.
+Clear all barcode items,Vorgesetzte können hier Karten ausstellen und aufladen.
+Clear all purchase order items,Nur den Kontostand prüfen
+Clear Cache,Suchen Sie nach neuen Commits
+Clear Search,Suchen Sie nach Updates
+Clearing local cache...,"Überprüfen Sie das Live-Guthaben, bevor Sie die Einlösung beantragen"
+Click to refresh,Überprüfen Sie das Live-Guthaben vor der Einlösung
+Client CPU Lag:,Überprüfen...
+Client Memory Usage:,Scheck-/Referenzdatum
+Client Metrics,Scheck/Referenznr
+Close,"Wählen Sie den Kassierer aus, der dieses Terminal derzeit bedient."
+Close about dialog,Wählen Sie Ihre bevorzugte Sprache für die POS-Oberfläche
+Close cashier switcher,Stadt
+Close closing shift dialog,Klar
+Close column selector,Alles löschen
+Close Dialog,Löschen Sie alle Barcode-Elemente
+Close drafts dialog,Löschen Sie alle Bestellpositionen
+Close invoice details dialog,Cache leeren
+Close invoice management,Suche löschen
+Close offline invoices dialog,Lokaler Cache wird geleert...
+Close packing list dialog,Klicken Sie zum Aktualisieren
+Close returns dialog,Client-CPU-Verzögerung:
+Close sales orders dialog,Client-Speichernutzung:
+Close Scanner,Kundenmetriken
+Close scanner dialog,Schließen
+Close Settings,Schließen Sie den Dialog
+Close Shift,Kassenschalter schließen
+Closing Amount,Schließt den Schichtdialog
+Closing POS Shift,Spaltenauswahl schließen
+Closing Snapshot Available,Dialog schließen
+Code,Entwurfsdialog schließen
+Code scanned successfully,Schließen Sie den Dialog „Rechnungsdetails“.
+COGS,Schließen Sie die Rechnungsverwaltung ab
+Collapse item details,Offline-Rechnungsdialog schließen
+Collected,Packlistendialog schließen
+Cols,Retourendialog schließen
+Columns,Schließen Sie den Dialog „Kundenaufträge“.
+commits,Schließen Sie den Scanner
+Completed and active sales in this range,Schließen Sie den Scannerdialog
+Completed returns will appear here.,Schließen Sie die Einstellungen
+Confirm,Schicht schließen
+Confirm Close,Schlussbetrag
+Confirm Mobile Number,POS-Schicht wird geschlossen
+Confirm PIN,Abschluss-Snapshot verfügbar
+Connect,Code
+Connect printer and manage certificate,Code erfolgreich gescannt
+Connecting to QZ Tray...,ZÄHNE
+Connection problem while submitting invoice,Artikeldetails ausblenden
+Connections:,Gesammelt
+Connectivity and cached prerequisite status were rechecked.,Spalten
+Continue Editing,Spalten
+Could not fetch latest balance from server,begeht
+Count,Abgeschlossene und aktive Verkäufe in diesem Bereich
+Country,Abgeschlossene Rücksendungen werden hier angezeigt.
+Coupon,Bestätigen
+Coupons,Bestätigen Sie „Schließen“.
+Cover,Bestätigen Sie die Mobiltelefonnummer
+CPU Cores:,PIN bestätigen
+Create,Verbinden
+Create and load a new prepaid card,Drucker anschließen und Zertifikat verwalten
+Create and preload a new gift card,Anschließen an das QZ-Fach...
+Create Bill,Verbindungsproblem beim Senden der Rechnung
+Create Customer,Verbindungen:
+Create New Item,Konnektivität und zwischengespeicherter Voraussetzungsstatus wurden erneut überprüft.
+Create or change your PIN,Bearbeiten Sie weiter
+Create PIN,Der aktuelle Kontostand konnte nicht vom Server abgerufen werden
+Create POS Opening Shift,Zählen
+Create Purchase Order,Land
+Create Return,Gutschein
+Create return from invoice,Gutscheine
+Create Supplier,Abdeckung
+Credit and Output,CPU-Kerne:
+Credit Note,Erstellen
+Credit Outstanding,Erstellen und laden Sie eine neue Prepaid-Karte
+Credit sales remaining to be collected,Erstellen Sie eine neue Geschenkkarte und laden Sie sie vorab auf
+Critical,Rechnung erstellen
+Currency,Kunde anlegen
+Current,Neues Element erstellen
+Current Event Loop Lag:,Erstellen oder ändern Sie Ihre PIN
+Current Month,PIN erstellen
+Current PIN,Erstellen Sie eine POS-Eröffnungsschicht
+Current Profile,Bestellung erstellen
+Current redeemable value on the gift card,Retoure erstellen
+Current User,Retoure aus Rechnung erstellen
+Custom,Lieferant anlegen
+Custom Due Days,Kredit und Leistung
+Custom items per page,Gutschrift
+Customer,Ausstehender Kredit
+Customer already selected,Es müssen noch Kreditverkäufe eingezogen werden
+Customer Balance,Kritisch
+Customer balance unavailable offline,Währung
+Customer created successfully.,Aktuell
+Customer creation failed.,Verzögerung der aktuellen Ereignisschleife:
+Customer Details,Aktueller Monat
+Customer display channel is missing,Aktuelle PIN
+Customer display was blocked. Please allow pop-ups for this site.,Aktuelles Profil
+Customer group is required,Aktueller einlösbarer Wert der Geschenkkarte
+Customer is required to add payment,Aktueller Benutzer
+Customer Name is required,Benutzerdefiniert
+Customer not selected,Benutzerdefinierte Fälligkeitstage
+Customer Report,Benutzerdefinierte Elemente pro Seite
+Customer saved offline,Kunde
+Customer Screen,Kunde bereits ausgewählt
+Customer territory is required,Kundensaldo
+Customer updated successfully.,Kundenguthaben offline nicht verfügbar
+Customer-facing tools and printer setup.,Kunde erfolgreich erstellt.
+Customers,Die Kundenerstellung ist fehlgeschlagen.
+Customers not found,Kundendaten
+Daily cashier actions without scrolling.,Der Kundenanzeigekanal fehlt
+Daily Sales,Die Kundenanzeige wurde blockiert.
+Daily Sales Summary,Bitte erlauben Sie Pop-ups für diese Website.
+Dark Mode,Kundengruppe ist erforderlich
+Data loaded in form. Review and submit.,Der Kunde muss die Zahlung hinzufügen
+Database Health,Kundenname ist erforderlich
+Database health affects overall system speed and reliability.,Kunde nicht ausgewählt
+Database Info,Kundenbericht
+Date,Kunde offline gespeichert
+Day Δ,Kundenbildschirm
+days,Kundengebiet ist erforderlich
+Day-wise (MTD),Der Kunde wurde erfolgreich aktualisiert.
+Day-wise Movement,Kundenorientierte Tools und Druckereinrichtung.
+Dead Stock,Kunden
+Dead Stock Items,Kunden nicht gefunden
+Decrease quantity,Tägliche Kassiereraktionen ohne Scrollen.
+Default,Tägliche Verkäufe
+Default:,Tägliche Verkaufsübersicht
+Delete,Dunkler Modus
+Delete cancelled cash movement {0}?,Im Formular geladene Daten.
+Delete Draft,Überprüfen und einreichen.
+Delete draft invoice,Datenbankzustand
+Delete draft invoice {0}?,Der Zustand der Datenbank wirkt sich auf die Gesamtgeschwindigkeit und -zuverlässigkeit des Systems aus.
+Delete Invoice,Datenbankinformationen
+Delete offline invoice,Datum
+Delivered,Tag Δ
+Delivery Charges,Tage
+Delivery Information,Tagesweise (MTD)
+Delivery Note {0} created,Tagesweise Bewegung
+Delivery note created,Toter Bestand
+Deployed Bundle:,Ausverkaufte Artikel
+Deposit,Menge verringern
+Description,Standard
+Detailed Supplier Breakdown,Standard:
+Detecting formats:,Löschen
+Device Memory:,Stornierte Bargeldbewegung {0} löschen?
+Difference,Entwurf löschen
+Difference (In Company Currency),Rechnungsentwurf löschen
+Disable offline mode first to recheck live connectivity.,Rechnungsentwurf {0} löschen?
+Disconnect,Rechnung löschen
+discount,Offline-Rechnung löschen
+Discount %,Geliefert
+Discount / Void / Return Report,Versandkosten
+Discount Amount,Lieferinformationen
+Discount limited by POS Profile,Lieferschein {0} erstellt
+Discounted Invoices,Lieferschein erstellt
+Discounts,Bereitgestelltes Paket:
+Dismiss,Anzahlung
+Download Certificate,Beschreibung
+Draft,Detaillierte Lieferantenaufschlüsselung
+Draft invoice deleted,Formate erkennen:
+Draft source,Gerätespeicher:
+Drafts,Unterschied
+Due {0},Differenz (in Firmenwährung)
+Due Date,"Deaktivieren Sie zunächst den Offline-Modus, um die Live-Konnektivität erneut zu überprüfen."
+Duplicate,Trennen
+Edit customer,Rabatt
+Edit discount amount,Rabatt %
+Edit discount percentage,Rabatt-/Stornierungs-/Rückgabebericht
+Edit Gift Application,Rabattbetrag
+Edit item name,Rabatt durch POS-Profil begrenzt
+Edit quantity,Rabattierte Rechnungen
+Edit rate,Rabatte
+Edit unit of measure,Entlassen
+Edited,Zertifikat herunterladen
+Employee,Entwurf
+Enable background sync,Rechnungsentwurf gelöscht
+Enable Customer Display in POS Profile first.,Entwurfsquelle
+End current session,Entwürfe
+Enter a PIN.,Fällig {0}
+Enter a valid grams value,Fälligkeitsdatum
+Enter new price list rate,Duplizieren
+Enter Quantity,Kunde bearbeiten
+Enter the cashier PIN to continue.,Rabattbetrag bearbeiten
+Enter the current PIN first.,Rabattprozentsatz bearbeiten
+"Enter the current PIN, then choose a new one.",Geschenkantrag bearbeiten
+Enter valid grams for scale barcode,Artikelnamen bearbeiten
+Entries,Menge bearbeiten
+Error accessing camera:,Tarif bearbeiten
+Error calculating prices,Maßeinheit bearbeiten
+Error fetching customer balance,Bearbeitet
+Error in change calculations!,Mitarbeiter
+Error Loading Data,Aktivieren Sie die Hintergrundsynchronisierung
+Error loading invoice details,Aktivieren Sie zunächst die Kundenanzeige im POS-Profil.
+Error processing invoice,Aktuelle Sitzung beenden
+Error processing payment,Geben Sie eine PIN ein.
+Error searching invoices,Geben Sie einen gültigen Grammwert ein
+Error submitting invoice:,Geben Sie den neuen Preislistenpreis ein
+Error submitting invoice: {0},Geben Sie die Menge ein
+Error submitting invoice: No response from server,"Geben Sie die Kassierer-PIN ein, um fortzufahren."
+Error updating currency,Geben Sie zunächst die aktuelle PIN ein.
+Error updating item details,Geben Sie die aktuelle PIN ein und wählen Sie dann eine neue.
+Est. Purchase,Geben Sie gültige Grammwerte für den Waagen-Barcode ein
+Est. Value,Einträge
+Event-loop lag measures how busy your browser is. Lower is better.,Fehler beim Zugriff auf die Kamera:
+Every,Fehler bei der Preisberechnung
+Exchange Rate,Fehler beim Abrufen des Kundenguthabens
+Expand item details,Fehler in der Änderungsberechnung!
+Expected Amount (In Company Currency),Fehler beim Laden der Daten
+Expected Cash,Fehler beim Laden der Rechnungsdetails
+Expected cash on hand grouped by currency,Fehler bei der Rechnungsverarbeitung
+Expected vs Actual,Fehler bei der Zahlungsabwicklung
+Expense,Fehler beim Suchen der Rechnungen
+Expense Account (Optional Override),Fehler beim Senden der Rechnung:
+Expense account is required.,Fehler beim Senden der Rechnung: {0}
+Expenses and deposits posted during this shift,Fehler beim Senden der Rechnung: Keine Antwort vom Server
+Expired,Fehler beim Aktualisieren der Währung
+Failed to auto reconcile payments.,Fehler beim Aktualisieren der Artikeldetails
+Failed to cancel cash movement,Schätzung:
+Failed to clear cache,Kauf
+Failed to create item,Schätzung:
+Failed to create supplier,Wert
+Failed to delete cash movement,"Die Ereignisschleifenverzögerung misst, wie beschäftigt Ihr Browser ist."
+Failed to generate scale barcode. Using item barcode only.,Niedriger ist besser.
+Failed to load cash movement context.,Jeder
+Failed to load dashboard data.,Wechselkurs
+Failed to reload invoice from server,Erweitern Sie die Artikeldetails
+Failed to submit cash movement,Erwarteter Betrag (in Firmenwährung)
+Failed to sync offline cash movements,Erwartetes Bargeld
+Fast cashier actions for active shifts.,"Erwarteter Kassenbestand, gruppiert nach Währung"
+Fast Moving Items,Erwartet vs. tatsächlich
+Fees,Kosten
+Fetch the latest offline prerequisite updates,Spesenkonto (optionale Überschreibung)
+Find a sales order quickly and load it into the current sale.,Eine Spesenabrechnung ist erforderlich.
+Fixing payment amounts for return invoice...,Während dieser Schicht gebuchte Ausgaben und Einzahlungen
+Flash Off,Abgelaufen
+Flash On,Fehler beim automatischen Abgleich der Zahlungen.
+"For 'Product Bundle' items, Warehouse, Serial No and Batch No will be considered from the 'Packing List' table. If Warehouse and Batch No are same for all packing items for any 'Product Bundle' item, those values can be entered in the main Item table; values will be copied to 'Packing List' table.",Die Bargeldbewegung konnte nicht abgebrochen werden
+Free,Cache konnte nicht geleert werden
+Free Qty,Element konnte nicht erstellt werden
+Frequency,Lieferant konnte nicht erstellt werden
+from,Die Bargeldbewegung konnte nicht gelöscht werden
+From Date,Der Barcode der Waage konnte nicht generiert werden.
+Fulfillment Details,Nur Artikel-Barcode verwenden.
+Full Name,Der Kontext für die Bargeldbewegung konnte nicht geladen werden.
+Gain,Das Laden der Dashboard-Daten ist fehlgeschlagen.
+Generate a fresh prepaid card and start it with an opening balance.,Die Rechnung konnte nicht vom Server neu geladen werden
+Generate and install the certificate to allow fully silent printing without trust prompts.,Die Bargeldbewegung konnte nicht übermittelt werden
+Generate Certificate,Offline-Bargeldbewegungen konnten nicht synchronisiert werden
+Generated scale barcode: {0},Schnelle Kassiereraktionen für aktive Schichten.
+Get Payments,Schnelllebige Artikel
+Gift Card,Gebühren
+Gift card amount must be greater than zero.,Rufen Sie die neuesten Offline-Voraussetzungsupdates ab
+Gift Card Code,Finden Sie schnell einen Kundenauftrag und laden Sie ihn in den aktuellen Verkauf.
+Gift card code is required for redemption,Zahlungsbeträge für Rücksenderechnung festlegen...
+Gift card code is required.,Blitz aus
+Gift card issued successfully.,Blitz an
+Gift card loaded successfully.,"Für „Produktpaket“-Artikel werden Lager, Seriennummer und Chargennummer aus der Tabelle „Packliste“ berücksichtigt."
+Gift Card Management,"Wenn Lager und Chargennummer für alle Verpackungsartikel für einen „Produktbündel“-Artikel gleich sind, können diese Werte in die Hauptartikeltabelle eingegeben werden;"
+Gift card payment,Die Werte werden in die Tabelle „Packliste“ kopiert.
+Gift card redemption requires an online connection,Kostenlos
+Gift card topped up successfully.,Kostenlose Menge
+Gift Cards,Häufigkeit
+Go Offline,von
+Go Online,Von Datum
+Go to Frappe Desk,Einzelheiten zur Erfüllung
+Grand Total,Vollständiger Name
+Gross Margin,Gewinn
+Gross Profit,Erstellen Sie eine neue Prepaid-Karte und starten Sie sie mit einem Anfangssaldo.
+Gross Sales,"Generieren und installieren Sie das Zertifikat, um ein völlig stilles Drucken ohne Vertrauensaufforderungen zu ermöglichen."
+Group not found,Zertifikat generieren
+"Grouped controls for terminal, UI, and session settings.",Generierter Waagen-Barcode: {0}
+Grouped totals for each payment method and currency,Erhalten Sie Zahlungen
+Hide,Geschenkkarte
+Hide Gift Card,Der Betrag der Geschenkkarte muss größer als Null sein.
+Hide Non Essential Fields,Geschenkkartencode
+Hide quantity decimals,Für die Einlösung ist ein Geschenkkartencode erforderlich
+Hide search tools,Geschenkkartencode ist erforderlich.
+Hide zero rated items,Geschenkkarte erfolgreich ausgestellt.
+High,Geschenkkarte erfolgreich geladen.
+History,Geschenkkartenverwaltung
+Hourly (Today),Zahlung mit Geschenkkarte
+How this section works,Für die Einlösung der Geschenkkarte ist eine Online-Verbindung erforderlich
+"If stale data remains, open Settings > Offline & Sync and run Rebuild Offline Data again while online.",Geschenkkarte erfolgreich aufgeladen.
+"If the warning persists, open Settings > Offline & Sync, then run Refresh Offline Data or Rebuild Offline Data.",Geschenkkarten
+Import the certificate into QZ Tray and restart QZ Tray on each POS machine.,Gehen Sie offline
+In,Gehen Sie online
+In stock: {0},Gehen Sie zum Frappe-Schalter
+Include Batch / Serial,Gesamtsumme
+Include Price,Bruttomarge
+Increase quantity,Bruttogewinn
+IndexedDB,Bruttoumsatz
+Initial Amount,Gruppe nicht gefunden
+Initialize your shift with opening balances,"Gruppierte Steuerelemente für Terminal-, Benutzeroberflächen- und Sitzungseinstellungen."
+Initializing application...,Anwendung wird initialisiert...
+"Inspect cache, sync, and prerequisite status","Überprüfen Sie den Cache-, Synchronisierungs- und Voraussetzungsstatus"
+Installed Applications,Installierte Anwendungen
+Insufficient stock:\n{0},Unzureichender Bestand:\n{0}
+Invalid rate,Ungültiger Tarif
+Inventory Status Report,Bestandsstatusbericht
+Invoice,Rechnung
+Invoice {0} is Submitted,Rechnung {0} wurde übermittelt
+Invoice {0} processed successfully,Rechnung {0} erfolgreich verarbeitet
+Invoice {0} submission failed,Die Übermittlung der Rechnung {0} ist fehlgeschlagen
+Invoice {0} was already submitted,Rechnung {0} wurde bereits eingereicht
+Invoice Adjustments,Rechnungsanpassungen
+Invoice Change,Rechnungsänderung
+Invoice Details,Rechnungsdetails
+Invoice is still in draft after background submission.,Die Rechnung befindet sich nach der Hintergrundübermittlung noch im Entwurf.
+Invoice Items,Rechnungspositionen
+Invoice Management,Rechnungsverwaltung
+Invoice Mgmt,Rechnungsverwaltung
+Invoice saved offline,Rechnung offline gespeichert
+Invoice submission failed,Die Übermittlung der Rechnung ist fehlgeschlagen
+Invoice Submitted,Rechnung eingereicht
+"Invoice value settled by loyalty points, not cash collection","Der Rechnungswert wird durch Treuepunkte beglichen, nicht durch Bargeldeinzug"
+Invoices,Rechnungen
+Invoices already past due date,Rechnungen sind bereits überfällig
+Invoices saved as POS Invoices,Als POS-Rechnungen gespeicherte Rechnungen
+Invoices still carrying balances,Rechnungen weisen noch Restbeträge auf
+Issue Mode,Ausgabemodus
+Issue New Card,Neue Karte ausstellen
+Issue Workflow,Issue-Workflow
+"Issue, top up, and check","Ausstellen, auffüllen und prüfen"
+Item,Artikel
+Item / Product Sales Report,Artikel-/Produktverkaufsbericht
+Item {0} added to invoice,Artikel {0} zur Rechnung hinzugefügt
+Item '{0}' has no barcode,Artikel „{0}“ hat keinen Barcode
+Item Code,Artikelcode
+Item created successfully,Artikel erfolgreich erstellt
+Item is out of stock,Der Artikel ist nicht vorrätig
+Item Name,Artikelname
+Item not found,Artikel nicht gefunden
+Item order updated,Artikelreihenfolge aktualisiert
+Item Selector Settings,Einstellungen für die Elementauswahl
+Items,Artikel
+Items added in POS will appear here automatically.,In POS hinzugefügte Artikel werden hier automatisch angezeigt.
+Items added to invoice,Zur Rechnung hinzugefügte Artikel
+Items per page,Artikel pro Seite
+Items Sold,Verkaufte Artikel
+Items/Invoice,Artikel/Rechnung
+Item-wise Profitability,Artikelbezogene Rentabilität
+Journal Entry,Tagebucheintrag
+json,json
+Just now,Gerade eben
+Keep offline prerequisites healthy and recover stale data safely.,Halten Sie die Offline-Voraussetzungen aufrecht und stellen Sie veraltete Daten sicher wieder her.
+Labels,Etiketten
+Language,Sprache
+Language will be changed to,Die Sprache wird geändert in
+"Language, theme, terminal tools, and session controls.","Sprache, Thema, Terminal-Tools und Sitzungssteuerung."
+Last,Zuletzt
+Last 14 Days (Paid vs Pending),Letzte 14 Tage (bezahlt vs. ausstehend)
+Last 14 Days Activity,Aktivität der letzten 14 Tage
+Last 14 Days Gross Profit,Bruttogewinn der letzten 14 Tage
+Last 14 Days Purchases,Einkäufe der letzten 14 Tage
+Last 14 Days Tax/Charges,Steuern/Gebühren der letzten 14 Tage
+Last sync:,Letzte Synchronisierung:
+Last sync: {0} | ok: {1} | failed: {2} | skipped: {3},Letzte Synchronisierung: {0} |
+Latest entries for current shift,ok: {1} |
+Lead Time,fehlgeschlagen: {2} |
+Light Mode,übersprungen: {3}
+Limited,Neueste Einträge für die aktuelle Schicht
+lines,Vorlaufzeit
+List,Lichtmodus
+Live Snapshot,Begrenzt
+Load a POS profile and cashier first.,Linien
+Load More Invoices,Liste
+Load previously saved invoices,Live-Schnappschuss
+Load Sale,Laden Sie zunächst ein POS-Profil und einen Kassierer.
+Load Sales Invoice,Weitere Rechnungen laden
+Loading app data...,Laden Sie zuvor gespeicherte Rechnungen
+Loading customer database...,Verkauf laden
+Loading customers...,Verkaufsrechnung laden
+Loading database stats...,App-Daten werden geladen...
+Loading details...,Kundendatenbank wird geladen...
+Loading invoice history...,Kunden werden geladen...
+Loading items...,Datenbankstatistiken werden geladen...
+Loading product catalog...,Details werden geladen...
+Loading return invoices...,Rechnungsverlauf wird geladen...
+Loading server CPU/memory usage...,Artikel werden geladen...
+Loading suppliers...,Produktkatalog wird geladen...
+Loading unpaid invoices...,Rücksenderechnungen werden geladen...
+Loading view...,CPU-/Speicherauslastung des Servers wird geladen...
+Loading...,Lieferanten werden geladen...
+Local storage is unavailable. Switching to online-only mode.,Unbezahlte Rechnungen werden geladen...
+localStorage,Ansicht wird geladen...
+Location Performance,Laden...
+Locations,Der lokale Speicher ist nicht verfügbar.
+Lock Screen,Wechsel in den reinen Online-Modus.
+Logout,lokaler Speicher
+Lookup Workflow,Standortleistung
+Loss,Standorte
+Low,Bildschirm sperren
+Low Stock,Abmelden
+Low Stock Alerts,Suchworkflow
+Low Stock Items,Verlust
+Low Stock Threshold,Niedrig
+Low Stock Total,Geringer Lagerbestand
+Lowest Margin,Warnungen bei niedrigem Lagerbestand
+Low-frequency maintenance and system details.,Artikel mit geringem Lagerbestand
+Loyalty Redeemed,Schwelle für niedrigen Lagerbestand
+Loyalty Redemption,Niedriger Gesamtbestand
+Make New Payment,Niedrigste Marge
+Manage all,Niederfrequenzwartung und Systemdetails.
+Manage and synchronize your offline transactions,Treue eingelöst
+Manage Cashier PIN,Treueeinlösung
+"Manage offline tools, terminal controls, and maintenance from one workspace.",Führen Sie eine neue Zahlung durch
+manual,Alles verwalten
+"Manual codes, barcode scans, and QR scans work in the same field",Verwalten und synchronisieren Sie Ihre Offline-Transaktionen
+Manual offline mode is enabled,Kassierer-PIN verwalten
+Margin,"Verwalten Sie Offline-Tools, Terminalsteuerungen und Wartung von einem Arbeitsbereich aus."
+Maximum available quantity is {0}. Quantity adjusted to match stock.,Handbuch
+Maximum discount amount for this offer item is {0}.,"Manuelle Codes, Barcode-Scans und QR-Scans funktionieren im gleichen Bereich"
+Maximum discount percentage for this offer item is {0}%.,Der manuelle Offline-Modus ist aktiviert
+Maximum offer quantity is {0}. Quantity adjusted to allowed limit.,Marge
+Medium,Die maximal verfügbare Menge beträgt {0}.
+Menu,Menge angepasst an den Lagerbestand.
+Method-wise Collections,Der maximale Rabattbetrag für diesen Angebotsartikel beträgt {0}.
+Minimum allowed rate for this offer item is {0}.,Der maximale Rabattprozentsatz für diesen Angebotsartikel beträgt {0} %.
+Minimum Qty,Die maximale Angebotsmenge beträgt {0}.
+Mobile No,Menge an erlaubtes Limit angepasst.
+Mode,Mittel
+Mode of Payment,Menü
+Month,Methodenbezogene Sammlungen
+Month Δ,Der zulässige Mindestpreis für diesen Angebotsartikel beträgt {0}.
+Monthly Profit,Mindestmenge
+Monthly Sales,Mobil-Nr
+Monthly Sales Summary,Modus
+Month-wise,Zahlungsart
+Most Active Cashiers,Monat
+Movement Type,Monat Δ
+Movements,Monatlicher Gewinn
+Multi Currency,Monatliche Verkäufe
+N/A,Monatliche Verkaufsübersicht
+Name,Monatlich
+Negative Stock,Die aktivsten Kassierer
+Negative Stock Items,Bewegungstyp
+Negative values not allowed,Bewegungen
+Net,Mehrere Währungen
+Net Qty,N/A
+Net Sales,Name
+Net Value,Negativer Bestand
+Never,Negative Lagerbestände
+New changes are ready to load,Negative Werte sind nicht zulässig
+New Item,Netto
+New Offer Available,Nettomenge
+New PIN,Nettoumsatz
+New rate,Nettowert
+Next unit of measure,Niemals
+No attribute data found.,Neue Änderungen können geladen werden
+No Barcode,Neuer Artikel
+No barcode found for UOM '{0}',Neues Angebot verfügbar
+No branch/location data found.,Neue PIN
+No brand data found.,Neuer Tarif
+No cached gift card balance is available offline.,Nächste Maßeinheit
+No camera found on this device. Please ensure your device has a working camera.,Keine Attributdaten gefunden.
+No capability warnings recorded yet.,Kein Barcode
+No cash expected for this shift.,Für Maßeinheit „{0}“ wurde kein Barcode gefunden
+No cash mode configured,Keine Filial-/Standortdaten gefunden.
+No cash movement type is allowed for this POS Profile.,Keine Markendaten gefunden.
+No cashier PIN is set yet. Create one now.,Offline ist kein zwischengespeichertes Guthaben der Geschenkkarte verfügbar.
+No cashier profiles are available for this POS profile yet.,Auf diesem Gerät wurde keine Kamera gefunden.
+No cashier-wise discount/void/return activity.,"Bitte stellen Sie sicher, dass Ihr Gerät über eine funktionierende Kamera verfügt."
+No category data found.,Es wurden noch keine Funktionswarnungen erfasst.
+No category profitability data found.,Für diese Schicht wird kein Bargeld erwartet.
+No change returned recorded for this shift.,Kein Bargeldmodus konfiguriert
+No change-allocation invoices match the current filters.,Für dieses POS-Profil ist keine Bargeldbewegungsart zulässig.
+No charge head breakdown found.,Es ist noch keine Kassierer-PIN festgelegt.
+No Company Selected,Erstellen Sie jetzt eines.
+No customer sales data found.,Für dieses Kassenprofil sind noch keine Kassiererprofile verfügbar.
+No day-wise discount/void/return trend.,Keine Rabatt-/Stornierungs-/Rückgabeaktivität an der Kasse.
+No day-wise payment data found.,Keine Kategoriedaten gefunden.
+No day-wise profitability trend found.,Es wurden keine Rentabilitätsdaten für die Kategorie gefunden.
+No day-wise purchase data found.,Für diese Schicht wurde keine Änderung zurückgegeben.
+No day-wise sales trend found.,Keine Rechnungen mit Änderungszuordnung entsprechen den aktuellen Filtern.
+No day-wise tax/charges trend found.,Es wurde kein Ausfall des Ladekopfes gefunden.
+No dead stock items.,Kein Unternehmen ausgewählt
+No due date,Keine Kundenverkaufsdaten gefunden.
+No exact repair match found for this invoice,Kein tagesweiser Rabatt-/Stornierungs-/Rückgabetrend.
+No hourly sales trend found for today.,Es wurden keine tagesbezogenen Zahlungsdaten gefunden.
+No invoice activity found.,Es wurde kein tagesbezogener Rentabilitätstrend gefunden.
+No invoices found,Es wurden keine tagesbezogenen Kaufdaten gefunden.
+No invoices found. Try different search criteria.,Es wurde kein tagesbezogener Verkaufstrend gefunden.
+No invoices recorded for this shift.,Es wurde kein tagesbezogener Steuer-/Gebührentrend gefunden.
+No item profitability data found.,Keine toten Lagerbestände.
+No item sales data found for this period.,Kein Fälligkeitsdatum
+No items found,Für diese Rechnung wurde keine genaue Reparaturübereinstimmung gefunden
+No items in cart,Für heute wurde kein stündlicher Verkaufstrend gefunden.
+No items with barcodes to print,Keine Rechnungsaktivität gefunden.
+No location-wise top item data found.,Keine Rechnungen gefunden
+No low stock alerts right now.,Keine Rechnungen gefunden.
+No low stock items.,Probieren Sie verschiedene Suchkriterien aus.
+No matching items in cart,Für diese Schicht wurden keine Rechnungen erfasst.
+No month-wise sales trend found.,Es wurden keine Artikelrentabilitätsdaten gefunden.
+No negative stock items.,Für diesen Zeitraum wurden keine Artikelverkaufsdaten gefunden.
+No notifications yet,Keine Artikel gefunden
+No offline cash movement synced.,Keine Artikel im Warenkorb
+No offline invoices pending synchronization,Keine Artikel mit Barcodes zum Drucken
+No offline sync issues recorded yet.,Es wurden keine standortbezogenen Top-Artikeldaten gefunden.
+No out-of-stock items.,Im Moment gibt es keine Benachrichtigungen über niedrige Lagerbestände.
+No outstanding credit invoices for this shift.,Keine Artikel mit geringem Lagerbestand.
+No payment collection data found.,Keine passenden Artikel im Warenkorb
+No payment rows available on this invoice.,Es wurde kein monatlicher Verkaufstrend gefunden.
+No payments registered for this shift.,Keine negativen Lagerbestände.
+No pending balances in this period.,Noch keine Benachrichtigungen
+No pending offline invoices,Keine Offline-Bargeldbewegung synchronisiert.
+No Print Formats Found,Keine Offline-Rechnungen warten auf die Synchronisierung
+No profiles found for selected scope. Falling back to current profile failed.,Es wurden noch keine Offline-Synchronisierungsprobleme registriert.
+No recent customer activity found.,Keine vergriffenen Artikel.
+No recent stock entries found.,Für diese Schicht sind keine Kreditrechnungen ausstehend.
+No records found,Es wurden keine Daten zum Zahlungseinzug gefunden.
+No reorder suggestions right now.,Auf dieser Rechnung sind keine Zahlungszeilen verfügbar.
+No repeat customers in this period.,Für diese Schicht wurden keine Zahlungen registriert.
+No response from server,In diesem Zeitraum liegen keine ausstehenden Salden vor.
+No return invoices found,Keine ausstehenden Offline-Rechnungen
+No return item trend found.,Keine Druckformate gefunden
+No returnable items found for this invoice,Für den ausgewählten Bereich wurden keine Profile gefunden.
+No returns were processed in this shift.,Das Zurückgreifen auf das aktuelle Profil ist fehlgeschlagen.
+No risk activity found.,Keine aktuellen Kundenaktivitäten gefunden.
+No sales activity found for this period.,Keine aktuellen Aktieneinträge gefunden.
+No slow moving items.,Keine Datensätze gefunden
+No staff sales activity found.,Im Moment gibt es keine Nachbestellungsvorschläge.
+No stock movement for this period.,Keine Stammkunden in diesem Zeitraum.
+No submitted cash movements in this shift.,Keine Antwort vom Server
+No supplier purchases found in this month.,Keine Rücksenderechnungen gefunden
+No suppliers found for this period.,Es wurde kein Trend zur Rückgabe von Artikeln gefunden.
+No sync trigger has run yet in this session.,Für diese Rechnung wurden keine rückzahlbaren Artikel gefunden
+No tax head breakdown found.,In dieser Schicht wurden keine Retouren bearbeitet.
+No top items found for this location.,Keine Risikoaktivität gefunden.
+No unpaid invoices,Für diesen Zeitraum wurden keine Verkaufsaktivitäten gefunden.
+No variant data found.,Keine sich langsam bewegenden Gegenstände.
+No week-wise sales trend found.,Keine Mitarbeiterverkaufsaktivität gefunden.
+No.,Keine Lagerbewegung für diesen Zeitraum.
+Nobile Number,In dieser Schicht wurden keine Bargeldbewegungen übermittelt.
+Not available,In diesem Monat wurden keine Lieferantenkäufe gefunden.
+Not checked,Für diesen Zeitraum wurden keine Lieferanten gefunden.
+Not selected,In dieser Sitzung wurde noch kein Synchronisierungstrigger ausgeführt.
+Not Set,Es wurde keine Aufschlüsselung der Steuersätze gefunden.
+Notifications,Für diesen Standort wurden keine Top-Artikel gefunden.
+Offer,Keine unbezahlten Rechnungen
+Offer Applied,Keine Variantendaten gefunden.
+Offer criteria exceeded,Es wurde kein wöchentlicher Verkaufstrend gefunden.
+Offer Item,Nein.
+Offer item unavailable,Nobile Nummer
+Offer Removed,Nicht verfügbar
+Offer UOM cannot be changed,Nicht überprüft
+Offer?,Nicht ausgewählt
+Offers,Nicht festgelegt
+Offline,Benachrichtigungen
+Offline & Sync,Angebot
+Offline Capabilities,Angebot angewendet
+Offline data status refreshed,Angebotskriterien überschritten
+Offline diagnostics,Angebotsartikel
+Offline Invoices,Angebotsartikel nicht verfügbar
+Offline invoices status,Angebot entfernt
+Offline invoices synced,Die Maßeinheit des Angebots kann nicht geändert werden
+Offline Queue: {0},Angebot?
+Offline rebuild guidance,Angebote
+Offline restore is unavailable for this session.,Offline
+Offline selling is available with degraded capabilities.,Offline und synchronisieren
+Offline snapshot does not match the current POS state.,Offline-Funktionen
+Offline Status,Offline-Datenstatus aktualisiert
+"Offline, terminal, and system controls",Offline-Diagnose
+OK,Offline-Rechnungen
+Online,Status der Offline-Rechnungen
+Open actions menu,Offline-Rechnungen synchronisiert
+Open balance to collect,Offline-Warteschlange: {0}
+Open Customer Display,Anleitung zum Offline-Wiederaufbau
+Open drawer,Die Offline-Wiederherstellung ist für diese Sitzung nicht verfügbar.
+Open invoices,Der Offline-Verkauf ist mit eingeschränkten Funktionen verfügbar.
+Open Payments?,Der Offline-Snapshot stimmt nicht mit dem aktuellen POS-Status überein.
+Open POS home,Offline-Status
+Open this screen from POS Menu -> Open Customer Display.,"Offline-, Terminal- und Systemsteuerung"
+OpenCV image processing enabled - Enhanced barcode detection,Okay
+OpenCV image processing unavailable on this device,Online
+OpenCV Off,Aktionsmenü öffnen
+OpenCV On,Offenes Guthaben zum Einsammeln
+OpenCV processing disabled,Öffnen Sie die Kundenanzeige
+Opening Amount,Schublade öffnen
+Opening Cash,Offene Rechnungen
+options,Offene Zahlungen?
+Order,Öffnen Sie die POS-Startseite
+Original,Öffnen Sie diesen Bildschirm über das POS-Menü -> Kundenanzeige öffnen.
+Other,OpenCV-Bildverarbeitung aktiviert – Verbesserte Barcode-Erkennung
+Out,OpenCV-Bildverarbeitung ist auf diesem Gerät nicht verfügbar
+Out of Stock,OpenCV Aus
+Out of Stock Items,OpenCV Ein
+Outstanding,OpenCV-Verarbeitung deaktiviert
+Outstanding Credit by Currency,Eröffnungsbetrag
+Overdue,Eröffnungsgeld
+Overpayment Change,Optionen
+Overpayment change deducted: {0},Bestellen
+Packing List,Original
+Page Format,Andere
+Page unavailable offline,Raus
+Paid,Ausverkauft
+Paid (orig):,Nicht vorrätige Artikel
+Paid Amount,Hervorragend
+Paid change cannot be greater than total change!,Ausstehendes Guthaben nach Währung
+Paid:,Überfällig
+Parent Item,Überzahlungsänderung
+Partial,Überzahlungsänderung abgezogen: {0}
+Partly Paid,Packliste
+Party Account,Seitenformat
+Party Type,Seite offline nicht verfügbar
+Pause terminal until next cashier,Bezahlt
+PAY,Bezahlt (original):
+Payment,Bezahlter Betrag
+Payment Account,Das bezahlte Wechselgeld darf nicht größer sein als das Gesamtwechselgeld!
+Payment entries processed for Invoice {0},Bezahlt:
+Payment Entry Type,Übergeordnetes Element
+Payment History,Teilweise
+Payment ID,Teilweise bezahlt
+Payment Method Report,Partykonto
+Payment Methods,Partytyp
+Payment of {0} received successfully.,Terminal bis zum nächsten Kassierer pausieren
+Payment Progress,ZAHLEN
+Payment Reconciliation,Zahlung
+Payment request status could not be retrieved. Please try again,Zahlungskonto
+Payment Request took too long to respond. Please try requesting for payment again,Zahlungseinträge für Rechnung {0} verarbeitet
+Payment saved offline,Zahlungseintragstyp
+Payment State,Zahlungshistorie
+Payment Status,Zahlungs-ID
+Payment submitted but print function could not be executed. Payment name not found.,Bericht zur Zahlungsmethode
+Payment submitted.,Zahlungsmethoden
+Payment Summary,Die Zahlung von {0} wurde erfolgreich empfangen.
+Payments,Zahlungsfortschritt
+Payments are not open. Do you want to open payments and submit?,Zahlungsabgleich
+Payments by Mode of Payment,Der Status der Zahlungsanforderung konnte nicht abgerufen werden.
+PDF,Bitte versuchen Sie es erneut
+Peak Hour,Die Antwort auf die Zahlungsanfrage hat zu lange gedauert.
+Peak Memory:,"Bitte versuchen Sie erneut, die Zahlung anzufordern"
+Peak Server:,Zahlung offline gespeichert
+Peak:,Zahlungsstatus
+Pending,Zahlungsstatus
+Pending Amount,"Zahlung übermittelt, aber Druckfunktion konnte nicht ausgeführt werden."
+Pending count updated from {0} to {1},Zahlungsname nicht gefunden.
+Pending Exposure,Zahlung eingereicht.
+Pending Invoices,Zahlungsübersicht
+Pending Ratio,Zahlungen
+Pending Sales,Zahlungen sind nicht möglich.
+Pending sales: {0} | Cache usage: {1}%,Möchten Sie Zahlungen eröffnen und einreichen?
+Pending Sync,Zahlungen nach Zahlungsart
+Pending: {0},PDF
+Pending: {0} | Synced: {1} | Draft: {2},Hauptverkehrszeit
+Per Page,Spitzenspeicher:
+Personal,Spitzenserver:
+Personal preferences adjust the current cashier experience without changing the active POS route.,Höhepunkt:
+PIN confirmation does not match.,Ausstehend
+PIN must be 4 to 8 digits.,Ausstehender Betrag
+Please add at least one item.,Ausstehende Anzahl aktualisiert von {0} auf {1}
+Please allow camera access to scan codes,Ausstehende Belichtung
+Please enter payment amount,Ausstehende Rechnungen
+Please fill all required fields,Ausstehendes Verhältnis
+Please make a payment or select a payment,Ausstehende Verkäufe
+Please request phone payment or use another payment method,Ausstehende Verkäufe: {0} |
+Please select a customer first,Cache-Nutzung: {1} %
+Please select a party,Ausstehende Synchronisierung
+Please select a party before reconciling.,Ausstehend: {0}
+Please select a valid movement type.,Ausstehend: {0} |
+Please select an invoice,Synchronisiert: {1} |
+Please select company before reconciling.,Entwurf: {2}
+Please set the customer's mobile number,Pro Seite
+Please try again or enter the item manually.,Persönlich
+Please verify the barcode or check the item's availability.,"Persönliche Vorlieben passen das aktuelle Kassierererlebnis an, ohne die aktive POS-Route zu ändern."
+Points,PIN-Bestätigung stimmt nicht überein.
+Popup blocked. Please allow popups.,Die PIN muss 4 bis 8 Ziffern lang sein.
+POS,Bitte fügen Sie mindestens einen Artikel hinzu.
+POS controls and maintenance,Bitte erlauben Sie der Kamera Zugriff zum Scannen von Codes
+POS Expense is disabled for this POS Profile.,Bitte geben Sie den Zahlungsbetrag ein
+POS is running with limited offline prerequisites.,Bitte füllen Sie alle erforderlichen Felder aus
+POS Profile,Bitte führen Sie eine Zahlung durch oder wählen Sie eine Zahlung aus
+Position the QR code or barcode within the scanning area,Bitte fordern Sie eine telefonische Zahlung an oder nutzen Sie eine andere Zahlungsmethode
+Posting,Bitte wählen Sie zunächst einen Kunden aus
+Posting and Price List,Bitte wählen Sie eine Party aus
+Posting Date,Bitte wählen Sie vor dem Abgleich eine Partei aus.
+Preparing background sync,Bitte wählen Sie eine gültige Bewegungsart aus.
+"Press OK to continue offline with a warning, or Cancel to retry.",Bitte wählen Sie eine Rechnung aus
+Previous unit of measure,Bitte wählen Sie vor dem Abgleich das Unternehmen aus.
+Price List,Bitte legen Sie die Mobilfunknummer des Kunden fest
+Price List Rate,Bitte versuchen Sie es erneut oder geben Sie den Artikel manuell ein.
+Price list rate updated locally only,Bitte überprüfen Sie den Barcode oder prüfen Sie die Verfügbarkeit des Artikels.
+Pricing & Discounts,Punkte
+Pricing Rule,Popup blockiert.
+Print,Bitte erlauben Sie Popups.
+Print Draft,POS
+Print Format (Invoice),POS-Kontrollen und Wartung
+Print Format (Order),Die POS-Ausgabe ist für dieses POS-Profil deaktiviert.
+Print invoice,POS läuft mit eingeschränkten Offline-Voraussetzungen.
+Print Last Invoice,POS-Profil
+Print Purchase Invoice instead of PO,Positionieren Sie den QR-Code oder Barcode innerhalb des Scanbereichs
+Printer,Veröffentlichung
+Processed returns impacting the shift totals,Ausschreibung und Preisliste
+Processing Payment,Buchungsdatum
+Processing payment entries for Invoice {0},Hintergrundsynchronisierung wird vorbereitet
+Profile,"Drücken Sie OK, um mit einer Warnung offline fortzufahren, oder Abbrechen, um es erneut zu versuchen."
+Profiles,Vorherige Maßeinheit
+Profit,Preisliste
+Profit: Invoice Item Estimate,Preislistenpreis
+Profit: Stock Ledger (COGS),Preislistentarif wird nur lokal aktualisiert
+Profitability Report,Preise und Rabatte
+Prorated return discount,Preisregel
+Purchase Amount,Drucken
+Purchase Invoices,Entwurf drucken
+Purchase Order created,Druckformat (Rechnung)
+Qty,Druckformat (Bestellung)
+Qualified,Rechnung drucken
+Quantity,Letzte Rechnung drucken
+Quantity exceeds available stock,Einkaufsrechnung statt Bestellung drucken
+Quick Actions,Drucker
+Quotation {0} is Submitted,Verarbeitete Retouren wirken sich auf die Schichtsummen aus
+Quotation submitted,Zahlungsabwicklung
+QZ Tray connected.,Zahlungseinträge für Rechnung {0} verarbeiten
+QZ Tray is manually disconnected. Press Connect to enable it again.,Profil
+QZ Tray is not connected.,Profile
+QZ Tray Setup,Gewinn
+Rate,Gewinn: Schätzung des Rechnungspostens
+Rate adjusted to maximum allowed discount,Gewinn: Lagerbuch (COGS)
+Ready,Rentabilitätsbericht
+Ready to resume,Anteiliger Retourenrabatt
+Ready!,Kaufbetrag
+Real-time POS insights for retail operations.,Kaufrechnungen
+Rebuild Offline Data,Bestellung erstellt
+Receive,Menge
+Receive now,Qualifiziert
+Received,Menge
+Received:,Die Menge übersteigt den verfügbaren Bestand
+Recent Movement Entries,Schnelle Aktionen
+Recent updates about your invoices,Angebot {0} wurde übermittelt
+Recently Active Customers,Angebot eingereicht
+Rechecking connection,QZ-Fach angeschlossen.
+Reconcile payment methods and close shift,Das QZ-Fach wurde manuell getrennt.
+Reconciling Payments,"Drücken Sie auf „Verbinden“, um es erneut zu aktivieren."
+"Reconnect and open this page once while online, then offline refreshes will be able to restore it.",Das QZ-Fach ist nicht angeschlossen.
+Reconnect online to refresh cached offline data from the server.,QZ-Fach-Setup
+Recreate local offline prerequisites from scratch,Bewerten
+Recv:,Der Preis wurde an den maximal zulässigen Rabatt angepasst
+Redeem,Bereit
+Redeem / Scan,Bereit zur Fortsetzung
+Redeem Amount,Fertig!
+Redeem Mode,Echtzeit-POS-Einblicke für Einzelhandelsbetriebe.
+Redeemed Amount,Offline-Daten neu erstellen
+Redeemed credit cannot be greater than its total.,Empfangen
+Redemption and Totals,Jetzt erhalten
+Reference,Erhalten
+Refresh,Erhalten:
+Refresh Exchange Rate,Aktuelle Bewegungseinträge
+Refresh Offline Data,Aktuelle Updates zu Ihren Rechnungen
+Refresh Printers,Kürzlich aktive Kunden
+Refund,Verbindung erneut prüfen
+Release Notes,Zahlungsarten abgleichen und Schicht abschließen
+Reload,Zahlungen abgleichen
+Reload customers,"Stellen Sie eine erneute Verbindung her und öffnen Sie diese Seite einmal, während Sie online sind. Anschließend kann sie durch Offline-Aktualisierungen wiederhergestellt werden."
+Reload Items,"Stellen Sie die Online-Verbindung wieder her, um zwischengespeicherte Offline-Daten vom Server zu aktualisieren."
+Reload Now,Erstellen Sie die lokalen Offline-Voraussetzungen von Grund auf neu
+Reload to apply the latest changes. Your current session will be refreshed.,Empfang:
+Reload Workflow,Einlösen
+Remarks,Einlösen / Scannen
+Remarks are required.,Betrag einlösen
+Remove,Einlösemodus
+Remove barcode item,Eingelöster Betrag
+Remove cached data and reload the POS app,Das eingelöste Guthaben darf den Gesamtbetrag nicht überschreiten.
+Remove item,Einlösung und Gesamtbeträge
+Remove Offer,Referenz
+Reorder / Purchase Suggestions,Aktualisieren
+Repair Candidate,Wechselkurs aktualisieren
+Repair Change Allocation,Offlinedaten aktualisieren
+Repair requires an online connection,Drucker aktualisieren
+Repaired,Rückerstattung
+Repairing change allocation,Versionshinweise
+Repeat Customers,Neu laden
+Repeat Rate,Kunden neu laden
+Reprint previous transaction,Elemente neu laden
+Request,Jetzt neu laden
+Request ID: {0},"Neu laden, um die neuesten Änderungen zu übernehmen."
+Request Payment,Ihre aktuelle Sitzung wird aktualisiert.
+Requested route: {0},Workflow neu laden
+Required columns cannot be hidden,Bemerkungen
+Reset,Anmerkungen sind erforderlich.
+Reset item name,Entfernen
+Reset to Default,Barcode-Artikel entfernen
+Resource Health,Entfernen Sie zwischengespeicherte Daten und laden Sie die POS-App neu
+Restricted,Artikel entfernen
+Restricted operational controls for supervisors only.,Angebot entfernen
+Retry,Nachbestellungs-/Kaufvorschläge
+Retry route,Reparaturkandidat
+Return,Änderungszuordnung reparieren
+Return Amount,Für die Reparatur ist eine Online-Verbindung erforderlich
+Return Count,Repariert
+Return items must have negative quantities,Änderungszuordnung reparieren
+Return total must be negative,Stammkunden
+Return Valid Until,Wiederholungsrate
+Return window passed,Vorherige Transaktion erneut drucken
+Return without Invoice,Anfrage
+Returns,Rückgaben
+Returns / Voids / Discounts,Rückgaben/Stornierungen/Rabatte
+Returns by Currency,Renditen nach Währung
+Revenue,Einnahmen
+Review shift totals before submitting the closing entry,"Überprüfen Sie die Schichtsummen, bevor Sie den Abschlusseintrag absenden"
+Round Off,Abrunden
+Rows,Reihen
+Rows:,Zeilen:
+Rule,Regel
+Sale,Verkauf
+Sales,Verkäufe
+Sales Order {0} is Submitted,Kundenauftrag {0} wurde übermittelt
+Sales Person and Print,Verkäufer und Druck
+Sales Person not found,Verkäufer nicht gefunden
+Sales processed,Verkäufe abgewickelt
+Sales Return,Verkaufsrendite
+Sales Trend Report,Verkaufstrendbericht
+Save,Speichern
+Save & Clear,Speichern und löschen
+Save as POS Profile Default,Als POS-Profil-Standard speichern
+Save Settings,Einstellungen speichern
+Save the selected printer as the POS Profile default so it shows automatically on this setup.,"Speichern Sie den ausgewählten Drucker als Standard-POS-Profil, damit er bei diesem Setup automatisch angezeigt wird."
+Saved as draft because: {0},"Als Entwurf gespeichert, weil: {0}"
+Saving...,Sparen...
+Scale barcode detected. Quantity here is the number of labels to print.,Waagen-Barcode erkannt.
+Scale barcode settings are not configured. Using item barcode only.,Unter „Menge“ wird die Anzahl der zu druckenden Etiketten angegeben.
+Scale template barcode is missing for this item/UOM. Using item barcode only.,Die Barcode-Einstellungen der Waage sind nicht konfiguriert.
+Scan an existing card and top it up without leaving the payment flow.,Nur Artikel-Barcode verwenden.
+Scan Error,Für diesen Artikel/diese Maßeinheit fehlt der Barcode der Waagenvorlage.
+Scan or enter a gift card code to check balance or redeem.,Nur Artikel-Barcode verwenden.
+Scan or paste the card code below.,"Scannen Sie eine vorhandene Karte und laden Sie sie auf, ohne den Zahlungsvorgang zu verlassen."
+Scan QR Code/Barcode,Scanfehler
+Scan with camera,"Scannen Sie einen Geschenkkartencode oder geben Sie ihn ein, um den Kontostand zu überprüfen oder ihn einzulösen."
+Scan-First Flow,Scannen oder fügen Sie den Kartencode unten ein.
+Scanned Code:,QR-Code/Barcode scannen
+Scanning for: {0},Mit der Kamera scannen
+Scanning items,Scan-First-Flow
+Scan-Ready,Gescannter Code:
+Scope,Suche nach: {0}
+Scope: All Profiles,Artikel scannen
+Scope: Current Profile,Scanbereit
+Scope: Specific Profile,Umfang
+Search,Geltungsbereich: Alle Profile
+Search Account,Geltungsbereich: Aktuelles Profil
+Search an invoice and continue the return flow without extra steps.,Geltungsbereich: Spezifisches Profil
+Search customer,Suchen
+Search invoices or customers,Suchkonto
+Search item,Suchen Sie eine Rechnung und setzen Sie den Rückfluss ohne zusätzliche Schritte fort.
+Search item / code,Kunden suchen
+Search items or barcode,Suchen Sie nach Rechnungen oder Kunden
+Search Mpesa Payments,Suchelement
+Search return invoices or customers,Artikel/Code suchen
+Search supplier,Suchen Sie nach Artikeln oder Barcode
+Search unpaid invoices or customers,Suchen Sie nach Mpesa Payments
+Secure context (HTTPS or localhost) is required for camera access.,Suchen Sie nach Retourenrechnungen oder Kunden
+Secure context (HTTPS) required for camera access. Please use HTTPS to access the camera.,Anbieter suchen
+Select,Suchen Sie nach unbezahlten Rechnungen oder Kunden
+Select a cashier first.,Für den Kamerazugriff ist ein sicherer Kontext (HTTPS oder Localhost) erforderlich.
+Select a customer,Für den Kamerazugriff ist ein sicherer Kontext (HTTPS) erforderlich.
+Select a customer to use coupon,"Bitte verwenden Sie HTTPS, um auf die Kamera zuzugreifen."
+Select a printer to use QZ silent printing.,Auswählen
+Select Batch,Wählen Sie zunächst einen Kassierer aus.
+Select Columns to Display,Wählen Sie einen Kunden aus
+Select items to sell,"Wählen Sie einen Kunden aus, um den Gutschein zu verwenden"
+Select Language,"Wählen Sie einen Drucker aus, um das stille QZ-Drucken zu verwenden."
+Select Payment,Wählen Sie Stapel aus
+Select Payment Account,Wählen Sie die anzuzeigenden Spalten aus
+Select printer,Wählen Sie Artikel zum Verkauf aus
+Select Return Invoice,Wählen Sie Sprache aus
+Select S.O,Wählen Sie Zahlung
+Select Sales Orders,Wählen Sie Zahlungskonto
+Select the cashier who is taking over this terminal.,Drucker auswählen
+Selected,Wählen Sie „Rechnung zurücksenden“.
+Selected movement type is not allowed by POS Profile.,Wählen Sie S.O
+Selected Payments,Wählen Sie Kundenaufträge aus
+Sensitive actions kept away from quick taps.,"Wählen Sie den Kassierer aus, der dieses Terminal übernimmt."
+Serial,Ausgewählt
+Serial Numbers,Der ausgewählte Bewegungstyp ist im POS-Profil nicht zulässig.
+Server CPU Usage:,Ausgewählte Zahlungen
+Server Health,Sensible Aktionen werden von schnellem Tippen ferngehalten.
+Server Memory Usage:,Seriell
+Server Metrics,Seriennummern
+Server Uptime:,Server-CPU-Auslastung:
+Service Charges,Serverzustand
+Session,Serverspeichernutzung:
+Set each cashier PIN in the User form and keep terminal members assigned in POS Profile User.,Servermetriken
+Settings,Serververfügbarkeit:
+Settings in this section update the POS workspace without changing the current route.,Servicegebühren
+Setup complete!,Sitzung
+Share,Legen Sie jede Kassierer-PIN im Benutzerformular fest und behalten Sie die zugewiesenen Terminalmitglieder im POS-Profilbenutzer bei.
+Shared terminal,Einstellungen
+Shift Closed Snapshot,"Die Einstellungen in diesem Abschnitt aktualisieren den POS-Arbeitsbereich, ohne die aktuelle Route zu ändern."
+Shift Overview,Einrichtung abgeschlossen!
+Show,Teilen
+Show cart on customer-facing screen,Gemeinsames Terminal
+Show last invoice rate,Geschlossenen Snapshot verschieben
+Show rate info,Schichtübersicht
+Show Repair Candidates,Zeigen
+Show search tools,Warenkorb auf dem Kundenbildschirm anzeigen
+Show the active cart on a customer-facing screen,Letzten Rechnungssatz anzeigen
+Showing {0}-{1} of {2},Preisinformationen anzeigen
+Showing 0 of 0,Reparaturkandidaten anzeigen
+Shows the distribution of invoices per currency,Suchwerkzeuge anzeigen
+Sign out of session,Zeigen Sie den aktiven Warenkorb auf einem kundenorientierten Bildschirm an
+Sign out of the current POS session,Angezeigt werden {0}-{1} von {2}
+Size:,0 von 0 werden angezeigt
+Skipped Payments,Zeigt die Verteilung der Rechnungen pro Währung
+Skipping items without barcodes,Melden Sie sich von der Sitzung ab
+Slow Moving,Melden Sie sich von der aktuellen POS-Sitzung ab
+Slow Moving Items,Größe:
+Slow Queries:,Übersprungene Zahlungen
+Sold,Überspringen von Artikeln ohne Barcode
+Source,Langsame Bewegung
+Source Cash Account (Optional Override),Langsam bewegliche Gegenstände
+Source Ex. Rate:,Langsame Abfragen:
+Source Rate:,Verkauft
+Specific Profile,Quelle
+Split Invoices,Quellgeldkonto (optionale Überschreibung)
+Staff / Cashier Performance Report,Quelle Bsp.
+Status,Bewerten:
+Stock,Quellrate:
+Stock Information,Spezifisches Profil
+Stock is lower than requested,Rechnungen aufteilen
+Stock is lower than requested:\n{0},Leistungsbericht für Mitarbeiter/Kassierer
+Stock Movement Report,Status
+Stock update: {0} has {1} available. Adding {2} will bring the stock below zero.,Lager
+Submit,Bestandsinformationen
+Submit & Print,Der Lagerbestand ist geringer als angefordert
+Submit Deposit,Der Lagerbestand ist geringer als angefordert:\n{0}
+Submit Expense,Lagerbewegungsbericht
+Submitted,Bestandsaktualisierung: {0} hat {1} verfügbar.
+Submitted Cash Movements,Durch Hinzufügen von {2} wird der Bestand unter Null gesenkt.
+Submitted entries,Senden
+Successfully scanned:,Senden und drucken
+Suggested,Anzahlung einreichen
+Suggested Qty,Spesen einreichen
+Supervisor Access,Eingereicht
+Supervisor permissions unlock issuance and reloads,Eingereichte Bargeldbewegungen
+Supervisor Tools,Eingereichte Einträge
+Supplier,Erfolgreich gescannt:
+Supplier and dates are required.,Vorgeschlagen
+Supplier Invoices,Empfohlene Menge
+Supplier is required.,Supervisor-Zugriff
+Supplier name is required,Supervisor-Berechtigungen entsperren die Ausgabe und das erneute Laden
+Supplier Payments,Supervisor-Tools
+Supplier Purchase Summary,Lieferant
+Suppliers,Anbieter und Termine sind erforderlich.
+Suppliers not found,Lieferantenrechnungen
+Switch Camera,Lieferant ist erforderlich.
+Switch Cashier,Der Name des Lieferanten ist erforderlich
+Switch the POS appearance theme,Lieferantenzahlungen
+Switch theme appearance,Zusammenfassung des Lieferanteneinkaufs
+Switched to:,Lieferanten
+Sync All Invoices,Lieferanten nicht gefunden
+Sync Offline Cash Movements ({0}),Kamera wechseln
+Sync Offline Sales,Kassierer wechseln
+Synced {0} offline cash movement(s).,Wechseln Sie das POS-Erscheinungsbilddesign
+Syncing items in background,Erscheinungsbild des Themes ändern
+System / Diagnostics,Gewechselt zu:
+"System actions are low-frequency maintenance controls such as app info, support diagnostics, and session controls.",Alle Rechnungen synchronisieren
+System Information,Offline-Bargeldbewegungen synchronisieren ({0})
+System Status,Offline-Verkäufe synchronisieren
+Tables:,Synchronisierte {0} Offline-Bargeldbewegung(en).
+Tap the button below to redeem a gift card during checkout.,Elemente im Hintergrund synchronisieren
+Target,System / Diagnose
+Target Ex. Rate:,"Bei Systemaktionen handelt es sich um Wartungskontrollen mit geringer Häufigkeit, z. B. App-Informationen, Supportdiagnosen und Sitzungskontrollen."
+Target Rate:,Systeminformationen
+Tax,Systemstatus
+Tax / Charges Report,Tische:
+Tax Heads,"Tippen Sie auf die Schaltfläche unten, um beim Bezahlvorgang eine Geschenkkarte einzulösen."
+Taxable Amount,Ziel
+Tendered,Ziel-Ex.
+Terminal,Bewerten:
+Terminal & Devices,Zielquote:
+Terminal locked,Steuer
+"Terminal tools affect this checkout station, customer-facing displays, and future printer/device controls.",Steuer-/Gebührenbericht
+Territory not found,Steuerchefs
+The amount paid is not complete,Steuerpflichtiger Betrag
+The app stores data locally for offline use. This is called cache.,Ausgeschrieben
+The invoice stayed in draft. Please review and submit it manually.,Terminal
+The maximum discount allowed is,Terminal und Geräte
+The quantity for {0} has been adjusted to the maximum available stock.,Terminal gesperrt
+The system could not retrieve the item details. Please try again.,"Terminal-Tools wirken sich auf diese Kassenstation, kundenorientierte Displays und zukünftige Drucker-/Gerätesteuerungen aus."
+These invoices will be synced when connection is restored,Gebiet nicht gefunden
+This action now opens inside the settings workspace.,Der gezahlte Betrag ist nicht vollständig
+This coupon already used !,Die App speichert Daten lokal für die Offline-Nutzung.
+This invoice does not need change-allocation repair,Dies wird als Cache bezeichnet.
+This invoice is already repaired,Die Rechnung blieb im Entwurf.
+This is an item template. Please choose a variant.,Bitte überprüfen Sie es und reichen Sie es manuell ein.
+this item,Der maximal zulässige Rabatt beträgt
+This POS page could not be opened offline because its code was not cached on this terminal yet.,Die Menge für {0} wurde an den maximal verfügbaren Bestand angepasst.
+This Serial Number {0} has already been added!,Das System konnte die Artikeldetails nicht abrufen.
+Threshold,Bitte versuchen Sie es erneut.
+Time,"Diese Rechnungen werden synchronisiert, sobald die Verbindung wiederhergestellt ist"
+Tip: Clear cache regularly to free up space and keep the app fast.,Diese Aktion wird jetzt im Einstellungsarbeitsbereich geöffnet.
+Tip: Close unused tabs or apps to reduce lag.,Dieser Gutschein wurde bereits verwendet!
+Tip: Monitor slow queries and table size for optimal performance.,Für diese Rechnung ist keine Änderungszuordnungsreparatur erforderlich
+To Be Paid,Diese Rechnung ist bereits repariert
+To Date,Dies ist eine Artikelvorlage.
+Today,Bitte wählen Sie eine Variante.
+Today Profit,diesen Artikel
+Today Sales,"Diese POS-Seite konnte nicht offline geöffnet werden, da ihr Code noch nicht auf diesem Terminal zwischengespeichert wurde."
+Toggle navigation drawer,Diese Seriennummer {0} wurde bereits hinzugefügt!
+Toggle Theme,Schwelle
+Tools,Zeit
+Tools for customer-facing screens and terminal-specific actions.,"Tipp: Leeren Sie regelmäßig den Cache, um Speicherplatz freizugeben und die App schnell zu halten."
+Top Brand,"Tipp: Schließen Sie nicht verwendete Tabs oder Apps, um Verzögerungen zu reduzieren."
+Top Category,"Tipp: Überwachen Sie langsame Abfragen und die Tabellengröße, um eine optimale Leistung zu erzielen."
+Top Charge Head,Zu bezahlen
+Top Customers,Bis heute
+Top Discount,Heute
+Top Items by Location,Heute Gewinn
+Top Margin,Heute Verkauf
+Top Pending,Navigationsleiste umschalten
+Top Profit Item,Thema umschalten
+Top Return Items,Werkzeuge
+Top Sales by Cashier,Tools für kundenorientierte Bildschirme und terminalspezifische Aktionen.
+Top Supplier,Top-Marke
+Top Suppliers by Spend,Top-Kategorie
+Top Tables,Oberer Ladekopf
+Top Tax Head,Top-Kunden
+Top Up Amount,Top-Rabatt
+Top Up Card,Top-Artikel nach Standort
+Top Up Mode,Oberer Rand
+Top Variant,Oben Ausstehend
+Total,Top-Gewinnelement
+Total Amount,Top-Retourenartikel
+Total Change,Top-Verkäufe nach Kassierer
+Total Charges,Top-Lieferant
+Total In,Top-Lieferanten nach Ausgaben
+Total Invoices,Top-Tische
+Total Items,Top-Steuerchef
+Total Mpesa,Aufladebetrag
+Total Out,Aufladekarte
+Total Payments,Auflademodus
+Total Purchase,Top-Variante
+Total Selected :,Insgesamt
+Total Size,Gesamtbetrag
+Total Stock Qty,Totale Veränderung
+Total:,Gesamtgebühren
+Totals by Invoice Currency,Gesamteingang
+Track how much cash was handed back to customers,Gesamtrechnungen
+"Track recent sales, collect unpaid balances, and reopen saved work",Gesamtzahl der Artikel
+Transaction ID,Gesamt-Mpesa
+Transfer,Total aus
+Try a different search term or clear the cart search.,Gesamtzahlungen
+Try adjusting your search or filters,Gesamtkauf
+Try another source or refresh the list.,Insgesamt ausgewählt:
+Try changing the date range or status filter.,Gesamtgröße
+Type,Gesamtbestandsmenge
+Unable to access camera even with basic settings. Please check your camera permissions and device compatibility.,Gesamt:
+Unable to add offer item {0}. Please refresh and try again.,Gesamtsummen nach Rechnungswährung
+Unable to add offer item. Please refresh and try again.,"Verfolgen Sie, wie viel Bargeld an Kunden zurückgegeben wurde"
+Unable to add scanned item.,"Verfolgen Sie aktuelle Verkäufe, sammeln Sie unbezahlte Beträge ein und öffnen Sie gespeicherte Arbeiten erneut"
+Unable to create purchase order,Transaktions-ID
+Unable to delete draft invoice,Übertragen
+Unable to fetch documents,Versuchen Sie es mit einem anderen Suchbegriff oder löschen Sie die Warenkorbsuche.
+Unable to fetch draft orders,"Versuchen Sie, Ihre Suche oder Filter anzupassen"
+Unable to fetch invoice history,Versuchen Sie es mit einer anderen Quelle oder aktualisieren Sie die Liste.
+Unable to fetch M-Pesa payments,"Versuchen Sie, den Datumsbereich oder den Statusfilter zu ändern."
+Unable to fetch sales orders,Typ
+Unable to fetch unpaid invoices,Trotz Grundeinstellungen ist kein Zugriff auf die Kamera möglich.
+Unable to generate scale barcode,Bitte überprüfen Sie Ihre Kameraberechtigungen und Gerätekompatibilität.
+Unable to issue gift card.,Angebotsartikel {0} konnte nicht hinzugefügt werden.
+Unable to load cashier PIN status.,Bitte aktualisieren Sie und versuchen Sie es erneut.
+Unable to load document,Angebotsartikel konnte nicht hinzugefügt werden.
+Unable to load draft invoice,Bitte aktualisieren Sie und versuchen Sie es erneut.
+Unable to load gift card balance.,Gescanntes Element konnte nicht hinzugefügt werden.
+Unable to load invoice details,Bestellung kann nicht erstellt werden
+Unable to load parked order,Der Rechnungsentwurf konnte nicht gelöscht werden
+Unable to load the selected sales order,Dokumente können nicht abgerufen werden
+Unable to prepare document,Bestellentwürfe können nicht abgerufen werden
+Unable to prepare return invoice,Der Rechnungsverlauf konnte nicht abgerufen werden
+Unable to print draft invoice,M-Pesa-Zahlungen können nicht abgerufen werden
+Unable to print submitted invoice,Kundenaufträge können nicht abgerufen werden
+Unable to process document action,Unbezahlte Rechnungen können nicht abgerufen werden
+Unable to repair change allocation,Waagen-Barcode kann nicht generiert werden
+Unable to save cashier PIN.,Geschenkkarte kann nicht ausgestellt werden.
+Unable to save the rate to the backend price list,Der Kassierer-PIN-Status konnte nicht geladen werden.
+Unable to submit invoice,Dokument kann nicht geladen werden
+Unable to submit the selected payment,Der Rechnungsentwurf konnte nicht geladen werden
+Unable to top up gift card.,Das Guthaben der Geschenkkarte konnte nicht geladen werden.
+Unable to verify cashier PIN.,Rechnungsdetails können nicht geladen werden
+Unallocated,Die geparkte Bestellung konnte nicht geladen werden
+Unallocated:,Der ausgewählte Kundenauftrag konnte nicht geladen werden
+Unavailable,Dokument kann nicht vorbereitet werden
+Unknown,Rücksenderechnung kann nicht erstellt werden
+Unknown error,Rechnungsentwurf kann nicht gedruckt werden
+Unknown Item,Die eingereichte Rechnung kann nicht gedruckt werden
+Unknown Warehouse,Dokumentaktion kann nicht verarbeitet werden
+Unlock POS,Änderungszuordnung kann nicht repariert werden
+Unpaid,Kassierer-PIN konnte nicht gespeichert werden.
+"Unselected payments stay unallocated first, then auto reconcile after submit.",Der Preis kann nicht in der Backend-Preisliste gespeichert werden
+UOM,Rechnung kann nicht übermittelt werden
+UOM not found,Die ausgewählte Zahlung kann nicht übermittelt werden
+Update available,Geschenkkarte kann nicht aufgeladen werden.
+Update Customer,Die Kassierer-PIN konnte nicht bestätigt werden.
+Update PIN,Nicht zugeordnet
+Update Price List Rate,Nicht zugeordnet:
+Updated,Nicht verfügbar
+Updates and app info that stay out of the cashier flow.,Unbekannt
+Updates automatically,Unbekannter Fehler
+Upload pending transactions,Unbekannter Artikel
+Usage,Unbekanntes Lager
+Usage Stats,POS entsperren
+Use a 4 to 8 digit PIN for cashier switching and terminal unlock.,Unbezahlt
+Use Cashier,Nicht ausgewählte Zahlungen bleiben zunächst unzugeordnet und werden nach der Übermittlung automatisch abgeglichen.
+Use date range to search for older invoices,UOM
+"Use one field for manual code entry, barcode scans, or QR scans.",Maßeinheit nicht gefunden
+"Use one workflow for balance checks, new issuance, and top ups without leaving POS.",Update verfügbar
+"Use this section when cached prerequisite data needs a refresh, rebuild, or diagnostics review.",Kunde aktualisieren
+Use Western numerals,PIN aktualisieren
+Used:,Preislistenpreis aktualisieren
+Using basic camera settings due to device limitations,Aktualisiert
+Using cached customer balance,"Updates und App-Informationen, die nicht in den Kassiererfluss gelangen."
+Valid until,Automatische Aktualisierung
+Variance %,Laden Sie ausstehende Transaktionen hoch
+Variants,Nutzung
+Variant-wise,Nutzungsstatistiken
+Verify closing amounts for each payment method,Verwenden Sie zum Wechseln der Kasse und zum Entsperren des Terminals eine 4- bis 8-stellige PIN.
+View all,Benutzen Sie die Kasse
+View app information and current build details,"Verwenden Sie den Datumsbereich, um nach älteren Rechnungen zu suchen"
+View Data Diagnostics,"Verwenden Sie ein Feld für die manuelle Codeeingabe, Barcode-Scans oder QR-Scans."
+View Details,"Nutzen Sie einen einzigen Workflow für Kontostandsprüfungen, Neuausgaben und Aufladungen, ohne den POS zu verlassen."
+View invoice details,"Verwenden Sie diesen Abschnitt, wenn zwischengespeicherte Voraussetzungsdaten aktualisiert, neu erstellt oder einer Diagnoseüberprüfung unterzogen werden müssen."
+View notifications,Verwenden Sie westliche Ziffern
+View offline invoices,Verwendet:
+View restricted POS insights,Aufgrund von Geräteeinschränkungen werden grundlegende Kameraeinstellungen verwendet
+Void Amount,Verwendung des zwischengespeicherten Kundenguthabens
+Void Count,Gültig bis
+Voids,Abweichung %
+Waiting for cart items,Varianten
+Waiting for payment...,Variantenmäßig
+Walk-in Customer,Überprüfen Sie die Abschlussbeträge für jede Zahlungsmethode
+Warehouse,Alle anzeigen
+Warning: High cache usage may affect performance.,App-Informationen und aktuelle Build-Details anzeigen
+Warning: High lag may indicate heavy processing or browser slowness.,Datendiagnose anzeigen
+Week Δ,Details anzeigen
+Week-wise,Rechnungsdetails anzeigen
+Weight (g),Benachrichtigungen anzeigen
+Weight (grams),Offline-Rechnungen anzeigen
+We'll let you know if an invoice fails to submit,Sehen Sie sich eingeschränkte POS-Einblicke an
+Workflow,Ungültiger Betrag
+Write off amount cannot exceed the POS profile maximum of {0},Leerenanzahl
+Write off amount exceeds the allowed limit ({0}). Please add payment for the remaining amount.,Leere
+Yes,Warten auf Artikel im Warenkorb
+"Yes, Cancel sale",Warten auf Zahlung...
+"Yes, Close",Laufkundschaft
+You are not allowed to print draft invoices,Lager
+You are offline. Add Payment will work again when the connection is restored.,Warnung: Eine hohe Cache-Nutzung kann die Leistung beeinträchtigen.
+You have no notifications right now,Warnung: Eine hohe Verzögerung kann auf eine starke Verarbeitung oder einen langsamen Browser hinweisen.
+Your Cart,Woche Δ

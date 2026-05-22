@@ -1,0 +1,1353 @@
+﻿- Total Unallocated,- Total Unallocated
+* Required,* Kötelező
+{0} (Qty: {1}),{0} (mennyiség: {1})
+{0} actions,{0} művelet
+{0} has only {1} in stock. You requested {2}. Adjust quantity or restock.,A(z) {0} terméknél csak {1} van raktáron.
+{0} offline invoice{1} pending,Ön ezt kérte: {2}.
+{0} offline invoice{1} saved as draft,Állítsa be a mennyiséget vagy töltse fel a készletet.
+{0} offline invoice{1} synced,{0} offline számla{1} függőben
+{0}: {1} {2},{0} offline számla{1} vázlatként mentve
+{0}d ago,{0} offline számla{1} szinkronizálva
+{0}h ago,{0}: {1} {2}
+{0}m ago,{0} napja
+A POS supervisor is required for this action.,{0} órája
+About,{0} perce
+Access,Ehhez a művelethez POS-felügyelő szükséges.
+Account,Körülbelül
+Account is overdrawn,Hozzáférés
+Acknowledge the error to resume scanning,fiók
+Acknowledge the error to resume scanning.,A számla túlterhelt
+Across,A vizsgálat folytatásához nyugtázza a hibát
+Action,A vizsgálat folytatásához nyugtázza a hibát.
+Actions,Keresztül
+Active sale,Akció
+add,Akciók
+Add items from the selector to start building this sale.,Aktív értékesítés
+Add more value to an existing gift card,add hozzá
+Add New Address,"Adjon hozzá elemeket a választóból, hogy elkezdhesse ezt az akciót."
+Add new customer,Adjon hozzá több értéket egy meglévő ajándékutalványhoz
+Add on New Line,Új cím hozzáadása
+Add Payment,Új ügyfél hozzáadása
+Add payment to invoice,Új sor hozzáadása
+Add/Edit Coupon Conditions,Fizetés hozzáadása
+Additional Discount,Fizetés hozzáadása a számlához
+Additional Discount %,Kuponfeltételek hozzáadása/szerkesztése
+Address Line 1,További kedvezmény
+Address not found,További kedvezmény %
+Adjust the quantity or enable negative stock to continue.,Cím 1. sora
+Adjustment,A cím nem található
+After returns,"Módosítsa a mennyiséget, vagy engedélyezze a negatív készlet folytatását."
+Against,Beállítás
+Against Name,Visszatérés után
+Age Bracket,Ellen
+All,Név ellen
+All Caught Up!,Korhatár
+All invoices are synchronized,Mind
+All pending invoices are up to date,Minden felkapott!
+All Profiles,Minden számla szinkronizálva van
+All Synchronized,Minden függőben lévő számla naprakész
+All visible invoices are fully settled.,Minden profil
+All Warehouses,Minden szinkronizált
+Allowed UOM is {0},Minden látható számla teljesen kiegyenlített.
+Always fetch items from server (ignore local cache),Minden raktár
+Amount,Az engedélyezett UOM: {0}
+Amount already received,Mindig töltsön le elemeket a szerverről (a helyi gyorsítótár figyelmen kívül hagyása)
+Amount exceeds profile cash movement max amount.,Összeg
+Amount must be greater than zero.,Már beérkezett összeg
+Amount received from customer,Az összeg meghaladja a profil készpénzmozgásának maximális összegét.
+App information,Az összegnek nagyobbnak kell lennie nullánál.
+Appearance and user-level preferences for the current session.,Az ügyféltől kapott összeg
+Applied,Alkalmazásinformációk
+Apply,Megjelenés és felhasználói szintű beállítások az aktuális munkamenethez.
+Apply Gift Card,Alkalmazva
+Apply Offer,Alkalmazni
+Apply On,Ajándékkártya alkalmazása
+Apply only the amount you want to redeem on this invoice. The remaining balance stays on the card.,Ajánlat alkalmazása
+Apply Redemption,Alkalmazás bekapcsolva
+Applying,Csak a beváltani kívánt összeget alkalmazza erre a számlára.
+Apps,A fennmaradó egyenleg a kártyán marad.
+Are you sure you want to close? All entered data will be lost.,Alkalmazza a Megváltást
+Attributes (Size/Color),Jelentkezés
+Auto Allocate Payment Amount,Alkalmazások elemre
+Auto Reconcile,Biztosan bezárja?
+Auto reconciliation completed after payment submit.,Minden megadott adat elvész.
+Auto reconciliation completed. Allocated: {0}{1}. Remaining outstanding: {0}{2}.,Tulajdonságok (méret/szín)
+Available Actions,Fizetési összeg automatikus kiosztása
+Available QTY,Automatikus egyeztetés
+Available:,Az automatikus egyeztetés a fizetés elküldése után befejeződött.
+Average Basket,Az automatikus egyeztetés befejeződött.
+Average Bill,Kiosztva: {0}{1}.
+Average Ticket,Fennmaradó: {0}{2}.
+Avg Bill,Rendelkezésre álló műveletek
+Avg Invoice,Elérhető darabszám
+Avg Invoice Profit,Elérhető:
+Avg Invoice Value,Átlagos kosár
+Avg Purchase Frequency,Átlagos Bill
+Awesome,Átlagos jegy
+Awesome Dashboard,Átl. Bill
+Awesome Dashboard is disabled for the selected POS Profile.,Átl. számla
+Awesome Dashboard is unavailable for the selected scope.,Átl. számla nyereség
+Awesome Dashboard is visible only to POS supervisors.,Átl. számlaérték
+Back,Átl. vásárlási gyakoriság
+Back Office Cash Account,Félelmetes
+Back Office Cash Account (Optional Override),Félelmetes irányítópult
+Back office cash account is required.,Az Awesome Dashboard le van tiltva a kiválasztott POS-profilnál.
+Back to {0},Az Awesome Dashboard nem érhető el a kiválasztott hatókörhöz.
+Background processing did not finish in time.,Az Awesome Dashboard csak a POS-felügyelők számára látható.
+Background processing failed for Invoice {0}: {1},Vissza
+Background Submission Failed,Back Office készpénzszámla
+Background sync interval (seconds),Back Office készpénzszámla (opcionális felülírás)
+Balance,Back office készpénzszámla szükséges.
+Balance will be updated when connection is restored,Vissza ide: {0}
+Balances still pending,A háttérfeldolgozás nem fejeződött be időben.
+Barcode,A(z) {0} számla háttérfeldolgozása meghiúsult: {1}
+Barcode / QR Ready,A háttérbeküldés sikertelen
+Barcode Label Printing,Szinkronizálási időköz a háttérben (másodperc)
+Base Paid:,Egyenleg
+Base Recv:,Az egyenleg a kapcsolat helyreállásakor frissül
+Base:,Az egyenlegek még függőben vannak
+Basic Information,Vonalkód
+Batch,Vonalkód / QR kész
+Batch Information,Vonalkód címke nyomtatás
+Before any return workflow,Fizetett alap:
+Before returns,Alap fogadás:
+Best Day,Alap:
+Best Seller,Alapvető információk
+Book expense or deposit from active shift.,Batch
+Branch / Location-wise Report,Batch Information
+Brand-wise,Bármilyen visszatérési munkafolyamat előtt
+Breakdown,Visszatérés előtt
+Browse,Legjobb nap
+Build Time:,Legjobb eladó
+Built with Frappe,Könyvköltség vagy letét az aktív műszakból.
+Bundle,Elágazás / Helyszín szerinti jelentés
+Buying Price,Márka szerint
+Cache cleared successfully,Lebontás
+Cache Usage,Tallózás
+cache used,Építési idő:
+Calculating...,Frappéval épült
+Camera Access Required,Csomag
+Camera access was aborted. Please try again.,Vásárlási ár
+Camera constraints not supported by your device. Trying fallback settings...,A gyorsítótár sikeresen törölve
+Camera is busy or blocked by another app/tab. Close other camera apps and try again.,Gyorsítótár használata
+Camera permission denied. Please allow camera access in your browser settings and refresh the page.,gyorsítótár használt
+Camera scanner is locked until the current error is acknowledged,Számítás...
+Camera started but the video stream did not load in time. Please try again.,Kamera hozzáférés szükséges
+Cancel,A kamera hozzáférése megszakadt.
+Cancel cash movement {0}?,"Kérjük, próbálja újra."
+Cancel Payment,Az eszköz nem támogatja a kamera korlátozásait.
+Cancel Sale,Tartalék beállítások kipróbálása...
+Cancel Sale ?,"A kamera foglalt, vagy egy másik alkalmazás/lap blokkolja."
+Cancelled,"Zárja be a többi kameraalkalmazást, és próbálja újra."
+Cannot add an item with zero or negative quantity.,Kameraengedély megtagadva.
+Cannot clear cache while offline,"Kérjük, engedélyezze a kamera hozzáférését a böngésző beállításaiban, és frissítse az oldalt."
+Cannot redeem customer credit more than invoice total,A kamera lapolvasója az aktuális hiba nyugtázásáig zárolva van
+Cannot redeem gift cards more than invoice total,"A kamera elindult, de a videofolyam nem töltődött be időben."
+Cannot Save Offline Invoice:,"Kérjük, próbálja újra."
+Cannot Save Offline Payment:,Mégsem
+Card,Törli a készpénzmozgást {0}?
+Card / Online,Fizetés törlése
+Card health after the last live lookup,Eladás törlése
+Cards,Mégse az értékesítést?
+Cart,Törölve
+Cash,Nem lehet nulla vagy negatív mennyiséget tartalmazó tételt hozzáadni.
+Cash back to customers,Offline állapotban nem lehet törölni a gyorsítótárat
+Cash Collections,"Nem váltható be több ügyfél jóváírása, mint a számla végösszege"
+Cash Deposit is disabled for this POS Profile.,A számla végösszegénél több ajándékutalványt nem lehet beváltani
+Cash Drawer Snapshot,Az offline számla nem menthető:
+Cash In Hand,Nem lehet menteni az offline fizetést:
+Cash Movement,kártya
+Cash movement cancelled,Kártya / Online
+Cash movement deduction applied,A kártya állapota az utolsó élő keresés után
+Cash movement deleted,Kártyák
+Cash movement is disabled for this POS Profile.,Kosár
+Cash Movement is disabled in current POS Profile.,Készpénz
+Cash movement saved offline,Pénzvisszafizetés az ügyfeleknek
+Cash movement submitted,Készpénzes beszedések
+Cash Movements,A készpénzes befizetés le van tiltva ennél a POS-profilnál.
+Cash payment cannot be less than invoice total when partial payment is not allowed,Pénztáros pillanatkép
+Cash returned after payment,Készpénz a Kézben
+Cashier,Pénzmozgás
+Cashier Access,Pénzmozgás törölve
+Cashier identity and appearance preferences.,Pénzmozgási levonás alkalmazott
+Cashier PIN,Pénzmozgás törölve
+Cashier PIN saved successfully.,A készpénzmozgás le van tiltva ennél a POS-profilnál.
+Cashiers,A készpénzmozgás le van tiltva a jelenlegi POS-profilban.
+Cashier-wise,A készpénzmozgás offline módban mentve
+Categories,Pénzmozgás benyújtva
+Category,Készpénzmozgások
+Category / Brand / Variant Report,"A készpénzes fizetés nem lehet kevesebb a számla végösszegénél, ha a részleges fizetés nem megengedett"
+Category-wise,Fizetés után készpénz visszakerült
+Category-wise Margin,Pénztáros
+Certificate,Pénztáros hozzáférés
+Certificate is missing or not trusted. QZ may show confirmation dialogs.,A pénztáros személyazonossága és megjelenési preferenciái.
+Certificate is trusted. Silent QZ printing is active.,Pénztári PIN-kód
+Change,A pénztáros PIN-kód sikeresen elmentve.
+Change allocation repaired,Pénztárosok
+Change interface language,Pénztári szempontból
+Change Language,Kategóriák
+Change Price,Kategória
+Change Return,Kategória / Márka / Változat jelentés
+Change Returned,Kategória szerint
+Change terminal cashier,Kategória szerinti árrés
+Charge Heads,Tanúsítvány
+Charges,A tanúsítvány hiányzik vagy nem megbízható.
+Charges not found,A QZ megerősítő párbeszédpaneleket jeleníthet meg.
+Check Balance,A tanúsítvány megbízható.
+Check balance for any card. Supervisors can issue and top up cards here.,A csendes QZ nyomtatás aktív.
+Check balance only,Változás
+Check for new commits,Változáskiosztás javítva
+Check for Updates,Az interfész nyelvének módosítása
+Check live balance before applying redemption,Nyelv módosítása
+Check live balance before redemption,Ár módosítása
+Checking...,Visszatérés módosítása
+Cheque/Reference Date,Változás visszatért
+Cheque/Reference No,Cserélje ki a terminál pénztárát
+Choose the cashier currently operating this terminal.,Töltőfejek
+Choose your preferred language for the POS interface,Díjak
+City,Díjak nem találhatók
+Clear,Ellenőrizze az egyenleget
+Clear All,Ellenőrizze bármely kártya egyenlegét.
+Clear all barcode items,A felügyelők itt adhatnak ki és tölthetnek fel kártyákat.
+Clear all purchase order items,Csak egyenleget ellenőrizze
+Clear Cache,Ellenőrizze az új commitokat
+Clear Search,Ellenőrizze a frissítéseket
+Clearing local cache...,A beváltás alkalmazása előtt ellenőrizze az élő egyenleget
+Click to refresh,A beváltás előtt ellenőrizze az élő egyenleget
+Client CPU Lag:,Ellenőrzés...
+Client Memory Usage:,Csekk/Referencia dátuma
+Client Metrics,Csekk/hivatkozási szám
+Close,Válassza ki a terminált jelenleg üzemeltető pénztárost.
+Close about dialog,Válassza ki a POS felület kívánt nyelvét
+Close cashier switcher,Város
+Close closing shift dialog,Világos
+Close column selector,Összes törlése
+Close Dialog,Törölje az összes vonalkód elemet
+Close drafts dialog,Törölje az összes beszerzési rendelési tételt
+Close invoice details dialog,Törölje a gyorsítótárat
+Close invoice management,Keresés törlése
+Close offline invoices dialog,Helyi gyorsítótár törlése...
+Close packing list dialog,Kattintson a frissítéshez
+Close returns dialog,Kliens CPU késés:
+Close sales orders dialog,Kliens memóriahasználat:
+Close Scanner,Ügyfélmutatók
+Close scanner dialog,Bezárás
+Close Settings,A párbeszédpanel bezárása
+Close Shift,Zárja be a pénztáros váltót
+Closing Amount,A shift párbeszédpanel bezárása
+Closing POS Shift,Oszlopválasztó bezárása
+Closing Snapshot Available,Párbeszéd bezárása
+Code,A piszkozatok párbeszédpanel bezárása
+Code scanned successfully,A számla részletei párbeszédpanel bezárása
+COGS,Számlakezelés bezárása
+Collapse item details,Az offline számlák párbeszédpanelének bezárása
+Collected,Csomagolási lista párbeszédpanel bezárása
+Cols,A visszatérési párbeszédpanel bezárása
+Columns,Az értékesítési rendelések párbeszédpanel bezárása
+commits,Zárja be a szkennert
+Completed and active sales in this range,Szkenner párbeszédpanel bezárása
+Completed returns will appear here.,Zárja be a Beállításokat
+Confirm,A Shift bezárása
+Confirm Close,Záró összeg
+Confirm Mobile Number,A POS Shift bezárása
+Confirm PIN,Elérhető a záró pillanatfelvétel
+Connect,kód
+Connect printer and manage certificate,A kód beolvasása sikeresen megtörtént
+Connecting to QZ Tray...,COGS
+Connection problem while submitting invoice,Az elem részleteinek összecsukása
+Connections:,Összegyűjtött
+Connectivity and cached prerequisite status were rechecked.,Cols
+Continue Editing,Oszlopok
+Could not fetch latest balance from server,vállalja
+Count,Befejezett és aktív értékesítések ebben a tartományban
+Country,Itt jelennek meg a befejezett visszaküldések.
+Coupon,Erősítse meg
+Coupons,Erősítse meg a Bezárást
+Cover,Erősítse meg a mobilszámot
+CPU Cores:,Erősítse meg a PIN kódot
+Create,Csatlakozás
+Create and load a new prepaid card,Csatlakoztassa a nyomtatót és kezelje a tanúsítványt
+Create and preload a new gift card,Csatlakozás a QZ tálcához...
+Create Bill,Kapcsolódási probléma a számla benyújtása közben
+Create Customer,Csatlakozások:
+Create New Item,A kapcsolat és a gyorsítótárazott előfeltétel állapota újraellenőrzésre került.
+Create or change your PIN,Szerkesztés folytatása
+Create PIN,Nem sikerült lekérni a legújabb egyenleget a szerverről
+Create POS Opening Shift,Gróf
+Create Purchase Order,Ország
+Create Return,Kupon
+Create return from invoice,Kuponok
+Create Supplier,Borító
+Credit and Output,CPU magok:
+Credit Note,Létrehozása
+Credit Outstanding,Hozzon létre és töltsön be egy új feltöltőkártyát
+Credit sales remaining to be collected,Hozzon létre és töltsön be előre egy új ajándékutalványt
+Critical,Bill létrehozása
+Currency,Ügyfél létrehozása
+Current,Új elem létrehozása
+Current Event Loop Lag:,PIN-kód létrehozása vagy módosítása
+Current Month,PIN-kód létrehozása
+Current PIN,POS nyitó eltolás létrehozása
+Current Profile,Megrendelés létrehozása
+Current redeemable value on the gift card,Return létrehozása
+Current User,Hozzon létre visszatérítést a számláról
+Custom,Szállító létrehozása
+Custom Due Days,Hitel és kimenet
+Custom items per page,Hiteljegy
+Customer,Kiemelkedő hitel
+Customer already selected,A hiteleladások beszedése hátravan
+Customer Balance,Kritikus
+Customer balance unavailable offline,Pénznem
+Customer created successfully.,Aktuális
+Customer creation failed.,Aktuális eseményhurok késés:
+Customer Details,Aktuális hónap
+Customer display channel is missing,Jelenlegi PIN-kód
+Customer display was blocked. Please allow pop-ups for this site.,Jelenlegi profil
+Customer group is required,Az ajándékutalványon szereplő aktuális beváltható érték
+Customer is required to add payment,Jelenlegi felhasználó
+Customer Name is required,Egyedi
+Customer not selected,Egyedi esedékességi napok
+Customer Report,Egyedi tételek oldalanként
+Customer saved offline,Ügyfél
+Customer Screen,Az ügyfél már kiválasztott
+Customer territory is required,Ügyfélegyenleg
+Customer updated successfully.,Az ügyfélegyenleg nem érhető el offline módban
+Customer-facing tools and printer setup.,Az ügyfél sikeresen létrehozta.
+Customers,Az ügyfél létrehozása nem sikerült.
+Customers not found,Ügyfél adatai
+Daily cashier actions without scrolling.,Az ügyfél megjelenítési csatornája hiányzik
+Daily Sales,Az ügyfél megjelenítése blokkolva volt.
+Daily Sales Summary,"Kérjük, engedélyezze az előugró ablakokat ezen a webhelyen."
+Dark Mode,Ügyfélcsoport szükséges
+Data loaded in form. Review and submit.,Az ügyfél köteles hozzáadni a fizetést
+Database Health,Az Ügyfél neve kötelező
+Database health affects overall system speed and reliability.,Az ügyfél nincs kiválasztva
+Database Info,Ügyféljelentés
+Date,Az ügyfél offline állapotban mentve
+Day Δ,Ügyfél képernyő
+days,Az ügyfél területe kötelező
+Day-wise (MTD),Az ügyfél sikeresen frissítette.
+Day-wise Movement,Ügyfélközpontú eszközök és nyomtatóbeállítás.
+Dead Stock,Ügyfelek
+Dead Stock Items,Az ügyfelek nem találhatók
+Decrease quantity,Napi pénztáros műveletek görgetés nélkül.
+Default,Napi értékesítés
+Default:,Napi értékesítési összefoglaló
+Delete,Sötét mód
+Delete cancelled cash movement {0}?,Adatok betöltve űrlapba.
+Delete Draft,Tekintse át és küldje be.
+Delete draft invoice,Adatbázis állapota
+Delete draft invoice {0}?,Az adatbázis állapota befolyásolja a rendszer általános sebességét és megbízhatóságát.
+Delete Invoice,Adatbázis Info
+Delete offline invoice,Dátum
+Delivered,Δ nap
+Delivery Charges,napokon
+Delivery Information,Nappali (MTD)
+Delivery Note {0} created,Napi bölcs mozgalom
+Delivery note created,Dead Stock
+Deployed Bundle:,Halott készletek
+Deposit,Csökkentse a mennyiséget
+Description,Alapértelmezett
+Detailed Supplier Breakdown,Alapértelmezett:
+Detecting formats:,Törölje
+Device Memory:,Törli a törölt készpénzmozgást ({0})?
+Difference,Piszkozat törlése
+Difference (In Company Currency),Számlavázlat törlése
+Disable offline mode first to recheck live connectivity.,Törli a(z) {0} számlavázlatot?
+Disconnect,Számla törlése
+discount,Offline számla törlése
+Discount %,Szállítva
+Discount / Void / Return Report,Szállítási díjak
+Discount Amount,Szállítási információk
+Discount limited by POS Profile,Szállítólevél {0} létrehozva
+Discounted Invoices,Szállítólevél létrehozva
+Discounts,Telepített csomag:
+Dismiss,letét
+Download Certificate,Leírás
+Draft,Részletes beszállítói bontás
+Draft invoice deleted,Formátumok észlelése:
+Draft source,Készülékmemória:
+Drafts,Különbség
+Due {0},Különbség (a vállalat pénznemében)
+Due Date,"Először kapcsolja ki az offline módot, hogy újra ellenőrizze az élő kapcsolatot."
+Duplicate,Leválasztás
+Edit customer,kedvezmény
+Edit discount amount,Kedvezmény %
+Edit discount percentage,Kedvezmény / Érvénytelen / Visszaküldési jelentés
+Edit Gift Application,Kedvezmény összege
+Edit item name,A kedvezményt a POS profil korlátozza
+Edit quantity,Kedvezményes számlák
+Edit rate,Kedvezmények
+Edit unit of measure,Elvetés
+Edited,Tanúsítvány letöltése
+Employee,Piszkozat
+Enable background sync,Számlavázlat törölve
+Enable Customer Display in POS Profile first.,Piszkozat forrás
+End current session,Piszkozatok
+Enter a PIN.,esedékesség: {0}
+Enter a valid grams value,Esedékesség
+Enter new price list rate,Megkettőzés
+Enter Quantity,Ügyfél szerkesztése
+Enter the cashier PIN to continue.,Szerkessze a kedvezmény összegét
+Enter the current PIN first.,Szerkessze a kedvezmény százalékát
+"Enter the current PIN, then choose a new one.",Ajándékkérelem szerkesztése
+Enter valid grams for scale barcode,Szerkessze az elem nevét
+Entries,Mennyiség szerkesztése
+Error accessing camera:,Arány szerkesztése
+Error calculating prices,Mértékegység szerkesztése
+Error fetching customer balance,Szerkesztette
+Error in change calculations!,Alkalmazott
+Error Loading Data,Háttér szinkronizálás engedélyezése
+Error loading invoice details,Először engedélyezze az Ügyfél megjelenítését a POS-profilban.
+Error processing invoice,Az aktuális munkamenet befejezése
+Error processing payment,Adjon meg egy PIN-kódot.
+Error searching invoices,Adjon meg egy érvényes gramm értéket
+Error submitting invoice:,Adja meg az új árlista árat
+Error submitting invoice: {0},Adja meg a Mennyiséget
+Error submitting invoice: No response from server,A folytatáshoz írja be a pénztáros PIN kódját.
+Error updating currency,Először írja be az aktuális PIN-kódot.
+Error updating item details,"Írja be a jelenlegi PIN-kódot, majd válasszon egy újat."
+Est. Purchase,Adjon meg érvényes grammokat a mérleg vonalkódjához
+Est. Value,Bejegyzések
+Event-loop lag measures how busy your browser is. Lower is better.,Hiba a kamera elérésekor:
+Every,Hiba az árak kiszámításakor
+Exchange Rate,Hiba történt az ügyfélegyenleg lekérésekor
+Expand item details,Hiba a változás számításánál!
+Expected Amount (In Company Currency),Hiba az adatok betöltésekor
+Expected Cash,Hiba a számla részleteinek betöltésekor
+Expected cash on hand grouped by currency,Hiba a számla feldolgozása során
+Expected vs Actual,Hiba a fizetés feldolgozása során
+Expense,Hiba a számlák keresése során
+Expense Account (Optional Override),Hiba a számla benyújtásakor:
+Expense account is required.,Hiba a számla elküldésekor: {0}
+Expenses and deposits posted during this shift,Hiba a számla elküldésekor: Nincs válasz a szervertől
+Expired,Hiba történt a pénznem frissítésekor
+Failed to auto reconcile payments.,Hiba történt az elem részleteinek frissítésekor
+Failed to cancel cash movement,Becs.
+Failed to clear cache,Vásárlás
+Failed to create item,Becs.
+Failed to create supplier,Érték
+Failed to delete cash movement,"Az eseményhurok késleltetése azt méri, hogy mennyire elfoglalt a böngészője."
+Failed to generate scale barcode. Using item barcode only.,Az alacsonyabb jobb.
+Failed to load cash movement context.,Minden
+Failed to load dashboard data.,Árfolyam
+Failed to reload invoice from server,A tétel részleteinek kibontása
+Failed to submit cash movement,Várható összeg (a vállalat pénznemében)
+Failed to sync offline cash movements,Várható készpénz
+Fast cashier actions for active shifts.,Várható készpénz devizanemenként csoportosítva
+Fast Moving Items,Várható vs
+Fees,Költség
+Fetch the latest offline prerequisite updates,Költségszámla (opcionális felülírás)
+Find a sales order quickly and load it into the current sale.,Költségszámla szükséges.
+Fixing payment amounts for return invoice...,A műszak alatt könyvelt költségek és betétek
+Flash Off,Lejárt
+Flash On,Nem sikerült a kifizetések automatikus egyeztetése.
+"For 'Product Bundle' items, Warehouse, Serial No and Batch No will be considered from the 'Packing List' table. If Warehouse and Batch No are same for all packing items for any 'Product Bundle' item, those values can be entered in the main Item table; values will be copied to 'Packing List' table.",Nem sikerült törölni a készpénzmozgást
+Free,Nem sikerült törölni a gyorsítótárat
+Free Qty,Nem sikerült létrehozni az elemet
+Frequency,Nem sikerült létrehozni a szállítót
+from,Nem sikerült törölni a készpénzmozgást
+From Date,Nem sikerült létrehozni a méretarányos vonalkódot.
+Fulfillment Details,Csak tétel vonalkód használata.
+Full Name,Nem sikerült betölteni a készpénzmozgási kontextust.
+Gain,Nem sikerült betölteni az irányítópult adatait.
+Generate a fresh prepaid card and start it with an opening balance.,Nem sikerült újratölteni a számlát a szerverről
+Generate and install the certificate to allow fully silent printing without trust prompts.,Nem sikerült benyújtani a készpénzmozgást
+Generate Certificate,Nem sikerült szinkronizálni az offline készpénzmozgásokat
+Generated scale barcode: {0},Gyors pénztáros műveletek aktív műszakokhoz.
+Get Payments,Gyorsan mozgó elemek
+Gift Card,Díjak
+Gift card amount must be greater than zero.,Töltse le a legújabb offline előfeltétel-frissítéseket
+Gift Card Code,"Keressen gyorsan egy értékesítési rendelést, és töltse be az aktuális akcióba."
+Gift card code is required for redemption,Visszaküldési számla fizetési összegének rögzítése...
+Gift card code is required.,Vaku kikapcsolva
+Gift card issued successfully.,Vaku bekapcsolva
+Gift card loaded successfully.,"A „Termékcsomag” tételeknél a „Csomagolási lista” táblázatban a Raktár, a sorozatszám és a kötegszám kerül figyelembevételre."
+Gift Card Management,"Ha a Raktár és a Tételszám megegyezik bármely „Termékcsomag” tételnél az összes csomagolási cikknél, akkor ezek az értékek beírhatók a fő Cikktáblázatba;"
+Gift card payment,Az értékek a „Csomagolási lista” táblába másolódnak.
+Gift card redemption requires an online connection,Ingyenes
+Gift card topped up successfully.,Ingyenes mennyiség
+Gift Cards,Frekvencia
+Go Offline,től
+Go Online,Dátumtól
+Go to Frappe Desk,Teljesítés részletei
+Grand Total,Teljes név
+Gross Margin,Nyereség
+Gross Profit,"Hozzon létre egy új feltöltőkártyát, és indítsa el nyitóegyenleggel."
+Gross Sales,A tanúsítvány létrehozása és telepítése teljesen csendes nyomtatást tesz lehetővé bizalmi kérdések nélkül.
+Group not found,Tanúsítvány létrehozása
+"Grouped controls for terminal, UI, and session settings.",Létrehozott léptékű vonalkód: {0}
+Grouped totals for each payment method and currency,Fizetések beszerzése
+Hide,Ajándékkártya
+Hide Gift Card,Az ajándékutalvány összegének nullánál nagyobbnak kell lennie.
+Hide Non Essential Fields,Ajándékkártya kódja
+Hide quantity decimals,Az ajándékkártya kódja szükséges a beváltáshoz
+Hide search tools,Az ajándékkártya kód megadása kötelező.
+Hide zero rated items,Ajándékkártya sikeresen kiállítva.
+High,Az ajándékutalvány sikeresen betöltve.
+History,Ajándékkártya kezelése
+Hourly (Today),Ajándékkártyás fizetés
+How this section works,Az ajándékkártya beváltásához online kapcsolat szükséges
+"If stale data remains, open Settings > Offline & Sync and run Rebuild Offline Data again while online.",Az ajándékkártya sikeresen feltöltve.
+"If the warning persists, open Settings > Offline & Sync, then run Refresh Offline Data or Rebuild Offline Data.",Ajándékkártyák
+Import the certificate into QZ Tray and restart QZ Tray on each POS machine.,Lépjen offline módba
+In,Online
+In stock: {0},Menjen a Frappe Deskhez
+Include Batch / Serial,Grand Total
+Include Price,Bruttó árrés
+Increase quantity,Bruttó nyereség
+IndexedDB,Bruttó értékesítés
+Initial Amount,Csoport nem található
+Initialize your shift with opening balances,"Csoportosított vezérlők a terminál-, felhasználói felület- és munkamenet-beállításokhoz."
+Initializing application...,Alkalmazás inicializálása...
+"Inspect cache, sync, and prerequisite status","Vizsgálja meg a gyorsítótárat, a szinkronizálást és az előfeltétel állapotát"
+Installed Applications,Telepített alkalmazások
+Insufficient stock:\n{0},Nincs elegendő készlet:\n{0}
+Invalid rate,Érvénytelen árfolyam
+Inventory Status Report,Készlet állapotjelentés
+Invoice,Számla
+Invoice {0} is Submitted,A(z) {0} számla elküldve
+Invoice {0} processed successfully,A(z) {0} számla sikeresen feldolgozva
+Invoice {0} submission failed,A(z) {0} számla elküldése sikertelen
+Invoice {0} was already submitted,A(z) {0} számla már elküldve
+Invoice Adjustments,Számlakorrekciók
+Invoice Change,Számla módosítása
+Invoice Details,Számla részletei
+Invoice is still in draft after background submission.,A számla a háttérben történő benyújtást követően még tervezetben van.
+Invoice Items,Számla tételek
+Invoice Management,Számlakezelés
+Invoice Mgmt,Számla Mgmt
+Invoice saved offline,A számla offline módban mentve
+Invoice submission failed,A számla benyújtása nem sikerült
+Invoice Submitted,Számla benyújtva
+"Invoice value settled by loyalty points, not cash collection","A számla értékét hűségpontok rendezik, nem készpénzbeszedés"
+Invoices,Számlák
+Invoices already past due date,A számlák már lejártak
+Invoices saved as POS Invoices,POS számlaként mentett számlák
+Invoices still carrying balances,A számlák még mindig egyenleget tartalmaznak
+Issue Mode,Kiadási mód
+Issue New Card,Új kártya kiadása
+Issue Workflow,Probléma munkafolyamat
+"Issue, top up, and check","Kibocsátani, feltölteni és ellenőrizni"
+Item,Tétel
+Item / Product Sales Report,Tétel/termék értékesítési jelentés
+Item {0} added to invoice,A(z) {0} tétel hozzáadva a számlához
+Item '{0}' has no barcode,"A(z) ""{0}"" elemnek nincs vonalkódja"
+Item Code,Tételkód
+Item created successfully,Az elem sikeresen létrehozva
+Item is out of stock,A termék elfogyott
+Item Name,Elem neve
+Item not found,Az elem nem található
+Item order updated,A cikkrendelés frissítve
+Item Selector Settings,Elemválasztó beállításai
+Items,Tételek
+Items added in POS will appear here automatically.,A POS-hoz hozzáadott elemek automatikusan megjelennek itt.
+Items added to invoice,Tételek hozzáadva a számlához
+Items per page,Elemek oldalanként
+Items Sold,Eladott tételek
+Items/Invoice,Tételek/Számla
+Item-wise Profitability,Tételenkénti jövedelmezőség
+Journal Entry,Naplóbejegyzés
+json,json
+Just now,Csak most
+Keep offline prerequisites healthy and recover stale data safely.,"Tartsa egészségesen az offline előfeltételeket, és állítsa vissza biztonságosan az elavult adatokat."
+Labels,Címkék
+Language,Nyelv
+Language will be changed to,A nyelv erre módosul
+"Language, theme, terminal tools, and session controls.","Nyelv, téma, termináleszközök és munkamenet-vezérlők."
+Last,Utolsó
+Last 14 Days (Paid vs Pending),Az elmúlt 14 nap (fizetett vs függőben lévő)
+Last 14 Days Activity,Az elmúlt 14 nap tevékenysége
+Last 14 Days Gross Profit,Az elmúlt 14 nap bruttó nyeresége
+Last 14 Days Purchases,Az elmúlt 14 nap vásárlásai
+Last 14 Days Tax/Charges,Utolsó 14 nap adója/költségei
+Last sync:,Utolsó szinkronizálás:
+Last sync: {0} | ok: {1} | failed: {2} | skipped: {3},Utolsó szinkronizálás: {0} |
+Latest entries for current shift,rendben: {1} |
+Lead Time,sikertelen: {2} |
+Light Mode,kihagyva: {3}
+Limited,Az aktuális műszak legújabb bejegyzései
+lines,Átfutási idő
+List,Fény mód
+Live Snapshot,Korlátozott
+Load a POS profile and cashier first.,vonalak
+Load More Invoices,Lista
+Load previously saved invoices,Élő pillanatfelvétel
+Load Sale,Először töltsön be egy POS-profilt és a pénztárost.
+Load Sales Invoice,További számlák betöltése
+Loading app data...,A korábban mentett számlák betöltése
+Loading customer database...,Load Eladó
+Loading customers...,Értékesítési számla betöltése
+Loading database stats...,Alkalmazásadatok betöltése...
+Loading details...,Ügyfél adatbázis betöltése...
+Loading invoice history...,Ügyfelek betöltése...
+Loading items...,Adatbázis-statisztikák betöltése...
+Loading product catalog...,Részletek betöltése...
+Loading return invoices...,Számlaelőzmények betöltése...
+Loading server CPU/memory usage...,Elemek betöltése...
+Loading suppliers...,Termékkatalógus betöltése...
+Loading unpaid invoices...,Visszaküldési számlák betöltése...
+Loading view...,Szerver CPU/memóriahasználatának betöltése...
+Loading...,Szállítók betöltése...
+Local storage is unavailable. Switching to online-only mode.,Kifizetetlen számlák betöltése...
+localStorage,Nézet betöltése...
+Location Performance,Betöltés...
+Locations,A helyi tárhely nem érhető el.
+Lock Screen,Váltás csak online módra.
+Logout,localStorage
+Lookup Workflow,Helyszín teljesítmény
+Loss,Helyszínek
+Low,Képernyőzár
+Low Stock,Kijelentkezés
+Low Stock Alerts,Keresési munkafolyamat
+Low Stock Items,Veszteség
+Low Stock Threshold,Alacsony
+Low Stock Total,Alacsony készlet
+Lowest Margin,Alacsony készlet figyelmeztetések
+Low-frequency maintenance and system details.,Alacsony készletű cikkek
+Loyalty Redeemed,Alacsony készletküszöb
+Loyalty Redemption,Alacsony készlet Összesen
+Make New Payment,Legalacsonyabb árrés
+Manage all,Alacsony frekvenciájú karbantartás és a rendszer részletei.
+Manage and synchronize your offline transactions,A hűség megváltva
+Manage Cashier PIN,Hűségmegváltás
+"Manage offline tools, terminal controls, and maintenance from one workspace.",Új befizetés
+manual,Az összes kezelése
+"Manual codes, barcode scans, and QR scans work in the same field",Kezelje és szinkronizálja offline tranzakcióit
+Manual offline mode is enabled,Pénztári PIN-kód kezelése
+Margin,"Egy munkaterületről kezelheti az offline eszközöket, terminálvezérlőket és karbantartást."
+Maximum available quantity is {0}. Quantity adjusted to match stock.,kézikönyvet
+Maximum discount amount for this offer item is {0}.,"A kézi kódok, a vonalkód-leolvasások és a QR-beolvasások ugyanazon a területen működnek"
+Maximum discount percentage for this offer item is {0}%.,A kézi offline mód engedélyezve van
+Maximum offer quantity is {0}. Quantity adjusted to allowed limit.,Margó
+Medium,A maximálisan elérhető mennyiség {0}.
+Menu,A mennyiség a készlethez igazítva.
+Method-wise Collections,A kedvezmény maximális összege ennél az ajánlattételnél {0}.
+Minimum allowed rate for this offer item is {0}.,A maximális kedvezmény százaléka ennél az ajánlattételnél {0}%.
+Minimum Qty,Az ajánlat maximális mennyisége {0}.
+Mobile No,A mennyiség a megengedett határértékhez igazítva.
+Mode,Közepes
+Mode of Payment,Menü
+Month,Módszertani gyűjtések
+Month Δ,Ennek az ajánlattételnek a minimális megengedett ára {0}.
+Monthly Profit,Minimális mennyiség
+Monthly Sales,Mobil sz
+Monthly Sales Summary,mód
+Month-wise,Fizetési mód
+Most Active Cashiers,hónap
+Movement Type,Hónap Δ
+Movements,Havi Profit
+Multi Currency,Havi értékesítés
+N/A,Havi értékesítési összefoglaló
+Name,Havi szinten
+Negative Stock,A legaktívabb pénztárosok
+Negative Stock Items,Mozgás típusa
+Negative values not allowed,Mozdulatok
+Net,Több valuta
+Net Qty,N/A
+Net Sales,Név
+Net Value,Negatív részvény
+Never,Negatív készletek
+New changes are ready to load,Negatív értékek nem megengedettek
+New Item,Net
+New Offer Available,Nettó menny
+New PIN,Nettó árbevétel
+New rate,Nettó érték
+Next unit of measure,Soha
+No attribute data found.,Az új módosítások készen állnak a betöltésre
+No Barcode,Új elem
+No barcode found for UOM '{0}',Új ajánlat elérhető
+No branch/location data found.,Új PIN kód
+No brand data found.,Új árfolyam
+No cached gift card balance is available offline.,Következő mértékegység
+No camera found on this device. Please ensure your device has a working camera.,Nem található attribútumadat.
+No capability warnings recorded yet.,Nincs vonalkód
+No cash expected for this shift.,Nem található vonalkód a következőhöz: „{0}”
+No cash mode configured,Nem található fiók/helyadat.
+No cash movement type is allowed for this POS Profile.,Nem található márkaadat.
+No cashier PIN is set yet. Create one now.,Az ajándékkártya tárolt egyenlege nem érhető el offline módban.
+No cashier profiles are available for this POS profile yet.,Nem található kamera ezen az eszközön.
+No cashier-wise discount/void/return activity.,"Győződjön meg arról, hogy a készülék rendelkezik működő kamerával."
+No category data found.,Még nem rögzítettek képességfigyelmeztetést.
+No category profitability data found.,Nem várható készpénz erre a műszakra.
+No change returned recorded for this shift.,Nincs konfigurálva készpénzes mód
+No change-allocation invoices match the current filters.,Ehhez a POS-profilhoz nem engedélyezett a készpénzmozgás típusa.
+No charge head breakdown found.,Még nincs beállítva a pénztáros PIN-kód.
+No Company Selected,Hozzon létre egyet most.
+No customer sales data found.,Ehhez a POS-profilhoz még nem érhetők el pénztáros profilok.
+No day-wise discount/void/return trend.,Nincs pénztáros engedmény/érvénytelen/visszaküldési tevékenység.
+No day-wise payment data found.,Nem található kategóriaadat.
+No day-wise profitability trend found.,Nem található kategória jövedelmezőségi adat.
+No day-wise purchase data found.,Ehhez a műszakhoz nem érkezett vissza változás.
+No day-wise sales trend found.,A jelenlegi szűrőknek egyetlen változás-felosztási számlá sem felel meg.
+No day-wise tax/charges trend found.,Nem található töltőfej bontás.
+No dead stock items.,Nincs kiválasztva vállalat
+No due date,Nem találhatók vásárlói értékesítési adatok.
+No exact repair match found for this invoice,Nincs napi engedmény/érvénytelen/visszatérési trend.
+No hourly sales trend found for today.,Nem találhatók napi fizetési adatok.
+No invoice activity found.,Nem találtunk napi szintű jövedelmezőségi trendet.
+No invoices found,Nem találhatók napi vásárlási adatok.
+No invoices found. Try different search criteria.,Nem található napi szintű értékesítési trend.
+No invoices recorded for this shift.,Nem található napi szintű adó/terhek trendje.
+No item profitability data found.,Nincsenek halott raktári tételek.
+No item sales data found for this period.,Nincs határidő
+No items found,Nem található pontos javítási egyezés ehhez a számlához
+No items in cart,Ma nem található óránkénti értékesítési trend.
+No items with barcodes to print,Nem található számlázási tevékenység.
+No location-wise top item data found.,Nem található számla
+No low stock alerts right now.,Nem található számla.
+No low stock items.,Próbáljon ki különböző keresési feltételeket.
+No matching items in cart,Ehhez a műszakhoz nem rögzítettek számlát.
+No month-wise sales trend found.,Nem található cikk jövedelmezőségi adata.
+No negative stock items.,Nem található cikkeladási adat erre az időszakra.
+No notifications yet,Nem található elemek
+No offline cash movement synced.,Nincsenek tételek a kosárban
+No offline invoices pending synchronization,Nincsenek nyomtatható tételek vonalkóddal
+No offline sync issues recorded yet.,Nem találhatók hely szerinti legfelső elemre vonatkozó adatok.
+No out-of-stock items.,Jelenleg nincs alacsony készletszintű riasztás.
+No outstanding credit invoices for this shift.,Nincsenek alacsony készletű termékek.
+No payment collection data found.,Nincsenek megfelelő termékek a kosárban
+No payment rows available on this invoice.,Nem található havi értékesítési trend.
+No payments registered for this shift.,Nincsenek negatív raktári tételek.
+No pending balances in this period.,Még nincsenek értesítések
+No pending offline invoices,Nincs offline készpénzmozgás szinkronizálva.
+No Print Formats Found,Nincsenek szinkronizálásra váró offline számlák
+No profiles found for selected scope. Falling back to current profile failed.,Még nem rögzítettek offline szinkronizálási problémákat.
+No recent customer activity found.,Nincsenek elfogyott termékek.
+No recent stock entries found.,Ehhez a műszakhoz nincs fennálló jóváírás.
+No records found,Nem található fizetési beszedési adat.
+No reorder suggestions right now.,Ezen a számlán nem állnak rendelkezésre fizetési sorok.
+No repeat customers in this period.,Ehhez a műszakhoz nem regisztráltak kifizetéseket.
+No response from server,Ebben az időszakban nincsenek függőben lévő egyenlegek.
+No return invoices found,Nincsenek függőben lévő offline számlák
+No return item trend found.,Nem található nyomtatási formátum
+No returnable items found for this invoice,Nem találhatók profilok a kiválasztott hatókörhöz.
+No returns were processed in this shift.,A jelenlegi profilhoz való visszatérés nem sikerült.
+No risk activity found.,Nem található legutóbbi ügyféltevékenység.
+No sales activity found for this period.,Nem található friss készletbejegyzés.
+No slow moving items.,Nem található rekord
+No staff sales activity found.,Jelenleg nincsenek átrendezési javaslatok.
+No stock movement for this period.,Ebben az időszakban nincs visszatérő vásárló.
+No submitted cash movements in this shift.,Nincs válasz a szervertől
+No supplier purchases found in this month.,Nem találhatók visszáru számlák
+No suppliers found for this period.,Nem található visszatérési tételtrend.
+No sync trigger has run yet in this session.,Ehhez a számlához nem található visszaküldhető tétel
+No tax head breakdown found.,Ebben a műszakban nem került sor visszaküldésre.
+No top items found for this location.,Nem található kockázati tevékenység.
+No unpaid invoices,Ebben az időszakban nem található értékesítési tevékenység.
+No variant data found.,Nincsenek lassan mozgó elemek.
+No week-wise sales trend found.,Nem található alkalmazotti értékesítési tevékenység.
+No.,Ebben az időszakban nincs készletmozgás.
+Nobile Number,Ebben a műszakban nincs benyújtott készpénzmozgás.
+Not available,Ebben a hónapban nem található beszállítói vásárlás.
+Not checked,Nem található beszállító erre az időszakra.
+Not selected,Ebben a munkamenetben még nem futott szinkronizálási trigger.
+Not Set,Nem található adószám szerinti bontás.
+Notifications,Nem találhatók legnépszerűbb tételek ehhez a helyhez.
+Offer,Nincsenek kifizetetlen számlák
+Offer Applied,Nem található változat adat.
+Offer criteria exceeded,Nem található heti szintű értékesítési trend.
+Offer Item,Nem.
+Offer item unavailable,Nobile szám
+Offer Removed,Nem elérhető
+Offer UOM cannot be changed,Nincs bejelölve
+Offer?,Nincs kiválasztva
+Offers,Nincs beállítva
+Offline,Értesítések
+Offline & Sync,Ajánlat
+Offline Capabilities,Az ajánlat érvényes
+Offline data status refreshed,Az ajánlat feltételei túllépve
+Offline diagnostics,Ajánlattétel
+Offline Invoices,Az ajánlattétel nem elérhető
+Offline invoices status,Ajánlat eltávolítva
+Offline invoices synced,Az ajánlat UOM nem módosítható
+Offline Queue: {0},Ajánlat?
+Offline rebuild guidance,Ajánlatok
+Offline restore is unavailable for this session.,Offline
+Offline selling is available with degraded capabilities.,Offline és szinkronizálás
+Offline snapshot does not match the current POS state.,Offline képességek
+Offline Status,Az offline adatok állapota frissítve
+"Offline, terminal, and system controls",Offline diagnosztika
+OK,Offline számlák
+Online,Offline számlák állapota
+Open actions menu,Offline számlák szinkronizálva
+Open balance to collect,Offline várólista: {0}
+Open Customer Display,Offline újraépítési útmutató
+Open drawer,Az offline visszaállítás nem érhető el ehhez a munkamenethez.
+Open invoices,Az offline értékesítés csökkent képességekkel is elérhető.
+Open Payments?,Az offline pillanatkép nem egyezik az aktuális POS állapottal.
+Open POS home,Offline állapot
+Open this screen from POS Menu -> Open Customer Display.,"Offline, terminál és rendszervezérlők"
+OpenCV image processing enabled - Enhanced barcode detection,OK
+OpenCV image processing unavailable on this device,Online
+OpenCV Off,A műveletek menü megnyitása
+OpenCV On,Nyitott egyenleg gyűjteni
+OpenCV processing disabled,Nyissa meg az Ügyfélkijelzőt
+Opening Amount,Nyissa ki a fiókot
+Opening Cash,Nyitott számlák
+options,Megnyitja a kifizetéseket?
+Order,Nyissa meg a POS kezdőlapját
+Original,Nyissa meg ezt a képernyőt a POS Menu -> Open Customer Display menüpontból.
+Other,OpenCV képfeldolgozás engedélyezve - Továbbfejlesztett vonalkód észlelés
+Out,Az OpenCV képfeldolgozás nem érhető el ezen az eszközön
+Out of Stock,OpenCV kikapcsolva
+Out of Stock Items,OpenCV bekapcsolva
+Outstanding,Az OpenCV feldolgozás letiltva
+Outstanding Credit by Currency,Nyitó összeg
+Overdue,Pénztár megnyitása
+Overpayment Change,opciók
+Overpayment change deducted: {0},Rendeljen
+Packing List,Eredeti
+Page Format,Egyéb
+Page unavailable offline,Ki
+Paid,Elfogyott
+Paid (orig):,Elfogyott tételek
+Paid Amount,Kiemelkedő
+Paid change cannot be greater than total change!,Kiemelkedő hitel devizanemenként
+Paid:,Lejárt
+Parent Item,Túlfizetés változása
+Partial,Túlfizetés levonása: {0}
+Partly Paid,Csomagolási lista
+Party Account,Oldalformátum
+Party Type,Az oldal offline állapotban nem érhető el
+Pause terminal until next cashier,Fizetett
+PAY,Fizetett (eredeti):
+Payment,Fizetett összeg
+Payment Account,"A fizetett változás nem lehet nagyobb, mint a teljes változás!"
+Payment entries processed for Invoice {0},Fizetett:
+Payment Entry Type,Szülőelem
+Payment History,Részleges
+Payment ID,Részben Fizetett
+Payment Method Report,Pártszámla
+Payment Methods,Párt típusa
+Payment of {0} received successfully.,A terminál szüneteltetése a következő pénztárosig
+Payment Progress,FIZET
+Payment Reconciliation,Fizetés
+Payment request status could not be retrieved. Please try again,Fizetési számla
+Payment Request took too long to respond. Please try requesting for payment again,Fizetési bejegyzések feldolgozva a(z) {0} számlához
+Payment saved offline,Fizetési bejegyzés típusa
+Payment State,Fizetési előzmények
+Payment Status,Fizetési azonosító
+Payment submitted but print function could not be executed. Payment name not found.,Fizetési mód jelentés
+Payment submitted.,Fizetési módok
+Payment Summary,{0} összegű befizetés sikeresen megérkezett.
+Payments,Fizetés folyamata
+Payments are not open. Do you want to open payments and submit?,Fizetési egyeztetés
+Payments by Mode of Payment,A fizetési kérelem állapotát nem sikerült lekérni.
+PDF,"Kérjük, próbálja újra"
+Peak Hour,A fizetési kérelem túl sokáig tartott a válaszadáshoz.
+Peak Memory:,"Kérjük, próbáljon újra fizetést kérni"
+Peak Server:,A fizetés offline módban mentve
+Peak:,Fizetési állapot
+Pending,Fizetési állapot
+Pending Amount,"A fizetés elküldve, de a nyomtatási funkció nem hajtható végre."
+Pending count updated from {0} to {1},A fizetés neve nem található.
+Pending Exposure,Fizetés benyújtva.
+Pending Invoices,Fizetési összefoglaló
+Pending Ratio,Kifizetések
+Pending Sales,A fizetések nem nyitottak.
+Pending sales: {0} | Cache usage: {1}%,Meg akarja nyitni és elküldeni a kifizetéseket?
+Pending Sync,Fizetés fizetési mód szerint
+Pending: {0},PDF
+Pending: {0} | Synced: {1} | Draft: {2},Csúcsóra
+Per Page,Csúcs memória:
+Personal,Peak szerver:
+Personal preferences adjust the current cashier experience without changing the active POS route.,Csúcs:
+PIN confirmation does not match.,Függőben
+PIN must be 4 to 8 digits.,Függőben lévő összeg
+Please add at least one item.,"A függőben lévő szám frissítve. Régi érték: {0}, új érték: {1}"
+Please allow camera access to scan codes,Függőben lévő megvilágítás
+Please enter payment amount,Függőben lévő számlák
+Please fill all required fields,Függő arány
+Please make a payment or select a payment,Függőben lévő értékesítések
+Please request phone payment or use another payment method,Függőben lévő értékesítések: {0} |
+Please select a customer first,Gyorsítótár használat: {1}%
+Please select a party,Függőben lévő szinkronizálás
+Please select a party before reconciling.,Függőben: {0}
+Please select a valid movement type.,Függőben: {0} |
+Please select an invoice,Szinkronizálva: {1} |
+Please select company before reconciling.,Piszkozat: {2}
+Please set the customer's mobile number,Oldalanként
+Please try again or enter the item manually.,Személyes
+Please verify the barcode or check the item's availability.,A személyes beállítások az aktív POS útvonal módosítása nélkül módosítják az aktuális pénztári élményt.
+Points,A PIN-kód megerősítése nem egyezik.
+Popup blocked. Please allow popups.,A PIN-kódnak 4-8 ​​számjegyből kell állnia.
+POS,"Kérjük, adjon hozzá legalább egy elemet."
+POS controls and maintenance,"Kérjük, engedélyezze a kamera hozzáférését a kódok beolvasásához"
+POS Expense is disabled for this POS Profile.,"Kérjük, adja meg a fizetés összegét"
+POS is running with limited offline prerequisites.,"Kérjük, töltse ki az összes kötelező mezőt"
+POS Profile,"Kérjük, fizessen be, vagy válasszon fizetést"
+Position the QR code or barcode within the scanning area,"Kérjen telefonos fizetést, vagy használjon másik fizetési módot"
+Posting,"Kérjük, először válasszon egy ügyfelet"
+Posting and Price List,"Kérjük, válasszon párt"
+Posting Date,"Kérjük, válasszon egy párt az egyeztetés előtt."
+Preparing background sync,"Kérjük, válasszon érvényes mozgástípust."
+"Press OK to continue offline with a warning, or Cancel to retry.","Kérjük, válasszon számlát"
+Previous unit of measure,"Kérjük, az egyeztetés előtt válassza ki a céget."
+Price List,"Kérjük, állítsa be az ügyfél mobilszámát"
+Price List Rate,"Kérjük, próbálja újra, vagy írja be kézzel az elemet."
+Price list rate updated locally only,"Kérjük, ellenőrizze a vonalkódot, vagy ellenőrizze a tétel elérhetőségét."
+Pricing & Discounts,Pontok
+Pricing Rule,Felugró ablak blokkolva.
+Print,"Kérjük, engedélyezze az előugró ablakokat."
+Print Draft,POS
+Print Format (Invoice),POS ellenőrzések és karbantartás
+Print Format (Order),A POS költség le van tiltva ennél a POS-profilnál.
+Print invoice,A POS korlátozott offline előfeltételekkel fut.
+Print Last Invoice,POS profil
+Print Purchase Invoice instead of PO,Helyezze el a QR-kódot vagy vonalkódot a szkennelési területen
+Printer,Feladás
+Processed returns impacting the shift totals,Feladás és árlista
+Processing Payment,Feladás dátuma
+Processing payment entries for Invoice {0},Háttérszinkronizálás előkészítése
+Profile,"Nyomja meg az OK gombot az offline folytatáshoz figyelmeztetéssel, vagy a Mégse gombot az újrapróbálkozáshoz."
+Profiles,Előző mértékegység
+Profit,Árlista
+Profit: Invoice Item Estimate,Árlista árfolyam
+Profit: Stock Ledger (COGS),Az árlista csak helyben frissítve
+Profitability Report,Árak és kedvezmények
+Prorated return discount,Árképzési szabály
+Purchase Amount,Nyomtatás
+Purchase Invoices,Piszkozat nyomtatása
+Purchase Order created,Nyomtatási formátum (számla)
+Qty,Nyomtatási formátum (megrendelés)
+Qualified,Számla nyomtatása
+Quantity,Nyomtassa ki az utolsó számlát
+Quantity exceeds available stock,Nyomtasson beszerzési számlát a megrendelés helyett
+Quick Actions,Nyomtató
+Quotation {0} is Submitted,A műszak végösszegét befolyásoló feldolgozott bevallások
+Quotation submitted,Fizetés feldolgozása
+QZ Tray connected.,Fizetési bejegyzések feldolgozása a(z) {0} számlához
+QZ Tray is manually disconnected. Press Connect to enable it again.,Profil
+QZ Tray is not connected.,Profilok
+QZ Tray Setup,Profit
+Rate,Nyereség: Számla tételbecslés
+Rate adjusted to maximum allowed discount,Profit: Tőzsdekönyv (COGS)
+Ready,Jövedelmezőségi jelentés
+Ready to resume,Arányos visszaküldési kedvezmény
+Ready!,Vásárlási összeg
+Real-time POS insights for retail operations.,Vásárlási számlák
+Rebuild Offline Data,Megrendelés létrehozva
+Receive,Menny
+Receive now,Képzett
+Received,Mennyiség
+Received:,A mennyiség meghaladja a rendelkezésre álló készletet
+Recent Movement Entries,Gyors műveletek
+Recent updates about your invoices,A(z) {0} árajánlat elküldve
+Recently Active Customers,Árajánlat benyújtva
+Rechecking connection,QZ Tálca csatlakoztatva.
+Reconcile payment methods and close shift,A QZ tálca manuálisan le van választva.
+Reconciling Payments,Nyomja meg a Csatlakozás gombot az újbóli engedélyezéséhez.
+"Reconnect and open this page once while online, then offline refreshes will be able to restore it.",A QZ tálca nincs csatlakoztatva.
+Reconnect online to refresh cached offline data from the server.,QZ tálca beállítása
+Recreate local offline prerequisites from scratch,Rate
+Recv:,Az ár a megengedett maximális engedményhez igazítva
+Redeem,Kész
+Redeem / Scan,Folytatásra készen
+Redeem Amount,Kész!
+Redeem Mode,Valós idejű POS betekintés a kiskereskedelmi műveletekhez.
+Redeemed Amount,Az offline adatok újraépítése
+Redeemed credit cannot be greater than its total.,Fogadás
+Redemption and Totals,Fogadja most
+Reference,Megérkezett
+Refresh,Megérkezett:
+Refresh Exchange Rate,Legutóbbi mozgalmi bejegyzések
+Refresh Offline Data,Legutóbbi frissítések a számlákkal kapcsolatban
+Refresh Printers,Nemrég aktív ügyfelek
+Refund,Csatlakozás újraellenőrzése
+Release Notes,A fizetési módok egyeztetése és a műszak bezárása
+Reload,Kifizetések egyeztetése
+Reload customers,"Csatlakozzon újra, és nyissa meg ezt az oldalt egyszer online állapotban, majd az offline frissítések visszaállíthatják."
+Reload Items,Csatlakozzon újra online a gyorsítótárazott offline adatok frissítéséhez a szerverről.
+Reload Now,Helyi offline előfeltételek létrehozása a semmiből
+Reload to apply the latest changes. Your current session will be refreshed.,Felvétel:
+Reload Workflow,Beváltani
+Remarks,Beváltás / beolvasás
+Remarks are required.,Beváltási összeg
+Remove,Beváltási mód
+Remove barcode item,Beváltott összeg
+Remove cached data and reload the POS app,"A beváltott jóváírás nem lehet nagyobb, mint a teljes összeg."
+Remove item,Megváltás és végösszeg
+Remove Offer,Hivatkozás
+Reorder / Purchase Suggestions,Frissítés
+Repair Candidate,Árfolyam frissítése
+Repair Change Allocation,Offline adatok frissítése
+Repair requires an online connection,Nyomtatók frissítése
+Repaired,Visszatérítés
+Repairing change allocation,Kiadási megjegyzések
+Repeat Customers,Újratöltés
+Repeat Rate,Újratölteni az ügyfeleket
+Reprint previous transaction,Tételek újratöltése
+Request,Újratöltés most
+Request ID: {0},Töltse be újra a legújabb módosítások alkalmazásához.
+Request Payment,Az aktuális munkamenet frissül.
+Requested route: {0},Munkafolyamat újratöltése
+Required columns cannot be hidden,Megjegyzések
+Reset,Megjegyzések szükségesek.
+Reset item name,Távolítsa el
+Reset to Default,Távolítsa el a vonalkód elemet
+Resource Health,"Távolítsa el a gyorsítótárazott adatokat, és töltse be újra a POS alkalmazást"
+Restricted,Elem eltávolítása
+Restricted operational controls for supervisors only.,Ajánlat eltávolítása
+Retry,Újrarendelési / vásárlási javaslatok
+Retry route,Javítási jelölt
+Return,Javítási változtatások kiosztása
+Return Amount,A javításhoz online kapcsolat szükséges
+Return Count,Javítva
+Return items must have negative quantities,Változáskiosztás javítása
+Return total must be negative,Ismételt ügyfelek
+Return Valid Until,Ismétlési arány
+Return window passed,Nyomtassa ki újra az előző tranzakciót
+Return without Invoice,Kérelem
+Returns,Visszatér
+Returns / Voids / Discounts,Visszaküldés / Érvényesség / Kedvezmények
+Returns by Currency,Visszaküldés pénznem szerint
+Revenue,Bevétel
+Review shift totals before submitting the closing entry,"Tekintse át a műszakösszegeket, mielőtt elküldi a záró bejegyzést"
+Round Off,Lekerekítés
+Rows,Sorok
+Rows:,Sorok:
+Rule,szabály
+Sale,Kiárusítás
+Sales,Értékesítés
+Sales Order {0} is Submitted,A(z) {0} értékesítési rendelés elküldve
+Sales Person and Print,Értékesítési személy és nyomtatás
+Sales Person not found,Az értékesítő nem található
+Sales processed,Értékesítés feldolgozva
+Sales Return,Értékesítési vissza
+Sales Trend Report,Értékesítési trend jelentés
+Save,Mentés
+Save & Clear,Mentés és törlés
+Save as POS Profile Default,Mentés POS-profil alapértelmezettként
+Save Settings,Beállítások mentése
+Save the selected printer as the POS Profile default so it shows automatically on this setup.,"Mentse a kiválasztott nyomtatót alapértelmezett POS-profilként, hogy az automatikusan megjelenjen ennél a beállításnál."
+Saved as draft because: {0},"Piszkozatként mentve, mert: {0}"
+Saving...,Mentés...
+Scale barcode detected. Quantity here is the number of labels to print.,Skála vonalkód észlelve.
+Scale barcode settings are not configured. Using item barcode only.,A mennyiség itt a nyomtatandó címkék számát jelenti.
+Scale template barcode is missing for this item/UOM. Using item barcode only.,A skála vonalkód beállításai nincsenek konfigurálva.
+Scan an existing card and top it up without leaving the payment flow.,Csak tétel vonalkód használata.
+Scan Error,Hiányzik a léptéksablon vonalkódja ehhez az elemhez/uom-hoz.
+Scan or enter a gift card code to check balance or redeem.,Csak tétel vonalkód használata.
+Scan or paste the card code below.,"Szkenneljen be egy meglévő kártyát, és töltse fel anélkül, hogy kilépne a fizetési folyamatból."
+Scan QR Code/Barcode,Szkennelési hiba
+Scan with camera,Olvassa be vagy írja be az ajándékkártya kódját az egyenleg ellenőrzéséhez vagy a beváltáshoz.
+Scan-First Flow,Szkennelje be vagy illessze be a kártyakódot alább.
+Scanned Code:,QR-kód/vonalkód beolvasása
+Scanning for: {0},Szkennelés kamerával
+Scanning items,Scan-First Flow
+Scan-Ready,Szkennelt kód:
+Scope,Keresés: {0}
+Scope: All Profiles,Elemek szkennelése
+Scope: Current Profile,Beolvasásra kész
+Scope: Specific Profile,Hatály
+Search,Hatáskör: Minden profil
+Search Account,Hatáskör: Jelenlegi profil
+Search an invoice and continue the return flow without extra steps.,Alkalmazási terület: Egyedi profil
+Search customer,Keresés
+Search invoices or customers,Fiók keresése
+Search item,"Keressen egy számlát, és további lépések nélkül folytassa a visszatérési folyamatot."
+Search item / code,Ügyfél keresése
+Search items or barcode,Keressen számlákat vagy ügyfeleket
+Search Mpesa Payments,Elem keresése
+Search return invoices or customers,Tétel/kód keresése
+Search supplier,Keressen elemeket vagy vonalkódot
+Search unpaid invoices or customers,Keresés Mpesa Payments
+Secure context (HTTPS or localhost) is required for camera access.,Keressen visszáru számlákat vagy ügyfeleket
+Secure context (HTTPS) required for camera access. Please use HTTPS to access the camera.,Keressen beszállítót
+Select,Kifizetetlen számlák vagy ügyfelek keresése
+Select a cashier first.,A kamera eléréséhez biztonságos környezet (HTTPS vagy localhost) szükséges.
+Select a customer,Biztonságos környezet (HTTPS) szükséges a kamera eléréséhez.
+Select a customer to use coupon,A kamera eléréséhez használja a HTTPS-t.
+Select a printer to use QZ silent printing.,Válassza ki
+Select Batch,Először válasszon pénztárost.
+Select Columns to Display,Válasszon egy ügyfelet
+Select items to sell,Válasszon egy vásárlót a kupon használatához
+Select Language,Válasszon ki egy nyomtatót a QZ csendes nyomtatás használatához.
+Select Payment,Válassza a Batch lehetőséget
+Select Payment Account,Válassza a Megjelenítendő oszlopok lehetőséget
+Select printer,Válassza ki az eladni kívánt termékeket
+Select Return Invoice,Válassza a Nyelv lehetőséget
+Select S.O,Válassza a Fizetés lehetőséget
+Select Sales Orders,Válassza a Fizetési számla lehetőséget
+Select the cashier who is taking over this terminal.,Válassza ki a nyomtatót
+Selected,Válassza a Számla visszáru lehetőséget
+Selected movement type is not allowed by POS Profile.,Válassza az S.O
+Selected Payments,Válassza az Értékesítési rendelések lehetőséget
+Sensitive actions kept away from quick taps.,"Válassza ki a pénztárost, aki átveszi ezt a terminált."
+Serial,Kiválasztva
+Serial Numbers,A kiválasztott mozgástípust a POS Profile nem engedélyezi.
+Server CPU Usage:,Kiválasztott fizetések
+Server Health,Az érzékeny műveletek távol maradtak a gyors koppintásoktól.
+Server Memory Usage:,Sorozatos
+Server Metrics,Sorozatszámok
+Server Uptime:,Szerver CPU használat:
+Service Charges,Szerver állapota
+Session,Szerver memóriahasználat:
+Set each cashier PIN in the User form and keep terminal members assigned in POS Profile User.,Szerver metrikák
+Settings,Szerver üzemidő:
+Settings in this section update the POS workspace without changing the current route.,Szolgáltatási díjak
+Setup complete!,Munkamenet
+Share,"Állítsa be az egyes pénztáros PIN-kódokat a Felhasználó képernyőn, és tartsa meg a termináltagokat a POS Profile User-ben."
+Shared terminal,Beállítások elemre
+Shift Closed Snapshot,Az ebben a szakaszban található beállítások frissítik a POS munkaterületet az aktuális útvonal módosítása nélkül.
+Shift Overview,A beállítás kész!
+Show,Megosztás
+Show cart on customer-facing screen,Megosztott terminál
+Show last invoice rate,Shift Closed Snapshot
+Show rate info,Műszak áttekintése
+Show Repair Candidates,Megjelenítés
+Show search tools,A kosár megjelenítése az ügyfél felé néző képernyőn
+Show the active cart on a customer-facing screen,Utolsó számla díjának megjelenítése
+Showing {0}-{1} of {2},Áradatok megjelenítése
+Showing 0 of 0,Mutasd a javításra jelölteket
+Shows the distribution of invoices per currency,Keresési eszközök megjelenítése
+Sign out of session,Mutassa meg az aktív kosarat az ügyfél felé néző képernyőn
+Sign out of the current POS session,{2}/{0}-{1}. megjelenítése
+Size:,0 a 0-ból
+Skipped Payments,A számlák pénznemenkénti megoszlását mutatja
+Skipping items without barcodes,Jelentkezzen ki a munkamenetből
+Slow Moving,Jelentkezzen ki az aktuális POS munkamenetből
+Slow Moving Items,Méret:
+Slow Queries:,Kihagyott fizetések
+Sold,Elemek kihagyása vonalkód nélkül
+Source,Lassú mozgás
+Source Cash Account (Optional Override),Lassan mozgó elemek
+Source Ex. Rate:,Lassú lekérdezések:
+Source Rate:,Eladva
+Specific Profile,Forrás
+Split Invoices,Forrás készpénzszámla (opcionális felülírás)
+Staff / Cashier Performance Report,Forrás Pl.
+Status,Értékelés:
+Stock,Forrás aránya:
+Stock Information,Specifikus profil
+Stock is lower than requested,Felosztott számlák
+Stock is lower than requested:\n{0},Személyzeti / Pénztáros teljesítményjelentés
+Stock Movement Report,Állapot
+Stock update: {0} has {1} available. Adding {2} will bring the stock below zero.,Stock
+Submit,Stock információk
+Submit & Print,A készlet alacsonyabb a kértnél
+Submit Deposit,A készlet alacsonyabb a kértnél:\n{0}
+Submit Expense,Készletmozgási jelentés
+Submitted,Raktárfrissítés: {0} {1} elérhető.
+Submitted Cash Movements,A(z) {2} hozzáadásával az állomány nulla alá kerül.
+Submitted entries,Beküld
+Successfully scanned:,Beküldés és nyomtatás
+Suggested,Befizetés benyújtása
+Suggested Qty,Költség benyújtása
+Supervisor Access,Beküldve
+Supervisor permissions unlock issuance and reloads,Beküldött készpénzmozgások
+Supervisor Tools,Beküldött pályaművek
+Supplier,Sikeresen beolvasva:
+Supplier and dates are required.,Javasolt
+Supplier Invoices,Javasolt mennyiség
+Supplier is required.,Felügyelő hozzáférés
+Supplier name is required,A felügyelői engedélyek feloldják a kiadást és az újratöltést
+Supplier Payments,Felügyelői eszközök
+Supplier Purchase Summary,Szállító
+Suppliers,A szállító és a dátumok megadása kötelező.
+Suppliers not found,Szállítói számlák
+Switch Camera,Szállító szükséges.
+Switch Cashier,A szállító neve kötelező
+Switch the POS appearance theme,Szállítói fizetések
+Switch theme appearance,Szállítói beszerzési összefoglaló
+Switched to:,Szállítók
+Sync All Invoices,Szállítók nem találhatók
+Sync Offline Cash Movements ({0}),Váltsunk kamerát
+Sync Offline Sales,Pénztárváltás
+Synced {0} offline cash movement(s).,Váltsa át a POS megjelenési témáját
+Syncing items in background,Téma megjelenésének váltása
+System / Diagnostics,Átváltott erre:
+"System actions are low-frequency maintenance controls such as app info, support diagnostics, and session controls.",Szinkronizálja az összes számlát
+System Information,Offline készpénzmozgások szinkronizálása ({0})
+System Status,Offline értékesítés szinkronizálása
+Tables:,{0} offline készpénzmozgás szinkronizálva.
+Tap the button below to redeem a gift card during checkout.,Elemek szinkronizálása a háttérben
+Target,Rendszer / Diagnosztika
+Target Ex. Rate:,"A rendszerműveletek alacsony frekvenciájú karbantartási vezérlők, például alkalmazásinformációk, támogatási diagnosztika és munkamenet-vezérlők."
+Target Rate:,Rendszerinformációk
+Tax,Rendszer állapota
+Tax / Charges Report,Táblázatok:
+Tax Heads,Koppintson az alábbi gombra az ajándékutalvány beváltásához a fizetés során.
+Taxable Amount,Cél
+Tendered,Célpont pl.
+Terminal,Értékelés:
+Terminal & Devices,Cél arány:
+Terminal locked,Adó
+"Terminal tools affect this checkout station, customer-facing displays, and future printer/device controls.",Adó-/költségjelentés
+Territory not found,Adófőnökök
+The amount paid is not complete,Adóköteles összeg
+The app stores data locally for offline use. This is called cache.,Pályázatban
+The invoice stayed in draft. Please review and submit it manually.,Terminál
+The maximum discount allowed is,Terminál és eszközök
+The quantity for {0} has been adjusted to the maximum available stock.,Terminál zárva
+The system could not retrieve the item details. Please try again.,"A termináleszközök hatással vannak erre a pénztári állomásra, az ügyfelek felé néző kijelzőkre és a jövőbeni nyomtató-/eszközvezérlőkre."
+These invoices will be synced when connection is restored,Terület nem található
+This action now opens inside the settings workspace.,A kifizetett összeg nem teljes
+This coupon already used !,Az alkalmazás helyben tárolja az adatokat offline használatra.
+This invoice does not need change-allocation repair,Ezt gyorsítótárnak hívják.
+This invoice is already repaired,A számla tervezetben maradt.
+This is an item template. Please choose a variant.,"Kérjük, tekintse át és küldje be manuálisan."
+this item,Az engedélyezett maximális kedvezmény
+This POS page could not be opened offline because its code was not cached on this terminal yet.,A(z) {0} mennyisége a maximálisan elérhető készletre lett igazítva.
+This Serial Number {0} has already been added!,A rendszer nem tudta lekérni a tétel részleteit.
+Threshold,"Kérjük, próbálja újra."
+Time,"Ezeket a számlákat a rendszer szinkronizálja, amikor a kapcsolat helyreáll"
+Tip: Clear cache regularly to free up space and keep the app fast.,Ez a művelet most megnyílik a beállítások munkaterületén.
+Tip: Close unused tabs or apps to reduce lag.,Ez a kupon már felhasználva!
+Tip: Monitor slow queries and table size for optimal performance.,Ez a számla nem igényel változtatási-kiosztási javítást
+To Be Paid,Ezt a számlát már javították
+To Date,Ez egy tételsablon.
+Today,"Kérjük, válasszon egy változatot."
+Today Profit,ezt a tételt
+Today Sales,"Ez a POS oldal nem nyitható meg offline módban, mert a kódja még nincs gyorsítótárban ezen a terminálon."
+Toggle navigation drawer,Ezt a sorozatszámot ({0}) már hozzáadták!
+Toggle Theme,Küszöb
+Tools,Idő
+Tools for customer-facing screens and terminal-specific actions.,"Tipp: Rendszeresen törölje a gyorsítótárat, hogy helyet szabadítson fel, és az alkalmazás gyors maradjon."
+Top Brand,Tipp: Zárja be a nem használt lapokat vagy alkalmazásokat a késés csökkentése érdekében.
+Top Category,Tipp: Figyelje a lassú lekérdezéseket és a táblázat méretét az optimális teljesítmény érdekében.
+Top Charge Head,Fizetni
+Top Customers,A dátumig
+Top Discount,Ma
+Top Items by Location,Ma Profit
+Top Margin,Ma értékesítés
+Top Pending,A navigációs fiók be- és kikapcsolása
+Top Profit Item,Téma váltása
+Top Return Items,Eszközök
+Top Sales by Cashier,Eszközök az ügyfelek felé néző képernyőkhöz és terminálspecifikus műveletekhez.
+Top Supplier,Top márka
+Top Suppliers by Spend,Felső kategória
+Top Tables,Felső töltőfej
+Top Tax Head,Legjobb vásárlók
+Top Up Amount,Top kedvezmény
+Top Up Card,A legnépszerűbb termékek hely szerint
+Top Up Mode,Felső margó
+Top Variant,Top Függőben
+Total,Legjobb profittétel
+Total Amount,Legjobb visszáru tételek
+Total Change,Legnagyobb eladások a pénztárostól
+Total Charges,Legjobb szállító
+Total In,Legnépszerűbb beszállítók a ráfordítás alapján
+Total Invoices,Felső táblázatok
+Total Items,Legfelső adóvezető
+Total Mpesa,Feltöltés összege
+Total Out,Feltöltés kártya
+Total Payments,Feltöltés mód
+Total Purchase,Top Variant
+Total Selected :,Összesen
+Total Size,Teljes összeg
+Total Stock Qty,Teljes változás
+Total:,Teljes díjak
+Totals by Invoice Currency,Összesen be
+Track how much cash was handed back to customers,Összes számla
+"Track recent sales, collect unpaid balances, and reopen saved work",Összes tétel
+Transaction ID,Teljes Mpesa
+Transfer,Total Out
+Try a different search term or clear the cart search.,Összes kifizetés
+Try adjusting your search or filters,Teljes vásárlás
+Try another source or refresh the list.,Összesen kiválasztott:
+Try changing the date range or status filter.,Teljes méret
+Type,Teljes készletmennyiség
+Unable to access camera even with basic settings. Please check your camera permissions and device compatibility.,Összesen:
+Unable to add offer item {0}. Please refresh and try again.,Összegek a számla pénzneme szerint
+Unable to add offer item. Please refresh and try again.,"Kövesse nyomon, hogy mennyi készpénzt adtak vissza az ügyfeleknek"
+Unable to add scanned item.,"Kövesse nyomon a legutóbbi eladásokat, gyűjtse össze a kifizetetlen egyenlegeket, és nyissa meg újra a mentett munkát"
+Unable to create purchase order,Tranzakcióazonosító
+Unable to delete draft invoice,Átadás
+Unable to fetch documents,"Próbálkozzon másik keresési kifejezéssel, vagy törölje a kosár keresését."
+Unable to fetch draft orders,Próbálja módosítani a keresést vagy a szűrőket
+Unable to fetch invoice history,"Próbáljon ki egy másik forrást, vagy frissítse a listát."
+Unable to fetch M-Pesa payments,Próbálja meg módosítani a dátumtartományt vagy az állapotszűrőt.
+Unable to fetch sales orders,Írja be
+Unable to fetch unpaid invoices,Alapbeállításokkal sem lehet hozzáférni a kamerához.
+Unable to generate scale barcode,"Kérjük, ellenőrizze a kamera engedélyeit és az eszköz kompatibilitását."
+Unable to issue gift card.,Nem sikerült hozzáadni a(z) {0} ajánlattételt.
+Unable to load cashier PIN status.,"Kérjük, frissítse, és próbálja újra."
+Unable to load document,Nem sikerült hozzáadni az ajánlattételt.
+Unable to load draft invoice,"Kérjük, frissítse, és próbálja újra."
+Unable to load gift card balance.,Nem sikerült hozzáadni a beolvasott elemet.
+Unable to load invoice details,Nem sikerült létrehozni a beszerzési rendelést
+Unable to load parked order,A számlavázlat nem törölhető
+Unable to load the selected sales order,Nem lehet letölteni a dokumentumokat
+Unable to prepare document,Nem sikerült lekérni a rendelésvázlatokat
+Unable to prepare return invoice,Nem sikerült lekérni a számlaelőzményeket
+Unable to print draft invoice,Nem sikerült lekérni az M-Pesa kifizetéseket
+Unable to print submitted invoice,Nem sikerült lekérni az értékesítési rendeléseket
+Unable to process document action,Nem sikerült lekérni a kifizetetlen számlákat
+Unable to repair change allocation,Nem lehet méretarányos vonalkódot generálni
+Unable to save cashier PIN.,Nem sikerült kiállítani az ajándékutalványt.
+Unable to save the rate to the backend price list,Nem sikerült betölteni a pénztáros PIN-kód állapotát.
+Unable to submit invoice,Nem lehet betölteni a dokumentumot
+Unable to submit the selected payment,Nem sikerült betölteni a számlavázlatot
+Unable to top up gift card.,Nem sikerült betölteni az ajándékkártya egyenlegét.
+Unable to verify cashier PIN.,Nem sikerült betölteni a számla részleteit
+Unallocated,Nem sikerült betölteni a parkoló rendelést
+Unallocated:,Nem sikerült betölteni a kiválasztott értékesítési rendelést
+Unavailable,Nem sikerült elkészíteni a dokumentumot
+Unknown,Visszaküldési számlát nem lehet elkészíteni
+Unknown error,Nem lehet kinyomtatni a számlavázlatot
+Unknown Item,Nem lehet kinyomtatni a benyújtott számlát
+Unknown Warehouse,Nem lehet feldolgozni a dokumentumműveletet
+Unlock POS,Nem sikerült kijavítani a változáskiosztást
+Unpaid,Nem sikerült menteni a pénztáros PIN-kódot.
+"Unselected payments stay unallocated first, then auto reconcile after submit.",Az árfolyam nem menthető a háttérárlistába
+UOM,Nem sikerült benyújtani a számlát
+UOM not found,Nem sikerült elküldeni a kiválasztott fizetést
+Update available,Nem sikerült feltölteni az ajándékutalványt.
+Update Customer,A pénztáros PIN kódja nem ellenőrizhető.
+Update PIN,Kiosztatlan
+Update Price List Rate,Nem allokált:
+Updated,Nem elérhető
+Updates and app info that stay out of the cashier flow.,Ismeretlen
+Updates automatically,Ismeretlen hiba
+Upload pending transactions,Ismeretlen tétel
+Usage,Ismeretlen raktár
+Usage Stats,POS feloldása
+Use a 4 to 8 digit PIN for cashier switching and terminal unlock.,Kifizetetlen
+Use Cashier,"A ki nem választott kifizetések először felosztatlanok maradnak, majd az elküldés után automatikusan egyeztethetők."
+Use date range to search for older invoices,UOM
+"Use one field for manual code entry, barcode scans, or QR scans.",UOM nem található
+"Use one workflow for balance checks, new issuance, and top ups without leaving POS.",Frissítés elérhető
+"Use this section when cached prerequisite data needs a refresh, rebuild, or diagnostics review.",Ügyfél frissítése
+Use Western numerals,Frissítse a PIN-kódot
+Used:,Árlista frissítése
+Using basic camera settings due to device limitations,Frissítve
+Using cached customer balance,"Frissítések és alkalmazásinformációk, amelyek kimaradnak a pénztárakból."
+Valid until,Automatikusan frissül
+Variance %,Függőben lévő tranzakciók feltöltése
+Variants,Használat
+Variant-wise,Használati statisztikák
+Verify closing amounts for each payment method,Használjon 4–8 számjegyű PIN-kódot a pénztáros váltáshoz és a terminál feloldásához.
+View all,Használja a Pénztárat
+View app information and current build details,Régebbi számlák kereséséhez használja a dátumtartományt
+View Data Diagnostics,"Használjon egy mezőt kézi kódbevitelhez, vonalkód-leolvasáshoz vagy QR-beolvasáshoz."
+View Details,"Használjon egyetlen munkafolyamatot az egyenlegellenőrzéshez, az új kibocsátáshoz és a feltöltéshez anélkül, hogy elhagyná a POS-t."
+View invoice details,"Ezt a szakaszt akkor használja, ha a gyorsítótárazott előfeltételadatok frissítést, újraépítést vagy diagnosztikai felülvizsgálatot igényelnek."
+View notifications,Használjon nyugati számokat
+View offline invoices,Használt:
+View restricted POS insights,Alapvető kamerabeállítások használata az eszköz korlátai miatt
+Void Amount,Gyorsítótárazott ügyfélegyenleg használata
+Void Count,ig érvényes
+Voids,Szórás %
+Waiting for cart items,Változatok
+Waiting for payment...,Változatosan
+Walk-in Customer,Ellenőrizze az egyes fizetési módok záró összegét
+Warehouse,Az összes megtekintése
+Warning: High cache usage may affect performance.,Tekintse meg az alkalmazás adatait és az aktuális build részleteit
+Warning: High lag may indicate heavy processing or browser slowness.,Adatdiagnosztika megtekintése
+Week Δ,Részletek megtekintése
+Week-wise,Számla részleteinek megtekintése
+Weight (g),Értesítések megtekintése
+Weight (grams),Offline számlák megtekintése
+We'll let you know if an invoice fails to submit,Tekintse meg a korlátozott POS statisztikákat
+Workflow,Érvénytelen összeg
+Write off amount cannot exceed the POS profile maximum of {0},Érvénytelen szám
+Write off amount exceeds the allowed limit ({0}). Please add payment for the remaining amount.,Ürességek
+Yes,Várjuk a kosár tételeit
+"Yes, Cancel sale",Fizetésre vár...
+"Yes, Close",Belépő Ügyfél
+You are not allowed to print draft invoices,Raktár
+You are offline. Add Payment will work again when the connection is restored.,Figyelmeztetés: A gyorsítótár magas használata befolyásolhatja a teljesítményt.
+You have no notifications right now,Figyelmeztetés: A nagy késés súlyos feldolgozást vagy a böngésző lassúságát jelezheti.
+Your Cart,Δ hét

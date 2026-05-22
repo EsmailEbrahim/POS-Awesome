@@ -1,0 +1,1353 @@
+﻿- Total Unallocated,- Total Unallocated
+* Required,* Υποχρεωτικό
+{0} (Qty: {1}),{0} (Ποσότητα: {1})
+{0} actions,{0} ενέργειες
+{0} has only {1} in stock. You requested {2}. Adjust quantity or restock.,Το {0} έχει μόνο {1} σε απόθεμα.
+{0} offline invoice{1} pending,Ζητήσατε {2}.
+{0} offline invoice{1} saved as draft,Προσαρμόστε την ποσότητα ή ανανεώστε το απόθεμα.
+{0} offline invoice{1} synced,{0} τιμολόγιο εκτός σύνδεσης{1} σε εκκρεμότητα
+{0}: {1} {2},Το {0} τιμολόγιο εκτός σύνδεσης{1} αποθηκεύτηκε ως πρόχειρο
+{0}d ago,{0} τιμολόγιο εκτός σύνδεσης{1} συγχρονίστηκε
+{0}h ago,{0}: {1} {2}
+{0}m ago,πριν από {0}ημ
+A POS supervisor is required for this action.,Πριν από {0} ώρες
+About,πριν από {0}μ
+Access,Απαιτείται επόπτης POS για αυτήν την ενέργεια.
+Account,Περίπου
+Account is overdrawn,Πρόσβαση
+Acknowledge the error to resume scanning,Λογαριασμός
+Acknowledge the error to resume scanning.,Ο λογαριασμός είναι υπερανάληψη
+Across,Αναγνωρίστε το σφάλμα για να συνεχιστεί η σάρωση
+Action,Αναγνωρίστε το σφάλμα για να συνεχιστεί η σάρωση.
+Actions,Απέναντι
+Active sale,Δράση
+add,Δράσεις
+Add items from the selector to start building this sale.,Ενεργή πώληση
+Add more value to an existing gift card,προσθέστε
+Add New Address,Προσθέστε στοιχεία από τον επιλογέα για να ξεκινήσετε τη δημιουργία αυτής της πώλησης.
+Add new customer,Προσθέστε περισσότερη αξία σε μια υπάρχουσα δωροκάρτα
+Add on New Line,Προσθήκη νέας διεύθυνσης
+Add Payment,Προσθήκη νέου πελάτη
+Add payment to invoice,Προσθήκη στη νέα γραμμή
+Add/Edit Coupon Conditions,Προσθήκη πληρωμής
+Additional Discount,Προσθήκη πληρωμής στο τιμολόγιο
+Additional Discount %,Προσθήκη/Επεξεργασία Προϋποθέσεων Κουπονιού
+Address Line 1,Πρόσθετη Έκπτωση
+Address not found,Επιπλέον έκπτωση %
+Adjust the quantity or enable negative stock to continue.,Γραμμή διεύθυνσης 1
+Adjustment,Η διεύθυνση δεν βρέθηκε
+After returns,Προσαρμόστε την ποσότητα ή ενεργοποιήστε το αρνητικό απόθεμα για να συνεχιστεί.
+Against,Προσαρμογή
+Against Name,Μετά τις επιστροφές
+Age Bracket,Κατά
+All,Ενάντια στο όνομα
+All Caught Up!,Ηλικιακός βραχίονας
+All invoices are synchronized,Όλα
+All pending invoices are up to date,Όλα Πιασμένα!
+All Profiles,Όλα τα τιμολόγια είναι συγχρονισμένα
+All Synchronized,Όλα τα εκκρεμή τιμολόγια είναι ενημερωμένα
+All visible invoices are fully settled.,Όλα τα Προφίλ
+All Warehouses,Όλα συγχρονισμένα
+Allowed UOM is {0},Όλα τα ορατά τιμολόγια έχουν εξοφληθεί πλήρως.
+Always fetch items from server (ignore local cache),Όλες οι Αποθήκες
+Amount,Το επιτρεπόμενο UOM είναι {0}
+Amount already received,Πάντα ανάκτηση στοιχείων από τον διακομιστή (αγνοήστε την τοπική προσωρινή μνήμη)
+Amount exceeds profile cash movement max amount.,Ποσό
+Amount must be greater than zero.,Ποσό που έχει ήδη ληφθεί
+Amount received from customer,Το ποσό υπερβαίνει το μέγιστο ποσό κίνησης μετρητών προφίλ.
+App information,Το ποσό πρέπει να είναι μεγαλύτερο από το μηδέν.
+Appearance and user-level preferences for the current session.,Ποσό που ελήφθη από τον πελάτη
+Applied,Πληροφορίες εφαρμογής
+Apply,Εμφάνιση και προτιμήσεις σε επίπεδο χρήστη για την τρέχουσα περίοδο λειτουργίας.
+Apply Gift Card,Εφαρμόστηκε
+Apply Offer,Εφαρμογή
+Apply On,Εφαρμογή δωροκάρτας
+Apply only the amount you want to redeem on this invoice. The remaining balance stays on the card.,Εφαρμογή Προσφοράς
+Apply Redemption,Εφαρμογή Ενεργοποίηση
+Applying,Εφαρμόστε μόνο το ποσό που θέλετε να εξαργυρώσετε σε αυτό το τιμολόγιο.
+Apps,Το υπόλοιπο παραμένει στην κάρτα.
+Are you sure you want to close? All entered data will be lost.,Εφαρμόστε το Redemption
+Attributes (Size/Color),Εφαρμογή
+Auto Allocate Payment Amount,Εφαρμογές
+Auto Reconcile,Είστε βέβαιοι ότι θέλετε να κλείσετε;
+Auto reconciliation completed after payment submit.,Όλα τα καταχωρημένα δεδομένα θα χαθούν.
+Auto reconciliation completed. Allocated: {0}{1}. Remaining outstanding: {0}{2}.,Χαρακτηριστικά (Μέγεθος/Χρώμα)
+Available Actions,Αυτόματη κατανομή ποσού πληρωμής
+Available QTY,Αυτόματη συμφωνία
+Available:,Η αυτόματη συμφωνία ολοκληρώθηκε μετά την υποβολή της πληρωμής.
+Average Basket,Ολοκληρώθηκε η αυτόματη συμφωνία.
+Average Bill,Κατανεμήθηκε: {0}{1}.
+Average Ticket,Παραμένει εκκρεμές: {0}{2}.
+Avg Bill,Διαθέσιμες ενέργειες
+Avg Invoice,Διαθέσιμο ΠΟΣΟΤΗΤΑ
+Avg Invoice Profit,Διαθέσιμο:
+Avg Invoice Value,Μέσο Καλάθι
+Avg Purchase Frequency,Μέσος Λογαριασμός
+Awesome,Μέσο εισιτήριο
+Awesome Dashboard,Μέσος λογαριασμός
+Awesome Dashboard is disabled for the selected POS Profile.,Μέσο τιμολόγιο
+Awesome Dashboard is unavailable for the selected scope.,Μέσο κέρδος τιμολογίου
+Awesome Dashboard is visible only to POS supervisors.,Μέση αξία τιμολογίου
+Back,Μέση Συχνότητα Αγοράς
+Back Office Cash Account,Φοβερό
+Back Office Cash Account (Optional Override),Καταπληκτικό ταμπλό
+Back office cash account is required.,Το Awesome Dashboard είναι απενεργοποιημένο για το επιλεγμένο προφίλ POS.
+Back to {0},Το Awesome Dashboard δεν είναι διαθέσιμο για το επιλεγμένο εύρος.
+Background processing did not finish in time.,Το Awesome Dashboard είναι ορατό μόνο στους επόπτες POS.
+Background processing failed for Invoice {0}: {1},Πίσω
+Background Submission Failed,Λογαριασμός μετρητών Back Office
+Background sync interval (seconds),Λογαριασμός μετρητών Back Office (Προαιρετική παράκαμψη)
+Balance,Απαιτείται λογαριασμός μετρητών back office.
+Balance will be updated when connection is restored,Επιστροφή στο {0}
+Balances still pending,Η επεξεργασία παρασκηνίου δεν ολοκληρώθηκε εγκαίρως.
+Barcode,Η επεξεργασία στο παρασκήνιο απέτυχε για το τιμολόγιο {0}: {1}
+Barcode / QR Ready,Η υποβολή παρασκηνίου απέτυχε
+Barcode Label Printing,Διάστημα συγχρονισμού φόντου (δευτερόλεπτα)
+Base Paid:,Ισορροπία
+Base Recv:,Το υπόλοιπο θα ενημερωθεί όταν αποκατασταθεί η σύνδεση
+Base:,Τα υπόλοιπα σε εκκρεμότητα
+Basic Information,Barcode
+Batch,Barcode / QR Ready
+Batch Information,Εκτύπωση ετικετών γραμμωτού κώδικα
+Before any return workflow,Βασική πληρωμή:
+Before returns,Βάση Recv:
+Best Day,Βάση:
+Best Seller,Βασικές Πληροφορίες
+Book expense or deposit from active shift.,παρτίδα
+Branch / Location-wise Report,Πληροφορίες παρτίδας
+Brand-wise,Πριν από οποιαδήποτε ροή εργασιών επιστροφής
+Breakdown,Πριν τις επιστροφές
+Browse,Καλύτερη μέρα
+Build Time:,Best Seller
+Built with Frappe,Δαπάνη κράτησης ή κατάθεση από ενεργή βάρδια.
+Bundle,Υποκατάστημα / Αναφορά τοποθεσίας
+Buying Price,μάρκας
+Cache cleared successfully,Ανάλυση
+Cache Usage,Περιήγηση
+cache used,Χρόνος κατασκευής:
+Calculating...,Κατασκευασμένο με φραπέ
+Camera Access Required,Δέσμη
+Camera access was aborted. Please try again.,Τιμή αγοράς
+Camera constraints not supported by your device. Trying fallback settings...,Η προσωρινή μνήμη διαγράφηκε με επιτυχία
+Camera is busy or blocked by another app/tab. Close other camera apps and try again.,Χρήση προσωρινής μνήμης
+Camera permission denied. Please allow camera access in your browser settings and refresh the page.,χρησιμοποιημένη κρυφή μνήμη
+Camera scanner is locked until the current error is acknowledged,Υπολογισμός...
+Camera started but the video stream did not load in time. Please try again.,Απαιτείται πρόσβαση στην κάμερα
+Cancel,Η πρόσβαση στην κάμερα ματαιώθηκε.
+Cancel cash movement {0}?,Δοκιμάστε ξανά.
+Cancel Payment,Οι περιορισμοί κάμερας δεν υποστηρίζονται από τη συσκευή σας.
+Cancel Sale,Δοκιμάζοντας εναλλακτικές ρυθμίσεις...
+Cancel Sale ?,Η κάμερα είναι απασχολημένη ή έχει αποκλειστεί από άλλη εφαρμογή/καρτέλα.
+Cancelled,Κλείστε άλλες εφαρμογές κάμερας και δοκιμάστε ξανά.
+Cannot add an item with zero or negative quantity.,Η άδεια κάμερας απορρίφθηκε.
+Cannot clear cache while offline,Επιτρέψτε την πρόσβαση της κάμερας στις ρυθμίσεις του προγράμματος περιήγησής σας και ανανεώστε τη σελίδα.
+Cannot redeem customer credit more than invoice total,Ο σαρωτής της κάμερας είναι κλειδωμένος μέχρι να επιβεβαιωθεί το τρέχον σφάλμα
+Cannot redeem gift cards more than invoice total,"Η κάμερα ξεκίνησε, αλλά η ροή βίντεο δεν φορτώθηκε έγκαιρα."
+Cannot Save Offline Invoice:,Δοκιμάστε ξανά.
+Cannot Save Offline Payment:,Ακύρωση
+Card,Ακύρωση κίνησης μετρητών {0};
+Card / Online,Ακύρωση πληρωμής
+Card health after the last live lookup,Ακύρωση πώλησης
+Cards,Ακύρωση πώλησης;
+Cart,Ακυρώθηκε
+Cash,Δεν είναι δυνατή η προσθήκη αντικειμένου με μηδενική ή αρνητική ποσότητα.
+Cash back to customers,Δεν είναι δυνατή η εκκαθάριση της προσωρινής μνήμης ενώ είστε εκτός σύνδεσης
+Cash Collections,Δεν είναι δυνατή η εξαργύρωση της πίστωσης πελατών μεγαλύτερη από το σύνολο του τιμολογίου
+Cash Deposit is disabled for this POS Profile.,Δεν είναι δυνατή η εξαργύρωση δωροκαρτών περισσότερο από το σύνολο του τιμολογίου
+Cash Drawer Snapshot,Δεν είναι δυνατή η αποθήκευση τιμολογίου εκτός σύνδεσης:
+Cash In Hand,Δεν είναι δυνατή η αποθήκευση της πληρωμής εκτός σύνδεσης:
+Cash Movement,Κάρτα
+Cash movement cancelled,Κάρτα / Διαδικτυακά
+Cash movement deduction applied,Υγεία κάρτας μετά την τελευταία ζωντανή αναζήτηση
+Cash movement deleted,Κάρτες
+Cash movement is disabled for this POS Profile.,Καλάθι
+Cash Movement is disabled in current POS Profile.,Μετρητά
+Cash movement saved offline,Επιστροφή μετρητών στους πελάτες
+Cash movement submitted,Εισπράξεις μετρητών
+Cash Movements,Η κατάθεση μετρητών είναι απενεργοποιημένη για αυτό το προφίλ POS.
+Cash payment cannot be less than invoice total when partial payment is not allowed,Στιγμιότυπο συρταριού μετρητών
+Cash returned after payment,μετρητά στο χέρι
+Cashier,Κίνηση μετρητών
+Cashier Access,Η κίνηση μετρητών ακυρώθηκε
+Cashier identity and appearance preferences.,Εφαρμόστηκε έκπτωση κίνησης μετρητών
+Cashier PIN,Η κίνηση μετρητών διαγράφηκε
+Cashier PIN saved successfully.,Η κίνηση μετρητών είναι απενεργοποιημένη για αυτό το προφίλ POS.
+Cashiers,Η κίνηση μετρητών είναι απενεργοποιημένη στο τρέχον προφίλ POS.
+Cashier-wise,Η κίνηση μετρητών αποθηκεύτηκε εκτός σύνδεσης
+Categories,Υποβλήθηκε κίνηση μετρητών
+Category,Κινήσεις μετρητών
+Category / Brand / Variant Report,Η πληρωμή με μετρητά δεν μπορεί να είναι μικρότερη από το σύνολο του τιμολογίου όταν δεν επιτρέπεται η μερική πληρωμή
+Category-wise,Επιστράφηκαν μετρητά μετά την πληρωμή
+Category-wise Margin,Ταμίας
+Certificate,Πρόσβαση ταμείου
+Certificate is missing or not trusted. QZ may show confirmation dialogs.,Προτιμήσεις ταυτότητας ταμείου και εμφάνισης.
+Certificate is trusted. Silent QZ printing is active.,PIN ταμείου
+Change,Το PIN του ταμείου αποθηκεύτηκε με επιτυχία.
+Change allocation repaired,Ταμίες
+Change interface language,Ταμειακά
+Change Language,Κατηγορίες
+Change Price,Κατηγορία
+Change Return,Αναφορά κατηγορίας / επωνυμίας / παραλλαγής
+Change Returned,Κατηγορικά
+Change terminal cashier,Περιθώριο κατά κατηγορία
+Charge Heads,Πιστοποιητικό
+Charges,Το πιστοποιητικό λείπει ή δεν είναι αξιόπιστο.
+Charges not found,Το QZ μπορεί να εμφανίζει παράθυρα διαλόγου επιβεβαίωσης.
+Check Balance,Το πιστοποιητικό είναι αξιόπιστο.
+Check balance for any card. Supervisors can issue and top up cards here.,Η αθόρυβη εκτύπωση QZ είναι ενεργή.
+Check balance only,Αλλαγή
+Check for new commits,Επιδιορθώθηκε η κατανομή αλλαγής
+Check for Updates,Αλλαγή γλώσσας διεπαφής
+Check live balance before applying redemption,Αλλαγή γλώσσας
+Check live balance before redemption,Αλλαγή Τιμής
+Checking...,Αλλαγή Επιστροφής
+Cheque/Reference Date,Η αλλαγή επέστρεψε
+Cheque/Reference No,Αλλαγή ταμείου τερματικού
+Choose the cashier currently operating this terminal.,Κεφαλές φόρτισης
+Choose your preferred language for the POS interface,Χρεώσεις
+City,Οι χρεώσεις δεν βρέθηκαν
+Clear,Ελέγξτε την ισορροπία
+Clear All,Ελέγξτε το υπόλοιπο για οποιαδήποτε κάρτα.
+Clear all barcode items,Οι επόπτες μπορούν να εκδίδουν και να συμπληρώνουν κάρτες εδώ.
+Clear all purchase order items,Ελέγξτε μόνο το υπόλοιπο
+Clear Cache,Ελέγξτε για νέες δεσμεύσεις
+Clear Search,Ελέγξτε για Ενημερώσεις
+Clearing local cache...,Ελέγξτε το ζωντανό υπόλοιπο πριν από την εφαρμογή εξαργύρωσης
+Click to refresh,Ελέγξτε το ζωντανό υπόλοιπο πριν από την εξαργύρωση
+Client CPU Lag:,Έλεγχος...
+Client Memory Usage:,Επιταγή/Ημερομηνία αναφοράς
+Client Metrics,Επιταγή/Αριθμός αναφοράς
+Close,Επιλέξτε το ταμείο που λειτουργεί αυτήν τη στιγμή αυτό το τερματικό.
+Close about dialog,Επιλέξτε τη γλώσσα που προτιμάτε για τη διεπαφή POS
+Close cashier switcher,Πόλη
+Close closing shift dialog,Καθαρό
+Close column selector,Εκκαθάριση όλων
+Close Dialog,Διαγράψτε όλα τα στοιχεία γραμμικού κώδικα
+Close drafts dialog,Διαγράψτε όλα τα στοιχεία παραγγελίας αγοράς
+Close invoice details dialog,Εκκαθάριση προσωρινής μνήμης
+Close invoice management,Εκκαθάριση αναζήτησης
+Close offline invoices dialog,Εκκαθάριση τοπικής προσωρινής μνήμης...
+Close packing list dialog,Κάντε κλικ για ανανέωση
+Close returns dialog,Καθυστέρηση CPU πελάτη:
+Close sales orders dialog,Χρήση μνήμης πελάτη:
+Close Scanner,Μετρήσεις πελατών
+Close scanner dialog,Κλείσιμο
+Close Settings,Κλείσιμο για το παράθυρο διαλόγου
+Close Shift,Κλείστε το ταμείο
+Closing Amount,Κλείσιμο διαλόγου κλεισίματος shift
+Closing POS Shift,Κλείσιμο επιλογέα στήλης
+Closing Snapshot Available,Κλείσιμο διαλόγου
+Code,Κλείσιμο διαλόγου πρόχειρων
+Code scanned successfully,Κλείσιμο διαλόγου λεπτομερειών τιμολογίου
+COGS,Κλείσιμο διαχείρισης τιμολογίων
+Collapse item details,Κλείσιμο διαλόγου τιμολογίων εκτός σύνδεσης
+Collected,Κλείσιμο διαλόγου λίστας συσκευασίας
+Cols,Κλείσιμο διαλόγου επιστροφών
+Columns,Κλείσιμο διαλόγου παραγγελιών πωλήσεων
+commits,Κλείστε τον σαρωτή
+Completed and active sales in this range,Κλείσιμο διαλόγου σαρωτή
+Completed returns will appear here.,Κλείστε τις Ρυθμίσεις
+Confirm,Κλείσιμο Shift
+Confirm Close,Ποσό κλεισίματος
+Confirm Mobile Number,Κλείσιμο POS Shift
+Confirm PIN,Διαθέσιμο στιγμιότυπο κλεισίματος
+Connect,Κωδικός
+Connect printer and manage certificate,Ο κώδικας σαρώθηκε με επιτυχία
+Connecting to QZ Tray...,COGS
+Connection problem while submitting invoice,Σύμπτυξη λεπτομερειών στοιχείου
+Connections:,Συλλέγονται
+Connectivity and cached prerequisite status were rechecked.,Cols
+Continue Editing,Στήλες
+Could not fetch latest balance from server,δεσμεύεται
+Count,Ολοκληρωμένες και ενεργές πωλήσεις σε αυτό το εύρος
+Country,Οι ολοκληρωμένες επιστροφές θα εμφανιστούν εδώ.
+Coupon,Επιβεβαίωση
+Coupons,Επιβεβαίωση Κλείσιμο
+Cover,Επιβεβαιώστε τον αριθμό κινητού τηλεφώνου
+CPU Cores:,Επιβεβαίωση PIN
+Create,Σύνδεση
+Create and load a new prepaid card,Συνδέστε τον εκτυπωτή και διαχειριστείτε το πιστοποιητικό
+Create and preload a new gift card,Σύνδεση σε δίσκο QZ...
+Create Bill,Πρόβλημα σύνδεσης κατά την υποβολή τιμολογίου
+Create Customer,Συνδέσεις:
+Create New Item,Ελέγχθηκε ξανά η κατάσταση συνδεσιμότητας και προσωρινής αποθήκευσης.
+Create or change your PIN,Συνέχεια Επεξεργασίας
+Create PIN,Δεν ήταν δυνατή η ανάκτηση του πιο πρόσφατου υπολοίπου από τον διακομιστή
+Create POS Opening Shift,Καταμέτρηση
+Create Purchase Order,Χώρα
+Create Return,Κουπόνι
+Create return from invoice,Κουπόνια
+Create Supplier,Εξώφυλλο
+Credit and Output,Πυρήνες CPU:
+Credit Note,Δημιουργία
+Credit Outstanding,Δημιουργήστε και φορτώστε μια νέα προπληρωμένη κάρτα
+Credit sales remaining to be collected,Δημιουργήστε και προφορτώστε μια νέα δωροκάρτα
+Critical,Δημιουργία λογαριασμού
+Currency,Δημιουργία Πελάτη
+Current,Δημιουργία νέου αντικειμένου
+Current Event Loop Lag:,Δημιουργήστε ή αλλάξτε το PIN σας
+Current Month,Δημιουργία PIN
+Current PIN,Δημιουργία POS Opening Shift
+Current Profile,Δημιουργία Εντολής Αγοράς
+Current redeemable value on the gift card,Δημιουργία Επιστροφής
+Current User,Δημιουργία επιστροφής από τιμολόγιο
+Custom,Δημιουργία Προμηθευτή
+Custom Due Days,Πίστωση και Εκροή
+Custom items per page,Πιστωτικό Σημείωμα
+Customer,Εκκρεμή πίστωση
+Customer already selected,Πιστωτικές πωλήσεις που απομένουν προς είσπραξη
+Customer Balance,Κριτική
+Customer balance unavailable offline,Νόμισμα
+Customer created successfully.,Τρέχον
+Customer creation failed.,Καθυστέρηση βρόχου τρέχοντος συμβάντος:
+Customer Details,Τρέχων Μήνας
+Customer display channel is missing,Τρέχον PIN
+Customer display was blocked. Please allow pop-ups for this site.,Τρέχον προφίλ
+Customer group is required,Τρέχουσα εξαργυρώσιμη αξία στη δωροκάρτα
+Customer is required to add payment,Τρέχων Χρήστης
+Customer Name is required,Προσαρμοσμένο
+Customer not selected,Προσαρμοσμένες ημέρες λήξης
+Customer Report,Προσαρμοσμένα στοιχεία ανά σελίδα
+Customer saved offline,Πελάτης
+Customer Screen,Ο πελάτης έχει ήδη επιλεγεί
+Customer territory is required,Υπόλοιπο πελατών
+Customer updated successfully.,Το υπόλοιπο πελάτη δεν είναι διαθέσιμο εκτός σύνδεσης
+Customer-facing tools and printer setup.,Ο πελάτης δημιουργήθηκε με επιτυχία.
+Customers,Η δημιουργία πελάτη απέτυχε.
+Customers not found,Στοιχεία Πελάτη
+Daily cashier actions without scrolling.,Το κανάλι εμφάνισης πελατών λείπει
+Daily Sales,Η εμφάνιση του πελάτη αποκλείστηκε.
+Daily Sales Summary,Επιτρέψτε τα αναδυόμενα παράθυρα για αυτόν τον ιστότοπο.
+Dark Mode,Απαιτείται ομάδα πελατών
+Data loaded in form. Review and submit.,Ο πελάτης πρέπει να προσθέσει πληρωμή
+Database Health,Απαιτείται όνομα πελάτη
+Database health affects overall system speed and reliability.,Ο πελάτης δεν επιλέχθηκε
+Database Info,Αναφορά πελάτη
+Date,Ο πελάτης αποθηκεύτηκε εκτός σύνδεσης
+Day Δ,Οθόνη πελάτη
+days,Απαιτείται περιοχή πελάτη
+Day-wise (MTD),Ο πελάτης ενημερώθηκε με επιτυχία.
+Day-wise Movement,Εργαλεία που απευθύνονται στον πελάτη και ρύθμιση εκτυπωτή.
+Dead Stock,Πελάτες
+Dead Stock Items,Δεν βρέθηκαν πελάτες
+Decrease quantity,Καθημερινές ενέργειες ταμείου χωρίς κύλιση.
+Default,Καθημερινές Πωλήσεις
+Default:,Ημερήσια σύνοψη πωλήσεων
+Delete,Σκοτεινή λειτουργία
+Delete cancelled cash movement {0}?,Τα δεδομένα φορτώνονται σε φόρμα.
+Delete Draft,Ελέγξτε και υποβάλετε.
+Delete draft invoice,Υγεία βάσης δεδομένων
+Delete draft invoice {0}?,Η υγεία της βάσης δεδομένων επηρεάζει τη συνολική ταχύτητα και αξιοπιστία του συστήματος.
+Delete Invoice,Πληροφορίες βάσης δεδομένων
+Delete offline invoice,Ημερομηνία
+Delivered,Ημέρα Δ
+Delivery Charges,ημέρες
+Delivery Information,Ημερήσια (MTD)
+Delivery Note {0} created,Καθημερινή Κίνηση
+Delivery note created,Νεκρό απόθεμα
+Deployed Bundle:,Νεκρά στοκ είδη
+Deposit,Μειώστε την ποσότητα
+Description,Προεπιλογή
+Detailed Supplier Breakdown,Προεπιλογή:
+Detecting formats:,Διαγραφή
+Device Memory:,Διαγραφή ακυρωμένης κίνησης μετρητών {0};
+Difference,Διαγραφή σχεδίου
+Difference (In Company Currency),Διαγραφή πρόχειρου τιμολογίου
+Disable offline mode first to recheck live connectivity.,Διαγραφή πρόχειρου τιμολογίου {0};
+Disconnect,Διαγραφή τιμολογίου
+discount,Διαγραφή τιμολογίου εκτός σύνδεσης
+Discount %,Παραδόθηκε
+Discount / Void / Return Report,Χρεώσεις παράδοσης
+Discount Amount,Πληροφορίες Παράδοσης
+Discount limited by POS Profile,Το δελτίο παράδοσης {0} δημιουργήθηκε
+Discounted Invoices,Δημιουργήθηκε δελτίο αποστολής
+Discounts,Αναπτυγμένο πακέτο:
+Dismiss,Κατάθεση
+Download Certificate,Περιγραφή
+Draft,Λεπτομερής Ανάλυση Προμηθευτών
+Draft invoice deleted,Ανίχνευση μορφών:
+Draft source,Μνήμη συσκευής:
+Drafts,Διαφορά
+Due {0},Διαφορά (σε εταιρικό νόμισμα)
+Due Date,Απενεργοποιήστε πρώτα τη λειτουργία εκτός σύνδεσης για να ελέγξετε ξανά τη ζωντανή συνδεσιμότητα.
+Duplicate,Αποσύνδεση
+Edit customer,έκπτωση
+Edit discount amount,έκπτωση %
+Edit discount percentage,Έκπτωση / Άκυρο / Αναφορά επιστροφής
+Edit Gift Application,Ποσό έκπτωσης
+Edit item name,Η έκπτωση περιορίζεται από το προφίλ POS
+Edit quantity,Εκπτωτικά τιμολόγια
+Edit rate,Εκπτώσεις
+Edit unit of measure,Απόρριψη
+Edited,Λήψη πιστοποιητικού
+Employee,Σχέδιο
+Enable background sync,Το προσχέδιο τιμολογίου διαγράφηκε
+Enable Customer Display in POS Profile first.,Πρόχειρη πηγή
+End current session,Προσχέδια
+Enter a PIN.,Λήξη {0}
+Enter a valid grams value,Ημερομηνία λήξης
+Enter new price list rate,Διπλότυπο
+Enter Quantity,Επεξεργασία πελάτη
+Enter the cashier PIN to continue.,Επεξεργασία ποσού έκπτωσης
+Enter the current PIN first.,Επεξεργασία ποσοστού έκπτωσης
+"Enter the current PIN, then choose a new one.",Επεξεργασία εφαρμογής δώρου
+Enter valid grams for scale barcode,Επεξεργασία ονόματος στοιχείου
+Entries,Επεξεργασία ποσότητας
+Error accessing camera:,Ρυθμός επεξεργασίας
+Error calculating prices,Επεξεργασία μονάδας μέτρησης
+Error fetching customer balance,Επεξεργάστηκε
+Error in change calculations!,Υπάλληλος
+Error Loading Data,Ενεργοποίηση συγχρονισμού φόντου
+Error loading invoice details,Ενεργοποιήστε πρώτα την εμφάνιση πελάτη στο προφίλ POS.
+Error processing invoice,Τερματισμός τρέχουσας συνεδρίας
+Error processing payment,Εισαγάγετε ένα PIN.
+Error searching invoices,Εισαγάγετε μια έγκυρη τιμή γραμμαρίων
+Error submitting invoice:,Εισαγάγετε νέα τιμή τιμοκαταλόγου
+Error submitting invoice: {0},Εισάγετε Ποσότητα
+Error submitting invoice: No response from server,Εισαγάγετε το PIN του ταμείου για να συνεχίσετε.
+Error updating currency,Εισαγάγετε πρώτα το τρέχον PIN.
+Error updating item details,"Εισαγάγετε το τρέχον PIN και, στη συνέχεια, επιλέξτε ένα νέο."
+Est. Purchase,Εισαγάγετε έγκυρα γραμμάρια για τον γραμμωτό κώδικα κλίμακας
+Est. Value,Συμμετοχές
+Event-loop lag measures how busy your browser is. Lower is better.,Σφάλμα πρόσβασης στην κάμερα:
+Every,Σφάλμα στον υπολογισμό των τιμών
+Exchange Rate,Σφάλμα κατά την ανάκτηση του υπολοίπου πελάτη
+Expand item details,Σφάλμα στους υπολογισμούς αλλαγών!
+Expected Amount (In Company Currency),Σφάλμα κατά τη φόρτωση δεδομένων
+Expected Cash,Σφάλμα κατά τη φόρτωση των στοιχείων τιμολογίου
+Expected cash on hand grouped by currency,Σφάλμα κατά την επεξεργασία τιμολογίου
+Expected vs Actual,Σφάλμα κατά την επεξεργασία της πληρωμής
+Expense,Σφάλμα κατά την αναζήτηση τιμολογίων
+Expense Account (Optional Override),Σφάλμα κατά την υποβολή τιμολογίου:
+Expense account is required.,Σφάλμα κατά την υποβολή τιμολογίου: {0}
+Expenses and deposits posted during this shift,Σφάλμα κατά την υποβολή τιμολογίου: Καμία απάντηση από τον διακομιστή
+Expired,Σφάλμα κατά την ενημέρωση του νομίσματος
+Failed to auto reconcile payments.,Σφάλμα κατά την ενημέρωση των λεπτομερειών του στοιχείου
+Failed to cancel cash movement,Εκτιμ.
+Failed to clear cache,Αγορά
+Failed to create item,Εκτιμ.
+Failed to create supplier,Αξία
+Failed to delete cash movement,Η καθυστέρηση βρόχου συμβάντος μετρά πόσο απασχολημένο είναι το πρόγραμμα περιήγησής σας.
+Failed to generate scale barcode. Using item barcode only.,Το χαμηλότερο είναι καλύτερο.
+Failed to load cash movement context.,Κάθε
+Failed to load dashboard data.,Συναλλαγματική Ισοτιμία
+Failed to reload invoice from server,Αναπτύξτε τις λεπτομέρειες του στοιχείου
+Failed to submit cash movement,Αναμενόμενο ποσό (σε εταιρικό νόμισμα)
+Failed to sync offline cash movements,Αναμενόμενα μετρητά
+Fast cashier actions for active shifts.,Αναμενόμενα μετρητά ομαδοποιημένα ανά νόμισμα
+Fast Moving Items,Αναμενόμενο vs Πραγματικό
+Fees,Έξοδα
+Fetch the latest offline prerequisite updates,Λογαριασμός Εξόδων (Προαιρετική Παράκαμψη)
+Find a sales order quickly and load it into the current sale.,Απαιτείται λογαριασμός εξόδων.
+Fixing payment amounts for return invoice...,Έξοδα και καταθέσεις που καταχωρήθηκαν κατά τη διάρκεια αυτής της βάρδιας
+Flash Off,Λήξη
+Flash On,Αποτυχία αυτόματης συμφωνίας πληρωμών.
+"For 'Product Bundle' items, Warehouse, Serial No and Batch No will be considered from the 'Packing List' table. If Warehouse and Batch No are same for all packing items for any 'Product Bundle' item, those values can be entered in the main Item table; values will be copied to 'Packing List' table.",Η ακύρωση της κίνησης μετρητών απέτυχε
+Free,Αποτυχία εκκαθάρισης της προσωρινής μνήμης
+Free Qty,Η δημιουργία του στοιχείου απέτυχε
+Frequency,Αποτυχία δημιουργίας προμηθευτή
+from,Απέτυχε η διαγραφή της κίνησης μετρητών
+From Date,Αποτυχία δημιουργίας γραμμικού κώδικα κλίμακας.
+Fulfillment Details,Χρησιμοποιώντας μόνο γραμμωτό κώδικα.
+Full Name,Απέτυχε η φόρτωση του περιβάλλοντος κίνησης μετρητών.
+Gain,Αποτυχία φόρτωσης δεδομένων πίνακα ελέγχου.
+Generate a fresh prepaid card and start it with an opening balance.,Αποτυχία επαναφόρτωσης τιμολογίου από τον διακομιστή
+Generate and install the certificate to allow fully silent printing without trust prompts.,Αποτυχία υποβολής κίνησης μετρητών
+Generate Certificate,Αποτυχία συγχρονισμού κινήσεων μετρητών εκτός σύνδεσης
+Generated scale barcode: {0},Γρήγορες ενέργειες ταμείου για ενεργές βάρδιες.
+Get Payments,Αντικείμενα γρήγορης κίνησης
+Gift Card,Τέλη
+Gift card amount must be greater than zero.,Λάβετε τις πιο πρόσφατες προαπαιτούμενες ενημερώσεις εκτός σύνδεσης
+Gift Card Code,Βρείτε γρήγορα μια παραγγελία πώλησης και φορτώστε την στην τρέχουσα πώληση.
+Gift card code is required for redemption,Καθορισμός ποσών πληρωμής για τιμολόγιο επιστροφής...
+Gift card code is required.,Απενεργοποίηση φλας
+Gift card issued successfully.,Αναβοσβήνει
+Gift card loaded successfully.,"Για τα είδη «Δέσμη προϊόντος», η αποθήκη, ο σειριακός αριθμός και ο αριθμός παρτίδας θα ληφθούν υπόψη από τον πίνακα «Λίστα συσκευασίας»."
+Gift Card Management,"Εάν η αποθήκη και ο αριθμός παρτίδας είναι ίδιοι για όλα τα είδη συσκευασίας για οποιοδήποτε είδος «Δέσμη προϊόντος», αυτές οι τιμές μπορούν να εισαχθούν στον κύριο πίνακα αντικειμένων."
+Gift card payment,"Οι τιμές θα αντιγραφούν στον πίνακα ""Λίστα συσκευασίας""."
+Gift card redemption requires an online connection,Δωρεάν
+Gift card topped up successfully.,Δωρεάν Ποσ
+Gift Cards,Συχνότητα
+Go Offline,από
+Go Online,Από Ημερομηνία
+Go to Frappe Desk,Λεπτομέρειες Εκπλήρωσης
+Grand Total,Πλήρες Όνομα
+Gross Margin,Κέρδος
+Gross Profit,Δημιουργήστε μια νέα προπληρωμένη κάρτα και ξεκινήστε την με ένα αρχικό υπόλοιπο.
+Gross Sales,Δημιουργήστε και εγκαταστήστε το πιστοποιητικό για να επιτρέψετε την πλήρως αθόρυβη εκτύπωση χωρίς προτροπές εμπιστοσύνης.
+Group not found,Δημιουργία Πιστοποιητικού
+"Grouped controls for terminal, UI, and session settings.",Γραμμωτός κώδικας κλίμακας που δημιουργήθηκε: {0}
+Grouped totals for each payment method and currency,Λάβετε πληρωμές
+Hide,Δωροκάρτα
+Hide Gift Card,Το ποσό της δωροκάρτας πρέπει να είναι μεγαλύτερο από μηδέν.
+Hide Non Essential Fields,Κωδικός δωροκάρτας
+Hide quantity decimals,Για την εξαργύρωση απαιτείται κωδικός δωροκάρτας
+Hide search tools,Απαιτείται κωδικός δωροκάρτας.
+Hide zero rated items,Η δωροκάρτα εκδόθηκε με επιτυχία.
+High,Η δωροκάρτα φορτώθηκε με επιτυχία.
+History,Διαχείριση δωροκάρτας
+Hourly (Today),Πληρωμή με κάρτα δώρου
+How this section works,Η εξαργύρωση δωροκάρτας απαιτεί σύνδεση στο διαδίκτυο
+"If stale data remains, open Settings > Offline & Sync and run Rebuild Offline Data again while online.",Η δωροκάρτα συμπληρώθηκε με επιτυχία.
+"If the warning persists, open Settings > Offline & Sync, then run Refresh Offline Data or Rebuild Offline Data.",Δωροκάρτες
+Import the certificate into QZ Tray and restart QZ Tray on each POS machine.,Μεταβείτε εκτός σύνδεσης
+In,Μεταβείτε στο Διαδίκτυο
+In stock: {0},Μεταβείτε στο Frappe Desk
+Include Batch / Serial,Μεγάλο Σύνολο
+Include Price,Μικτό Περιθώριο
+Increase quantity,Μικτό Κέρδος
+IndexedDB,Ακαθάριστες Πωλήσεις
+Initial Amount,Η ομάδα δεν βρέθηκε
+Initialize your shift with opening balances,"Ομαδοποιημένα στοιχεία ελέγχου για ρυθμίσεις τερματικού, διεπαφής χρήστη και περιόδου σύνδεσης."
+Initializing application...,Αρχικοποίηση εφαρμογής...
+"Inspect cache, sync, and prerequisite status","Επιθεωρήστε την προσωρινή μνήμη, τον συγχρονισμό και την κατάσταση προαπαιτούμενων"
+Installed Applications,Εγκατεστημένες Εφαρμογές
+Insufficient stock:\n{0},Ανεπαρκές απόθεμα:\n{0}
+Invalid rate,Μη έγκυρη τιμή
+Inventory Status Report,Αναφορά κατάστασης αποθέματος
+Invoice,Τιμολόγιο
+Invoice {0} is Submitted,Το τιμολόγιο {0} υποβλήθηκε
+Invoice {0} processed successfully,Η επεξεργασία του τιμολογίου {0} ολοκληρώθηκε με επιτυχία
+Invoice {0} submission failed,Η υποβολή τιμολογίου {0} απέτυχε
+Invoice {0} was already submitted,Το τιμολόγιο {0} υποβλήθηκε ήδη
+Invoice Adjustments,Προσαρμογές τιμολογίων
+Invoice Change,Αλλαγή Τιμολογίου
+Invoice Details,Στοιχεία Τιμολογίου
+Invoice is still in draft after background submission.,Το τιμολόγιο είναι ακόμα σε προσχέδιο μετά την υποβολή του ιστορικού.
+Invoice Items,Είδη τιμολογίου
+Invoice Management,Διαχείριση Τιμολογίων
+Invoice Mgmt,Τιμολόγιο Mgmt
+Invoice saved offline,Το τιμολόγιο αποθηκεύτηκε εκτός σύνδεσης
+Invoice submission failed,Η υποβολή τιμολογίου απέτυχε
+Invoice Submitted,Το τιμολόγιο υποβλήθηκε
+"Invoice value settled by loyalty points, not cash collection","Η αξία τιμολογίου διακανονίζεται με πόντους επιβράβευσης, όχι με είσπραξη μετρητών"
+Invoices,τιμολόγια
+Invoices already past due date,Τιμολόγια έχουν ήδη λήξει
+Invoices saved as POS Invoices,Τα τιμολόγια αποθηκεύτηκαν ως τιμολόγια POS
+Invoices still carrying balances,Τα τιμολόγια εξακολουθούν να φέρουν υπόλοιπα
+Issue Mode,Λειτουργία θέματος
+Issue New Card,Έκδοση νέας κάρτας
+Issue Workflow,Ροή εργασιών θέματος
+"Issue, top up, and check","Έκδοση, συμπλήρωση και έλεγχος"
+Item,Στοιχείο
+Item / Product Sales Report,Αναφορά πωλήσεων αντικειμένου / προϊόντος
+Item {0} added to invoice,Το στοιχείο {0} προστέθηκε στο τιμολόγιο
+Item '{0}' has no barcode,"Το στοιχείο ""{0}"" δεν έχει γραμμωτό κώδικα"
+Item Code,Κωδικός είδους
+Item created successfully,Το στοιχείο δημιουργήθηκε με επιτυχία
+Item is out of stock,Το προϊόν έχει εξαντληθεί
+Item Name,Όνομα αντικειμένου
+Item not found,Το στοιχείο δεν βρέθηκε
+Item order updated,Η παραγγελία προϊόντος ενημερώθηκε
+Item Selector Settings,Ρυθμίσεις επιλογέα αντικειμένου
+Items,Είδη
+Items added in POS will appear here automatically.,Τα στοιχεία που προστέθηκαν στο POS θα εμφανιστούν εδώ αυτόματα.
+Items added to invoice,Αντικείμενα που προστέθηκαν στο τιμολόγιο
+Items per page,Στοιχεία ανά σελίδα
+Items Sold,Είδη Πουλήθηκαν
+Items/Invoice,Είδη/Τιμολόγιο
+Item-wise Profitability,Κερδοφορία σε σχέση με τα είδη
+Journal Entry,Καταχώριση Ημερολογίου
+json,json
+Just now,Μόλις τώρα
+Keep offline prerequisites healthy and recover stale data safely.,Διατηρήστε τα προαπαιτούμενα εκτός σύνδεσης υγιή και ανακτήστε μπαγιάτικα δεδομένα με ασφάλεια.
+Labels,Ετικέτες
+Language,Γλώσσα
+Language will be changed to,Η γλώσσα θα αλλάξει σε
+"Language, theme, terminal tools, and session controls.","Γλώσσα, θέμα, εργαλεία τερματικού και στοιχεία ελέγχου περιόδου σύνδεσης."
+Last,Τελευταίο
+Last 14 Days (Paid vs Pending),Τελευταίες 14 ημέρες (με πληρωμή έναντι εκκρεμότητας)
+Last 14 Days Activity,Δραστηριότητα των τελευταίων 14 ημερών
+Last 14 Days Gross Profit,Μικτό κέρδος τελευταίων 14 ημερών
+Last 14 Days Purchases,Αγορές των τελευταίων 14 ημερών
+Last 14 Days Tax/Charges,Φόρος/Χρεώσεις των τελευταίων 14 ημερών
+Last sync:,Τελευταίος συγχρονισμός:
+Last sync: {0} | ok: {1} | failed: {2} | skipped: {3},Τελευταίος συγχρονισμός: {0} |
+Latest entries for current shift,εντάξει: {1} |
+Lead Time,απέτυχε: {2} |
+Light Mode,παράβλεψη: {3}
+Limited,Τελευταίες καταχωρήσεις για την τρέχουσα βάρδια
+lines,Χρόνος ανοχής
+List,Λειτουργία φωτός
+Live Snapshot,Περιορισμένη
+Load a POS profile and cashier first.,γραμμές
+Load More Invoices,Λίστα
+Load previously saved invoices,Ζωντανό στιγμιότυπο
+Load Sale,Φορτώστε πρώτα ένα προφίλ POS και ένα ταμείο.
+Load Sales Invoice,Φόρτωση περισσότερων τιμολογίων
+Loading app data...,Φορτώστε προηγουμένως αποθηκευμένα τιμολόγια
+Loading customer database...,Πώληση φορτίου
+Loading customers...,Φόρτωση τιμολογίου πωλήσεων
+Loading database stats...,Φόρτωση δεδομένων εφαρμογής...
+Loading details...,Φόρτωση βάσης δεδομένων πελατών...
+Loading invoice history...,Φόρτωση πελατών...
+Loading items...,Φόρτωση στατιστικών βάσης δεδομένων...
+Loading product catalog...,Φόρτωση λεπτομερειών...
+Loading return invoices...,Φόρτωση ιστορικού τιμολογίων...
+Loading server CPU/memory usage...,Φόρτωση στοιχείων...
+Loading suppliers...,Φόρτωση καταλόγου προϊόντων...
+Loading unpaid invoices...,Φόρτωση τιμολογίων επιστροφής...
+Loading view...,Φόρτωση CPU διακομιστή/χρήση μνήμης...
+Loading...,Φόρτωση προμηθευτών...
+Local storage is unavailable. Switching to online-only mode.,Φόρτωση απλήρωτων τιμολογίων...
+localStorage,Φόρτωση προβολής...
+Location Performance,Φόρτωση...
+Locations,Ο τοπικός χώρος αποθήκευσης δεν είναι διαθέσιμος.
+Lock Screen,Μετάβαση σε λειτουργία μόνο online.
+Logout,τοπική αποθήκευση
+Lookup Workflow,Απόδοση τοποθεσίας
+Loss,Τοποθεσίες
+Low,Κλείδωμα οθόνης
+Low Stock,Αποσύνδεση
+Low Stock Alerts,Ροή εργασιών αναζήτησης
+Low Stock Items,Απώλεια
+Low Stock Threshold,Χαμηλό
+Low Stock Total,Χαμηλό απόθεμα
+Lowest Margin,Ειδοποιήσεις χαμηλών αποθεμάτων
+Low-frequency maintenance and system details.,Είδη με χαμηλό απόθεμα
+Loyalty Redeemed,Χαμηλό όριο αποθεμάτων
+Loyalty Redemption,Σύνολο χαμηλού αποθέματος
+Make New Payment,Χαμηλότερο Περιθώριο
+Manage all,Συντήρηση χαμηλής συχνότητας και λεπτομέρειες συστήματος.
+Manage and synchronize your offline transactions,Η πίστη εξαργυρώθηκε
+Manage Cashier PIN,Εξαγορά πίστης
+"Manage offline tools, terminal controls, and maintenance from one workspace.",Κάντε νέα πληρωμή
+manual,Διαχειριστείτε όλα
+"Manual codes, barcode scans, and QR scans work in the same field",Διαχειριστείτε και συγχρονίστε τις συναλλαγές σας εκτός σύνδεσης
+Manual offline mode is enabled,Διαχείριση PIN Ταμείου
+Margin,"Διαχειριστείτε εργαλεία εκτός σύνδεσης, χειριστήρια τερματικού και συντήρηση από έναν χώρο εργασίας."
+Maximum available quantity is {0}. Quantity adjusted to match stock.,εγχειρίδιο
+Maximum discount amount for this offer item is {0}.,"Οι χειροκίνητοι κωδικοί, οι σαρώσεις γραμμωτού κώδικα και οι σαρώσεις QR λειτουργούν στο ίδιο πεδίο"
+Maximum discount percentage for this offer item is {0}%.,Η μη αυτόματη λειτουργία εκτός σύνδεσης είναι ενεργοποιημένη
+Maximum offer quantity is {0}. Quantity adjusted to allowed limit.,Περιθώριο
+Medium,Η μέγιστη διαθέσιμη ποσότητα είναι {0}.
+Menu,Ποσότητα προσαρμοσμένη για να ταιριάζει με το απόθεμα.
+Method-wise Collections,Το μέγιστο ποσό έκπτωσης για αυτό το στοιχείο προσφοράς είναι {0}.
+Minimum allowed rate for this offer item is {0}.,Το μέγιστο ποσοστό έκπτωσης για αυτό το στοιχείο προσφοράς είναι {0}%.
+Minimum Qty,Η μέγιστη ποσότητα προσφοράς είναι {0}.
+Mobile No,Ποσότητα προσαρμοσμένη στο επιτρεπόμενο όριο.
+Mode,Μεσαίο
+Mode of Payment,Μενού
+Month,Συλλογές με γνώμονα τη μέθοδο
+Month Δ,Η ελάχιστη επιτρεπόμενη τιμή για αυτό το στοιχείο προσφοράς είναι {0}.
+Monthly Profit,Ελάχιστη Ποσότητα
+Monthly Sales,Κινητό Αρ
+Monthly Sales Summary,Λειτουργία
+Month-wise,Τρόπος πληρωμής
+Most Active Cashiers,Μήνας
+Movement Type,Μήνας Δ
+Movements,Μηνιαίο κέρδος
+Multi Currency,Μηνιαίες εκπτώσεις
+N/A,Περίληψη μηνιαίων πωλήσεων
+Name,Μηνιαίως
+Negative Stock,Οι πιο ενεργοί ταμίες
+Negative Stock Items,Τύπος κίνησης
+Negative values not allowed,κινήσεις
+Net,Πολλαπλό νόμισμα
+Net Qty,N/A
+Net Sales,Όνομα
+Net Value,Αρνητικό απόθεμα
+Never,Αρνητικά στοιχεία μετοχών
+New changes are ready to load,Δεν επιτρέπονται αρνητικές τιμές
+New Item,Καθαρό
+New Offer Available,Καθαρό Ποσ
+New PIN,Καθαρές πωλήσεις
+New rate,Καθαρή Αξία
+Next unit of measure,Ποτέ
+No attribute data found.,Οι νέες αλλαγές είναι έτοιμες για φόρτωση
+No Barcode,Νέο στοιχείο
+No barcode found for UOM '{0}',Νέα προσφορά διαθέσιμη
+No branch/location data found.,Νέο PIN
+No brand data found.,Νέο ποσοστό
+No cached gift card balance is available offline.,Επόμενη μονάδα μέτρησης
+No camera found on this device. Please ensure your device has a working camera.,Δεν βρέθηκαν δεδομένα χαρακτηριστικών.
+No capability warnings recorded yet.,Χωρίς Barcode
+No cash expected for this shift.,Δεν βρέθηκε γραμμικός κώδικας για το UOM '{0}'
+No cash mode configured,Δεν βρέθηκαν δεδομένα υποκαταστήματος/τοποθεσίας.
+No cash movement type is allowed for this POS Profile.,Δεν βρέθηκαν δεδομένα επωνυμίας.
+No cashier PIN is set yet. Create one now.,Δεν υπάρχει αποθηκευμένο υπόλοιπο δωροκάρτας διαθέσιμο εκτός σύνδεσης.
+No cashier profiles are available for this POS profile yet.,Δεν βρέθηκε κάμερα σε αυτήν τη συσκευή.
+No cashier-wise discount/void/return activity.,Βεβαιωθείτε ότι η συσκευή σας διαθέτει κάμερα που λειτουργεί.
+No category data found.,Δεν έχουν καταγραφεί ακόμη προειδοποιήσεις ικανότητας.
+No category profitability data found.,Δεν αναμένονται μετρητά για αυτή τη μετατόπιση.
+No change returned recorded for this shift.,Δεν έχει ρυθμιστεί η λειτουργία μετρητών
+No change-allocation invoices match the current filters.,Κανένας τύπος κίνησης μετρητών δεν επιτρέπεται για αυτό το προφίλ POS.
+No charge head breakdown found.,Δεν έχει οριστεί ακόμη PIN ταμείου.
+No Company Selected,Δημιουργήστε ένα τώρα.
+No customer sales data found.,Δεν υπάρχουν ακόμη διαθέσιμα προφίλ ταμείου για αυτό το προφίλ POS.
+No day-wise discount/void/return trend.,Καμία δραστηριότητα έκπτωσης/άκυρης/επιστροφής κατά ταμείο.
+No day-wise payment data found.,Δεν βρέθηκαν δεδομένα κατηγορίας.
+No day-wise profitability trend found.,Δεν βρέθηκαν δεδομένα κερδοφορίας κατηγορίας.
+No day-wise purchase data found.,Δεν καταγράφηκε καμία αλλαγή που επιστράφηκε για αυτήν τη βάρδια.
+No day-wise sales trend found.,Κανένα τιμολόγιο αλλαγής-κατανομής δεν ταιριάζει με τα τρέχοντα φίλτρα.
+No day-wise tax/charges trend found.,Δεν βρέθηκε ανάλυση κεφαλής φόρτισης.
+No dead stock items.,Δεν έχει επιλεγεί εταιρεία
+No due date,Δεν βρέθηκαν δεδομένα πωλήσεων πελατών.
+No exact repair match found for this invoice,Καμία ημερήσια τάση έκπτωσης/άκυρης/επιστροφής.
+No hourly sales trend found for today.,Δεν βρέθηκαν δεδομένα ημερήσιας πληρωμής.
+No invoice activity found.,Δεν βρέθηκε ημερήσια τάση κερδοφορίας.
+No invoices found,Δεν βρέθηκαν δεδομένα ημερήσιας αγοράς.
+No invoices found. Try different search criteria.,Δεν βρέθηκε καθημερινή τάση πωλήσεων.
+No invoices recorded for this shift.,Δεν βρέθηκε ημερήσια τάση φόρου/χρεώσεων.
+No item profitability data found.,Δεν υπάρχουν νεκρά αποθέματα.
+No item sales data found for this period.,Χωρίς ημερομηνία λήξης
+No items found,Δεν βρέθηκε ακριβής αντιστοίχιση επισκευής για αυτό το τιμολόγιο
+No items in cart,Δεν βρέθηκε τάση ωριαίων πωλήσεων για σήμερα.
+No items with barcodes to print,Δεν βρέθηκε δραστηριότητα τιμολογίου.
+No location-wise top item data found.,Δεν βρέθηκαν τιμολόγια
+No low stock alerts right now.,Δεν βρέθηκαν τιμολόγια.
+No low stock items.,Δοκιμάστε διαφορετικά κριτήρια αναζήτησης.
+No matching items in cart,Δεν καταγράφηκαν τιμολόγια για αυτήν τη βάρδια.
+No month-wise sales trend found.,Δεν βρέθηκαν δεδομένα κερδοφορίας προϊόντος.
+No negative stock items.,Δεν βρέθηκαν στοιχεία πωλήσεων ειδών για αυτήν την περίοδο.
+No notifications yet,Δεν βρέθηκαν στοιχεία
+No offline cash movement synced.,Δεν υπάρχουν αντικείμενα στο καλάθι
+No offline invoices pending synchronization,Δεν υπάρχουν αντικείμενα με γραμμωτούς κώδικες για εκτύπωση
+No offline sync issues recorded yet.,Δεν βρέθηκαν δεδομένα κορυφαίων στοιχείων ως προς την τοποθεσία.
+No out-of-stock items.,Δεν υπάρχουν ειδοποιήσεις χαμηλών αποθεμάτων αυτήν τη στιγμή.
+No outstanding credit invoices for this shift.,Δεν υπάρχουν είδη με χαμηλό απόθεμα.
+No payment collection data found.,Δεν υπάρχουν αντικείμενα που να ταιριάζουν στο καλάθι
+No payment rows available on this invoice.,Δεν βρέθηκε τάση πωλήσεων σε μηνιαία βάση.
+No payments registered for this shift.,Δεν υπάρχουν αρνητικά στοιχεία στο απόθεμα.
+No pending balances in this period.,Δεν υπάρχουν ακόμη ειδοποιήσεις
+No pending offline invoices,Δεν συγχρονίστηκε η κίνηση μετρητών εκτός σύνδεσης.
+No Print Formats Found,Δεν υπάρχουν τιμολόγια εκτός σύνδεσης σε εκκρεμότητα συγχρονισμού
+No profiles found for selected scope. Falling back to current profile failed.,Δεν έχουν καταγραφεί ακόμα προβλήματα συγχρονισμού εκτός σύνδεσης.
+No recent customer activity found.,Δεν υπάρχουν αντικείμενα που δεν είναι διαθέσιμα.
+No recent stock entries found.,Δεν υπάρχουν εκκρεμή πιστωτικά τιμολόγια για αυτήν τη μετατόπιση.
+No records found,Δεν βρέθηκαν δεδομένα είσπραξης πληρωμών.
+No reorder suggestions right now.,Δεν υπάρχουν διαθέσιμες σειρές πληρωμής σε αυτό το τιμολόγιο.
+No repeat customers in this period.,Δεν έχουν καταχωρηθεί πληρωμές για αυτήν τη μετατόπιση.
+No response from server,Δεν υπάρχουν υπόλοιπα σε εκκρεμότητα σε αυτήν την περίοδο.
+No return invoices found,Δεν υπάρχουν εκκρεμή τιμολόγια εκτός σύνδεσης
+No return item trend found.,Δεν βρέθηκαν μορφές εκτύπωσης
+No returnable items found for this invoice,Δεν βρέθηκαν προφίλ για επιλεγμένο εύρος.
+No returns were processed in this shift.,Η επιστροφή στο τρέχον προφίλ απέτυχε.
+No risk activity found.,Δεν βρέθηκε πρόσφατη δραστηριότητα πελατών.
+No sales activity found for this period.,Δεν βρέθηκαν πρόσφατες εγγραφές μετοχών.
+No slow moving items.,Δεν βρέθηκαν εγγραφές
+No staff sales activity found.,Δεν υπάρχουν προτάσεις αναδιάταξης αυτήν τη στιγμή.
+No stock movement for this period.,Δεν υπάρχουν επαναλαμβανόμενοι πελάτες σε αυτήν την περίοδο.
+No submitted cash movements in this shift.,Καμία απάντηση από τον διακομιστή
+No supplier purchases found in this month.,Δεν βρέθηκαν τιμολόγια επιστροφής
+No suppliers found for this period.,Δεν βρέθηκε τάση επιστροφής προϊόντος.
+No sync trigger has run yet in this session.,Δεν βρέθηκαν επιστρεφόμενα στοιχεία για αυτό το τιμολόγιο
+No tax head breakdown found.,Δεν έγινε επεξεργασία επιστροφών σε αυτήν τη βάρδια.
+No top items found for this location.,Δεν βρέθηκε δραστηριότητα κινδύνου.
+No unpaid invoices,Δεν βρέθηκε δραστηριότητα πωλήσεων για αυτήν την περίοδο.
+No variant data found.,Δεν υπάρχουν αντικείμενα που κινούνται αργά.
+No week-wise sales trend found.,Δεν βρέθηκε δραστηριότητα πωλήσεων προσωπικού.
+No.,Καμία κίνηση μετοχών για αυτήν την περίοδο.
+Nobile Number,Δεν υποβλήθηκαν κινήσεις μετρητών σε αυτήν τη βάρδια.
+Not available,Δεν βρέθηκαν αγορές προμηθευτών αυτόν τον μήνα.
+Not checked,Δεν βρέθηκαν προμηθευτές για αυτήν την περίοδο.
+Not selected,Δεν έχει εκτελεστεί ακόμη κανένας κανόνας συγχρονισμού σε αυτήν την περίοδο λειτουργίας.
+Not Set,Δεν βρέθηκε ανάλυση της φορολογικής αρχής.
+Notifications,Δεν βρέθηκαν κορυφαία αντικείμενα για αυτήν την τοποθεσία.
+Offer,Χωρίς απλήρωτα τιμολόγια
+Offer Applied,Δεν βρέθηκαν δεδομένα παραλλαγής.
+Offer criteria exceeded,Δεν βρέθηκε εβδομαδιαία τάση πωλήσεων.
+Offer Item,Όχι.
+Offer item unavailable,Nobile Number
+Offer Removed,Μη διαθέσιμο
+Offer UOM cannot be changed,Δεν έχει ελεγχθεί
+Offer?,Δεν έχει επιλεγεί
+Offers,Δεν έχει οριστεί
+Offline,Ειδοποιήσεις
+Offline & Sync,Προσφορά
+Offline Capabilities,Εφαρμόστηκε η προσφορά
+Offline data status refreshed,Υπέρβαση των κριτηρίων προσφοράς
+Offline diagnostics,Στοιχείο προσφοράς
+Offline Invoices,Το προϊόν προσφοράς δεν είναι διαθέσιμο
+Offline invoices status,Η προσφορά καταργήθηκε
+Offline invoices synced,Το UOM προσφοράς δεν μπορεί να αλλάξει
+Offline Queue: {0},Προσφορά;
+Offline rebuild guidance,Προσφορές
+Offline restore is unavailable for this session.,Εκτός σύνδεσης
+Offline selling is available with degraded capabilities.,Εκτός σύνδεσης και συγχρονισμός
+Offline snapshot does not match the current POS state.,Δυνατότητες εκτός σύνδεσης
+Offline Status,Η κατάσταση δεδομένων εκτός σύνδεσης ανανεώθηκε
+"Offline, terminal, and system controls",Διαγνωστικά εκτός σύνδεσης
+OK,Τιμολόγια εκτός σύνδεσης
+Online,Κατάσταση τιμολογίων εκτός σύνδεσης
+Open actions menu,Τα τιμολόγια εκτός σύνδεσης συγχρονίστηκαν
+Open balance to collect,Ουρά εκτός σύνδεσης: {0}
+Open Customer Display,Οδηγίες ανακατασκευής εκτός σύνδεσης
+Open drawer,Η επαναφορά εκτός σύνδεσης δεν είναι διαθέσιμη για αυτήν την περίοδο λειτουργίας.
+Open invoices,Η πώληση εκτός σύνδεσης είναι διαθέσιμη με υποβαθμισμένες δυνατότητες.
+Open Payments?,Το στιγμιότυπο εκτός σύνδεσης δεν ταιριάζει με την τρέχουσα κατάσταση POS.
+Open POS home,Κατάσταση εκτός σύνδεσης
+Open this screen from POS Menu -> Open Customer Display.,"Στοιχεία ελέγχου εκτός σύνδεσης, τερματικού και συστήματος"
+OpenCV image processing enabled - Enhanced barcode detection,ΟΚ
+OpenCV image processing unavailable on this device,Διαδικτυακά
+OpenCV Off,Ανοίξτε το μενού ενεργειών
+OpenCV On,Ανοιχτό υπόλοιπο προς συλλογή
+OpenCV processing disabled,Ανοίξτε την προβολή πελατών
+Opening Amount,Ανοιχτό συρτάρι
+Opening Cash,Ανοιχτά τιμολόγια
+options,Άνοιγμα πληρωμών;
+Order,Ανοίξτε το σπίτι POS
+Original,Ανοίξτε αυτήν την οθόνη από το μενού POS -> Άνοιγμα εμφάνισης πελατών.
+Other,Ενεργοποιήθηκε η επεξεργασία εικόνας OpenCV - Βελτιωμένη ανίχνευση γραμμικού κώδικα
+Out,Η επεξεργασία εικόνας OpenCV δεν είναι διαθέσιμη σε αυτήν τη συσκευή
+Out of Stock,OpenCV Off
+Out of Stock Items,OpenCV On
+Outstanding,Η επεξεργασία OpenCV απενεργοποιήθηκε
+Outstanding Credit by Currency,Ποσό ανοίγματος
+Overdue,Άνοιγμα μετρητών
+Overpayment Change,επιλογές
+Overpayment change deducted: {0},Παραγγελία
+Packing List,Πρωτότυπο
+Page Format,Άλλο
+Page unavailable offline,Έξω
+Paid,Εκτός αποθέματος
+Paid (orig):,Εξαντλημένα είδη
+Paid Amount,Εξαιρετικό
+Paid change cannot be greater than total change!,Ανεξόφλητη πίστωση ανά νόμισμα
+Paid:,Εκπρόθεσμα
+Parent Item,Αλλαγή υπερπληρωμής
+Partial,Παρακρατήθηκε η αλλαγή υπερπληρωμής: {0}
+Partly Paid,Λίστα συσκευασίας
+Party Account,Μορφή σελίδας
+Party Type,Η σελίδα δεν είναι διαθέσιμη εκτός σύνδεσης
+Pause terminal until next cashier,Πληρωμένη
+PAY,Επί πληρωμή (προέλευση):
+Payment,Ποσό που καταβλήθηκε
+Payment Account,Η πληρωμένη αλλαγή δεν μπορεί να είναι μεγαλύτερη από τη συνολική αλλαγή!
+Payment entries processed for Invoice {0},Πληρωμή:
+Payment Entry Type,Γονικό αντικείμενο
+Payment History,Μερική
+Payment ID,Μερικώς πληρωμένο
+Payment Method Report,Λογαριασμός κόμματος
+Payment Methods,Τύπος πάρτι
+Payment of {0} received successfully.,Παύση τερματικού μέχρι το επόμενο ταμείο
+Payment Progress,ΠΛΗΡΩΣΤΕ
+Payment Reconciliation,Πληρωμή
+Payment request status could not be retrieved. Please try again,Λογαριασμός πληρωμών
+Payment Request took too long to respond. Please try requesting for payment again,Έγινε επεξεργασία των εγγραφών πληρωμής για το τιμολόγιο {0}
+Payment saved offline,Τύπος καταχώρισης πληρωμής
+Payment State,Ιστορικό πληρωμών
+Payment Status,Ταυτότητα πληρωμής
+Payment submitted but print function could not be executed. Payment name not found.,Αναφορά τρόπου πληρωμής
+Payment submitted.,Τρόποι Πληρωμής
+Payment Summary,Η πληρωμή του {0} ελήφθη με επιτυχία.
+Payments,Πρόοδος πληρωμής
+Payments are not open. Do you want to open payments and submit?,Συμφωνία πληρωμών
+Payments by Mode of Payment,Δεν ήταν δυνατή η ανάκτηση της κατάστασης του αιτήματος πληρωμής.
+PDF,Δοκιμάστε ξανά
+Peak Hour,Το αίτημα πληρωμής άργησε να ανταποκριθεί.
+Peak Memory:,Δοκιμάστε να ζητήσετε ξανά πληρωμή
+Peak Server:,Η πληρωμή αποθηκεύτηκε εκτός σύνδεσης
+Peak:,Κράτος πληρωμής
+Pending,Κατάσταση πληρωμής
+Pending Amount,"Η πληρωμή υποβλήθηκε, αλλά δεν ήταν δυνατή η εκτέλεση της λειτουργίας εκτύπωσης."
+Pending count updated from {0} to {1},Το όνομα πληρωμής δεν βρέθηκε.
+Pending Exposure,Η πληρωμή υποβλήθηκε.
+Pending Invoices,Περίληψη πληρωμών
+Pending Ratio,Πληρωμές
+Pending Sales,Οι πληρωμές δεν είναι ανοιχτές.
+Pending sales: {0} | Cache usage: {1}%,Θέλετε να ανοίξετε πληρωμές και να υποβάλετε;
+Pending Sync,Πληρωμές κατά τρόπο πληρωμής
+Pending: {0},PDF
+Pending: {0} | Synced: {1} | Draft: {2},Ώρα αιχμής
+Per Page,Μέγιστη μνήμη:
+Personal,Διακομιστής κορυφής:
+Personal preferences adjust the current cashier experience without changing the active POS route.,Κορυφή:
+PIN confirmation does not match.,Σε εκκρεμότητα
+PIN must be 4 to 8 digits.,Ποσό σε εκκρεμότητα
+Please add at least one item.,Ο αριθμός σε εκκρεμότητα ενημερώθηκε από {0} σε {1}
+Please allow camera access to scan codes,Έκθεση σε εκκρεμότητα
+Please enter payment amount,Εκκρεμή τιμολόγια
+Please fill all required fields,Αναλογία σε εκκρεμότητα
+Please make a payment or select a payment,Εκκρεμείς πωλήσεις
+Please request phone payment or use another payment method,Εκκρεμείς εκπτώσεις: {0} |
+Please select a customer first,Χρήση προσωρινής μνήμης: {1}%
+Please select a party,Συγχρονισμός σε εκκρεμότητα
+Please select a party before reconciling.,Σε εκκρεμότητα: {0}
+Please select a valid movement type.,Σε εκκρεμότητα: {0} |
+Please select an invoice,Συγχρονίστηκε: {1} |
+Please select company before reconciling.,Πρόχειρο: {2}
+Please set the customer's mobile number,Ανά σελίδα
+Please try again or enter the item manually.,Προσωπικά
+Please verify the barcode or check the item's availability.,Οι προσωπικές προτιμήσεις προσαρμόζουν την τρέχουσα εμπειρία ταμείου χωρίς να αλλάξετε την ενεργή διαδρομή POS.
+Points,Η επιβεβαίωση PIN δεν ταιριάζει.
+Popup blocked. Please allow popups.,Το PIN πρέπει να είναι 4 έως 8 ψηφία.
+POS,Προσθέστε τουλάχιστον ένα στοιχείο.
+POS controls and maintenance,Επιτρέψτε την πρόσβαση της κάμερας στους κωδικούς σάρωσης
+POS Expense is disabled for this POS Profile.,Εισαγάγετε το ποσό πληρωμής
+POS is running with limited offline prerequisites.,Συμπληρώστε όλα τα υποχρεωτικά πεδία
+POS Profile,Κάντε μια πληρωμή ή επιλέξτε μια πληρωμή
+Position the QR code or barcode within the scanning area,Ζητήστε πληρωμή μέσω τηλεφώνου ή χρησιμοποιήστε άλλη μέθοδο πληρωμής
+Posting,Επιλέξτε πρώτα έναν πελάτη
+Posting and Price List,Επιλέξτε ένα πάρτι
+Posting Date,Επιλέξτε ένα μέρος πριν συμφιλιωθείτε.
+Preparing background sync,Επιλέξτε έναν έγκυρο τύπο κίνησης.
+"Press OK to continue offline with a warning, or Cancel to retry.",Επιλέξτε ένα τιμολόγιο
+Previous unit of measure,Επιλέξτε εταιρεία πριν από τη συμφωνία.
+Price List,Ορίστε τον αριθμό κινητού του πελάτη
+Price List Rate,Δοκιμάστε ξανά ή εισαγάγετε το στοιχείο μη αυτόματα.
+Price list rate updated locally only,Επαληθεύστε τον γραμμωτό κώδικα ή ελέγξτε τη διαθεσιμότητα του προϊόντος.
+Pricing & Discounts,Πόντοι
+Pricing Rule,Αποκλείστηκε το αναδυόμενο παράθυρο.
+Print,Επιτρέψτε τα αναδυόμενα παράθυρα.
+Print Draft,POS
+Print Format (Invoice),Έλεγχοι και συντήρηση POS
+Print Format (Order),Το POS Expense είναι απενεργοποιημένο για αυτό το προφίλ POS.
+Print invoice,Το POS λειτουργεί με περιορισμένες προϋποθέσεις εκτός σύνδεσης.
+Print Last Invoice,Προφίλ POS
+Print Purchase Invoice instead of PO,Τοποθετήστε τον κωδικό QR ή τον γραμμωτό κώδικα μέσα στην περιοχή σάρωσης
+Printer,Ανάρτηση
+Processed returns impacting the shift totals,Ανάρτηση και Τιμοκατάλογος
+Processing Payment,Ημερομηνία δημοσίευσης
+Processing payment entries for Invoice {0},Προετοιμασία συγχρονισμού φόντου
+Profile,Πατήστε OK για να συνεχίσετε εκτός σύνδεσης με μια προειδοποίηση ή Άκυρο για να προσπαθήσετε ξανά.
+Profiles,Προηγούμενη μονάδα μέτρησης
+Profit,Τιμοκατάλογος
+Profit: Invoice Item Estimate,Τιμή καταλόγου
+Profit: Stock Ledger (COGS),Η τιμή του τιμοκαταλόγου ενημερώνεται μόνο τοπικά
+Profitability Report,Τιμές & Εκπτώσεις
+Prorated return discount,Κανόνας τιμολόγησης
+Purchase Amount,Εκτύπωση
+Purchase Invoices,Εκτύπωση προσχέδιο
+Purchase Order created,Μορφή εκτύπωσης (τιμολόγιο)
+Qty,Μορφή εκτύπωσης (παραγγελία)
+Qualified,Εκτύπωση τιμολογίου
+Quantity,Εκτύπωση τελευταίου τιμολογίου
+Quantity exceeds available stock,Εκτύπωση Τιμολογίου Αγοράς αντί PO
+Quick Actions,Εκτυπωτής
+Quotation {0} is Submitted,Επεξεργασμένες επιστροφές που επηρεάζουν τα σύνολα βάρδιας
+Quotation submitted,Επεξεργασία πληρωμής
+QZ Tray connected.,Επεξεργασία εγγραφών πληρωμής για το τιμολόγιο {0}
+QZ Tray is manually disconnected. Press Connect to enable it again.,Προφίλ
+QZ Tray is not connected.,Προφίλ
+QZ Tray Setup,Κέρδος
+Rate,Κέρδος: Εκτίμηση είδους τιμολογίου
+Rate adjusted to maximum allowed discount,Κέρδος: Καθολικό Αποθεμάτων (COGS)
+Ready,Έκθεση Κερδοφορίας
+Ready to resume,Αναλογική έκπτωση επιστροφής
+Ready!,Ποσό Αγοράς
+Real-time POS insights for retail operations.,Τιμολόγια αγορών
+Rebuild Offline Data,Δημιουργήθηκε η εντολή αγοράς
+Receive,Ποσ
+Receive now,Πιστοποιημένος
+Received,Ποσότητα
+Received:,Η ποσότητα υπερβαίνει το διαθέσιμο απόθεμα
+Recent Movement Entries,Γρήγορες Ενέργειες
+Recent updates about your invoices,Η προσφορά {0} υποβλήθηκε
+Recently Active Customers,Η προσφορά υποβλήθηκε
+Rechecking connection,Συνδέθηκε ο δίσκος QZ.
+Reconcile payment methods and close shift,Ο δίσκος QZ αποσυνδέεται χειροκίνητα.
+Reconciling Payments,Πατήστε Σύνδεση για να το ενεργοποιήσετε ξανά.
+"Reconnect and open this page once while online, then offline refreshes will be able to restore it.",Ο δίσκος QZ δεν είναι συνδεδεμένος.
+Reconnect online to refresh cached offline data from the server.,Ρύθμιση δίσκου QZ
+Recreate local offline prerequisites from scratch,Βαθμολογήστε
+Recv:,Η τιμή προσαρμόστηκε στη μέγιστη επιτρεπόμενη έκπτωση
+Redeem,Έτοιμοι
+Redeem / Scan,Έτοιμο για συνέχιση
+Redeem Amount,Έτοιμοι!
+Redeem Mode,Πληροφορίες POS σε πραγματικό χρόνο για εργασίες λιανικής.
+Redeemed Amount,Αναδημιουργία δεδομένων εκτός σύνδεσης
+Redeemed credit cannot be greater than its total.,Λήψη
+Redemption and Totals,Λάβετε τώρα
+Reference,Ελήφθη
+Refresh,Λήφθηκε:
+Refresh Exchange Rate,Εγγραφές πρόσφατων κινήσεων
+Refresh Offline Data,Πρόσφατες ενημερώσεις σχετικά με τα τιμολόγιά σας
+Refresh Printers,Πρόσφατα ενεργοί πελάτες
+Refund,Επανέλεγχος σύνδεσης
+Release Notes,Εναρμονίστε τους τρόπους πληρωμής και κλείστε τη βάρδια
+Reload,Συμφωνία πληρωμών
+Reload customers,"Επανασυνδεθείτε και ανοίξτε αυτήν τη σελίδα μία φορά ενώ είστε συνδεδεμένοι και, στη συνέχεια, οι ανανεώσεις εκτός σύνδεσης θα μπορούν να την επαναφέρουν."
+Reload Items,Συνδεθείτε ξανά στο διαδίκτυο για να ανανεώσετε τα αποθηκευμένα δεδομένα εκτός σύνδεσης από το διακομιστή.
+Reload Now,Δημιουργήστε εκ νέου τοπικές προϋποθέσεις εκτός σύνδεσης από την αρχή
+Reload to apply the latest changes. Your current session will be refreshed.,Recv:
+Reload Workflow,Εξαργύρωση
+Remarks,Εξαργύρωση / Σάρωση
+Remarks are required.,Εξαργυρώστε το ποσό
+Remove,Λειτουργία εξαργύρωσης
+Remove barcode item,Εξαγορασμένο Ποσό
+Remove cached data and reload the POS app,Η εξαργυρωμένη πίστωση δεν μπορεί να είναι μεγαλύτερη από το σύνολο της.
+Remove item,Εξαγορά και Σύνολα
+Remove Offer,Αναφορά
+Reorder / Purchase Suggestions,Ανανέωση
+Repair Candidate,Ανανέωση συναλλαγματικής ισοτιμίας
+Repair Change Allocation,Ανανέωση δεδομένων εκτός σύνδεσης
+Repair requires an online connection,Ανανέωση εκτυπωτών
+Repaired,Επιστροφή χρημάτων
+Repairing change allocation,Σημειώσεις Έκδοσης
+Repeat Customers,Επαναφόρτωση
+Repeat Rate,Επαναφόρτωση πελατών
+Reprint previous transaction,Επαναφόρτωση αντικειμένων
+Request,Επανάληψη φόρτωσης τώρα
+Request ID: {0},Επαναλάβετε τη φόρτωση για να εφαρμόσετε τις τελευταίες αλλαγές.
+Request Payment,Η τρέχουσα συνεδρία σας θα ανανεωθεί.
+Requested route: {0},Επαναφόρτωση ροής εργασίας
+Required columns cannot be hidden,Παρατηρήσεις
+Reset,Απαιτούνται παρατηρήσεις.
+Reset item name,Αφαίρεση
+Reset to Default,Αφαιρέστε το στοιχείο γραμμικού κώδικα
+Resource Health,Καταργήστε τα αποθηκευμένα δεδομένα και φορτώστε ξανά την εφαρμογή POS
+Restricted,Αφαίρεση στοιχείου
+Restricted operational controls for supervisors only.,Κατάργηση προσφοράς
+Retry,Αναπαραγγελία / Προτάσεις αγοράς
+Retry route,Υποψήφιος επισκευής
+Return,Επιδιόρθωση Κατανομής Αλλαγών
+Return Amount,Η επισκευή απαιτεί σύνδεση στο διαδίκτυο
+Return Count,Επισκευασμένο
+Return items must have negative quantities,Επισκευή κατανομής αλλαγών
+Return total must be negative,Επαναλαμβανόμενοι πελάτες
+Return Valid Until,Ρυθμός επανάληψης
+Return window passed,Επανεκτύπωση προηγούμενης συναλλαγής
+Return without Invoice,Αίτημα
+Returns,Επιστροφές
+Returns / Voids / Discounts,Επιστροφές / Ακυρώσεις / Εκπτώσεις
+Returns by Currency,Επιστροφές ανά νόμισμα
+Revenue,Έσοδα
+Review shift totals before submitting the closing entry,Ελέγξτε τα σύνολα βάρδιων πριν υποβάλετε την καταχώριση κλεισίματος
+Round Off,Στρογγυλοποίηση
+Rows,Σειρές
+Rows:,Σειρές:
+Rule,Κανόνας
+Sale,Πώληση
+Sales,Πωλήσεις
+Sales Order {0} is Submitted,Η παραγγελία πώλησης {0} έχει υποβληθεί
+Sales Person and Print,Πωλητής και Εκτύπωση
+Sales Person not found,Ο πωλητής δεν βρέθηκε
+Sales processed,Οι πωλήσεις υποβλήθηκαν σε επεξεργασία
+Sales Return,Επιστροφή πωλήσεων
+Sales Trend Report,Αναφορά τάσης πωλήσεων
+Save,Αποθήκευση
+Save & Clear,Αποθήκευση & Εκκαθάριση
+Save as POS Profile Default,Αποθήκευση ως Προεπιλογή Προφίλ POS
+Save Settings,Αποθήκευση ρυθμίσεων
+Save the selected printer as the POS Profile default so it shows automatically on this setup.,"Αποθηκεύστε τον επιλεγμένο εκτυπωτή ως το προεπιλεγμένο προφίλ POS, ώστε να εμφανίζεται αυτόματα σε αυτήν τη ρύθμιση."
+Saved as draft because: {0},Αποθηκεύτηκε ως πρόχειρο επειδή: {0}
+Saving...,Αποθήκευση...
+Scale barcode detected. Quantity here is the number of labels to print.,Εντοπίστηκε γραμμωτός κώδικας κλίμακας.
+Scale barcode settings are not configured. Using item barcode only.,Η ποσότητα εδώ είναι ο αριθμός των ετικετών που θα εκτυπωθούν.
+Scale template barcode is missing for this item/UOM. Using item barcode only.,Οι ρυθμίσεις γραμμικού κώδικα κλίμακας δεν έχουν διαμορφωθεί.
+Scan an existing card and top it up without leaving the payment flow.,Χρησιμοποιώντας μόνο γραμμωτό κώδικα.
+Scan Error,Ο γραμμωτός κώδικας προτύπου κλίμακας λείπει για αυτό το στοιχείο/UOM.
+Scan or enter a gift card code to check balance or redeem.,Χρησιμοποιώντας μόνο γραμμωτό κώδικα.
+Scan or paste the card code below.,Σαρώστε μια υπάρχουσα κάρτα και συμπληρώστε την χωρίς να αποχωρήσετε από τη ροή πληρωμών.
+Scan QR Code/Barcode,Σφάλμα σάρωσης
+Scan with camera,Σαρώστε ή εισαγάγετε έναν κωδικό δωροκάρτας για να ελέγξετε το υπόλοιπο ή να εξαργυρώσετε.
+Scan-First Flow,Σαρώστε ή επικολλήστε τον κωδικό της κάρτας παρακάτω.
+Scanned Code:,Σάρωση QR Code/Barcode
+Scanning for: {0},Σάρωση με κάμερα
+Scanning items,Σάρωση-Πρώτη ροή
+Scan-Ready,Σαρωμένος κώδικας:
+Scope,Σάρωση για: {0}
+Scope: All Profiles,Σάρωση στοιχείων
+Scope: Current Profile,Έτοιμο για σάρωση
+Scope: Specific Profile,Πεδίο εφαρμογής
+Search,Πεδίο εφαρμογής: Όλα τα προφίλ
+Search Account,Πεδίο εφαρμογής: Τρέχον προφίλ
+Search an invoice and continue the return flow without extra steps.,Πεδίο εφαρμογής: Ειδικό προφίλ
+Search customer,Αναζήτηση
+Search invoices or customers,Αναζήτηση λογαριασμού
+Search item,Αναζητήστε ένα τιμολόγιο και συνεχίστε τη ροή επιστροφής χωρίς επιπλέον βήματα.
+Search item / code,Αναζήτηση πελάτη
+Search items or barcode,Αναζήτηση τιμολογίων ή πελατών
+Search Mpesa Payments,Αναζήτηση αντικειμένου
+Search return invoices or customers,Αναζήτηση στοιχείου / κωδικού
+Search supplier,Αναζήτηση στοιχείων ή γραμμικού κώδικα
+Search unpaid invoices or customers,Αναζήτηση Mpesa Payments
+Secure context (HTTPS or localhost) is required for camera access.,Αναζήτηση τιμολογίων επιστροφής ή πελατών
+Secure context (HTTPS) required for camera access. Please use HTTPS to access the camera.,Αναζήτηση προμηθευτή
+Select,Αναζήτηση απλήρωτων τιμολογίων ή πελατών
+Select a cashier first.,Απαιτείται ασφαλές περιβάλλον (HTTPS ή localhost) για πρόσβαση στην κάμερα.
+Select a customer,Απαιτείται ασφαλές περιβάλλον (HTTPS) για πρόσβαση στην κάμερα.
+Select a customer to use coupon,Χρησιμοποιήστε το HTTPS για πρόσβαση στην κάμερα.
+Select a printer to use QZ silent printing.,Επιλέξτε
+Select Batch,Επιλέξτε πρώτα ένα ταμείο.
+Select Columns to Display,Επιλέξτε έναν πελάτη
+Select items to sell,Επιλέξτε έναν πελάτη για χρήση κουπονιού
+Select Language,Επιλέξτε έναν εκτυπωτή για χρήση της αθόρυβης εκτύπωσης QZ.
+Select Payment,Επιλέξτε Παρτίδα
+Select Payment Account,Επιλέξτε Στήλες για εμφάνιση
+Select printer,Επιλέξτε αντικείμενα προς πώληση
+Select Return Invoice,Επιλέξτε Γλώσσα
+Select S.O,Επιλέξτε Πληρωμή
+Select Sales Orders,Επιλέξτε Λογαριασμός πληρωμής
+Select the cashier who is taking over this terminal.,Επιλέξτε εκτυπωτή
+Selected,Επιλέξτε Επιστροφή τιμολογίου
+Selected movement type is not allowed by POS Profile.,Επιλέξτε S.O
+Selected Payments,Επιλέξτε Παραγγελίες Πωλήσεων
+Sensitive actions kept away from quick taps.,Επιλέξτε τον ταμία που αναλαμβάνει αυτό το τερματικό.
+Serial,Επιλεγμένο
+Serial Numbers,Ο επιλεγμένος τύπος κίνησης δεν επιτρέπεται από το προφίλ POS.
+Server CPU Usage:,Επιλεγμένες πληρωμές
+Server Health,Οι ευαίσθητες ενέργειες κρατούνται μακριά από γρήγορα χτυπήματα.
+Server Memory Usage:,Σειρά
+Server Metrics,Σειριακούς Αριθμούς
+Server Uptime:,Χρήση CPU διακομιστή:
+Service Charges,Υγεία διακομιστή
+Session,Χρήση μνήμης διακομιστή:
+Set each cashier PIN in the User form and keep terminal members assigned in POS Profile User.,Μετρήσεις διακομιστή
+Settings,Χρόνος λειτουργίας διακομιστή:
+Settings in this section update the POS workspace without changing the current route.,Χρεώσεις υπηρεσιών
+Setup complete!,συνεδρία
+Share,Ορίστε κάθε PIN ταμείου στη φόρμα Χρήστη και διατηρήστε τα μέλη τερματικού που έχουν εκχωρηθεί στο προφίλ χρήστη POS.
+Shared terminal,Ρυθμίσεις
+Shift Closed Snapshot,Οι ρυθμίσεις σε αυτήν την ενότητα ενημερώνουν τον χώρο εργασίας του POS χωρίς να αλλάξουν την τρέχουσα διαδρομή.
+Shift Overview,Η εγκατάσταση ολοκληρώθηκε!
+Show,Κοινή χρήση
+Show cart on customer-facing screen,Κοινόχρηστο τερματικό
+Show last invoice rate,Shift Κλειστό στιγμιότυπο
+Show rate info,Επισκόπηση Shift
+Show Repair Candidates,Εμφάνιση
+Show search tools,Εμφάνιση του καλαθιού στην οθόνη που βλέπει ο πελάτης
+Show the active cart on a customer-facing screen,Εμφάνιση τιμής τελευταίου τιμολογίου
+Showing {0}-{1} of {2},Εμφάνιση πληροφοριών τιμής
+Showing 0 of 0,Εμφάνιση υποψηφίων επισκευής
+Shows the distribution of invoices per currency,Εμφάνιση εργαλείων αναζήτησης
+Sign out of session,Εμφάνιση του ενεργού καλαθιού σε μια οθόνη που βλέπει τον πελάτη
+Sign out of the current POS session,Εμφάνιση {0}-{1} από {2}
+Size:,Εμφάνιση 0 από 0
+Skipped Payments,Εμφανίζει την κατανομή των τιμολογίων ανά νόμισμα
+Skipping items without barcodes,Αποσύνδεση από τη συνεδρία
+Slow Moving,Αποσυνδεθείτε από την τρέχουσα περίοδο λειτουργίας POS
+Slow Moving Items,Μέγεθος:
+Slow Queries:,Παράβλεψη πληρωμών
+Sold,Παράκαμψη αντικειμένων χωρίς γραμμωτούς κώδικες
+Source,Αργή κίνηση
+Source Cash Account (Optional Override),Είδη αργής κίνησης
+Source Ex. Rate:,Αργή ερωτήματα:
+Source Rate:,Πουλήθηκε
+Specific Profile,Πηγή
+Split Invoices,Λογαριασμός μετρητών προέλευσης (Προαιρετική παράκαμψη)
+Staff / Cashier Performance Report,Πηγή Εξ.
+Status,Βαθμολογία:
+Stock,Πηγή Ποσοστό:
+Stock Information,Συγκεκριμένο προφίλ
+Stock is lower than requested,Διαίρεση Τιμολογίων
+Stock is lower than requested:\n{0},Έκθεση Απόδοσης Προσωπικού / Ταμείου
+Stock Movement Report,Κατάσταση
+Stock update: {0} has {1} available. Adding {2} will bring the stock below zero.,απόθεμα
+Submit,Πληροφορίες αποθέματος
+Submit & Print,Το απόθεμα είναι χαμηλότερο από το ζητούμενο
+Submit Deposit,Το απόθεμα είναι χαμηλότερο από το ζητούμενο:\n{0}
+Submit Expense,Έκθεση κίνησης μετοχών
+Submitted,Ενημέρωση αποθέματος: Η εταιρεία {0} διαθέτει {1}.
+Submitted Cash Movements,Η προσθήκη του {2} θα φέρει το απόθεμα κάτω από το μηδέν.
+Submitted entries,Υποβολή
+Successfully scanned:,Υποβολή & Εκτύπωση
+Suggested,Υποβολή κατάθεσης
+Suggested Qty,Υποβολή Δαπάνης
+Supervisor Access,Υποβλήθηκε
+Supervisor permissions unlock issuance and reloads,Υποβλήθηκαν κινήσεις μετρητών
+Supervisor Tools,Υποβλήθηκαν συμμετοχές
+Supplier,Σαρώθηκε με επιτυχία:
+Supplier and dates are required.,Προτεινόμενα
+Supplier Invoices,Προτεινόμενη Ποσότητα
+Supplier is required.,Πρόσβαση επόπτη
+Supplier name is required,Τα δικαιώματα επόπτη ξεκλειδώνουν την έκδοση και τις επαναφορτώσεις
+Supplier Payments,Εργαλεία Επόπτη
+Supplier Purchase Summary,Προμηθευτής
+Suppliers,Απαιτείται προμηθευτής και ημερομηνίες.
+Suppliers not found,Τιμολόγια Προμηθευτών
+Switch Camera,Απαιτείται προμηθευτής.
+Switch Cashier,Απαιτείται όνομα προμηθευτή
+Switch the POS appearance theme,Πληρωμές προμηθευτών
+Switch theme appearance,Περίληψη αγορών προμηθευτή
+Switched to:,Προμηθευτές
+Sync All Invoices,Δεν βρέθηκαν προμηθευτές
+Sync Offline Cash Movements ({0}),Εναλλαγή κάμερας
+Sync Offline Sales,Διακόπτης Ταμείου
+Synced {0} offline cash movement(s).,Αλλάξτε το θέμα εμφάνισης POS
+Syncing items in background,Εναλλαγή εμφάνισης θέματος
+System / Diagnostics,Έγινε εναλλαγή σε:
+"System actions are low-frequency maintenance controls such as app info, support diagnostics, and session controls.",Συγχρονισμός όλων των τιμολογίων
+System Information,Συγχρονισμός μετρητών εκτός σύνδεσης ({0})
+System Status,Συγχρονισμός πωλήσεων εκτός σύνδεσης
+Tables:,Συγχρονίστηκαν {0} κινήσεις μετρητών εκτός σύνδεσης.
+Tap the button below to redeem a gift card during checkout.,Συγχρονισμός στοιχείων στο παρασκήνιο
+Target,Σύστημα / Διαγνωστικά
+Target Ex. Rate:,"Οι ενέργειες συστήματος είναι έλεγχοι συντήρησης χαμηλής συχνότητας, όπως πληροφορίες εφαρμογής, διαγνωστικά υποστήριξης και έλεγχοι συνεδρίας."
+Target Rate:,Πληροφορίες συστήματος
+Tax,Κατάσταση συστήματος
+Tax / Charges Report,Πίνακες:
+Tax Heads,Πατήστε το κουμπί παρακάτω για να εξαργυρώσετε μια δωροκάρτα κατά την ολοκλήρωση της αγοράς.
+Taxable Amount,Στόχος
+Tendered,Στόχος Ex.
+Terminal,Βαθμολογία:
+Terminal & Devices,Ποσοστό στόχος:
+Terminal locked,Φόρος
+"Terminal tools affect this checkout station, customer-facing displays, and future printer/device controls.",Έκθεση Φόρου / Χρεώσεων
+Territory not found,Προϊστάμενοι Εφορίας
+The amount paid is not complete,Φορολογητέα Ποσό
+The app stores data locally for offline use. This is called cache.,Προσφορά
+The invoice stayed in draft. Please review and submit it manually.,Τερματικό
+The maximum discount allowed is,Τερματικό & Συσκευές
+The quantity for {0} has been adjusted to the maximum available stock.,Το τερματικό κλειδωμένο
+The system could not retrieve the item details. Please try again.,"Τα εργαλεία τερματικού επηρεάζουν αυτόν τον σταθμό ολοκλήρωσης αγοράς, τις οθόνες που αντιμετωπίζουν οι πελάτες και τα μελλοντικά στοιχεία ελέγχου εκτυπωτή/συσκευής."
+These invoices will be synced when connection is restored,Η περιοχή δεν βρέθηκε
+This action now opens inside the settings workspace.,Το ποσό που καταβλήθηκε δεν είναι πλήρες
+This coupon already used !,Η εφαρμογή αποθηκεύει δεδομένα τοπικά για χρήση εκτός σύνδεσης.
+This invoice does not need change-allocation repair,Αυτό ονομάζεται προσωρινή μνήμη.
+This invoice is already repaired,Το τιμολόγιο παρέμεινε προσχέδιο.
+This is an item template. Please choose a variant.,Ελέγξτε και υποβάλετέ το με μη αυτόματο τρόπο.
+this item,Η μέγιστη επιτρεπόμενη έκπτωση είναι
+This POS page could not be opened offline because its code was not cached on this terminal yet.,Η ποσότητα για το {0} έχει προσαρμοστεί στο μέγιστο διαθέσιμο απόθεμα.
+This Serial Number {0} has already been added!,Το σύστημα δεν μπόρεσε να ανακτήσει τις λεπτομέρειες του στοιχείου.
+Threshold,Δοκιμάστε ξανά.
+Time,Αυτά τα τιμολόγια θα συγχρονιστούν όταν αποκατασταθεί η σύνδεση
+Tip: Clear cache regularly to free up space and keep the app fast.,Αυτή η ενέργεια ανοίγει τώρα μέσα στο χώρο εργασίας των ρυθμίσεων.
+Tip: Close unused tabs or apps to reduce lag.,Αυτό το κουπόνι έχει ήδη χρησιμοποιηθεί!
+Tip: Monitor slow queries and table size for optimal performance.,Αυτό το τιμολόγιο δεν χρειάζεται επισκευή αλλαγής-κατανομής
+To Be Paid,Αυτό το τιμολόγιο έχει ήδη επισκευαστεί
+To Date,Αυτό είναι ένα πρότυπο στοιχείου.
+Today,Επιλέξτε μια παραλλαγή.
+Today Profit,αυτό το στοιχείο
+Today Sales,Αυτή η σελίδα POS δεν ήταν δυνατό να ανοίξει εκτός σύνδεσης επειδή ο κώδικάς της δεν είχε αποθηκευτεί ακόμα προσωρινά σε αυτό το τερματικό.
+Toggle navigation drawer,Αυτός ο σειριακός αριθμός {0} έχει ήδη προστεθεί!
+Toggle Theme,Κατώφλι
+Tools,Χρόνος
+Tools for customer-facing screens and terminal-specific actions.,Συμβουλή: Εκκαθαρίστε τακτικά την προσωρινή μνήμη για να ελευθερώσετε χώρο και να διατηρήσετε την εφαρμογή γρήγορη.
+Top Brand,Συμβουλή: Κλείστε τις αχρησιμοποίητες καρτέλες ή εφαρμογές για να μειώσετε την καθυστέρηση.
+Top Category,Συμβουλή: Παρακολουθήστε αργά ερωτήματα και μέγεθος πίνακα για βέλτιστη απόδοση.
+Top Charge Head,Να Πληρωθεί
+Top Customers,Μέχρι σήμερα
+Top Discount,Σήμερα
+Top Items by Location,Κέρδος σήμερα
+Top Margin,Πωλήσεις σήμερα
+Top Pending,Εναλλαγή συρταριού πλοήγησης
+Top Profit Item,Εναλλαγή θέματος
+Top Return Items,Εργαλεία
+Top Sales by Cashier,Εργαλεία για οθόνες που απευθύνονται σε πελάτες και ενέργειες για συγκεκριμένα τερματικά.
+Top Supplier,Κορυφαία μάρκα
+Top Suppliers by Spend,Κορυφαία Κατηγορία
+Top Tables,Κορυφαία κεφαλή φόρτισης
+Top Tax Head,Κορυφαίοι πελάτες
+Top Up Amount,Κορυφαία Έκπτωση
+Top Up Card,Κορυφαία είδη ανά τοποθεσία
+Top Up Mode,Κορυφαίο Περιθώριο
+Top Variant,Κορυφή σε εκκρεμότητα
+Total,Κορυφαίο Στοιχείο Κέρδους
+Total Amount,Κορυφαία είδη επιστροφής
+Total Change,Κορυφαίες πωλήσεις από ταμείο
+Total Charges,Κορυφαίος προμηθευτής
+Total In,Κορυφαίοι προμηθευτές ανά δαπάνη
+Total Invoices,Κορυφαίοι πίνακες
+Total Items,Αρχηγός Φορολογίας
+Total Mpesa,Ποσό Συμπλήρωσης
+Total Out,Κάρτα ανανέωσης
+Total Payments,Λειτουργία συμπλήρωσης
+Total Purchase,Κορυφαία παραλλαγή
+Total Selected :,Σύνολο
+Total Size,Συνολικό Ποσό
+Total Stock Qty,Συνολική Αλλαγή
+Total:,Συνολικές Χρεώσεις
+Totals by Invoice Currency,Σύνολο εισόδου
+Track how much cash was handed back to customers,Σύνολο τιμολογίων
+"Track recent sales, collect unpaid balances, and reopen saved work",Σύνολο αντικειμένων
+Transaction ID,Σύνολο Mpesa
+Transfer,Σύνολο Έξω
+Try a different search term or clear the cart search.,Σύνολο πληρωμών
+Try adjusting your search or filters,Συνολική Αγορά
+Try another source or refresh the list.,Σύνολο επιλεγμένων :
+Try changing the date range or status filter.,Συνολικό μέγεθος
+Type,Συνολικός αριθμός αποθεμάτων
+Unable to access camera even with basic settings. Please check your camera permissions and device compatibility.,Σύνολο:
+Unable to add offer item {0}. Please refresh and try again.,Σύνολα ανά νόμισμα τιμολογίου
+Unable to add offer item. Please refresh and try again.,Παρακολουθήστε πόσα μετρητά επιστράφηκαν στους πελάτες
+Unable to add scanned item.,"Παρακολουθήστε πρόσφατες πωλήσεις, συλλέξτε απλήρωτα υπόλοιπα και ανοίξτε ξανά την αποθηκευμένη εργασία"
+Unable to create purchase order,Αναγνωριστικό συναλλαγής
+Unable to delete draft invoice,Μεταφορά
+Unable to fetch documents,Δοκιμάστε έναν διαφορετικό όρο αναζήτησης ή διαγράψτε την αναζήτηση στο καλάθι.
+Unable to fetch draft orders,Δοκιμάστε να προσαρμόσετε την αναζήτηση ή τα φίλτρα σας
+Unable to fetch invoice history,Δοκιμάστε άλλη πηγή ή ανανεώστε τη λίστα.
+Unable to fetch M-Pesa payments,Δοκιμάστε να αλλάξετε το εύρος ημερομηνιών ή το φίλτρο κατάστασης.
+Unable to fetch sales orders,Τύπος
+Unable to fetch unpaid invoices,Δεν είναι δυνατή η πρόσβαση στην κάμερα ακόμη και με βασικές ρυθμίσεις.
+Unable to generate scale barcode,Ελέγξτε τα δικαιώματα της κάμερας και τη συμβατότητα της συσκευής σας.
+Unable to issue gift card.,Δεν είναι δυνατή η προσθήκη του στοιχείου προσφοράς {0}.
+Unable to load cashier PIN status.,Κάντε ανανέωση και δοκιμάστε ξανά.
+Unable to load document,Δεν είναι δυνατή η προσθήκη του στοιχείου προσφοράς.
+Unable to load draft invoice,Κάντε ανανέωση και δοκιμάστε ξανά.
+Unable to load gift card balance.,Δεν είναι δυνατή η προσθήκη σαρωμένου στοιχείου.
+Unable to load invoice details,Δεν είναι δυνατή η δημιουργία παραγγελίας
+Unable to load parked order,Δεν είναι δυνατή η διαγραφή πρόχειρου τιμολογίου
+Unable to load the selected sales order,Δεν είναι δυνατή η ανάκτηση εγγράφων
+Unable to prepare document,Δεν είναι δυνατή η ανάκτηση πρόχειρων παραγγελιών
+Unable to prepare return invoice,Δεν είναι δυνατή η ανάκτηση του ιστορικού τιμολογίων
+Unable to print draft invoice,Δεν είναι δυνατή η ανάκτηση πληρωμών M-Pesa
+Unable to print submitted invoice,Δεν είναι δυνατή η ανάκτηση παραγγελιών πωλήσεων
+Unable to process document action,Δεν είναι δυνατή η ανάκτηση απλήρωτων τιμολογίων
+Unable to repair change allocation,Δεν είναι δυνατή η δημιουργία γραμμικού κώδικα κλίμακας
+Unable to save cashier PIN.,Δεν είναι δυνατή η έκδοση δωροκάρτας.
+Unable to save the rate to the backend price list,Δεν είναι δυνατή η φόρτωση της κατάστασης PIN του ταμείου.
+Unable to submit invoice,Δεν είναι δυνατή η φόρτωση του εγγράφου
+Unable to submit the selected payment,Δεν είναι δυνατή η φόρτωση του προσχεδίου τιμολογίου
+Unable to top up gift card.,Δεν είναι δυνατή η φόρτωση του υπολοίπου της δωροκάρτας.
+Unable to verify cashier PIN.,Δεν είναι δυνατή η φόρτωση των στοιχείων τιμολογίου
+Unallocated,Δεν είναι δυνατή η φόρτωση σταθμευμένης παραγγελίας
+Unallocated:,Δεν είναι δυνατή η φόρτωση της επιλεγμένης παραγγελίας
+Unavailable,Δεν είναι δυνατή η προετοιμασία του εγγράφου
+Unknown,Δεν είναι δυνατή η προετοιμασία του τιμολογίου επιστροφής
+Unknown error,Δεν είναι δυνατή η εκτύπωση πρόχειρου τιμολογίου
+Unknown Item,Δεν είναι δυνατή η εκτύπωση του τιμολογίου που υποβλήθηκε
+Unknown Warehouse,Δεν είναι δυνατή η επεξεργασία της ενέργειας εγγράφου
+Unlock POS,Δεν είναι δυνατή η επιδιόρθωση της κατανομής αλλαγών
+Unpaid,Δεν είναι δυνατή η αποθήκευση του PIN του ταμείου.
+"Unselected payments stay unallocated first, then auto reconcile after submit.",Δεν είναι δυνατή η αποθήκευση της τιμής στον τιμοκατάλογο του backend
+UOM,Δεν είναι δυνατή η υποβολή τιμολογίου
+UOM not found,Δεν είναι δυνατή η υποβολή της επιλεγμένης πληρωμής
+Update available,Δεν είναι δυνατή η ανανέωση της δωροκάρτας.
+Update Customer,Δεν είναι δυνατή η επαλήθευση του PIN του ταμείου.
+Update PIN,Μη κατανομή
+Update Price List Rate,Μη κατανομή:
+Updated,Μη διαθέσιμο
+Updates and app info that stay out of the cashier flow.,Άγνωστο
+Updates automatically,Άγνωστο σφάλμα
+Upload pending transactions,Άγνωστο Στοιχείο
+Usage,Άγνωστη Αποθήκη
+Usage Stats,Ξεκλείδωμα POS
+Use a 4 to 8 digit PIN for cashier switching and terminal unlock.,Απλήρωτοι
+Use Cashier,"Οι μη επιλεγμένες πληρωμές μένουν πρώτα αδιάθετες και, στη συνέχεια, γίνεται αυτόματη συμφωνία μετά την υποβολή."
+Use date range to search for older invoices,UOM
+"Use one field for manual code entry, barcode scans, or QR scans.",Το UOM δεν βρέθηκε
+"Use one workflow for balance checks, new issuance, and top ups without leaving POS.",Διαθέσιμη ενημέρωση
+"Use this section when cached prerequisite data needs a refresh, rebuild, or diagnostics review.",Ενημέρωση πελάτη
+Use Western numerals,Ενημέρωση PIN
+Used:,Ενημέρωση τιμής τιμοκαταλόγου
+Using basic camera settings due to device limitations,Ενημερώθηκε
+Using cached customer balance,Ενημερώσεις και πληροφορίες εφαρμογών που παραμένουν εκτός ροής ταμείου.
+Valid until,Ενημερώνεται αυτόματα
+Variance %,Μεταφόρτωση εκκρεμών συναλλαγών
+Variants,Χρήση
+Variant-wise,Στατιστικά χρήσης
+Verify closing amounts for each payment method,Χρησιμοποιήστε ένα PIN 4 έως 8 ψηφίων για εναλλαγή ταμείου και ξεκλείδωμα τερματικού.
+View all,Χρησιμοποιήστε ταμείο
+View app information and current build details,Χρησιμοποιήστε το εύρος ημερομηνιών για να αναζητήσετε παλαιότερα τιμολόγια
+View Data Diagnostics,"Χρησιμοποιήστε ένα πεδίο για χειροκίνητη εισαγωγή κωδικού, σαρώσεις γραμμωτού κώδικα ή σαρώσεις QR."
+View Details,"Χρησιμοποιήστε μία ροή εργασιών για ελέγχους υπολοίπου, νέα έκδοση και ανανεώσεις χωρίς έξοδο από το POS."
+View invoice details,"Χρησιμοποιήστε αυτήν την ενότητα όταν τα προαπαιτούμενα δεδομένα προσωρινής αποθήκευσης χρειάζονται ανανέωση, ανακατασκευή ή διαγνωστικό έλεγχο."
+View notifications,Χρησιμοποιήστε δυτικούς αριθμούς
+View offline invoices,Χρησιμοποιείται:
+View restricted POS insights,Χρήση βασικών ρυθμίσεων κάμερας λόγω περιορισμών της συσκευής
+Void Amount,Χρήση αποθηκευμένου υπολοίπου πελατών
+Void Count,Ισχύει μέχρι
+Voids,Διακύμανση %
+Waiting for cart items,Παραλλαγές
+Waiting for payment...,Κατά παραλλαγή
+Walk-in Customer,Επαληθεύστε τα ποσά κλεισίματος για κάθε τρόπο πληρωμής
+Warehouse,Προβολή όλων
+Warning: High cache usage may affect performance.,Προβολή πληροφοριών εφαρμογής και λεπτομερειών τρέχουσας κατασκευής
+Warning: High lag may indicate heavy processing or browser slowness.,Προβολή Διαγνωστικών δεδομένων
+Week Δ,Προβολή λεπτομερειών
+Week-wise,Προβολή λεπτομερειών τιμολογίου
+Weight (g),Προβολή ειδοποιήσεων
+Weight (grams),Προβολή τιμολογίων εκτός σύνδεσης
+We'll let you know if an invoice fails to submit,Προβολή περιορισμένων πληροφοριών POS
+Workflow,Άκυρο Ποσό
+Write off amount cannot exceed the POS profile maximum of {0},Κενός αριθμός
+Write off amount exceeds the allowed limit ({0}). Please add payment for the remaining amount.,Κενά
+Yes,Αναμονή για είδη καλαθιού
+"Yes, Cancel sale",Αναμονή πληρωμής...
+"Yes, Close",Εσωτερικός πελάτης
+You are not allowed to print draft invoices,Αποθήκη
+You are offline. Add Payment will work again when the connection is restored.,Προειδοποίηση: Η υψηλή χρήση προσωρινής μνήμης μπορεί να επηρεάσει την απόδοση.
+You have no notifications right now,Προειδοποίηση: Η υψηλή καθυστέρηση μπορεί να υποδηλώνει έντονη επεξεργασία ή βραδύτητα του προγράμματος περιήγησης.
+Your Cart,Εβδομάδα Δ

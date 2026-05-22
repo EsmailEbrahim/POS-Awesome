@@ -1,0 +1,1353 @@
+﻿- Total Unallocated,- Total Unallocated
+* Required,* Nauðsynlegt
+{0} (Qty: {1}),{0} (Magn: {1})
+{0} actions,{0} aðgerðir
+{0} has only {1} in stock. You requested {2}. Adjust quantity or restock.,{0} er aðeins með {1} á lager.
+{0} offline invoice{1} pending,Þú baðst um {2}.
+{0} offline invoice{1} saved as draft,Stilltu magn eða endurnýjaðu birgðir.
+{0} offline invoice{1} synced,{0} ónettengdur reikningur{1} í bið
+{0}: {1} {2},{0} ónettengdur reikningur{1} vistaður sem drög
+{0}d ago,{0} ónettengdur reikningur{1} samstilltur
+{0}h ago,{0}: {1} {2}
+{0}m ago,fyrir {0}d
+A POS supervisor is required for this action.,{0}klst. síðan
+About,Fyrir {0}m. síðan
+Access,Nauðsynlegt er að vera umsjónarmaður POS fyrir þessa aðgerð.
+Account,Um
+Account is overdrawn,Aðgangur
+Acknowledge the error to resume scanning,Reikningur
+Acknowledge the error to resume scanning.,Reikningur er yfirdreginn
+Across,Viðurkenndu villuna til að halda áfram að skanna
+Action,Viðurkenndu villuna til að halda áfram að skanna.
+Actions,Þvert yfir
+Active sale,Aðgerð
+add,Aðgerðir
+Add items from the selector to start building this sale.,Virk sala
+Add more value to an existing gift card,bæta við
+Add New Address,Bættu við hlutum úr veljaranum til að byrja að byggja upp þessa sölu.
+Add new customer,Bættu meira gildi við núverandi gjafakort
+Add on New Line,Bæta við nýju heimilisfangi
+Add Payment,Bæta við nýjum viðskiptavinum
+Add payment to invoice,Bæta við nýrri línu
+Add/Edit Coupon Conditions,Bæta við greiðslu
+Additional Discount,Bættu greiðslu við reikning
+Additional Discount %,Bæta við/breyta afsláttarmiðaskilmálum
+Address Line 1,Auka afsláttur
+Address not found,Auka afsláttur %
+Adjust the quantity or enable negative stock to continue.,Heimilisfangslína 1
+Adjustment,Heimilisfang fannst ekki
+After returns,Stilltu magnið eða gerðu neikvæða birgðir til að halda áfram.
+Against,Aðlögun
+Against Name,Eftir skil
+Age Bracket,Á móti
+All,Á móti nafni
+All Caught Up!,Aldursflokkur
+All invoices are synchronized,Allt
+All pending invoices are up to date,Allt týnt!
+All Profiles,Allir reikningar eru samstilltir
+All Synchronized,Allir óafgreiddir reikningar eru uppfærðir
+All visible invoices are fully settled.,Öll snið
+All Warehouses,Allt samstillt
+Allowed UOM is {0},Allir sýnilegir reikningar eru að fullu uppgerðir.
+Always fetch items from server (ignore local cache),Öll vöruhús
+Amount,Leyfilegt UOM er {0}
+Amount already received,Sæktu alltaf hluti af þjóninum (hundsa staðbundið skyndiminni)
+Amount exceeds profile cash movement max amount.,Upphæð
+Amount must be greater than zero.,Upphæð þegar móttekin
+Amount received from customer,Upphæð fer yfir hámarksupphæð peningahreyfingar prófíls.
+App information,Upphæð verður að vera hærri en núll.
+Appearance and user-level preferences for the current session.,Upphæð móttekin frá viðskiptavini
+Applied,Upplýsingar um forrit
+Apply,Útlit og kjörstillingar á notendastigi fyrir núverandi lotu.
+Apply Gift Card,Beitt
+Apply Offer,Sækja um
+Apply On,Sækja um gjafakort
+Apply only the amount you want to redeem on this invoice. The remaining balance stays on the card.,Sækja tilboð
+Apply Redemption,Sækja um á
+Applying,Notaðu aðeins upphæðina sem þú vilt innleysa á þessum reikningi.
+Apps,Eftirstöðvarnar verða áfram á kortinu.
+Are you sure you want to close? All entered data will be lost.,Sækja um innlausn
+Attributes (Size/Color),Að sækja um
+Auto Allocate Payment Amount,Forrit
+Auto Reconcile,Ertu viss um að þú viljir loka?
+Auto reconciliation completed after payment submit.,Öll innslögð gögn glatast.
+Auto reconciliation completed. Allocated: {0}{1}. Remaining outstanding: {0}{2}.,Eiginleikar (stærð/litur)
+Available Actions,Úthluta sjálfkrafa greiðsluupphæð
+Available QTY,Sjálfvirk afstemming
+Available:,Sjálfvirk afstemming lokið eftir að greiðslu hefur verið skilað.
+Average Basket,Sjálfvirk afstemmingu lokið.
+Average Bill,Úthlutað: {0}{1}.
+Average Ticket,Eftirstöðvar: {0}{2}.
+Avg Bill,Tiltækar aðgerðir
+Avg Invoice,Fáanlegt magn
+Avg Invoice Profit,Í boði:
+Avg Invoice Value,Meðalkarfa
+Avg Purchase Frequency,Meðalreikningur
+Awesome,Meðalmiði
+Awesome Dashboard,Meðalreikningur
+Awesome Dashboard is disabled for the selected POS Profile.,Meðalreikningur
+Awesome Dashboard is unavailable for the selected scope.,Meðalhagnaður reiknings
+Awesome Dashboard is visible only to POS supervisors.,Meðalverðmæti reiknings
+Back,Meðalkaupatíðni
+Back Office Cash Account,Æðislegt
+Back Office Cash Account (Optional Override),Æðislegt mælaborð
+Back office cash account is required.,Óvirkt mælaborð er óvirkt fyrir valinn POS prófíl.
+Back to {0},Frábært mælaborð er ekki tiltækt fyrir valið umfang.
+Background processing did not finish in time.,Æðislegt mælaborð er aðeins sýnilegt fyrir umsjónarmenn POS.
+Background processing failed for Invoice {0}: {1},Til baka
+Background Submission Failed,Back Office reiðufé reikningur
+Background sync interval (seconds),Back Office reiðufé reikningur (valfrjáls hnekking)
+Balance,Bankareikningur er nauðsynlegur.
+Balance will be updated when connection is restored,Til baka í {0}
+Balances still pending,Bakgrunnsvinnslu lauk ekki í tæka tíð.
+Barcode,Bakgrunnsvinnsla mistókst fyrir reikning {0}: {1}
+Barcode / QR Ready,Bakgrunnssending mistókst
+Barcode Label Printing,Samstillingarbil í bakgrunni (sekúndur)
+Base Paid:,Jafnvægi
+Base Recv:,Staðan verður uppfærð þegar tenging er endurheimt
+Base:,Eftirstöðvar enn í bið
+Basic Information,Strikamerki
+Batch,Strikamerki / QR tilbúið
+Batch Information,Strikamerkisprentun
+Before any return workflow,Grunngreitt:
+Before returns,Base Recv:
+Best Day,Grunnur:
+Best Seller,Grunnupplýsingar
+Book expense or deposit from active shift.,Hópur
+Branch / Location-wise Report,Lotuupplýsingar
+Brand-wise,Áður en verkflæði til baka kemur
+Breakdown,Áður en skilar
+Browse,Besti dagur
+Build Time:,Best Seljandi
+Built with Frappe,Bókaðu kostnað eða innborgun frá virkri vakt.
+Bundle,Skýrsla greinar / staðsetningar
+Buying Price,Vörumerkislega séð
+Cache cleared successfully,Sundurliðun
+Cache Usage,Skoðaðu
+cache used,Byggingartími:
+Calculating...,Byggt með Frappe
+Camera Access Required,Knippi
+Camera access was aborted. Please try again.,Kaupverð
+Camera constraints not supported by your device. Trying fallback settings...,Skyndiminni var hreinsað
+Camera is busy or blocked by another app/tab. Close other camera apps and try again.,Skyndiminni notkun
+Camera permission denied. Please allow camera access in your browser settings and refresh the page.,skyndiminni notað
+Camera scanner is locked until the current error is acknowledged,Er að reikna...
+Camera started but the video stream did not load in time. Please try again.,Aðgangur að myndavél áskilinn
+Cancel,Aðgangi að myndavél var hætt.
+Cancel cash movement {0}?,Vinsamlegast reyndu aftur.
+Cancel Payment,Myndavélartakmarkanir eru ekki studdar af tækinu þínu.
+Cancel Sale,Reynir varastillingar...
+Cancel Sale ?,Myndavélin er upptekin eða læst af öðru forriti/flipa.
+Cancelled,Lokaðu öðrum myndavélarforritum og reyndu aftur.
+Cannot add an item with zero or negative quantity.,Myndavélarleyfi hafnað.
+Cannot clear cache while offline,Vinsamlegast leyfðu myndavélaraðgang í stillingum vafrans og endurnýjaðu síðuna.
+Cannot redeem customer credit more than invoice total,Myndavélarskanni er læstur þar til núverandi villa er staðfest
+Cannot redeem gift cards more than invoice total,Myndavélin fór í gang en myndstraumurinn hleðst ekki í tíma.
+Cannot Save Offline Invoice:,Vinsamlegast reyndu aftur.
+Cannot Save Offline Payment:,Hætta við
+Card,Hætta við hreyfingu á reiðufé {0}?
+Card / Online,Hætta við greiðslu
+Card health after the last live lookup,Hætta við sölu
+Cards,Hætta við sölu?
+Cart,Hætt við
+Cash,Ekki er hægt að bæta við hlut með núlli eða neikvæðu magni.
+Cash back to customers,Ekki er hægt að hreinsa skyndiminni án nettengingar
+Cash Collections,Ekki er hægt að innleysa inneign viðskiptavina meira en heildarupphæð reiknings
+Cash Deposit is disabled for this POS Profile.,Ekki er hægt að innleysa gjafakort meira en heildarreikning
+Cash Drawer Snapshot,Get ekki vistað reikning án nettengingar:
+Cash In Hand,Ekki er hægt að vista greiðslu án nettengingar:
+Cash Movement,Kort
+Cash movement cancelled,Kort / á netinu
+Cash movement deduction applied,Heilsa korta eftir síðustu leit í beinni
+Cash movement deleted,Spil
+Cash movement is disabled for this POS Profile.,Karfa
+Cash Movement is disabled in current POS Profile.,Reiðufé
+Cash movement saved offline,Reiðufé til viðskiptavina
+Cash movement submitted,Peningaöflun
+Cash Movements,Innborgun reiðufjár er óvirk fyrir þennan POS prófíl.
+Cash payment cannot be less than invoice total when partial payment is not allowed,Skyndimynd af peningaskúffu
+Cash returned after payment,Handbært fé
+Cashier,Cash Hreyfing
+Cashier Access,Handbært fé hætt
+Cashier identity and appearance preferences.,Fjárflutningsfrádráttur beitt
+Cashier PIN,Handbært fé eytt
+Cashier PIN saved successfully.,Hreyfing reiðufjár er óvirk fyrir þennan POS prófíl.
+Cashiers,Hreyfing reiðufjár er óvirk í núverandi POS prófíl.
+Cashier-wise,Hreyfing reiðufjár vistuð án nettengingar
+Categories,Handbært fé lögð fram
+Category,Peningahreyfingar
+Category / Brand / Variant Report,Greiðsla í reiðufé getur ekki verið lægri en heildarreikningur þegar hlutagreiðsla er óheimil
+Category-wise,Reiðufé skilað eftir greiðslu
+Category-wise Margin,Gjaldkeri
+Certificate,Aðgangur gjaldkera
+Certificate is missing or not trusted. QZ may show confirmation dialogs.,Gjaldkeri sjálfsmynd og útlitsvalkostir.
+Certificate is trusted. Silent QZ printing is active.,PIN gjaldkera
+Change,PIN-númer gjaldkera var vistað.
+Change allocation repaired,Gjaldkerar
+Change interface language,Gjaldkeri miðað við
+Change Language,Flokkar
+Change Price,Flokkur
+Change Return,Skýrsla um flokk / vörumerki / afbrigði
+Change Returned,Flokkslega séð
+Change terminal cashier,Framlegð í flokki
+Charge Heads,Vottorð
+Charges,Vottorð vantar eða ekki treyst.
+Charges not found,QZ gæti sýnt staðfestingarglugga.
+Check Balance,Vottorð er treyst.
+Check balance for any card. Supervisors can issue and top up cards here.,Hljóðlaus QZ prentun er virk.
+Check balance only,Breyta
+Check for new commits,Breyta úthlutun lagfærð
+Check for Updates,Breyttu tungumáli viðmótsins
+Check live balance before applying redemption,Breyta tungumáli
+Check live balance before redemption,Breyta verð
+Checking...,Breyta aftur
+Cheque/Reference Date,Breyting skilað
+Cheque/Reference No,Skiptu um gjaldkera í flugstöðinni
+Choose the cashier currently operating this terminal.,Hleðsluhausar
+Choose your preferred language for the POS interface,Gjöld
+City,Gjöld fundust ekki
+Clear,Athugaðu jafnvægi
+Clear All,Athugaðu stöðuna fyrir hvaða kort sem er.
+Clear all barcode items,Umsjónarmenn geta gefið út og fyllt á kort hér.
+Clear all purchase order items,Athugaðu aðeins jafnvægi
+Clear Cache,Athugaðu fyrir nýjar skuldbindingar
+Clear Search,Leitaðu að uppfærslum
+Clearing local cache...,Athugaðu lifandi stöðu áður en þú sækir um innlausn
+Click to refresh,Athugaðu lifandi stöðu fyrir innlausn
+Client CPU Lag:,Athugar...
+Client Memory Usage:,Ávísun/viðmiðunardagur
+Client Metrics,Ávísun/tilvísunarnr
+Close,Veldu gjaldkerann sem starfrækir þessa flugstöð.
+Close about dialog,Veldu valið tungumál fyrir POS viðmótið
+Close cashier switcher,Borg
+Close closing shift dialog,Hreinsa
+Close column selector,Hreinsa allt
+Close Dialog,Hreinsaðu öll strikamerki
+Close drafts dialog,Hreinsaðu allar innkaupapöntunarvörur
+Close invoice details dialog,Hreinsaðu skyndiminni
+Close invoice management,Hreinsa leit
+Close offline invoices dialog,Hreinsar staðbundið skyndiminni...
+Close packing list dialog,Smelltu til að endurnýja
+Close returns dialog,CPU bið viðskiptavinar:
+Close sales orders dialog,Minnisnotkun viðskiptavinar:
+Close Scanner,Viðskiptavinamælingar
+Close scanner dialog,Loka
+Close Settings,Lokaðu um glugga
+Close Shift,Lokaðu gjaldkeraskiptanum
+Closing Amount,Lokaðu lokunarvaktglugganum
+Closing POS Shift,Lokaðu dálkavali
+Closing Snapshot Available,Loka glugga
+Code,Lokaðu drögglugganum
+Code scanned successfully,Lokaðu reikningsupplýsingaglugganum
+COGS,Lokaðu reikningsstjórnun
+Collapse item details,Lokaðu valmynd fyrir ónettengda reikninga
+Collected,Lokaðu pökkunarlistaglugganum
+Cols,Loka skilaglugga
+Columns,Lokaðu sölupantanaglugganum
+commits,Lokaðu skanni
+Completed and active sales in this range,Lokaðu skannaglugga
+Completed returns will appear here.,Lokaðu stillingum
+Confirm,Lokaðu Shift
+Confirm Close,Lokaupphæð
+Confirm Mobile Number,Lokar POS Shift
+Confirm PIN,Lokamynd í boði
+Connect,Kóði
+Connect printer and manage certificate,Kóði skannaður
+Connecting to QZ Tray...,COGS
+Connection problem while submitting invoice,Draga saman upplýsingar um atriði
+Connections:,Safnað
+Connectivity and cached prerequisite status were rechecked.,Cols
+Continue Editing,Dálkar
+Could not fetch latest balance from server,skuldbindur sig
+Count,Lokið og virk sala á þessu sviði
+Country,Lokið skil mun birtast hér.
+Coupon,Staðfesta
+Coupons,Staðfestu Loka
+Cover,Staðfestu farsímanúmer
+CPU Cores:,Staðfestu PIN
+Create,Tengdu
+Create and load a new prepaid card,Tengdu prentara og stjórnaðu vottorðinu
+Create and preload a new gift card,Tengist QZ bakka...
+Create Bill,Tengingarvandamál við að senda inn reikning
+Create Customer,Tengingar:
+Create New Item,Tengingar og forsendustaða í skyndiminni voru endurskoðuð.
+Create or change your PIN,Halda áfram að breyta
+Create PIN,Gat ekki sótt nýjustu stöðuna frá þjóninum
+Create POS Opening Shift,Telja
+Create Purchase Order,Land
+Create Return,Afsláttarmiði
+Create return from invoice,Afsláttarmiðar
+Create Supplier,Kápa
+Credit and Output,CPU kjarna:
+Credit Note,Búa til
+Credit Outstanding,Búðu til og hlaðið inn nýju fyrirframgreitt kort
+Credit sales remaining to be collected,Búðu til og forhleðdu nýtt gjafakort
+Critical,Búðu til Bill
+Currency,Búðu til viðskiptavin
+Current,Búðu til nýjan hlut
+Current Event Loop Lag:,Búðu til eða breyttu PIN-númerinu þínu
+Current Month,Búðu til PIN
+Current PIN,Búðu til POS opnunarvakt
+Current Profile,Búðu til innkaupapöntun
+Current redeemable value on the gift card,Búðu til aftur
+Current User,Búðu til skil frá reikningi
+Custom,Búðu til birgja
+Custom Due Days,Inneign og framleiðsla
+Custom items per page,Inneignarnóta
+Customer,Inneign útistandandi
+Customer already selected,Inneignarsala á eftir að innheimta
+Customer Balance,Gagnrýnið
+Customer balance unavailable offline,Gjaldmiðill
+Customer created successfully.,Núverandi
+Customer creation failed.,Núverandi atburðarhleypni:
+Customer Details,Núverandi mánuður
+Customer display channel is missing,Núverandi PIN-númer
+Customer display was blocked. Please allow pop-ups for this site.,Núverandi prófíll
+Customer group is required,Núverandi innleysanlegt verð á gjafakortinu
+Customer is required to add payment,Núverandi notandi
+Customer Name is required,Sérsniðin
+Customer not selected,Sérsniðnir gjalddagar
+Customer Report,Sérsniðin atriði á síðu
+Customer saved offline,Viðskiptavinur
+Customer Screen,Viðskiptavinur þegar valinn
+Customer territory is required,Viðskiptavinajöfnuður
+Customer updated successfully.,Inneign viðskiptavinar ekki tiltæk án nettengingar
+Customer-facing tools and printer setup.,Viðskiptavinur búinn til.
+Customers,Ekki tókst að búa til viðskiptavina.
+Customers not found,Upplýsingar viðskiptavina
+Daily cashier actions without scrolling.,Sýningarrás viðskiptavinar vantar
+Daily Sales,Lokað var á skjá viðskiptavinar.
+Daily Sales Summary,Vinsamlegast leyfðu sprettiglugga fyrir þessa síðu.
+Dark Mode,Viðskiptavinahópur er nauðsynlegur
+Data loaded in form. Review and submit.,Viðskiptavinur þarf að bæta við greiðslu
+Database Health,Nafn viðskiptavinar er áskilið
+Database health affects overall system speed and reliability.,Viðskiptavinur ekki valinn
+Database Info,Skýrsla viðskiptavinar
+Date,Viðskiptavinur vistaður án nettengingar
+Day Δ,Viðskiptavinaskjár
+days,Landsvæði viðskiptavinar er krafist
+Day-wise (MTD),Viðskiptavinur uppfærður.
+Day-wise Movement,Verkfæri sem snúa að viðskiptavinum og uppsetning prentara.
+Dead Stock,Viðskiptavinir
+Dead Stock Items,Viðskiptavinir fundust ekki
+Decrease quantity,Daglegar gjaldkeraaðgerðir án þess að fletta.
+Default,Dagleg sala
+Default:,Daglegt söluyfirlit
+Delete,Dark Mode
+Delete cancelled cash movement {0}?,Gögn hlaðin á formi.
+Delete Draft,Skoðaðu og sendu inn.
+Delete draft invoice,Gagnagrunnur Heilsa
+Delete draft invoice {0}?,Heilsu gagnagrunns hefur áhrif á heildarhraða og áreiðanleika kerfisins.
+Delete Invoice,Upplýsingar um gagnagrunn
+Delete offline invoice,Dagsetning
+Delivered,Dagur Δ
+Delivery Charges,daga
+Delivery Information,Daglega (MTD)
+Delivery Note {0} created,Hreyfing dagsins
+Delivery note created,Dauður birgðir
+Deployed Bundle:,Dauðir lagervörur
+Deposit,Minnka magn
+Description,Sjálfgefið
+Detailed Supplier Breakdown,Sjálfgefið:
+Detecting formats:,Eyða
+Device Memory:,Eyða hætt við peningahreyfingu {0}?
+Difference,Eyða drögum
+Difference (In Company Currency),Eyða reikningsdrögum
+Disable offline mode first to recheck live connectivity.,Eyða reikningsdrögum {0}?
+Disconnect,Eyða reikningi
+discount,Eyða reikningi án nettengingar
+Discount %,Afhent
+Discount / Void / Return Report,Sendingargjöld
+Discount Amount,Upplýsingar um afhendingu
+Discount limited by POS Profile,Afhendingarseðill {0} búin til
+Discounted Invoices,Afhendingarseðill búinn til
+Discounts,Dreifður pakki:
+Dismiss,Innborgun
+Download Certificate,Lýsing
+Draft,Ítarleg sundurliðun birgja
+Draft invoice deleted,Greina snið:
+Draft source,Minni tækis:
+Drafts,Mismunur
+Due {0},Mismunur (í gjaldmiðli fyrirtækisins)
+Due Date,Slökktu fyrst á ótengdu stillingu til að athuga aftur tengingu í beinni.
+Duplicate,Aftengjast
+Edit customer,afsláttur
+Edit discount amount,% afsláttur
+Edit discount percentage,Afsláttur / ógildur / skilaskýrsla
+Edit Gift Application,Afsláttarupphæð
+Edit item name,Afsláttur takmarkaður af POS prófíl
+Edit quantity,Afslættir reikningar
+Edit rate,Afslættir
+Edit unit of measure,Segja frá
+Edited,Sækja skírteini
+Employee,Drög
+Enable background sync,Drög að reikningi eytt
+Enable Customer Display in POS Profile first.,Drög að heimild
+End current session,Drög
+Enter a PIN.,Gjalddagi {0}
+Enter a valid grams value,Gjalddagi
+Enter new price list rate,Afrit
+Enter Quantity,Breyta viðskiptavini
+Enter the cashier PIN to continue.,Breyta afsláttarupphæð
+Enter the current PIN first.,Breyta afsláttarprósentu
+"Enter the current PIN, then choose a new one.",Breyta gjafaumsókn
+Enter valid grams for scale barcode,Breyta heiti hlutar
+Entries,Breyta magni
+Error accessing camera:,Breyta hlutfalli
+Error calculating prices,Breyta mælieiningu
+Error fetching customer balance,Breytt
+Error in change calculations!,Starfsmaður
+Error Loading Data,Virkjaðu samstillingu í bakgrunni
+Error loading invoice details,Virkjaðu skjá viðskiptavinar í POS prófíl fyrst.
+Error processing invoice,Ljúktu núverandi lotu
+Error processing payment,Sláðu inn PIN-númer.
+Error searching invoices,Sláðu inn gilt grammgildi
+Error submitting invoice:,Sláðu inn nýtt verðskrárgjald
+Error submitting invoice: {0},Sláðu inn Magn
+Error submitting invoice: No response from server,Sláðu inn PIN-númer gjaldkera til að halda áfram.
+Error updating currency,Sláðu inn núverandi PIN-númer fyrst.
+Error updating item details,Sláðu inn núverandi PIN-númer og veldu síðan nýtt.
+Est. Purchase,Sláðu inn gild grömm fyrir mælikvarða strikamerki
+Est. Value,Færslur
+Event-loop lag measures how busy your browser is. Lower is better.,Villa við að opna myndavél:
+Every,Villa við að reikna verð
+Exchange Rate,Villa við að sækja stöðu viðskiptavina
+Expand item details,Villa í breytingaútreikningum!
+Expected Amount (In Company Currency),Villa við að hlaða gögnum
+Expected Cash,Villa við að hlaða reikningsupplýsingar
+Expected cash on hand grouped by currency,Villa við að vinna reikning
+Expected vs Actual,Villa við að vinna úr greiðslu
+Expense,Villa við leit á reikningum
+Expense Account (Optional Override),Villa við að senda inn reikning:
+Expense account is required.,Villa við að senda inn reikning: {0}
+Expenses and deposits posted during this shift,Villa við að senda inn reikning: Ekkert svar frá þjóni
+Expired,Villa við að uppfæra gjaldmiðil
+Failed to auto reconcile payments.,Villa við að uppfæra upplýsingar um atriði
+Failed to cancel cash movement,Áætlað
+Failed to clear cache,Kaup
+Failed to create item,Áætlað
+Failed to create supplier,Gildi
+Failed to delete cash movement,Atburðalykkjatöf mælir hversu upptekinn vafrinn þinn er.
+Failed to generate scale barcode. Using item barcode only.,Lægra er betra.
+Failed to load cash movement context.,Hvert
+Failed to load dashboard data.,Gengi
+Failed to reload invoice from server,Stækka upplýsingar um atriði
+Failed to submit cash movement,Áætluð upphæð (í gjaldmiðli fyrirtækisins)
+Failed to sync offline cash movements,Væntanlegt reiðufé
+Fast cashier actions for active shifts.,Væntanlegt reiðufé á hendi flokkað eftir gjaldmiðli
+Fast Moving Items,Væntanlegt vs raunverulegt
+Fees,Kostnaður
+Fetch the latest offline prerequisite updates,Kostnaðarreikningur (valfrjáls hnekking)
+Find a sales order quickly and load it into the current sale.,Áskilið er kostnaðarreikning.
+Fixing payment amounts for return invoice...,Gjöld og innistæður færðar á þessari vakt
+Flash Off,Útrunnið
+Flash On,Mistókst að samræma greiðslur sjálfkrafa.
+"For 'Product Bundle' items, Warehouse, Serial No and Batch No will be considered from the 'Packing List' table. If Warehouse and Batch No are same for all packing items for any 'Product Bundle' item, those values can be entered in the main Item table; values will be copied to 'Packing List' table.",Mistókst að hætta við hreyfingu á reiðufé
+Free,Mistókst að hreinsa skyndiminni
+Free Qty,Mistókst að búa til atriði
+Frequency,Mistókst að búa til birgi
+from,Mistókst að eyða peningahreyfingu
+From Date,Mistókst að búa til mælikvarða strikamerki.
+Fulfillment Details,Notar eingöngu strikamerki vöru.
+Full Name,Mistókst að hlaða samhengi reiðufjárhreyfingar.
+Gain,Mistókst að hlaða stjórnborðsgögnum.
+Generate a fresh prepaid card and start it with an opening balance.,Mistókst að endurhlaða reikning frá þjóni
+Generate and install the certificate to allow fully silent printing without trust prompts.,Mistókst að senda inn peningahreyfingu
+Generate Certificate,Mistókst að samstilla peningahreyfingar án nettengingar
+Generated scale barcode: {0},Hraðar gjaldkeraaðgerðir fyrir virkar vaktir.
+Get Payments,Hlutir sem hreyfast hratt
+Gift Card,Gjöld
+Gift card amount must be greater than zero.,Sæktu nýjustu forkröfuuppfærslur án nettengingar
+Gift Card Code,Finndu sölupöntun fljótt og hlaðið henni inn í núverandi sölu.
+Gift card code is required for redemption,Lagar greiðsluupphæðir fyrir skilareikning...
+Gift card code is required.,Slökkt á blikka
+Gift card issued successfully.,Flash On
+Gift card loaded successfully.,"Fyrir 'Vörubúnt' vörur verða vöruhús, raðnúmer og lotunúmer tekin til greina frá 'Pökkunarlista' töflunni."
+Gift Card Management,"Ef Vöruhús og Lotunúmer eru þau sömu fyrir allar pökkunarvörur fyrir hvaða 'vörubúnt' sem er, er hægt að færa þau gildi inn í aðalvörutöfluna;"
+Gift card payment,gildi verða afrituð í töfluna 'Pökkunarlista'.
+Gift card redemption requires an online connection,Ókeypis
+Gift card topped up successfully.,Ókeypis Magn
+Gift Cards,Tíðni
+Go Offline,frá
+Go Online,Frá Dagsetningu
+Go to Frappe Desk,Uppfyllingarupplýsingar
+Grand Total,Fullt nafn
+Gross Margin,Hagnaður
+Gross Profit,Búðu til nýtt fyrirframgreitt kort og byrjaðu það með upphafsstöðu.
+Gross Sales,Búðu til og settu upp vottorðið til að leyfa fullkomlega hljóðlausa prentun án traustkvaðninga.
+Group not found,Búðu til skírteini
+"Grouped controls for terminal, UI, and session settings.",Búið til mælikvarða strikamerki: {0}
+Grouped totals for each payment method and currency,Fáðu greiðslur
+Hide,Gjafakort
+Hide Gift Card,Upphæð gjafakorts verður að vera hærri en núll.
+Hide Non Essential Fields,Gjafakortskóði
+Hide quantity decimals,Gjafakortskóði er nauðsynlegur til að innleysa
+Hide search tools,Gjafakortskóði er nauðsynlegur.
+Hide zero rated items,Gjafakort gefið út.
+High,Gjafakort var hlaðið.
+History,Gjafakortastjórnun
+Hourly (Today),Gjafakortsgreiðsla
+How this section works,Innlausn gjafakorta krefst nettengingar
+"If stale data remains, open Settings > Offline & Sync and run Rebuild Offline Data again while online.",Gjafakort fyllt á með góðum árangri.
+"If the warning persists, open Settings > Offline & Sync, then run Refresh Offline Data or Rebuild Offline Data.",Gjafakort
+Import the certificate into QZ Tray and restart QZ Tray on each POS machine.,Farðu án nettengingar
+In,Farðu á netinu
+In stock: {0},Farðu í Frappe Desk
+Include Batch / Serial,Grand Total
+Include Price,Heildarframlegð
+Increase quantity,Heildarhagnaður
+IndexedDB,Brúttó sala
+Initial Amount,Hópur fannst ekki
+Initialize your shift with opening balances,"Hópaðar stýringar fyrir flugstöð, notendaviðmót og lotustillingar."
+Initializing application...,Frumstillir forrit...
+"Inspect cache, sync, and prerequisite status","Skoðaðu skyndiminni, samstillingu og forsenda stöðu"
+Installed Applications,Uppsett forrit
+Insufficient stock:\n{0},Ófullnægjandi birgðir:\n{0}
+Invalid rate,Ógilt gjald
+Inventory Status Report,Stöðuskýrsla birgða
+Invoice,Reikningur
+Invoice {0} is Submitted,Reikningur {0} er lagður fram
+Invoice {0} processed successfully,Reikningur {0} tókst að vinna
+Invoice {0} submission failed,Ekki tókst að senda inn reikning {0}
+Invoice {0} was already submitted,Reikningur {0} var þegar lagður fram
+Invoice Adjustments,Leiðréttingar reikninga
+Invoice Change,Breyting á reikningi
+Invoice Details,Upplýsingar um reikning
+Invoice is still in draft after background submission.,Reikningurinn er enn í drögum eftir bakgrunnsskil.
+Invoice Items,Reikningsvörur
+Invoice Management,Reikningarstjórnun
+Invoice Mgmt,Reikningsstj
+Invoice saved offline,Reikningur vistaður án nettengingar
+Invoice submission failed,Ekki tókst að skila reikningi
+Invoice Submitted,Reikningur lagður fram
+"Invoice value settled by loyalty points, not cash collection","Reikningsverðmæti jafnað með vildarpunktum, ekki innheimtu reiðufé"
+Invoices,Reikningar
+Invoices already past due date,Reikningar þegar fram yfir gjalddaga
+Invoices saved as POS Invoices,Reikningar vistaðir sem POS reikningar
+Invoices still carrying balances,Reikningar eru enn með inneign
+Issue Mode,Útgáfuhamur
+Issue New Card,Gefðu út nýtt kort
+Issue Workflow,Útgáfuverkflæði
+"Issue, top up, and check","Gefðu út, fylltu á og athugaðu"
+Item,Atriði
+Item / Product Sales Report,Vöru- / vörusöluskýrsla
+Item {0} added to invoice,Atriði {0} bætt við reikning
+Item '{0}' has no barcode,Atriði '{0}' hefur ekkert strikamerki
+Item Code,Atriðakóði
+Item created successfully,Atriði búið til
+Item is out of stock,Varan er ekki til á lager
+Item Name,Nafn vöru
+Item not found,Atriði fannst ekki
+Item order updated,Vörupöntun uppfærð
+Item Selector Settings,Atriðavalsstillingar
+Items,Atriði
+Items added in POS will appear here automatically.,Hlutir sem bætt er við í POS birtast hér sjálfkrafa.
+Items added to invoice,Hlutum bætt við reikning
+Items per page,Atriði á síðu
+Items Sold,Hlutir seldir
+Items/Invoice,Hlutir/Reikningur
+Item-wise Profitability,Arðsemi hlutar
+Journal Entry,Dagbókarfærsla
+json,json
+Just now,Bara núna
+Keep offline prerequisites healthy and recover stale data safely.,Haltu forsendum án nettengingar heilbrigðum og endurheimtu gömul gögn á öruggan hátt.
+Labels,Merki
+Language,Tungumál
+Language will be changed to,Tungumáli verður breytt í
+"Language, theme, terminal tools, and session controls.","Tungumál, þema, flugstöðvarverkfæri og lotustýringar."
+Last,Síðast
+Last 14 Days (Paid vs Pending),Síðustu 14 dagar (greitt vs bið)
+Last 14 Days Activity,Síðustu 14 daga starfsemi
+Last 14 Days Gross Profit,Framlegð síðustu 14 daga
+Last 14 Days Purchases,Síðustu 14 daga kaup
+Last 14 Days Tax/Charges,Skattur/gjöld síðustu 14 daga
+Last sync:,Síðasta samstilling:
+Last sync: {0} | ok: {1} | failed: {2} | skipped: {3},Síðasta samstilling: {0} |
+Latest entries for current shift,allt í lagi: {1} |
+Lead Time,mistókst: {2} |
+Light Mode,sleppt: {3}
+Limited,Nýjustu færslur fyrir núverandi vakt
+lines,Leiðslutími
+List,Ljóshamur
+Live Snapshot,Takmarkað
+Load a POS profile and cashier first.,línur
+Load More Invoices,Listi
+Load previously saved invoices,Skyndimynd í beinni
+Load Sale,Hladdu POS prófíl og gjaldkera fyrst.
+Load Sales Invoice,Hlaða fleiri reikningum
+Loading app data...,Hlaða áður vistuðum reikningum
+Loading customer database...,Hlaða Sala
+Loading customers...,Hlaða sölureikning
+Loading database stats...,Hleður forritsgögnum...
+Loading details...,Hleður viðskiptavinagagnagrunni...
+Loading invoice history...,Hleður viðskiptavinum...
+Loading items...,Hleður gagnagrunnstölfræði...
+Loading product catalog...,Hleður upplýsingum...
+Loading return invoices...,Hleður reikningsferil...
+Loading server CPU/memory usage...,Hleður hlutum...
+Loading suppliers...,Hleður vörulista...
+Loading unpaid invoices...,Hleður skilareikningum...
+Loading view...,Hleður CPU/minni notkun miðlara...
+Loading...,Hleður birgja...
+Local storage is unavailable. Switching to online-only mode.,Hleður ógreiddum reikningum...
+localStorage,Hleður útsýni...
+Location Performance,Hleður...
+Locations,Staðbundin geymsla er ekki tiltæk.
+Lock Screen,Skiptir yfir í netstillingu eingöngu.
+Logout,staðbundin Geymsla
+Lookup Workflow,Staðsetning árangur
+Loss,Staðsetningar
+Low,Læsa skjá
+Low Stock,Útskrá
+Low Stock Alerts,Verkflæði leit
+Low Stock Items,Tap
+Low Stock Threshold,Lágt
+Low Stock Total,Lágt lager
+Lowest Margin,Viðvaranir um lágar birgðir
+Low-frequency maintenance and system details.,Lítið lager
+Loyalty Redeemed,Lágur hlutabréfaþröskuldur
+Loyalty Redemption,Lágt lager samtals
+Make New Payment,Lægsta framlegð
+Manage all,Lágtíðni viðhald og kerfisupplýsingar.
+Manage and synchronize your offline transactions,Hollusta innleyst
+Manage Cashier PIN,Hollusta innlausn
+"Manage offline tools, terminal controls, and maintenance from one workspace.",Gerðu nýja greiðslu
+manual,Stjórna öllum
+"Manual codes, barcode scans, and QR scans work in the same field",Stjórnaðu og samstilltu viðskipti þín án nettengingar
+Manual offline mode is enabled,Stjórna PIN gjaldkera
+Margin,"Hafa umsjón með verkfærum án nettengingar, flugstöðvarstýringum og viðhaldi frá einu vinnusvæði."
+Maximum available quantity is {0}. Quantity adjusted to match stock.,handbók
+Maximum discount amount for this offer item is {0}.,"Handvirkir kóðar, strikamerkjaskannanir og QR skannar virka á sama sviði"
+Maximum discount percentage for this offer item is {0}%.,Handvirk ótengd stilling er virkjuð
+Maximum offer quantity is {0}. Quantity adjusted to allowed limit.,Framlegð
+Medium,Hámarksmagn tiltækt er {0}.
+Menu,Magn stillt til að passa við lager.
+Method-wise Collections,Hámarksafsláttarupphæð fyrir þessa tilboðsvöru er {0}.
+Minimum allowed rate for this offer item is {0}.,Hámarks afsláttarprósenta fyrir þessa tilboðsvöru er {0}%.
+Minimum Qty,Hámarkstilboðsmagn er {0}.
+Mobile No,Magn leiðrétt að leyfilegum mörkum.
+Mode,Miðlungs
+Mode of Payment,Matseðill
+Month,Aðferðarlega séð Söfn
+Month Δ,Leyfilegt lágmarksgjald fyrir þessa tilboðsvöru er {0}.
+Monthly Profit,Lágmarksmagn
+Monthly Sales,Farsíma nr
+Monthly Sales Summary,Mode
+Month-wise,Greiðslumáti
+Most Active Cashiers,Mánuður
+Movement Type,Mánuður Δ
+Movements,Mánaðarlegur hagnaður
+Multi Currency,Mánaðarleg sala
+N/A,Mánaðarlegt söluyfirlit
+Name,Mánaðarlega séð
+Negative Stock,Virkustu gjaldkerar
+Negative Stock Items,Tegund hreyfingar
+Negative values not allowed,Hreyfingar
+Net,Margur gjaldmiðill
+Net Qty,N/A
+Net Sales,Nafn
+Net Value,Neikvætt hlutabréf
+Never,Neikvæðar hlutabréfavörur
+New changes are ready to load,Neikvæð gildi ekki leyfð
+New Item,Nettó
+New Offer Available,Nettó Magn
+New PIN,Nettó sala
+New rate,Nettóvirði
+Next unit of measure,Aldrei
+No attribute data found.,Nýjar breytingar eru tilbúnar til að hlaðast inn
+No Barcode,Nýr hlutur
+No barcode found for UOM '{0}',Nýtt tilboð í boði
+No branch/location data found.,Nýtt PIN
+No brand data found.,Nýtt gengi
+No cached gift card balance is available offline.,Næsta mælieining
+No camera found on this device. Please ensure your device has a working camera.,Engin eigindagögn fundust.
+No capability warnings recorded yet.,Ekkert strikamerki
+No cash expected for this shift.,Ekkert strikamerki fannst fyrir UOM '{0}'
+No cash mode configured,Engin útibús-/staðsetningargögn fundust.
+No cash movement type is allowed for this POS Profile.,Engin vörumerkisgögn fundust.
+No cashier PIN is set yet. Create one now.,Engin inneign gjafakorta í skyndiminni er tiltæk án nettengingar.
+No cashier profiles are available for this POS profile yet.,Engin myndavél fannst á þessu tæki.
+No cashier-wise discount/void/return activity.,Gakktu úr skugga um að tækið þitt sé með virka myndavél.
+No category data found.,Engar getuviðvaranir skráðar ennþá.
+No category profitability data found.,Ekki er búist við reiðufé fyrir þessa vakt.
+No change returned recorded for this shift.,Engin reiðufjárstilling stillt
+No change-allocation invoices match the current filters.,Engin tegund reiðufjárhreyfinga er leyfð fyrir þennan POS prófíl.
+No charge head breakdown found.,Ekkert PIN-númer gjaldkera er enn stillt.
+No Company Selected,Búðu til einn núna.
+No customer sales data found.,Engir gjaldkeraprófílar eru enn tiltækir fyrir þennan POS prófíl.
+No day-wise discount/void/return trend.,Enginn gjaldkeraafsláttur/ógildur/skilastarfsemi.
+No day-wise payment data found.,Engin flokkagögn fundust.
+No day-wise profitability trend found.,Engin arðsemisgögn fyrir flokk fundust.
+No day-wise purchase data found.,Engin breyting skilaði skráð fyrir þessa vakt.
+No day-wise sales trend found.,Engir úthlutunarreikningar passa við núverandi síur.
+No day-wise tax/charges trend found.,Engin sundurliðun á hleðsluhaus fannst.
+No dead stock items.,Ekkert fyrirtæki valið
+No due date,Engin sölugögn viðskiptavina fundust.
+No exact repair match found for this invoice,Enginn daglegur afsláttur/ógildur/ávöxtunarþróun.
+No hourly sales trend found for today.,Engin dagleg greiðslugögn fundust.
+No invoice activity found.,Engin arðsemisþróun dagsins fannst.
+No invoices found,Engin dagleg kaupgögn fundust.
+No invoices found. Try different search criteria.,Engin dagleg söluþróun fannst.
+No invoices recorded for this shift.,Engin þróun skatta/gjalda daglega fannst.
+No item profitability data found.,Engir dauðir lagervörur.
+No item sales data found for this period.,Enginn gjalddagi
+No items found,Engin nákvæm viðgerðarsamsvörun fannst fyrir þennan reikning
+No items in cart,Engin tímabundin söluþróun fannst í dag.
+No items with barcodes to print,Engin reikningsvirkni fannst.
+No location-wise top item data found.,Engir reikningar fundust
+No low stock alerts right now.,Engir reikningar fundust.
+No low stock items.,Prófaðu mismunandi leitarskilyrði.
+No matching items in cart,Engir reikningar skráðir fyrir þessa vakt.
+No month-wise sales trend found.,Engin arðsemisgögn vöru fundust.
+No negative stock items.,Engin vörusölugögn fundust fyrir þetta tímabil.
+No notifications yet,Engir hlutir fundust
+No offline cash movement synced.,Engir hlutir í körfu
+No offline invoices pending synchronization,Engir hlutir með strikamerki til að prenta
+No offline sync issues recorded yet.,Engin gögn um efstu atriði fundust.
+No out-of-stock items.,Engar tilkynningar um lága birgðir eins og er.
+No outstanding credit invoices for this shift.,Engar vörur á lager.
+No payment collection data found.,Engir samsvarandi hlutir í körfu
+No payment rows available on this invoice.,Engin mánaðarleg söluþróun fannst.
+No payments registered for this shift.,Engir neikvæðir lagervörur.
+No pending balances in this period.,Engar tilkynningar ennþá
+No pending offline invoices,Engin ónettengd peningahreyfing samstillt.
+No Print Formats Found,Engir ónettengdir reikningar bíða samstillingar
+No profiles found for selected scope. Falling back to current profile failed.,Engin ónettengd samstillingarvandamál skráð ennþá.
+No recent customer activity found.,Engar uppseldar vörur.
+No recent stock entries found.,Engir útistandandi kreditreikningar fyrir þessa vakt.
+No records found,Engin greiðslusöfnunargögn fundust.
+No reorder suggestions right now.,Engar greiðslulínur tiltækar á þessum reikningi.
+No repeat customers in this period.,Engar greiðslur skráðar fyrir þessa vakt.
+No response from server,Engar biðstöður á þessu tímabili.
+No return invoices found,Engir ótengdir reikningar í bið
+No return item trend found.,Ekkert prentsnið fannst
+No returnable items found for this invoice,Engir snið fundust fyrir valið umfang.
+No returns were processed in this shift.,Mistókst að falla aftur í núverandi prófíl.
+No risk activity found.,Engin nýleg virkni viðskiptavina fannst.
+No sales activity found for this period.,Engar nýlegar hlutabréfafærslur fundust.
+No slow moving items.,Engar skrár fundust
+No staff sales activity found.,Engar endurröðunartillögur eins og er.
+No stock movement for this period.,Engir endurteknir viðskiptavinir á þessu tímabili.
+No submitted cash movements in this shift.,Ekkert svar frá þjóni
+No supplier purchases found in this month.,Engir skilareikningar fundust
+No suppliers found for this period.,Engin þróun vöruskila fannst.
+No sync trigger has run yet in this session.,Engar skilavörur fundust fyrir þennan reikning
+No tax head breakdown found.,Engin skil voru afgreidd á þessari vakt.
+No top items found for this location.,Engin áhættuvirkni fannst.
+No unpaid invoices,Engin söluvirkni fannst fyrir þetta tímabil.
+No variant data found.,Engir hlutir sem ganga hægt.
+No week-wise sales trend found.,Engin söluvirkni starfsmanna fannst.
+No.,Engin hlutabréfahreyfing á þessu tímabili.
+Nobile Number,Engar innsendar peningahreyfingar á þessari vakt.
+Not available,Engin birgjakaup fundust í þessum mánuði.
+Not checked,Engir birgjar fundust fyrir þetta tímabil.
+Not selected,Engin samstillingarkveikja hefur keyrt enn í þessari lotu.
+Not Set,Engin skatthlutfall fannst.
+Notifications,Engir toppvörur fundust fyrir þessa staðsetningu.
+Offer,Engir ógreiddir reikningar
+Offer Applied,Engin afbrigðisgögn fundust.
+Offer criteria exceeded,Engin vikuleg söluþróun fannst.
+Offer Item,Nei.
+Offer item unavailable,Nobil númer
+Offer Removed,Ekki í boði
+Offer UOM cannot be changed,Ekki athugað
+Offer?,Ekki valið
+Offers,Ekki stillt
+Offline,Tilkynningar
+Offline & Sync,Tilboð
+Offline Capabilities,Tilboð sótt
+Offline data status refreshed,Farið var yfir tilboðsskilyrði
+Offline diagnostics,Tilboðsvara
+Offline Invoices,Tilboðsvara ekki tiltæk
+Offline invoices status,Tilboð fjarlægt
+Offline invoices synced,Ekki er hægt að breyta tilboði UOM
+Offline Queue: {0},Tilboð?
+Offline rebuild guidance,Tilboð
+Offline restore is unavailable for this session.,Ótengdur
+Offline selling is available with degraded capabilities.,Ótengdur og samstilltur
+Offline snapshot does not match the current POS state.,Ótengdur möguleikar
+Offline Status,Gagnastaða án nettengingar endurnýjuð
+"Offline, terminal, and system controls",Ótengd greining
+OK,Ótengdir reikningar
+Online,Staða reikninga án nettengingar
+Open actions menu,Ónettengdir reikningar samstilltir
+Open balance to collect,Ótengdur biðröð: {0}
+Open Customer Display,Leiðbeiningar um endurbyggingu án nettengingar
+Open drawer,Endurheimt án nettengingar er ekki tiltæk fyrir þessa lotu.
+Open invoices,Sala án nettengingar er fáanleg með skertri getu.
+Open Payments?,Skyndimynd án nettengingar passar ekki við núverandi stöðu POS.
+Open POS home,Ótengdur staða
+Open this screen from POS Menu -> Open Customer Display.,"Ótengdur, flugstöðvar- og kerfisstýringar"
+OpenCV image processing enabled - Enhanced barcode detection,Allt í lagi
+OpenCV image processing unavailable on this device,Á netinu
+OpenCV Off,Opnaðu aðgerðarvalmynd
+OpenCV On,Opið jafnvægi til að safna
+OpenCV processing disabled,Opnaðu viðskiptavinaskjá
+Opening Amount,Opna skúffu
+Opening Cash,Opnir reikningar
+options,Opna greiðslur?
+Order,Opið POS heimili
+Original,Opnaðu þennan skjá frá POS valmynd -> Opnaðu viðskiptavinaskjá.
+Other,OpenCV myndvinnsla virkjuð - Aukin strikamerkjagreining
+Out,OpenCV myndvinnsla er ekki tiltæk á þessu tæki
+Out of Stock,OpenCV slökkt
+Out of Stock Items,OpenCV Kveikt
+Outstanding,OpenCV vinnsla óvirk
+Outstanding Credit by Currency,Opnunarupphæð
+Overdue,Opnun reiðufé
+Overpayment Change,valkosti
+Overpayment change deducted: {0},Panta
+Packing List,Upprunalegt
+Page Format,Annað
+Page unavailable offline,Út
+Paid,Uppselt
+Paid (orig):,Uppseldir vörur
+Paid Amount,Framúrskarandi
+Paid change cannot be greater than total change!,Útistandandi inneign eftir gjaldmiðli
+Paid:,Tímabært
+Parent Item,Ofgreiðslubreyting
+Partial,Ofgreiðslubreyting dregnar frá: {0}
+Partly Paid,Pökkunarlisti
+Party Account,Blaðsíðusnið
+Party Type,Síða ekki tiltæk án nettengingar
+Pause terminal until next cashier,Greitt
+PAY,Greitt (upprunalega):
+Payment,Greidd upphæð
+Payment Account,Greidd breyting getur ekki verið meiri en heildarbreyting!
+Payment entries processed for Invoice {0},Greitt:
+Payment Entry Type,Foreldri hlutur
+Payment History,Hluti
+Payment ID,Greitt að hluta
+Payment Method Report,Reikningur aðila
+Payment Methods,Tegund veislu
+Payment of {0} received successfully.,Gerðu hlé á útstöðinni þar til næsti gjaldkeri
+Payment Progress,BORGA
+Payment Reconciliation,Greiðsla
+Payment request status could not be retrieved. Please try again,Greiðslureikningur
+Payment Request took too long to respond. Please try requesting for payment again,Greiðslufærslur unnar fyrir reikning {0}
+Payment saved offline,Tegund greiðslufærslu
+Payment State,Greiðslusaga
+Payment Status,Greiðsluauðkenni
+Payment submitted but print function could not be executed. Payment name not found.,Greiðslumátaskýrsla
+Payment submitted.,Greiðslumáti
+Payment Summary,Greiðsla upp á {0} móttekin.
+Payments,Framfarir í greiðslum
+Payments are not open. Do you want to open payments and submit?,Greiðsluafstemming
+Payments by Mode of Payment,Ekki var hægt að sækja stöðu greiðslubeiðni.
+PDF,Vinsamlegast reyndu aftur
+Peak Hour,Greiðslubeiðni tók of langan tíma að svara.
+Peak Memory:,Vinsamlegast reyndu að biðja um greiðslu aftur
+Peak Server:,Greiðsla vistuð án nettengingar
+Peak:,Greiðsluríki
+Pending,Greiðslustaða
+Pending Amount,Greiðsla lögð fram en ekki var hægt að framkvæma prentaðgerð.
+Pending count updated from {0} to {1},Greiðsluheiti fannst ekki.
+Pending Exposure,Greiðsla lögð fram.
+Pending Invoices,Greiðsluyfirlit
+Pending Ratio,Greiðslur
+Pending Sales,Greiðslur eru ekki opnar.
+Pending sales: {0} | Cache usage: {1}%,Viltu opna greiðslur og leggja fram?
+Pending Sync,Greiðslur eftir greiðslumáta
+Pending: {0},PDF
+Pending: {0} | Synced: {1} | Draft: {2},Hámarksstund
+Per Page,Hámarksminni:
+Personal,Hámarksþjónn:
+Personal preferences adjust the current cashier experience without changing the active POS route.,Hámark:
+PIN confirmation does not match.,Í bið
+PIN must be 4 to 8 digits.,Upphæð í bið
+Please add at least one item.,Talning í bið uppfærð úr {0} í {1}
+Please allow camera access to scan codes,Bíður útsetning
+Please enter payment amount,Reikningar í bið
+Please fill all required fields,Biðhlutfall
+Please make a payment or select a payment,Sala í bið
+Please request phone payment or use another payment method,Sala í bið: {0} |
+Please select a customer first,Skyndiminninotkun: {1}%
+Please select a party,Bíður samstillingar
+Please select a party before reconciling.,Í bið: {0}
+Please select a valid movement type.,Í bið: {0} |
+Please select an invoice,Samstillt: {1} |
+Please select company before reconciling.,Drög: {2}
+Please set the customer's mobile number,Á síðu
+Please try again or enter the item manually.,Persónulegt
+Please verify the barcode or check the item's availability.,Persónulegar óskir breyta núverandi upplifun gjaldkera án þess að breyta virku POS-leiðinni.
+Points,PIN-staðfesting passar ekki.
+Popup blocked. Please allow popups.,PIN-númer verður að vera 4 til 8 tölustafir.
+POS,Vinsamlegast bættu við að minnsta kosti einu atriði.
+POS controls and maintenance,Vinsamlegast leyfðu myndavélaraðgangi til að skanna kóða
+POS Expense is disabled for this POS Profile.,Vinsamlega sláðu inn greiðsluupphæð
+POS is running with limited offline prerequisites.,Vinsamlegast fylltu út alla nauðsynlega reiti
+POS Profile,Vinsamlegast greiddu eða veldu greiðslu
+Position the QR code or barcode within the scanning area,Vinsamlegast biðjið um símagreiðslu eða notaðu annan greiðslumáta
+Posting,Vinsamlegast veldu viðskiptavin fyrst
+Posting and Price List,Vinsamlegast veldu aðila
+Posting Date,Vinsamlega veldu aðila áður en þú gerir afstemmingu.
+Preparing background sync,Vinsamlegast veldu gilda hreyfingartegund.
+"Press OK to continue offline with a warning, or Cancel to retry.",Vinsamlegast veldu reikning
+Previous unit of measure,Vinsamlegast veldu fyrirtæki áður en þú gerir afstemmingu.
+Price List,Vinsamlegast stilltu farsímanúmer viðskiptavinarins
+Price List Rate,Vinsamlegast reyndu aftur eða sláðu inn hlutinn handvirkt.
+Price list rate updated locally only,Vinsamlegast staðfestu strikamerkið eða athugaðu hvort hluturinn sé tiltækur.
+Pricing & Discounts,Stig
+Pricing Rule,Lokað á sprettiglugga.
+Print,Vinsamlegast leyfðu sprettiglugga.
+Print Draft,POS
+Print Format (Invoice),POS stýringar og viðhald
+Print Format (Order),POS kostnaður er óvirkur fyrir þennan POS prófíl.
+Print invoice,POS er í gangi með takmarkaðar forsendur án nettengingar.
+Print Last Invoice,POS prófíll
+Print Purchase Invoice instead of PO,Settu QR kóða eða strikamerki innan skönnunarsvæðisins
+Printer,Birting
+Processed returns impacting the shift totals,Birting og verðskrá
+Processing Payment,Birtingardagur
+Processing payment entries for Invoice {0},Undirbýr samstillingu í bakgrunni
+Profile,"Ýttu á OK til að halda áfram án nettengingar með viðvörun, eða Hætta við til að reyna aftur."
+Profiles,Fyrri mælieining
+Profit,Verðskrá
+Profit: Invoice Item Estimate,Verðskrá Verð
+Profit: Stock Ledger (COGS),Verðlistaverð uppfært eingöngu á staðnum
+Profitability Report,Verð og afslættir
+Prorated return discount,Verðlagsregla
+Purchase Amount,Prenta
+Purchase Invoices,Prenta uppkast
+Purchase Order created,Prentsnið (reikningur)
+Qty,Prentsnið (pöntun)
+Qualified,Prentaðu reikning
+Quantity,Prentaðu síðasta reikning
+Quantity exceeds available stock,Prentaðu innkaupareikning í stað innkaupapöntunar
+Quick Actions,Prentari
+Quotation {0} is Submitted,Unnin skil sem hafa áhrif á vaktsamtölur
+Quotation submitted,Afgreiðsla greiðslu
+QZ Tray connected.,Vinnur greiðslufærslur fyrir reikning {0}
+QZ Tray is manually disconnected. Press Connect to enable it again.,Prófíll
+QZ Tray is not connected.,Snið
+QZ Tray Setup,Hagnaður
+Rate,Hagnaður: Áætlun reikningsvöru
+Rate adjusted to maximum allowed discount,Hagnaður: Hlutabréfabók (COGS)
+Ready,Arðsemisskýrsla
+Ready to resume,Hlutfallslegur skilaafsláttur
+Ready!,Kaupupphæð
+Real-time POS insights for retail operations.,Innkaupareikningar
+Rebuild Offline Data,Innkaupapöntun búin til
+Receive,Magn
+Receive now,Hæfur
+Received,Magn
+Received:,Magn er umfram tiltækt magn
+Recent Movement Entries,Fljótar aðgerðir
+Recent updates about your invoices,Tilvitnun {0} er lögð fram
+Recently Active Customers,Tilboð lögð fram
+Rechecking connection,QZ bakki tengdur.
+Reconcile payment methods and close shift,QZ bakki er aftengt handvirkt.
+Reconciling Payments,Ýttu á Tengja til að virkja það aftur.
+"Reconnect and open this page once while online, then offline refreshes will be able to restore it.",QZ bakki er ekki tengdur.
+Reconnect online to refresh cached offline data from the server.,Uppsetning QZ bakka
+Recreate local offline prerequisites from scratch,Gefa
+Recv:,Verð leiðrétt að hámarks leyfilegum afslætti
+Redeem,Tilbúið
+Redeem / Scan,Tilbúinn til að halda áfram
+Redeem Amount,Tilbúið!
+Redeem Mode,Rauntíma POS innsýn fyrir smásölurekstur.
+Redeemed Amount,Endurbyggja gögn án nettengingar
+Redeemed credit cannot be greater than its total.,Taka á móti
+Redemption and Totals,Fáðu núna
+Reference,Tekið á móti
+Refresh,Móttekið:
+Refresh Exchange Rate,Nýlegar hreyfifærslur
+Refresh Offline Data,Nýlegar uppfærslur um reikninga þína
+Refresh Printers,Nýlega virkir viðskiptavinir
+Refund,Athugar tengingu aftur
+Release Notes,Samræma greiðslumáta og loka vakt
+Reload,Samræma greiðslur
+Reload customers,"Tengdu aftur og opnaðu þessa síðu einu sinni á netinu, þá munu endurnýjunar án nettengingar geta endurheimt hana."
+Reload Items,Tengstu aftur á netinu til að endurnýja skyndiminni ónettengd gögn frá þjóninum.
+Reload Now,Endurskapaðu staðbundnar forsendur án nettengingar frá grunni
+Reload to apply the latest changes. Your current session will be refreshed.,Rev:
+Reload Workflow,Innleysa
+Remarks,Innleysa / skanna
+Remarks are required.,Innlausnarupphæð
+Remove,Innlausnarhamur
+Remove barcode item,Innleyst upphæð
+Remove cached data and reload the POS app,Innleyst inneign getur ekki verið hærri en heildarfjöldi þess.
+Remove item,Innlausn og samtals
+Remove Offer,Tilvísun
+Reorder / Purchase Suggestions,Endurnýja
+Repair Candidate,Endurnýja gengi
+Repair Change Allocation,Endurnýjaðu gögn án nettengingar
+Repair requires an online connection,Endurnýjaðu prentara
+Repaired,Endurgreiðsla
+Repairing change allocation,Útgáfuskýringar
+Repeat Customers,Endurhlaða
+Repeat Rate,Endurhlaða viðskiptavini
+Reprint previous transaction,Endurhlaða hluti
+Request,Endurhlaða núna
+Request ID: {0},Endurhlaða til að nota nýjustu breytingarnar.
+Request Payment,Núverandi lota þín verður endurnýjuð.
+Requested route: {0},Endurhlaða verkflæði
+Required columns cannot be hidden,Athugasemdir
+Reset,Athugasemdir eru nauðsynlegar.
+Reset item name,Fjarlægja
+Reset to Default,Fjarlægðu strikamerki
+Resource Health,Fjarlægðu skyndiminni gögn og endurhlaðið POS appið
+Restricted,Fjarlægðu hlut
+Restricted operational controls for supervisors only.,Fjarlægja tilboð
+Retry,Endurpöntun / innkaupatillögur
+Retry route,Viðgerðarframbjóðandi
+Return,Viðgerð Breyta úthlutun
+Return Amount,Viðgerð krefst nettengingar
+Return Count,Viðgerð
+Return items must have negative quantities,Gerir við breytingu á úthlutun
+Return total must be negative,Endurtaktu viðskiptavinir
+Return Valid Until,Endurtekið hlutfall
+Return window passed,Endurprentaðu fyrri viðskipti
+Return without Invoice,Beiðni
+Returns,Skilar
+Returns / Voids / Discounts,Skil / Ógildir / Afslættir
+Returns by Currency,Skil eftir gjaldmiðli
+Revenue,Tekjur
+Review shift totals before submitting the closing entry,Skoðaðu samtölur vakta áður en þú sendir inn lokafærsluna
+Round Off,Round Off
+Rows,Raðir
+Rows:,Raðir:
+Rule,Regla
+Sale,Útsala
+Sales,Sala
+Sales Order {0} is Submitted,Sölupöntun {0} er send
+Sales Person and Print,Sölumaður og prentun
+Sales Person not found,Söluaðili fannst ekki
+Sales processed,Sala afgreidd
+Sales Return,Söluskil
+Sales Trend Report,Söluþróunarskýrsla
+Save,Vista
+Save & Clear,Vista og hreinsa
+Save as POS Profile Default,Vista sem sjálfgefið POS prófíl
+Save Settings,Vista stillingar
+Save the selected printer as the POS Profile default so it shows automatically on this setup.,Vistaðu valinn prentara sem sjálfgefið POS prófíl svo hann birtist sjálfkrafa í þessari uppsetningu.
+Saved as draft because: {0},Vistað sem drög vegna þess að: {0}
+Saving...,Vistar...
+Scale barcode detected. Quantity here is the number of labels to print.,Skala strikamerki fannst.
+Scale barcode settings are not configured. Using item barcode only.,Magn hér er fjöldi merkimiða sem á að prenta.
+Scale template barcode is missing for this item/UOM. Using item barcode only.,Stillingar strikamerkiskvarða eru ekki stilltar.
+Scan an existing card and top it up without leaving the payment flow.,Notar eingöngu strikamerki vöru.
+Scan Error,Strikamerki mælikvarðasniðmáts vantar fyrir þessa vöru/UOM.
+Scan or enter a gift card code to check balance or redeem.,Notar eingöngu strikamerki vöru.
+Scan or paste the card code below.,Skannaðu kort sem fyrir er og fylltu á það án þess að fara út úr greiðsluflæðinu.
+Scan QR Code/Barcode,Skanna villa
+Scan with camera,Skannaðu eða sláðu inn gjafakortskóða til að athuga stöðuna eða innleysa.
+Scan-First Flow,Skannaðu eða límdu kortakóðann hér að neðan.
+Scanned Code:,Skannaðu QR kóða / strikamerki
+Scanning for: {0},Skannaðu með myndavél
+Scanning items,Scan-First Flow
+Scan-Ready,Skannaður kóði:
+Scope,Leitar að: {0}
+Scope: All Profiles,Skanna atriði
+Scope: Current Profile,Skanna-tilbúið
+Scope: Specific Profile,Gildissvið
+Search,Gildissvið: Öll snið
+Search Account,Gildissvið: Núverandi snið
+Search an invoice and continue the return flow without extra steps.,Gildissvið: Sérsniðið snið
+Search customer,Leita
+Search invoices or customers,Leita að reikningi
+Search item,Leitaðu að reikningi og haltu áfram skilaflæðinu án aukaþrepa.
+Search item / code,Leitaðu að viðskiptavini
+Search items or barcode,Leitaðu að reikningum eða viðskiptavinum
+Search Mpesa Payments,Leitaratriði
+Search return invoices or customers,Leita að hlut / kóða
+Search supplier,Leitaðu að hlutum eða strikamerki
+Search unpaid invoices or customers,Leitaðu í Mpesa Payments
+Secure context (HTTPS or localhost) is required for camera access.,Leitaðu að skilareikningum eða viðskiptavinum
+Secure context (HTTPS) required for camera access. Please use HTTPS to access the camera.,Leita að birgi
+Select,Leitaðu að ógreiddum reikningum eða viðskiptavinum
+Select a cashier first.,Öruggt samhengi (HTTPS eða localhost) er nauðsynlegt fyrir aðgang að myndavél.
+Select a customer,Öruggt samhengi (HTTPS) er krafist fyrir aðgang að myndavél.
+Select a customer to use coupon,Vinsamlegast notaðu HTTPS til að fá aðgang að myndavélinni.
+Select a printer to use QZ silent printing.,Veldu
+Select Batch,Veldu gjaldkera fyrst.
+Select Columns to Display,Veldu viðskiptavin
+Select items to sell,Veldu viðskiptavin til að nota afsláttarmiða
+Select Language,Veldu prentara til að nota QZ hljóðlausa prentun.
+Select Payment,Veldu Lotu
+Select Payment Account,Veldu Dálka til að sýna
+Select printer,Veldu hluti til að selja
+Select Return Invoice,Veldu Tungumál
+Select S.O,Veldu Greiðsla
+Select Sales Orders,Veldu Greiðslureikningur
+Select the cashier who is taking over this terminal.,Veldu prentara
+Selected,Veldu Skilareikning
+Selected movement type is not allowed by POS Profile.,Veldu S.O
+Selected Payments,Veldu Sölupantanir
+Sensitive actions kept away from quick taps.,Veldu gjaldkerann sem tekur við þessari flugstöð.
+Serial,Valið
+Serial Numbers,Valin hreyfing er ekki leyfð af POS prófíl.
+Server CPU Usage:,Valdar greiðslur
+Server Health,Viðkvæmar aðgerðir héldu í burtu frá skjótum krönum.
+Server Memory Usage:,Serial
+Server Metrics,Raðnúmer
+Server Uptime:,Notkun örgjörva miðlara:
+Service Charges,Server Health
+Session,Minninotkun miðlara:
+Set each cashier PIN in the User form and keep terminal members assigned in POS Profile User.,Miðlaramælingar
+Settings,Spenntur netþjóns:
+Settings in this section update the POS workspace without changing the current route.,Þjónustugjöld
+Setup complete!,Þing
+Share,Stilltu hvert PIN-númer gjaldkera á eyðublaðinu Notanda og haltu meðlimum útstöðvar úthlutað í POS Profile User.
+Shared terminal,Stillingar
+Shift Closed Snapshot,Stillingar í þessum hluta uppfæra POS vinnusvæðið án þess að breyta núverandi leið.
+Shift Overview,Uppsetningu lokið!
+Show,Deila
+Show cart on customer-facing screen,Sameiginleg flugstöð
+Show last invoice rate,Shift Lokað Snapshot
+Show rate info,Vaktayfirlit
+Show Repair Candidates,Sýna
+Show search tools,Sýna körfu á skjá sem snýr að viðskiptavinum
+Show the active cart on a customer-facing screen,Sýna síðasta reikningshlutfall
+Showing {0}-{1} of {2},Sýna upplýsingar um verð
+Showing 0 of 0,Sýna viðgerðarframbjóðendur
+Shows the distribution of invoices per currency,Sýna leitartæki
+Sign out of session,Sýndu virku körfuna á skjá sem snýr að viðskiptavinum
+Sign out of the current POS session,Sýnir {0}-{1} af {2}
+Size:,Sýnir 0 af 0
+Skipped Payments,Sýnir dreifingu reikninga á gjaldmiðil
+Skipping items without barcodes,Skráðu þig út af fundi
+Slow Moving,Skráðu þig út af núverandi POS lotu
+Slow Moving Items,Stærð:
+Slow Queries:,Sleppt greiðslum
+Sold,Sleppir hlutum án strikamerkja
+Source,Slow Moving
+Source Cash Account (Optional Override),Hægvirkir hlutir
+Source Ex. Rate:,Hægar fyrirspurnir:
+Source Rate:,Seldur
+Specific Profile,Heimild
+Split Invoices,Upprunasjóðsreikningur (valfrjáls hnekking)
+Staff / Cashier Performance Report,Heimild Ex.
+Status,Verð:
+Stock,Upprunahlutfall:
+Stock Information,Sérstakur prófíll
+Stock is lower than requested,Skiptir reikningum
+Stock is lower than requested:\n{0},Árangursskýrsla starfsfólks / gjaldkera
+Stock Movement Report,Staða
+Stock update: {0} has {1} available. Adding {2} will bring the stock below zero.,Stock
+Submit,Upplýsingar um hlutabréf
+Submit & Print,Birgðir eru minni en óskað var eftir
+Submit Deposit,Birgðir eru minni en beðið var um:\n{0}
+Submit Expense,Hlutabréfahreyfingarskýrsla
+Submitted,Lageruppfærsla: {0} hefur {1} tiltækt.
+Submitted Cash Movements,Með því að bæta við {2} verður hlutabréfið undir núll.
+Submitted entries,Sendu inn
+Successfully scanned:,Senda og prenta
+Suggested,Leggðu fram innborgun
+Suggested Qty,Sendu inn kostnað
+Supervisor Access,Lagt fram
+Supervisor permissions unlock issuance and reloads,Lagðar fram peningahreyfingar
+Supervisor Tools,Innsendar færslur
+Supplier,Tókst að skanna:
+Supplier and dates are required.,Lagt til
+Supplier Invoices,Ráðlagt magn
+Supplier is required.,Aðgangur umsjónarmanns
+Supplier name is required,Leyfi umsjónarmanns opnar útgáfu og endurhleðsla
+Supplier Payments,Verkfæri umsjónarmanns
+Supplier Purchase Summary,Birgir
+Suppliers,Birgir og dagsetningar eru nauðsynlegar.
+Suppliers not found,Reikningar birgja
+Switch Camera,Birgir er krafist.
+Switch Cashier,Nafn birgja er áskilið
+Switch the POS appearance theme,Greiðslur birgja
+Switch theme appearance,Yfirlit birgjakaupa
+Switched to:,Birgjar
+Sync All Invoices,Birgjar fundust ekki
+Sync Offline Cash Movements ({0}),Skiptu um myndavél
+Sync Offline Sales,Skiptu um gjaldkera
+Synced {0} offline cash movement(s).,Skiptu um POS útlitsþema
+Syncing items in background,Skiptu um útlit þema
+System / Diagnostics,Skipt yfir í:
+"System actions are low-frequency maintenance controls such as app info, support diagnostics, and session controls.",Samstilla alla reikninga
+System Information,Samstilla peningahreyfingar án nettengingar ({0})
+System Status,Samstilltu sölu án nettengingar
+Tables:,Samstillt {0} ónettengda peningahreyfingar.
+Tap the button below to redeem a gift card during checkout.,Samstillir atriði í bakgrunni
+Target,Kerfi / Greining
+Target Ex. Rate:,"Kerfisaðgerðir eru lágtíðniviðhaldsstýringar eins og forritaupplýsingar, stuðningsgreiningar og lotustýringar."
+Target Rate:,Kerfisupplýsingar
+Tax,Kerfisstaða
+Tax / Charges Report,Töflur:
+Tax Heads,Ýttu á hnappinn hér að neðan til að innleysa gjafakort við greiðslu.
+Taxable Amount,Markmið
+Tendered,Markmið Ex.
+Terminal,Verð:
+Terminal & Devices,Markhlutfall:
+Terminal locked,Skattur
+"Terminal tools affect this checkout station, customer-facing displays, and future printer/device controls.",Skýrsla um skatta/gjöld
+Territory not found,Skattstjórar
+The amount paid is not complete,Skattskyld upphæð
+The app stores data locally for offline use. This is called cache.,Boðið út
+The invoice stayed in draft. Please review and submit it manually.,Flugstöð
+The maximum discount allowed is,Flugstöð og tæki
+The quantity for {0} has been adjusted to the maximum available stock.,Flugstöð læst
+The system could not retrieve the item details. Please try again.,"Útstöðvarverkfæri hafa áhrif á þessa afgreiðslustöð, skjái sem snúa að viðskiptavinum og framtíðarstýringar prentara/tækja."
+These invoices will be synced when connection is restored,Landsvæði fannst ekki
+This action now opens inside the settings workspace.,Upphæðin sem greidd er er ekki tæmandi
+This coupon already used !,Forritið geymir gögn á staðnum til notkunar án nettengingar.
+This invoice does not need change-allocation repair,Þetta er kallað skyndiminni.
+This invoice is already repaired,Reikningurinn stóð í drögum.
+This is an item template. Please choose a variant.,Vinsamlegast skoðaðu og sendu það handvirkt.
+this item,Leyfilegur hámarksafsláttur er
+This POS page could not be opened offline because its code was not cached on this terminal yet.,Magnið fyrir {0} hefur verið stillt að hámarksbirgðum.
+This Serial Number {0} has already been added!,Kerfið gat ekki sótt atriðisupplýsingarnar.
+Threshold,Vinsamlegast reyndu aftur.
+Time,Þessir reikningar verða samstilltir þegar tenging er endurheimt
+Tip: Clear cache regularly to free up space and keep the app fast.,Þessi aðgerð opnast nú inni í stillingarvinnusvæðinu.
+Tip: Close unused tabs or apps to reduce lag.,Þessi afsláttarmiði þegar notaður!
+Tip: Monitor slow queries and table size for optimal performance.,Þessi reikningur þarfnast ekki breytinga-úthlutunarviðgerðar
+To Be Paid,Þessi reikningur hefur þegar verið lagfærður
+To Date,Þetta er vörusniðmát.
+Today,Vinsamlegast veldu afbrigði.
+Today Profit,þetta atriði
+Today Sales,Ekki var hægt að opna þessa POS-síðu án nettengingar vegna þess að kóði hennar var ekki enn í skyndiminni á þessari flugstöð.
+Toggle navigation drawer,Þessu raðnúmeri {0} hefur þegar verið bætt við!
+Toggle Theme,Þröskuldur
+Tools,Tími
+Tools for customer-facing screens and terminal-specific actions.,Ábending: Hreinsaðu skyndiminni reglulega til að losa um pláss og halda forritinu hratt.
+Top Brand,Ábending: Lokaðu ónotuðum flipum eða forritum til að draga úr töf.
+Top Category,Ábending: Fylgstu með hægum fyrirspurnum og töflustærð til að ná sem bestum árangri.
+Top Charge Head,Að fá greitt
+Top Customers,Hingað til
+Top Discount,Í dag
+Top Items by Location,Hagnaður í dag
+Top Margin,Sala í dag
+Top Pending,Skiptu um leiðsöguskúffu
+Top Profit Item,Skipta um þema
+Top Return Items,Verkfæri
+Top Sales by Cashier,Verkfæri fyrir skjái sem snúa að viðskiptavinum og sértækar aðgerðir fyrir flugstöðvar.
+Top Supplier,Topp vörumerki
+Top Suppliers by Spend,Efsti flokkur
+Top Tables,Top Charge Head
+Top Tax Head,Topp viðskiptavinir
+Top Up Amount,Topp afsláttur
+Top Up Card,Helstu atriði eftir staðsetningu
+Top Up Mode,Efsta framlegð
+Top Variant,Efst í bið
+Total,Efsta hagnaðarhlutur
+Total Amount,Efstu skilavörur
+Total Change,Toppsala hjá gjaldkera
+Total Charges,Topp birgir
+Total In,Helstu birgjar eftir Spend
+Total Invoices,Efstu töflur
+Total Items,Efsti skattstjóri
+Total Mpesa,Uppfyllingarupphæð
+Total Out,Toppkort
+Total Payments,Top Up Mode
+Total Purchase,Topp afbrigði
+Total Selected :,Samtals
+Total Size,Heildarupphæð
+Total Stock Qty,Heildarbreyting
+Total:,Heildargjöld
+Totals by Invoice Currency,Samtals inn
+Track how much cash was handed back to customers,Heildarreikningar
+"Track recent sales, collect unpaid balances, and reopen saved work",Heildarhlutir
+Transaction ID,Heildar Mpesa
+Transfer,Total Out
+Try a different search term or clear the cart search.,Heildargreiðslur
+Try adjusting your search or filters,Heildarkaup
+Try another source or refresh the list.,Samtals valið:
+Try changing the date range or status filter.,Heildarstærð
+Type,Heildarlagermagn
+Unable to access camera even with basic settings. Please check your camera permissions and device compatibility.,Samtals:
+Unable to add offer item {0}. Please refresh and try again.,Samtölur eftir gjaldmiðli reiknings
+Unable to add offer item. Please refresh and try again.,Fylgstu með hversu mikið reiðufé var skilað til viðskiptavina
+Unable to add scanned item.,"Fylgstu með nýlegum sölum, safnaðu ógreiddum innistæðum og opnaðu vistað vinnu aftur"
+Unable to create purchase order,Auðkenni færslu
+Unable to delete draft invoice,Flytja
+Unable to fetch documents,Prófaðu annað leitarorð eða hreinsaðu körfuleitina.
+Unable to fetch draft orders,Prófaðu að stilla leitina þína eða síur
+Unable to fetch invoice history,Prófaðu aðra heimild eða endurnýjaðu listann.
+Unable to fetch M-Pesa payments,Prófaðu að breyta dagsetningarbilinu eða stöðusíu.
+Unable to fetch sales orders,Tegund
+Unable to fetch unpaid invoices,Ekki hægt að nálgast myndavélina jafnvel með grunnstillingum.
+Unable to generate scale barcode,Athugaðu heimildir myndavélarinnar og samhæfni tækisins.
+Unable to issue gift card.,Ekki er hægt að bæta við tilboðsvöru {0}.
+Unable to load cashier PIN status.,Endurnýjaðu og reyndu aftur.
+Unable to load document,Ekki er hægt að bæta við tilboðsvöru.
+Unable to load draft invoice,Endurnýjaðu og reyndu aftur.
+Unable to load gift card balance.,Ekki er hægt að bæta við skönnuðu atriði.
+Unable to load invoice details,Ekki tókst að búa til innkaupapöntun
+Unable to load parked order,Ekki tókst að eyða reikningsdrögum
+Unable to load the selected sales order,Ekki er hægt að sækja skjöl
+Unable to prepare document,Ekki er hægt að sækja drög að pöntunum
+Unable to prepare return invoice,Ekki er hægt að sækja reikningsferil
+Unable to print draft invoice,Ekki er hægt að sækja M-Pesa greiðslur
+Unable to print submitted invoice,Ekki er hægt að sækja sölupantanir
+Unable to process document action,Ekki er hægt að sækja ógreidda reikninga
+Unable to repair change allocation,Ekki tókst að búa til mælikvarða strikamerki
+Unable to save cashier PIN.,Ekki er hægt að gefa út gjafakort.
+Unable to save the rate to the backend price list,Ekki tókst að hlaða PIN-númer gjaldkera.
+Unable to submit invoice,Ekki tókst að hlaða skjalinu
+Unable to submit the selected payment,Ekki tókst að hlaða reikningsdrögum
+Unable to top up gift card.,Ekki tókst að hlaða inneign gjafakorts.
+Unable to verify cashier PIN.,Ekki tókst að hlaða reikningsupplýsingum
+Unallocated,Ekki er hægt að hlaða niður pöntun
+Unallocated:,Ekki tókst að hlaða valda sölupöntun
+Unavailable,Ekki hægt að útbúa skjal
+Unknown,Ekki er hægt að útbúa skilareikning
+Unknown error,Ekki er hægt að prenta reikningsdrög
+Unknown Item,Ekki er hægt að prenta innsendan reikning
+Unknown Warehouse,Ekki tókst að vinna úr skjalaaðgerð
+Unlock POS,Ekki er hægt að gera við breytingarúthlutun
+Unpaid,Ekki tókst að vista PIN-númer gjaldkera.
+"Unselected payments stay unallocated first, then auto reconcile after submit.",Ekki tókst að vista verðið í verðskrá bakenda
+UOM,Ekki er hægt að leggja fram reikning
+UOM not found,Ekki tókst að senda inn valda greiðslu
+Update available,Ekki er hægt að fylla á gjafakort.
+Update Customer,Ekki er hægt að staðfesta PIN-númer gjaldkera.
+Update PIN,Óúthlutað
+Update Price List Rate,Óúthlutað:
+Updated,Ekki tiltækt
+Updates and app info that stay out of the cashier flow.,Óþekkt
+Updates automatically,Óþekkt villa
+Upload pending transactions,Óþekkt atriði
+Usage,Óþekkt vöruhús
+Usage Stats,Opnaðu POS
+Use a 4 to 8 digit PIN for cashier switching and terminal unlock.,Ógreitt
+Use Cashier,"Óvöldum greiðslum er óúthlutað fyrst, síðan samræmast sjálfkrafa eftir sendingu."
+Use date range to search for older invoices,UOM
+"Use one field for manual code entry, barcode scans, or QR scans.",UOM fannst ekki
+"Use one workflow for balance checks, new issuance, and top ups without leaving POS.",Uppfærsla í boði
+"Use this section when cached prerequisite data needs a refresh, rebuild, or diagnostics review.",Uppfærðu viðskiptavin
+Use Western numerals,Uppfærðu PIN-númerið
+Used:,Uppfærðu verðskrárverð
+Using basic camera settings due to device limitations,Uppfært
+Using cached customer balance,Uppfærslur og appupplýsingar sem haldast utan við gjaldkeraflæðið.
+Valid until,Uppfærir sjálfkrafa
+Variance %,Hladdu upp færslum í bið
+Variants,Notkun
+Variant-wise,Notkunartölfræði
+Verify closing amounts for each payment method,Notaðu 4 til 8 stafa PIN-númer til að skipta um gjaldkera og opna flugstöðina.
+View all,Notaðu gjaldkera
+View app information and current build details,Notaðu tímabil til að leita að eldri reikningum
+View Data Diagnostics,"Notaðu einn reit fyrir handvirka innslátt kóða, strikamerkjaskannanir eða QR skannanir."
+View Details,"Notaðu eitt verkflæði fyrir jafnvægisathugun, nýja útgáfu og áfyllingu án þess að fara úr POS."
+View invoice details,"Notaðu þennan hluta þegar skyndiminni forsenda gagna þarfnast endurnýjunar, endurbyggingar eða greiningarskoðunar."
+View notifications,Notaðu vestræna tölustafi
+View offline invoices,Notað:
+View restricted POS insights,Notar grunnstillingar myndavélar vegna takmarkana á tækinu
+Void Amount,Notar inneign viðskiptavinar í skyndiminni
+Void Count,Gildir til kl
+Voids,Frávik %
+Waiting for cart items,Afbrigði
+Waiting for payment...,Afbrigðilega séð
+Walk-in Customer,Staðfestu lokaupphæðir fyrir hvern greiðslumáta
+Warehouse,Skoða allt
+Warning: High cache usage may affect performance.,Skoðaðu upplýsingar um forrit og núverandi byggingarupplýsingar
+Warning: High lag may indicate heavy processing or browser slowness.,Skoða gagnagreiningu
+Week Δ,Skoða upplýsingar
+Week-wise,Skoða reikningsupplýsingar
+Weight (g),Skoða tilkynningar
+Weight (grams),Skoða reikninga án nettengingar
+We'll let you know if an invoice fails to submit,Skoða takmarkaða POS innsýn
+Workflow,Ógild upphæð
+Write off amount cannot exceed the POS profile maximum of {0},Ógild talning
+Write off amount exceeds the allowed limit ({0}). Please add payment for the remaining amount.,Tómar
+Yes,Beðið eftir vörukörfu
+"Yes, Cancel sale",Beðið eftir greiðslu...
+"Yes, Close",Gangandi viðskiptavinur
+You are not allowed to print draft invoices,Vöruhús
+You are offline. Add Payment will work again when the connection is restored.,Viðvörun: Mikil skyndiminninotkun getur haft áhrif á frammistöðu.
+You have no notifications right now,Viðvörun: Mikil töf getur bent til mikillar vinnslu eða hægfara vafra.
+Your Cart,Vika Δ

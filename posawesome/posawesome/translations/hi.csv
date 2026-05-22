@@ -1,0 +1,1353 @@
+﻿- Total Unallocated,- Total Unallocated
+* Required,*आवश्यक
+{0} (Qty: {1}),{0} (मात्रा: {1})
+{0} actions,{0} क्रियाएं
+{0} has only {1} in stock. You requested {2}. Adjust quantity or restock.,{0} के पास स्टॉक में केवल {1} है।
+{0} offline invoice{1} pending,आपने अनुरोध किया है {2}.
+{0} offline invoice{1} saved as draft,मात्रा समायोजित करें या पुनः स्टॉक करें।
+{0} offline invoice{1} synced,{0}ऑफ़लाइन चालान{1}लंबित है
+{0}: {1} {2},{0}ऑफ़लाइन चालान{1} ड्राफ्ट के रूप में सहेजा गया
+{0}d ago,{0} ऑफ़लाइन चालान{1} समन्वयित किया गया
+{0}h ago,{0}: {1} {2}
+{0}m ago,{0}दिन पहले
+A POS supervisor is required for this action.,{0}घंटे पहले
+About,{0}मी पहले
+Access,इस कार्रवाई के लिए एक पीओएस पर्यवेक्षक की आवश्यकता है।
+Account,के बारे में
+Account is overdrawn,पहुंच
+Acknowledge the error to resume scanning,खाता
+Acknowledge the error to resume scanning.,खाता ओवरड्राउन हो गया है
+Across,स्कैनिंग फिर से शुरू करने के लिए त्रुटि स्वीकार करें
+Action,स्कैनिंग फिर से शुरू करने के लिए त्रुटि स्वीकार करें।
+Actions,पार
+Active sale,कार्रवाई
+add,क्रियाएँ
+Add items from the selector to start building this sale.,सक्रिय बिक्री
+Add more value to an existing gift card,जोड़ें
+Add New Address,इस बिक्री का निर्माण शुरू करने के लिए चयनकर्ता से आइटम जोड़ें।
+Add new customer,मौजूदा उपहार कार्ड में अधिक मूल्य जोड़ें
+Add on New Line,नया पता जोड़ें
+Add Payment,नया ग्राहक जोड़ें
+Add payment to invoice,नई लाइन पर जोड़ें
+Add/Edit Coupon Conditions,भुगतान जोड़ें
+Additional Discount,चालान में भुगतान जोड़ें
+Additional Discount %,कूपन शर्तें जोड़ें/संपादित करें
+Address Line 1,अतिरिक्त छूट
+Address not found,अतिरिक्त छूट %
+Adjust the quantity or enable negative stock to continue.,पता पंक्ति 1
+Adjustment,पता नहीं मिला
+After returns,मात्रा समायोजित करें या नकारात्मक स्टॉक को जारी रखने में सक्षम करें।
+Against,समायोजन
+Against Name,वापसी के बाद
+Age Bracket,विरुद्ध
+All,नाम के विरुद्ध
+All Caught Up!,आयु वर्ग
+All invoices are synchronized,सब
+All pending invoices are up to date,सब पकड़े गए!
+All Profiles,सभी चालान सिंक्रनाइज़ हैं
+All Synchronized,सभी लंबित चालान अद्यतन हैं
+All visible invoices are fully settled.,सभी प्रोफाइल
+All Warehouses,सभी सिंक्रनाइज़
+Allowed UOM is {0},सभी दृश्यमान चालान पूरी तरह से निपटाए गए हैं।
+Always fetch items from server (ignore local cache),सभी गोदाम
+Amount,अनुमत यूओएम {0} है
+Amount already received,आइटम हमेशा सर्वर से प्राप्त करें (स्थानीय कैश पर ध्यान न दें)
+Amount exceeds profile cash movement max amount.,रकम
+Amount must be greater than zero.,राशि मिल चुकी है
+Amount received from customer,राशि प्रोफ़ाइल नकदी संचलन की अधिकतम राशि से अधिक है।
+App information,राशि शून्य से अधिक होनी चाहिए.
+Appearance and user-level preferences for the current session.,ग्राहक से प्राप्त राशि
+Applied,ऐप की जानकारी
+Apply,वर्तमान सत्र के लिए उपस्थिति और उपयोगकर्ता-स्तरीय प्राथमिकताएँ।
+Apply Gift Card,लागू
+Apply Offer,आवेदन करें
+Apply On,उपहार कार्ड लागू करें
+Apply only the amount you want to redeem on this invoice. The remaining balance stays on the card.,ऑफर लागू करें
+Apply Redemption,पर आवेदन करें
+Applying,इस चालान पर केवल वही राशि लागू करें जिसे आप भुनाना चाहते हैं।
+Apps,शेष राशि कार्ड पर रहती है.
+Are you sure you want to close? All entered data will be lost.,मोचन लागू करें
+Attributes (Size/Color),आवेदन करना
+Auto Allocate Payment Amount,ऐप्स
+Auto Reconcile,क्या आप वाकई बंद करना चाहते हैं?
+Auto reconciliation completed after payment submit.,दर्ज किया गया सारा डेटा नष्ट हो जाएगा.
+Auto reconciliation completed. Allocated: {0}{1}. Remaining outstanding: {0}{2}.,गुण (आकार/रंग)
+Available Actions,भुगतान राशि स्वतः आवंटित करें
+Available QTY,स्वतः समाधान
+Available:,भुगतान जमा होने के बाद स्वत: समाधान पूरा हो गया।
+Average Basket,स्वतः समाधान पूर्ण हुआ.
+Average Bill,आवंटित: {0}{1}.
+Average Ticket,शेष बकाया: {0}{2}.
+Avg Bill,उपलब्ध क्रियाएँ
+Avg Invoice,उपलब्ध मात्रा
+Avg Invoice Profit,उपलब्ध:
+Avg Invoice Value,औसत टोकरी
+Avg Purchase Frequency,औसत बिल
+Awesome,औसत टिकट
+Awesome Dashboard,औसत बिल
+Awesome Dashboard is disabled for the selected POS Profile.,औसत चालान
+Awesome Dashboard is unavailable for the selected scope.,औसत चालान लाभ
+Awesome Dashboard is visible only to POS supervisors.,औसत चालान मूल्य
+Back,औसत खरीद आवृत्ति
+Back Office Cash Account,बहुत बढ़िया
+Back Office Cash Account (Optional Override),बहुत बढ़िया डैशबोर्ड
+Back office cash account is required.,चयनित पीओएस प्रोफ़ाइल के लिए विस्मयकारी डैशबोर्ड अक्षम है।
+Back to {0},चयनित दायरे के लिए विस्मयकारी डैशबोर्ड अनुपलब्ध है।
+Background processing did not finish in time.,विस्मयकारी डैशबोर्ड केवल पीओएस पर्यवेक्षकों को दिखाई देता है।
+Background processing failed for Invoice {0}: {1},वापस
+Background Submission Failed,बैक ऑफिस कैश खाता
+Background sync interval (seconds),बैक ऑफिस कैश अकाउंट (वैकल्पिक ओवरराइड)
+Balance,बैक ऑफिस कैश खाता आवश्यक है.
+Balance will be updated when connection is restored,{0} पर वापस जाएँ
+Balances still pending,पृष्ठभूमि प्रसंस्करण समय पर समाप्त नहीं हुआ.
+Barcode,चालान {0} के लिए पृष्ठभूमि प्रसंस्करण विफल: {1}
+Barcode / QR Ready,पृष्ठभूमि सबमिशन विफल
+Barcode Label Printing,पृष्ठभूमि सिंक अंतराल (सेकंड)
+Base Paid:,संतुलन
+Base Recv:,कनेक्शन बहाल होने पर शेष राशि अपडेट कर दी जाएगी
+Base:,शेष अभी भी लंबित हैं
+Basic Information,बारकोड
+Batch,बारकोड/क्यूआर तैयार
+Batch Information,बारकोड लेबल मुद्रण
+Before any return workflow,आधार भुगतान:
+Before returns,आधार पुनर्प्राप्ति:
+Best Day,आधार:
+Best Seller,बुनियादी जानकारी
+Book expense or deposit from active shift.,बैच
+Branch / Location-wise Report,बैच सूचना
+Brand-wise,किसी भी रिटर्न वर्कफ़्लो से पहले
+Breakdown,वापसी से पहले
+Browse,सबसे अच्छा दिन
+Build Time:,सर्वश्रेष्ठ विक्रेता
+Built with Frappe,सक्रिय शिफ्ट से व्यय या जमा बुक करें।
+Bundle,शाखा/स्थान-वार रिपोर्ट
+Buying Price,ब्रांड के अनुसार
+Cache cleared successfully,टूटना
+Cache Usage,ब्राउज़ करें
+cache used,निर्माण समय:
+Calculating...,फ्रैपे के साथ निर्मित
+Camera Access Required,बंडल
+Camera access was aborted. Please try again.,क्रय मूल्य
+Camera constraints not supported by your device. Trying fallback settings...,कैश सफलतापूर्वक साफ़ हो गया
+Camera is busy or blocked by another app/tab. Close other camera apps and try again.,कैश उपयोग
+Camera permission denied. Please allow camera access in your browser settings and refresh the page.,कैश का उपयोग किया गया
+Camera scanner is locked until the current error is acknowledged,हिसाब लगाया जा रहा है...
+Camera started but the video stream did not load in time. Please try again.,कैमरा पहुंच आवश्यक है
+Cancel,कैमरे का उपयोग निरस्त कर दिया गया.
+Cancel cash movement {0}?,कृपया पुन: प्रयास करें।
+Cancel Payment,कैमरा बाधाएँ आपके डिवाइस द्वारा समर्थित नहीं हैं।
+Cancel Sale,फ़ॉलबैक सेटिंग आज़मा रहा है...
+Cancel Sale ?,कैमरा व्यस्त है या किसी अन्य ऐप/टैब द्वारा अवरुद्ध है।
+Cancelled,अन्य कैमरा ऐप्स बंद करें और पुनः प्रयास करें।
+Cannot add an item with zero or negative quantity.,कैमरे की अनुमति अस्वीकृत.
+Cannot clear cache while offline,कृपया अपनी ब्राउज़र सेटिंग में कैमरा एक्सेस की अनुमति दें और पेज को रीफ्रेश करें।
+Cannot redeem customer credit more than invoice total,वर्तमान त्रुटि की पुष्टि होने तक कैमरा स्कैनर लॉक है
+Cannot redeem gift cards more than invoice total,कैमरा चालू हुआ लेकिन वीडियो स्ट्रीम समय पर लोड नहीं हुआ।
+Cannot Save Offline Invoice:,कृपया पुन: प्रयास करें।
+Cannot Save Offline Payment:,रद्द करें
+Card,नकदी संचलन रद्द करें {0}?
+Card / Online,भुगतान रद्द करें
+Card health after the last live lookup,बिक्री रद्द करें
+Cards,बिक्री रद्द करें?
+Cart,रद्द किया गया
+Cash,शून्य या ऋणात्मक मात्रा वाला कोई आइटम नहीं जोड़ा जा सकता.
+Cash back to customers,ऑफ़लाइन रहते हुए कैश साफ़ नहीं किया जा सकता
+Cash Collections,ग्राहक क्रेडिट को कुल चालान से अधिक नहीं भुनाया जा सकता
+Cash Deposit is disabled for this POS Profile.,कुल चालान से अधिक उपहार कार्ड भुना नहीं सकते
+Cash Drawer Snapshot,ऑफ़लाइन चालान सहेजा नहीं जा सकता:
+Cash In Hand,ऑफ़लाइन भुगतान सहेजा नहीं जा सकता:
+Cash Movement,कार्ड
+Cash movement cancelled,कार्ड/ऑनलाइन
+Cash movement deduction applied,अंतिम लाइव लुकअप के बाद कार्ड का स्वास्थ्य
+Cash movement deleted,कार्ड
+Cash movement is disabled for this POS Profile.,गाड़ी
+Cash Movement is disabled in current POS Profile.,नकद
+Cash movement saved offline,ग्राहकों को नकद वापसी
+Cash movement submitted,नकद संग्रह
+Cash Movements,इस पीओएस प्रोफ़ाइल के लिए नकद जमा अक्षम है।
+Cash payment cannot be less than invoice total when partial payment is not allowed,नकद दराज स्नैपशॉट
+Cash returned after payment,हाथ में नकद
+Cashier,नकद आंदोलन
+Cashier Access,नकदी की आवाजाही रद्द कर दी गई
+Cashier identity and appearance preferences.,नकद संचलन कटौती लागू
+Cashier PIN,नकदी संचलन हटा दिया गया
+Cashier PIN saved successfully.,इस पीओएस प्रोफ़ाइल के लिए नकदी संचलन अक्षम है।
+Cashiers,वर्तमान पीओएस प्रोफ़ाइल में नकदी संचलन अक्षम है।
+Cashier-wise,नकदी संचलन ऑफ़लाइन सहेजा गया
+Categories,नकद संचलन प्रस्तुत किया गया
+Category,नकदी संचलन
+Category / Brand / Variant Report,आंशिक भुगतान की अनुमति नहीं होने पर नकद भुगतान कुल चालान से कम नहीं हो सकता
+Category-wise,भुगतान के बाद नकद वापस कर दिया गया
+Category-wise Margin,खजांची
+Certificate,खजांची प्रवेश
+Certificate is missing or not trusted. QZ may show confirmation dialogs.,कैशियर की पहचान और उपस्थिति प्राथमिकताएँ।
+Certificate is trusted. Silent QZ printing is active.,कैशियर पिन
+Change,कैशियर पिन सफलतापूर्वक सहेजा गया.
+Change allocation repaired,खजांची
+Change interface language,खजांची-वार
+Change Language,श्रेणियाँ
+Change Price,श्रेणी
+Change Return,श्रेणी/ब्रांड/संस्करण रिपोर्ट
+Change Returned,श्रेणी-वार
+Change terminal cashier,श्रेणी-वार मार्जिन
+Charge Heads,प्रमाणपत्र
+Charges,प्रमाणपत्र गुम है या विश्वसनीय नहीं है.
+Charges not found,QZ पुष्टिकरण संवाद दिखा सकता है।
+Check Balance,प्रमाणपत्र विश्वसनीय है.
+Check balance for any card. Supervisors can issue and top up cards here.,साइलेंट QZ प्रिंटिंग सक्रिय है.
+Check balance only,परिवर्तन
+Check for new commits,परिवर्तन आवंटन की मरम्मत की गई
+Check for Updates,इंटरफ़ेस भाषा बदलें
+Check live balance before applying redemption,भाषा बदलें
+Check live balance before redemption,कीमत बदलें
+Checking...,रिटर्न बदलें
+Cheque/Reference Date,परिवर्तन वापस आ गया
+Cheque/Reference No,टर्मिनल कैशियर बदलें
+Choose the cashier currently operating this terminal.,प्रभारी प्रमुख
+Choose your preferred language for the POS interface,शुल्क
+City,आरोप नहीं मिले
+Clear,शेष राशि जांचें
+Clear All,किसी भी कार्ड का बैलेंस जांचें।
+Clear all barcode items,पर्यवेक्षक यहां कार्ड जारी और टॉप-अप कर सकते हैं।
+Clear all purchase order items,केवल शेष राशि की जाँच करें
+Clear Cache,नई प्रतिबद्धताओं की जाँच करें
+Clear Search,अद्यतनों के लिए जाँच करें
+Clearing local cache...,रिडेम्प्शन लागू करने से पहले लाइव बैलेंस जांचें
+Click to refresh,मोचन से पहले लाइव बैलेंस जांचें
+Client CPU Lag:,जाँच हो रही है...
+Client Memory Usage:,चेक/संदर्भ दिनांक
+Client Metrics,चेक/संदर्भ संख्या
+Close,उस कैशियर को चुनें जो वर्तमान में इस टर्मिनल का संचालन कर रहा है।
+Close about dialog,पीओएस इंटरफ़ेस के लिए अपनी पसंदीदा भाषा चुनें
+Close cashier switcher,शहर
+Close closing shift dialog,स्पष्ट
+Close column selector,सभी साफ़ करें
+Close Dialog,सभी बारकोड आइटम साफ़ करें
+Close drafts dialog,सभी क्रय ऑर्डर आइटम साफ़ करें
+Close invoice details dialog,कैश साफ़ करें
+Close invoice management,स्पष्ट खोज
+Close offline invoices dialog,स्थानीय कैश साफ़ किया जा रहा है...
+Close packing list dialog,ताज़ा करने के लिए क्लिक करें
+Close returns dialog,क्लाइंट सीपीयू लैग:
+Close sales orders dialog,क्लाइंट मेमोरी उपयोग:
+Close Scanner,ग्राहक मेट्रिक्स
+Close scanner dialog,बंद करें
+Close Settings,संवाद के बारे में बंद करें
+Close Shift,कैशियर स्विचर बंद करें
+Closing Amount,समापन शिफ्ट संवाद बंद करें
+Closing POS Shift,स्तंभ चयनकर्ता बंद करें
+Closing Snapshot Available,संवाद बंद करें
+Code,ड्राफ्ट संवाद बंद करें
+Code scanned successfully,चालान विवरण संवाद बंद करें
+COGS,चालान प्रबंधन बंद करें
+Collapse item details,ऑफ़लाइन चालान संवाद बंद करें
+Collected,पैकिंग सूची संवाद बंद करें
+Cols,रिटर्न संवाद बंद करें
+Columns,विक्रय आदेश संवाद बंद करें
+commits,स्कैनर बंद करें
+Completed and active sales in this range,स्कैनर संवाद बंद करें
+Completed returns will appear here.,सेटिंग्स बंद करें
+Confirm,शिफ्ट बंद करें
+Confirm Close,समापन राशि
+Confirm Mobile Number,पीओएस शिफ्ट को बंद करना
+Confirm PIN,समापन स्नैपशॉट उपलब्ध है
+Connect,कोड
+Connect printer and manage certificate,कोड सफलतापूर्वक स्कैन किया गया
+Connecting to QZ Tray...,COGS
+Connection problem while submitting invoice,आइटम विवरण संक्षिप्त करें
+Connections:,एकत्र किया गया
+Connectivity and cached prerequisite status were rechecked.,कर्नल
+Continue Editing,कॉलम
+Could not fetch latest balance from server,प्रतिबद्ध
+Count,इस श्रेणी में पूर्ण और सक्रिय बिक्री
+Country,पूर्ण रिटर्न यहां दिखाई देंगे.
+Coupon,पुष्टि करें
+Coupons,पुष्टि करें बंद करें
+Cover,मोबाइल नंबर की पुष्टि करें
+CPU Cores:,पिन की पुष्टि करें
+Create,कनेक्ट करें
+Create and load a new prepaid card,प्रिंटर कनेक्ट करें और प्रमाणपत्र प्रबंधित करें
+Create and preload a new gift card,QZ ट्रे से कनेक्ट हो रहा है...
+Create Bill,चालान जमा करते समय कनेक्शन की समस्या
+Create Customer,कनेक्शन:
+Create New Item,कनेक्टिविटी और कैश्ड पूर्वावश्यक स्थिति की पुनः जाँच की गई।
+Create or change your PIN,संपादन जारी रखें
+Create PIN,सर्वर से नवीनतम शेष राशि प्राप्त नहीं की जा सकी
+Create POS Opening Shift,गिनती
+Create Purchase Order,देश
+Create Return,कूपन
+Create return from invoice,कूपन
+Create Supplier,आवरण
+Credit and Output,सीपीयू कोर:
+Credit Note,बनाएँ
+Credit Outstanding,नया प्रीपेड कार्ड बनाएं और लोड करें
+Credit sales remaining to be collected,एक नया उपहार कार्ड बनाएं और प्रीलोड करें
+Critical,बिल बनाएं
+Currency,ग्राहक बनाएं
+Current,नया आइटम बनाएं
+Current Event Loop Lag:,अपना पिन बनाएं या बदलें
+Current Month,पिन बनाएं
+Current PIN,पीओएस ओपनिंग शिफ्ट बनाएं
+Current Profile,क्रय आदेश बनाएं
+Current redeemable value on the gift card,रिटर्न बनाएं
+Current User,चालान से रिटर्न बनाएं
+Custom,आपूर्तिकर्ता बनाएँ
+Custom Due Days,क्रेडिट और आउटपुट
+Custom items per page,क्रेडिट नोट
+Customer,बकाया क्रेडिट
+Customer already selected,क्रेडिट बिक्री एकत्र की जानी बाकी है
+Customer Balance,गंभीर
+Customer balance unavailable offline,मुद्रा
+Customer created successfully.,वर्तमान
+Customer creation failed.,वर्तमान घटना लूप लैग:
+Customer Details,चालू माह
+Customer display channel is missing,वर्तमान पिन
+Customer display was blocked. Please allow pop-ups for this site.,वर्तमान प्रोफ़ाइल
+Customer group is required,उपहार कार्ड पर वर्तमान प्रतिदेय मूल्य
+Customer is required to add payment,वर्तमान उपयोगकर्ता
+Customer Name is required,कस्टम
+Customer not selected,कस्टम देय दिन
+Customer Report,प्रति पृष्ठ कस्टम आइटम
+Customer saved offline,ग्राहक
+Customer Screen,ग्राहक पहले से ही चयनित है
+Customer territory is required,ग्राहक शेष
+Customer updated successfully.,ग्राहक शेष ऑफ़लाइन उपलब्ध नहीं है
+Customer-facing tools and printer setup.,ग्राहक सफलतापूर्वक बनाया गया.
+Customers,ग्राहक निर्माण विफल.
+Customers not found,ग्राहक विवरण
+Daily cashier actions without scrolling.,ग्राहक प्रदर्शन चैनल गायब है
+Daily Sales,ग्राहक प्रदर्शन अवरुद्ध कर दिया गया था.
+Daily Sales Summary,कृपया इस साइट के लिए पॉप-अप की अनुमति दें।
+Dark Mode,ग्राहक समूह आवश्यक है
+Data loaded in form. Review and submit.,ग्राहक को भुगतान जोड़ना आवश्यक है
+Database Health,ग्राहक का नाम आवश्यक है
+Database health affects overall system speed and reliability.,ग्राहक का चयन नहीं किया गया
+Database Info,ग्राहक रिपोर्ट
+Date,ग्राहक ऑफ़लाइन सहेजा गया
+Day Δ,ग्राहक स्क्रीन
+days,ग्राहक क्षेत्र आवश्यक है
+Day-wise (MTD),ग्राहक सफलतापूर्वक अपडेट किया गया.
+Day-wise Movement,ग्राहक-सामना करने वाले उपकरण और प्रिंटर सेटअप।
+Dead Stock,ग्राहक
+Dead Stock Items,ग्राहक नहीं मिले
+Decrease quantity,स्क्रॉल किए बिना दैनिक कैशियर कार्रवाई।
+Default,दैनिक बिक्री
+Default:,दैनिक बिक्री सारांश
+Delete,डार्क मोड
+Delete cancelled cash movement {0}?,डेटा प्रपत्र में लोड किया गया.
+Delete Draft,समीक्षा करें और सबमिट करें.
+Delete draft invoice,डेटाबेस स्वास्थ्य
+Delete draft invoice {0}?,डेटाबेस स्वास्थ्य समग्र सिस्टम गति और विश्वसनीयता को प्रभावित करता है।
+Delete Invoice,डेटाबेस जानकारी
+Delete offline invoice,दिनांक
+Delivered,दिन Δ
+Delivery Charges,दिन
+Delivery Information,दिन-वार (एमटीडी)
+Delivery Note {0} created,दिनवार आंदोलन
+Delivery note created,डेड स्टॉक
+Deployed Bundle:,डेड स्टॉक आइटम
+Deposit,मात्रा कम करें
+Description,डिफ़ॉल्ट
+Detailed Supplier Breakdown,डिफ़ॉल्ट:
+Detecting formats:,हटाएँ
+Device Memory:,रद्द किया गया नकदी संचलन हटाएं {0}?
+Difference,ड्राफ्ट हटाएं
+Difference (In Company Currency),ड्राफ्ट चालान हटाएं
+Disable offline mode first to recheck live connectivity.,ड्राफ्ट इनवॉइस {0} हटाएं?
+Disconnect,चालान हटाएँ
+discount,ऑफ़लाइन चालान हटाएँ
+Discount %,वितरित
+Discount / Void / Return Report,डिलीवरी शुल्क
+Discount Amount,डिलिवरी सूचना
+Discount limited by POS Profile,डिलिवरी नोट {0} बनाया गया
+Discounted Invoices,डिलीवरी नोट बनाया गया
+Discounts,तैनात बंडल:
+Dismiss,जमा
+Download Certificate,विवरण
+Draft,विस्तृत आपूर्तिकर्ता विवरण
+Draft invoice deleted,प्रारूपों का पता लगाना:
+Draft source,डिवाइस मेमोरी:
+Drafts,अंतर
+Due {0},अंतर (कंपनी की मुद्रा में)
+Due Date,लाइव कनेक्टिविटी दोबारा जांचने के लिए सबसे पहले ऑफ़लाइन मोड अक्षम करें।
+Duplicate,डिस्कनेक्ट करें
+Edit customer,छूट
+Edit discount amount,छूट %
+Edit discount percentage,छूट/शून्य/वापसी रिपोर्ट
+Edit Gift Application,छूट राशि
+Edit item name,छूट पीओएस प्रोफाइल द्वारा सीमित है
+Edit quantity,रियायती चालान
+Edit rate,छूट
+Edit unit of measure,ख़ारिज करें
+Edited,प्रमाणपत्र डाउनलोड करें
+Employee,ड्राफ्ट
+Enable background sync,ड्राफ्ट चालान हटा दिया गया
+Enable Customer Display in POS Profile first.,ड्राफ्ट स्रोत
+End current session,ड्राफ्ट
+Enter a PIN.,देय {0}
+Enter a valid grams value,देय तिथि
+Enter new price list rate,डुप्लिकेट
+Enter Quantity,ग्राहक संपादित करें
+Enter the cashier PIN to continue.,छूट राशि संपादित करें
+Enter the current PIN first.,छूट प्रतिशत संपादित करें
+"Enter the current PIN, then choose a new one.",उपहार एप्लिकेशन संपादित करें
+Enter valid grams for scale barcode,आइटम का नाम संपादित करें
+Entries,मात्रा संपादित करें
+Error accessing camera:,दर संपादित करें
+Error calculating prices,माप की इकाई संपादित करें
+Error fetching customer balance,संपादित
+Error in change calculations!,कर्मचारी
+Error Loading Data,पृष्ठभूमि समन्वयन सक्षम करें
+Error loading invoice details,पहले पीओएस प्रोफाइल में ग्राहक प्रदर्शन सक्षम करें।
+Error processing invoice,वर्तमान सत्र समाप्त करें
+Error processing payment,एक पिन दर्ज करें.
+Error searching invoices,मान्य ग्राम मान दर्ज करें
+Error submitting invoice:,नई मूल्य सूची दर दर्ज करें
+Error submitting invoice: {0},मात्रा दर्ज करें
+Error submitting invoice: No response from server,जारी रखने के लिए कैशियर पिन दर्ज करें।
+Error updating currency,पहले वर्तमान पिन दर्ज करें.
+Error updating item details,"वर्तमान पिन दर्ज करें, फिर नया चुनें।"
+Est. Purchase,स्केल बारकोड के लिए वैध ग्राम दर्ज करें
+Est. Value,प्रविष्टियाँ
+Event-loop lag measures how busy your browser is. Lower is better.,कैमरे तक पहुंचने में त्रुटि:
+Every,कीमतों की गणना में त्रुटि
+Exchange Rate,ग्राहक शेष राशि प्राप्त करने में त्रुटि
+Expand item details,परिवर्तन गणना में त्रुटि!
+Expected Amount (In Company Currency),डेटा लोड करने में त्रुटि
+Expected Cash,चालान विवरण लोड करने में त्रुटि
+Expected cash on hand grouped by currency,चालान संसाधित करने में त्रुटि
+Expected vs Actual,भुगतान संसाधित करने में त्रुटि
+Expense,चालान खोजने में त्रुटि
+Expense Account (Optional Override),चालान सबमिट करने में त्रुटि:
+Expense account is required.,चालान सबमिट करने में त्रुटि: {0}
+Expenses and deposits posted during this shift,चालान सबमिट करने में त्रुटि: सर्वर से कोई प्रतिक्रिया नहीं
+Expired,मुद्रा अद्यतन करने में त्रुटि
+Failed to auto reconcile payments.,आइटम विवरण अपडेट करने में त्रुटि
+Failed to cancel cash movement,स्था.
+Failed to clear cache,खरीद
+Failed to create item,स्था.
+Failed to create supplier,मूल्य
+Failed to delete cash movement,इवेंट-लूप लैग मापता है कि आपका ब्राउज़र कितना व्यस्त है।
+Failed to generate scale barcode. Using item barcode only.,कम बेहतर है।
+Failed to load cash movement context.,हर
+Failed to load dashboard data.,विनिमय दर
+Failed to reload invoice from server,आइटम विवरण विस्तृत करें
+Failed to submit cash movement,अपेक्षित राशि (कंपनी की मुद्रा में)
+Failed to sync offline cash movements,अपेक्षित नकद
+Fast cashier actions for active shifts.,हाथ में अपेक्षित नकदी मुद्रा के आधार पर समूहीकृत
+Fast Moving Items,अपेक्षित बनाम वास्तविक
+Fees,व्यय
+Fetch the latest offline prerequisite updates,व्यय खाता (वैकल्पिक ओवरराइड)
+Find a sales order quickly and load it into the current sale.,व्यय लेखा आवश्यक है.
+Fixing payment amounts for return invoice...,इस बदलाव के दौरान खर्च और जमा राशि पोस्ट की गई
+Flash Off,समाप्त हो गया
+Flash On,भुगतानों का स्वतः समाधान करने में विफल.
+"For 'Product Bundle' items, Warehouse, Serial No and Batch No will be considered from the 'Packing List' table. If Warehouse and Batch No are same for all packing items for any 'Product Bundle' item, those values can be entered in the main Item table; values will be copied to 'Packing List' table.",नकदी संचलन रद्द करने में विफल
+Free,कैश साफ़ करने में विफल
+Free Qty,आइटम बनाने में विफल
+Frequency,आपूर्तिकर्ता बनाने में विफल
+from,नकदी संचलन को हटाने में विफल
+From Date,स्केल बारकोड जनरेट करने में विफल.
+Fulfillment Details,केवल आइटम बारकोड का उपयोग करना।
+Full Name,नकदी संचलन संदर्भ लोड करने में विफल.
+Gain,डैशबोर्ड डेटा लोड करने में विफल.
+Generate a fresh prepaid card and start it with an opening balance.,सर्वर से इनवॉइस पुनः लोड करने में विफल
+Generate and install the certificate to allow fully silent printing without trust prompts.,नकद संचलन प्रस्तुत करने में विफल
+Generate Certificate,ऑफ़लाइन नकदी संचलन समन्वयित करने में विफल
+Generated scale barcode: {0},सक्रिय पारियों के लिए त्वरित खजांची कार्रवाई।
+Get Payments,तेजी से चलने वाली वस्तुएँ
+Gift Card,फीस
+Gift card amount must be greater than zero.,नवीनतम ऑफ़लाइन आवश्यक अपडेट प्राप्त करें
+Gift Card Code,शीघ्रता से विक्रय आदेश ढूंढें और उसे वर्तमान विक्रय में लोड करें।
+Gift card code is required for redemption,रिटर्न इनवॉइस के लिए भुगतान राशि तय करना...
+Gift card code is required.,फ़्लैश बंद
+Gift card issued successfully.,फ्लैश ऑन
+Gift card loaded successfully.,"'उत्पाद बंडल' आइटम के लिए, गोदाम, सीरियल नंबर और बैच नंबर पर 'पैकिंग सूची' तालिका से विचार किया जाएगा।"
+Gift Card Management,"यदि किसी 'उत्पाद बंडल' आइटम के लिए सभी पैकिंग आइटम के लिए वेयरहाउस और बैच नंबर समान हैं, तो उन मानों को मुख्य आइटम तालिका में दर्ज किया जा सकता है;"
+Gift card payment,मानों को 'पैकिंग सूची' तालिका में कॉपी किया जाएगा।
+Gift card redemption requires an online connection,निःशुल्क
+Gift card topped up successfully.,मुफ़्त मात्रा
+Gift Cards,आवृत्ति
+Go Offline,से
+Go Online,दिनांक से
+Go to Frappe Desk,पूर्ति विवरण
+Grand Total,पूरा नाम
+Gross Margin,लाभ
+Gross Profit,एक नया प्रीपेड कार्ड बनाएं और इसे शुरुआती शेष राशि के साथ शुरू करें।
+Gross Sales,विश्वास संकेतों के बिना पूरी तरह से मौन मुद्रण की अनुमति देने के लिए प्रमाणपत्र बनाएं और स्थापित करें।
+Group not found,प्रमाणपत्र जनरेट करें
+"Grouped controls for terminal, UI, and session settings.",जनरेट किया गया स्केल बारकोड: {0}
+Grouped totals for each payment method and currency,भुगतान प्राप्त करें
+Hide,उपहार कार्ड
+Hide Gift Card,उपहार कार्ड की राशि शून्य से अधिक होनी चाहिए.
+Hide Non Essential Fields,उपहार कार्ड कोड
+Hide quantity decimals,मोचन के लिए उपहार कार्ड कोड आवश्यक है
+Hide search tools,उपहार कार्ड कोड आवश्यक है.
+Hide zero rated items,उपहार कार्ड सफलतापूर्वक जारी किया गया.
+High,उपहार कार्ड सफलतापूर्वक लोड हो गया.
+History,उपहार कार्ड प्रबंधन
+Hourly (Today),उपहार कार्ड से भुगतान
+How this section works,उपहार कार्ड मोचन के लिए ऑनलाइन कनेक्शन की आवश्यकता होती है
+"If stale data remains, open Settings > Offline & Sync and run Rebuild Offline Data again while online.",उपहार कार्ड सफलतापूर्वक टॉप अप हो गया।
+"If the warning persists, open Settings > Offline & Sync, then run Refresh Offline Data or Rebuild Offline Data.",उपहार कार्ड
+Import the certificate into QZ Tray and restart QZ Tray on each POS machine.,ऑफ़लाइन हो जाओ
+In,ऑनलाइन हो जाओ
+In stock: {0},फ्रैपे डेस्क पर जाएँ
+Include Batch / Serial,कुल योग
+Include Price,सकल मार्जिन
+Increase quantity,सकल लाभ
+IndexedDB,सकल बिक्री
+Initial Amount,समूह नहीं मिला
+Initialize your shift with opening balances,"टर्मिनल, यूआई और सत्र सेटिंग्स के लिए समूहीकृत नियंत्रण।"
+Initializing application...,एप्लिकेशन प्रारंभ किया जा रहा है...
+"Inspect cache, sync, and prerequisite status","कैश, सिंक और पूर्व अपेक्षित स्थिति का निरीक्षण करें"
+Installed Applications,इंस्टॉल किए गए एप्लिकेशन
+Insufficient stock:\n{0},अपर्याप्त स्टॉक:\n{0}
+Invalid rate,अमान्य दर
+Inventory Status Report,इन्वेंटरी स्थिति रिपोर्ट
+Invoice,चालान
+Invoice {0} is Submitted,चालान {0} जमा कर दिया गया है
+Invoice {0} processed successfully,चालान {0} सफलतापूर्वक संसाधित हुआ
+Invoice {0} submission failed,चालान {0} जमा करना विफल रहा
+Invoice {0} was already submitted,चालान {0} पहले ही जमा कर दिया गया था
+Invoice Adjustments,चालान समायोजन
+Invoice Change,चालान परिवर्तन
+Invoice Details,चालान विवरण
+Invoice is still in draft after background submission.,पृष्ठभूमि प्रस्तुत करने के बाद भी चालान ड्राफ्ट में है।
+Invoice Items,चालान आइटम
+Invoice Management,चालान प्रबंधन
+Invoice Mgmt,चालान प्रबंधन
+Invoice saved offline,चालान ऑफ़लाइन सहेजा गया
+Invoice submission failed,चालान प्रस्तुत करना विफल रहा
+Invoice Submitted,चालान प्रस्तुत किया गया
+"Invoice value settled by loyalty points, not cash collection","चालान का मूल्य लॉयल्टी पॉइंट्स द्वारा तय किया जाता है, न कि नकद संग्रहण द्वारा"
+Invoices,चालान
+Invoices already past due date,चालान की नियत तिथि पहले ही बीत चुकी है
+Invoices saved as POS Invoices,चालान पीओएस चालान के रूप में सहेजे गए
+Invoices still carrying balances,चालान में अभी भी शेष राशि है
+Issue Mode,जारी करने का तरीका
+Issue New Card,नया कार्ड जारी करें
+Issue Workflow,वर्कफ़्लो जारी करें
+"Issue, top up, and check","जारी करें, टॉप अप करें और जांचें"
+Item,वस्तु
+Item / Product Sales Report,आइटम/उत्पाद बिक्री रिपोर्ट
+Item {0} added to invoice,आइटम {0} इनवॉइस में जोड़ा गया
+Item '{0}' has no barcode,आइटम '{0}' में कोई बारकोड नहीं है
+Item Code,आइटम कोड
+Item created successfully,आइटम सफलतापूर्वक बनाया गया
+Item is out of stock,आइटम स्टॉक में नहीं है
+Item Name,आइटम का नाम
+Item not found,आइटम नहीं मिला
+Item order updated,आइटम ऑर्डर अपडेट किया गया
+Item Selector Settings,आइटम चयनकर्ता सेटिंग्स
+Items,आइटम
+Items added in POS will appear here automatically.,पीओएस में जोड़े गए आइटम स्वचालित रूप से यहां दिखाई देंगे।
+Items added to invoice,चालान में आइटम जोड़े गए
+Items per page,प्रति पृष्ठ आइटम
+Items Sold,आइटम बेचे गए
+Items/Invoice,आइटम/चालान
+Item-wise Profitability,मदवार लाभप्रदता
+Journal Entry,जर्नल प्रविष्टि
+json,json
+Just now,अभी अभी
+Keep offline prerequisites healthy and recover stale data safely.,ऑफ़लाइन पूर्वापेक्षाओं को स्वस्थ रखें और पुराने डेटा को सुरक्षित रूप से पुनर्प्राप्त करें।
+Labels,लेबल
+Language,भाषा
+Language will be changed to,भाषा बदल दी जाएगी
+"Language, theme, terminal tools, and session controls.","भाषा, विषय, टर्मिनल उपकरण और सत्र नियंत्रण।"
+Last,अंतिम
+Last 14 Days (Paid vs Pending),पिछले 14 दिन (भुगतान बनाम लंबित)
+Last 14 Days Activity,पिछले 14 दिनों की गतिविधि
+Last 14 Days Gross Profit,पिछले 14 दिनों का सकल लाभ
+Last 14 Days Purchases,पिछले 14 दिनों की खरीदारी
+Last 14 Days Tax/Charges,पिछले 14 दिनों का कर/प्रभार
+Last sync:,अंतिम सिंक:
+Last sync: {0} | ok: {1} | failed: {2} | skipped: {3},अंतिम सिंक: {0} |
+Latest entries for current shift,ठीक है: {1} |
+Lead Time,विफल: {2} |
+Light Mode,छोड़ दिया गया: {3}
+Limited,वर्तमान पारी के लिए नवीनतम प्रविष्टियाँ
+lines,नेतृत्व समय
+List,लाइट मोड
+Live Snapshot,सीमित
+Load a POS profile and cashier first.,पंक्तियाँ
+Load More Invoices,सूची
+Load previously saved invoices,लाइव स्नैपशॉट
+Load Sale,सबसे पहले एक पीओएस प्रोफ़ाइल और कैशियर लोड करें।
+Load Sales Invoice,अधिक चालान लोड करें
+Loading app data...,पहले से सहेजे गए चालान लोड करें
+Loading customer database...,लोड बिक्री
+Loading customers...,बिक्री चालान लोड करें
+Loading database stats...,ऐप डेटा लोड हो रहा है...
+Loading details...,ग्राहक डेटाबेस लोड हो रहा है...
+Loading invoice history...,ग्राहक लोड हो रहे हैं...
+Loading items...,डेटाबेस आँकड़े लोड हो रहे हैं...
+Loading product catalog...,विवरण लोड हो रहा है...
+Loading return invoices...,चालान इतिहास लोड हो रहा है...
+Loading server CPU/memory usage...,आइटम लोड हो रहा है...
+Loading suppliers...,उत्पाद सूची लोड हो रही है...
+Loading unpaid invoices...,वापसी चालान लोड हो रहा है...
+Loading view...,सर्वर सीपीयू/मेमोरी उपयोग लोड हो रहा है...
+Loading...,आपूर्तिकर्ता लोड हो रहे हैं...
+Local storage is unavailable. Switching to online-only mode.,भुगतान न किए गए चालान लोड हो रहे हैं...
+localStorage,दृश्य लोड हो रहा है...
+Location Performance,लोड हो रहा है...
+Locations,स्थानीय भंडारण अनुपलब्ध है.
+Lock Screen,केवल-ऑनलाइन मोड पर स्विच करना।
+Logout,लोकलस्टोरेज
+Lookup Workflow,स्थान प्रदर्शन
+Loss,स्थान
+Low,लॉक स्क्रीन
+Low Stock,लॉगआउट करें
+Low Stock Alerts,लुकअप वर्कफ़्लो
+Low Stock Items,हानि
+Low Stock Threshold,नीचा
+Low Stock Total,कम स्टॉक
+Lowest Margin,कम स्टॉक अलर्ट
+Low-frequency maintenance and system details.,कम स्टॉक वाले आइटम
+Loyalty Redeemed,कम स्टॉक सीमा
+Loyalty Redemption,कम स्टॉक कुल
+Make New Payment,सबसे कम मार्जिन
+Manage all,कम-आवृत्ति रखरखाव और सिस्टम विवरण।
+Manage and synchronize your offline transactions,वफादारी छुड़ाई गई
+Manage Cashier PIN,वफादारी मोचन
+"Manage offline tools, terminal controls, and maintenance from one workspace.",नया भुगतान करें
+manual,सब मैनेज करो
+"Manual codes, barcode scans, and QR scans work in the same field",अपने ऑफ़लाइन लेनदेन को प्रबंधित और सिंक्रनाइज़ करें
+Manual offline mode is enabled,कैशियर पिन प्रबंधित करें
+Margin,"एक ही कार्यस्थान से ऑफ़लाइन उपकरण, टर्मिनल नियंत्रण और रखरखाव प्रबंधित करें।"
+Maximum available quantity is {0}. Quantity adjusted to match stock.,मैनुअल
+Maximum discount amount for this offer item is {0}.,"मैनुअल कोड, बारकोड स्कैन और क्यूआर स्कैन एक ही क्षेत्र में काम करते हैं"
+Maximum discount percentage for this offer item is {0}%.,मैन्युअल ऑफ़लाइन मोड सक्षम है
+Maximum offer quantity is {0}. Quantity adjusted to allowed limit.,मार्जिन
+Medium,अधिकतम उपलब्ध मात्रा {0} है.
+Menu,स्टॉक से मेल खाने के लिए मात्रा समायोजित की गई।
+Method-wise Collections,इस ऑफ़र आइटम के लिए अधिकतम छूट राशि {0} है।
+Minimum allowed rate for this offer item is {0}.,इस ऑफ़र आइटम के लिए अधिकतम छूट प्रतिशत {0}% है।
+Minimum Qty,अधिकतम ऑफ़र मात्रा {0} है.
+Mobile No,मात्रा को अनुमत सीमा तक समायोजित किया गया।
+Mode,मध्यम
+Mode of Payment,मेनू
+Month,विधि-वार संग्रह
+Month Δ,इस ऑफ़र आइटम के लिए न्यूनतम अनुमत दर {0} है।
+Monthly Profit,न्यूनतम मात्रा
+Monthly Sales,मोबाइल नंबर
+Monthly Sales Summary,मोड
+Month-wise,भुगतान का तरीका
+Most Active Cashiers,महीना
+Movement Type,माह Δ
+Movements,मासिक लाभ
+Multi Currency,मासिक बिक्री
+N/A,मासिक बिक्री सारांश
+Name,माहवार
+Negative Stock,सर्वाधिक सक्रिय कैशियर
+Negative Stock Items,आंदोलन प्रकार
+Negative values not allowed,आंदोलन
+Net,बहु मुद्रा
+Net Qty,एन/ए
+Net Sales,नाम
+Net Value,नकारात्मक स्टॉक
+Never,नकारात्मक स्टॉक आइटम
+New changes are ready to load,नकारात्मक मानों की अनुमति नहीं है
+New Item,नेट
+New Offer Available,शुद्ध मात्रा
+New PIN,शुद्ध बिक्री
+New rate,शुद्ध मूल्य
+Next unit of measure,कभी नहीं
+No attribute data found.,नए परिवर्तन लोड करने के लिए तैयार हैं
+No Barcode,नया आइटम
+No barcode found for UOM '{0}',नया ऑफर उपलब्ध है
+No branch/location data found.,नया पिन
+No brand data found.,नई दर
+No cached gift card balance is available offline.,माप की अगली इकाई
+No camera found on this device. Please ensure your device has a working camera.,कोई विशेषता डेटा नहीं मिला.
+No capability warnings recorded yet.,कोई बारकोड नहीं
+No cash expected for this shift.,UOM '{0}' के लिए कोई बारकोड नहीं मिला
+No cash mode configured,कोई शाखा/स्थान डेटा नहीं मिला.
+No cash movement type is allowed for this POS Profile.,कोई ब्रांड डेटा नहीं मिला.
+No cashier PIN is set yet. Create one now.,कोई कैश्ड उपहार कार्ड शेष ऑफ़लाइन उपलब्ध नहीं है।
+No cashier profiles are available for this POS profile yet.,इस डिवाइस पर कोई कैमरा नहीं मिला.
+No cashier-wise discount/void/return activity.,कृपया सुनिश्चित करें कि आपके डिवाइस में एक कार्यशील कैमरा है।
+No category data found.,अभी तक कोई क्षमता चेतावनी दर्ज नहीं की गई है.
+No category profitability data found.,इस बदलाव के लिए कोई नकदी की उम्मीद नहीं है.
+No change returned recorded for this shift.,कोई कैश मोड कॉन्फ़िगर नहीं किया गया
+No change-allocation invoices match the current filters.,इस पीओएस प्रोफ़ाइल के लिए किसी भी नकदी संचलन प्रकार की अनुमति नहीं है।
+No charge head breakdown found.,अभी तक कोई कैशियर पिन सेट नहीं है.
+No Company Selected,अभी एक बनाएं.
+No customer sales data found.,इस पीओएस प्रोफ़ाइल के लिए अभी तक कोई कैशियर प्रोफ़ाइल उपलब्ध नहीं है।
+No day-wise discount/void/return trend.,कोई कैशियर-वार छूट/शून्य/वापसी गतिविधि नहीं।
+No day-wise payment data found.,कोई श्रेणी डेटा नहीं मिला.
+No day-wise profitability trend found.,कोई श्रेणी लाभप्रदता डेटा नहीं मिला.
+No day-wise purchase data found.,इस बदलाव के लिए कोई परिवर्तन दर्ज नहीं किया गया।
+No day-wise sales trend found.,कोई भी परिवर्तन-आवंटन चालान वर्तमान फ़िल्टर से मेल नहीं खाता।
+No day-wise tax/charges trend found.,कोई चार्ज हेड ब्रेकडाउन नहीं मिला.
+No dead stock items.,कोई कंपनी चयनित नहीं
+No due date,कोई ग्राहक बिक्री डेटा नहीं मिला.
+No exact repair match found for this invoice,कोई दिन-वार छूट/शून्य/वापसी की प्रवृत्ति नहीं।
+No hourly sales trend found for today.,कोई दिन-वार भुगतान डेटा नहीं मिला.
+No invoice activity found.,दिन-वार लाभप्रदता की कोई प्रवृत्ति नहीं मिली।
+No invoices found,दिन-वार खरीदारी का कोई डेटा नहीं मिला.
+No invoices found. Try different search criteria.,दिनवार बिक्री का कोई रुझान नहीं मिला.
+No invoices recorded for this shift.,कोई दिन-वार कर/प्रभार प्रवृत्ति नहीं मिली।
+No item profitability data found.,कोई डेड स्टॉक आइटम नहीं.
+No item sales data found for this period.,कोई नियत तिथि नहीं
+No items found,इस इनवॉइस के लिए कोई सटीक मरम्मत मिलान नहीं मिला
+No items in cart,आज के लिए कोई प्रति घंटा बिक्री रुझान नहीं मिला.
+No items with barcodes to print,कोई चालान गतिविधि नहीं मिली.
+No location-wise top item data found.,कोई चालान नहीं मिला
+No low stock alerts right now.,कोई चालान नहीं मिला.
+No low stock items.,विभिन्न खोज मानदंड आज़माएँ.
+No matching items in cart,इस शिफ्ट के लिए कोई चालान दर्ज नहीं किया गया।
+No month-wise sales trend found.,कोई आइटम लाभप्रदता डेटा नहीं मिला.
+No negative stock items.,इस अवधि के लिए कोई आइटम बिक्री डेटा नहीं मिला.
+No notifications yet,कोई आइटम नहीं मिला
+No offline cash movement synced.,कार्ट में कोई आइटम नहीं
+No offline invoices pending synchronization,मुद्रित करने के लिए बारकोड वाला कोई आइटम नहीं
+No offline sync issues recorded yet.,कोई स्थान-वार शीर्ष आइटम डेटा नहीं मिला।
+No out-of-stock items.,अभी कम स्टॉक की कोई चेतावनी नहीं है।
+No outstanding credit invoices for this shift.,कोई कम स्टॉक वाली वस्तु नहीं.
+No payment collection data found.,कार्ट में कोई मेल खाने वाला आइटम नहीं
+No payment rows available on this invoice.,कोई माहवार बिक्री रुझान नहीं मिला.
+No payments registered for this shift.,कोई नकारात्मक स्टॉक आइटम नहीं.
+No pending balances in this period.,अभी तक कोई सूचना नहीं
+No pending offline invoices,कोई ऑफ़लाइन नकदी संचलन समन्वयित नहीं हुआ.
+No Print Formats Found,कोई ऑफ़लाइन चालान सिंक्रनाइज़ेशन के लिए लंबित नहीं है
+No profiles found for selected scope. Falling back to current profile failed.,अभी तक कोई ऑफ़लाइन समन्वयन समस्या दर्ज नहीं की गई है.
+No recent customer activity found.,कोई आउट-ऑफ-स्टॉक आइटम नहीं.
+No recent stock entries found.,इस बदलाव के लिए कोई बकाया क्रेडिट चालान नहीं।
+No records found,कोई भुगतान संग्रहण डेटा नहीं मिला.
+No reorder suggestions right now.,इस चालान पर कोई भुगतान पंक्ति उपलब्ध नहीं है.
+No repeat customers in this period.,इस बदलाव के लिए कोई भुगतान पंजीकृत नहीं है।
+No response from server,इस अवधि में कोई लंबित शेष नहीं है.
+No return invoices found,कोई ऑफ़लाइन चालान लंबित नहीं है
+No return item trend found.,कोई प्रिंट प्रारूप नहीं मिला
+No returnable items found for this invoice,चयनित दायरे के लिए कोई प्रोफ़ाइल नहीं मिली.
+No returns were processed in this shift.,वर्तमान प्रोफ़ाइल पर वापस जाना विफल रहा.
+No risk activity found.,हाल की कोई ग्राहक गतिविधि नहीं मिली.
+No sales activity found for this period.,कोई हालिया स्टॉक प्रविष्टियाँ नहीं मिलीं.
+No slow moving items.,कोई रिकार्ड नहीं मिला
+No staff sales activity found.,अभी कोई पुन: व्यवस्थित करने का सुझाव नहीं है.
+No stock movement for this period.,इस अवधि में कोई दोबारा ग्राहक नहीं।
+No submitted cash movements in this shift.,सर्वर से कोई प्रतिक्रिया नहीं
+No supplier purchases found in this month.,कोई वापसी चालान नहीं मिला
+No suppliers found for this period.,कोई वापसी आइटम का रुझान नहीं मिला.
+No sync trigger has run yet in this session.,इस चालान के लिए कोई वापसी योग्य वस्तु नहीं मिली
+No tax head breakdown found.,इस शिफ्ट में कोई रिटर्न संसाधित नहीं किया गया।
+No top items found for this location.,कोई जोखिम गतिविधि नहीं मिली.
+No unpaid invoices,इस अवधि के लिए कोई बिक्री गतिविधि नहीं मिली.
+No variant data found.,कोई धीमी गति से चलने वाली वस्तु नहीं.
+No week-wise sales trend found.,कोई स्टाफ बिक्री गतिविधि नहीं मिली.
+No.,इस अवधि के लिए स्टॉक में कोई हलचल नहीं।
+Nobile Number,इस पाली में कोई नकदी संचलन प्रस्तुत नहीं किया गया।
+Not available,इस माह में कोई आपूर्तिकर्ता खरीदारी नहीं मिली.
+Not checked,इस अवधि के लिए कोई आपूर्तिकर्ता नहीं मिला.
+Not selected,इस सत्र में अभी तक कोई सिंक ट्रिगर नहीं चला है.
+Not Set,कोई कर शीर्ष विवरण नहीं मिला.
+Notifications,इस स्थान के लिए कोई शीर्ष आइटम नहीं मिला.
+Offer,कोई अवैतनिक चालान नहीं
+Offer Applied,कोई भिन्न डेटा नहीं मिला.
+Offer criteria exceeded,कोई सप्ताहवार बिक्री रुझान नहीं मिला.
+Offer Item,नहीं.
+Offer item unavailable,नोबेल नंबर
+Offer Removed,उपलब्ध नहीं है
+Offer UOM cannot be changed,जाँच नहीं की गई
+Offer?,चयनित नहीं
+Offers,सेट नहीं
+Offline,सूचनाएं
+Offline & Sync,प्रस्ताव
+Offline Capabilities,प्रस्ताव लागू
+Offline data status refreshed,ऑफ़र मानदंड पार हो गए
+Offline diagnostics,प्रस्ताव वस्तु
+Offline Invoices,ऑफ़र आइटम अनुपलब्ध है
+Offline invoices status,प्रस्ताव हटा दिया गया
+Offline invoices synced,ऑफ़र यूओएम को बदला नहीं जा सकता
+Offline Queue: {0},प्रस्ताव?
+Offline rebuild guidance,ऑफर
+Offline restore is unavailable for this session.,ऑफ़लाइन
+Offline selling is available with degraded capabilities.,ऑफ़लाइन और सिंक
+Offline snapshot does not match the current POS state.,ऑफ़लाइन क्षमताएँ
+Offline Status,ऑफ़लाइन डेटा स्थिति ताज़ा की गई
+"Offline, terminal, and system controls",ऑफ़लाइन निदान
+OK,ऑफ़लाइन चालान
+Online,ऑफ़लाइन चालान स्थिति
+Open actions menu,ऑफ़लाइन चालान समन्वयित किए गए
+Open balance to collect,ऑफ़लाइन कतार: {0}
+Open Customer Display,ऑफ़लाइन पुनर्निर्माण मार्गदर्शन
+Open drawer,इस सत्र के लिए ऑफ़लाइन पुनर्स्थापना अनुपलब्ध है.
+Open invoices,ऑफ़लाइन बिक्री निम्न क्षमताओं के साथ उपलब्ध है।
+Open Payments?,ऑफ़लाइन स्नैपशॉट वर्तमान POS स्थिति से मेल नहीं खाता.
+Open POS home,ऑफ़लाइन स्थिति
+Open this screen from POS Menu -> Open Customer Display.,"ऑफ़लाइन, टर्मिनल और सिस्टम नियंत्रण"
+OpenCV image processing enabled - Enhanced barcode detection,ठीक है
+OpenCV image processing unavailable on this device,ऑनलाइन
+OpenCV Off,क्रियाएँ मेनू खोलें
+OpenCV On,इकट्ठा करने के लिए खुला शेष
+OpenCV processing disabled,ग्राहक प्रदर्शन खोलें
+Opening Amount,दराज खोलें
+Opening Cash,चालान खोलें
+options,भुगतान खोलें?
+Order,पीओएस होम खोलें
+Original,इस स्क्रीन को पीओएस मेनू से खोलें -> ग्राहक डिस्प्ले खोलें।
+Other,OpenCV छवि प्रसंस्करण सक्षम - उन्नत बारकोड पहचान
+Out,इस डिवाइस पर OpenCV इमेज प्रोसेसिंग उपलब्ध नहीं है
+Out of Stock,ओपनसीवी बंद
+Out of Stock Items,ओपनसीवी चालू
+Outstanding,OpenCV प्रसंस्करण अक्षम किया गया
+Outstanding Credit by Currency,उद्घाटन राशि
+Overdue,नकदी खोलना
+Overpayment Change,विकल्प
+Overpayment change deducted: {0},आदेश
+Packing List,मौलिक
+Page Format,अन्य
+Page unavailable offline,बाहर
+Paid,स्टॉक से बाहर
+Paid (orig):,स्टॉक में नहीं आइटम
+Paid Amount,उत्कृष्ट
+Paid change cannot be greater than total change!,मुद्रा द्वारा बकाया क्रेडिट
+Paid:,अतिदेय
+Parent Item,अधिक भुगतान परिवर्तन
+Partial,अधिक भुगतान पर परिवर्तन काटा गया: {0}
+Partly Paid,पैकिंग सूची
+Party Account,पृष्ठ प्रारूप
+Party Type,पृष्ठ ऑफ़लाइन अनुपलब्ध है
+Pause terminal until next cashier,भुगतान किया गया
+PAY,भुगतान किया गया (मूल):
+Payment,भुगतान की गई राशि
+Payment Account,भुगतान किया गया परिवर्तन कुल परिवर्तन से बड़ा नहीं हो सकता!
+Payment entries processed for Invoice {0},भुगतान किया गया:
+Payment Entry Type,मूल वस्तु
+Payment History,आंशिक
+Payment ID,आंशिक भुगतान
+Payment Method Report,पार्टी खाता
+Payment Methods,पार्टी का प्रकार
+Payment of {0} received successfully.,अगले कैशियर तक टर्मिनल रोकें
+Payment Progress,भुगतान करें
+Payment Reconciliation,भुगतान
+Payment request status could not be retrieved. Please try again,भुगतान खाता
+Payment Request took too long to respond. Please try requesting for payment again,चालान {0} के लिए भुगतान प्रविष्टियाँ संसाधित की गईं
+Payment saved offline,भुगतान प्रविष्टि प्रकार
+Payment State,भुगतान इतिहास
+Payment Status,भुगतान आईडी
+Payment submitted but print function could not be executed. Payment name not found.,भुगतान विधि रिपोर्ट
+Payment submitted.,भुगतान के तरीके
+Payment Summary,{0} का भुगतान सफलतापूर्वक प्राप्त हुआ.
+Payments,भुगतान की प्रगति
+Payments are not open. Do you want to open payments and submit?,भुगतान समाधान
+Payments by Mode of Payment,भुगतान अनुरोध स्थिति पुनर्प्राप्त नहीं की जा सकी.
+PDF,कृपया पुनः प्रयास करें
+Peak Hour,भुगतान अनुरोध का जवाब देने में बहुत लंबा समय लगा।
+Peak Memory:,कृपया भुगतान के लिए पुनः अनुरोध करने का प्रयास करें
+Peak Server:,भुगतान ऑफ़लाइन सहेजा गया
+Peak:,भुगतान स्थिति
+Pending,भुगतान की स्थिति
+Pending Amount,भुगतान जमा कर दिया गया लेकिन प्रिंट फ़ंक्शन निष्पादित नहीं किया जा सका।
+Pending count updated from {0} to {1},भुगतान का नाम नहीं मिला.
+Pending Exposure,भुगतान जमा किया गया.
+Pending Invoices,भुगतान सारांश
+Pending Ratio,भुगतान
+Pending Sales,भुगतान खुले नहीं हैं.
+Pending sales: {0} | Cache usage: {1}%,क्या आप भुगतान खोलना और सबमिट करना चाहते हैं?
+Pending Sync,भुगतान के माध्यम से भुगतान
+Pending: {0},पीडीएफ
+Pending: {0} | Synced: {1} | Draft: {2},पीक ऑवर
+Per Page,चरम स्मृति:
+Personal,पीक सर्वर:
+Personal preferences adjust the current cashier experience without changing the active POS route.,शिखर:
+PIN confirmation does not match.,लंबित
+PIN must be 4 to 8 digits.,लंबित राशि
+Please add at least one item.,लंबित गिनती को {0} से {1} तक अपडेट किया गया
+Please allow camera access to scan codes,लंबित एक्सपोज़र
+Please enter payment amount,लंबित चालान
+Please fill all required fields,लंबित अनुपात
+Please make a payment or select a payment,लंबित बिक्री
+Please request phone payment or use another payment method,लंबित बिक्री: {0} |
+Please select a customer first,कैश उपयोग: {1}%
+Please select a party,लंबित समन्वयन
+Please select a party before reconciling.,लंबित: {0}
+Please select a valid movement type.,लंबित: {0} |
+Please select an invoice,समन्वयित: {1} |
+Please select company before reconciling.,ड्राफ्ट: {2}
+Please set the customer's mobile number,प्रति पेज
+Please try again or enter the item manually.,निजी
+Please verify the barcode or check the item's availability.,व्यक्तिगत प्राथमिकताएँ सक्रिय पीओएस रूट को बदले बिना वर्तमान कैशियर अनुभव को समायोजित करती हैं।
+Points,पिन पुष्टिकरण मेल नहीं खाता.
+Popup blocked. Please allow popups.,पिन 4 से 8 अंकों का होना चाहिए.
+POS,कृपया कम से कम एक आइटम जोड़ें.
+POS controls and maintenance,कृपया स्कैन कोड तक कैमरे की पहुंच की अनुमति दें
+POS Expense is disabled for this POS Profile.,कृपया भुगतान राशि दर्ज करें
+POS is running with limited offline prerequisites.,कृपया सभी आवश्यक फ़ील्ड भरें
+POS Profile,कृपया भुगतान करें या भुगतान चुनें
+Position the QR code or barcode within the scanning area,कृपया फ़ोन भुगतान का अनुरोध करें या किसी अन्य भुगतान विधि का उपयोग करें
+Posting,कृपया पहले एक ग्राहक चुनें
+Posting and Price List,कृपया एक पार्टी चुनें
+Posting Date,कृपया सुलह करने से पहले एक पार्टी का चयन करें।
+Preparing background sync,कृपया एक वैध आंदोलन प्रकार का चयन करें।
+"Press OK to continue offline with a warning, or Cancel to retry.",कृपया एक चालान चुनें
+Previous unit of measure,कृपया समाधान करने से पहले कंपनी का चयन करें।
+Price List,कृपया ग्राहक का मोबाइल नंबर सेट करें
+Price List Rate,कृपया पुनः प्रयास करें या आइटम को मैन्युअल रूप से दर्ज करें।
+Price list rate updated locally only,कृपया बारकोड सत्यापित करें या आइटम की उपलब्धता जांचें।
+Pricing & Discounts,अंक
+Pricing Rule,पॉपअप अवरुद्ध.
+Print,कृपया पॉपअप की अनुमति दें.
+Print Draft,पीओएस
+Print Format (Invoice),पीओएस नियंत्रण और रखरखाव
+Print Format (Order),इस पीओएस प्रोफ़ाइल के लिए पीओएस व्यय अक्षम है।
+Print invoice,पीओएस सीमित ऑफ़लाइन शर्तों के साथ चल रहा है।
+Print Last Invoice,पीओएस प्रोफ़ाइल
+Print Purchase Invoice instead of PO,क्यूआर कोड या बारकोड को स्कैनिंग क्षेत्र के भीतर रखें
+Printer,पोस्टिंग
+Processed returns impacting the shift totals,पोस्टिंग और मूल्य सूची
+Processing Payment,पोस्टिंग तिथि
+Processing payment entries for Invoice {0},बैकग्राउंड सिंक तैयार किया जा रहा है
+Profile,"चेतावनी के साथ ऑफ़लाइन जारी रखने के लिए ओके दबाएँ, या पुनः प्रयास करने के लिए रद्द करें दबाएँ।"
+Profiles,माप की पिछली इकाई
+Profit,मूल्य सूची
+Profit: Invoice Item Estimate,मूल्य सूची दर
+Profit: Stock Ledger (COGS),मूल्य सूची दर केवल स्थानीय स्तर पर अपडेट की गई
+Profitability Report,मूल्य निर्धारण और छूट
+Prorated return discount,मूल्य निर्धारण नियम
+Purchase Amount,प्रिंट करें
+Purchase Invoices,ड्राफ्ट प्रिंट करें
+Purchase Order created,प्रिंट प्रारूप (चालान)
+Qty,प्रिंट प्रारूप (आदेश)
+Qualified,चालान प्रिंट करें
+Quantity,अंतिम चालान प्रिंट करें
+Quantity exceeds available stock,पीओ के स्थान पर खरीद चालान प्रिंट करें
+Quick Actions,मुद्रक
+Quotation {0} is Submitted,संसाधित रिटर्न शिफ्ट योग को प्रभावित करते हैं
+Quotation submitted,भुगतान संसाधित किया जा रहा है
+QZ Tray connected.,चालान {0} के लिए भुगतान प्रविष्टियाँ संसाधित की जा रही हैं
+QZ Tray is manually disconnected. Press Connect to enable it again.,प्रोफाइल
+QZ Tray is not connected.,प्रोफाइल
+QZ Tray Setup,मुनाफ़ा
+Rate,लाभ: चालान मद अनुमान
+Rate adjusted to maximum allowed discount,लाभ: स्टॉक लेजर (सीओजीएस)
+Ready,लाभप्रदता रिपोर्ट
+Ready to resume,आनुपातिक वापसी छूट
+Ready!,खरीद राशि
+Real-time POS insights for retail operations.,खरीद चालान
+Rebuild Offline Data,क्रय आदेश बनाया गया
+Receive,मात्रा
+Receive now,योग्य
+Received,मात्रा
+Received:,मात्रा उपलब्ध स्टॉक से अधिक है
+Recent Movement Entries,त्वरित कार्रवाई
+Recent updates about your invoices,कोटेशन {0} सबमिट कर दिया गया है
+Recently Active Customers,कोटेशन प्रस्तुत किया गया
+Rechecking connection,QZ ट्रे जुड़ा हुआ है।
+Reconcile payment methods and close shift,QZ ट्रे मैन्युअल रूप से डिस्कनेक्ट हो गई है।
+Reconciling Payments,इसे फिर से सक्षम करने के लिए कनेक्ट दबाएँ।
+"Reconnect and open this page once while online, then offline refreshes will be able to restore it.",QZ ट्रे कनेक्ट नहीं है.
+Reconnect online to refresh cached offline data from the server.,QZ ट्रे सेटअप
+Recreate local offline prerequisites from scratch,दर
+Recv:,दर को अधिकतम अनुमत छूट के अनुसार समायोजित किया गया
+Redeem,तैयार
+Redeem / Scan,फिर से शुरू करने के लिए तैयार
+Redeem Amount,तैयार!
+Redeem Mode,खुदरा परिचालन के लिए वास्तविक समय पीओएस अंतर्दृष्टि।
+Redeemed Amount,ऑफ़लाइन डेटा का पुनर्निर्माण करें
+Redeemed credit cannot be greater than its total.,प्राप्त करें
+Redemption and Totals,अभी प्राप्त करें
+Reference,प्राप्त हुआ
+Refresh,प्राप्त:
+Refresh Exchange Rate,हालिया आंदोलन प्रविष्टियाँ
+Refresh Offline Data,आपके चालान के बारे में नवीनतम अपडेट
+Refresh Printers,हाल ही में सक्रिय ग्राहक
+Refund,कनेक्शन पुनः जाँच रहा है
+Release Notes,भुगतान विधियों का मिलान करें और शिफ्ट बंद करें
+Reload,भुगतानों का मिलान करना
+Reload customers,"ऑनलाइन रहते हुए इस पेज को एक बार दोबारा कनेक्ट करें और खोलें, फिर ऑफलाइन रिफ्रेश होने पर इसे रीस्टोर किया जा सकेगा।"
+Reload Items,सर्वर से कैश्ड ऑफ़लाइन डेटा को ताज़ा करने के लिए ऑनलाइन पुनः कनेक्ट करें।
+Reload Now,स्क्रैच से स्थानीय ऑफ़लाइन पूर्वापेक्षाएँ पुनः बनाएँ
+Reload to apply the latest changes. Your current session will be refreshed.,पुनःप्राप्त:
+Reload Workflow,छुड़ाओ
+Remarks,रिडीम / स्कैन करें
+Remarks are required.,रकम भुनाएं
+Remove,रिडीम मोड
+Remove barcode item,छुड़ाई गई राशि
+Remove cached data and reload the POS app,भुनाया गया क्रेडिट उसके कुल से अधिक नहीं हो सकता।
+Remove item,मोचन और कुल
+Remove Offer,संदर्भ
+Reorder / Purchase Suggestions,ताज़ा करें
+Repair Candidate,विनिमय दर ताज़ा करें
+Repair Change Allocation,ऑफ़लाइन डेटा ताज़ा करें
+Repair requires an online connection,प्रिंटर ताज़ा करें
+Repaired,वापसी
+Repairing change allocation,नोट्स जारी करें
+Repeat Customers,पुनः लोड करें
+Repeat Rate,ग्राहकों को पुनः लोड करें
+Reprint previous transaction,आइटम पुनः लोड करें
+Request,अभी पुनः लोड करें
+Request ID: {0},नवीनतम परिवर्तन लागू करने के लिए पुनः लोड करें।
+Request Payment,आपका वर्तमान सत्र ताज़ा हो जाएगा.
+Requested route: {0},वर्कफ़्लो पुनः लोड करें
+Required columns cannot be hidden,टिप्पणियाँ
+Reset,टिप्पणियाँ आवश्यक हैं.
+Reset item name,हटाओ
+Reset to Default,बारकोड आइटम हटाएँ
+Resource Health,कैश्ड डेटा हटाएँ और POS ऐप पुनः लोड करें
+Restricted,आइटम हटाएँ
+Restricted operational controls for supervisors only.,प्रस्ताव हटाएँ
+Retry,पुन: क्रमित करें/खरीद सुझाव
+Retry route,मरम्मत उम्मीदवार
+Return,मरम्मत परिवर्तन आवंटन
+Return Amount,मरम्मत के लिए ऑनलाइन कनेक्शन की आवश्यकता होती है
+Return Count,मरम्मत की गई
+Return items must have negative quantities,परिवर्तन आवंटन की मरम्मत
+Return total must be negative,ग्राहक दोहराएँ
+Return Valid Until,दोहराव दर
+Return window passed,पिछले लेन-देन को दोबारा प्रिंट करें
+Return without Invoice,निवेदन
+Returns,रिटर्न
+Returns / Voids / Discounts,रिटर्न/खाली/छूट
+Returns by Currency,मुद्रा द्वारा रिटर्न
+Revenue,राजस्व
+Review shift totals before submitting the closing entry,समापन प्रविष्टि सबमिट करने से पहले शिफ्ट के कुल योग की समीक्षा करें
+Round Off,राउंड ऑफ
+Rows,पंक्तियाँ
+Rows:,पंक्तियाँ:
+Rule,नियम
+Sale,बिक्री
+Sales,बिक्री
+Sales Order {0} is Submitted,विक्रय आदेश {0} सबमिट कर दिया गया है
+Sales Person and Print,विक्रय व्यक्ति और मुद्रण
+Sales Person not found,सेल्स पर्सन नहीं मिला
+Sales processed,बिक्री संसाधित
+Sales Return,बिक्री रिटर्न
+Sales Trend Report,बिक्री रुझान रिपोर्ट
+Save,सहेजें
+Save & Clear,सहेजें और साफ़ करें
+Save as POS Profile Default,पीओएस प्रोफ़ाइल डिफ़ॉल्ट के रूप में सहेजें
+Save Settings,सेटिंग्स सहेजें
+Save the selected printer as the POS Profile default so it shows automatically on this setup.,चयनित प्रिंटर को पीओएस प्रोफ़ाइल डिफ़ॉल्ट के रूप में सहेजें ताकि यह इस सेटअप पर स्वचालित रूप से दिखाई दे।
+Saved as draft because: {0},ड्राफ्ट के रूप में सहेजा गया क्योंकि: {0}
+Saving...,सहेजा जा रहा है...
+Scale barcode detected. Quantity here is the number of labels to print.,स्केल बारकोड का पता चला.
+Scale barcode settings are not configured. Using item barcode only.,यहां मात्रा मुद्रित किए जाने वाले लेबलों की संख्या है।
+Scale template barcode is missing for this item/UOM. Using item barcode only.,स्केल बारकोड सेटिंग कॉन्फ़िगर नहीं की गई हैं.
+Scan an existing card and top it up without leaving the payment flow.,केवल आइटम बारकोड का उपयोग करना।
+Scan Error,इस आइटम/यूओएम के लिए स्केल टेम्पलेट बारकोड गायब है।
+Scan or enter a gift card code to check balance or redeem.,केवल आइटम बारकोड का उपयोग करना।
+Scan or paste the card code below.,किसी मौजूदा कार्ड को स्कैन करें और भुगतान प्रवाह छोड़े बिना उसे टॉप अप करें।
+Scan QR Code/Barcode,स्कैन त्रुटि
+Scan with camera,शेष राशि जांचने या रिडीम करने के लिए उपहार कार्ड कोड स्कैन करें या दर्ज करें।
+Scan-First Flow,नीचे दिए गए कार्ड कोड को स्कैन या पेस्ट करें।
+Scanned Code:,क्यूआर कोड/बारकोड स्कैन करें
+Scanning for: {0},कैमरे से स्कैन करें
+Scanning items,स्कैन-प्रथम प्रवाह
+Scan-Ready,स्कैन किया गया कोड:
+Scope,इसके लिए स्कैन किया जा रहा है: {0}
+Scope: All Profiles,आइटम स्कैन करना
+Scope: Current Profile,स्कैन-तैयार
+Scope: Specific Profile,दायरा
+Search,दायरा: सभी प्रोफ़ाइल
+Search Account,दायरा: वर्तमान प्रोफ़ाइल
+Search an invoice and continue the return flow without extra steps.,दायरा: विशिष्ट प्रोफ़ाइल
+Search customer,खोजें
+Search invoices or customers,खाता खोजें
+Search item,एक चालान खोजें और बिना किसी अतिरिक्त कदम के रिटर्न प्रवाह जारी रखें।
+Search item / code,ग्राहक खोजें
+Search items or barcode,चालान या ग्राहक खोजें
+Search Mpesa Payments,आइटम खोजें
+Search return invoices or customers,आइटम/कोड खोजें
+Search supplier,आइटम या बारकोड खोजें
+Search unpaid invoices or customers,एमपेसा पेमेंट्स खोजें
+Secure context (HTTPS or localhost) is required for camera access.,रिटर्न चालान या ग्राहक खोजें
+Secure context (HTTPS) required for camera access. Please use HTTPS to access the camera.,आपूर्तिकर्ता खोजें
+Select,अवैतनिक चालान या ग्राहक खोजें
+Select a cashier first.,कैमरा एक्सेस के लिए सुरक्षित संदर्भ (HTTPS या लोकलहोस्ट) आवश्यक है।
+Select a customer,कैमरा एक्सेस के लिए सुरक्षित संदर्भ (HTTPS) आवश्यक है।
+Select a customer to use coupon,कृपया कैमरे तक पहुंचने के लिए HTTPS का उपयोग करें।
+Select a printer to use QZ silent printing.,चयन करें
+Select Batch,सबसे पहले एक कैशियर चुनें.
+Select Columns to Display,एक ग्राहक चुनें
+Select items to sell,कूपन का उपयोग करने के लिए एक ग्राहक का चयन करें
+Select Language,QZ साइलेंट प्रिंटिंग का उपयोग करने के लिए एक प्रिंटर का चयन करें।
+Select Payment,बैच का चयन करें
+Select Payment Account,प्रदर्शित करने के लिए कॉलम चुनें
+Select printer,बेचने के लिए आइटम चुनें
+Select Return Invoice,भाषा चुनें
+Select S.O,भुगतान चुनें
+Select Sales Orders,भुगतान खाता चुनें
+Select the cashier who is taking over this terminal.,प्रिंटर चुनें
+Selected,वापसी चालान का चयन करें
+Selected movement type is not allowed by POS Profile.,एस.ओ. का चयन करें
+Selected Payments,विक्रय आदेश चुनें
+Sensitive actions kept away from quick taps.,उस कैशियर का चयन करें जो इस टर्मिनल का कार्यभार संभाल रहा है।
+Serial,चयनित
+Serial Numbers,पीओएस प्रोफ़ाइल द्वारा चयनित गतिविधि प्रकार की अनुमति नहीं है।
+Server CPU Usage:,चयनित भुगतान
+Server Health,संवेदनशील क्रियाएं त्वरित टैप से दूर रहीं।
+Server Memory Usage:,धारावाहिक
+Server Metrics,सीरियल नंबर
+Server Uptime:,सर्वर सीपीयू उपयोग:
+Service Charges,सर्वर स्वास्थ्य
+Session,सर्वर मेमोरी उपयोग:
+Set each cashier PIN in the User form and keep terminal members assigned in POS Profile User.,सर्वर मेट्रिक्स
+Settings,सर्वर अपटाइम:
+Settings in this section update the POS workspace without changing the current route.,सेवा शुल्क
+Setup complete!,सत्र
+Share,उपयोगकर्ता प्रपत्र में प्रत्येक कैशियर पिन सेट करें और टर्मिनल सदस्यों को पीओएस प्रोफ़ाइल उपयोगकर्ता में निर्दिष्ट रखें।
+Shared terminal,सेटिंग्स
+Shift Closed Snapshot,इस अनुभाग में सेटिंग्स वर्तमान मार्ग को बदले बिना पीओएस कार्यक्षेत्र को अद्यतन करती हैं।
+Shift Overview,सेटअप पूर्ण!
+Show,साझा करें
+Show cart on customer-facing screen,साझा टर्मिनल
+Show last invoice rate,बंद स्नैपशॉट शिफ्ट करें
+Show rate info,शिफ्ट अवलोकन
+Show Repair Candidates,दिखाओ
+Show search tools,ग्राहक-सामना वाली स्क्रीन पर कार्ट दिखाएं
+Show the active cart on a customer-facing screen,अंतिम चालान दर दिखाएँ
+Showing {0}-{1} of {2},दर की जानकारी दिखाएँ
+Showing 0 of 0,मरम्मत करने वाले अभ्यर्थी दिखाएँ
+Shows the distribution of invoices per currency,खोज उपकरण दिखाएँ
+Sign out of session,ग्राहक-सामना वाली स्क्रीन पर सक्रिय कार्ट दिखाएं
+Sign out of the current POS session,{2} में से {0}-{1} दिखाया जा रहा है
+Size:,0 में से 0 दिखा रहा है
+Skipped Payments,प्रति मुद्रा चालान का वितरण दिखाता है
+Skipping items without barcodes,सत्र से प्रस्थान करें
+Slow Moving,वर्तमान पीओएस सत्र से साइन आउट करें
+Slow Moving Items,आकार:
+Slow Queries:,भुगतान छोड़ दिया गया
+Sold,बारकोड के बिना आइटम छोड़ना
+Source,धीमी गति से चलना
+Source Cash Account (Optional Override),धीमी गति से चलने वाली वस्तुएँ
+Source Ex. Rate:,धीमी क्वेरीज़:
+Source Rate:,बेच दिया
+Specific Profile,स्रोत
+Split Invoices,स्रोत नकद खाता (वैकल्पिक ओवरराइड)
+Staff / Cashier Performance Report,स्रोत पूर्व.
+Status,दर:
+Stock,स्रोत दर:
+Stock Information,विशिष्ट प्रोफ़ाइल
+Stock is lower than requested,चालान विभाजित करें
+Stock is lower than requested:\n{0},स्टाफ/कैशियर प्रदर्शन रिपोर्ट
+Stock Movement Report,स्थिति
+Stock update: {0} has {1} available. Adding {2} will bring the stock below zero.,भण्डार
+Submit,स्टॉक सूचना
+Submit & Print,स्टॉक अनुरोध से कम है
+Submit Deposit,स्टॉक अनुरोध से कम है:\n{0}
+Submit Expense,स्टॉक मूवमेंट रिपोर्ट
+Submitted,स्टॉक अपडेट: {0} के पास {1} उपलब्ध है।
+Submitted Cash Movements,{2} जोड़ने से स्टॉक शून्य से नीचे आ जाएगा।
+Submitted entries,सबमिट करें
+Successfully scanned:,सबमिट करें और प्रिंट करें
+Suggested,जमा जमा करें
+Suggested Qty,व्यय जमा करें
+Supervisor Access,प्रस्तुत किया गया
+Supervisor permissions unlock issuance and reloads,नकद संचलन प्रस्तुत किया
+Supervisor Tools,प्रविष्टियाँ प्रस्तुत की गईं
+Supplier,सफलतापूर्वक स्कैन किया गया:
+Supplier and dates are required.,सुझाव दिया
+Supplier Invoices,सुझाई गई मात्रा
+Supplier is required.,पर्यवेक्षक पहुंच
+Supplier name is required,पर्यवेक्षक अनुमतियाँ जारी करने और पुनः लोड करने को अनलॉक करती हैं
+Supplier Payments,पर्यवेक्षक उपकरण
+Supplier Purchase Summary,आपूर्तिकर्ता
+Suppliers,आपूर्तिकर्ता और तारीखें आवश्यक हैं.
+Suppliers not found,आपूर्तिकर्ता चालान
+Switch Camera,आपूर्तिकर्ता की आवश्यकता है.
+Switch Cashier,आपूर्तिकर्ता का नाम आवश्यक है
+Switch the POS appearance theme,आपूर्तिकर्ता भुगतान
+Switch theme appearance,आपूर्तिकर्ता खरीद सारांश
+Switched to:,आपूर्तिकर्ता
+Sync All Invoices,आपूर्तिकर्ता नहीं मिले
+Sync Offline Cash Movements ({0}),कैमरा स्विच करें
+Sync Offline Sales,कैशियर स्विच करें
+Synced {0} offline cash movement(s).,पीओएस उपस्थिति थीम स्विच करें
+Syncing items in background,थीम का स्वरूप बदलें
+System / Diagnostics,पर स्विच किया गया:
+"System actions are low-frequency maintenance controls such as app info, support diagnostics, and session controls.",सभी चालान सिंक करें
+System Information,ऑफ़लाइन नकदी संचलन समन्वयित करें ({0})
+System Status,ऑफ़लाइन बिक्री सिंक करें
+Tables:,समन्वयित {0} ऑफ़लाइन नकदी संचलन।
+Tap the button below to redeem a gift card during checkout.,पृष्ठभूमि में आइटम समन्वयित करना
+Target,सिस्टम / डायग्नोस्टिक्स
+Target Ex. Rate:,"सिस्टम क्रियाएँ कम-आवृत्ति रखरखाव नियंत्रण हैं जैसे ऐप जानकारी, समर्थन डायग्नोस्टिक्स और सत्र नियंत्रण।"
+Target Rate:,सिस्टम सूचना
+Tax,सिस्टम स्थिति
+Tax / Charges Report,टेबल्स:
+Tax Heads,चेकआउट के दौरान उपहार कार्ड भुनाने के लिए नीचे दिए गए बटन पर टैप करें।
+Taxable Amount,लक्ष्य
+Tendered,लक्ष्य पूर्व.
+Terminal,दर:
+Terminal & Devices,लक्ष्य दर:
+Terminal locked,कर
+"Terminal tools affect this checkout station, customer-facing displays, and future printer/device controls.",कर/प्रभार रिपोर्ट
+Territory not found,कर प्रमुख
+The amount paid is not complete,करयोग्य राशि
+The app stores data locally for offline use. This is called cache.,टेंडर किया गया
+The invoice stayed in draft. Please review and submit it manually.,टर्मिनल
+The maximum discount allowed is,टर्मिनल और उपकरण
+The quantity for {0} has been adjusted to the maximum available stock.,टर्मिनल लॉक कर दिया गया
+The system could not retrieve the item details. Please try again.,"टर्मिनल उपकरण इस चेकआउट स्टेशन, ग्राहक-सामना वाले डिस्प्ले और भविष्य के प्रिंटर/डिवाइस नियंत्रण को प्रभावित करते हैं।"
+These invoices will be synced when connection is restored,क्षेत्र नहीं मिला
+This action now opens inside the settings workspace.,भुगतान की गई राशि पूरी नहीं है
+This coupon already used !,ऐप ऑफ़लाइन उपयोग के लिए स्थानीय रूप से डेटा संग्रहीत करता है।
+This invoice does not need change-allocation repair,इसे कैश कहा जाता है.
+This invoice is already repaired,चालान ड्राफ्ट में ही रह गया.
+This is an item template. Please choose a variant.,कृपया इसकी समीक्षा करें और इसे मैन्युअल रूप से सबमिट करें।
+this item,अनुमत अधिकतम छूट है
+This POS page could not be opened offline because its code was not cached on this terminal yet.,{0} की मात्रा को अधिकतम उपलब्ध स्टॉक में समायोजित किया गया है।
+This Serial Number {0} has already been added!,सिस्टम आइटम विवरण पुनर्प्राप्त नहीं कर सका.
+Threshold,कृपया पुन: प्रयास करें।
+Time,कनेक्शन बहाल होने पर ये चालान सिंक हो जाएंगे
+Tip: Clear cache regularly to free up space and keep the app fast.,यह क्रिया अब सेटिंग कार्यक्षेत्र के अंदर खुलती है।
+Tip: Close unused tabs or apps to reduce lag.,यह कूपन पहले ही उपयोग किया जा चुका है!
+Tip: Monitor slow queries and table size for optimal performance.,इस इनवॉइस को परिवर्तन-आवंटन मरम्मत की आवश्यकता नहीं है
+To Be Paid,इस चालान की मरम्मत पहले ही की जा चुकी है
+To Date,यह एक आइटम टेम्पलेट है.
+Today,कृपया एक प्रकार चुनें.
+Today Profit,यह वस्तु
+Today Sales,यह पीओएस पेज ऑफ़लाइन नहीं खोला जा सका क्योंकि इसका कोड अभी तक इस टर्मिनल पर कैश नहीं किया गया था।
+Toggle navigation drawer,यह सीरियल नंबर {0} पहले ही जोड़ा जा चुका है!
+Toggle Theme,देहली
+Tools,समय
+Tools for customer-facing screens and terminal-specific actions.,युक्ति: स्थान खाली करने और ऐप को तेज़ रखने के लिए नियमित रूप से कैश साफ़ करें।
+Top Brand,युक्ति: अंतराल कम करने के लिए अप्रयुक्त टैब या ऐप्स बंद करें।
+Top Category,युक्ति: इष्टतम प्रदर्शन के लिए धीमी क्वेरी और तालिका आकार की निगरानी करें।
+Top Charge Head,भुगतान किया जाना है
+Top Customers,आज तक
+Top Discount,आज
+Top Items by Location,आज लाभ
+Top Margin,आज की बिक्री
+Top Pending,नेविगेशन ड्रॉअर टॉगल करें
+Top Profit Item,थीम टॉगल करें
+Top Return Items,उपकरण
+Top Sales by Cashier,ग्राहक-सामना वाली स्क्रीन और टर्मिनल-विशिष्ट क्रियाओं के लिए उपकरण।
+Top Supplier,शीर्ष ब्रांड
+Top Suppliers by Spend,शीर्ष श्रेणी
+Top Tables,शीर्ष प्रभारी प्रमुख
+Top Tax Head,शीर्ष ग्राहक
+Top Up Amount,शीर्ष छूट
+Top Up Card,स्थान के अनुसार शीर्ष आइटम
+Top Up Mode,शीर्ष मार्जिन
+Top Variant,शीर्ष लंबित
+Total,शीर्ष लाभ वाली वस्तु
+Total Amount,शीर्ष वापसी आइटम
+Total Change,कैशियर द्वारा शीर्ष बिक्री
+Total Charges,शीर्ष आपूर्तिकर्ता
+Total In,व्यय के अनुसार शीर्ष आपूर्तिकर्ता
+Total Invoices,शीर्ष तालिकाएँ
+Total Items,शीर्ष कर प्रमुख
+Total Mpesa,टॉप अप राशि
+Total Out,टॉप अप कार्ड
+Total Payments,टॉप अप मोड
+Total Purchase,शीर्ष संस्करण
+Total Selected :,कुल
+Total Size,कुल राशि
+Total Stock Qty,संपूर्ण परिवर्तन
+Total:,कुल शुल्क
+Totals by Invoice Currency,कुल में
+Track how much cash was handed back to customers,कुल चालान
+"Track recent sales, collect unpaid balances, and reopen saved work",कुल आइटम
+Transaction ID,कुल मपेसा
+Transfer,टोटल आउट
+Try a different search term or clear the cart search.,कुल भुगतान
+Try adjusting your search or filters,कुल खरीद
+Try another source or refresh the list.,कुल चयनित :
+Try changing the date range or status filter.,कुल आकार
+Type,कुल स्टॉक मात्रा
+Unable to access camera even with basic settings. Please check your camera permissions and device compatibility.,कुल:
+Unable to add offer item {0}. Please refresh and try again.,चालान मुद्रा द्वारा कुल
+Unable to add offer item. Please refresh and try again.,ट्रैक करें कि ग्राहकों को कितनी नकदी वापस सौंपी गई
+Unable to add scanned item.,"हाल की बिक्री को ट्रैक करें, अवैतनिक शेष राशि एकत्र करें और सहेजे गए कार्य को फिर से खोलें"
+Unable to create purchase order,लेन-देन आईडी
+Unable to delete draft invoice,स्थानांतरण
+Unable to fetch documents,कोई भिन्न खोज शब्द आज़माएँ या कार्ट खोज साफ़ करें।
+Unable to fetch draft orders,अपनी खोज या फ़िल्टर समायोजित करने का प्रयास करें
+Unable to fetch invoice history,कोई अन्य स्रोत आज़माएँ या सूची ताज़ा करें।
+Unable to fetch M-Pesa payments,दिनांक सीमा या स्थिति फ़िल्टर बदलने का प्रयास करें.
+Unable to fetch sales orders,प्रकार
+Unable to fetch unpaid invoices,बुनियादी सेटिंग्स के साथ भी कैमरे तक पहुंचने में असमर्थ।
+Unable to generate scale barcode,कृपया अपनी कैमरा अनुमतियाँ और डिवाइस अनुकूलता जाँचें।
+Unable to issue gift card.,ऑफ़र आइटम {0} जोड़ने में असमर्थ.
+Unable to load cashier PIN status.,कृपया ताज़ा करें और पुनः प्रयास करें।
+Unable to load document,ऑफ़र आइटम जोड़ने में असमर्थ.
+Unable to load draft invoice,कृपया ताज़ा करें और पुनः प्रयास करें।
+Unable to load gift card balance.,स्कैन किया गया आइटम जोड़ने में असमर्थ.
+Unable to load invoice details,क्रय आदेश बनाने में असमर्थ
+Unable to load parked order,ड्राफ्ट चालान हटाने में असमर्थ
+Unable to load the selected sales order,दस्तावेज़ लाने में असमर्थ
+Unable to prepare document,ड्राफ्ट ऑर्डर लाने में असमर्थ
+Unable to prepare return invoice,चालान इतिहास लाने में असमर्थ
+Unable to print draft invoice,एम-पेसा भुगतान प्राप्त करने में असमर्थ
+Unable to print submitted invoice,विक्रय आदेश लाने में असमर्थ
+Unable to process document action,भुगतान न किए गए चालान लाने में असमर्थ
+Unable to repair change allocation,स्केल बारकोड जनरेट करने में असमर्थ
+Unable to save cashier PIN.,उपहार कार्ड जारी करने में असमर्थ.
+Unable to save the rate to the backend price list,कैशियर पिन स्थिति लोड करने में असमर्थ.
+Unable to submit invoice,दस्तावेज़ लोड करने में असमर्थ
+Unable to submit the selected payment,ड्राफ्ट चालान लोड करने में असमर्थ
+Unable to top up gift card.,उपहार कार्ड शेष लोड करने में असमर्थ.
+Unable to verify cashier PIN.,चालान विवरण लोड करने में असमर्थ
+Unallocated,पार्क किया गया ऑर्डर लोड करने में असमर्थ
+Unallocated:,चयनित विक्रय आदेश लोड करने में असमर्थ
+Unavailable,दस्तावेज़ तैयार करने में असमर्थ
+Unknown,वापसी चालान तैयार करने में असमर्थ
+Unknown error,ड्राफ्ट चालान मुद्रित करने में असमर्थ
+Unknown Item,प्रस्तुत चालान मुद्रित करने में असमर्थ
+Unknown Warehouse,दस्तावेज़ कार्रवाई संसाधित करने में असमर्थ
+Unlock POS,परिवर्तन आवंटन की मरम्मत करने में असमर्थ
+Unpaid,कैशियर पिन सहेजने में असमर्थ.
+"Unselected payments stay unallocated first, then auto reconcile after submit.",दर को बैकएंड मूल्य सूची में सहेजने में असमर्थ
+UOM,चालान जमा करने में असमर्थ
+UOM not found,चयनित भुगतान सबमिट करने में असमर्थ
+Update available,उपहार कार्ड टॉप अप करने में असमर्थ.
+Update Customer,कैशियर पिन सत्यापित करने में असमर्थ.
+Update PIN,आवंटित नहीं
+Update Price List Rate,असंबद्ध:
+Updated,अनुपलब्ध
+Updates and app info that stay out of the cashier flow.,अज्ञात
+Updates automatically,अज्ञात त्रुटि
+Upload pending transactions,अज्ञात वस्तु
+Usage,अज्ञात गोदाम
+Usage Stats,पीओएस अनलॉक करें
+Use a 4 to 8 digit PIN for cashier switching and terminal unlock.,अवैतनिक
+Use Cashier,"अचयनित भुगतान पहले असंबद्ध रहते हैं, फिर सबमिट के बाद स्वतः समाधान हो जाता है।"
+Use date range to search for older invoices,यूओएम
+"Use one field for manual code entry, barcode scans, or QR scans.",यूओएम नहीं मिला
+"Use one workflow for balance checks, new issuance, and top ups without leaving POS.",अपडेट उपलब्ध है
+"Use this section when cached prerequisite data needs a refresh, rebuild, or diagnostics review.",ग्राहक को अपडेट करें
+Use Western numerals,पिन अपडेट करें
+Used:,अद्यतन मूल्य सूची दर
+Using basic camera settings due to device limitations,अद्यतन किया गया
+Using cached customer balance,अपडेट और ऐप जानकारी जो कैशियर प्रवाह से बाहर रहती है।
+Valid until,स्वचालित रूप से अद्यतन होता है
+Variance %,लंबित लेनदेन अपलोड करें
+Variants,उपयोग
+Variant-wise,उपयोग आँकड़े
+Verify closing amounts for each payment method,कैशियर स्विचिंग और टर्मिनल अनलॉक के लिए 4 से 8 अंकों के पिन का उपयोग करें।
+View all,खजांची का प्रयोग करें
+View app information and current build details,पुराने चालान खोजने के लिए दिनांक सीमा का उपयोग करें
+View Data Diagnostics,"मैन्युअल कोड प्रविष्टि, बारकोड स्कैन या क्यूआर स्कैन के लिए एक फ़ील्ड का उपयोग करें।"
+View Details,"पीओएस छोड़े बिना शेष राशि की जांच, नए जारी करने और टॉप अप के लिए एक वर्कफ़्लो का उपयोग करें।"
+View invoice details,"इस अनुभाग का उपयोग तब करें जब कैश्ड पूर्वापेक्षित डेटा को ताज़ा करने, पुनर्निर्माण या निदान समीक्षा की आवश्यकता हो।"
+View notifications,पश्चिमी अंकों का प्रयोग करें
+View offline invoices,प्रयुक्त:
+View restricted POS insights,डिवाइस की सीमाओं के कारण बुनियादी कैमरा सेटिंग्स का उपयोग करना
+Void Amount,कैश्ड ग्राहक शेष का उपयोग करना
+Void Count,तक वैध है
+Voids,भिन्नता %
+Waiting for cart items,वेरिएंट
+Waiting for payment...,भिन्न-भिन्न प्रकार के अनुसार
+Walk-in Customer,प्रत्येक भुगतान विधि के लिए समापन राशि सत्यापित करें
+Warehouse,सभी देखें
+Warning: High cache usage may affect performance.,ऐप की जानकारी और वर्तमान निर्माण विवरण देखें
+Warning: High lag may indicate heavy processing or browser slowness.,डेटा डायग्नोस्टिक्स देखें
+Week Δ,विवरण देखें
+Week-wise,चालान विवरण देखें
+Weight (g),सूचनाएं देखें
+Weight (grams),ऑफ़लाइन चालान देखें
+We'll let you know if an invoice fails to submit,प्रतिबंधित पीओएस अंतर्दृष्टि देखें
+Workflow,शून्य राशि
+Write off amount cannot exceed the POS profile maximum of {0},शून्य गिनती
+Write off amount exceeds the allowed limit ({0}). Please add payment for the remaining amount.,ख़ालीपन
+Yes,कार्ट आइटम की प्रतीक्षा की जा रही है
+"Yes, Cancel sale",भुगतान की प्रतीक्षा की जा रही है...
+"Yes, Close",वॉक-इन ग्राहक
+You are not allowed to print draft invoices,गोदाम
+You are offline. Add Payment will work again when the connection is restored.,चेतावनी: उच्च कैश उपयोग प्रदर्शन को प्रभावित कर सकता है।
+You have no notifications right now,चेतावनी: उच्च अंतराल भारी प्रसंस्करण या ब्राउज़र धीमेपन का संकेत दे सकता है।
+Your Cart,सप्ताह Δ

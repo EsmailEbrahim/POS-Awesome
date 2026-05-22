@@ -1,0 +1,1353 @@
+﻿- Total Unallocated,- Total Unallocated
+* Required,* Bezonata
+{0} (Qty: {1}),{0} (Kvanto: {1})
+{0} actions,{0} agoj
+{0} has only {1} in stock. You requested {2}. Adjust quantity or restock.,{0} havas nur {1} en stoko.
+{0} offline invoice{1} pending,Vi petis {2}.
+{0} offline invoice{1} saved as draft,Alĝustigu kvanton aŭ reprovizi.
+{0} offline invoice{1} synced,{0} eksterreta fakturo{1} pritraktata
+{0}: {1} {2},{0} eksterreta fakturo{1} konservita kiel skizo
+{0}d ago,{0} eksterreta fakturo{1} sinkronigita
+{0}h ago,{0}: {1} {2}
+{0}m ago,antaŭ {0}d
+A POS supervisor is required for this action.,antaŭ {0}h
+About,antaŭ {0}m
+Access,Por ĉi tiu ago necesas POS-kontrolisto.
+Account,Pri
+Account is overdrawn,Aliro
+Acknowledge the error to resume scanning,Konto
+Acknowledge the error to resume scanning.,Konto estas trostreĉita
+Across,Agnosku la eraron por rekomenci skanadon
+Action,Agnosku la eraron por rekomenci skanadon.
+Actions,Transe
+Active sale,Ago
+add,Agoj
+Add items from the selector to start building this sale.,Aktiva vendo
+Add more value to an existing gift card,aldoni
+Add New Address,Aldonu erojn de la elektilo por komenci konstrui ĉi tiun vendon.
+Add new customer,Aldonu pli da valoro al ekzistanta donackarto
+Add on New Line,Aldonu Novan Adreson
+Add Payment,Aldonu novan klienton
+Add payment to invoice,Aldonu sur Nova Linio
+Add/Edit Coupon Conditions,Aldonu Pagon
+Additional Discount,Aldonu pagon al fakturo
+Additional Discount %,Aldoni/Redakti Kuponajn Kondiĉojn
+Address Line 1,Plia Rabato
+Address not found,Plia Rabato%
+Adjust the quantity or enable negative stock to continue.,Adreslinio 1
+Adjustment,Adreso ne trovita
+After returns,Alĝustigu la kvanton aŭ ebligu la negativan stokon daŭri.
+Against,Alĝustigo
+Against Name,Post revenoj
+Age Bracket,Kontraŭ
+All,Kontraŭ Nomo
+All Caught Up!,Aĝa Krampo
+All invoices are synchronized,Ĉiuj
+All pending invoices are up to date,Ĉiuj Kaptitaj!
+All Profiles,Ĉiuj fakturoj estas sinkronigitaj
+All Synchronized,Ĉiuj pritraktataj fakturoj estas ĝisdatigitaj
+All visible invoices are fully settled.,Ĉiuj Profiloj
+All Warehouses,Ĉiuj Sinkronigitaj
+Allowed UOM is {0},Ĉiuj videblaj fakturoj estas plene pagitaj.
+Always fetch items from server (ignore local cache),Ĉiuj Stokejoj
+Amount,Permesita UOM estas {0}
+Amount already received,Ĉiam alportu erojn de servilo (ignoru lokan kaŝmemoron)
+Amount exceeds profile cash movement max amount.,Kvanto
+Amount must be greater than zero.,Sumo jam ricevita
+Amount received from customer,Kvanto superas profilon kontantmovado maksimuma kvanto.
+App information,Kvanto devas esti pli granda ol nulo.
+Appearance and user-level preferences for the current session.,Kvanto ricevita de kliento
+Applied,Informoj pri aplikaĵo
+Apply,Aspekto kaj uzantnivelaj preferoj por la nuna sesio.
+Apply Gift Card,Aplikita
+Apply Offer,Apliki
+Apply On,Apliki Donacan Karton
+Apply only the amount you want to redeem on this invoice. The remaining balance stays on the card.,Apliki Oferto
+Apply Redemption,Apliki On
+Applying,"Apliku nur la kvanton, kiun vi volas elaĉeti sur ĉi tiu fakturo."
+Apps,La restanta saldo restas sur la karto.
+Are you sure you want to close? All entered data will be lost.,Apliki Redemption
+Attributes (Size/Color),Aplikante
+Auto Allocate Payment Amount,Aplikoj
+Auto Reconcile,"Ĉu vi certas, ke vi volas fermi?"
+Auto reconciliation completed after payment submit.,Ĉiuj enigitaj datumoj estos perditaj.
+Auto reconciliation completed. Allocated: {0}{1}. Remaining outstanding: {0}{2}.,Atributoj (Grandeco/Koloro)
+Available Actions,Aŭtomate Asigni Pagan Kvanton
+Available QTY,Aŭtomata Repaciĝo
+Available:,Aŭtomata repaciĝo finiĝis post pago sendado.
+Average Basket,Aŭtomata repaciĝo finiĝis.
+Average Bill,Asignita: {0}{1}.
+Average Ticket,Restantaj elstaraj: {0}{2}.
+Avg Bill,Disponeblaj Agoj
+Avg Invoice,Disponebla Kvanto
+Avg Invoice Profit,Disponebla:
+Avg Invoice Value,Meza Korbo
+Avg Purchase Frequency,Averaĝa Bill
+Awesome,Meza Bileto
+Awesome Dashboard,Meze Bill
+Awesome Dashboard is disabled for the selected POS Profile.,Meza Fakturo
+Awesome Dashboard is unavailable for the selected scope.,Meza Faktura Profito
+Awesome Dashboard is visible only to POS supervisors.,Mezvaloro de fakturo
+Back,Meza Aĉeta Ofteco
+Back Office Cash Account,Mirinda
+Back Office Cash Account (Optional Override),Mirinda Instrumentpanelo
+Back office cash account is required.,Awesome Dashboard estas malŝaltita por la elektita POS-Profilo.
+Back to {0},Awesome Dashboard ne disponeblas por la elektita amplekso.
+Background processing did not finish in time.,Awesome Dashboard estas videbla nur por POS-kontrolistoj.
+Background processing failed for Invoice {0}: {1},Reen
+Background Submission Failed,Malantaŭa Oficeja Konto
+Background sync interval (seconds),Konto de Malantaŭa Oficejo (Laŭvola Anstataŭigo)
+Balance,Malantaŭa oficejo kontanta konto estas postulata.
+Balance will be updated when connection is restored,Reen al {0}
+Balances still pending,Fona prilaborado ne finiĝis ĝustatempe.
+Barcode,Fona prilaborado malsukcesis por Fakturo {0}: {1}
+Barcode / QR Ready,Fona Transdono Malsukcesis
+Barcode Label Printing,Fona sinkroniga intervalo (sekundoj)
+Base Paid:,Ekvilibro
+Base Recv:,Ekvilibro estos ĝisdatigita kiam konekto estas restarigita
+Base:,Bilancoj ankoraŭ pritraktataj
+Basic Information,Strekokodo
+Batch,Strekokodo / QR Preta
+Batch Information,Strekkoda Etikedo Preso
+Before any return workflow,Bazo Pagita:
+Before returns,Baza Revuo:
+Best Day,Bazo:
+Best Seller,Bazaj Informoj
+Book expense or deposit from active shift.,Aro
+Branch / Location-wise Report,Lotaj Informoj
+Brand-wise,Antaŭ ajna revena laborfluo
+Breakdown,Antaŭ revenoj
+Browse,Plej bona Tago
+Build Time:,Plej vendisto
+Built with Frappe,Libro elspezo aŭ deponejo de aktiva deĵoro.
+Bundle,Branĉo / Lok-saĝa Raporto
+Buying Price,Mark-saĝe
+Cache cleared successfully,Panaso
+Cache Usage,Foliumi
+cache used,Konstrua Tempo:
+Calculating...,Konstruite kun Frappe
+Camera Access Required,Pakaĵo
+Camera access was aborted. Please try again.,Aĉeta Prezo
+Camera constraints not supported by your device. Trying fallback settings...,Kaŝmemoro malpleniĝis sukcese
+Camera is busy or blocked by another app/tab. Close other camera apps and try again.,Cache Uzado
+Camera permission denied. Please allow camera access in your browser settings and refresh the page.,kaŝmemoro uzata
+Camera scanner is locked until the current error is acknowledged,Kalkulante...
+Camera started but the video stream did not load in time. Please try again.,Fotila Aliro Bezonata
+Cancel,Fotila aliro estis ĉesigita.
+Cancel cash movement {0}?,Bonvolu provi denove.
+Cancel Payment,Fotilaj limoj ne subtenataj de via aparato.
+Cancel Sale,Provante rezervajn agordojn...
+Cancel Sale ?,Fotilo estas okupata aŭ blokita de alia programo/langeto.
+Cancelled,Fermu aliajn fotilajn apojn kaj provu denove.
+Cannot add an item with zero or negative quantity.,Fotila permeso rifuzita.
+Cannot clear cache while offline,Bonvolu permesi fotilan aliron en via retumila agordo kaj refreŝigi la paĝon.
+Cannot redeem customer credit more than invoice total,Fotila skanilo estas ŝlosita ĝis la nuna eraro estas agnoskita
+Cannot redeem gift cards more than invoice total,Fotilo komenciĝis sed la videofluo ne ŝargis ĝustatempe.
+Cannot Save Offline Invoice:,Bonvolu provi denove.
+Cannot Save Offline Payment:,Nuligi
+Card,Ĉu nuligi kontantan movon {0}?
+Card / Online,Nuligi Pagon
+Card health after the last live lookup,Nuligi Vendon
+Cards,Ĉu Nuligi Vendon?
+Cart,Nuligite
+Cash,Ne povas aldoni eron kun nula aŭ negativa kvanto.
+Cash back to customers,Ne povas forigi kaŝmemoron dum eksterrete
+Cash Collections,Ne povas elaĉeti klientkrediton pli ol la totala fakturo
+Cash Deposit is disabled for this POS Profile.,Ne povas elaĉeti donackartojn pli ol la totala fakturo
+Cash Drawer Snapshot,Ne Povas Konservi Senkonektan Fakturon:
+Cash In Hand,Ne Povas Konservi Senkonektan Pagon:
+Cash Movement,Karto
+Cash movement cancelled,Karto / Enreta
+Cash movement deduction applied,Karto-sano post la lasta viva serĉo
+Cash movement deleted,Kartoj
+Cash movement is disabled for this POS Profile.,Ĉaro
+Cash Movement is disabled in current POS Profile.,Kontantmono
+Cash movement saved offline,Rekompenco al klientoj
+Cash movement submitted,Monaj Kolektoj
+Cash Movements,Mona Deponejo estas malŝaltita por ĉi tiu POS-Profilo.
+Cash payment cannot be less than invoice total when partial payment is not allowed,Mona Kesto Momentfoto
+Cash returned after payment,Kontantmono En Mano
+Cashier,Mona Movado
+Cashier Access,Mona movado nuligita
+Cashier identity and appearance preferences.,Kontantmovaddepreno aplikata
+Cashier PIN,Mona movado forigita
+Cashier PIN saved successfully.,Mona movado estas malŝaltita por ĉi tiu POS-Profilo.
+Cashiers,Mona Movado estas malŝaltita en nuna POS-Profilo.
+Cashier-wise,Mona movado konservita eksterrete
+Categories,Mona movado prezentita
+Category,Monaj Movadoj
+Category / Brand / Variant Report,Kontantpago ne povas esti malpli ol la totala fakturo kiam parta pago ne estas permesita
+Category-wise,Kontantmono resendita post pago
+Category-wise Margin,Kasisto
+Certificate,Aliro al Kasisto
+Certificate is missing or not trusted. QZ may show confirmation dialogs.,Kasisto-identeco kaj aspekto-preferoj.
+Certificate is trusted. Silent QZ printing is active.,Kasisto PIN
+Change,Kasisto PIN sukcese konservita.
+Change allocation repaired,Kasistoj
+Change interface language,Kasisto-saĝa
+Change Language,Kategorioj
+Change Price,Kategorio
+Change Return,Raporto pri Kategorio/Marko/Varianto
+Change Returned,Kategorie
+Change terminal cashier,Kategori-saĝa Marĝo
+Charge Heads,Atestilo
+Charges,Atestilo mankas aŭ ne estas fidinda.
+Charges not found,QZ povas montri konfirmajn dialogojn.
+Check Balance,Atestilo estas fidinda.
+Check balance for any card. Supervisors can issue and top up cards here.,Silenta QZ-presado estas aktiva.
+Check balance only,Ŝanĝi
+Check for new commits,Ŝanĝo de atribuo riparita
+Check for Updates,Ŝanĝu interfaclingvon
+Check live balance before applying redemption,Ŝanĝi Lingvon
+Check live balance before redemption,Ŝanĝi Prezon
+Checking...,Ŝanĝi Revenon
+Cheque/Reference Date,Ŝanĝo Revenis
+Cheque/Reference No,Ŝanĝi terminalan kasiston
+Choose the cashier currently operating this terminal.,Ŝargaj Kapoj
+Choose your preferred language for the POS interface,Ŝargoj
+City,Ŝargoj ne trovitaj
+Clear,Kontrolu Bilancon
+Clear All,Kontrolu ekvilibron por iu ajn karto.
+Clear all barcode items,Kontrolistoj povas eldoni kaj replenigi kartojn ĉi tie.
+Clear all purchase order items,Kontrolu nur ekvilibron
+Clear Cache,Kontrolu novajn komitojn
+Clear Search,Kontrolu por Ĝisdatigoj
+Clearing local cache...,Kontrolu vivan ekvilibron antaŭ ol apliki elaĉeton
+Click to refresh,Kontrolu vivan ekvilibron antaŭ elaĉeto
+Client CPU Lag:,Kontrolante...
+Client Memory Usage:,Ĉeko/Referenca Dato
+Client Metrics,Ĉeko/Referenco No
+Close,Elektu la kasiston nuntempe funkciantan ĉi tiun terminalon.
+Close about dialog,Elektu vian preferatan lingvon por la POS-interfaco
+Close cashier switcher,Urbo
+Close closing shift dialog,Klara
+Close column selector,Forigi Ĉion
+Close Dialog,Forigi ĉiujn strekkodojn
+Close drafts dialog,Forigi ĉiujn aĉetmendojn
+Close invoice details dialog,Malplenigi Kaŝmemoron
+Close invoice management,Klara Serĉo
+Close offline invoices dialog,Forigante lokan kaŝmemoron...
+Close packing list dialog,Klaku por refreŝigi
+Close returns dialog,Kliento CPU Malfruo:
+Close sales orders dialog,Klienta Memoruzo:
+Close Scanner,Kliento-Metrikoj
+Close scanner dialog,Fermu
+Close Settings,Fermu pri dialogo
+Close Shift,Fermu kasiston ŝaltilon
+Closing Amount,Fermu fermantan ŝanĝ-dialogon
+Closing POS Shift,Fermu kolumnelektilon
+Closing Snapshot Available,Fermu Dialogon
+Code,Fermu dialogon pri skizoj
+Code scanned successfully,Fermu dialogon pri detaloj pri fakturo
+COGS,Fermu administradon de fakturoj
+Collapse item details,Fermu eksterretajn fakturojn dialogon
+Collected,Fermu paklistan dialogon
+Cols,Fermi revenas dialogon
+Columns,Fermu vendajn mendojn dialogon
+commits,Fermu Skanilon
+Completed and active sales in this range,Fermu dialogon pri skanilo
+Completed returns will appear here.,Fermu Agordojn
+Confirm,Fermu Shift
+Confirm Close,Ferma Kvanto
+Confirm Mobile Number,Fermante POS Shift
+Confirm PIN,Ferma Momentfoto Havebla
+Connect,Kodo
+Connect printer and manage certificate,Kodo skanita sukcese
+Connecting to QZ Tray...,COGS
+Connection problem while submitting invoice,Kolapu eron-detalojn
+Connections:,Kolektita
+Connectivity and cached prerequisite status were rechecked.,Kols
+Continue Editing,Kolumnoj
+Could not fetch latest balance from server,faras
+Count,Kompletitaj kaj aktivaj vendoj en ĉi tiu gamo
+Country,Finitaj revenoj aperos ĉi tie.
+Coupon,Konfirmu
+Coupons,Konfirmu Fermi
+Cover,Konfirmu Poŝtelefonan Numeron
+CPU Cores:,Konfirmu PIN
+Create,Konekti
+Create and load a new prepaid card,Konektu presilon kaj administru atestilon
+Create and preload a new gift card,Konektante al QZ-Pleto...
+Create Bill,Konektoproblemo dum sendado de fakturo
+Create Customer,Konektoj:
+Create New Item,Konektebleco kaj kaŝmemorigita antaŭkondiĉa statuso estis rekontrolitaj.
+Create or change your PIN,Daŭrigu Redakton
+Create PIN,Ne eblis preni la plej novan bilancon de servilo
+Create POS Opening Shift,grafo
+Create Purchase Order,Lando
+Create Return,Kupono
+Create return from invoice,Kuponoj
+Create Supplier,Kovrilo
+Credit and Output,CPU Kernoj:
+Credit Note,Krei
+Credit Outstanding,Kreu kaj ŝarĝu novan antaŭpagitan karton
+Credit sales remaining to be collected,Kreu kaj antaŭŝarĝu novan donackarton
+Critical,Kreu Bill
+Currency,Krei Klienton
+Current,Krei Novan Eron
+Current Event Loop Lag:,Kreu aŭ ŝanĝu vian PIN
+Current Month,Krei PIN
+Current PIN,Kreu POS-Malferman Ŝanĝon
+Current Profile,Krei Aĉeton
+Current redeemable value on the gift card,Kreu Revenon
+Current User,Krei revenon de fakturo
+Custom,Krei Provizanton
+Custom Due Days,Kredito kaj Eligo
+Custom items per page,Kredita Noto
+Customer,Kredito Elstara
+Customer already selected,Kreditvendoj restas por esti kolektitaj
+Customer Balance,Kritika
+Customer balance unavailable offline,Monero
+Customer created successfully.,Nuna
+Customer creation failed.,Nuna Eventa Buklo-Malfruo:
+Customer Details,Nuna Monato
+Customer display channel is missing,Nuna PIN
+Customer display was blocked. Please allow pop-ups for this site.,Nuna Profilo
+Customer group is required,Nuna elaĉetebla valoro sur la donackarto
+Customer is required to add payment,Nuna Uzanto
+Customer Name is required,Kutimo
+Customer not selected,Propraj Tagoj
+Customer Report,Propraj eroj po paĝo
+Customer saved offline,Kliento
+Customer Screen,Kliento jam elektita
+Customer territory is required,Kliento Bilanco
+Customer updated successfully.,Klienta saldo nedisponebla eksterrete
+Customer-facing tools and printer setup.,Kliento kreita sukcese.
+Customers,Kreado de klientoj malsukcesis.
+Customers not found,Klienta Detaloj
+Daily cashier actions without scrolling.,Mankas la montra kanalo de klientoj
+Daily Sales,Klienta ekrano estis blokita.
+Daily Sales Summary,Bonvolu permesi ŝprucfenestrojn por ĉi tiu retejo.
+Dark Mode,Klienta grupo estas postulata
+Data loaded in form. Review and submit.,Kliento devas aldoni pagon
+Database Health,Klienta Nomo estas postulata
+Database health affects overall system speed and reliability.,Kliento ne elektita
+Database Info,Klienta Raporto
+Date,Kliento konservita eksterrete
+Day Δ,Klienta Ekrano
+days,Klienta teritorio estas postulata
+Day-wise (MTD),Kliento ĝisdatiĝis sukcese.
+Day-wise Movement,Kliento-frunta iloj kaj presilo aranĝo.
+Dead Stock,Klientoj
+Dead Stock Items,Klientoj ne trovitaj
+Decrease quantity,Ĉiutagaj kasistaj agoj sen movo.
+Default,Ĉiutaga Vendo
+Default:,Ĉiutaga Venda Resumo
+Delete,Malhela Reĝimo
+Delete cancelled cash movement {0}?,Datumoj ŝarĝitaj en formo.
+Delete Draft,Revizu kaj sendu.
+Delete draft invoice,Datumbazo Sano
+Delete draft invoice {0}?,Datumbaza sano influas ĝeneralan sisteman rapidecon kaj fidindecon.
+Delete Invoice,Informoj pri datumbazo
+Delete offline invoice,Dato
+Delivered,Tago Δ
+Delivery Charges,tagoj
+Delivery Information,Taga (MTD)
+Delivery Note {0} created,Taga Movado
+Delivery note created,Morta Stoko
+Deployed Bundle:,Dead Stock Eroj
+Deposit,Malpliigu kvanton
+Description,Defaŭlte
+Detailed Supplier Breakdown,Defaŭlta:
+Detecting formats:,Forigi
+Device Memory:,Ĉu forigi nuligitan kontantmovon {0}?
+Difference,Forigi Malneton
+Difference (In Company Currency),Forigi malneton de fakturo
+Disable offline mode first to recheck live connectivity.,Ĉu forigi malneton de fakturo {0}?
+Disconnect,Forigi Fakturon
+discount,Forigu eksterrete fakturon
+Discount %,Liverita
+Discount / Void / Return Report,Liverkostoj
+Discount Amount,Liveraj Informoj
+Discount limited by POS Profile,Livernoto {0} kreita
+Discounted Invoices,Livera bileto kreita
+Discounts,Deplojita pakaĵo:
+Dismiss,Deponejo
+Download Certificate,Priskribo
+Draft,Detala Provizo-Rompiĝo
+Draft invoice deleted,Detektado de formatoj:
+Draft source,Aparato Memoro:
+Drafts,Diferenco
+Due {0},Diferenco (En Firmaa Valuto)
+Due Date,Malebligu senkonektan reĝimon unue por rekontroli vivan konekteblecon.
+Duplicate,Malkonekti
+Edit customer,rabato
+Edit discount amount,Rabato %
+Edit discount percentage,Rabato / Malpleno / Revena Raporto
+Edit Gift Application,Rabata Kvanto
+Edit item name,Rabato limigita de POS-Profilo
+Edit quantity,Rabatitaj Fakturoj
+Edit rate,Rabatoj
+Edit unit of measure,Forĵeti
+Edited,Elŝutu Atestilon
+Employee,Malneto
+Enable background sync,Malneto de fakturo forigita
+Enable Customer Display in POS Profile first.,Malneto de fonto
+End current session,Malnetoj
+Enter a PIN.,Paga {0}
+Enter a valid grams value,Ligdato
+Enter new price list rate,Duobligi
+Enter Quantity,Redaktu klienton
+Enter the cashier PIN to continue.,Redaktu rabatsumon
+Enter the current PIN first.,Redakti rabatan procenton
+"Enter the current PIN, then choose a new one.",Redakti Donacan Aplikon
+Enter valid grams for scale barcode,Redaktu eron-nomon
+Entries,Redakti kvanton
+Error accessing camera:,Redakti imposton
+Error calculating prices,Redaktu mezurunuon
+Error fetching customer balance,Redaktita
+Error in change calculations!,Dungito
+Error Loading Data,Ebligu fonan sinkronigon
+Error loading invoice details,Unue ebligu Klienta Montron en POS-Profilo.
+Error processing invoice,Finu la nunan sesion
+Error processing payment,Enigu PIN.
+Error searching invoices,Enigu validan gramvaloron
+Error submitting invoice:,Enigu novan prezon de prezo
+Error submitting invoice: {0},Enigu Kvanton
+Error submitting invoice: No response from server,Enigu la kasiston PIN por daŭrigi.
+Error updating currency,Enigu la nunan PIN unue.
+Error updating item details,"Enigu la nunan PIN, tiam elektu novan."
+Est. Purchase,Enigu validajn gramojn por skala strekkodo
+Est. Value,Enskriboj
+Event-loop lag measures how busy your browser is. Lower is better.,Eraro alirante fotilon:
+Every,Eraro kalkuli prezojn
+Exchange Rate,Eraro alportante la saldon de la kliento
+Expand item details,Eraro en ŝanĝkalkuloj!
+Expected Amount (In Company Currency),Eraro Ŝarĝante Datumojn
+Expected Cash,Eraro dum ŝarĝo de fakturaj detaloj
+Expected cash on hand grouped by currency,Eraro pri procesado de fakturo
+Expected vs Actual,Eraro pri procesorado de pago
+Expense,Eraro serĉante fakturojn
+Expense Account (Optional Override),Eraro dum sendado de fakturo:
+Expense account is required.,Eraro dum sendado de fakturo: {0}
+Expenses and deposits posted during this shift,Eraro dum sendado de fakturo: Neniu respondo de servilo
+Expired,Eraro dum ĝisdatigo de valuto
+Failed to auto reconcile payments.,Eraro dum ĝisdatigo de detaloj de la objekto
+Failed to cancel cash movement,Est.
+Failed to clear cache,Aĉeto
+Failed to create item,Est.
+Failed to create supplier,Valoro
+Failed to delete cash movement,Event-buklo-malfruo mezuras kiom okupata estas via retumilo.
+Failed to generate scale barcode. Using item barcode only.,Pli malalta estas pli bona.
+Failed to load cash movement context.,Ĉiu
+Failed to load dashboard data.,Interŝanĝa kurzo
+Failed to reload invoice from server,Pligrandigi eron-detalojn
+Failed to submit cash movement,Atendata Kvanto (En Firmaa Valuto)
+Failed to sync offline cash movements,Atendita Kontantmono
+Fast cashier actions for active shifts.,Atendita kontanta mono grupigita laŭ valuto
+Fast Moving Items,Atendita vs Aktuala
+Fees,Elspezo
+Fetch the latest offline prerequisite updates,Elspezkonto (Laŭvola Anstataŭigo)
+Find a sales order quickly and load it into the current sale.,Elspezkonto estas postulata.
+Fixing payment amounts for return invoice...,Elspezoj kaj deponejoj afiŝitaj dum ĉi tiu deĵoro
+Flash Off,Eksvalidiĝis
+Flash On,Malsukcesis aŭtomate akordigi pagojn.
+"For 'Product Bundle' items, Warehouse, Serial No and Batch No will be considered from the 'Packing List' table. If Warehouse and Batch No are same for all packing items for any 'Product Bundle' item, those values can be entered in the main Item table; values will be copied to 'Packing List' table.",Malsukcesis nuligi kontantmovadon
+Free,Malsukcesis forigi kaŝmemoron
+Free Qty,Malsukcesis krei eron
+Frequency,Malsukcesis krei provizanton
+from,Malsukcesis forigi kontantmovon
+From Date,Malsukcesis generi skalan strekkodon.
+Fulfillment Details,Uzante la strekkodon nur.
+Full Name,Malsukcesis ŝarĝi kontantmovadan kuntekston.
+Gain,Malsukcesis ŝargi datumojn de panelo.
+Generate a fresh prepaid card and start it with an opening balance.,Malsukcesis reŝargi fakturon de servilo
+Generate and install the certificate to allow fully silent printing without trust prompts.,Malsukcesis sendi monmovon
+Generate Certificate,Malsukcesis sinkronigi eksterretajn monmovojn
+Generated scale barcode: {0},Rapidaj kasistaj agoj por aktivaj deĵoroj.
+Get Payments,Rapide Movantaj Eroj
+Gift Card,Kotizoj
+Gift card amount must be greater than zero.,Akiru la plej novajn eksterretajn antaŭkondiĉajn ĝisdatigojn
+Gift Card Code,Trovu vendomendon rapide kaj ŝarĝu ĝin en la nunan vendon.
+Gift card code is required for redemption,Fiksante pagokvantojn por resenda fakturo...
+Gift card code is required.,Ekbrilo Malŝaltita
+Gift card issued successfully.,Ekbrilo Enŝaltita
+Gift card loaded successfully.,"Por 'Produkto-Pasko' aĵoj, Stokejo, Seria N-ro kaj Loko-Nro estos konsiderataj el la tabelo 'Pakaĵlisto'."
+Gift Card Management,"Se Storehouse kaj Batch No estas samaj por ĉiuj pakaĵoj por iu ajn 'Produkta Pako', tiuj valoroj povas esti enigitaj en la ĉefa Item-tabelo;"
+Gift card payment,valoroj estos kopiitaj al 'Pakuma Listo' tabelo.
+Gift card redemption requires an online connection,Senpaga
+Gift card topped up successfully.,Senpaga Kvanto
+Gift Cards,Ofteco
+Go Offline,de
+Go Online,De Dato
+Go to Frappe Desk,Plenumaj Detaloj
+Grand Total,Plena Nomo
+Gross Margin,Gajno
+Gross Profit,Generu freŝan antaŭpagitan karton kaj komencu ĝin per komenca saldo.
+Gross Sales,Generu kaj instalu la atestilon por permesi plene silentan presadon sen fidindaj instigoj.
+Group not found,Generu Atestilon
+"Grouped controls for terminal, UI, and session settings.",Generita skala strekkodo: {0}
+Grouped totals for each payment method and currency,Akiru Pagojn
+Hide,Donaca Karto
+Hide Gift Card,La kvanto de donackarto devas esti pli granda ol nulo.
+Hide Non Essential Fields,Donaca Karto Kodo
+Hide quantity decimals,Donacartkodo estas postulata por elaĉeto
+Hide search tools,Donackartokodo estas postulata.
+Hide zero rated items,Donackarto sukcese eldonita.
+High,Donackarto ŝarĝita sukcese.
+History,Administrado de Donacaj Kartoj
+Hourly (Today),Pago de donacokarto
+How this section works,Elaĉeto de donacokarto postulas interretan konekton
+"If stale data remains, open Settings > Offline & Sync and run Rebuild Offline Data again while online.",Donackarto replenigita sukcese.
+"If the warning persists, open Settings > Offline & Sync, then run Refresh Offline Data or Rebuild Offline Data.",Donacaj Kartoj
+Import the certificate into QZ Tray and restart QZ Tray on each POS machine.,Iru eksterrete
+In,Iru Interrete
+In stock: {0},Iru al Frappe Desk
+Include Batch / Serial,Granda Totalo
+Include Price,Malneta Marĝeno
+Increase quantity,Malneta Profito
+IndexedDB,Malnetaj Vendoj
+Initial Amount,Grupo ne trovita
+Initialize your shift with opening balances,"Grupigitaj kontroloj por agordoj de terminalo, UI kaj sesio."
+Initializing application...,Komencante aplikaĵon...
+"Inspect cache, sync, and prerequisite status","Inspektu kaŝmemoron, sinkronigon kaj antaŭkondiĉan staton"
+Installed Applications,Instalitaj Aplikoj
+Insufficient stock:\n{0},Nesufiĉa stoko:\n{0}
+Invalid rate,Nevalida tarifo
+Inventory Status Report,Inventaro-Statusa Raporto
+Invoice,Fakturo
+Invoice {0} is Submitted,Fakturo {0} estas Sendita
+Invoice {0} processed successfully,Fakturo {0} sukcese procesita
+Invoice {0} submission failed,Transdono de fakturo {0} malsukcesis
+Invoice {0} was already submitted,Fakturo {0} jam estis sendita
+Invoice Adjustments,Fakturaj Alĝustigoj
+Invoice Change,Ŝanĝo de Fakturo
+Invoice Details,Fakturaj Detaloj
+Invoice is still in draft after background submission.,Fakturo estas ankoraŭ en malneto post fona sendado.
+Invoice Items,Fakturoj
+Invoice Management,Administrado de Fakturoj
+Invoice Mgmt,Fakturoj Mgmt
+Invoice saved offline,Fakturo konservita eksterrete
+Invoice submission failed,La sendado de fakturo malsukcesis
+Invoice Submitted,Fakturo Submetita
+"Invoice value settled by loyalty points, not cash collection","Faktura valoro aranĝita per lojalecpunktoj, ne kontanta kolekto"
+Invoices,Fakturoj
+Invoices already past due date,Fakturoj jam preterpasis ligdaton
+Invoices saved as POS Invoices,Fakturoj konservitaj kiel POS-Fakturoj
+Invoices still carrying balances,Fakturoj ankoraŭ portantaj saldojn
+Issue Mode,Problema Reĝimo
+Issue New Card,Eldonu Novan Karton
+Issue Workflow,Problema Laborfluo
+"Issue, top up, and check","Eldonu, plenigu kaj kontrolu"
+Item,Ero
+Item / Product Sales Report,Ero / Produkta Venda Raporto
+Item {0} added to invoice,Ero {0} aldonita al fakturo
+Item '{0}' has no barcode,Ero '{0}' ne havas strekkodon
+Item Code,Item Kodo
+Item created successfully,Ero kreita sukcese
+Item is out of stock,Ero estas elĉerpita
+Item Name,Item Nomo
+Item not found,Ero ne trovita
+Item order updated,Artikomendo ĝisdatigita
+Item Selector Settings,Agordoj de Elektilo de Eroj
+Items,Eroj
+Items added in POS will appear here automatically.,Eroj aldonitaj en POS aperos ĉi tie aŭtomate.
+Items added to invoice,Eroj aldonitaj al fakturo
+Items per page,Eroj po paĝo
+Items Sold,Eroj Venditaj
+Items/Invoice,Eroj/Fakturo
+Item-wise Profitability,Item-saĝa Profito
+Journal Entry,Ĵurnalo Eniro
+json,json
+Just now,Ĝuste nun
+Keep offline prerequisites healthy and recover stale data safely.,Konservu eksterretajn antaŭkondiĉojn sanajn kaj sekure reakiru malnoviĝintajn datumojn.
+Labels,Etikedoj
+Language,Lingvo
+Language will be changed to,Lingvo estos ŝanĝita al
+"Language, theme, terminal tools, and session controls.","Lingvo, temo, finaj iloj kaj sesiaj kontroloj."
+Last,Laste
+Last 14 Days (Paid vs Pending),Lastaj 14 Tagoj (Pagitaj vs Pritraktataj)
+Last 14 Days Activity,Lasta 14 Taga Agado
+Last 14 Days Gross Profit,Lastaj 14 Tagoj Malneta Profito
+Last 14 Days Purchases,Lastaj 14 Tagoj Aĉetoj
+Last 14 Days Tax/Charges,Lastaj 14 Tagoj Imposto/Kostoj
+Last sync:,Lasta sinkronigo:
+Last sync: {0} | ok: {1} | failed: {2} | skipped: {3},Lasta sinkronigo: {0} |
+Latest entries for current shift,bone: {1} |
+Lead Time,malsukcesis: {2} |
+Light Mode,preterpasis: {3}
+Limited,Plej novaj enskriboj por nuna deĵoro
+lines,Plumbotempo
+List,Luma Reĝimo
+Live Snapshot,Limigita
+Load a POS profile and cashier first.,linioj
+Load More Invoices,Listo
+Load previously saved invoices,Viva Momentfoto
+Load Sale,Ŝarĝu POS-profilon kaj kasiston unue.
+Load Sales Invoice,Ŝarĝu Pli da Fakturoj
+Loading app data...,Ŝarĝu antaŭe konservitajn fakturojn
+Loading customer database...,Ŝarĝo Vendo
+Loading customers...,Ŝarĝu Venda Fakturo
+Loading database stats...,Ŝarĝante aplikajn datumojn...
+Loading details...,Ŝarĝante klientdatumbazon...
+Loading invoice history...,Ŝarĝante klientojn...
+Loading items...,Ŝarĝante datumbazan statistikon...
+Loading product catalog...,Ŝarĝante detalojn...
+Loading return invoices...,Ŝarĝante fakturhistorion...
+Loading server CPU/memory usage...,Ŝargante aĵojn...
+Loading suppliers...,Ŝarĝante produktkatalogon...
+Loading unpaid invoices...,Ŝarĝante revenfakturojn...
+Loading view...,Ŝargante uzon de CPU/memoro de la servilo...
+Loading...,Ŝarĝante provizantojn...
+Local storage is unavailable. Switching to online-only mode.,Ŝargante nepagitajn fakturojn...
+localStorage,Ŝarĝante vido...
+Location Performance,Ŝargante...
+Locations,Loka stokado ne disponeblas.
+Lock Screen,Ŝanĝante al interreta reĝimo.
+Logout,loka Stokado
+Lookup Workflow,Loka Rendimento
+Loss,Lokoj
+Low,Ŝlosu Ekranon
+Low Stock,Elsaluti
+Low Stock Alerts,Serĉu Laborfluon
+Low Stock Items,Perdo
+Low Stock Threshold,Malalta
+Low Stock Total,Malalta Stoko
+Lowest Margin,Atentigoj de Malalta Akcio
+Low-frequency maintenance and system details.,Malalta Provizo-Eroj
+Loyalty Redeemed,Malalta Stock Sojlo
+Loyalty Redemption,Malalta Stock Totalo
+Make New Payment,Plej Malalta Rando
+Manage all,Malaltfrekvenca prizorgado kaj sistemaj detaloj.
+Manage and synchronize your offline transactions,Lojaleco Elaĉetita
+Manage Cashier PIN,Lojaleco Elaĉeto
+"Manage offline tools, terminal controls, and maintenance from one workspace.",Faru Novan Pagon
+manual,Administri ĉion
+"Manual codes, barcode scans, and QR scans work in the same field",Administri kaj sinkronigi viajn eksterretajn transakciojn
+Manual offline mode is enabled,Administri Kasisto PIN
+Margin,"Administru eksterretajn ilojn, finajn kontrolojn kaj prizorgadon de unu laborspaco."
+Maximum available quantity is {0}. Quantity adjusted to match stock.,manlibro
+Maximum discount amount for this offer item is {0}.,"Manaj kodoj, strekkodaj skanadoj kaj QR-skanadoj funkcias en la sama kampo"
+Maximum discount percentage for this offer item is {0}%.,Manlibro eksterreta reĝimo estas ebligita
+Maximum offer quantity is {0}. Quantity adjusted to allowed limit.,Marĝeno
+Medium,Maksimuma disponebla kvanto estas {0}.
+Menu,Kvanto ĝustigita por kongrui kun stoko.
+Method-wise Collections,Maksimuma rabatkvanto por ĉi tiu oferto estas {0}.
+Minimum allowed rate for this offer item is {0}.,Maksimuma rabata procento por ĉi tiu oferto estas {0}%.
+Minimum Qty,Maksimuma oferta kvanto estas {0}.
+Mobile No,Kvanto alĝustigita al permesita limo.
+Mode,Meza
+Mode of Payment,Menuo
+Month,Metodo-saĝaj Kolektoj
+Month Δ,Minimuma permesita tarifo por ĉi tiu oferto estas {0}.
+Monthly Profit,Minimuma Kvanto
+Monthly Sales,Poŝtelefono Nr
+Monthly Sales Summary,Reĝimo
+Month-wise,Reĝimo de Pago
+Most Active Cashiers,Monato
+Movement Type,Monato Δ
+Movements,Monata Profito
+Multi Currency,Monataj Vendoj
+N/A,Monata Venda Resumo
+Name,Monate
+Negative Stock,Plej Aktivaj Kasistoj
+Negative Stock Items,Movada Tipo
+Negative values not allowed,Movadoj
+Net,Multa Monero
+Net Qty,N/A
+Net Sales,Nomo
+Net Value,Negativa Stoko
+Never,Negativaj Provizaĵoj
+New changes are ready to load,Negativaj valoroj ne permesitaj
+New Item,Reto
+New Offer Available,Neta Kvanto
+New PIN,Retaj Vendoj
+New rate,Neta Valoro
+Next unit of measure,Neniam
+No attribute data found.,Novaj ŝanĝoj estas pretaj por ŝargi
+No Barcode,Nova Ero
+No barcode found for UOM '{0}',Nova Oferto Disponebla
+No branch/location data found.,Nova PIN
+No brand data found.,Nova tarifo
+No cached gift card balance is available offline.,Sekva mezurunuo
+No camera found on this device. Please ensure your device has a working camera.,Neniu atributdatumo trovita.
+No capability warnings recorded yet.,Neniu Strekokodo
+No cash expected for this shift.,Neniu strekkodo trovita por UOM '{0}'
+No cash mode configured,Neniuj branĉoj/lokaj datumoj trovitaj.
+No cash movement type is allowed for this POS Profile.,Neniuj markdatenoj trovitaj.
+No cashier PIN is set yet. Create one now.,Neniu kaŝmemorigita saldo de donackartoj disponeblas eksterrete.
+No cashier profiles are available for this POS profile yet.,Neniu fotilo trovita sur ĉi tiu aparato.
+No cashier-wise discount/void/return activity.,"Bonvolu certigi, ke via aparato havas funkciantan fotilon."
+No category data found.,Neniuj kapablecaj avertoj ankoraŭ registritaj.
+No category profitability data found.,Neniu mono atendita por ĉi tiu deĵoro.
+No change returned recorded for this shift.,Neniu kontanta reĝimo agordita
+No change-allocation invoices match the current filters.,Neniu tipo de kontantmovado estas permesita por ĉi tiu POS-Profilo.
+No charge head breakdown found.,Neniu kasisto PIN estas ankoraŭ fiksita.
+No Company Selected,Kreu unu nun.
+No customer sales data found.,Neniuj kasistprofiloj ankoraŭ haveblas por ĉi tiu POS-profilo.
+No day-wise discount/void/return trend.,Neniu kasisto-saĝa rabato/malplenigo/revena agado.
+No day-wise payment data found.,Neniuj kategoriodatenoj trovitaj.
+No day-wise profitability trend found.,Neniuj kategorio-profitecaj datumoj trovitaj.
+No day-wise purchase data found.,Neniu ŝanĝo revenis registrita por ĉi tiu deĵoro.
+No day-wise sales trend found.,Neniuj ŝanĝ-asignaj fakturoj kongruas kun la nunaj filtriloj.
+No day-wise tax/charges trend found.,Neniu ŝarĝokapa paneo trovita.
+No dead stock items.,Neniu Kompanio Elektita
+No due date,Neniuj klientvendaj datumoj trovitaj.
+No exact repair match found for this invoice,Neniu tago-saĝa rabato/malpleno/revena tendenco.
+No hourly sales trend found for today.,Neniuj tagaj pagdatumoj trovitaj.
+No invoice activity found.,Neniu tago-saĝa profita tendenco trovita.
+No invoices found,Neniuj tagaj aĉetaj datumoj trovitaj.
+No invoices found. Try different search criteria.,Neniu tago-saĝa venda tendenco trovita.
+No invoices recorded for this shift.,Neniu tago-saĝa imposto/kostoj tendenco trovita.
+No item profitability data found.,Neniuj mortaj stokaĵoj.
+No item sales data found for this period.,Neniu ligdato
+No items found,Neniu preciza ripara kongruo trovita por ĉi tiu fakturo
+No items in cart,Neniu hora venda tendenco trovita por hodiaŭ.
+No items with barcodes to print,Neniu faktura agado trovita.
+No location-wise top item data found.,Neniuj fakturoj trovitaj
+No low stock alerts right now.,Neniuj fakturoj trovitaj.
+No low stock items.,Provu malsamajn serĉkriteriojn.
+No matching items in cart,Neniuj fakturoj registritaj por ĉi tiu deĵoro.
+No month-wise sales trend found.,Neniuj eroj pri profitodatenoj trovitaj.
+No negative stock items.,Neniuj eroj-vendaj datumoj trovitaj por ĉi tiu periodo.
+No notifications yet,Neniuj eroj trovitaj
+No offline cash movement synced.,Neniuj aĵoj en ĉaro
+No offline invoices pending synchronization,Neniuj eroj kun strekkodoj por presi
+No offline sync issues recorded yet.,Neniuj datumoj de supraj objektoj laŭ loko trovitaj.
+No out-of-stock items.,Neniuj avertoj pri malalta stoko nun.
+No outstanding credit invoices for this shift.,Neniuj malaltaj stokaĵoj.
+No payment collection data found.,Neniuj kongruaj eroj en ĉaro
+No payment rows available on this invoice.,Neniu monata venda tendenco trovita.
+No payments registered for this shift.,Neniuj negativaj stokaĵoj.
+No pending balances in this period.,Ankoraŭ neniuj sciigoj
+No pending offline invoices,Neniu eksterreta kontanta movado sinkronigita.
+No Print Formats Found,Neniuj eksterrete fakturoj atendante sinkronigon
+No profiles found for selected scope. Falling back to current profile failed.,Ankoraŭ neniuj problemoj pri senkonekta sinkronigo registris.
+No recent customer activity found.,Neniuj elĉerpitaj aĵoj.
+No recent stock entries found.,Neniuj elstaraj kreditfakturoj por ĉi tiu deĵoro.
+No records found,Neniuj pagkolektaj datumoj trovitaj.
+No reorder suggestions right now.,Neniuj pagvicoj haveblaj sur ĉi tiu fakturo.
+No repeat customers in this period.,Neniuj pagoj registritaj por ĉi tiu deĵoro.
+No response from server,Neniuj pritraktataj saldoj en ĉi tiu periodo.
+No return invoices found,Neniuj pritraktataj eksterrete fakturoj
+No return item trend found.,Neniuj Presaj Formatoj Trovitaj
+No returnable items found for this invoice,Neniuj profiloj trovitaj por elektita amplekso.
+No returns were processed in this shift.,Refalo al nuna profilo malsukcesis.
+No risk activity found.,Neniu lastatempa klienta agado trovita.
+No sales activity found for this period.,Neniuj lastatempaj akciaj enskriboj trovitaj.
+No slow moving items.,Neniuj registroj trovitaj
+No staff sales activity found.,Neniuj reordigaj sugestoj nun.
+No stock movement for this period.,Neniuj ripetaj klientoj en ĉi tiu periodo.
+No submitted cash movements in this shift.,Neniu respondo de servilo
+No supplier purchases found in this month.,Neniuj revenfakturoj trovitaj
+No suppliers found for this period.,Neniu tendenco de reveno trovita.
+No sync trigger has run yet in this session.,Neniuj resendeblaj eroj trovitaj por ĉi tiu fakturo
+No tax head breakdown found.,Neniuj revenoj estis prilaboritaj en ĉi tiu deĵoro.
+No top items found for this location.,Neniu riska agado trovita.
+No unpaid invoices,Neniu venda aktiveco trovita por ĉi tiu periodo.
+No variant data found.,Neniuj malrapide moviĝantaj eroj.
+No week-wise sales trend found.,Neniu dungita venda agado trovita.
+No.,Neniu akcia movado por ĉi tiu periodo.
+Nobile Number,Neniuj senditaj monmovoj en ĉi tiu deĵoro.
+Not available,Neniuj provizantaj aĉetoj trovitaj en ĉi tiu monato.
+Not checked,Neniuj provizantoj trovitaj por ĉi tiu periodo.
+Not selected,Neniu sinkroniga ellasilo ankoraŭ funkciis en ĉi tiu sesio.
+Not Set,Neniu impostkapa rompo trovita.
+Notifications,Neniuj ĉefaj eroj trovitaj por ĉi tiu loko.
+Offer,Neniuj nepagitaj fakturoj
+Offer Applied,Neniuj variantaj datumoj trovitaj.
+Offer criteria exceeded,Neniu semajna venda tendenco trovita.
+Offer Item,Ne.
+Offer item unavailable,Nobela Numero
+Offer Removed,Ne disponebla
+Offer UOM cannot be changed,Ne kontrolita
+Offer?,Ne elektita
+Offers,Ne Agordita
+Offline,Sciigoj
+Offline & Sync,Proponu
+Offline Capabilities,Oferto Aplikata
+Offline data status refreshed,Ofertokriterioj superitaj
+Offline diagnostics,Oferto Ero
+Offline Invoices,Oferto objekto nedisponebla
+Offline invoices status,Oferto Forigita
+Offline invoices synced,Oferto UOM ne povas esti ŝanĝita
+Offline Queue: {0},Proponon?
+Offline rebuild guidance,Ofertoj
+Offline restore is unavailable for this session.,Senrete
+Offline selling is available with degraded capabilities.,Senkonekta kaj Sinkronigi
+Offline snapshot does not match the current POS state.,Eksterretaj Kapabloj
+Offline Status,Senreta datuma stato refreŝigita
+"Offline, terminal, and system controls",Senkonekta diagnozo
+OK,Senkonektaj Fakturoj
+Online,Senreta fakturo stato
+Open actions menu,Senretaj fakturoj sinkronigitaj
+Open balance to collect,Senkonekta Vico: {0}
+Open Customer Display,Senkonekta rekonstrua gvido
+Open drawer,Senreta restarigo ne disponeblas por ĉi tiu sesio.
+Open invoices,Senreta vendado haveblas kun degraditaj kapabloj.
+Open Payments?,Senreta momentfoto ne kongruas kun la nuna POS-stato.
+Open POS home,Senreta Statuso
+Open this screen from POS Menu -> Open Customer Display.,"Senretaj, terminalaj kaj sistemaj kontroloj"
+OpenCV image processing enabled - Enhanced barcode detection,Bone
+OpenCV image processing unavailable on this device,Rete
+OpenCV Off,Malfermu menuon de agoj
+OpenCV On,Malfermu bilancon por kolekti
+OpenCV processing disabled,Malfermu Klienta Ekrano
+Opening Amount,Malfermu tirkeston
+Opening Cash,Malfermu fakturojn
+options,Malfermaj Pagoj?
+Order,Malfermu POS hejme
+Original,Malfermu ĉi tiun ekranon de POS Menuo -> Malfermu Klienta Ekrano.
+Other,OpenCV-bildtraktado ebligita - Plibonigita strekkoda detekto
+Out,OpenCV-bildtraktado ne disponebla en ĉi tiu aparato
+Out of Stock,OpenCV Malŝaltita
+Out of Stock Items,OpenCV ŝaltita
+Outstanding,OpenCV-pretigo malŝaltita
+Outstanding Credit by Currency,Malferma Kvanto
+Overdue,Malferma Kontantmono
+Overpayment Change,opcioj
+Overpayment change deducted: {0},Ordonu
+Packing List,Originala
+Page Format,Aliaj
+Page unavailable offline,Ekstere
+Paid,Elĉerpita
+Paid (orig):,Elĉerpita Eroj
+Paid Amount,Elstara
+Paid change cannot be greater than total change!,Elstara Kredito per Monero
+Paid:,Malfrua
+Parent Item,Tropago Ŝanĝo
+Partial,Tropago subtrahita: {0}
+Partly Paid,Pakita Listo
+Party Account,Paĝa Formato
+Party Type,Paĝo nedisponebla eksterrete
+Pause terminal until next cashier,Pagita
+PAY,Pagita (orig):
+Payment,Pagita Kvanto
+Payment Account,Pagita ŝanĝo ne povas esti pli granda ol totala ŝanĝo!
+Payment entries processed for Invoice {0},Pagita:
+Payment Entry Type,Gepatra Ero
+Payment History,Parta
+Payment ID,Parte Pagita
+Payment Method Report,Partia Konto
+Payment Methods,Partia Tipo
+Payment of {0} received successfully.,Paŭzu terminalon ĝis venonta kasisto
+Payment Progress,PAGI
+Payment Reconciliation,Pago
+Payment request status could not be retrieved. Please try again,Paga Konto
+Payment Request took too long to respond. Please try requesting for payment again,Pagaj enskriboj procesitaj por Fakturo {0}
+Payment saved offline,Paga Eniro Tipo
+Payment State,Paghistorio
+Payment Status,Paga ID
+Payment submitted but print function could not be executed. Payment name not found.,Raporto pri Paga Metodo
+Payment submitted.,Pag-Metodoj
+Payment Summary,Pago de {0} sukcese ricevita.
+Payments,Paga Progreso
+Payments are not open. Do you want to open payments and submit?,Paga Repaciĝo
+Payments by Mode of Payment,La stato de pago-peto ne povis esti prenita.
+PDF,Bonvolu provi denove
+Peak Hour,Paga Peto daŭris tro longe por respondi.
+Peak Memory:,Bonvolu provi peti pagon denove
+Peak Server:,Pago konservita eksterrete
+Peak:,Paga Ŝtato
+Pending,Paga Statuso
+Pending Amount,Pago sendita sed presa funkcio ne eblis plenumi.
+Pending count updated from {0} to {1},Pagnomo ne trovita.
+Pending Exposure,Pago sendita.
+Pending Invoices,Paga Resumo
+Pending Ratio,Pagoj
+Pending Sales,Pagoj ne estas malfermitaj.
+Pending sales: {0} | Cache usage: {1}%,Ĉu vi volas malfermi pagojn kaj sendi?
+Pending Sync,Pagoj laŭ Reĝimo de Pago
+Pending: {0},PDF
+Pending: {0} | Synced: {1} | Draft: {2},Pinta Horo
+Per Page,Pinta Memoro:
+Personal,Pinta Servilo:
+Personal preferences adjust the current cashier experience without changing the active POS route.,Pinto:
+PIN confirmation does not match.,Pritraktata
+PIN must be 4 to 8 digits.,Pritraktata Kvanto
+Please add at least one item.,Atenda kalkulo ĝisdatigita de {0} al {1}
+Please allow camera access to scan codes,Pritraktata Ekspozicio
+Please enter payment amount,Pritraktataj Fakturoj
+Please fill all required fields,Pritraktata Proporcio
+Please make a payment or select a payment,Pritraktataj Vendoj
+Please request phone payment or use another payment method,Atendantaj vendoj: {0} |
+Please select a customer first,Kaŝmemoruzo: {1}%
+Please select a party,Pritraktata Sinkronigo
+Please select a party before reconciling.,Pritraktata: {0}
+Please select a valid movement type.,Pritraktata: {0} |
+Please select an invoice,Sinkronigita: {1} |
+Please select company before reconciling.,Malneto: {2}
+Please set the customer's mobile number,Po Paĝo
+Please try again or enter the item manually.,Personaj
+Please verify the barcode or check the item's availability.,Personaj preferoj ĝustigas la nunan kasistan sperton sen ŝanĝi la aktivan POS-itineron.
+Points,PIN-konfirmo ne kongruas.
+Popup blocked. Please allow popups.,PIN devas esti 4 ĝis 8 ciferoj.
+POS,Bonvolu aldoni almenaŭ unu eron.
+POS controls and maintenance,Bonvolu permesi fotilan aliron por skani kodojn
+POS Expense is disabled for this POS Profile.,Bonvolu enigi pagsumon
+POS is running with limited offline prerequisites.,Bonvolu plenigi ĉiujn postulatajn kampojn
+POS Profile,Bonvolu fari pagon aŭ elekti pagon
+Position the QR code or barcode within the scanning area,Bonvolu peti telefonan pagon aŭ uzi alian pagmetodon
+Posting,Bonvolu unue elekti klienton
+Posting and Price List,Bonvolu elekti partion
+Posting Date,Bonvolu elekti partion antaŭ akordigi.
+Preparing background sync,Bonvolu elekti validan movspecon.
+"Press OK to continue offline with a warning, or Cancel to retry.",Bonvolu elekti fakturon
+Previous unit of measure,Bonvolu elekti firmaon antaŭ akordigi.
+Price List,Bonvolu agordi la poŝtelefonan numeron de la kliento
+Price List Rate,Bonvolu provi denove aŭ enigi la eron permane.
+Price list rate updated locally only,Bonvolu kontroli la strekkodon aŭ kontroli la haveblecon de la objekto.
+Pricing & Discounts,Punktoj
+Pricing Rule,Ŝprucfenestro blokita.
+Print,Bonvolu permesi ŝprucfenestrojn.
+Print Draft,POS
+Print Format (Invoice),POS-kontroloj kaj bontenado
+Print Format (Order),POS-Elspezo estas malŝaltita por ĉi tiu POS-Profilo.
+Print invoice,POS funkcias kun limigitaj eksterretaj antaŭkondiĉoj.
+Print Last Invoice,POS Profilo
+Print Purchase Invoice instead of PO,Metu la QR-kodon aŭ strekkodon ene de la skana areo
+Printer,Afiŝado
+Processed returns impacting the shift totals,Afiŝado kaj Prezo Listo
+Processing Payment,Afiŝdato
+Processing payment entries for Invoice {0},Preparante fonan sinkronigon
+Profile,"Premu OK por daŭrigi eksterrete kun averto, aŭ Nuligi por reprovi."
+Profiles,Antaŭa mezurunuo
+Profit,Prezo Listo
+Profit: Invoice Item Estimate,Prezo Listo
+Profit: Stock Ledger (COGS),Prezlisto tarifo ĝisdatigita nur loke
+Profitability Report,Prezoj kaj Rabatoj
+Prorated return discount,Regulo pri Prezoj
+Purchase Amount,Presi
+Purchase Invoices,Presi Malneton
+Purchase Order created,Presa Formato (Fakturo)
+Qty,Presa Formato (Mendo)
+Qualified,Presi fakturon
+Quantity,Presi Lastan Fakturon
+Quantity exceeds available stock,Presi Aĉetfakturon anstataŭ PO
+Quick Actions,Presilo
+Quotation {0} is Submitted,Prilaboritaj rendimentoj influantaj la deĵortotalojn
+Quotation submitted,Pretigo de Pago
+QZ Tray connected.,Prilaboranta pagonskribojn por Fakturo {0}
+QZ Tray is manually disconnected. Press Connect to enable it again.,Profilo
+QZ Tray is not connected.,Profiloj
+QZ Tray Setup,Profito
+Rate,Profito: Fakturo Item Taksado
+Rate adjusted to maximum allowed discount,Profito: Stock Ledger (COGS)
+Ready,Raporto pri Profiteco
+Ready to resume,Prorata rabato de reveno
+Ready!,Aĉeta Kvanto
+Real-time POS insights for retail operations.,Aĉeto-Fakturoj
+Rebuild Offline Data,Aĉeto Mendo kreita
+Receive,Kvanto
+Receive now,Kvalifikita
+Received,Kvanto
+Received:,Kvanto superas disponeblan stokon
+Recent Movement Entries,Rapidaj Agoj
+Recent updates about your invoices,Citaĵo {0} estas Sendita
+Recently Active Customers,Citaĵo sendita
+Rechecking connection,QZ-Pleto konektita.
+Reconcile payment methods and close shift,QZ-Pleto estas mane malkonektita.
+Reconciling Payments,Premu Konekti por ebligi ĝin denove.
+"Reconnect and open this page once while online, then offline refreshes will be able to restore it.",QZ-Pleto ne estas konektita.
+Reconnect online to refresh cached offline data from the server.,Agordo de QZ-Pleto
+Recreate local offline prerequisites from scratch,Takso
+Recv:,Tarifo ĝustigita al maksimuma permesita rabato
+Redeem,Preta
+Redeem / Scan,Preta por rekomenci
+Redeem Amount,Preta!
+Redeem Mode,Realtempaj POS-komprenoj por podetalaj operacioj.
+Redeemed Amount,Rekonstruu Senkonektajn Datumojn
+Redeemed credit cannot be greater than its total.,Ricevu
+Redemption and Totals,Ricevu nun
+Reference,Ricevita
+Refresh,Ricevite:
+Refresh Exchange Rate,Lastatempaj Movadaj Enskriboj
+Refresh Offline Data,Lastatempaj ĝisdatigoj pri viaj fakturoj
+Refresh Printers,Lastatempe Aktivaj Klientoj
+Refund,Rekontrolante konekton
+Release Notes,Akordigu pagmetodojn kaj fermu deĵoron
+Reload,Repacigante Pagojn
+Reload customers,"Rekonektu kaj malfermu ĉi tiun paĝon unufoje dum enrete, tiam eksterretaj refreŝigoj povos restarigi ĝin."
+Reload Items,Rekonekti interrete por refreŝigi kaŝmemoritajn eksterretajn datumojn de la servilo.
+Reload Now,Rekreu lokajn eksterretajn antaŭkondiĉojn de nulo
+Reload to apply the latest changes. Your current session will be refreshed.,Recv:
+Reload Workflow,Elaĉeti
+Remarks,Elaĉeti / Skani
+Remarks are required.,Elaĉetu Sumon
+Remove,Elaĉeti Reĝimon
+Remove barcode item,Elaĉetita Kvanto
+Remove cached data and reload the POS app,Elaĉetita kredito ne povas esti pli granda ol ĝia totalo.
+Remove item,Elaĉeto kaj Totaloj
+Remove Offer,Referenco
+Reorder / Purchase Suggestions,Refreŝigi
+Repair Candidate,Refreŝigi Interŝanĝan Kurzon
+Repair Change Allocation,Refreŝigu Senkonektajn Datumojn
+Repair requires an online connection,Refreŝigi Presilojn
+Repaired,Repago
+Repairing change allocation,Eldonaj Notoj
+Repeat Customers,Reŝargi
+Repeat Rate,Reŝargi klientojn
+Reprint previous transaction,Reŝargi Erojn
+Request,Reŝargi Nun
+Request ID: {0},Reŝargi por apliki la lastajn ŝanĝojn.
+Request Payment,Via nuna sesio estos refreŝigita.
+Requested route: {0},Reŝargi Laborfluon
+Required columns cannot be hidden,Rimarkoj
+Reset,Rimarkoj estas postulataj.
+Reset item name,Forigi
+Reset to Default,Forigi strekkodan objekton
+Resource Health,Forigu konservitajn datumojn kaj reŝargu la POS-apon
+Restricted,Forigi objekton
+Restricted operational controls for supervisors only.,Forigi Oferton
+Retry,Reordigi / Aĉetaj Sugestoj
+Retry route,Ripara Kandidato
+Return,Ripara Ŝanĝo-Atribuo
+Return Amount,Riparo postulas interretan konekton
+Return Count,Riparita
+Return items must have negative quantities,Riparante ŝanĝan atribuon
+Return total must be negative,Ripetu Klientojn
+Return Valid Until,Ripeta indico
+Return window passed,Represu antaŭan transakcion
+Return without Invoice,Peto
+Returns,Revenoj
+Returns / Voids / Discounts,Revenoj / Malplenigoj / Rabatoj
+Returns by Currency,Revenoj per Monero
+Revenue,Enspezo
+Review shift totals before submitting the closing entry,Revizu ŝanĝajn totalojn antaŭ sendi la ferman enskribon
+Round Off,Rondigi
+Rows,Vicoj
+Rows:,Vicoj:
+Rule,Regulo
+Sale,Vendo
+Sales,Vendoj
+Sales Order {0} is Submitted,Vendo Mendo {0} estas Sendita
+Sales Person and Print,Vendisto kaj Presaĵo
+Sales Person not found,Vendisto ne trovita
+Sales processed,Vendoj procesitaj
+Sales Return,Venda Reveno
+Sales Trend Report,Raporto pri Venda Tendenco
+Save,Konservu
+Save & Clear,Konservi & Malplenigi
+Save as POS Profile Default,Konservu kiel POS Profilo Defaŭlto
+Save Settings,Konservu Agordojn
+Save the selected printer as the POS Profile default so it shows automatically on this setup.,Konservu la elektitan presilon kiel la defaŭltan POS-Profilo por ke ĝi montru aŭtomate en ĉi tiu agordo.
+Saved as draft because: {0},Konservite kiel skizo ĉar: {0}
+Saving...,Konservante...
+Scale barcode detected. Quantity here is the number of labels to print.,Skala strekkodo detektita.
+Scale barcode settings are not configured. Using item barcode only.,Kvanto ĉi tie estas la nombro da etikedoj por presi.
+Scale template barcode is missing for this item/UOM. Using item barcode only.,Skalaj strekkodaj agordoj ne estas agorditaj.
+Scan an existing card and top it up without leaving the payment flow.,Uzante la strekkodon nur.
+Scan Error,Skalŝablona strekkodo mankas por ĉi tiu ero/UOM.
+Scan or enter a gift card code to check balance or redeem.,Uzante la strekkodon nur.
+Scan or paste the card code below.,Skanu ekzistantan karton kaj plenigu ĝin sen forlasi la pagfluon.
+Scan QR Code/Barcode,Scan Eraro
+Scan with camera,Skanu aŭ enigu donackartan kodon por kontroli saldon aŭ elaĉeti.
+Scan-First Flow,Skanu aŭ algluu la karton-kodon sube.
+Scanned Code:,Skanu QR-kodon/Strekkodon
+Scanning for: {0},Skanu per fotilo
+Scanning items,Skanado-Unua Fluo
+Scan-Ready,Skanita Kodo:
+Scope,Skanante por: {0}
+Scope: All Profiles,Skanante erojn
+Scope: Current Profile,Skanado-Preta
+Scope: Specific Profile,Amplekso
+Search,Amplekso: Ĉiuj Profiloj
+Search Account,Amplekso: Nuna Profilo
+Search an invoice and continue the return flow without extra steps.,Amplekso: Specifa Profilo
+Search customer,Serĉu
+Search invoices or customers,Serĉu Konton
+Search item,Serĉu fakturon kaj daŭrigu la revenan fluon sen kromaj paŝoj.
+Search item / code,Serĉu klienton
+Search items or barcode,Serĉu fakturojn aŭ klientojn
+Search Mpesa Payments,Serĉu objekton
+Search return invoices or customers,Serĉu objekton/kodon
+Search supplier,Serĉu erojn aŭ strekkodon
+Search unpaid invoices or customers,Serĉu Mpesa Pagojn
+Secure context (HTTPS or localhost) is required for camera access.,Serĉu revenfakturojn aŭ klientojn
+Secure context (HTTPS) required for camera access. Please use HTTPS to access the camera.,Serĉu provizanton
+Select,Serĉu nepagitajn fakturojn aŭ klientojn
+Select a cashier first.,Sekura kunteksto (HTTPS aŭ loka gastiganto) estas postulata por fotila aliro.
+Select a customer,Sekura kunteksto (HTTPS) necesa por fotila aliro.
+Select a customer to use coupon,Bonvolu uzi HTTPS por aliri la fotilon.
+Select a printer to use QZ silent printing.,Elektu
+Select Batch,Elektu kasiston unue.
+Select Columns to Display,Elektu klienton
+Select items to sell,Elektu klienton por uzi kuponon
+Select Language,Elektu presilon por uzi QZ silentan presadon.
+Select Payment,Elektu Batch
+Select Payment Account,Elektu Kolumnojn por Montri
+Select printer,Elektu erojn por vendi
+Select Return Invoice,Elektu Lingvon
+Select S.O,Elektu Pagon
+Select Sales Orders,Elektu Pagan Konton
+Select the cashier who is taking over this terminal.,Elektu presilon
+Selected,Elektu Revenan Fakturon
+Selected movement type is not allowed by POS Profile.,Elektu S.O
+Selected Payments,Elektu Vendajn Mendojn
+Sensitive actions kept away from quick taps.,"Elektu la kasiston, kiu transprenas ĉi tiun terminalon."
+Serial,Elektita
+Serial Numbers,Elektita movspeco ne estas permesita de POS-Profilo.
+Server CPU Usage:,Elektitaj Pagoj
+Server Health,Sentemaj agoj konservitaj for de rapidaj frapetoj.
+Server Memory Usage:,Seria
+Server Metrics,Seriaj Nombroj
+Server Uptime:,Uzo de CPU de Servilo:
+Service Charges,Servila Sano
+Session,Servila Memoruzo:
+Set each cashier PIN in the User form and keep terminal members assigned in POS Profile User.,Servila Metriko
+Settings,Funkcia Tempo de Servilo:
+Settings in this section update the POS workspace without changing the current route.,Servaj Pagoj
+Setup complete!,Sesio
+Share,Agordu ĉiun kasiston PIN en la Uzanto-formularo kaj konservu terminalajn membrojn asignitajn en POS-Profilo-Uzanto.
+Shared terminal,Agordoj
+Shift Closed Snapshot,Agordoj en ĉi tiu sekcio ĝisdatigas la POS-laborspacon sen ŝanĝi la nunan itineron.
+Shift Overview,Agordo finita!
+Show,Kunhavigi
+Show cart on customer-facing screen,Komuna terminalo
+Show last invoice rate,Shift Fermita Momentfoto
+Show rate info,Shift Superrigardo
+Show Repair Candidates,Montru
+Show search tools,Montru ĉaron sur ekrano kliento
+Show the active cart on a customer-facing screen,Montru lastan fakturan tarifon
+Showing {0}-{1} of {2},Montri tarifajn informojn
+Showing 0 of 0,Montru Riparajn Kandidatojn
+Shows the distribution of invoices per currency,Montru serĉajn ilojn
+Sign out of session,Montru la aktivan ĉaron sur ekrano al kliento
+Sign out of the current POS session,Montrante {0}-{1} el {2}
+Size:,Montrante 0 el 0
+Skipped Payments,Montras la distribuadon de fakturoj per valuto
+Skipping items without barcodes,Eliru el la kunsido
+Slow Moving,Eliru el la nuna POS-sesio
+Slow Moving Items,Grandeco:
+Slow Queries:,Saltitaj Pagoj
+Sold,Preterpasi erojn sen strekkodoj
+Source,Malrapida Movado
+Source Cash Account (Optional Override),Malrapidaj Eroj
+Source Ex. Rate:,Malrapidaj Demandoj:
+Source Rate:,Vendita
+Specific Profile,Fonto
+Split Invoices,Fonta Konto-Konto (Laŭvola Anstataŭigo)
+Staff / Cashier Performance Report,Fonto Ekz.
+Status,Prezo:
+Stock,Fonta indico:
+Stock Information,Specifa Profilo
+Stock is lower than requested,Dividi Fakturojn
+Stock is lower than requested:\n{0},Raporto pri Agado de Personaro/Kasisto
+Stock Movement Report,Statuso
+Stock update: {0} has {1} available. Adding {2} will bring the stock below zero.,Stoko
+Submit,Akcia Informo
+Submit & Print,Stoko estas pli malalta ol petita
+Submit Deposit,Stoko estas pli malalta ol la petita:\n{0}
+Submit Expense,Raporto pri Akcia Movado
+Submitted,Akcia ĝisdatigo: {0} havas {1} havebla.
+Submitted Cash Movements,Aldono de {2} alportos la stokon sub nul.
+Submitted entries,Submeti
+Successfully scanned:,Sendu & Presi
+Suggested,Sendu Deponejon
+Suggested Qty,Submeti Elspezon
+Supervisor Access,Submetita
+Supervisor permissions unlock issuance and reloads,Submetitaj Monaj Movadoj
+Supervisor Tools,Senditaj enskriboj
+Supplier,Sukcese skanita:
+Supplier and dates are required.,Sugestita
+Supplier Invoices,Sugestita Kvanto
+Supplier is required.,Kontrolisto Aliro
+Supplier name is required,Kontrolaj permesoj malŝlosas emision kaj reŝargiĝojn
+Supplier Payments,Kontrolisto Iloj
+Supplier Purchase Summary,Provizanto
+Suppliers,Provizanto kaj datoj estas postulataj.
+Suppliers not found,Fakturoj de Provizantoj
+Switch Camera,Provizanto estas postulata.
+Switch Cashier,Nomo de provizanto estas postulata
+Switch the POS appearance theme,Pagoj de Provizantoj
+Switch theme appearance,Provizanto Aĉeta Resumo
+Switched to:,Provizantoj
+Sync All Invoices,Provizantoj ne trovitaj
+Sync Offline Cash Movements ({0}),Ŝanĝi Fotilon
+Sync Offline Sales,Ŝaltilo Kasisto
+Synced {0} offline cash movement(s).,Ŝanĝu la temon de POS-aspekto
+Syncing items in background,Ŝanĝu la aspekton de la temo
+System / Diagnostics,Ŝanĝite al:
+"System actions are low-frequency maintenance controls such as app info, support diagnostics, and session controls.",Sinkronigi Ĉiuj Fakturoj
+System Information,Sinkronigi Senretajn Monajn Movojn ({0})
+System Status,Sinkronigi Senkonektajn Vendojn
+Tables:,Sinkronigitaj {0} eksterrete kontantmovado(j).
+Tap the button below to redeem a gift card during checkout.,Sinkronigante erojn en fono
+Target,Sistemo / Diagnozo
+Target Ex. Rate:,"Sistemaj agoj estas malaltfrekvencaj prizorgaj kontroloj kiel ekzemple aplikaĵaj informoj, subtenaj diagnozoj kaj sesiaj kontroloj."
+Target Rate:,Sistema Informoj
+Tax,Sistema Statuso
+Tax / Charges Report,Tabeloj:
+Tax Heads,Alklaku la suban butonon por elaĉeti donackarton dum la pago.
+Taxable Amount,Celo
+Tendered,Celo Ekz.
+Terminal,Prezo:
+Terminal & Devices,Celo-Indico:
+Terminal locked,Imposto
+"Terminal tools affect this checkout station, customer-facing displays, and future printer/device controls.",Raporto pri impostoj/kozoj
+Territory not found,Impostaj Kapoj
+The amount paid is not complete,Impostebla Sumo
+The app stores data locally for offline use. This is called cache.,Tenita
+The invoice stayed in draft. Please review and submit it manually.,Terminalo
+The maximum discount allowed is,Terminalo & Aparatoj
+The quantity for {0} has been adjusted to the maximum available stock.,Terminalo ŝlosita
+The system could not retrieve the item details. Please try again.,"Finaj iloj influas ĉi tiun kasstacion, ekranojn al kliento kaj estontajn presilon/aparatajn kontrolojn."
+These invoices will be synced when connection is restored,Teritorio ne trovita
+This action now opens inside the settings workspace.,La pagita kvanto ne estas kompleta
+This coupon already used !,La programo konservas datumojn loke por eksterreta uzo.
+This invoice does not need change-allocation repair,Ĉi tio nomiĝas kaŝmemoro.
+This invoice is already repaired,La fakturo restis en skizo.
+This is an item template. Please choose a variant.,Bonvolu revizii kaj sendi ĝin permane.
+this item,La maksimuma rabato permesita estas
+This POS page could not be opened offline because its code was not cached on this terminal yet.,La kvanto por {0} estis alĝustigita al la maksimuma disponebla stoko.
+This Serial Number {0} has already been added!,La sistemo ne povis reakiri la eron-detalojn.
+Threshold,Bonvolu provi denove.
+Time,Ĉi tiuj fakturoj estos sinkronigitaj kiam la konekto estas restarigita
+Tip: Clear cache regularly to free up space and keep the app fast.,Ĉi tiu ago nun malfermiĝas en la agorda laborspaco.
+Tip: Close unused tabs or apps to reduce lag.,Ĉi tiu kupono jam uzata!
+Tip: Monitor slow queries and table size for optimal performance.,Ĉi tiu fakturo ne bezonas riparon de ŝanĝo-atribuo
+To Be Paid,Ĉi tiu fakturo jam estas riparita
+To Date,Ĉi tio estas ero-ŝablono.
+Today,Bonvolu elekti varianton.
+Today Profit,ĉi tiu objekto
+Today Sales,Ĉi tiu POS-paĝo ne eblis malfermiĝi eksterrete ĉar ĝia kodo ankoraŭ ne estis kaŝmemorigita en ĉi tiu terminalo.
+Toggle navigation drawer,Ĉi tiu Seria Numero {0} jam estis aldonita!
+Toggle Theme,Sojlo
+Tools,Tempo
+Tools for customer-facing screens and terminal-specific actions.,Konsilo: Malplenigu kaŝmemoron regule por liberigi spacon kaj konservi la apon rapide.
+Top Brand,Konsilo: Fermu neuzatajn langetojn aŭ apojn por redukti malfruon.
+Top Category,Konsilo: Monitoru malrapidajn demandojn kaj tabelgrandecon por optimuma rendimento.
+Top Charge Head,Esti Pagita
+Top Customers,Ĝis nun
+Top Discount,Hodiaŭ
+Top Items by Location,Hodiaŭ Profito
+Top Margin,Hodiaŭ Vendoj
+Top Pending,Baskuligi navigadan tirkeston
+Top Profit Item,Baskuligi Temon
+Top Return Items,Iloj
+Top Sales by Cashier,Iloj por ekranoj alfrontantaj al kliento kaj specifaj agoj de terminaloj.
+Top Supplier,Pinta Marko
+Top Suppliers by Spend,Supra Kategorio
+Top Tables,Supra Ŝarga Kapo
+Top Tax Head,Supraj Klientoj
+Top Up Amount,Supra Rabato
+Top Up Card,Ĉefaj Eroj laŭ Loko
+Top Up Mode,Supra Marĝeno
+Top Variant,Supre Pritraktata
+Total,Pinta Profita Ero
+Total Amount,Supraj Revenaj Eroj
+Total Change,Plej bonaj Vendoj de Kasisto
+Total Charges,Plej alta Provizanto
+Total In,Plej bonaj Provizantoj laŭ Elspezo
+Total Invoices,Supraj Tabeloj
+Total Items,Supra Imposto-Kapo
+Total Mpesa,Supren Sumo
+Total Out,Supren Karto
+Total Payments,Reĝimo Supren
+Total Purchase,Supra Variaĵo
+Total Selected :,Entute
+Total Size,Tuta Kvanto
+Total Stock Qty,Tuta Ŝanĝo
+Total:,Totalaj Ŝargoj
+Totals by Invoice Currency,Sumo En
+Track how much cash was handed back to customers,Totalaj Fakturoj
+"Track recent sales, collect unpaid balances, and reopen saved work",Sumaj Eroj
+Transaction ID,Tuta Mpesa
+Transfer,Tuta Ekstere
+Try a different search term or clear the cart search.,Sumaj Pagoj
+Try adjusting your search or filters,Tuta Aĉeto
+Try another source or refresh the list.,Sumo Elektitaj:
+Try changing the date range or status filter.,Tuta Grandeco
+Type,Totala Stokkvanto
+Unable to access camera even with basic settings. Please check your camera permissions and device compatibility.,Totalo:
+Unable to add offer item {0}. Please refresh and try again.,Sumoj laŭ Fakturo-Monero
+Unable to add offer item. Please refresh and try again.,Spuri kiom da mono estis redonita al klientoj
+Unable to add scanned item.,"Spuri lastatempajn vendojn, kolektu nepagitajn saldojn kaj remalfermu konservitan laboron"
+Unable to create purchase order,ID de transakcio
+Unable to delete draft invoice,Translokigo
+Unable to fetch documents,Provu alian serĉterminon aŭ malplenigu la ĉaran serĉon.
+Unable to fetch draft orders,Provu ĝustigi vian serĉon aŭ filtrilojn
+Unable to fetch invoice history,Provu alian fonton aŭ refreŝigu la liston.
+Unable to fetch M-Pesa payments,Provu ŝanĝi la datintervalon aŭ statusan filtrilon.
+Unable to fetch sales orders,Tajpu
+Unable to fetch unpaid invoices,Ne eblas aliri fotilon eĉ kun bazaj agordoj.
+Unable to generate scale barcode,Bonvolu kontroli viajn fotilajn permesojn kaj aparatkongruon.
+Unable to issue gift card.,Ne eblas aldoni oferton {0}.
+Unable to load cashier PIN status.,Bonvolu refreŝigi kaj provi denove.
+Unable to load document,Ne eblas aldoni oferton.
+Unable to load draft invoice,Bonvolu refreŝigi kaj provi denove.
+Unable to load gift card balance.,Ne eblas aldoni skanitan objekton.
+Unable to load invoice details,Ne eblas krei aĉetmendon
+Unable to load parked order,Ne eblas forigi malneton de fakturo
+Unable to load the selected sales order,Ne eblas preni dokumentojn
+Unable to prepare document,Ne eblas preni skizajn mendojn
+Unable to prepare return invoice,Ne eblas akiri fakturhistorion
+Unable to print draft invoice,Ne eblas akiri pagojn de M-Pesa
+Unable to print submitted invoice,Ne eblas akiri vendomendojn
+Unable to process document action,Ne eblas akiri nepagitajn fakturojn
+Unable to repair change allocation,Ne eblas generi skalan strekkodon
+Unable to save cashier PIN.,Ne eblas elsendi donackarton.
+Unable to save the rate to the backend price list,Ne eblas ŝargi la kasiston PIN-statuson.
+Unable to submit invoice,Ne eblas ŝargi la dokumenton
+Unable to submit the selected payment,Ne eblas ŝargi malneton de fakturo
+Unable to top up gift card.,Ne eblas ŝargi saldo de donackarto.
+Unable to verify cashier PIN.,Ne eblas ŝargi fakturajn detalojn
+Unallocated,Ne eblas ŝargi parkumitan mendon
+Unallocated:,Ne eblas ŝargi la elektitan vendomendon
+Unavailable,Ne eblas prepari dokumenton
+Unknown,Ne eblas prepari resendofakturon
+Unknown error,Ne eblas presi malneton de fakturo
+Unknown Item,Ne eblas presi senditan fakturon
+Unknown Warehouse,Ne eblas prilabori dokumentan agon
+Unlock POS,Ne eblas ripari ŝanĝan atribuon
+Unpaid,Ne eblas konservi kasiston PIN.
+"Unselected payments stay unallocated first, then auto reconcile after submit.",Ne eblas konservi la tarifon al la postaĵa preza listo
+UOM,Ne eblas sendi fakturon
+UOM not found,Ne eblas sendi la elektitan pagon
+Update available,Ne eblas replenigi donackarton.
+Update Customer,Ne eblas kontroli la kasiston PIN.
+Update PIN,Neasignita
+Update Price List Rate,Neasignita:
+Updated,Nedisponebla
+Updates and app info that stay out of the cashier flow.,Nekonata
+Updates automatically,Nekonata eraro
+Upload pending transactions,Nekonata Ero
+Usage,Nekonata Stokejo
+Usage Stats,Malŝlosu POS
+Use a 4 to 8 digit PIN for cashier switching and terminal unlock.,Nepagita
+Use Cashier,"Neelektitaj pagoj unue restas neasignitaj, poste aŭtomate akordigas post sendo."
+Use date range to search for older invoices,UOM
+"Use one field for manual code entry, barcode scans, or QR scans.",UOM ne trovita
+"Use one workflow for balance checks, new issuance, and top ups without leaving POS.",Ĝisdatigo disponebla
+"Use this section when cached prerequisite data needs a refresh, rebuild, or diagnostics review.",Ĝisdatigu Klienton
+Use Western numerals,Ĝisdatigu PIN
+Used:,Ĝisdatigu Prezan Liston
+Using basic camera settings due to device limitations,Ĝisdatigita
+Using cached customer balance,"Ĝisdatigoj kaj aplikaĵaj informoj, kiuj restas ekster la kasista fluo."
+Valid until,Ĝisdatigoj aŭtomate
+Variance %,Alŝutu pritraktatajn transakciojn
+Variants,Uzado
+Variant-wise,Statistiko de uzado
+Verify closing amounts for each payment method,Uzu 4 ĝis 8 ciferan PIN por kasistoŝanĝo kaj terminala malŝloso.
+View all,Uzu Kasiston
+View app information and current build details,Uzu datintervalon por serĉi pli malnovajn fakturojn
+View Data Diagnostics,"Uzu unu kampon por mana koda enigo, strekkoda skanado aŭ QR-skanado."
+View Details,"Uzu unu laborfluon por ekvilibrokontroloj, nova elsendo kaj replenigo sen eliri POS."
+View invoice details,"Uzu ĉi tiun sekcion kiam konservitaj antaŭkondiĉaj datumoj bezonas refreŝigon, rekonstruon aŭ diagnozan revizion."
+View notifications,Uzu okcidentajn ciferojn
+View offline invoices,Uzita:
+View restricted POS insights,Uzante bazajn fotilajn agordojn pro aparato-limigoj
+Void Amount,Uzante kaŝmemorigitan klientan bilancon
+Void Count,Valida ĝis
+Voids,Varianco %
+Waiting for cart items,Variantoj
+Waiting for payment...,Variant-saĝa
+Walk-in Customer,Kontrolu finajn sumojn por ĉiu pagmetodo
+Warehouse,Rigardu ĉiujn
+Warning: High cache usage may affect performance.,Rigardu aplikaĵinformojn kaj aktualajn konstruajn detalojn
+Warning: High lag may indicate heavy processing or browser slowness.,Vidi Datumajn Diagnozojn
+Week Δ,Rigardu Detalojn
+Week-wise,Rigardu fakturajn detalojn
+Weight (g),Rigardu sciigojn
+Weight (grams),Rigardu eksterretajn fakturojn
+We'll let you know if an invoice fails to submit,Rigardu limigitajn informojn pri POS
+Workflow,Void Kvanto
+Write off amount cannot exceed the POS profile maximum of {0},Void Grafo
+Write off amount exceeds the allowed limit ({0}). Please add payment for the remaining amount.,Malplenoj
+Yes,Atendante ĉarajn aĵojn
+"Yes, Cancel sale",Atendante pagon...
+"Yes, Close",Eniranta Kliento
+You are not allowed to print draft invoices,Stokejo
+You are offline. Add Payment will work again when the connection is restored.,Averto: Alta uzado de kaŝmemoro povas influi rendimenton.
+You have no notifications right now,Averto: Alta malfruo povas indiki pezan prilaboradon aŭ retumilon malrapidecon.
+Your Cart,Semajno Δ

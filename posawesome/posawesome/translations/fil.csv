@@ -1,0 +1,1353 @@
+﻿- Total Unallocated,- Total Unallocated
+* Required,* Kinakailangan
+{0} (Qty: {1}),{0} (Bilang: {1})
+{0} actions,{0} mga aksyon
+{0} has only {1} in stock. You requested {2}. Adjust quantity or restock.,Ang {0} ay mayroon lamang {1} sa stock.
+{0} offline invoice{1} pending,Humiling ka ng {2}.
+{0} offline invoice{1} saved as draft,Ayusin ang dami o i-restock.
+{0} offline invoice{1} synced,Nakabinbin ang {0} offline na invoice{1}.
+{0}: {1} {2},{0} offline na invoice{1} ang na-save bilang draft
+{0}d ago,Naka-sync ang {0} offline na invoice{1}.
+{0}h ago,{0}: {1} {2}
+{0}m ago,{0}d ang nakalipas
+A POS supervisor is required for this action.,{0}h ang nakalipas
+About,{0}m ang nakalipas
+Access,Ang isang superbisor ng POS ay kinakailangan para sa pagkilos na ito.
+Account,Tungkol sa
+Account is overdrawn,Access
+Acknowledge the error to resume scanning,Account
+Acknowledge the error to resume scanning.,Na-overdrawn ang account
+Across,Kilalanin ang error upang ipagpatuloy ang pag-scan
+Action,Kilalanin ang error upang ipagpatuloy ang pag-scan.
+Actions,Sa kabila
+Active sale,Aksyon
+add,Mga aksyon
+Add items from the selector to start building this sale.,Aktibong pagbebenta
+Add more value to an existing gift card,idagdag
+Add New Address,Magdagdag ng mga item mula sa selector upang simulan ang pagbuo ng sale na ito.
+Add new customer,Magdagdag ng higit na halaga sa isang kasalukuyang gift card
+Add on New Line,Magdagdag ng Bagong Address
+Add Payment,Magdagdag ng bagong customer
+Add payment to invoice,Idagdag sa Bagong Linya
+Add/Edit Coupon Conditions,Magdagdag ng Pagbabayad
+Additional Discount,Magdagdag ng bayad sa invoice
+Additional Discount %,Magdagdag/Mag-edit ng Mga Kundisyon ng Kupon
+Address Line 1,Karagdagang Diskwento
+Address not found,Karagdagang Diskwento %
+Adjust the quantity or enable negative stock to continue.,Linya ng Address 1
+Adjustment,Hindi nakita ang address
+After returns,Ayusin ang dami o paganahin ang negatibong stock na magpatuloy.
+Against,Pagsasaayos
+Against Name,Pagkatapos ng mga pagbabalik
+Age Bracket,Laban sa
+All,Laban sa Pangalan
+All Caught Up!,Bracket ng Edad
+All invoices are synchronized,Lahat
+All pending invoices are up to date,Lahat Nahuli!
+All Profiles,Naka-synchronize ang lahat ng invoice
+All Synchronized,Ang lahat ng mga nakabinbing invoice ay napapanahon
+All visible invoices are fully settled.,Lahat ng Profile
+All Warehouses,Naka-synchronize lahat
+Allowed UOM is {0},Ang lahat ng nakikitang mga invoice ay ganap na naayos.
+Always fetch items from server (ignore local cache),Lahat ng Warehouses
+Amount,Ang pinapayagang UOM ay {0}
+Amount already received,Palaging kumuha ng mga item mula sa server (balewala ang lokal na cache)
+Amount exceeds profile cash movement max amount.,Halaga
+Amount must be greater than zero.,Natanggap na ang halaga
+Amount received from customer,Ang halaga ay lumampas sa max na halaga ng cash movement ng profile.
+App information,Ang halaga ay dapat na mas malaki kaysa sa zero.
+Appearance and user-level preferences for the current session.,Halaga na natanggap mula sa customer
+Applied,Impormasyon ng app
+Apply,Hitsura at mga kagustuhan sa antas ng user para sa kasalukuyang session.
+Apply Gift Card,Inilapat
+Apply Offer,Mag-apply
+Apply On,Ilapat ang Gift Card
+Apply only the amount you want to redeem on this invoice. The remaining balance stays on the card.,Ilapat ang Alok
+Apply Redemption,Mag-apply Sa
+Applying,Ilapat lang ang halagang gusto mong i-redeem sa invoice na ito.
+Apps,Ang natitirang balanse ay mananatili sa card.
+Are you sure you want to close? All entered data will be lost.,Mag-apply ng Redemption
+Attributes (Size/Color),Nag-aaplay
+Auto Allocate Payment Amount,Mga app
+Auto Reconcile,Sigurado ka bang gusto mong isara?
+Auto reconciliation completed after payment submit.,Mawawala ang lahat ng ipinasok na data.
+Auto reconciliation completed. Allocated: {0}{1}. Remaining outstanding: {0}{2}.,Mga Katangian (Laki/Kulay)
+Available Actions,Awtomatikong Maglaan ng Halaga ng Pagbabayad
+Available QTY,Auto Reconcile
+Available:,Nakumpleto ang auto reconciliation pagkatapos isumite ang pagbabayad.
+Average Basket,Nakumpleto ang auto reconciliation.
+Average Bill,Inilaan: {0}{1}.
+Average Ticket,Nananatiling natitirang: {0}{2}.
+Avg Bill,Mga Magagamit na Pagkilos
+Avg Invoice,Magagamit na QTY
+Avg Invoice Profit,Available:
+Avg Invoice Value,Karaniwang Basket
+Avg Purchase Frequency,Average na Bill
+Awesome,Average na Ticket
+Awesome Dashboard,Avg Bill
+Awesome Dashboard is disabled for the selected POS Profile.,Avg na Invoice
+Awesome Dashboard is unavailable for the selected scope.,Avg na Kita ng Invoice
+Awesome Dashboard is visible only to POS supervisors.,Avg na Halaga ng Invoice
+Back,Avg na Dalas ng Pagbili
+Back Office Cash Account,Kahanga-hanga
+Back Office Cash Account (Optional Override),Kahanga-hangang Dashboard
+Back office cash account is required.,Naka-disable ang Awesome Dashboard para sa napiling POS Profile.
+Back to {0},Hindi available ang Kahanga-hangang Dashboard para sa napiling saklaw.
+Background processing did not finish in time.,Ang Kahanga-hangang Dashboard ay makikita lamang ng mga superbisor ng POS.
+Background processing failed for Invoice {0}: {1},Bumalik
+Background Submission Failed,Back Office Cash Account
+Background sync interval (seconds),Back Office Cash Account (Opsyonal na Pag-override)
+Balance,Kinakailangan ang back office cash account.
+Balance will be updated when connection is restored,Bumalik sa {0}
+Balances still pending,Hindi natapos ang pagpoproseso sa background sa oras.
+Barcode,Nabigo ang pagproseso sa background para sa Invoice {0}: {1}
+Barcode / QR Ready,Nabigo ang Pagsusumite sa Background
+Barcode Label Printing,Agwat ng pag-sync sa background (mga segundo)
+Base Paid:,Balanse
+Base Recv:,Maa-update ang balanse kapag naibalik ang koneksyon
+Base:,Nakabinbin pa rin ang mga balanse
+Basic Information,Barcode
+Batch,Handa na ang Barcode / QR
+Batch Information,Pag-print ng Barcode Label
+Before any return workflow,Base Bayad:
+Before returns,Base Recv:
+Best Day,Base:
+Best Seller,Pangunahing Impormasyon
+Book expense or deposit from active shift.,Batch
+Branch / Location-wise Report,Impormasyon sa Batch
+Brand-wise,Bago ang anumang return workflow
+Breakdown,Bago bumalik
+Browse,Pinakamahusay na Araw
+Build Time:,Pinakamabenta
+Built with Frappe,Gastos sa libro o deposito mula sa aktibong shift.
+Bundle,Ulat sa Sangay / Lokasyon
+Buying Price,Brand-wise
+Cache cleared successfully,Pagkasira
+Cache Usage,Mag-browse
+cache used,Oras ng Pagbuo:
+Calculating...,Itinayo gamit ang Frappe
+Camera Access Required,Bundle
+Camera access was aborted. Please try again.,Presyo ng Pagbili
+Camera constraints not supported by your device. Trying fallback settings...,Matagumpay na na-clear ang cache
+Camera is busy or blocked by another app/tab. Close other camera apps and try again.,Paggamit ng Cache
+Camera permission denied. Please allow camera access in your browser settings and refresh the page.,ginamit na cache
+Camera scanner is locked until the current error is acknowledged,Kinakalkula...
+Camera started but the video stream did not load in time. Please try again.,Kinakailangan ang Pag-access sa Camera
+Cancel,Na-abort ang access sa camera.
+Cancel cash movement {0}?,Pakisubukang muli.
+Cancel Payment,Hindi sinusuportahan ng iyong device ang mga hadlang sa camera.
+Cancel Sale,Sinusubukan ang mga setting ng fallback...
+Cancel Sale ?,Ang camera ay abala o na-block ng isa pang app/tab.
+Cancelled,Isara ang iba pang camera app at subukang muli.
+Cannot add an item with zero or negative quantity.,Tinanggihan ang pahintulot sa camera.
+Cannot clear cache while offline,Mangyaring payagan ang pag-access ng camera sa mga setting ng iyong browser at i-refresh ang pahina.
+Cannot redeem customer credit more than invoice total,Ang camera scanner ay naka-lock hanggang sa ang kasalukuyang error ay kilalanin
+Cannot redeem gift cards more than invoice total,Nagsimula ang camera ngunit hindi nag-load ang video stream sa oras.
+Cannot Save Offline Invoice:,Pakisubukang muli.
+Cannot Save Offline Payment:,Kanselahin
+Card,Kanselahin ang paggalaw ng pera {0}?
+Card / Online,Kanselahin ang Pagbabayad
+Card health after the last live lookup,Kanselahin ang Sale
+Cards,Kanselahin ang Sale ?
+Cart,Kinansela
+Cash,Hindi maaaring magdagdag ng item na may zero o negatibong dami.
+Cash back to customers,Hindi ma-clear ang cache habang offline
+Cash Collections,Hindi ma-redeem ang credit ng customer nang higit sa kabuuang invoice
+Cash Deposit is disabled for this POS Profile.,Hindi ma-redeem ang mga gift card nang higit sa kabuuang invoice
+Cash Drawer Snapshot,Hindi Ma-save ang Offline na Invoice:
+Cash In Hand,Hindi Ma-save ang Offline na Pagbabayad:
+Cash Movement,Card
+Cash movement cancelled,Card / Online
+Cash movement deduction applied,Kalusugan ng card pagkatapos ng huling live na paghahanap
+Cash movement deleted,Mga card
+Cash movement is disabled for this POS Profile.,Cart
+Cash Movement is disabled in current POS Profile.,Cash
+Cash movement saved offline,Cash back sa mga customer
+Cash movement submitted,Mga Koleksyon ng Pera
+Cash Movements,Ang Cash Deposit ay hindi pinagana para sa POS Profile na ito.
+Cash payment cannot be less than invoice total when partial payment is not allowed,Snapshot ng Cash Drawer
+Cash returned after payment,Cash sa Kamay
+Cashier,Cash Movement
+Cashier Access,Kinansela ang paggalaw ng pera
+Cashier identity and appearance preferences.,Inilapat ang bawas sa paggalaw ng pera
+Cashier PIN,Ang paggalaw ng pera ay tinanggal
+Cashier PIN saved successfully.,Ang paggalaw ng pera ay hindi pinagana para sa POS Profile na ito.
+Cashiers,Ang Cash Movement ay hindi pinagana sa kasalukuyang POS Profile.
+Cashier-wise,Ang paggalaw ng pera ay nai-save offline
+Categories,Naisumite ang paggalaw ng pera
+Category,Cash Movements
+Category / Brand / Variant Report,Ang pagbabayad ng cash ay hindi maaaring mas mababa sa kabuuang invoice kapag hindi pinapayagan ang bahagyang pagbabayad
+Category-wise,Ibinalik ang pera pagkatapos magbayad
+Category-wise Margin,Cashier
+Certificate,Pag-access sa Cashier
+Certificate is missing or not trusted. QZ may show confirmation dialogs.,Pagkakilanlan ng cashier at mga kagustuhan sa hitsura.
+Certificate is trusted. Silent QZ printing is active.,PIN ng cashier
+Change,Matagumpay na na-save ang cashier PIN.
+Change allocation repaired,Mga cashier
+Change interface language,Cashier-wise
+Change Language,Mga kategorya
+Change Price,Kategorya
+Change Return,Ulat ng Kategorya / Brand / Variant
+Change Returned,Category-wise
+Change terminal cashier,Margin ayon sa kategorya
+Charge Heads,Sertipiko
+Charges,Nawawala o hindi pinagkakatiwalaan ang sertipiko.
+Charges not found,Maaaring magpakita ang QZ ng mga dialog ng kumpirmasyon.
+Check Balance,Ang sertipiko ay pinagkakatiwalaan.
+Check balance for any card. Supervisors can issue and top up cards here.,Aktibo ang silent QZ printing.
+Check balance only,Baguhin
+Check for new commits,Naayos ang alokasyon ng pagbabago
+Check for Updates,Baguhin ang wika ng interface
+Check live balance before applying redemption,Baguhin ang Wika
+Check live balance before redemption,Baguhin ang Presyo
+Checking...,Baguhin ang Pagbabalik
+Cheque/Reference Date,Ibinalik ang Pagbabago
+Cheque/Reference No,Baguhin ang terminal cashier
+Choose the cashier currently operating this terminal.,Mga Ulo ng Pagsingil
+Choose your preferred language for the POS interface,Mga singil
+City,Hindi nakita ang mga singil
+Clear,Suriin ang Balanse
+Clear All,Suriin ang balanse para sa anumang card.
+Clear all barcode items,Ang mga superbisor ay maaaring mag-isyu at mag-top up ng mga card dito.
+Clear all purchase order items,Suriin ang balanse lamang
+Clear Cache,Tingnan kung may mga bagong commit
+Clear Search,Tingnan ang Mga Update
+Clearing local cache...,Suriin ang live na balanse bago mag-apply ng redemption
+Click to refresh,Suriin ang live na balanse bago i-redeem
+Client CPU Lag:,Sinusuri...
+Client Memory Usage:,Petsa ng tseke/Sanggunian
+Client Metrics,Tsek/Reference No
+Close,Piliin ang cashier na kasalukuyang nagpapatakbo ng terminal na ito.
+Close about dialog,Piliin ang iyong gustong wika para sa interface ng POS
+Close cashier switcher,lungsod
+Close closing shift dialog,Maaliwalas
+Close column selector,I-clear ang Lahat
+Close Dialog,I-clear ang lahat ng barcode item
+Close drafts dialog,I-clear ang lahat ng item ng purchase order
+Close invoice details dialog,I-clear ang Cache
+Close invoice management,I-clear ang Paghahanap
+Close offline invoices dialog,Ni-clear ang lokal na cache...
+Close packing list dialog,I-click upang i-refresh
+Close returns dialog,Lag ng CPU ng kliyente:
+Close sales orders dialog,Paggamit ng Memorya ng Kliyente:
+Close Scanner,Mga Sukatan ng Kliyente
+Close scanner dialog,Isara
+Close Settings,Isara ang tungkol sa dialog
+Close Shift,Isara ang cashier switcher
+Closing Amount,Isara ang dialog ng pagsasara ng shift
+Closing POS Shift,Isara ang tagapili ng hanay
+Closing Snapshot Available,Isara ang Dialog
+Code,Isara ang dialog ng mga draft
+Code scanned successfully,Isara ang dialog ng mga detalye ng invoice
+COGS,Isara ang pamamahala ng invoice
+Collapse item details,Isara ang dialog ng mga offline na invoice
+Collected,Isara ang dialog ng listahan ng packing
+Cols,Isara ang dialog ng pagbabalik
+Columns,Isara ang dialog ng mga order sa pagbebenta
+commits,Isara ang Scanner
+Completed and active sales in this range,Isara ang dialog ng scanner
+Completed returns will appear here.,Isara ang Mga Setting
+Confirm,Isara ang Shift
+Confirm Close,Halaga ng pagsasara
+Confirm Mobile Number,Isinasara ang POS Shift
+Confirm PIN,Available ang Closing Snapshot
+Connect,Code
+Connect printer and manage certificate,Matagumpay na na-scan ang code
+Connecting to QZ Tray...,COGS
+Connection problem while submitting invoice,I-collapse ang mga detalye ng item
+Connections:,Nakolekta
+Connectivity and cached prerequisite status were rechecked.,Sinabi ni Cols
+Continue Editing,Mga hanay
+Could not fetch latest balance from server,nangangako
+Count,Nakumpleto at aktibong mga benta sa hanay na ito
+Country,Lalabas dito ang mga nakumpletong pagbabalik.
+Coupon,Kumpirmahin
+Coupons,Kumpirmahin ang Isara
+Cover,Kumpirmahin ang Numero ng Mobile
+CPU Cores:,Kumpirmahin ang PIN
+Create,Kumonekta
+Create and load a new prepaid card,Ikonekta ang printer at pamahalaan ang certificate
+Create and preload a new gift card,Kumokonekta sa QZ Tray...
+Create Bill,Problema sa koneksyon habang nagsusumite ng invoice
+Create Customer,Mga koneksyon:
+Create New Item,Ang pagkakakonekta at naka-cache na prerequisite na katayuan ay muling sinuri.
+Create or change your PIN,Ipagpatuloy ang Pag-edit
+Create PIN,Hindi makuha ang pinakabagong balanse mula sa server
+Create POS Opening Shift,Bilangin
+Create Purchase Order,Bansa
+Create Return,Kupon
+Create return from invoice,Mga kupon
+Create Supplier,Takpan
+Credit and Output,Mga CPU Core:
+Credit Note,Lumikha
+Credit Outstanding,Gumawa at mag-load ng bagong prepaid card
+Credit sales remaining to be collected,Gumawa at mag-preload ng bagong gift card
+Critical,Lumikha ng Bill
+Currency,Lumikha ng Customer
+Current,Lumikha ng Bagong Item
+Current Event Loop Lag:,Gumawa o baguhin ang iyong PIN
+Current Month,Lumikha ng PIN
+Current PIN,Lumikha ng POS Opening Shift
+Current Profile,Lumikha ng Purchase Order
+Current redeemable value on the gift card,Lumikha ng Pagbabalik
+Current User,Lumikha ng pagbabalik mula sa invoice
+Custom,Lumikha ng Supplier
+Custom Due Days,Credit at Output
+Custom items per page,Credit Note
+Customer,Credit Outstanding
+Customer already selected,Ang natitirang mga benta ng kredito ay kolektahin
+Customer Balance,Kritikal
+Customer balance unavailable offline,Pera
+Customer created successfully.,Kasalukuyan
+Customer creation failed.,Kasalukuyang Event Loop Lag:
+Customer Details,Kasalukuyang Buwan
+Customer display channel is missing,Kasalukuyang PIN
+Customer display was blocked. Please allow pop-ups for this site.,Kasalukuyang Profile
+Customer group is required,Kasalukuyang nare-redeem na halaga sa gift card
+Customer is required to add payment,Kasalukuyang Gumagamit
+Customer Name is required,Custom
+Customer not selected,Custom na Takdang Araw
+Customer Report,Mga custom na item sa bawat page
+Customer saved offline,Customer
+Customer Screen,Napili na ang customer
+Customer territory is required,Balanse ng Customer
+Customer updated successfully.,Hindi available offline ang balanse ng customer
+Customer-facing tools and printer setup.,Matagumpay na nagawa ang customer.
+Customers,Nabigo ang paggawa ng customer.
+Customers not found,Mga Detalye ng Customer
+Daily cashier actions without scrolling.,Nawawala ang channel ng display ng customer
+Daily Sales,Na-block ang display ng customer.
+Daily Sales Summary,Mangyaring payagan ang mga pop-up para sa site na ito.
+Dark Mode,Kinakailangan ang pangkat ng customer
+Data loaded in form. Review and submit.,Kinakailangan ng customer na magdagdag ng bayad
+Database Health,Kinakailangan ang Pangalan ng Customer
+Database health affects overall system speed and reliability.,Hindi napili ang customer
+Database Info,Ulat ng Customer
+Date,Na-save ang customer offline
+Day Δ,Screen ng Customer
+days,Kinakailangan ang teritoryo ng customer
+Day-wise (MTD),Matagumpay na na-update ang customer.
+Day-wise Movement,Mga tool na nakaharap sa customer at setup ng printer.
+Dead Stock,Mga customer
+Dead Stock Items,Hindi nahanap ang mga customer
+Decrease quantity,Araw-araw na pagkilos ng cashier nang walang pag-scroll.
+Default,Araw-araw na Benta
+Default:,Pang-araw-araw na Buod ng Benta
+Delete,Dark Mode
+Delete cancelled cash movement {0}?,Na-load ang data sa form.
+Delete Draft,Suriin at isumite.
+Delete draft invoice,Kalusugan ng Database
+Delete draft invoice {0}?,Ang kalusugan ng database ay nakakaapekto sa pangkalahatang bilis at pagiging maaasahan ng system.
+Delete Invoice,Impormasyon sa Database
+Delete offline invoice,Petsa
+Delivered,Araw Δ
+Delivery Charges,araw
+Delivery Information,Day-wise (MTD)
+Delivery Note {0} created,Day-wise Movement
+Delivery note created,Patay na Stock
+Deployed Bundle:,Patay na Stock Items
+Deposit,Bawasan ang dami
+Description,Default
+Detailed Supplier Breakdown,Default:
+Detecting formats:,Tanggalin
+Device Memory:,Tanggalin ang nakanselang paggalaw ng pera {0}?
+Difference,Tanggalin ang Draft
+Difference (In Company Currency),Tanggalin ang draft na invoice
+Disable offline mode first to recheck live connectivity.,Tanggalin ang draft na invoice {0}?
+Disconnect,Tanggalin ang Invoice
+discount,Tanggalin ang offline na invoice
+Discount %,Naihatid
+Discount / Void / Return Report,Mga Singil sa Paghahatid
+Discount Amount,Impormasyon sa Paghahatid
+Discount limited by POS Profile,Nagawa ang Delivery Note {0}.
+Discounted Invoices,Nagawa ang tala sa paghahatid
+Discounts,Na-deploy na Bundle:
+Dismiss,Deposito
+Download Certificate,Paglalarawan
+Draft,Detalyadong Pagkakasira ng Supplier
+Draft invoice deleted,Pagtukoy sa mga format:
+Draft source,Memorya ng Device:
+Drafts,Pagkakaiba
+Due {0},Pagkakaiba (Sa Currency ng Kumpanya)
+Due Date,I-disable muna ang offline mode para suriing muli ang live na koneksyon.
+Duplicate,Idiskonekta
+Edit customer,diskwento
+Edit discount amount,% ng diskwento
+Edit discount percentage,Discount / Void / Return Report
+Edit Gift Application,Halaga ng Diskwento
+Edit item name,Limitado ang diskwento ng POS Profile
+Edit quantity,Mga May Diskwentong Invoice
+Edit rate,Mga diskwento
+Edit unit of measure,I-dismiss
+Edited,I-download ang Sertipiko
+Employee,Draft
+Enable background sync,Tinanggal ang draft na invoice
+Enable Customer Display in POS Profile first.,Pinagmulan ng draft
+End current session,Mga draft
+Enter a PIN.,Nakatakdang {0}
+Enter a valid grams value,Takdang Petsa
+Enter new price list rate,Duplicate
+Enter Quantity,I-edit ang customer
+Enter the cashier PIN to continue.,I-edit ang halaga ng diskwento
+Enter the current PIN first.,I-edit ang porsyento ng diskwento
+"Enter the current PIN, then choose a new one.",I-edit ang Application ng Regalo
+Enter valid grams for scale barcode,I-edit ang pangalan ng item
+Entries,I-edit ang dami
+Error accessing camera:,I-edit ang rate
+Error calculating prices,I-edit ang yunit ng sukat
+Error fetching customer balance,Na-edit
+Error in change calculations!,Empleyado
+Error Loading Data,Paganahin ang pag-sync sa background
+Error loading invoice details,Paganahin muna ang Customer Display sa POS Profile.
+Error processing invoice,Tapusin ang kasalukuyang session
+Error processing payment,Maglagay ng PIN.
+Error searching invoices,Maglagay ng wastong halaga ng gramo
+Error submitting invoice:,Maglagay ng bagong rate ng listahan ng presyo
+Error submitting invoice: {0},Ipasok ang Dami
+Error submitting invoice: No response from server,Ilagay ang cashier PIN upang magpatuloy.
+Error updating currency,Ilagay muna ang kasalukuyang PIN.
+Error updating item details,"Ilagay ang kasalukuyang PIN, pagkatapos ay pumili ng bago."
+Est. Purchase,Maglagay ng wastong gramo para sa scale barcode
+Est. Value,Mga entry
+Event-loop lag measures how busy your browser is. Lower is better.,Error sa pag-access sa camera:
+Every,Error sa pagkalkula ng mga presyo
+Exchange Rate,Error sa pagkuha ng balanse ng customer
+Expand item details,Error sa mga kalkulasyon ng pagbabago!
+Expected Amount (In Company Currency),Error sa Paglo-load ng Data
+Expected Cash,Error sa paglo-load ng mga detalye ng invoice
+Expected cash on hand grouped by currency,Error sa pagproseso ng invoice
+Expected vs Actual,Error sa pagproseso ng pagbabayad
+Expense,Error sa paghahanap ng mga invoice
+Expense Account (Optional Override),Error sa pagsusumite ng invoice:
+Expense account is required.,Error sa pagsusumite ng invoice: {0}
+Expenses and deposits posted during this shift,Error sa pagsusumite ng invoice: Walang tugon mula sa server
+Expired,Error sa pag-update ng pera
+Failed to auto reconcile payments.,Error sa pag-update ng mga detalye ng item
+Failed to cancel cash movement,Est.
+Failed to clear cache,Bumili
+Failed to create item,Est.
+Failed to create supplier,Halaga
+Failed to delete cash movement,Sinusukat ng event-loop lag kung gaano ka-busy ang iyong browser.
+Failed to generate scale barcode. Using item barcode only.,Mas mabuti ang ibaba.
+Failed to load cash movement context.,Bawat
+Failed to load dashboard data.,Exchange Rate
+Failed to reload invoice from server,Palawakin ang mga detalye ng item
+Failed to submit cash movement,Inaasahang Halaga (Sa Currency ng Kumpanya)
+Failed to sync offline cash movements,Inaasahang Cash
+Fast cashier actions for active shifts.,Inaasahang cash sa kamay na nakapangkat ayon sa currency
+Fast Moving Items,Inaasahan vs Aktwal
+Fees,Gastos
+Fetch the latest offline prerequisite updates,Expense Account (Opsyonal na Pag-override)
+Find a sales order quickly and load it into the current sale.,Kinakailangan ang account ng gastos.
+Fixing payment amounts for return invoice...,Mga gastos at deposito na nai-post sa shift na ito
+Flash Off,Nag-expire na
+Flash On,Nabigong i-auto reconcile ang mga pagbabayad.
+"For 'Product Bundle' items, Warehouse, Serial No and Batch No will be considered from the 'Packing List' table. If Warehouse and Batch No are same for all packing items for any 'Product Bundle' item, those values can be entered in the main Item table; values will be copied to 'Packing List' table.",Nabigong kanselahin ang paggalaw ng pera
+Free,Nabigong i-clear ang cache
+Free Qty,Nabigong gumawa ng item
+Frequency,Nabigong gumawa ng supplier
+from,Nabigong tanggalin ang paggalaw ng pera
+From Date,Nabigong bumuo ng scale barcode.
+Fulfillment Details,Gamit lang ang item barcode.
+Full Name,Nabigong i-load ang konteksto ng paggalaw ng pera.
+Gain,Nabigong i-load ang data ng dashboard.
+Generate a fresh prepaid card and start it with an opening balance.,Nabigong i-reload ang invoice mula sa server
+Generate and install the certificate to allow fully silent printing without trust prompts.,Nabigong magsumite ng cash movement
+Generate Certificate,Nabigong i-sync ang mga offline na paggalaw ng pera
+Generated scale barcode: {0},Mabilis na pagkilos ng cashier para sa mga aktibong shift.
+Get Payments,Mabilis na Gumagalaw na Mga Item
+Gift Card,Mga bayarin
+Gift card amount must be greater than zero.,Kunin ang pinakabagong mga update sa offline na kinakailangan
+Gift Card Code,Maghanap ng isang order sa pagbebenta nang mabilis at i-load ito sa kasalukuyang benta.
+Gift card code is required for redemption,Pag-aayos ng mga halaga ng pagbabayad para sa return invoice...
+Gift card code is required.,Flash Off
+Gift card issued successfully.,Naka-on ang Flash
+Gift card loaded successfully.,"Para sa 'Product Bundle' item, Warehouse, Serial No at Batch No ay isasaalang-alang mula sa talahanayan ng 'Packing List'."
+Gift Card Management,"Kung ang Warehouse at Batch No ay pareho para sa lahat ng packing item para sa anumang 'Product Bundle' na item, ang mga value na iyon ay maaaring ilagay sa main Item table;"
+Gift card payment,ang mga halaga ay makokopya sa talahanayan ng 'Packing List'.
+Gift card redemption requires an online connection,Libre
+Gift card topped up successfully.,Libreng Qty
+Gift Cards,Dalas
+Go Offline,mula sa
+Go Online,Mula sa Petsa
+Go to Frappe Desk,Mga Detalye ng Katuparan
+Grand Total,Buong Pangalan
+Gross Margin,Makakuha
+Gross Profit,Bumuo ng bagong prepaid card at simulan ito sa pagbubukas ng balanse.
+Gross Sales,Bumuo at i-install ang certificate upang payagan ang ganap na tahimik na pag-print nang walang trust prompt.
+Group not found,Bumuo ng Sertipiko
+"Grouped controls for terminal, UI, and session settings.",Binuong scale barcode: {0}
+Grouped totals for each payment method and currency,Kumuha ng mga Pagbabayad
+Hide,Gift Card
+Hide Gift Card,Ang halaga ng gift card ay dapat na mas malaki kaysa sa zero.
+Hide Non Essential Fields,Gift Card Code
+Hide quantity decimals,Kinakailangan ang gift card code para sa pagkuha
+Hide search tools,Kinakailangan ang gift card code.
+Hide zero rated items,Matagumpay na naibigay ang gift card.
+High,Matagumpay na na-load ang gift card.
+History,Pamamahala ng Gift Card
+Hourly (Today),Pagbabayad ng gift card
+How this section works,Nangangailangan ng online na koneksyon ang pagkuha ng gift card
+"If stale data remains, open Settings > Offline & Sync and run Rebuild Offline Data again while online.",Matagumpay na na-top up ang gift card.
+"If the warning persists, open Settings > Offline & Sync, then run Refresh Offline Data or Rebuild Offline Data.",Mga Gift Card
+Import the certificate into QZ Tray and restart QZ Tray on each POS machine.,Mag-offline
+In,Mag Online
+In stock: {0},Pumunta sa Frappe Desk
+Include Batch / Serial,Malaking Kabuuan
+Include Price,Gross Margin
+Increase quantity,Kabuuang Kita
+IndexedDB,Kabuuang Benta
+Initial Amount,Hindi nahanap ang pangkat
+Initialize your shift with opening balances,"Mga pinagsama-samang kontrol para sa mga setting ng terminal, UI, at session."
+Initializing application...,Sinisimulan ang aplikasyon...
+"Inspect cache, sync, and prerequisite status","Suriin ang cache, pag-sync, at paunang kinakailangan na katayuan"
+Installed Applications,Mga Naka-install na Application
+Insufficient stock:\n{0},Hindi sapat na stock:\n{0}
+Invalid rate,Di-wastong rate
+Inventory Status Report,Ulat sa Katayuan ng Imbentaryo
+Invoice,Invoice
+Invoice {0} is Submitted,Ang invoice {0} ay naisumite
+Invoice {0} processed successfully,Matagumpay na naproseso ang invoice {0}.
+Invoice {0} submission failed,Nabigo ang pagsusumite ng invoice {0}.
+Invoice {0} was already submitted,Naisumite na ang invoice {0}.
+Invoice Adjustments,Mga Pagsasaayos ng Invoice
+Invoice Change,Pagbabago ng Invoice
+Invoice Details,Mga Detalye ng Invoice
+Invoice is still in draft after background submission.,Nasa draft pa rin ang invoice pagkatapos isumite ang background.
+Invoice Items,Mga Item ng Invoice
+Invoice Management,Pamamahala ng Invoice
+Invoice Mgmt,Invoice Mgmt
+Invoice saved offline,Na-save ang invoice offline
+Invoice submission failed,Nabigo ang pagsusumite ng invoice
+Invoice Submitted,Naisumite ang Invoice
+"Invoice value settled by loyalty points, not cash collection","Ang halaga ng invoice ay binabayaran ng mga puntos ng katapatan, hindi koleksyon ng pera"
+Invoices,Mga invoice
+Invoices already past due date,Lampas na sa takdang petsa ang mga invoice
+Invoices saved as POS Invoices,Na-save ang mga invoice bilang POS Invoice
+Invoices still carrying balances,May mga balanse pa rin ang mga invoice
+Issue Mode,Isyu Mode
+Issue New Card,Mag-isyu ng Bagong Card
+Issue Workflow,Isyu sa Daloy ng Trabaho
+"Issue, top up, and check","Mag-isyu, mag-top up, at suriin"
+Item,item
+Item / Product Sales Report,Ulat sa Pagbebenta ng Item / Produkto
+Item {0} added to invoice,Idinagdag ang item na {0} sa invoice
+Item '{0}' has no barcode,Ang item na '{0}' ay walang barcode
+Item Code,Item Code
+Item created successfully,Matagumpay na nagawa ang item
+Item is out of stock,Out of stock ang item
+Item Name,Pangalan ng Item
+Item not found,Hindi nahanap ang item
+Item order updated,Na-update ang order ng item
+Item Selector Settings,Mga Setting ng Tagapili ng Item
+Items,Mga bagay
+Items added in POS will appear here automatically.,Ang mga item na idinagdag sa POS ay awtomatikong lalabas dito.
+Items added to invoice,Mga item na idinagdag sa invoice
+Items per page,Mga item bawat pahina
+Items Sold,Mga Nabentang Item
+Items/Invoice,Mga Item/Invoice
+Item-wise Profitability,Item-wise Profitability
+Journal Entry,Entry sa Journal
+json,json
+Just now,Ngayon lang
+Keep offline prerequisites healthy and recover stale data safely.,Panatilihing malusog ang mga kinakailangan sa offline at ligtas na mabawi ang lipas na data.
+Labels,Mga label
+Language,Wika
+Language will be changed to,Papalitan ang wika sa
+"Language, theme, terminal tools, and session controls.","Wika, tema, terminal tool, at mga kontrol sa session."
+Last,Huling
+Last 14 Days (Paid vs Pending),Huling 14 na Araw (Bayad vs Nakabinbin)
+Last 14 Days Activity,Huling 14 na Araw na Aktibidad
+Last 14 Days Gross Profit,Huling 14 na Araw na Kabuuang Kita
+Last 14 Days Purchases,Huling 14 na Araw na Pagbili
+Last 14 Days Tax/Charges,Huling 14 na Araw na Buwis/Mga Singil
+Last sync:,Huling pag-sync:
+Last sync: {0} | ok: {1} | failed: {2} | skipped: {3},Huling pag-sync: {0} |
+Latest entries for current shift,ok: {1} |
+Lead Time,nabigo: {2} |
+Light Mode,nilaktawan: {3}
+Limited,Pinakabagong mga entry para sa kasalukuyang shift
+lines,Lead Time
+List,Light Mode
+Live Snapshot,Limitado
+Load a POS profile and cashier first.,mga linya
+Load More Invoices,Listahan
+Load previously saved invoices,Live na Snapshot
+Load Sale,Mag-load muna ng POS profile at cashier.
+Load Sales Invoice,Mag-load ng Higit pang Mga Invoice
+Loading app data...,I-load ang mga dating na-save na invoice
+Loading customer database...,I-load ang Sale
+Loading customers...,Mag-load ng Sales Invoice
+Loading database stats...,Nilo-load ang data ng app...
+Loading details...,Nilo-load ang database ng customer...
+Loading invoice history...,Nilo-load ang mga customer...
+Loading items...,Nilo-load ang mga istatistika ng database...
+Loading product catalog...,Nilo-load ang mga detalye...
+Loading return invoices...,Nilo-load ang history ng invoice...
+Loading server CPU/memory usage...,Naglo-load ng mga item...
+Loading suppliers...,Nilo-load ang katalogo ng produkto...
+Loading unpaid invoices...,Nilo-load ang mga return invoice...
+Loading view...,Nilo-load ang server CPU/paggamit ng memory...
+Loading...,Nilo-load ang mga supplier...
+Local storage is unavailable. Switching to online-only mode.,Nilo-load ang mga hindi nabayarang invoice...
+localStorage,Nilo-load ang view...
+Location Performance,Naglo-load...
+Locations,Hindi available ang lokal na storage.
+Lock Screen,Lumipat sa online-only na mode.
+Logout,localStorage
+Lookup Workflow,Pagganap ng Lokasyon
+Loss,Mga lokasyon
+Low,Lock Screen
+Low Stock,Mag-logout
+Low Stock Alerts,Lookup Workflow
+Low Stock Items,Pagkawala
+Low Stock Threshold,Mababa
+Low Stock Total,Mababang Stock
+Lowest Margin,Mga Alerto sa Mababang Stock
+Low-frequency maintenance and system details.,Mababang Stock na Item
+Loyalty Redeemed,Mababang Stock Threshold
+Loyalty Redemption,Mababang Kabuuan ng Stock
+Make New Payment,Pinakamababang Margin
+Manage all,Mababang dalas ng pagpapanatili at mga detalye ng system.
+Manage and synchronize your offline transactions,Natubos ang Katapatan
+Manage Cashier PIN,Pagtubos ng Katapatan
+"Manage offline tools, terminal controls, and maintenance from one workspace.",Gumawa ng Bagong Pagbabayad
+manual,Pamahalaan ang lahat
+"Manual codes, barcode scans, and QR scans work in the same field",Pamahalaan at i-synchronize ang iyong mga offline na transaksyon
+Manual offline mode is enabled,Pamahalaan ang Cashier PIN
+Margin,"Pamahalaan ang mga offline na tool, mga kontrol sa terminal, at pagpapanatili mula sa isang workspace."
+Maximum available quantity is {0}. Quantity adjusted to match stock.,manwal
+Maximum discount amount for this offer item is {0}.,"Gumagana sa parehong field ang mga manual code, barcode scan, at QR scan"
+Maximum discount percentage for this offer item is {0}%.,Naka-enable ang manual offline mode
+Maximum offer quantity is {0}. Quantity adjusted to allowed limit.,Margin
+Medium,Ang maximum na available na dami ay {0}.
+Menu,Inayos ang dami upang tumugma sa stock.
+Method-wise Collections,Ang maximum na halaga ng diskwento para sa item ng alok na ito ay {0}.
+Minimum allowed rate for this offer item is {0}.,Ang maximum na porsyento ng diskwento para sa item ng alok na ito ay {0}%.
+Minimum Qty,Ang maximum na dami ng alok ay {0}.
+Mobile No,Inayos ang dami sa pinapayagang limitasyon.
+Mode,Katamtaman
+Mode of Payment,Menu
+Month,Mga Koleksyon na matalino sa pamamaraan
+Month Δ,Ang minimum na pinapayagang rate para sa alok na item na ito ay {0}.
+Monthly Profit,Minimum Qty
+Monthly Sales,Mobile No
+Monthly Sales Summary,Mode
+Month-wise,Paraan ng Pagbabayad
+Most Active Cashiers,buwan
+Movement Type,Buwan Δ
+Movements,Buwanang Kita
+Multi Currency,Buwanang Benta
+N/A,Buwanang Buod ng Benta
+Name,Month-wise
+Negative Stock,Karamihan sa mga Aktibong Cashier
+Negative Stock Items,Uri ng Paggalaw
+Negative values not allowed,Mga galaw
+Net,Multi Currency
+Net Qty,N/A
+Net Sales,Pangalan
+Net Value,Negatibong Stock
+Never,Mga Negatibong Stock Item
+New changes are ready to load,Hindi pinapayagan ang mga negatibong halaga
+New Item,Net
+New Offer Available,Net Qty
+New PIN,Net Benta
+New rate,Net Value
+Next unit of measure,Hindi kailanman
+No attribute data found.,Handa nang i-load ang mga bagong pagbabago
+No Barcode,Bagong Item
+No barcode found for UOM '{0}',Available ang Bagong Alok
+No branch/location data found.,Bagong PIN
+No brand data found.,Bagong rate
+No cached gift card balance is available offline.,Susunod na yunit ng sukat
+No camera found on this device. Please ensure your device has a working camera.,Walang nakitang data ng katangian.
+No capability warnings recorded yet.,Walang Barcode
+No cash expected for this shift.,Walang nakitang barcode para sa UOM '{0}'
+No cash mode configured,Walang nakitang data ng sangay/lokasyon.
+No cash movement type is allowed for this POS Profile.,Walang nakitang data ng brand.
+No cashier PIN is set yet. Create one now.,Walang naka-cache na balanse ng gift card na available offline.
+No cashier profiles are available for this POS profile yet.,Walang nakitang camera sa device na ito.
+No cashier-wise discount/void/return activity.,Pakitiyak na may gumaganang camera ang iyong device.
+No category data found.,Wala pang naitalang babala sa kakayahan.
+No category profitability data found.,Walang inaasahang pera para sa shift na ito.
+No change returned recorded for this shift.,Walang cash mode na na-configure
+No change-allocation invoices match the current filters.,Walang uri ng paggalaw ng pera ang pinapayagan para sa POS Profile na ito.
+No charge head breakdown found.,Wala pang nakatakdang cashier PIN.
+No Company Selected,Lumikha ng isa ngayon.
+No customer sales data found.,Wala pang mga profile ng cashier na magagamit para sa profile ng POS na ito.
+No day-wise discount/void/return trend.,Walang cashier-wise discount/void/return activity.
+No day-wise payment data found.,Walang nakitang data ng kategorya.
+No day-wise profitability trend found.,Walang nakitang data ng kakayahang kumita ng kategorya.
+No day-wise purchase data found.,Walang naibalik na pagbabago na naitala para sa shift na ito.
+No day-wise sales trend found.,Walang mga invoice ng pagbabago-allocation na tumutugma sa kasalukuyang mga filter.
+No day-wise tax/charges trend found.,Walang nakitang charge head breakdown.
+No dead stock items.,Walang Napiling Kumpanya
+No due date,Walang nakitang data ng benta ng customer.
+No exact repair match found for this invoice,Walang day-wise discount/void/return trend.
+No hourly sales trend found for today.,Walang nakitang data ng pagbabayad sa araw-araw.
+No invoice activity found.,Walang nakitang pang-araw-araw na trend ng kakayahang kumita.
+No invoices found,Walang nakitang data ng pagbili sa araw-araw.
+No invoices found. Try different search criteria.,Walang nakitang pang-araw-araw na kalakaran sa pagbebenta.
+No invoices recorded for this shift.,Walang nakitang trend ng buwis/singil sa araw.
+No item profitability data found.,Walang dead stock items.
+No item sales data found for this period.,Walang takdang petsa
+No items found,Walang nakitang eksaktong tugma sa pag-aayos para sa invoice na ito
+No items in cart,Walang nakitang oras-oras na kalakaran sa pagbebenta para sa araw na ito.
+No items with barcodes to print,Walang nakitang aktibidad ng invoice.
+No location-wise top item data found.,Walang nakitang mga invoice
+No low stock alerts right now.,Walang nakitang mga invoice.
+No low stock items.,Subukan ang iba't ibang pamantayan sa paghahanap.
+No matching items in cart,Walang naitala na mga invoice para sa shift na ito.
+No month-wise sales trend found.,Walang nakitang data ng kakayahang kumita ng item.
+No negative stock items.,Walang nakitang data ng benta ng item para sa panahong ito.
+No notifications yet,Walang nakitang mga item
+No offline cash movement synced.,Walang mga item sa cart
+No offline invoices pending synchronization,Walang mga item na may mga barcode na ipi-print
+No offline sync issues recorded yet.,Walang nakitang data ng nangungunang item sa lokasyon.
+No out-of-stock items.,Walang mababang stock alert sa ngayon.
+No outstanding credit invoices for this shift.,Walang mababang stock na mga item.
+No payment collection data found.,Walang tumutugmang item sa cart
+No payment rows available on this invoice.,Walang nakitang month-wise sales trend.
+No payments registered for this shift.,Walang negatibong stock item.
+No pending balances in this period.,Wala pang notification
+No pending offline invoices,Walang offline na paggalaw ng pera na naka-sync.
+No Print Formats Found,Walang mga offline na invoice na nakabinbing pag-synchronize
+No profiles found for selected scope. Falling back to current profile failed.,Wala pang naitala na mga isyu sa offline na pag-sync.
+No recent customer activity found.,Walang mga out-of-stock na item.
+No recent stock entries found.,Walang natitirang credit invoice para sa shift na ito.
+No records found,Walang nakitang data ng pangongolekta ng pagbabayad.
+No reorder suggestions right now.,Walang available na mga hilera ng pagbabayad sa invoice na ito.
+No repeat customers in this period.,Walang mga pagbabayad na nakarehistro para sa shift na ito.
+No response from server,Walang nakabinbing balanse sa panahong ito.
+No return invoices found,Walang nakabinbing mga offline na invoice
+No return item trend found.,Walang Nahanap na Mga Format ng Pag-print
+No returnable items found for this invoice,Walang nakitang profile para sa napiling saklaw.
+No returns were processed in this shift.,Nabigo ang pagbabalik sa kasalukuyang profile.
+No risk activity found.,Walang nakitang kamakailang aktibidad ng customer.
+No sales activity found for this period.,Walang nakitang kamakailang mga entry sa stock.
+No slow moving items.,Walang nakitang mga tala
+No staff sales activity found.,Walang mga suhestyon sa muling pagsasaayos sa ngayon.
+No stock movement for this period.,Walang umuulit na customer sa panahong ito.
+No submitted cash movements in this shift.,Walang tugon mula sa server
+No supplier purchases found in this month.,Walang nakitang mga return invoice
+No suppliers found for this period.,Walang nakitang trend ng return item.
+No sync trigger has run yet in this session.,Walang nahanap na maibabalik na mga item para sa invoice na ito
+No tax head breakdown found.,Walang mga pagbabalik na naproseso sa shift na ito.
+No top items found for this location.,Walang nakitang aktibidad sa peligro.
+No unpaid invoices,Walang nakitang aktibidad sa pagbebenta para sa panahong ito.
+No variant data found.,Walang mabagal na paggalaw ng mga item.
+No week-wise sales trend found.,Walang nakitang aktibidad sa pagbebenta ng kawani.
+No.,Walang paggalaw ng stock para sa panahong ito.
+Nobile Number,Walang isinumiteng cash movement sa shift na ito.
+Not available,Walang nakitang mga pagbili ng supplier sa buwang ito.
+Not checked,Walang nakitang mga supplier para sa panahong ito.
+Not selected,Wala pang sync trigger na tumatakbo sa session na ito.
+Not Set,Walang nakitang tax head breakdown.
+Notifications,Walang nahanap na nangungunang mga item para sa lokasyong ito.
+Offer,Walang hindi bayad na mga invoice
+Offer Applied,Walang nakitang data ng variant.
+Offer criteria exceeded,Walang nakitang week-wise trend ng benta.
+Offer Item,Hindi.
+Offer item unavailable,Numero ng Nobile
+Offer Removed,Hindi available
+Offer UOM cannot be changed,Hindi nasuri
+Offer?,Hindi pinili
+Offers,Hindi Nakatakda
+Offline,Mga abiso
+Offline & Sync,Alok
+Offline Capabilities,Inilapat ang Alok
+Offline data status refreshed,Lumampas sa pamantayan ng alok
+Offline diagnostics,Item ng Alok
+Offline Invoices,Hindi available ang item ng alok
+Offline invoices status,Inalis ang Alok
+Offline invoices synced,Hindi mababago ang alok na UOM
+Offline Queue: {0},Alok?
+Offline rebuild guidance,Mga alok
+Offline restore is unavailable for this session.,Offline
+Offline selling is available with degraded capabilities.,Offline at Sync
+Offline snapshot does not match the current POS state.,Mga Kakayahang Offline
+Offline Status,Na-refresh ang katayuan ng offline na data
+"Offline, terminal, and system controls",Mga offline na diagnostic
+OK,Mga Offline na Invoice
+Online,Katayuan ng mga offline na invoice
+Open actions menu,Naka-sync ang mga offline na invoice
+Open balance to collect,Offline na Queue: {0}
+Open Customer Display,Offline na gabay sa muling pagbuo
+Open drawer,Hindi available ang offline na pag-restore para sa session na ito.
+Open invoices,Available ang offline na pagbebenta na may mga mababang kakayahan.
+Open Payments?,Ang offline na snapshot ay hindi tumutugma sa kasalukuyang estado ng POS.
+Open POS home,Offline na Katayuan
+Open this screen from POS Menu -> Open Customer Display.,"Offline, terminal, at mga kontrol ng system"
+OpenCV image processing enabled - Enhanced barcode detection,OK
+OpenCV image processing unavailable on this device,Online
+OpenCV Off,Buksan ang menu ng mga pagkilos
+OpenCV On,Buksan ang balanse upang mangolekta
+OpenCV processing disabled,Buksan ang Display ng Customer
+Opening Amount,Buksan ang drawer
+Opening Cash,Buksan ang mga invoice
+options,Buksan ang Mga Pagbabayad?
+Order,Buksan ang POS sa bahay
+Original,Buksan ang screen na ito mula sa POS Menu -> Open Customer Display.
+Other,Pinagana ang pagproseso ng imahe ng OpenCV - Pinahusay na pagtukoy ng barcode
+Out,Hindi available ang OpenCV image processing sa device na ito
+Out of Stock,Naka-off ang OpenCV
+Out of Stock Items,Naka-on ang OpenCV
+Outstanding,Hindi pinagana ang pagproseso ng OpenCV
+Outstanding Credit by Currency,Pagbubukas ng Halaga
+Overdue,Pagbubukas ng Cash
+Overpayment Change,mga pagpipilian
+Overpayment change deducted: {0},Umorder
+Packing List,Orihinal
+Page Format,Iba pa
+Page unavailable offline,Out
+Paid,Out of Stock
+Paid (orig):,Out of Stock Items
+Paid Amount,Natitirang
+Paid change cannot be greater than total change!,Natitirang Credit ayon sa Currency
+Paid:,Overdue na
+Parent Item,Pagbabago sa Sobra sa Bayad
+Partial,Ibinawas ang pagbabago sa sobrang bayad: {0}
+Partly Paid,Listahan ng Pag-iimpake
+Party Account,Format ng Pahina
+Party Type,Hindi available ang page offline
+Pause terminal until next cashier,Binayaran
+PAY,Binayaran (original):
+Payment,Bayad na Halaga
+Payment Account,Ang bayad na pagbabago ay hindi maaaring mas malaki kaysa sa kabuuang pagbabago!
+Payment entries processed for Invoice {0},binayaran:
+Payment Entry Type,Item ng Magulang
+Payment History,Bahagyang
+Payment ID,Bahagyang Binabayaran
+Payment Method Report,Party Account
+Payment Methods,Uri ng Party
+Payment of {0} received successfully.,I-pause ang terminal hanggang sa susunod na cashier
+Payment Progress,MAGBAYAD
+Payment Reconciliation,Pagbabayad
+Payment request status could not be retrieved. Please try again,Account sa Pagbabayad
+Payment Request took too long to respond. Please try requesting for payment again,Naproseso ang mga entry sa pagbabayad para sa Invoice {0}
+Payment saved offline,Uri ng Pagpasok ng Pagbabayad
+Payment State,Kasaysayan ng Pagbabayad
+Payment Status,Payment ID
+Payment submitted but print function could not be executed. Payment name not found.,Ulat ng Paraan ng Pagbabayad
+Payment submitted.,Mga Paraan ng Pagbabayad
+Payment Summary,Matagumpay na natanggap ang pagbabayad ng {0}.
+Payments,Pag-unlad ng Pagbabayad
+Payments are not open. Do you want to open payments and submit?,Pagkakasundo sa Pagbabayad
+Payments by Mode of Payment,Hindi mabawi ang status ng kahilingan sa pagbabayad.
+PDF,Pakisubukang muli
+Peak Hour,Masyadong matagal bago tumugon ang Kahilingan sa Pagbabayad.
+Peak Memory:,Pakisubukang humiling muli ng pagbabayad
+Peak Server:,Na-save offline ang pagbabayad
+Peak:,Estado ng Pagbabayad
+Pending,Katayuan ng Pagbabayad
+Pending Amount,Naisumite ang pagbabayad ngunit hindi maisagawa ang pag-print ng function.
+Pending count updated from {0} to {1},Hindi nakita ang pangalan ng pagbabayad.
+Pending Exposure,Naisumite ang bayad.
+Pending Invoices,Buod ng Pagbabayad
+Pending Ratio,Mga pagbabayad
+Pending Sales,Hindi bukas ang mga pagbabayad.
+Pending sales: {0} | Cache usage: {1}%,Gusto mo bang buksan ang mga pagbabayad at isumite?
+Pending Sync,Mga Pagbabayad sa Pamamaraan ng Pagbabayad
+Pending: {0},PDF
+Pending: {0} | Synced: {1} | Draft: {2},Peak Hour
+Per Page,Peak Memory:
+Personal,Peak Server:
+Personal preferences adjust the current cashier experience without changing the active POS route.,Tuktok:
+PIN confirmation does not match.,Nakabinbin
+PIN must be 4 to 8 digits.,Nakabinbing Halaga
+Please add at least one item.,Na-update ang nakabinbing bilang mula {0} hanggang {1}
+Please allow camera access to scan codes,Nakabinbing Exposure
+Please enter payment amount,Mga Nakabinbing Invoice
+Please fill all required fields,Nakabinbing Ratio
+Please make a payment or select a payment,Nakabinbing Benta
+Please request phone payment or use another payment method,Nakabinbing benta: {0} |
+Please select a customer first,Paggamit ng cache: {1}%
+Please select a party,Nakabinbing Pag-sync
+Please select a party before reconciling.,Nakabinbin: {0}
+Please select a valid movement type.,Nakabinbin: {0} |
+Please select an invoice,Naka-sync: {1} |
+Please select company before reconciling.,Draft: {2}
+Please set the customer's mobile number,Bawat Pahina
+Please try again or enter the item manually.,Personal
+Please verify the barcode or check the item's availability.,Inaayos ng mga personal na kagustuhan ang kasalukuyang karanasan sa cashier nang hindi binabago ang aktibong ruta ng POS.
+Points,Hindi tugma ang kumpirmasyon ng PIN.
+Popup blocked. Please allow popups.,Ang PIN ay dapat na 4 hanggang 8 digit.
+POS,Mangyaring magdagdag ng hindi bababa sa isang item.
+POS controls and maintenance,Mangyaring payagan ang access ng camera upang mag-scan ng mga code
+POS Expense is disabled for this POS Profile.,Mangyaring ipasok ang halaga ng pagbabayad
+POS is running with limited offline prerequisites.,Mangyaring punan ang lahat ng kinakailangang mga patlang
+POS Profile,Mangyaring magbayad o pumili ng pagbabayad
+Position the QR code or barcode within the scanning area,Mangyaring humiling ng pagbabayad sa telepono o gumamit ng ibang paraan ng pagbabayad
+Posting,Mangyaring pumili muna ng isang customer
+Posting and Price List,Mangyaring pumili ng isang partido
+Posting Date,Mangyaring pumili ng isang partido bago makipagkasundo.
+Preparing background sync,Mangyaring pumili ng wastong uri ng paggalaw.
+"Press OK to continue offline with a warning, or Cancel to retry.",Mangyaring pumili ng invoice
+Previous unit of measure,Mangyaring pumili ng kumpanya bago makipagkasundo.
+Price List,Mangyaring itakda ang numero ng mobile ng customer
+Price List Rate,Pakisubukang muli o manu-manong ilagay ang item.
+Price list rate updated locally only,Paki-verify ang barcode o tingnan ang availability ng item.
+Pricing & Discounts,Mga puntos
+Pricing Rule,Na-block ang popup.
+Print,Mangyaring payagan ang mga popup.
+Print Draft,POS
+Print Format (Invoice),Mga kontrol at pagpapanatili ng POS
+Print Format (Order),Ang POS Expense ay hindi pinagana para sa POS Profile na ito.
+Print invoice,Gumagana ang POS na may limitadong mga kinakailangan sa offline.
+Print Last Invoice,Profile ng POS
+Print Purchase Invoice instead of PO,Iposisyon ang QR code o barcode sa loob ng lugar ng pag-scan
+Printer,Pagpo-post
+Processed returns impacting the shift totals,Pag-post at Listahan ng Presyo
+Processing Payment,Petsa ng Pag-post
+Processing payment entries for Invoice {0},Inihahanda ang pag-sync sa background
+Profile,"Pindutin ang OK upang magpatuloy offline na may babala, o Kanselahin upang subukang muli."
+Profiles,Nakaraang yunit ng sukat
+Profit,Listahan ng Presyo
+Profit: Invoice Item Estimate,Rate ng Listahan ng Presyo
+Profit: Stock Ledger (COGS),Ang rate ng listahan ng presyo ay na-update sa lokal lamang
+Profitability Report,Pagpepresyo at Mga Diskwento
+Prorated return discount,Panuntunan sa Pagpepresyo
+Purchase Amount,Print
+Purchase Invoices,Print Draft
+Purchase Order created,Format ng Pag-print (Invoice)
+Qty,Print Format (Order)
+Qualified,I-print ang invoice
+Quantity,I-print ang Huling Invoice
+Quantity exceeds available stock,I-print ang Invoice ng Pagbili sa halip na PO
+Quick Actions,Printer
+Quotation {0} is Submitted,Mga naprosesong pagbabalik na nakakaapekto sa mga kabuuan ng shift
+Quotation submitted,Pinoproseso ang Pagbabayad
+QZ Tray connected.,Pinoproseso ang mga entry sa pagbabayad para sa Invoice {0}
+QZ Tray is manually disconnected. Press Connect to enable it again.,Profile
+QZ Tray is not connected.,Mga profile
+QZ Tray Setup,Kita
+Rate,Kita: Pagtantya ng Item ng Invoice
+Rate adjusted to maximum allowed discount,Kita: Stock Ledger (COGS)
+Ready,Ulat sa kakayahang kumita
+Ready to resume,Prorated na diskwento sa pagbabalik
+Ready!,Halaga ng Binili
+Real-time POS insights for retail operations.,Bumili ng Mga Invoice
+Rebuild Offline Data,Nagawa ang Purchase Order
+Receive,Qty
+Receive now,Kwalipikado
+Received,Dami
+Received:,Ang dami ay lumampas sa available na stock
+Recent Movement Entries,Mabilis na Aksyon
+Recent updates about your invoices,Ang panipi {0} ay isinumite
+Recently Active Customers,Naisumite ang panipi
+Rechecking connection,Nakakonekta ang QZ Tray.
+Reconcile payment methods and close shift,Ang QZ Tray ay manu-manong nadiskonekta.
+Reconciling Payments,Pindutin ang Connect para paganahin itong muli.
+"Reconnect and open this page once while online, then offline refreshes will be able to restore it.",Hindi nakakonekta ang QZ Tray.
+Reconnect online to refresh cached offline data from the server.,Pag-setup ng QZ Tray
+Recreate local offline prerequisites from scratch,Rate
+Recv:,Isinasaayos ang rate sa maximum na pinapayagang diskwento
+Redeem,handa na
+Redeem / Scan,Handa nang ipagpatuloy
+Redeem Amount,handa na!
+Redeem Mode,Mga real-time na insight sa POS para sa mga retail na operasyon.
+Redeemed Amount,Muling Buuin ang Offline na Data
+Redeemed credit cannot be greater than its total.,Tumanggap
+Redemption and Totals,Tumanggap ngayon
+Reference,Natanggap
+Refresh,Natanggap:
+Refresh Exchange Rate,Mga Kamakailang Movement Entry
+Refresh Offline Data,Mga kamakailang update tungkol sa iyong mga invoice
+Refresh Printers,Mga Aktibong Customer kamakailan
+Refund,Sinusuri muli ang koneksyon
+Release Notes,I-reconcile ang mga paraan ng pagbabayad at isara ang shift
+Reload,Pagkakasundo sa mga Pagbabayad
+Reload customers,"Muling kumonekta at buksan ang page na ito nang isang beses habang online, pagkatapos ay maibabalik ito ng mga offline na pag-refresh."
+Reload Items,Kumonekta muli online upang i-refresh ang naka-cache na offline na data mula sa server.
+Reload Now,Muling likhain ang mga lokal na offline na kinakailangan mula sa simula
+Reload to apply the latest changes. Your current session will be refreshed.,Recv:
+Reload Workflow,Tubusin
+Remarks,I-redeem / I-scan
+Remarks are required.,I-redeem ang Halaga
+Remove,I-redeem ang Mode
+Remove barcode item,Na-redeem na Halaga
+Remove cached data and reload the POS app,Ang na-redeem na credit ay hindi maaaring mas malaki kaysa sa kabuuan nito.
+Remove item,Pagtubos at Kabuuan
+Remove Offer,Sanggunian
+Reorder / Purchase Suggestions,I-refresh
+Repair Candidate,I-refresh ang Exchange Rate
+Repair Change Allocation,I-refresh ang Offline na Data
+Repair requires an online connection,I-refresh ang Mga Printer
+Repaired,Refund
+Repairing change allocation,Mga Tala sa Paglabas
+Repeat Customers,I-reload
+Repeat Rate,I-reload ang mga customer
+Reprint previous transaction,I-reload ang Mga Item
+Request,I-reload Ngayon
+Request ID: {0},I-reload upang ilapat ang mga pinakabagong pagbabago.
+Request Payment,Ire-refresh ang iyong kasalukuyang session.
+Requested route: {0},I-reload ang Daloy ng Trabaho
+Required columns cannot be hidden,Remarks
+Reset,Kinakailangan ang mga puna.
+Reset item name,Alisin
+Reset to Default,Alisin ang barcode item
+Resource Health,Alisin ang naka-cache na data at i-reload ang POS app
+Restricted,Alisin ang item
+Restricted operational controls for supervisors only.,Alisin ang Alok
+Retry,Muling pagkakaayos / Mga Mungkahi sa Pagbili
+Retry route,Kandidato sa Pag-aayos
+Return,Ayusin ang Paglalaan ng Pagbabago
+Return Amount,Ang pag-aayos ay nangangailangan ng online na koneksyon
+Return Count,Inayos
+Return items must have negative quantities,Pag-aayos ng alokasyon ng pagbabago
+Return total must be negative,Ulitin ang mga Customer
+Return Valid Until,Ulitin ang Rate
+Return window passed,Muling i-print ang nakaraang transaksyon
+Return without Invoice,Kahilingan
+Returns,Nagbabalik
+Returns / Voids / Discounts,Mga Pagbabalik / Voids / Mga Diskwento
+Returns by Currency,Ibinabalik ayon sa Currency
+Revenue,Kita
+Review shift totals before submitting the closing entry,Suriin ang mga kabuuan ng shift bago isumite ang pagsasara ng entry
+Round Off,Round Off
+Rows,Mga hilera
+Rows:,Mga hilera:
+Rule,Panuntunan
+Sale,Sale
+Sales,Benta
+Sales Order {0} is Submitted,Ang Sales Order {0} ay Isinumite
+Sales Person and Print,Sales Person at Print
+Sales Person not found,Hindi nahanap ang Sales Person
+Sales processed,Naproseso ang mga benta
+Sales Return,Pagbabalik ng Benta
+Sales Trend Report,Ulat ng Trend ng Pagbebenta
+Save,I-save
+Save & Clear,I-save at I-clear
+Save as POS Profile Default,I-save bilang POS Profile Default
+Save Settings,I-save ang Mga Setting
+Save the selected printer as the POS Profile default so it shows automatically on this setup.,I-save ang napiling printer bilang default na POS Profile upang awtomatiko itong magpakita sa setup na ito.
+Saved as draft because: {0},Na-save bilang draft dahil: {0}
+Saving...,Nagse-save...
+Scale barcode detected. Quantity here is the number of labels to print.,Natukoy ang scale ng barcode.
+Scale barcode settings are not configured. Using item barcode only.,Ang dami dito ay ang bilang ng mga label na ipi-print.
+Scale template barcode is missing for this item/UOM. Using item barcode only.,Hindi naka-configure ang mga setting ng scale ng barcode.
+Scan an existing card and top it up without leaving the payment flow.,Gamit lang ang item barcode.
+Scan Error,Nawawala ang barcode ng template ng scale para sa item/UOM na ito.
+Scan or enter a gift card code to check balance or redeem.,Gamit lang ang item barcode.
+Scan or paste the card code below.,Mag-scan ng umiiral nang card at itaas ito nang hindi umaalis sa daloy ng pagbabayad.
+Scan QR Code/Barcode,Error sa Pag-scan
+Scan with camera,Mag-scan o maglagay ng code ng gift card para tingnan ang balanse o i-redeem.
+Scan-First Flow,I-scan o i-paste ang card code sa ibaba.
+Scanned Code:,I-scan ang QR Code/Barcode
+Scanning for: {0},I-scan gamit ang camera
+Scanning items,Scan-Unang Daloy
+Scan-Ready,Na-scan na Code:
+Scope,Nag-scan para sa: {0}
+Scope: All Profiles,Pag-scan ng mga item
+Scope: Current Profile,I-scan-Handa
+Scope: Specific Profile,Saklaw
+Search,Saklaw: Lahat ng Profile
+Search Account,Saklaw: Kasalukuyang Profile
+Search an invoice and continue the return flow without extra steps.,Saklaw: Tukoy na Profile
+Search customer,Maghanap
+Search invoices or customers,Maghanap ng Account
+Search item,Maghanap ng invoice at ipagpatuloy ang daloy ng pagbabalik nang walang karagdagang hakbang.
+Search item / code,Maghanap ng customer
+Search items or barcode,Maghanap ng mga invoice o customer
+Search Mpesa Payments,Maghanap ng item
+Search return invoices or customers,Maghanap ng item / code
+Search supplier,Maghanap ng mga item o barcode
+Search unpaid invoices or customers,Maghanap ng Mga Pagbabayad sa Mpesa
+Secure context (HTTPS or localhost) is required for camera access.,Maghanap ng mga return invoice o mga customer
+Secure context (HTTPS) required for camera access. Please use HTTPS to access the camera.,Maghanap ng supplier
+Select,Maghanap ng mga hindi nabayarang invoice o mga customer
+Select a cashier first.,Ang secure na konteksto (HTTPS o localhost) ay kinakailangan para sa pag-access sa camera.
+Select a customer,Kinakailangan ang secure na konteksto (HTTPS) para sa pag-access sa camera.
+Select a customer to use coupon,Mangyaring gamitin ang HTTPS upang ma-access ang camera.
+Select a printer to use QZ silent printing.,Pumili
+Select Batch,Pumili muna ng cashier.
+Select Columns to Display,Pumili ng customer
+Select items to sell,Pumili ng customer na gagamiting kupon
+Select Language,Pumili ng printer na gagamitin ang QZ silent printing.
+Select Payment,Piliin ang Batch
+Select Payment Account,Piliin ang Mga Column na Ipapakita
+Select printer,Pumili ng mga bagay na ibebenta
+Select Return Invoice,Piliin ang Wika
+Select S.O,Piliin ang Pagbabayad
+Select Sales Orders,Piliin ang Account sa Pagbabayad
+Select the cashier who is taking over this terminal.,Pumili ng printer
+Selected,Piliin ang Ibalik ang Invoice
+Selected movement type is not allowed by POS Profile.,Piliin ang S.O
+Selected Payments,Piliin ang Mga Sales Order
+Sensitive actions kept away from quick taps.,Piliin ang cashier na kukuha sa terminal na ito.
+Serial,Napili
+Serial Numbers,Ang napiling uri ng paggalaw ay hindi pinapayagan ng POS Profile.
+Server CPU Usage:,Mga Piniling Pagbabayad
+Server Health,Ang mga sensitibong pagkilos ay iniiwasan mula sa mabilis na pag-tap.
+Server Memory Usage:,Serial
+Server Metrics,Mga Serial Number
+Server Uptime:,Paggamit ng CPU ng Server:
+Service Charges,Kalusugan ng Server
+Session,Paggamit ng Memorya ng Server:
+Set each cashier PIN in the User form and keep terminal members assigned in POS Profile User.,Mga Sukatan ng Server
+Settings,Uptime ng Server:
+Settings in this section update the POS workspace without changing the current route.,Mga Bayad sa Serbisyo
+Setup complete!,Sesyon
+Share,Itakda ang bawat cashier PIN sa User form at panatilihin ang mga miyembro ng terminal na nakatalaga sa POS Profile User.
+Shared terminal,Mga setting
+Shift Closed Snapshot,Ang mga setting sa seksyong ito ay nag-a-update sa POS workspace nang hindi binabago ang kasalukuyang ruta.
+Shift Overview,Kumpleto na ang setup!
+Show,Ibahagi
+Show cart on customer-facing screen,Nakabahaging terminal
+Show last invoice rate,Shift Closed Snapshot
+Show rate info,Pangkalahatang-ideya ng Shift
+Show Repair Candidates,Ipakita
+Show search tools,Ipakita ang cart sa screen na nakaharap sa customer
+Show the active cart on a customer-facing screen,Ipakita ang huling rate ng invoice
+Showing {0}-{1} of {2},Ipakita ang impormasyon ng rate
+Showing 0 of 0,Ipakita ang mga Kandidato sa Pag-aayos
+Shows the distribution of invoices per currency,Ipakita ang mga tool sa paghahanap
+Sign out of session,Ipakita ang aktibong cart sa isang screen na nakaharap sa customer
+Sign out of the current POS session,Ipinapakita ang {0}-{1} ng {2}
+Size:,Ipinapakita ang 0 ng 0
+Skipped Payments,Ipinapakita ang pamamahagi ng mga invoice bawat currency
+Skipping items without barcodes,Mag-sign out sa session
+Slow Moving,Mag-sign out sa kasalukuyang POS session
+Slow Moving Items,Sukat:
+Slow Queries:,Nilaktawan ang mga Pagbabayad
+Sold,Nilaktawan ang mga item nang walang barcode
+Source,Mabagal na Gumagalaw
+Source Cash Account (Optional Override),Mga Bagay na Mabagal na Gumagalaw
+Source Ex. Rate:,Mabagal na Mga Tanong:
+Source Rate:,Nabenta
+Specific Profile,Pinagmulan
+Split Invoices,Source Cash Account (Opsyonal na Pag-override)
+Staff / Cashier Performance Report,Pinagmulan Hal.
+Status,Rate:
+Stock,Rate ng Pinagmulan:
+Stock Information,Tukoy na Profile
+Stock is lower than requested,Hatiin ang Mga Invoice
+Stock is lower than requested:\n{0},Ulat sa Pagganap ng Staff / Cashier
+Stock Movement Report,Katayuan
+Stock update: {0} has {1} available. Adding {2} will bring the stock below zero.,Stock
+Submit,Impormasyon ng Stock
+Submit & Print,Ang stock ay mas mababa kaysa sa hiniling
+Submit Deposit,Mas mababa ang stock kaysa sa hiniling:\n{0}
+Submit Expense,Ulat sa Paggalaw ng Stock
+Submitted,Pag-update ng stock: {0} ay may {1} na available.
+Submitted Cash Movements,Ang pagdaragdag ng {2} ay magdadala sa stock sa ibaba ng zero.
+Submitted entries,Isumite
+Successfully scanned:,Isumite at I-print
+Suggested,Magsumite ng Deposito
+Suggested Qty,Isumite ang Gastos
+Supervisor Access,Naisumite
+Supervisor permissions unlock issuance and reloads,Nagsumite ng Cash Movements
+Supervisor Tools,Nagsumite ng mga entry
+Supplier,Matagumpay na na-scan:
+Supplier and dates are required.,Iminungkahi
+Supplier Invoices,Iminungkahing Qty
+Supplier is required.,Access ng Superbisor
+Supplier name is required,Ang mga pahintulot ng superbisor ay nag-a-unlock ng pagpapalabas at pag-reload
+Supplier Payments,Mga Tool ng Superbisor
+Supplier Purchase Summary,Supplier
+Suppliers,Kinakailangan ang supplier at mga petsa.
+Suppliers not found,Mga Invoice ng Supplier
+Switch Camera,Kinakailangan ang supplier.
+Switch Cashier,Kinakailangan ang pangalan ng supplier
+Switch the POS appearance theme,Mga Pagbabayad ng Supplier
+Switch theme appearance,Buod ng Pagbili ng Supplier
+Switched to:,Mga supplier
+Sync All Invoices,Hindi nahanap ang mga supplier
+Sync Offline Cash Movements ({0}),Lumipat ng Camera
+Sync Offline Sales,Lumipat ng Cashier
+Synced {0} offline cash movement(s).,Ilipat ang tema ng hitsura ng POS
+Syncing items in background,Lumipat sa hitsura ng tema
+System / Diagnostics,Lumipat sa:
+"System actions are low-frequency maintenance controls such as app info, support diagnostics, and session controls.",I-sync ang Lahat ng Invoice
+System Information,I-sync ang Offline Cash Movements ({0})
+System Status,I-sync ang Offline Sales
+Tables:,Naka-sync na {0} (mga) offline na paggalaw ng cash.
+Tap the button below to redeem a gift card during checkout.,Sini-sync ang mga item sa background
+Target,System / Diagnostics
+Target Ex. Rate:,"Ang mga pagkilos ng system ay mga kontrol sa pagpapanatili na mababa ang dalas gaya ng impormasyon ng app, mga diagnostic ng suporta, at mga kontrol sa session."
+Target Rate:,Impormasyon ng System
+Tax,Katayuan ng System
+Tax / Charges Report,Mga talahanayan:
+Tax Heads,I-tap ang button sa ibaba para mag-redeem ng gift card habang nag-checkout.
+Taxable Amount,Target
+Tendered,Target Hal.
+Terminal,Rate:
+Terminal & Devices,Target na Rate:
+Terminal locked,Buwis
+"Terminal tools affect this checkout station, customer-facing displays, and future printer/device controls.",Ulat sa Buwis / Mga Singil
+Territory not found,Mga Pinuno ng Buwis
+The amount paid is not complete,Halaga na Nabubuwisan
+The app stores data locally for offline use. This is called cache.,Binigay
+The invoice stayed in draft. Please review and submit it manually.,Terminal
+The maximum discount allowed is,Terminal at Mga Device
+The quantity for {0} has been adjusted to the maximum available stock.,Naka-lock ang terminal
+The system could not retrieve the item details. Please try again.,"Nakakaapekto ang mga terminal tool sa checkout station na ito, mga display na nakaharap sa customer, at mga kontrol sa printer/device sa hinaharap."
+These invoices will be synced when connection is restored,Hindi natagpuan ang teritoryo
+This action now opens inside the settings workspace.,Hindi kumpleto ang halagang binayaran
+This coupon already used !,Ang app ay nag-iimbak ng data nang lokal para sa offline na paggamit.
+This invoice does not need change-allocation repair,Ito ay tinatawag na cache.
+This invoice is already repaired,Ang invoice ay nanatili sa draft.
+This is an item template. Please choose a variant.,Mangyaring suriin at isumite ito nang manu-mano.
+this item,Ang maximum na diskwento na pinapayagan ay
+This POS page could not be opened offline because its code was not cached on this terminal yet.,Ang dami para sa {0} ay naayos sa maximum na magagamit na stock.
+This Serial Number {0} has already been added!,Hindi makuha ng system ang mga detalye ng item.
+Threshold,Pakisubukang muli.
+Time,Ang mga invoice na ito ay isi-sync kapag naibalik ang koneksyon
+Tip: Clear cache regularly to free up space and keep the app fast.,Ang aksyon na ito ay bubukas na ngayon sa loob ng mga setting ng workspace.
+Tip: Close unused tabs or apps to reduce lag.,Nagamit na ang kupon na ito!
+Tip: Monitor slow queries and table size for optimal performance.,Ang invoice na ito ay hindi nangangailangan ng pagbabago-allocation repair
+To Be Paid,Ang invoice na ito ay naayos na
+To Date,Ito ay isang template ng item.
+Today,Mangyaring pumili ng variant.
+Today Profit,ang item na ito
+Today Sales,Ang pahina ng POS na ito ay hindi mabuksan offline dahil ang code nito ay hindi pa naka-cache sa terminal na ito.
+Toggle navigation drawer,Itong Serial Number {0} ay naidagdag na!
+Toggle Theme,Threshold
+Tools,Oras
+Tools for customer-facing screens and terminal-specific actions.,Tip: I-clear ang cache nang regular upang magbakante ng espasyo at panatilihing mabilis ang app.
+Top Brand,Tip: Isara ang mga hindi nagamit na tab o app para mabawasan ang lag.
+Top Category,Tip: Subaybayan ang mabagal na mga query at laki ng talahanayan para sa pinakamainam na pagganap.
+Top Charge Head,Babayaran
+Top Customers,Upang Date
+Top Discount,Ngayong araw
+Top Items by Location,Ngayong Kita
+Top Margin,Sales ngayon
+Top Pending,I-toggle ang navigation drawer
+Top Profit Item,I-toggle ang Tema
+Top Return Items,Mga kasangkapan
+Top Sales by Cashier,Mga tool para sa mga screen na nakaharap sa customer at mga pagkilos na tukoy sa terminal.
+Top Supplier,Nangungunang Brand
+Top Suppliers by Spend,Nangungunang Kategorya
+Top Tables,Top Charge Head
+Top Tax Head,Mga Nangungunang Customer
+Top Up Amount,Nangungunang Diskwento
+Top Up Card,Nangungunang Mga Item ayon sa Lokasyon
+Top Up Mode,Nangungunang Margin
+Top Variant,Nangungunang Nakabinbin
+Total,Nangungunang Profit Item
+Total Amount,Mga Nangungunang Ibinalik na Item
+Total Change,Nangungunang Benta ng Cashier
+Total Charges,Nangungunang Supplier
+Total In,Mga Nangungunang Supplier ayon sa Paggastos
+Total Invoices,Mga Top Table
+Total Items,Nangungunang Tax Head
+Total Mpesa,Halaga ng Top Up
+Total Out,Top Up Card
+Total Payments,Top Up Mode
+Total Purchase,Nangungunang Variant
+Total Selected :,Kabuuan
+Total Size,Kabuuang Halaga
+Total Stock Qty,Kabuuang Pagbabago
+Total:,Kabuuang Singil
+Totals by Invoice Currency,Kabuuang In
+Track how much cash was handed back to customers,Kabuuang Mga Invoice
+"Track recent sales, collect unpaid balances, and reopen saved work",Kabuuang Mga Item
+Transaction ID,Kabuuang Mpesa
+Transfer,Total Out
+Try a different search term or clear the cart search.,Kabuuang mga Pagbabayad
+Try adjusting your search or filters,Kabuuang Pagbili
+Try another source or refresh the list.,Kabuuang Pinili :
+Try changing the date range or status filter.,Kabuuang Sukat
+Type,Kabuuang Stock Qty
+Unable to access camera even with basic settings. Please check your camera permissions and device compatibility.,Kabuuan:
+Unable to add offer item {0}. Please refresh and try again.,Mga Kabuuan ayon sa Invoice Currency
+Unable to add offer item. Please refresh and try again.,Subaybayan kung gaano karaming pera ang naibalik sa mga customer
+Unable to add scanned item.,"Subaybayan ang mga kamakailang benta, mangolekta ng mga hindi nabayarang balanse, at muling buksan ang na-save na trabaho"
+Unable to create purchase order,ID ng Transaksyon
+Unable to delete draft invoice,Paglipat
+Unable to fetch documents,Subukan ang ibang termino para sa paghahanap o i-clear ang paghahanap sa cart.
+Unable to fetch draft orders,Subukang ayusin ang iyong paghahanap o mga filter
+Unable to fetch invoice history,Subukan ang ibang pinagmulan o i-refresh ang listahan.
+Unable to fetch M-Pesa payments,Subukang baguhin ang hanay ng petsa o filter ng katayuan.
+Unable to fetch sales orders,Uri
+Unable to fetch unpaid invoices,Hindi ma-access ang camera kahit na may mga pangunahing setting.
+Unable to generate scale barcode,Pakisuri ang iyong mga pahintulot sa camera at compatibility ng device.
+Unable to issue gift card.,Hindi maidagdag ang item ng alok {0}.
+Unable to load cashier PIN status.,Mangyaring i-refresh at subukang muli.
+Unable to load document,Hindi maidagdag ang alok na item.
+Unable to load draft invoice,Mangyaring i-refresh at subukang muli.
+Unable to load gift card balance.,Hindi maidagdag ang na-scan na item.
+Unable to load invoice details,Hindi makagawa ng purchase order
+Unable to load parked order,Hindi matanggal ang draft na invoice
+Unable to load the selected sales order,Hindi makuha ang mga dokumento
+Unable to prepare document,Hindi makuha ang mga draft na order
+Unable to prepare return invoice,Hindi makuha ang history ng invoice
+Unable to print draft invoice,Hindi makuha ang mga pagbabayad sa M-Pesa
+Unable to print submitted invoice,Hindi makuha ang mga order sa pagbebenta
+Unable to process document action,Hindi makuha ang mga hindi nabayarang invoice
+Unable to repair change allocation,Hindi makabuo ng scale barcode
+Unable to save cashier PIN.,Hindi makapagbigay ng gift card.
+Unable to save the rate to the backend price list,Hindi ma-load ang katayuan ng cashier PIN.
+Unable to submit invoice,Hindi ma-load ang dokumento
+Unable to submit the selected payment,Hindi ma-load ang draft na invoice
+Unable to top up gift card.,Hindi ma-load ang balanse ng gift card.
+Unable to verify cashier PIN.,Hindi ma-load ang mga detalye ng invoice
+Unallocated,Hindi ma-load ang naka-park na order
+Unallocated:,Hindi ma-load ang napiling sales order
+Unavailable,Hindi makapaghanda ng dokumento
+Unknown,Hindi makapaghanda ng return invoice
+Unknown error,Hindi makapag-print ng draft na invoice
+Unknown Item,Hindi ma-print ang isinumiteng invoice
+Unknown Warehouse,Hindi maproseso ang pagkilos ng dokumento
+Unlock POS,Hindi naayos ang alokasyon ng pagbabago
+Unpaid,Hindi ma-save ang cashier PIN.
+"Unselected payments stay unallocated first, then auto reconcile after submit.",Hindi ma-save ang rate sa listahan ng presyo ng backend
+UOM,Hindi makapagsumite ng invoice
+UOM not found,Hindi maisumite ang napiling pagbabayad
+Update available,Hindi makapag-top up ng gift card.
+Update Customer,Hindi ma-verify ang cashier PIN.
+Update PIN,Hindi inilalaan
+Update Price List Rate,Hindi inilalaan:
+Updated,Hindi magagamit
+Updates and app info that stay out of the cashier flow.,Hindi kilala
+Updates automatically,Hindi kilalang error
+Upload pending transactions,Hindi Kilalang Item
+Usage,Hindi kilalang Warehouse
+Usage Stats,I-unlock ang POS
+Use a 4 to 8 digit PIN for cashier switching and terminal unlock.,Walang bayad
+Use Cashier,"Ang mga hindi napiling pagbabayad ay mananatiling unallocated, pagkatapos ay awtomatikong magkasundo pagkatapos isumite."
+Use date range to search for older invoices,UOM
+"Use one field for manual code entry, barcode scans, or QR scans.",Hindi natagpuan ang UOM
+"Use one workflow for balance checks, new issuance, and top ups without leaving POS.",Available ang update
+"Use this section when cached prerequisite data needs a refresh, rebuild, or diagnostics review.",I-update ang Customer
+Use Western numerals,I-update ang PIN
+Used:,I-update ang Rate ng Listahan ng Presyo
+Using basic camera settings due to device limitations,Na-update
+Using cached customer balance,Mga update at impormasyon ng app na hindi kasama sa daloy ng cashier.
+Valid until,Awtomatikong nag-a-update
+Variance %,Mag-upload ng mga nakabinbing transaksyon
+Variants,Paggamit
+Variant-wise,Mga Istatistika ng Paggamit
+Verify closing amounts for each payment method,Gumamit ng 4 hanggang 8 digit na PIN para sa paglipat ng cashier at pag-unlock ng terminal.
+View all,Gumamit ng Cashier
+View app information and current build details,Gamitin ang hanay ng petsa upang maghanap ng mga mas lumang invoice
+View Data Diagnostics,"Gumamit ng isang field para sa manual code entry, barcode scan, o QR scan."
+View Details,"Gumamit ng isang daloy ng trabaho para sa mga pagsusuri sa balanse, bagong pagpapalabas, at mga top up nang hindi umaalis sa POS."
+View invoice details,"Gamitin ang seksyong ito kapag ang naka-cache na paunang kinakailangan na data ay nangangailangan ng pag-refresh, muling pagbuo, o pagsusuri sa diagnostic."
+View notifications,Gumamit ng Western numerals
+View offline invoices,Ginamit:
+View restricted POS insights,Paggamit ng mga pangunahing setting ng camera dahil sa mga limitasyon ng device
+Void Amount,Gamit ang naka-cache na balanse ng customer
+Void Count,May bisa hanggang
+Voids,Variance %
+Waiting for cart items,Mga variant
+Waiting for payment...,Variant-wise
+Walk-in Customer,I-verify ang mga pagsasara ng halaga para sa bawat paraan ng pagbabayad
+Warehouse,Tingnan lahat
+Warning: High cache usage may affect performance.,Tingnan ang impormasyon ng app at kasalukuyang mga detalye ng build
+Warning: High lag may indicate heavy processing or browser slowness.,Tingnan ang Data Diagnostics
+Week Δ,Tingnan ang mga Detalye
+Week-wise,Tingnan ang mga detalye ng invoice
+Weight (g),Tingnan ang mga notification
+Weight (grams),Tingnan ang mga offline na invoice
+We'll let you know if an invoice fails to submit,Tingnan ang mga pinaghihigpitang insight sa POS
+Workflow,Walang bisang Halaga
+Write off amount cannot exceed the POS profile maximum of {0},Void Count
+Write off amount exceeds the allowed limit ({0}). Please add payment for the remaining amount.,Walang laman
+Yes,Naghihintay ng mga item sa cart
+"Yes, Cancel sale",Naghihintay ng bayad...
+"Yes, Close",Walk-in Customer
+You are not allowed to print draft invoices,Warehouse
+You are offline. Add Payment will work again when the connection is restored.,Babala: Ang mataas na paggamit ng cache ay maaaring makaapekto sa pagganap.
+You have no notifications right now,Babala: Ang mataas na lag ay maaaring magpahiwatig ng mabigat na pagproseso o pagbagal ng browser.
+Your Cart,Linggo Δ

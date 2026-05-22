@@ -1,0 +1,1353 @@
+﻿- Total Unallocated,- Total Unallocated
+* Required,* 必須
+{0} (Qty: {1}),{0} (数量: {1})
+{0} actions,{0} 個のアクション
+{0} has only {1} in stock. You requested {2}. Adjust quantity or restock.,{0} の在庫は {1} のみです。
+{0} offline invoice{1} pending,{2} をリクエストしました。
+{0} offline invoice{1} saved as draft,数量を調整したり、補充したりします。
+{0} offline invoice{1} synced,{0}オフライン請求書{1}は保留中です
+{0}: {1} {2},{0}オフライン請求書{1}は下書きとして保存されました
+{0}d ago,{0}オフライン請求書{1}が同期されました
+{0}h ago,{0}: {1} {2}
+{0}m ago,{0}日前
+A POS supervisor is required for this action.,{0}時間前
+About,{0}分前
+Access,このアクションには POS スーパーバイザが必要です。
+Account,について
+Account is overdrawn,アクセス
+Acknowledge the error to resume scanning,アカウント
+Acknowledge the error to resume scanning.,口座が超過引き落とされている
+Across,エラーを確認してスキャンを再開します
+Action,エラーを認識してスキャンを再開します。
+Actions,アクロス
+Active sale,アクション
+add,アクション
+Add items from the selector to start building this sale.,積極的な販売
+Add more value to an existing gift card,追加する
+Add New Address,このセールの構築を開始するには、セレクターからアイテムを追加します。
+Add new customer,既存のギフトカードにさらに価値を加える
+Add on New Line,新しいアドレスを追加
+Add Payment,新しい顧客を追加する
+Add payment to invoice,新しい行に追加
+Add/Edit Coupon Conditions,支払いの追加
+Additional Discount,請求書に支払いを追加する
+Additional Discount %,クーポン条件の追加/編集
+Address Line 1,追加割引
+Address not found,追加割引率
+Adjust the quantity or enable negative stock to continue.,住所 1 行目
+Adjustment,住所が見つかりません
+After returns,数量を調整するか、マイナス在庫を継続できるようにしてください。
+Against,調整
+Against Name,返品後
+Age Bracket,反対
+All,名前に対して
+All Caught Up!,年齢区分
+All invoices are synchronized,すべて
+All pending invoices are up to date,全部追いついた！
+All Profiles,すべての請求書は同期されます
+All Synchronized,保留中の請求書はすべて最新のものです
+All visible invoices are fully settled.,すべてのプロファイル
+All Warehouses,すべて同期
+Allowed UOM is {0},表示されているすべての請求書は完全に決済されています。
+Always fetch items from server (ignore local cache),すべての倉庫
+Amount,許可される単位は {0} です
+Amount already received,常にサーバーからアイテムをフェッチします (ローカル キャッシュを無視します)
+Amount exceeds profile cash movement max amount.,金額
+Amount must be greater than zero.,すでに受け取った金額
+Amount received from customer,金額がプロファイルの現金移動の最大金額を超えています。
+App information,金額はゼロより大きくなければなりません。
+Appearance and user-level preferences for the current session.,お客様からいただいた金額
+Applied,アプリ情報
+Apply,現在のセッションの外観とユーザーレベルの設定。
+Apply Gift Card,適用済み
+Apply Offer,申し込む
+Apply On,ギフトカードを適用する
+Apply only the amount you want to redeem on this invoice. The remaining balance stays on the card.,オファーを適用する
+Apply Redemption,適用する
+Applying,この請求書には、引き換えたい金額のみを適用してください。
+Apps,残りの残高はカードに残ります。
+Are you sure you want to close? All entered data will be lost.,引き換えを適用する
+Attributes (Size/Color),申請中
+Auto Allocate Payment Amount,アプリ
+Auto Reconcile,閉じてもよろしいですか?
+Auto reconciliation completed after payment submit.,入力したデータはすべて失われます。
+Auto reconciliation completed. Allocated: {0}{1}. Remaining outstanding: {0}{2}.,属性(サイズ/色)
+Available Actions,支払い金額の自動割り当て
+Available QTY,自動調整
+Available:,支払い送信後に自動調整が完了しました。
+Average Basket,自動調整が完了しました。
+Average Bill,割り当て済み: {0}{1}。
+Average Ticket,残りの未払い: {0}{2}。
+Avg Bill,利用可能なアクション
+Avg Invoice,利用可能な数量
+Avg Invoice Profit,利用可能:
+Avg Invoice Value,平均的なバスケット
+Avg Purchase Frequency,平均請求額
+Awesome,平均的なチケット
+Awesome Dashboard,平均請求額
+Awesome Dashboard is disabled for the selected POS Profile.,平均請求書
+Awesome Dashboard is unavailable for the selected scope.,平均請求書利益
+Awesome Dashboard is visible only to POS supervisors.,平均請求額
+Back,平均購入頻度
+Back Office Cash Account,すごい
+Back Office Cash Account (Optional Override),素晴らしいダッシュボード
+Back office cash account is required.,選択した POS プロファイルでは、Awesome Dashboard が無効になっています。
+Back to {0},Awesome Dashboard は、選択したスコープでは使用できません。
+Background processing did not finish in time.,Awesome Dashboard は POS スーパーバイザーのみに表示されます。
+Background processing failed for Invoice {0}: {1},戻る
+Background Submission Failed,バックオフィス現金口座
+Background sync interval (seconds),バックオフィス現金口座 (オプションの上書き)
+Balance,バックオフィスの現金口座が必要です。
+Balance will be updated when connection is restored,{0} に戻る
+Balances still pending,バックグラウンド処理が時間内に終了しませんでした。
+Barcode,請求書 {0} のバックグラウンド処理が失敗しました: {1}
+Barcode / QR Ready,バックグラウンド送信に失敗しました
+Barcode Label Printing,バックグラウンド同期間隔 (秒)
+Base Paid:,バランス
+Base Recv:,接続が回復すると残高が更新されます
+Base:,残高はまだ保留中です
+Basic Information,バーコード
+Batch,バーコード/QR対応
+Batch Information,バーコードラベル印刷
+Before any return workflow,基本支払い:
+Before returns,基本受信:
+Best Day,ベース:
+Best Seller,基本情報
+Book expense or deposit from active shift.,バッチ
+Branch / Location-wise Report,バッチ情報
+Brand-wise,返品ワークフローの前に
+Breakdown,返品前に
+Browse,最高の一日
+Build Time:,ベストセラー
+Built with Frappe,アクティブなシフトから経費または保証金を予約します。
+Bundle,支店・所在地別レポート
+Buying Price,ブランド的に
+Cache cleared successfully,内訳
+Cache Usage,閲覧する
+cache used,ビルド時間:
+Calculating...,フラッペで作りました
+Camera Access Required,バンドル
+Camera access was aborted. Please try again.,購入価格
+Camera constraints not supported by your device. Trying fallback settings...,キャッシュが正常にクリアされました
+Camera is busy or blocked by another app/tab. Close other camera apps and try again.,キャッシュの使用量
+Camera permission denied. Please allow camera access in your browser settings and refresh the page.,使用されたキャッシュ
+Camera scanner is locked until the current error is acknowledged,計算中...
+Camera started but the video stream did not load in time. Please try again.,カメラへのアクセスが必要です
+Cancel,カメラへのアクセスが中止されました。
+Cancel cash movement {0}?,もう一度試してください。
+Cancel Payment,カメラの制約がデバイスでサポートされていません。
+Cancel Sale,フォールバック設定を試行しています...
+Cancel Sale ?,カメラがビジー状態であるか、別のアプリ/タブによってブロックされています。
+Cancelled,他のカメラ アプリを閉じて、もう一度試してください。
+Cannot add an item with zero or negative quantity.,カメラの許可が拒否されました。
+Cannot clear cache while offline,ブラウザの設定でカメラへのアクセスを許可し、ページを更新してください。
+Cannot redeem customer credit more than invoice total,現在のエラーが確認されるまで、カメラ スキャナはロックされます
+Cannot redeem gift cards more than invoice total,カメラは起動しましたが、ビデオ ストリームが時間内に読み込まれませんでした。
+Cannot Save Offline Invoice:,もう一度試してください。
+Cannot Save Offline Payment:,キャンセル
+Card,現金の移動 {0} をキャンセルしますか?
+Card / Online,支払いのキャンセル
+Card health after the last live lookup,セールのキャンセル
+Cards,販売をキャンセルしますか?
+Cart,キャンセルされました
+Cash,数量がゼロまたはマイナスの品目を追加することはできません。
+Cash back to customers,オフラインではキャッシュをクリアできません
+Cash Collections,請求額合計を超える顧客クレジットを引き換えることはできません
+Cash Deposit is disabled for this POS Profile.,請求額の合計を超えるギフト カードを引き換えることはできません
+Cash Drawer Snapshot,オフライン請求書を保存できません:
+Cash In Hand,オフライン支払いを保存できません:
+Cash Movement,カード
+Cash movement cancelled,カード / オンライン
+Cash movement deduction applied,最後のライブルックアップ後のカードの状態
+Cash movement deleted,カード
+Cash movement is disabled for this POS Profile.,カート
+Cash Movement is disabled in current POS Profile.,現金
+Cash movement saved offline,顧客へのキャッシュバック
+Cash movement submitted,現金回収
+Cash Movements,この POS プロファイルでは現金デポジットが無効になっています。
+Cash payment cannot be less than invoice total when partial payment is not allowed,キャッシュ ドロワーのスナップショット
+Cash returned after payment,手持ちの現金
+Cashier,現金の動き
+Cashier Access,現金の移動がキャンセルされました
+Cashier identity and appearance preferences.,現金移動控除の適用
+Cashier PIN,現金の移動が削除されました
+Cashier PIN saved successfully.,この POS プロファイルでは現金の移動が無効になっています。
+Cashiers,現在の POS プロファイルでは現金移動が無効になっています。
+Cashier-wise,現金の移動をオフラインで保存
+Categories,現金の移動が送信されました
+Category,現金の動き
+Category / Brand / Variant Report,部分的な支払いが許可されていない場合、現金での支払いは請求書の合計額を下回ることはできません
+Category-wise,支払い後に現金が戻ってくる
+Category-wise Margin,レジ係
+Certificate,レジへのアクセス
+Certificate is missing or not trusted. QZ may show confirmation dialogs.,レジ係のアイデンティティと外観の好み。
+Certificate is trusted. Silent QZ printing is active.,レジ暗証番号
+Change,キャッシャー PIN が正常に保存されました。
+Change allocation repaired,レジ係
+Change interface language,レジ係について
+Change Language,カテゴリー
+Change Price,カテゴリ
+Change Return,カテゴリー/ブランド/バリエーションレポート
+Change Returned,カテゴリ別
+Change terminal cashier,カテゴリ別マージン
+Charge Heads,証明書
+Charges,証明書が見つからないか、信頼されていません。
+Charges not found,QZ では確認ダイアログが表示される場合があります。
+Check Balance,証明書は信頼されています。
+Check balance for any card. Supervisors can issue and top up cards here.,サイレント QZ 印刷がアクティブです。
+Check balance only,変更
+Check for new commits,変更割り当てが修復されました
+Check for Updates,インターフェース言語を変更する
+Check live balance before applying redemption,言語を変更する
+Check live balance before redemption,価格の変更
+Checking...,変更 返品
+Cheque/Reference Date,返却された釣銭
+Cheque/Reference No,端末レジの変更
+Choose the cashier currently operating this terminal.,チャージヘッド
+Choose your preferred language for the POS interface,料金
+City,料金が見つかりません
+Clear,残高を確認する
+Clear All,カードの残高を確認します。
+Clear all barcode items,スーパーバイザーはここでカードを発行したり補充したりできます。
+Clear all purchase order items,残高確認のみ
+Clear Cache,新しいコミットを確認する
+Clear Search,アップデートをチェックする
+Clearing local cache...,引き換えを適用する前にライブ残高を確認してください
+Click to refresh,引き換え前にライブ残高を確認する
+Client CPU Lag:,確認中...
+Client Memory Usage:,小切手/参照日
+Client Metrics,小切手/参照番号
+Close,現在この端末を操作しているレジ担当者を選択してください。
+Close about dialog,POS インターフェースに使用する言語を選択してください
+Close cashier switcher,市
+Close closing shift dialog,クリア
+Close column selector,すべてクリア
+Close Dialog,すべてのバーコード項目をクリアします
+Close drafts dialog,すべての発注書アイテムをクリアします
+Close invoice details dialog,キャッシュのクリア
+Close invoice management,検索をクリア
+Close offline invoices dialog,ローカルキャッシュをクリアしています...
+Close packing list dialog,クリックして更新
+Close returns dialog,クライアントの CPU ラグ:
+Close sales orders dialog,クライアントのメモリ使用量:
+Close Scanner,クライアントメトリクス
+Close scanner dialog,閉じる
+Close Settings,「バージョン情報」ダイアログを閉じる
+Close Shift,レジスイッチャーを閉じる
+Closing Amount,シフトダイアログを閉じる
+Closing POS Shift,列セレクターを閉じる
+Closing Snapshot Available,ダイアログを閉じる
+Code,下書きダイアログを閉じる
+Code scanned successfully,請求書の詳細ダイアログを閉じる
+COGS,請求書管理を閉じる
+Collapse item details,オフライン請求書ダイアログを閉じる
+Collected,パッキングリストダイアログを閉じる
+Cols,返品ダイアログを閉じる
+Columns,販売注文ダイアログを閉じる
+commits,スキャナーを閉じる
+Completed and active sales in this range,スキャナダイアログを閉じる
+Completed returns will appear here.,設定を閉じる
+Confirm,シフトを閉じる
+Confirm Close,クロージング金額
+Confirm Mobile Number,POSシフト終了
+Confirm PIN,終了スナップショットが利用可能です
+Connect,コード
+Connect printer and manage certificate,コードは正常にスキャンされました
+Connecting to QZ Tray...,歯車
+Connection problem while submitting invoice,アイテムの詳細を折りたたむ
+Connections:,集めた
+Connectivity and cached prerequisite status were rechecked.,コル
+Continue Editing,コラム
+Could not fetch latest balance from server,コミットする
+Count,この範囲での販売が完了し、現在進行中である
+Country,完了した返品がここに表示されます。
+Coupon,確認する
+Coupons,閉じるの確認
+Cover,携帯電話番号の確認
+CPU Cores:,PINの確認
+Create,接続する
+Create and load a new prepaid card,プリンターの接続と証明書の管理
+Create and preload a new gift card,QZトレイに接続しています...
+Create Bill,請求書の送信中に接続の問題が発生しました
+Create Customer,接続:
+Create New Item,接続とキャッシュされた前提条件ステータスが再チェックされました。
+Create or change your PIN,編集を続ける
+Create PIN,サーバーから最新の残高を取得できませんでした
+Create POS Opening Shift,数を数える
+Create Purchase Order,国
+Create Return,クーポン
+Create return from invoice,クーポン
+Create Supplier,カバー
+Credit and Output,CPUコア:
+Credit Note,作成
+Credit Outstanding,新しいプリペイド カードを作成してロードする
+Credit sales remaining to be collected,新しいギフトカードを作成してプリロードする
+Critical,請求書の作成
+Currency,顧客の作成
+Current,新しいアイテムの作成
+Current Event Loop Lag:,PIN を作成または変更する
+Current Month,PINの作成
+Current PIN,POS 開始シフトの作成
+Current Profile,注文書の作成
+Current redeemable value on the gift card,返品の作成
+Current User,請求書から返品を作成する
+Custom,サプライヤーの作成
+Custom Due Days,クレジットと成果
+Custom items per page,クレジットノート
+Customer,信用残高
+Customer already selected,クレジット売上の回収が残っている
+Customer Balance,クリティカル
+Customer balance unavailable offline,通貨
+Customer created successfully.,現在
+Customer creation failed.,現在のイベントのループ ラグ:
+Customer Details,当月
+Customer display channel is missing,現在のPIN
+Customer display was blocked. Please allow pop-ups for this site.,現在のプロフィール
+Customer group is required,ギフトカードの現在の引き換え可能額
+Customer is required to add payment,現在のユーザー
+Customer Name is required,カスタム
+Customer not selected,カスタム期限日
+Customer Report,ページごとのカスタム項目
+Customer saved offline,お客様
+Customer Screen,お客様はすでに選択されています
+Customer territory is required,顧客残高
+Customer updated successfully.,顧客残高はオフラインでは利用できません
+Customer-facing tools and printer setup.,お客様が正常に作成されました。
+Customers,顧客の作成に失敗しました。
+Customers not found,顧客の詳細
+Daily cashier actions without scrolling.,顧客表示チャネルがありません
+Daily Sales,カスタマーディスプレイがブロックされました。
+Daily Sales Summary,このサイトのポップアップを許可してください。
+Dark Mode,顧客グループは必須です
+Data loaded in form. Review and submit.,お客様は支払いを追加する必要があります
+Database Health,顧客名は必須です
+Database health affects overall system speed and reliability.,顧客が選択されていません
+Database Info,顧客レポート
+Date,顧客はオフラインで保存されました
+Day Δ,顧客画面
+days,顧客の地域は必須です
+Day-wise (MTD),お客様は正常に更新しました。
+Day-wise Movement,顧客対応ツールとプリンターのセットアップ。
+Dead Stock,お客様
+Dead Stock Items,顧客が見つかりません
+Decrease quantity,スクロールせずに毎日のレジ操作を実行できます。
+Default,日販
+Default:,毎日の売上概要
+Delete,ダークモード
+Delete cancelled cash movement {0}?,フォームにロードされたデータ。
+Delete Draft,確認して送信します。
+Delete draft invoice,データベースの健全性
+Delete draft invoice {0}?,データベースの健全性は、システム全体の速度と信頼性に影響します。
+Delete Invoice,データベース情報
+Delete offline invoice,日付
+Delivered,Δ日
+Delivery Charges,日
+Delivery Information,日単位 (MTD)
+Delivery Note {0} created,一日の動き
+Delivery note created,デッドストック
+Deployed Bundle:,デッドストック品
+Deposit,数量を減らす
+Description,デフォルト
+Detailed Supplier Breakdown,デフォルト:
+Detecting formats:,削除
+Device Memory:,キャンセルされた現金移動 {0} を削除しますか?
+Difference,下書きの削除
+Difference (In Company Currency),請求書草案を削除する
+Disable offline mode first to recheck live connectivity.,下書き請求書 {0} を削除しますか?
+Disconnect,請求書の削除
+discount,オフライン請求書を削除する
+Discount %,納品済み
+Discount / Void / Return Report,配送料
+Discount Amount,配送情報
+Discount limited by POS Profile,納品書 {0} が作成されました
+Discounted Invoices,納品書を作成しました
+Discounts,導入されたバンドル:
+Dismiss,デポジット
+Download Certificate,説明
+Draft,サプライヤーの詳細な内訳
+Draft invoice deleted,フォーマットの検出:
+Draft source,デバイスメモリ:
+Drafts,違い
+Due {0},差額（会社通貨）
+Due Date,まずオフライン モードを無効にして、ライブ接続を再確認します。
+Duplicate,切断する
+Edit customer,割引
+Edit discount amount,割引率
+Edit discount percentage,割引/無効/返品レポート
+Edit Gift Application,割引額
+Edit item name,POS プロファイルによって割引が制限される
+Edit quantity,割引された請求書
+Edit rate,割引
+Edit unit of measure,解雇する
+Edited,証明書のダウンロード
+Employee,草案
+Enable background sync,請求書草案が削除されました
+Enable Customer Display in POS Profile first.,草案のソース
+End current session,下書き
+Enter a PIN.,期限: {0}
+Enter a valid grams value,期限
+Enter new price list rate,重複
+Enter Quantity,顧客の編集
+Enter the cashier PIN to continue.,割引額を編集する
+Enter the current PIN first.,割引率を編集する
+"Enter the current PIN, then choose a new one.",ギフト申請の編集
+Enter valid grams for scale barcode,項目名を編集する
+Entries,数量を編集する
+Error accessing camera:,編集速度
+Error calculating prices,測定単位の編集
+Error fetching customer balance,編集済み
+Error in change calculations!,従業員
+Error Loading Data,バックグラウンド同期を有効にする
+Error loading invoice details,最初に POS プロファイルでカスタマー ディスプレイを有効にします。
+Error processing invoice,現在のセッションを終了する
+Error processing payment,PIN を入力します。
+Error searching invoices,有効なグラム値を入力してください
+Error submitting invoice:,新しい価格表レートを入力してください
+Error submitting invoice: {0},数量を入力してください
+Error submitting invoice: No response from server,続行するには、レジの暗証番号を入力してください。
+Error updating currency,最初に現在の PIN を入力します。
+Error updating item details,現在の PIN を入力し、新しい PIN を選択します。
+Est. Purchase,スケールバーコードに有効なグラムを入力してください
+Est. Value,エントリー
+Event-loop lag measures how busy your browser is. Lower is better.,カメラへのアクセス中にエラーが発生しました:
+Every,価格計算エラー
+Exchange Rate,顧客残高の取得エラー
+Expand item details,お釣りの計算に誤りがあります!
+Expected Amount (In Company Currency),データのロード中にエラーが発生しました
+Expected Cash,請求書の詳細のロード中にエラーが発生しました
+Expected cash on hand grouped by currency,請求書の処理中にエラーが発生しました
+Expected vs Actual,支払い処理中にエラーが発生しました
+Expense,請求書の検索エラー
+Expense Account (Optional Override),請求書の送信エラー:
+Expense account is required.,請求書の送信エラー: {0}
+Expenses and deposits posted during this shift,請求書の送信エラー: サーバーからの応答がありません
+Expired,通貨の更新エラー
+Failed to auto reconcile payments.,アイテム詳細の更新中にエラーが発生しました
+Failed to cancel cash movement,推定
+Failed to clear cache,購入する
+Failed to create item,推定
+Failed to create supplier,値
+Failed to delete cash movement,イベント ループ ラグは、ブラウザーのビジー度を測定します。
+Failed to generate scale barcode. Using item barcode only.,低いほど良いです。
+Failed to load cash movement context.,毎
+Failed to load dashboard data.,為替レート
+Failed to reload invoice from server,アイテムの詳細を展開する
+Failed to submit cash movement,予想金額（当社通貨）
+Failed to sync offline cash movements,期待される現金
+Fast cashier actions for active shifts.,通貨ごとにグループ化された予想手元資金
+Fast Moving Items,予想と実際
+Fees,経費
+Fetch the latest offline prerequisite updates,経費勘定 (オプションの上書き)
+Find a sales order quickly and load it into the current sale.,経費勘定は必須です。
+Fixing payment amounts for return invoice...,このシフト中に転記された経費と保証金
+Flash Off,期限切れ
+Flash On,支払いの自動調整に失敗しました。
+"For 'Product Bundle' items, Warehouse, Serial No and Batch No will be considered from the 'Packing List' table. If Warehouse and Batch No are same for all packing items for any 'Product Bundle' item, those values can be entered in the main Item table; values will be copied to 'Packing List' table.",現金移動のキャンセルに失敗しました
+Free,キャッシュのクリアに失敗しました
+Free Qty,アイテムの作成に失敗しました
+Frequency,サプライヤーの作成に失敗しました
+from,現金移動の削除に失敗しました
+From Date,スケールバーコードの生成に失敗しました。
+Fulfillment Details,商品バーコードのみを使用します。
+Full Name,現金移動コンテキストのロードに失敗しました。
+Gain,ダッシュボードデータの読み込みに失敗しました。
+Generate a fresh prepaid card and start it with an opening balance.,サーバーから請求書をリロードできませんでした
+Generate and install the certificate to allow fully silent printing without trust prompts.,現金移動の送信に失敗しました
+Generate Certificate,オフラインの現金移動の同期に失敗しました
+Generated scale barcode: {0},アクティブなシフトのための素早いレジ操作。
+Get Payments,動きの速いアイテム
+Gift Card,料金
+Gift card amount must be greater than zero.,最新のオフライン前提条件更新を取得する
+Gift Card Code,販売注文をすばやく見つけて、現在の販売にロードします。
+Gift card code is required for redemption,返品請求書の支払い金額を修正しています...
+Gift card code is required.,フラッシュオフ
+Gift card issued successfully.,フラッシュオン
+Gift card loaded successfully.,「製品バンドル」アイテムの場合、倉庫、シリアル番号、バッチ番号は「梱包リスト」テーブルから考慮されます。
+Gift Card Management,「製品バンドル」品目のすべての梱包品目で倉庫番号とバッチ番号が同じ場合、それらの値をメインの品目テーブルに入力できます。
+Gift card payment,値は「梱包リスト」テーブルにコピーされます。
+Gift card redemption requires an online connection,無料
+Gift card topped up successfully.,無料数量
+Gift Cards,周波数
+Go Offline,から
+Go Online,開始日
+Go to Frappe Desk,フルフィルメントの詳細
+Grand Total,フルネーム
+Gross Margin,ゲイン
+Gross Profit,新しいプリペイド カードを生成し、開始残高で開始します。
+Gross Sales,証明書を生成してインストールすると、信頼プロンプトなしで完全にサイレント印刷が可能になります。
+Group not found,証明書の生成
+"Grouped controls for terminal, UI, and session settings.",生成されたスケール バーコード: {0}
+Grouped totals for each payment method and currency,支払いを受ける
+Hide,ギフトカード
+Hide Gift Card,ギフトカードの金額はゼロより大きくなければなりません。
+Hide Non Essential Fields,ギフトカードコード
+Hide quantity decimals,引き換えにはギフトカード コードが必要です
+Hide search tools,ギフトカードコードが必要です。
+Hide zero rated items,ギフトカードが正常に発行されました。
+High,ギフトカードが正常にロードされました。
+History,ギフトカード管理
+Hourly (Today),ギフトカードでのお支払い
+How this section works,ギフトカードの引き換えにはオンライン接続が必要です
+"If stale data remains, open Settings > Offline & Sync and run Rebuild Offline Data again while online.",ギフトカードに正常にチャージされました。
+"If the warning persists, open Settings > Offline & Sync, then run Refresh Offline Data or Rebuild Offline Data.",ギフトカード
+Import the certificate into QZ Tray and restart QZ Tray on each POS machine.,オフラインにする
+In,オンラインにする
+In stock: {0},フラッペデスクへ行く
+Include Batch / Serial,総計
+Include Price,粗利
+Increase quantity,売上総利益
+IndexedDB,総売上高
+Initial Amount,グループが見つかりません
+Initialize your shift with opening balances,ターミナル、UI、セッション設定のグループ化されたコントロール。
+Initializing application...,アプリケーションを初期化しています...
+"Inspect cache, sync, and prerequisite status",キャッシュ、同期、前提条件のステータスを検査する
+Installed Applications,インストールされているアプリケーション
+Insufficient stock:\n{0},在庫が不足しています:\n{0}
+Invalid rate,無効なレート
+Inventory Status Report,在庫状況レポート
+Invoice,請求書
+Invoice {0} is Submitted,請求書 {0} が送信されました
+Invoice {0} processed successfully,請求書 {0} は正常に処理されました
+Invoice {0} submission failed,請求書 {0} の送信に失敗しました
+Invoice {0} was already submitted,請求書 {0} はすでに送信されています
+Invoice Adjustments,請求書の調整
+Invoice Change,請求書の変更
+Invoice Details,請求書の詳細
+Invoice is still in draft after background submission.,バックグラウンドで送信された後も、請求書はまだ下書きのままです。
+Invoice Items,請求書項目
+Invoice Management,請求書管理
+Invoice Mgmt,請求書管理
+Invoice saved offline,請求書はオフラインで保存されました
+Invoice submission failed,請求書の提出に失敗しました
+Invoice Submitted,請求書が提出されました
+"Invoice value settled by loyalty points, not cash collection",請求額は現金徴収ではなくロイヤルティ ポイントによって決済されます
+Invoices,請求書
+Invoices already past due date,すでに期限を過ぎた請求書
+Invoices saved as POS Invoices,POS 請求書として保存された請求書
+Invoices still carrying balances,請求書に残高が残っている
+Issue Mode,発行モード
+Issue New Card,新しいカードを発行する
+Issue Workflow,発行ワークフロー
+"Issue, top up, and check",発行・チャージ・チェック
+Item,アイテム
+Item / Product Sales Report,アイテム・商品販売レポート
+Item {0} added to invoice,アイテム {0} が請求書に追加されました
+Item '{0}' has no barcode,アイテム「{0}」にはバーコードがありません
+Item Code,アイテムコード
+Item created successfully,アイテムが正常に作成されました
+Item is out of stock,商品が在庫切れです
+Item Name,項目名
+Item not found,アイテムが見つかりません
+Item order updated,アイテムの注文が更新されました
+Item Selector Settings,項目セレクターの設定
+Items,アイテム
+Items added in POS will appear here automatically.,POS に追加されたアイテムはここに自動的に表示されます。
+Items added to invoice,請求書に項目が追加されました
+Items per page,ページごとの項目
+Items Sold,販売アイテム
+Items/Invoice,商品・請求書
+Item-wise Profitability,品目別収益性
+Journal Entry,仕訳帳
+json,json
+Just now,たった今
+Keep offline prerequisites healthy and recover stale data safely.,オフラインの前提条件を健全な状態に保ち、古いデータを安全に復元します。
+Labels,ラベル
+Language,言語
+Language will be changed to,言語が次のように変更されます
+"Language, theme, terminal tools, and session controls.",言語、テーマ、ターミナル ツール、およびセッション コントロール。
+Last,最後
+Last 14 Days (Paid vs Pending),過去 14 日間 (支払い済み vs 保留中)
+Last 14 Days Activity,過去 14 日間のアクティビティ
+Last 14 Days Gross Profit,過去 14 日間の総利益
+Last 14 Days Purchases,過去 14 日間の購入
+Last 14 Days Tax/Charges,過去 14 日間の税金/料金
+Last sync:,最終同期:
+Last sync: {0} | ok: {1} | failed: {2} | skipped: {3},最終同期: {0} |
+Latest entries for current shift,わかりました: {1} |
+Lead Time,失敗しました: {2} |
+Light Mode,スキップされました: {3}
+Limited,現在のシフトの最新エントリ
+lines,リードタイム
+List,ライトモード
+Live Snapshot,限定
+Load a POS profile and cashier first.,行
+Load More Invoices,リスト
+Load previously saved invoices,ライブスナップショット
+Load Sale,最初に POS プロファイルとレジ係をロードします。
+Load Sales Invoice,さらに請求書をロードする
+Loading app data...,以前に保存した請求書をロードする
+Loading customer database...,ロードセール
+Loading customers...,売上請求書のロード
+Loading database stats...,アプリデータを読み込んでいます...
+Loading details...,顧客データベースをロードしています...
+Loading invoice history...,顧客を読み込んでいます...
+Loading items...,データベース統計をロードしています...
+Loading product catalog...,詳細を読み込んでいます...
+Loading return invoices...,請求書履歴を読み込んでいます...
+Loading server CPU/memory usage...,アイテムを読み込んでいます...
+Loading suppliers...,製品カタログを読み込んでいます...
+Loading unpaid invoices...,返品請求書を読み込んでいます...
+Loading view...,サーバーの CPU/メモリ使用量を読み込んでいます...
+Loading...,サプライヤーを読み込み中...
+Local storage is unavailable. Switching to online-only mode.,未払いの請求書を読み込んでいます...
+localStorage,ビューを読み込み中...
+Location Performance,読み込み中...
+Locations,ローカル ストレージが使用できません。
+Lock Screen,オンライン専用モードに切り替えます。
+Logout,ローカルストレージ
+Lookup Workflow,ロケーションパフォーマンス
+Loss,所在地
+Low,ロック画面
+Low Stock,ログアウト
+Low Stock Alerts,ルックアップのワークフロー
+Low Stock Items,損失
+Low Stock Threshold,低い
+Low Stock Total,在庫僅少
+Lowest Margin,在庫不足アラート
+Low-frequency maintenance and system details.,在庫が少ない商品
+Loyalty Redeemed,低在庫閾値
+Loyalty Redemption,在庫合計が少ない
+Make New Payment,最低マージン
+Manage all,低頻度のメンテナンスとシステムの詳細。
+Manage and synchronize your offline transactions,ロイヤルティが償還されました
+Manage Cashier PIN,ロイヤリティの償還
+"Manage offline tools, terminal controls, and maintenance from one workspace.",新たな支払いを行う
+manual,すべてを管理する
+"Manual codes, barcode scans, and QR scans work in the same field",オフライントランザクションの管理と同期
+Manual offline mode is enabled,レジ暗証番号の管理
+Margin,オフライン ツール、端末制御、メンテナンスを 1 つのワークスペースから管理します。
+Maximum available quantity is {0}. Quantity adjusted to match stock.,マニュアル
+Maximum discount amount for this offer item is {0}.,手動コード、バーコード スキャン、QR スキャンが同じフィールドで機能します
+Maximum discount percentage for this offer item is {0}%.,手動オフラインモードが有効になっています
+Maximum offer quantity is {0}. Quantity adjusted to allowed limit.,マージン
+Medium,最大利用可能数量は {0} です。
+Menu,在庫に合わせて数量を調整します。
+Method-wise Collections,この特典アイテムの最大割引額は {0} です。
+Minimum allowed rate for this offer item is {0}.,この特典アイテムの最大割引率は {0}% です。
+Minimum Qty,オファーの最大数量は {0} です。
+Mobile No,数量が許容限度に調整されました。
+Mode,中
+Mode of Payment,メニュー
+Month,メソッドごとのコレクション
+Month Δ,このオファー項目の最小許容レートは {0} です。
+Monthly Profit,最小数量
+Monthly Sales,携帯番号
+Monthly Sales Summary,モード
+Month-wise,支払い方法
+Most Active Cashiers,月
+Movement Type,Δ月
+Movements,月次利益
+Multi Currency,月次売上高
+N/A,月次売上概要
+Name,月ごと
+Negative Stock,最もアクティブなレジ係
+Negative Stock Items,移動タイプ
+Negative values not allowed,動き
+Net,多通貨
+Net Qty,該当なし
+Net Sales,名前
+Net Value,マイナス在庫
+Never,マイナス在庫品目
+New changes are ready to load,負の値は許可されません
+New Item,ネット
+New Offer Available,正味数量
+New PIN,売上高
+New rate,正味価値
+Next unit of measure,決してしない
+No attribute data found.,新しい変更をロードする準備ができました
+No Barcode,新しいアイテム
+No barcode found for UOM '{0}',新しい特典が利用可能
+No branch/location data found.,新しいPIN
+No brand data found.,新しい料金
+No cached gift card balance is available offline.,次の測定単位
+No camera found on this device. Please ensure your device has a working camera.,属性データが見つかりません。
+No capability warnings recorded yet.,バーコードなし
+No cash expected for this shift.,単位「{0}」のバーコードが見つかりませんでした
+No cash mode configured,支店/所在地データが見つかりません。
+No cash movement type is allowed for this POS Profile.,ブランドデータが見つかりませんでした。
+No cashier PIN is set yet. Create one now.,キャッシュされたギフトカード残高はオフラインでは使用できません。
+No cashier profiles are available for this POS profile yet.,このデバイスにはカメラが見つかりません。
+No cashier-wise discount/void/return activity.,デバイスにカメラが動作していることを確認してください。
+No category data found.,機能に関する警告はまだ記録されていません。
+No category profitability data found.,このシフトでは現金は見込まれません。
+No change returned recorded for this shift.,キャッシュモードが設定されていません
+No change-allocation invoices match the current filters.,この POS プロファイルでは現金移動タイプは許可されません。
+No charge head breakdown found.,レジ暗証番号はまだ設定されていません。
+No Company Selected,今すぐ作成してください。
+No customer sales data found.,この POS プロファイルにはまだレジ係プロファイルがありません。
+No day-wise discount/void/return trend.,レジ係による割引/無効化/返品のアクティビティはありません。
+No day-wise payment data found.,カテゴリ データが見つかりません。
+No day-wise profitability trend found.,カテゴリの収益性データが見つかりません。
+No day-wise purchase data found.,このシフトに関して記録された変更は返されませんでした。
+No day-wise sales trend found.,現在のフィルタに一致する変更割り当て請求書はありません。
+No day-wise tax/charges trend found.,チャージヘッドの故障は見つかりませんでした。
+No dead stock items.,会社が選択されていません
+No due date,顧客の販売データが見つかりません。
+No exact repair match found for this invoice,日ごとの割引/無効/返品の傾向はありません。
+No hourly sales trend found for today.,日単位の支払いデータが見つかりません。
+No invoice activity found.,日ごとの収益性の傾向は見つかりませんでした。
+No invoices found,日ごとの購入データは見つかりませんでした。
+No invoices found. Try different search criteria.,日別の販売傾向は見つかりませんでした。
+No invoices recorded for this shift.,日ごとの税金/料金の傾向は見つかりませんでした。
+No item profitability data found.,デッドストック品はございません。
+No item sales data found for this period.,期限なし
+No items found,この請求書に正確に一致する修理は見つかりませんでした
+No items in cart,今日の時間当たりの売上トレンドは見つかりませんでした。
+No items with barcodes to print,請求書アクティビティが見つかりません。
+No location-wise top item data found.,請求書が見つかりません
+No low stock alerts right now.,請求書が見つかりませんでした。
+No low stock items.,別の検索条件を試してください。
+No matching items in cart,このシフトに対して記録された請求書はありません。
+No month-wise sales trend found.,品目の収益性データが見つかりません。
+No negative stock items.,この期間の商品販売データは見つかりませんでした。
+No notifications yet,項目が見つかりませんでした
+No offline cash movement synced.,カートに商品がありません
+No offline invoices pending synchronization,印刷するバーコードのある商品はありません
+No offline sync issues recorded yet.,場所別の上位アイテム データが見つかりません。
+No out-of-stock items.,現在、在庫不足のアラートはありません。
+No outstanding credit invoices for this shift.,在庫の少ない商品はございません。
+No payment collection data found.,カート内に一致する商品がありません
+No payment rows available on this invoice.,月ごとの売上推移は見つかりませんでした。
+No payments registered for this shift.,マイナス在庫品目はありません。
+No pending balances in this period.,まだ通知はありません
+No pending offline invoices,オフラインの現金移動は同期されません。
+No Print Formats Found,同期保留中のオフライン請求書はありません
+No profiles found for selected scope. Falling back to current profile failed.,オフライン同期の問題はまだ記録されていません。
+No recent customer activity found.,在庫切れの商品はございません。
+No recent stock entries found.,このシフトに対する未処理のクレジット請求書はありません。
+No records found,支払い回収データが見つかりません。
+No reorder suggestions right now.,この請求書には支払い行がありません。
+No repeat customers in this period.,このシフトには支払いが登録されていません。
+No response from server,この期間に保留中の残高はありません。
+No return invoices found,保留中のオフライン請求書はありません
+No return item trend found.,印刷フォーマットが見つかりません
+No returnable items found for this invoice,選択したスコープにプロファイルが見つかりません。
+No returns were processed in this shift.,現在のプロファイルへのフォールバックに失敗しました。
+No risk activity found.,最近の顧客アクティビティは見つかりませんでした。
+No sales activity found for this period.,最近の株式エントリは見つかりませんでした。
+No slow moving items.,記録が見つかりませんでした
+No staff sales activity found.,現在、再注文の提案はありません。
+No stock movement for this period.,この期間中、リピーターはいません。
+No submitted cash movements in this shift.,サーバーからの応答がありません
+No supplier purchases found in this month.,返品請求書が見つかりません
+No suppliers found for this period.,返品アイテムの傾向が見つかりませんでした。
+No sync trigger has run yet in this session.,この請求書には返品可能な商品が見つかりませんでした
+No tax head breakdown found.,このシフトでは返品は処理されませんでした。
+No top items found for this location.,リスクのあるアクティビティは見つかりませんでした。
+No unpaid invoices,この期間の販売活動は見つかりませんでした。
+No variant data found.,動きの遅いアイテムはありません。
+No week-wise sales trend found.,スタッフの営業活動は見つかりませんでした。
+No.,この期間の在庫の動きはありません。
+Nobile Number,このシフトでは提出された現金の移動はありません。
+Not available,今月はサプライヤーによる購入が見つかりませんでした。
+Not checked,この期間のサプライヤーは見つかりませんでした。
+Not selected,このセッションではまだ同期トリガーが実行されていません。
+Not Set,納税頭数の内訳は見つかりませんでした。
+Notifications,この場所のトップアイテムは見つかりませんでした。
+Offer,未払いの請求書はありません
+Offer Applied,バリアント データが見つかりません。
+Offer criteria exceeded,週ごとの売上傾向は見つかりませんでした。
+Offer Item,いいえ。
+Offer item unavailable,貴族の数
+Offer Removed,利用できません
+Offer UOM cannot be changed,未チェック
+Offer?,未選択
+Offers,未設定
+Offline,通知
+Offline & Sync,オファー
+Offline Capabilities,オファーが適用されました
+Offline data status refreshed,オファー基準を超えています
+Offline diagnostics,オファーアイテム
+Offline Invoices,オファーアイテムは利用できません
+Offline invoices status,オファーが削除されました
+Offline invoices synced,オファー単位は変更できません
+Offline Queue: {0},オファーしますか？
+Offline rebuild guidance,オファー
+Offline restore is unavailable for this session.,オフライン
+Offline selling is available with degraded capabilities.,オフラインと同期
+Offline snapshot does not match the current POS state.,オフライン機能
+Offline Status,オフラインデータステータスが更新されました
+"Offline, terminal, and system controls",オフライン診断
+OK,オフライン請求書
+Online,オフライン請求書のステータス
+Open actions menu,オフラインの請求書が同期されました
+Open balance to collect,オフラインキュー: {0}
+Open Customer Display,オフライン再構築のガイダンス
+Open drawer,このセッションではオフライン復元は利用できません。
+Open invoices,オフライン販売は、機能が低下しても利用できます。
+Open Payments?,オフライン スナップショットは現在の POS 状態と一致しません。
+Open POS home,オフラインステータス
+Open this screen from POS Menu -> Open Customer Display.,オフライン、端末、およびシステム制御
+OpenCV image processing enabled - Enhanced barcode detection,OK
+OpenCV image processing unavailable on this device,オンライン
+OpenCV Off,アクションメニューを開く
+OpenCV On,オープン残高を集めてください
+OpenCV processing disabled,カスタマーディスプレイを開く
+Opening Amount,引き出しを開ける
+Opening Cash,オープン請求書
+options,支払いをオープンしますか?
+Order,POSホームを開く
+Original,この画面は、POSメニュー→カスタマーディスプレイを開くから開きます。
+Other,OpenCV 画像処理が有効 - 強化されたバーコード検出
+Out,このデバイスでは OpenCV 画像処理を利用できません
+Out of Stock,OpenCV オフ
+Out of Stock Items,OpenCV オン
+Outstanding,OpenCV 処理が無効になっています
+Outstanding Credit by Currency,開口量
+Overdue,オープニングキャッシュ
+Overpayment Change,オプション
+Overpayment change deducted: {0},注文
+Packing List,オリジナル
+Page Format,その他
+Page unavailable offline,アウト
+Paid,在庫切れ
+Paid (orig):,在庫切れ商品
+Paid Amount,優れた
+Paid change cannot be greater than total change!,通貨別の信用残高
+Paid:,期限を過ぎました
+Parent Item,過払い金の変更
+Partial,過払いの変更が差し引かれました: {0}
+Partly Paid,パッキングリスト
+Party Account,ページ形式
+Party Type,ページはオフラインでは利用できません
+Pause terminal until next cashier,有料
+PAY,有料（オリジナル）：
+Payment,支払額
+Payment Account,支払われるお釣りは、お釣りの総額を超えることはできません。
+Payment entries processed for Invoice {0},有料:
+Payment Entry Type,親アイテム
+Payment History,部分的
+Payment ID,一部有料
+Payment Method Report,パーティーアカウント
+Payment Methods,パーティータイプ
+Payment of {0} received successfully.,次のレジ係までターミナルを一時停止する
+Payment Progress,支払う
+Payment Reconciliation,お支払い
+Payment request status could not be retrieved. Please try again,支払いアカウント
+Payment Request took too long to respond. Please try requesting for payment again,請求書 {0} の支払いエントリが処理されました
+Payment saved offline,支払い入力タイプ
+Payment State,支払い履歴
+Payment Status,支払いID
+Payment submitted but print function could not be executed. Payment name not found.,支払方法レポート
+Payment submitted.,支払い方法
+Payment Summary,{0} の支払いが正常に受領されました。
+Payments,支払いの進捗状況
+Payments are not open. Do you want to open payments and submit?,支払いの調整
+Payments by Mode of Payment,支払いリクエストのステータスを取得できませんでした。
+PDF,もう一度試してください
+Peak Hour,支払いリクエストの応答に時間がかかりすぎました。
+Peak Memory:,もう一度支払いリクエストをお試しください
+Peak Server:,支払いはオフラインで保存されました
+Peak:,支払い状態
+Pending,支払い状況
+Pending Amount,支払いは送信されましたが、印刷機能を実行できませんでした。
+Pending count updated from {0} to {1},支払い名が見つかりません。
+Pending Exposure,支払いが送信されました。
+Pending Invoices,お支払い概要
+Pending Ratio,支払い
+Pending Sales,支払いはオープンされていません。
+Pending sales: {0} | Cache usage: {1}%,支払いを開始して送信しますか?
+Pending Sync,支払い方法別の支払い
+Pending: {0},PDF
+Pending: {0} | Synced: {1} | Draft: {2},ピーク時間帯
+Per Page,ピークメモリ:
+Personal,ピークサーバー:
+Personal preferences adjust the current cashier experience without changing the active POS route.,ピーク:
+PIN confirmation does not match.,保留中
+PIN must be 4 to 8 digits.,保留中の金額
+Please add at least one item.,保留中の数が {0} から {1} に更新されました
+Please allow camera access to scan codes,公開保留中
+Please enter payment amount,保留中の請求書
+Please fill all required fields,保留中の比率
+Please make a payment or select a payment,保留中の販売
+Please request phone payment or use another payment method,保留中の販売: {0} |
+Please select a customer first,キャッシュ使用率: {1}%
+Please select a party,保留中の同期
+Please select a party before reconciling.,保留中: {0}
+Please select a valid movement type.,保留中: {0} |
+Please select an invoice,同期済み: {1} |
+Please select company before reconciling.,ドラフト: {2}
+Please set the customer's mobile number,ページごと
+Please try again or enter the item manually.,個人的な
+Please verify the barcode or check the item's availability.,個人の好みにより、アクティブな POS ルートを変更することなく、現在のレジのエクスペリエンスが調整されます。
+Points,PIN の確認が一致しません。
+Popup blocked. Please allow popups.,PIN は 4 ～ 8 桁である必要があります。
+POS,少なくとも 1 つの項目を追加してください。
+POS controls and maintenance,カメラによるコードのスキャンへのアクセスを許可してください
+POS Expense is disabled for this POS Profile.,お支払い金額を入力してください
+POS is running with limited offline prerequisites.,必須フィールドをすべて入力してください
+POS Profile,支払いを行うか、支払いを選択してください
+Position the QR code or barcode within the scanning area,電話による支払いをリクエストするか、別の支払い方法を使用してください
+Posting,最初に顧客を選択してください
+Posting and Price List,パーティーを選択してください
+Posting Date,和解する前にパーティーを選択してください。
+Preparing background sync,有効な移動タイプを選択してください。
+"Press OK to continue offline with a warning, or Cancel to retry.",請求書を選択してください
+Previous unit of measure,調整する前に会社を選択してください。
+Price List,お客様の携帯電話番号を設定してください
+Price List Rate,もう一度お試しいただくか、手動で項目を入力してください。
+Price list rate updated locally only,バーコードを確認するか、商品の在庫状況をご確認ください。
+Pricing & Discounts,ポイント
+Pricing Rule,ポップアップがブロックされました。
+Print,ポップアップを許可してください。
+Print Draft,POS
+Print Format (Invoice),POSの管理とメンテナンス
+Print Format (Order),この POS プロファイルでは POS Expense が無効になっています。
+Print invoice,POS は、限られたオフライン前提条件で実行されています。
+Print Last Invoice,POSプロファイル
+Print Purchase Invoice instead of PO,QRコードまたはバーコードをスキャン領域内に配置します
+Printer,投稿する
+Processed returns impacting the shift totals,投稿と価格表
+Processing Payment,投稿日
+Processing payment entries for Invoice {0},バックグラウンド同期の準備中
+Profile,警告を表示してオフラインを続行するには [OK] を、再試行するには [キャンセル] を押してください。
+Profiles,以前の測定単位
+Profit,価格表
+Profit: Invoice Item Estimate,料金表料金
+Profit: Stock Ledger (COGS),価格表レートはローカルでのみ更新されます
+Profitability Report,価格と割引
+Prorated return discount,価格設定ルール
+Purchase Amount,印刷する
+Purchase Invoices,ドラフトを印刷する
+Purchase Order created,印刷フォーマット（請求書）
+Qty,印刷フォーマット（オーダー）
+Qualified,請求書の印刷
+Quantity,最後の請求書を印刷する
+Quantity exceeds available stock,POの代わりに購入請求書を印刷
+Quick Actions,プリンター
+Quotation {0} is Submitted,シフト合計に影響を与える処理済み返品
+Quotation submitted,支払いの処理中
+QZ Tray connected.,請求書 {0} の支払いエントリを処理しています
+QZ Tray is manually disconnected. Press Connect to enable it again.,プロフィール
+QZ Tray is not connected.,プロフィール
+QZ Tray Setup,利益
+Rate,利益: 請求書項目の見積り
+Rate adjusted to maximum allowed discount,利益: 株式元帳 (COGS)
+Ready,収益性レポート
+Ready to resume,日割り返品割引
+Ready!,購入金額
+Real-time POS insights for retail operations.,購入請求書
+Rebuild Offline Data,注文書が作成されました
+Receive,数量
+Receive now,資格のある
+Received,数量
+Received:,数量が利用可能な在庫を超えています
+Recent Movement Entries,クイックアクション
+Recent updates about your invoices,見積書 {0} が送信されました
+Recently Active Customers,見積書の提出
+Rechecking connection,QZトレイが接続されました。
+Reconcile payment methods and close shift,QZ トレイが手動で切断されました。
+Reconciling Payments,再度有効にするには、[接続] を押します。
+"Reconnect and open this page once while online, then offline refreshes will be able to restore it.",QZトレイが接続されていません。
+Reconnect online to refresh cached offline data from the server.,QZトレイのセットアップ
+Recreate local offline prerequisites from scratch,料金
+Recv:,許可される最大割引率に調整されたレート
+Redeem,準備完了
+Redeem / Scan,再開の準備完了
+Redeem Amount,準備完了！
+Redeem Mode,小売業向けのリアルタイム POS 洞察。
+Redeemed Amount,オフラインデータの再構築
+Redeemed credit cannot be greater than its total.,受信
+Redemption and Totals,今すぐ受け取る
+Reference,受け取りました
+Refresh,受信:
+Refresh Exchange Rate,最近の動きのエントリ
+Refresh Offline Data,請求書に関する最近の更新情報
+Refresh Printers,最近アクティブな顧客
+Refund,接続を再確認しています
+Release Notes,支払い方法を調整し、シフトを締める
+Reload,支払いの調整
+Reload customers,オンライン中に再接続してこのページを一度開くと、オフラインで更新すると復元できます。
+Reload Items,オンラインで再接続して、サーバーからキャッシュされたオフライン データを更新します。
+Reload Now,ローカルのオフライン前提条件を最初から再作成する
+Reload to apply the latest changes. Your current session will be refreshed.,受信:
+Reload Workflow,引き換える
+Remarks,引き換え/スキャン
+Remarks are required.,引き換え額
+Remove,引き換えモード
+Remove barcode item,償還額
+Remove cached data and reload the POS app,引き換えられるクレジットはその合計を超えることはできません。
+Remove item,償還と合計
+Remove Offer,参考資料
+Reorder / Purchase Suggestions,リフレッシュ
+Repair Candidate,為替レートを更新する
+Repair Change Allocation,オフラインデータを更新する
+Repair requires an online connection,プリンターを更新する
+Repaired,払い戻し
+Repairing change allocation,リリースノート
+Repeat Customers,リロード
+Repeat Rate,顧客をリロードする
+Reprint previous transaction,アイテムをリロードする
+Request,今すぐリロード
+Request ID: {0},最新の変更を適用するには、リロードします。
+Request Payment,現在のセッションが更新されます。
+Requested route: {0},リロードワークフロー
+Required columns cannot be hidden,備考
+Reset,備考は必須です。
+Reset item name,削除
+Reset to Default,バーコード項目を削除する
+Resource Health,キャッシュされたデータを削除し、POS アプリをリロードします
+Restricted,アイテムを削除する
+Restricted operational controls for supervisors only.,オファーを削除する
+Retry,再注文/購入の提案
+Retry route,修理候補
+Return,修理変更の割り当て
+Return Amount,修復にはオンライン接続が必要です
+Return Count,修理済み
+Return items must have negative quantities,変更割り当ての修復
+Return total must be negative,リピートのお客様
+Return Valid Until,リピート率
+Return window passed,以前のトランザクションを再印刷する
+Return without Invoice,リクエスト
+Returns,返品
+Returns / Voids / Discounts,返品/無効/割引
+Returns by Currency,通貨別の返品
+Revenue,収益
+Review shift totals before submitting the closing entry,締めエントリーを提出する前にシフト合計を確認してください
+Round Off,四捨五入
+Rows,行
+Rows:,行:
+Rule,ルール
+Sale,販売
+Sales,販売
+Sales Order {0} is Submitted,販売注文 {0} が送信されました
+Sales Person and Print,営業担当者と印刷物
+Sales Person not found,営業担当者が見つかりません
+Sales processed,売上処理済み
+Sales Return,売上収益
+Sales Trend Report,売上動向レポート
+Save,保存
+Save & Clear,保存してクリア
+Save as POS Profile Default,POS プロファイルのデフォルトとして保存
+Save Settings,設定の保存
+Save the selected printer as the POS Profile default so it shows automatically on this setup.,選択したプリンターをデフォルトの POS プロファイルとして保存すると、この設定で自動的に表示されます。
+Saved as draft because: {0},下書きとして保存された理由: {0}
+Saving...,保存中...
+Scale barcode detected. Quantity here is the number of labels to print.,スケールバーコードが検出されました。ここでの数量は、印刷するラベルの数です。
+Scale barcode settings are not configured. Using item barcode only.,スケールバーコード設定が構成されていません。商品バーコードのみを使用します。
+Scale template barcode is missing for this item/UOM. Using item barcode only.,この品目/単位にはスケール テンプレート バーコードがありません。商品バーコードのみを使用します。
+Scan an existing card and top it up without leaving the payment flow.,既存のカードをスキャンして、支払いフローを離れることなくチャージします。
+Scan Error,スキャンエラー
+Scan or enter a gift card code to check balance or redeem.,ギフト カード コードをスキャンまたは入力して、残高を確認するか引き換えます。
+Scan or paste the card code below.,以下のカードコードをスキャンまたは貼り付けてください。
+Scan QR Code/Barcode,QRコード/バーコードをスキャンします
+Scan with camera,カメラでスキャン
+Scan-First Flow,スキャンファーストフロー
+Scanned Code:,スキャンされたコード:
+Scanning for: {0},スキャン中: {0}
+Scanning items,アイテムのスキャン
+Scan-Ready,スキャン準備完了
+Scope,範囲
+Scope: All Profiles,範囲: すべてのプロファイル
+Scope: Current Profile,範囲: 現在のプロファイル
+Scope: Specific Profile,範囲: 特定のプロファイル
+Search,検索
+Search Account,アカウントの検索
+Search an invoice and continue the return flow without extra steps.,請求書を検索し、追加の手順を行わずに返品フローを続行します。
+Search customer,顧客を検索
+Search invoices or customers,請求書や顧客を検索する
+Search item,検索項目
+Search item / code,検索項目・コード
+Search items or barcode,商品またはバーコードを検索する
+Search Mpesa Payments,Mpesa の支払いを検索
+Search return invoices or customers,返品請求書または顧客を検索する
+Search supplier,サプライヤーを検索
+Search unpaid invoices or customers,未払いの請求書または顧客を検索する
+Secure context (HTTPS or localhost) is required for camera access.,カメラへのアクセスには安全なコンテキスト (HTTPS または localhost) が必要です。
+Secure context (HTTPS) required for camera access. Please use HTTPS to access the camera.,カメラへのアクセスにはセキュア コンテキスト (HTTPS) が必要です。カメラにアクセスするにはHTTPSを使用してください。
+Select,選択
+Select a cashier first.,まずレジを選択します。
+Select a customer,顧客を選択してください
+Select a customer to use coupon,クーポンを使用する顧客を選択してください
+Select a printer to use QZ silent printing.,QZサイレント印刷を使用するプリンターを選択します。
+Select Batch,バッチの選択
+Select Columns to Display,表示する列の選択
+Select items to sell,販売する商品を選択してください
+Select Language,言語の選択
+Select Payment,お支払いを選択してください
+Select Payment Account,支払いアカウントを選択してください
+Select printer,プリンターの選択
+Select Return Invoice,請求書の返送を選択してください
+Select S.O,S.Oを選択してください
+Select Sales Orders,販売注文の選択
+Select the cashier who is taking over this terminal.,この端末を引き継ぐレジ担当者を選択します。
+Selected,選択済み
+Selected movement type is not allowed by POS Profile.,選択した移動タイプは POS プロファイルで許可されていません。
+Selected Payments,選択した支払い
+Sensitive actions kept away from quick taps.,敏感なアクションは素早いタップから遠ざけてください。
+Serial,シリアル
+Serial Numbers,シリアル番号
+Server CPU Usage:,サーバーの CPU 使用率:
+Server Health,サーバーの状態
+Server Memory Usage:,サーバーのメモリ使用量:
+Server Metrics,サーバーメトリクス
+Server Uptime:,サーバー稼働時間:
+Service Charges,サービス料
+Session,セッション
+Set each cashier PIN in the User form and keep terminal members assigned in POS Profile User.,ユーザー フォームで各レジの PIN を設定し、POS プロファイル ユーザーで端末メンバーを割り当てたままにします。
+Settings,設定
+Settings in this section update the POS workspace without changing the current route.,このセクションの設定により、現在のルートを変更せずに POS ワークスペースが更新されます。
+Setup complete!,セットアップ完了！
+Share,共有
+Shared terminal,共用端末
+Shift Closed Snapshot,シフトクローズドスナップショット
+Shift Overview,シフト概要
+Show,見せる
+Show cart on customer-facing screen,顧客向け画面にカートを表示する
+Show last invoice rate,最後の請求書レートを表示
+Show rate info,料金情報を表示する
+Show Repair Candidates,修理候補を表示
+Show search tools,検索ツールを表示する
+Show the active cart on a customer-facing screen,顧客向け画面にアクティブなカートを表示する
+Showing {0}-{1} of {2},{2}中{0}～{1}を表示中
+Showing 0 of 0,0 件中 0 件を表示
+Shows the distribution of invoices per currency,通貨ごとの請求書の分布を示します
+Sign out of session,セッションからサインアウトする
+Sign out of the current POS session,現在の POS セッションからサインアウトします
+Size:,サイズ：
+Skipped Payments,スキップされた支払い
+Skipping items without barcodes,バーコードのない商品をスキップする
+Slow Moving,ゆっくりとした動き
+Slow Moving Items,動きの遅いアイテム
+Slow Queries:,遅いクエリ:
+Sold,販売済み
+Source,ソース
+Source Cash Account (Optional Override),ソース現金口座 (オプションの上書き)
+Source Ex. Rate:,ソース例レート：
+Source Rate:,ソースレート:
+Specific Profile,特定のプロファイル
+Split Invoices,分割請求書
+Staff / Cashier Performance Report,スタッフ/レジ係のパフォーマンスレポート
+Status,状態
+Stock,ストック
+Stock Information,株式情報
+Stock is lower than requested,在庫が要求よりも少ない
+Stock is lower than requested:\n{0},在庫が要求よりも少ないです:\n{0}
+Stock Movement Report,在庫変動レポート
+Stock update: {0} has {1} available. Adding {2} will bring the stock below zero.,在庫更新: {0} には {1} が在庫あります。 {2} を追加すると、在庫はゼロ以下になります。
+Submit,提出する
+Submit & Print,送信して印刷
+Submit Deposit,デポジットを送信する
+Submit Expense,経費の提出
+Submitted,提出済み
+Submitted Cash Movements,提出された現金の移動
+Submitted entries,提出されたエントリー
+Successfully scanned:,正常にスキャンされました:
+Suggested,提案された
+Suggested Qty,推奨数量
+Supervisor Access,スーパーバイザーのアクセス
+Supervisor permissions unlock issuance and reloads,スーパーバイザー権限による発行とリロードのロック解除
+Supervisor Tools,スーパーバイザーツール
+Supplier,サプライヤー
+Supplier and dates are required.,サプライヤーと日付は必須です。
+Supplier Invoices,サプライヤーの請求書
+Supplier is required.,サプライヤーは必須です。
+Supplier name is required,サプライヤー名は必須です
+Supplier Payments,サプライヤーの支払い
+Supplier Purchase Summary,サプライヤーの購入概要
+Suppliers,サプライヤー
+Suppliers not found,サプライヤーが見つかりません
+Switch Camera,カメラを切り替える
+Switch Cashier,スイッチレジ
+Switch the POS appearance theme,POS 外観テーマを切り替える
+Switch theme appearance,テーマの外観を切り替える
+Switched to:,に切り替えました:
+Sync All Invoices,すべての請求書を同期する
+Sync Offline Cash Movements ({0}),オフラインの現金移動を同期 ({0})
+Sync Offline Sales,オフライン販売を同期する
+Synced {0} offline cash movement(s).,{0} 個のオフライン現金移動を同期しました。
+Syncing items in background,バックグラウンドでのアイテムの同期
+System / Diagnostics,システム/診断
+"System actions are low-frequency maintenance controls such as app info, support diagnostics, and session controls.",システム アクションは、アプリ情報、サポート診断、セッション制御などの低頻度のメンテナンス制御です。
+System Information,システム情報
+System Status,システムステータス
+Tables:,テーブル:
+Tap the button below to redeem a gift card during checkout.,チェックアウト時に下のボタンをタップしてギフトカードを引き換えてください。
+Target,ターゲット
+Target Ex. Rate:,対象例レート：
+Target Rate:,目標レート:
+Tax,税
+Tax / Charges Report,税金/料金レポート
+Tax Heads,税務署長
+Taxable Amount,課税対象額
+Tendered,入札されました
+Terminal,ターミナル
+Terminal & Devices,端末とデバイス
+Terminal locked,端末ロック中
+"Terminal tools affect this checkout station, customer-facing displays, and future printer/device controls.",ターミナル ツールは、このチェックアウト ステーション、顧客向けディスプレイ、および将来のプリンター/デバイスの制御に影響を与えます。
+Territory not found,テリトリーが見つかりません
+The amount paid is not complete,支払額が完了していません
+The app stores data locally for offline use. This is called cache.,アプリはオフラインで使用できるようにデータをローカルに保存します。これをキャッシュと呼びます。
+The invoice stayed in draft. Please review and submit it manually.,請求書は下書きのままでした。手動で確認して送信してください。
+The maximum discount allowed is,許可される最大割引は
+The quantity for {0} has been adjusted to the maximum available stock.,{0} の数量は、利用可能な最大在庫に合わせて調整されました。
+The system could not retrieve the item details. Please try again.,システムはアイテムの詳細を取得できませんでした。もう一度試してください。
+These invoices will be synced when connection is restored,これらの請求書は、接続が復元されると同期されます
+This action now opens inside the settings workspace.,このアクションは設定ワークスペース内で開きます。
+This coupon already used !,このクーポンはすでに使用されています!
+This invoice does not need change-allocation repair,この請求書には変更配分の修正は必要ありません
+This invoice is already repaired,この請求書はすでに修復されています
+This is an item template. Please choose a variant.,アイテムのテンプレートです。バリエーションを選択してください。
+this item,このアイテム
+This POS page could not be opened offline because its code was not cached on this terminal yet.,コードがこの端末にまだキャッシュされていないため、この POS ページをオフラインで開くことができませんでした。
+This Serial Number {0} has already been added!,このシリアル番号 {0} はすでに追加されています。
+Threshold,しきい値
+Time,時間
+Tip: Clear cache regularly to free up space and keep the app fast.,ヒント: キャッシュを定期的にクリアしてスペースを解放し、アプリの高速性を維持します。
+Tip: Close unused tabs or apps to reduce lag.,ヒント: 遅延を軽減するには、使用していないタブまたはアプリを閉じてください。
+Tip: Monitor slow queries and table size for optimal performance.,ヒント: 最適なパフォーマンスを得るために、遅いクエリとテーブル サイズを監視します。
+To Be Paid,支払い予定
+To Date,現在まで
+Today,今日
+Today Profit,今日の利益
+Today Sales,今日の売上
+Toggle navigation drawer,ナビゲーションドロワーを切り替えます
+Toggle Theme,テーマの切り替え
+Tools,ツール
+Tools for customer-facing screens and terminal-specific actions.,顧客向けの画面と端末固有のアクションのためのツール。
+Top Brand,トップブランド
+Top Category,トップカテゴリー
+Top Charge Head,トップチャージヘッド
+Top Customers,上位顧客
+Top Discount,トップディスカウント
+Top Items by Location,場所別の上位アイテム
+Top Margin,上マージン
+Top Pending,上位保留中
+Top Profit Item,最高利益品目
+Top Return Items,上位の返品商品
+Top Sales by Cashier,レジ係別のトップセールス
+Top Supplier,トップサプライヤー
+Top Suppliers by Spend,支出額別上位サプライヤー
+Top Tables,トップテーブル
+Top Tax Head,最高税務責任者
+Top Up Amount,チャージ金額
+Top Up Card,トップアップカード
+Top Up Mode,補充モード
+Top Variant,トップバリアント
+Total,合計
+Total Amount,合計金額
+Total Change,合計の変化
+Total Charges,合計料金
+Total In,合計入力
+Total Invoices,合計請求額
+Total Items,総アイテム数
+Total Mpesa,トータル・ムペサ
+Total Out,トータルアウト
+Total Payments,支払総額
+Total Purchase,購入総額
+Total Selected :,選択された合計:
+Total Size,合計サイズ
+Total Stock Qty,総在庫数
+Total:,合計：
+Totals by Invoice Currency,請求書通貨別の合計
+Track how much cash was handed back to customers,顧客に返された現金の額を追跡する
+"Track recent sales, collect unpaid balances, and reopen saved work",最近の売上を追跡し、未払い残高を回収し、保存した作業を再度開きます
+Transaction ID,トランザクションID
+Transfer,移行
+Try a different search term or clear the cart search.,別の検索語を試すか、カートの検索をクリアしてください。
+Try adjusting your search or filters,検索またはフィルターを調整してみてください
+Try another source or refresh the list.,別のソースを試すか、リストを更新してください。
+Try changing the date range or status filter.,日付範囲またはステータス フィルターを変更してみてください。
+Type,タイプ
+Unable to access camera even with basic settings. Please check your camera permissions and device compatibility.,基本設定でもカメラにアクセスできません。カメラの許可とデバイスの互換性を確認してください。
+Unable to add offer item {0}. Please refresh and try again.,オファーアイテム {0} を追加できません。更新してもう一度お試しください。
+Unable to add offer item. Please refresh and try again.,オファーアイテムを追加できません。更新してもう一度お試しください。
+Unable to add scanned item.,スキャンしたアイテムを追加できません。
+Unable to create purchase order,注文書を作成できません
+Unable to delete draft invoice,下書き請求書を削除できません
+Unable to fetch documents,ドキュメントを取得できません
+Unable to fetch draft orders,下書き注文を取得できません
+Unable to fetch invoice history,請求書履歴を取得できません
+Unable to fetch M-Pesa payments,M-Pesa の支払いを取得できません
+Unable to fetch sales orders,販売注文を取得できません
+Unable to fetch unpaid invoices,未払いの請求書を取得できません
+Unable to generate scale barcode,スケールバーコードを生成できません
+Unable to issue gift card.,ギフトカードを発行できません。
+Unable to load cashier PIN status.,レジの PIN ステータスをロードできません。
+Unable to load document,ドキュメントをロードできません
+Unable to load draft invoice,請求書草案を読み込めません
+Unable to load gift card balance.,ギフトカードの残高を読み込むことができません。
+Unable to load invoice details,請求書の詳細をロードできません
+Unable to load parked order,保留中の注文をロードできません
+Unable to load the selected sales order,選択した販売注文をロードできません
+Unable to prepare document,書類を準備できません
+Unable to prepare return invoice,返品請求書を準備できません
+Unable to print draft invoice,請求書草案を印刷できません
+Unable to print submitted invoice,送信された請求書を印刷できません
+Unable to process document action,ドキュメントアクションを処理できません
+Unable to repair change allocation,変更割り当てを修復できません
+Unable to save cashier PIN.,レジ暗証番号を保存できません。
+Unable to save the rate to the backend price list,バックエンド価格リストにレートを保存できません
+Unable to submit invoice,請求書を提出できません
+Unable to submit the selected payment,選択した支払いを送信できません
+Unable to top up gift card.,ギフトカードにチャージできません。
+Unable to verify cashier PIN.,レジの暗証番号を確認できません。
+Unallocated,未割り当て
+Unallocated:,未割り当て:
+Unavailable,利用不可
+Unknown,未知
+Unknown error,不明なエラー
+Unknown Item,不明なアイテム
+Unknown Warehouse,未知の倉庫
+Unlock POS,POSのロックを解除する
+Unpaid,未払い
+"Unselected payments stay unallocated first, then auto reconcile after submit.",選択されていない支払いは最初は割り当てられないままになり、送信後に自動的に調整されます。
+UOM,単位
+UOM not found,単位が見つかりません
+Update available,利用可能なアップデート
+Update Customer,顧客の更新
+Update PIN,PIN を更新する
+Update Price List Rate,価格表レートの更新
+Updated,更新されました
+Updates and app info that stay out of the cashier flow.,レジの流れから外れるアップデートとアプリ情報。
+Updates automatically,自動的に更新されます
+Upload pending transactions,保留中のトランザクションをアップロードする
+Usage,使用法
+Usage Stats,使用状況統計
+Use a 4 to 8 digit PIN for cashier switching and terminal unlock.,レジの切り替えや端末のロック解除には4〜8桁の暗証番号を使用します。
+Use Cashier,キャッシャーを使用する
+Use date range to search for older invoices,日付範囲を使用して古い請求書を検索します
+"Use one field for manual code entry, barcode scans, or QR scans.",手動コード入力、バーコード スキャン、または QR スキャンには 1 つのフィールドを使用します。
+"Use one workflow for balance checks, new issuance, and top ups without leaving POS.",POS を離れることなく、残高確認、新規発行、チャージを 1 つのワークフローで実行できます。
+"Use this section when cached prerequisite data needs a refresh, rebuild, or diagnostics review.",キャッシュされた前提条件データの更新、再構築、または診断レビューが必要な場合は、このセクションを使用します。
+Use Western numerals,欧文数字を使用する
+Used:,使用済み：
+Using basic camera settings due to device limitations,デバイスの制限により基本的なカメラ設定を使用する
+Using cached customer balance,キャッシュされた顧客残高の使用
+Valid until,まで有効
+Variance %,分散%
+Variants,バリエーション
+Variant-wise,バリアントごと
+Verify closing amounts for each payment method,各支払い方法の最終金額を確認する
+View all,すべて見る
+View app information and current build details,アプリ情報と現在のビルドの詳細を表示する
+View Data Diagnostics,データ診断の表示
+View Details,詳細を見る
+View invoice details,請求書の詳細を表示する
+View notifications,通知を表示する
+View offline invoices,オフラインの請求書を表示する
+View restricted POS insights,制限された POS の分析情報を表示する
+Void Amount,ボイド量
+Void Count,ボイド数
+Voids,ボイド
+Waiting for cart items,カートの商品を待っています
+Waiting for payment...,支払いを待っています...
+Walk-in Customer,ウォークインのお客様
+Warehouse,倉庫
+Warning: High cache usage may affect performance.,警告: キャッシュの使用率が高くなると、パフォーマンスに影響を与える可能性があります。
+Warning: High lag may indicate heavy processing or browser slowness.,警告: 遅延が大きい場合は、処理が重いかブラウザが遅いことを示している可能性があります。
+Week Δ,週Δ
+Week-wise,週ごと
+Weight (g),重量(g)
+Weight (grams),重量 (グラム)
+We'll let you know if an invoice fails to submit,請求書が送信されない場合は通知されます
+Workflow,ワークフロー
+Write off amount cannot exceed the POS profile maximum of {0},償却額は POS プロファイルの最大値 {0} を超えることはできません
+Write off amount exceeds the allowed limit ({0}). Please add payment for the remaining amount.,償却額が許容限度 ({0}) を超えています。残額を追加でお支払い下さい。
+Yes,はい
+"Yes, Cancel sale",はい、販売をキャンセルします
+"Yes, Close",はい、閉じます
+You are not allowed to print draft invoices,請求書の下書きを印刷することはできません
+You are offline. Add Payment will work again when the connection is restored.,あなたはオフラインです。接続が復元されると、支払いの追加は再び機能します。
+You have no notifications right now,現在通知はありません
+Your Cart,あなたのカート
