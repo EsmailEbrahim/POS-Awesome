@@ -1,3 +1,5 @@
+import { toCompanyCurrency } from "../../../../utils/erpnextCurrency";
+
 declare const __: (_text: string, _args?: any[]) => string;
 declare const frappe: any;
 
@@ -51,15 +53,14 @@ export function useItemCreation() {
 		const selectedCurrency = context.selected_currency || companyCurrency;
 		if (selectedCurrency !== companyCurrency) {
 			// Store original base currency values (Selected -> Company)
-			const conversionRate = context.conversion_rate || 1;
 			new_item.base_price_list_rate =
 				item.base_price_list_rate !== undefined
 					? item.base_price_list_rate
-					: item.rate * conversionRate;
+					: toCompanyCurrency(context, item.rate);
 			new_item.base_rate =
 				item.base_rate !== undefined
 					? item.base_rate
-					: item.rate * conversionRate;
+					: toCompanyCurrency(context, item.rate);
 			new_item.base_discount_amount = 0;
 		} else {
 			// In base currency, base rates = displayed rates

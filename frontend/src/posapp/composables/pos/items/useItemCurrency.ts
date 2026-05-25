@@ -1,3 +1,11 @@
+import {
+	getCompanyCurrency,
+	getPlcConversionRate,
+	getPriceListCurrency,
+	getSelectedCurrency,
+	priceListToSelectedCurrency,
+} from "../../../utils/erpnextCurrency";
+
 type CurrencyItem = {
 	plc_conversion_rate?: number;
 	original_rate?: number;
@@ -11,11 +19,13 @@ type CurrencyItem = {
 };
 
 type CurrencyContext = {
+	company?: { default_currency?: string };
 	pos_profile: { currency: string };
 	price_list_currency?: string;
 	selected_currency?: string;
 	exchange_rate?: number;
 	conversion_rate?: number;
+	plc_conversion_rate?: number;
 	currency_precision?: number;
 	flt?: (_value: unknown, _precision?: number) => number;
 };
@@ -31,16 +41,8 @@ export function useItemCurrency() {
 		item: CurrencyItem,
 		context: CurrencyContext,
 	): number => {
-		const companyCurrency = context.pos_profile.currency;
-		const priceListCurrency =
-			context.price_list_currency || companyCurrency;
 		// Benchmark note: favor item-level plc_conversion_rate to avoid recomputing PLC->CC.
-		return (
-			item.plc_conversion_rate ??
-			(priceListCurrency === companyCurrency
-				? 1
-				: (context.exchange_rate || 1) * (context.conversion_rate || 1))
-		);
+		return item.plc_conversion_rate ?? getPlcConversionRate(context);
 	};
 
 	/**
@@ -54,7 +56,7 @@ export function useItemCurrency() {
 		context: CurrencyContext,
 	) => {
 		if (!item) return;
-		const base = context.pos_profile.currency;
+		const base = getCompanyCurrency(context) || context.pos_profile.currency;
 
 		if (!item.original_rate) {
 			item.original_rate = item.rate;
@@ -73,8 +75,8 @@ export function useItemCurrency() {
 
 		// Determine selected rate using exchange rate (Price List -> Selected)
 		// item.original_currency is the Price List Currency
-		const priceListCurrency = context.price_list_currency || base;
-		const selectedCurrency = context.selected_currency || base;
+		const priceListCurrency = getPriceListCurrency(context) || base;
+		const selectedCurrency = getSelectedCurrency(context) || base;
 
 		// Benchmark note: when PLC === SC, keep the displayed rate in PLC to avoid CC bleed-through.
 		const converted_rate =
@@ -82,7 +84,7 @@ export function useItemCurrency() {
 				? price_list_rate
 				: item.original_currency === selectedCurrency
 					? price_list_rate
-					: price_list_rate * (context.exchange_rate || 1);
+					: priceListToSelectedCurrency(context, price_list_rate);
 
 		// context.flt is expected to be available or passed
 		const flt = context.flt || ((v: unknown) => Number(v));

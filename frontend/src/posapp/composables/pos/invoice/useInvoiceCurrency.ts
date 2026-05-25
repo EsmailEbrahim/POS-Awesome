@@ -36,6 +36,10 @@ import {
 	saveExchangeRateCache,
 	savePriceListMetaCache,
 } from "../../../../offline/index";
+import {
+	fromCompanyCurrency,
+	toCompanyCurrency,
+} from "../../../utils/erpnextCurrency";
 
 // @ts-ignore
 const __ = window.__ || ((s) => s);
@@ -250,6 +254,12 @@ export function useInvoiceCurrency() {
 			pos_profile.value?.currency;
 		const conversionRate = conversion_rate.value || 1;
 		const precision = currency_precision.value;
+		const currencyContext = {
+			pos_profile: pos_profile.value,
+			company: company.value,
+			selected_currency: selected_currency.value,
+			conversion_rate: conversionRate,
+		};
 
 		items.forEach((item: any) => {
 			item._skip_calc = true;
@@ -261,11 +271,20 @@ export function useInvoiceCurrency() {
 					item.base_price_list_rate = item.price_list_rate;
 					item.base_discount_amount = item.discount_amount || 0;
 				} else {
-					item.base_rate = item.rate * conversionRate;
+					item.base_rate = toCompanyCurrency(
+						currencyContext,
+						item.rate,
+					);
 					item.base_price_list_rate =
-						item.price_list_rate * conversionRate;
+						toCompanyCurrency(
+							currencyContext,
+							item.price_list_rate,
+						);
 					item.base_discount_amount =
-						(item.discount_amount || 0) * conversionRate;
+						toCompanyCurrency(
+							currencyContext,
+							item.discount_amount || 0,
+						);
 				}
 			}
 
@@ -275,15 +294,24 @@ export function useInvoiceCurrency() {
 				item.discount_amount = item.base_discount_amount;
 			} else {
 				const converted_price = flt(
-					item.base_price_list_rate / conversionRate,
+					fromCompanyCurrency(
+						currencyContext,
+						item.base_price_list_rate,
+					),
 					precision,
 				);
 				const converted_rate = flt(
-					item.base_rate / conversionRate,
+					fromCompanyCurrency(
+						currencyContext,
+						item.base_rate,
+					),
 					precision,
 				);
 				const converted_discount = flt(
-					item.base_discount_amount / conversionRate,
+					fromCompanyCurrency(
+						currencyContext,
+						item.base_discount_amount,
+					),
 					precision,
 				);
 
