@@ -38,6 +38,7 @@ import {
 } from "../../../../offline/index";
 import {
 	fromCompanyCurrency,
+	getPlcConversionRate,
 	toCompanyCurrency,
 } from "../../../utils/erpnextCurrency";
 
@@ -93,6 +94,59 @@ export function useInvoiceCurrency() {
 		if (isNaN(_value)) return 0;
 		if (Math.abs(_value) < 0.000001) return _value;
 		return Number((_value || 0).toFixed(prec));
+	};
+
+	const parseFinite = (value: unknown): number | null => {
+		const numeric = Number.parseFloat(String(value ?? ""));
+		return Number.isFinite(numeric) ? numeric : null;
+	};
+
+	const resolveOriginalBasePriceListRate = (
+		item: any,
+		currencyContext: Record<string, any>,
+	): number | null => {
+		const conversionFactor = parseFinite(item?.conversion_factor) || 1;
+		const originalBasePriceListRate = parseFinite(
+			item?.original_base_price_list_rate,
+		);
+		if (originalBasePriceListRate !== null) {
+			return originalBasePriceListRate * conversionFactor;
+		}
+
+		const originalRate = parseFinite(item?.original_rate);
+		if (originalRate !== null) {
+			return originalRate * getPlcConversionRate(currencyContext);
+		}
+
+		return null;
+	};
+
+	const refreshCanonicalBaseRates = (
+		item: any,
+		currencyContext: Record<string, any>,
+	) => {
+		if (!item || item._manual_rate_set === true || item.locked_price) {
+			return;
+		}
+
+		const canonicalBasePriceListRate =
+			resolveOriginalBasePriceListRate(item, currencyContext);
+		if (canonicalBasePriceListRate === null) {
+			return;
+		}
+
+		const baseDiscountAmount =
+			parseFinite(item.base_discount_amount) ?? 0;
+		item.base_price_list_rate = canonicalBasePriceListRate;
+
+		if (baseDiscountAmount > 0) {
+			item.base_rate = Math.max(
+				canonicalBasePriceListRate - baseDiscountAmount,
+				0,
+			);
+		} else if (!item.posa_offer_applied) {
+			item.base_rate = canonicalBasePriceListRate;
+		}
 	};
 
 	const fetch_available_currencies = async () => {
@@ -257,12 +311,15 @@ export function useInvoiceCurrency() {
 		const currencyContext = {
 			pos_profile: pos_profile.value,
 			company: company.value,
+			price_list_currency: price_list_currency.value || companyCurrency,
 			selected_currency: selected_currency.value,
+			exchange_rate: exchange_rate.value || 1,
 			conversion_rate: conversionRate,
 		};
 
 		items.forEach((item: any) => {
 			item._skip_calc = true;
+			refreshCanonicalBaseRates(item, currencyContext);
 
 			// Ensure base rates exist
 			if (!item.base_rate) {
@@ -325,6 +382,13 @@ export function useInvoiceCurrency() {
 			item.amount = flt(item.qty * item.rate, precision);
 			item.base_amount = flt(item.qty * item.base_rate, precision);
 		});
+
+		if (typeof invoiceStore.recalculateTotals === "function") {
+			invoiceStore.recalculateTotals();
+		}
+		if (typeof invoiceStore.touch === "function") {
+			invoiceStore.touch();
+		}
 	};
 
 	const roundAmount = (amount: number) => {

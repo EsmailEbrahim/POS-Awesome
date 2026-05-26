@@ -30,6 +30,11 @@ type CurrencyContext = {
 	flt?: (_value: unknown, _precision?: number) => number;
 };
 
+const parseFinite = (value: unknown): number | null => {
+	const numeric = Number.parseFloat(String(value ?? ""));
+	return Number.isFinite(numeric) ? numeric : null;
+};
+
 export function useItemCurrency() {
 	/**
 	 * Calculates the rate from Price List Currency to Company Currency.
@@ -59,8 +64,15 @@ export function useItemCurrency() {
 		const base = getCompanyCurrency(context) || context.pos_profile.currency;
 
 		if (!item.original_rate) {
-			item.original_rate = item.rate;
-			item.original_currency = item.currency || base;
+			const sourceRate =
+				parseFinite(item.price_list_rate) ??
+				parseFinite(item.rate) ??
+				0;
+			item.original_rate = sourceRate;
+		}
+		if (!item.original_currency) {
+			item.original_currency =
+				context.price_list_currency || item.currency || base;
 		}
 
 		// original_rate is in price list currency
