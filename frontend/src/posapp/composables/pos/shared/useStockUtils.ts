@@ -14,6 +14,7 @@ export function useStockUtils() {
 			? context.flt(value, context.currency_precision)
 			: value;
 	const syncLineAmounts = (item: any, context: any) => {
+		if (!item) return;
 		const qty = toNumber(item?.qty);
 		const rate = toNumber(item?.rate);
 		const baseRate = toNumber(item?.base_rate ?? item?.rate);
@@ -27,7 +28,6 @@ export function useStockUtils() {
 			invoiceStore.triggerUpdateTotals();
 		} else if (invoiceStore.recalculateTotals) {
 			invoiceStore.recalculateTotals();
-			invoiceStore.touch?.();
 		}
 	};
 
@@ -439,10 +439,7 @@ export function useStockUtils() {
 
 		// Update item details
 		if (context.calc_stock_qty) context.calc_stock_qty(item, item.qty);
-		if (context.invoiceStore) {
-			context.invoiceStore.touch();
-			refreshInvoiceTotals(context);
-		}
+		refreshInvoiceTotals(context);
 		if (context.forceUpdate) context.forceUpdate();
 
 	};
