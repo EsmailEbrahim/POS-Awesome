@@ -5,6 +5,32 @@ import { useToastStore } from "../../../stores/toastStore.js";
 
 export function useStockUtils() {
 	const toastStore = useToastStore();
+	const toNumber = (value: any) => {
+		const numeric = Number.parseFloat(String(value ?? 0));
+		return Number.isFinite(numeric) ? numeric : 0;
+	};
+	const roundCurrency = (context: any, value: number) =>
+		typeof context?.flt === "function"
+			? context.flt(value, context.currency_precision)
+			: value;
+	const syncLineAmounts = (item: any, context: any) => {
+		if (!item) return;
+		const qty = toNumber(item?.qty);
+		const rate = toNumber(item?.rate);
+		const baseRate = toNumber(item?.base_rate ?? item?.rate);
+		item.amount = roundCurrency(context, qty * rate);
+		item.base_amount = roundCurrency(context, qty * baseRate);
+	};
+	const refreshInvoiceTotals = (context: any) => {
+		const invoiceStore = context?.invoiceStore;
+		if (!invoiceStore) return;
+		if (invoiceStore.triggerUpdateTotals) {
+			invoiceStore.triggerUpdateTotals();
+		} else if (invoiceStore.recalculateTotals) {
+			invoiceStore.recalculateTotals();
+		}
+	};
+
 	// Calculate UOM conversion and update item rates
 	const calcUom = async (item: any, value: any, context: any) => {
 		if (!item || !value) return;
@@ -244,9 +270,11 @@ export function useStockUtils() {
 			item.price_list_rate = toSelectedCurrency(context, base_price);
 			item.rate = toSelectedCurrency(context, base_rate);
 			item.discount_amount = toSelectedCurrency(context, base_discount);
+			syncLineAmounts(item, context);
 
 
 			if (context.calc_stock_qty) context.calc_stock_qty(item, item.qty);
+			refreshInvoiceTotals(context);
 			if (context.forceUpdate) context.forceUpdate();
 
 			console.log("[useStockUtils] calcUom DONE (specific price)", {
@@ -407,17 +435,11 @@ export function useStockUtils() {
 				item.base_price_list_rate,
 			);
 		}
+		syncLineAmounts(item, context);
 
 		// Update item details
 		if (context.calc_stock_qty) context.calc_stock_qty(item, item.qty);
-		if (context.invoiceStore) {
-			context.invoiceStore.touch();
-			if (context.invoiceStore.triggerUpdateTotals) {
-				context.invoiceStore.triggerUpdateTotals();
-			} else if (context.invoiceStore.recalculateTotals) {
-				context.invoiceStore.recalculateTotals();
-			}
-		}
+		refreshInvoiceTotals(context);
 		if (context.forceUpdate) context.forceUpdate();
 
 	};
