@@ -389,3 +389,7 @@ fixtures = [
         ],
     },
 ]
+
+# Permissions for Custom DocTypes
+# --------------------------------
+permissions = []
