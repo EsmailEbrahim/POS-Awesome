@@ -190,11 +190,11 @@ def _prepare_mapped_doc(doc, target_doctype):
 
 def _get_mapping_functions():
     return {
-        "quote_to_order": resolve_make_sales_order_from_quotation(),
-        "quote_to_invoice": resolve_make_sales_invoice_from_quotation(),
-        "order_to_delivery_note": resolve_make_delivery_note_from_order(),
-        "order_to_invoice": resolve_make_sales_invoice_from_order(),
-        "delivery_to_invoice": resolve_make_sales_invoice_from_delivery(),
+        "quote_to_order": lambda *a, **kw: resolve_make_sales_order_from_quotation()(*a, **kw),
+        "quote_to_invoice": lambda *a, **kw: resolve_make_sales_invoice_from_quotation()(*a, **kw),
+        "order_to_delivery_note": lambda *a, **kw: resolve_make_delivery_note_from_order()(*a, **kw),
+        "order_to_invoice": lambda *a, **kw: resolve_make_sales_invoice_from_order()(*a, **kw),
+        "delivery_to_invoice": lambda *a, **kw: resolve_make_sales_invoice_from_delivery()(*a, **kw),
     }
 
 
