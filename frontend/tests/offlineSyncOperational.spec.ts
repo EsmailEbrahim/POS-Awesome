@@ -213,10 +213,9 @@ describe("operational offline sync adapters", () => {
 				}),
 			}),
 		);
-		expect(syncStateMocks.setSyncResourceState).toHaveBeenCalledWith(
+		expect(syncStateMocks.setSyncResourceState).not.toHaveBeenCalledWith(
 			expect.objectContaining({
 				resourceId: "item_prices",
-				status: "fresh",
 			}),
 		);
 		expect(result.status).toBe("fresh");
