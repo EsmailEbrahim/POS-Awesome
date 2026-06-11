@@ -184,7 +184,7 @@ def _fetch_barcodes(item_codes: Tuple[str, ...]):
         return []
     return frappe.get_all(
         "Item Barcode",
-        fields=["parent", "barcode", "uom"],
+        fields=["parent", "barcode", "barcode_type", "uom"],
         filters={"parent": ["in", item_codes]},
     )
 
@@ -542,6 +542,15 @@ def merge_item_row(
         row["manufacturing_cost"] = bom_cost.get("rate")
         row["manufacturing_cost_source"] = bom_cost.get("source")
         row["manufacturing_bom"] = bom_cost.get("bom")
+    prices_by_uom: Dict[str, Dict[str, object]] = {}
+    for uom_key, pr in lookup_data.price_map.get(item_code, {}).items():
+        uom_name = "" if uom_key == "None" else uom_key
+        prices_by_uom[uom_name] = {
+            "price_list_rate": pr.get("price_list_rate"),
+            "currency": pr.get("currency"),
+        }
+    row["_prices_by_uom"] = prices_by_uom
+
     if not row.get("item_name") and meta.get("item_name"):
         row["item_name"] = meta.get("item_name")
     return row
@@ -683,7 +692,11 @@ class ItemDetailAggregator:
 
         barcode_map: Dict[str, List[Dict[str, object]]] = {}
         for row in barcode_rows:
-            barcode_map.setdefault(row.parent, []).append({"barcode": row.barcode, "uom": row.uom})
+            barcode_map.setdefault(row.parent, []).append({
+                "barcode": row.barcode,
+                "barcode_type": getattr(row, "barcode_type", ""),
+                "uom": row.uom,
+            })
 
         batch_map: Dict[str, List[Dict[str, object]]] = {}
         for row in batch_rows:
