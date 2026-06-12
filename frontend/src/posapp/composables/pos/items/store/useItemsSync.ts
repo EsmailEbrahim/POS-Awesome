@@ -28,7 +28,8 @@ const containsStockQuantities = (items: Item[]) =>
 	Array.isArray(items) && items.some(hasStockQuantity);
 
 const DELTA_SYNC_LIMIT = 1000;
-const BACKGROUND_SYNC_PAGE_SIZE = 1000;
+const BACKGROUND_SYNC_PAGE_SIZE = 200;
+const BACKGROUND_SYNC_CONCURRENCY = 5;
 const BACKGROUND_PAGINATION_REFRESH_BATCHES = 5;
 const BACKGROUND_PROGRESS_YIELD_INTERVAL = 10;
 
@@ -329,77 +330,116 @@ export function useItemsSync() {
 
 			let loaded = items.value.length;
 			let syncedCount = 0;
-			let lastItemName = items.value.length
-				? items.value[items.value.length - 1]?.item_name || null
-				: null;
+			let nextOffset = reset
+				? bootstrapCount
+				: Math.max(bootstrapCount, items.value.length);
 
 			while (
 				backgroundSyncState.value.token === token &&
 				shouldPersistItems
 			) {
-				// Clone posProfile and disable caching for this specific request
-				const requestProfile = JSON.parse(JSON.stringify(posProfile));
-				if (reset) {
-					requestProfile.posa_use_server_cache = 0;
-					requestProfile.posa_force_reload_items = 1;
+				const offsets = Array.from(
+					{ length: BACKGROUND_SYNC_CONCURRENCY },
+					(_, index) => nextOffset + index * limit,
+				).filter(
+					(offset) =>
+						totalItemCount.value <= 0 ||
+						offset < totalItemCount.value,
+				);
+
+				if (offsets.length === 0) {
+					break;
 				}
 
-				// @ts-ignore
-				const response = await frappe.call({
-					method: "posawesome.posawesome.api.items.get_items",
-					args: {
-						pos_profile: JSON.stringify(requestProfile),
-						price_list: activePriceList,
-						item_group:
-							normalizedGroup !== "ALL"
-								? normalizedGroup.toLowerCase()
-								: "",
-						start_after: lastItemName,
-						limit,
-					},
-				});
+				const pageResults = await Promise.all(
+					offsets.map(async (offset) => {
+						// Clone the profile per request because reset flags are request-specific.
+						const requestProfile = JSON.parse(
+							JSON.stringify(posProfile),
+						);
+						if (reset) {
+							requestProfile.posa_use_server_cache = 0;
+							requestProfile.posa_force_reload_items = 1;
+						}
+
+						// @ts-ignore
+						const response = await frappe.call({
+							method: "posawesome.posawesome.api.items.get_items",
+							args: {
+								pos_profile: JSON.stringify(requestProfile),
+								price_list: activePriceList,
+								item_group:
+									normalizedGroup !== "ALL"
+										? normalizedGroup.toLowerCase()
+										: "",
+								offset,
+								limit,
+							},
+							freeze: false,
+						});
+
+						return {
+							offset,
+							batch: Array.isArray(response?.message)
+								? response.message
+								: [],
+						};
+					}),
+				);
 
 				if (backgroundSyncState.value.token !== token) {
 					break;
 				}
 
-				const batch = Array.isArray(response.message)
-					? response.message
-					: [];
-				if (batch.length === 0) {
-					break;
+				let reachedEnd = false;
+				for (const { batch } of pageResults) {
+					if (batch.length > 0) {
+						primeItemDetailsCache(
+							batch,
+							posProfile,
+							activePriceList,
+						);
+						if (containsStockQuantities(batch)) {
+							updateLocalStockCache(batch);
+							stockCacheReady = true;
+						}
+						await saveItemsBulk(batch, scope);
+						setItems(batch, { append: true });
+						appended.push(...batch);
+						loaded += batch.length;
+						syncedCount = await publishBatchProgress(
+							syncedCount,
+							batch.length,
+						);
+						batchesSincePaginationRefresh += 1;
+					}
+
+					reachedEnd = batch.length < limit;
+					if (
+						reachedEnd ||
+						batchesSincePaginationRefresh >=
+							BACKGROUND_PAGINATION_REFRESH_BATCHES
+					) {
+						await updateCachedPaginationFromStorage();
+						batchesSincePaginationRefresh = 0;
+					}
+
+					if (
+						reachedEnd ||
+						backgroundSyncState.value.token !== token
+					) {
+						break;
+					}
 				}
 
-				primeItemDetailsCache(batch, posProfile, activePriceList);
-				if (containsStockQuantities(batch)) {
-					updateLocalStockCache(batch);
-					stockCacheReady = true;
-				}
-				await saveItemsBulk(batch, scope);
-				setItems(batch, { append: true });
-				appended.push(...batch);
-				loaded += batch.length;
-				syncedCount = await publishBatchProgress(
-					syncedCount,
-					batch.length,
-				);
-				lastItemName =
-					batch[batch.length - 1]?.item_name || lastItemName;
-				batchesSincePaginationRefresh += 1;
-
-				const reachedEnd = batch.length < limit;
 				if (
 					reachedEnd ||
-					batchesSincePaginationRefresh >=
-						BACKGROUND_PAGINATION_REFRESH_BATCHES
+					backgroundSyncState.value.token !== token
 				) {
-					await updateCachedPaginationFromStorage();
-					batchesSincePaginationRefresh = 0;
-				}
-
-				if (batch.length < limit) {
 					break;
 				}
+
+				nextOffset += offsets.length * limit;
 			}
 
 			if (backgroundSyncState.value.token === token) {
