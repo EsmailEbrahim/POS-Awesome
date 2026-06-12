@@ -60,7 +60,7 @@
 				<!-- Add icon (right) -->
 				<template #append-inner>
 					<span v-if="showCustomerLoadProgress" class="customer-load-percent">
-						{{ customerLoadPercent }}%
+						{{ customerLoadedCountLabel }} · {{ customerLoadPercent }}%
 					</span>
 					<v-tooltip :text="__('Add new customer')" content-class="posa-theme-tooltip">
 						<template #activator="{ props }">
@@ -255,6 +255,10 @@ export default {
 		const isCustomerSearchLocked = computed(() => loadingCustomers.value && customers.value.length === 0);
 		const customerLoadPercent = computed(() =>
 			Math.max(0, Math.min(100, Math.round(loadProgress.value || 0))),
+		);
+		const customerLoadedCountLabel = computed(
+			() =>
+				`${Number(loadedCustomerCount.value || 0).toLocaleString()} ${__("customers")}`,
 		);
 		const customerFieldLabel = computed(() =>
 			showCustomerLoadProgress.value
@@ -565,6 +569,7 @@ export default {
 			showCustomerLoadProgress,
 			isCustomerSearchLocked,
 			customerLoadPercent,
+			customerLoadedCountLabel,
 			customerFieldLabel,
 			customerFieldPlaceholder,
 			customerNoDataText,

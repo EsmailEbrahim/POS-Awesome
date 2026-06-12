@@ -374,6 +374,42 @@ export function useItemsSync() {
 				return 0;
 			}
 		};
+		const preparePageWave = async (
+			pageResults: Array<{ offset: number; batch: Item[] }>,
+		) => {
+			let reachedEnd = false;
+			const completedBatches: Item[][] = [];
+			for (const { batch } of pageResults) {
+				if (batch.length > 0) {
+					completedBatches.push(batch);
+				}
+				reachedEnd = batch.length < limit;
+				if (reachedEnd) {
+					break;
+				}
+			}
+
+			const waveItems = completedBatches.flat();
+			if (waveItems.length > 0) {
+				primeItemDetailsCache(
+					waveItems,
+					posProfile,
+					activePriceList,
+				);
+				if (containsStockQuantities(waveItems)) {
+					updateLocalStockCache(waveItems);
+					stockCacheReady = true;
+				}
+				await saveItemsBulk(waveItems, scope);
+				paginationNeedsRefresh = true;
+			}
+
+			return {
+				reachedEnd,
+				completedBatchCount: completedBatches.length,
+				waveItems,
+			};
+		};
 
 		try {
 			if (reset) {
@@ -415,32 +451,22 @@ export function useItemsSync() {
 						: 0;
 			}
 
-			let pendingPageResults = Promise.resolve(firstPageResults);
+			let pendingPreparedWave = preparePageWave(firstPageResults);
 
 			while (
 				backgroundSyncState.value.token === token &&
 				shouldPersistItems
 			) {
-				const pageResults = await pendingPageResults;
+				const {
+					reachedEnd,
+					completedBatchCount,
+					waveItems,
+				} = await pendingPreparedWave;
 
 				if (backgroundSyncState.value.token !== token) {
 					break;
 				}
 
-				let reachedEnd = false;
-				const completedBatches: Item[][] = [];
-				for (const { batch } of pageResults) {
-					if (batch.length > 0) {
-						completedBatches.push(batch);
-					}
-
-					reachedEnd = batch.length < limit;
-					if (reachedEnd) {
-						break;
-					}
-				}
-
-				const waveItems = completedBatches.flat();
 				const nextWaveOffset =
 					nextOffset + BACKGROUND_SYNC_CONCURRENCY * limit;
 				const nextPageResults = !reachedEnd
@@ -448,21 +474,10 @@ export function useItemsSync() {
 					: null;
 
 				if (waveItems.length > 0) {
-					primeItemDetailsCache(
-						waveItems,
-						posProfile,
-						activePriceList,
-					);
-					if (containsStockQuantities(waveItems)) {
-						updateLocalStockCache(waveItems);
-						stockCacheReady = true;
-					}
-					await saveItemsBulk(waveItems, scope);
-					paginationNeedsRefresh = true;
 					setItems(waveItems, { append: true });
 					appended.push(...waveItems);
 					loaded += waveItems.length;
-					batchesSincePaginationRefresh += completedBatches.length;
+					batchesSincePaginationRefresh += completedBatchCount;
 
 					const shouldRefreshPagination =
 						reachedEnd ||
@@ -471,6 +486,9 @@ export function useItemsSync() {
 					const paginationRefresh = shouldRefreshPagination
 						? updateCachedPaginationFromStorage()
 						: Promise.resolve();
+					const nextPreparedWave = nextPageResults
+						? nextPageResults.then(preparePageWave)
+						: null;
 					[syncedCount] = await Promise.all([
 						publishBatchProgress(
 							syncedCount,
@@ -482,6 +500,9 @@ export function useItemsSync() {
 						batchesSincePaginationRefresh = 0;
 						paginationNeedsRefresh = false;
 					}
+					if (nextPreparedWave) {
+						pendingPreparedWave = nextPreparedWave;
+					}
 				}
 
 				if (
@@ -492,7 +513,6 @@ export function useItemsSync() {
 				}
 
 				nextOffset = nextWaveOffset;
-				pendingPageResults = nextPageResults!;
 			}
 
 			if (backgroundSyncState.value.token === token) {
