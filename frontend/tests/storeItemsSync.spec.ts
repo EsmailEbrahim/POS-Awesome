@@ -230,6 +230,41 @@ describe("store useItemsSync background progress", () => {
 		);
 	});
 
+	it("continues syncing when the local cached count is stale", async () => {
+		const sync = useItemsSync();
+		const initialBatch = [{ item_code: "ITEM-1", item_name: "Item 1" }];
+		const catalog = Array.from({ length: 13 }, (_, index) => ({
+			item_code: `ITEM-${index + 1}`,
+			item_name: `Item ${index + 1}`,
+		}));
+		const frappeCall = vi.fn(async ({ args }) => ({
+			message: catalog.slice(args.offset, args.offset + args.limit),
+		}));
+		const setItems = vi.fn();
+		(globalThis as any).frappe = { call: frappeCall };
+
+		const appended = await sync.backgroundSyncItems(
+			{ initialBatch },
+			{ name: "POS-1", warehouse: "WH-1" } as any,
+			"Retail",
+			"POS-1_WH-1",
+			true,
+			() => 2,
+			setItems,
+			vi.fn(async () => {}),
+			{ value: 3 },
+			{ value: false },
+			{ value: initialBatch },
+		);
+
+		expect(appended).toHaveLength(12);
+		expect(setItems).toHaveBeenCalledTimes(6);
+		expect(
+			frappeCall.mock.calls.map(([request]) => request.args.offset),
+		).toEqual([1, 3, 5, 7, 9, 11, 13, 15, 17, 19]);
+		expect(sync.syncedItemsCount.value).toBe(12);
+	});
+
 	it("throttles cached pagination refresh while background batches continue", async () => {
 		const sync = useItemsSync();
 		const updateCachedPaginationFromStorage = vi.fn(async () => {});

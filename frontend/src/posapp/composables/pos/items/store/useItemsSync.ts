@@ -269,6 +269,7 @@ export function useItemsSync() {
 			: items.value.length;
 		let stockCacheReady = false;
 		let batchesSincePaginationRefresh = 0;
+		let paginationNeedsRefresh = false;
 		const remainingCatalogEstimate =
 			totalItemCount.value > bootstrapCount
 				? totalItemCount.value - bootstrapCount
@@ -341,10 +342,6 @@ export function useItemsSync() {
 				const offsets = Array.from(
 					{ length: BACKGROUND_SYNC_CONCURRENCY },
 					(_, index) => nextOffset + index * limit,
-				).filter(
-					(offset) =>
-						totalItemCount.value <= 0 ||
-						offset < totalItemCount.value,
 				);
 
 				if (offsets.length === 0) {
@@ -404,6 +401,7 @@ export function useItemsSync() {
 							stockCacheReady = true;
 						}
 						await saveItemsBulk(batch, scope);
+						paginationNeedsRefresh = true;
 						setItems(batch, { append: true });
 						appended.push(...batch);
 						loaded += batch.length;
@@ -422,6 +420,7 @@ export function useItemsSync() {
 					) {
 						await updateCachedPaginationFromStorage();
 						batchesSincePaginationRefresh = 0;
+						paginationNeedsRefresh = false;
 					}
 
 					if (
@@ -445,7 +444,9 @@ export function useItemsSync() {
 			if (backgroundSyncState.value.token === token) {
 				loadProgress.value = 100;
 				itemsLoaded.value = true;
-				await updateCachedPaginationFromStorage();
+				if (paginationNeedsRefresh) {
+					await updateCachedPaginationFromStorage();
+				}
 				setItemsLastSync(new Date().toISOString());
 				if (stockCacheReady) {
 					setStockCacheReady(true);
