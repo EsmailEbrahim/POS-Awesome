@@ -131,7 +131,7 @@ def _enrich_je_accounts_with_currency(company, accounts, posting_date):
         multi_currency = 1
         if not row.get("exchange_rate"):
             try:
-                row["exchange_rate"] = _to_float(
+                row["exchange_rate"] = frappe.utils.flt(
                     get_exchange_rate(account_currency, company_currency, posting_date)
                 ) or 1
             except Exception:
