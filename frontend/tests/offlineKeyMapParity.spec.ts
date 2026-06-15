@@ -73,4 +73,18 @@ describe("offline key map parity", () => {
 		expect(workerSource).toContain("pricing_rule_records");
 		expect(workerSource).toContain("currency_rate_records");
 	});
+
+	it("keeps worker persistence table-grouped and bulk-written", () => {
+		const thisFile = fileURLToPath(import.meta.url);
+		const testsDir = path.dirname(thisFile);
+		const workerSource = readFileSync(
+			path.resolve(testsDir, "../src/posapp/workers/itemWorker.js"),
+			"utf8",
+		);
+
+		expect(workerSource).toContain('data.type === "persist_batch"');
+		expect(workerSource).toContain("bulkPut(rows)");
+		expect(workerSource).toContain("persistBatchChain");
+		expect(workerSource).not.toContain('data.type === "persist"');
+	});
 });

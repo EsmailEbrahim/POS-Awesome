@@ -5,7 +5,7 @@
  * sub-modules. The layer is composed of four levels:
  *
  * - **`db`** — storage primitives: the Dexie IndexedDB instance (`db`), the
- *   in-memory store (`memory`), `persist()`, network-status helpers, and
+ *   in-memory store (`memory`), batched `persist()`, network-status helpers, and
  *   cache-clear utilities. Every other sub-module in this layer depends on these.
  *
  * - **Domain queues** (`invoices`, `customers`, `payments`, `cash_movements`,

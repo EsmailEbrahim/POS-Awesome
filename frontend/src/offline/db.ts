@@ -20,12 +20,13 @@
  * when no persisted value exists.
  *
  * **Persist write path (`persist`)**
- * `persist(key)` is the single write path for all `memory` entries. On each call
- * it writes once to the Dexie table determined by `KEY_TABLE_MAP`. Only a small,
- * explicit set of lightweight settings/metadata keys are additionally mirrored to
- * `localStorage` under `posa_<key>`. When a Web Worker is available
- * (`persistWorker`), the Dexie/localStorage writes are offloaded to avoid blocking
- * the main thread during heavy sync passes.
+ * `persist(key)` is the single write path for all `memory` entries. Calls made in
+ * the same turn are coalesced by key, then grouped by the Dexie table determined
+ * by `KEY_TABLE_MAP`. Only a small, explicit set of lightweight
+ * settings/metadata keys are additionally mirrored to `localStorage` under
+ * `posa_<key>`. When a Web Worker is available (`persistWorker`), one native
+ * structured-clone batch is sent to the worker; otherwise the same grouped
+ * `bulkPut()` path runs on the main thread.
  *
  * **Relationship to the rest of the offline layer**
  * `cache.ts` reads and writes through `memory`, calling `persist(key)` on every
@@ -412,6 +413,23 @@ function readLocalStorageValue(key: string): PersistedValueRecord {
 	}
 }
 
+type PersistEntry = { key: string; value: unknown };
+type PersistWorkerBatch = {
+	entries: PersistEntry[];
+	resolve: () => void;
+	reject: (_error: unknown) => void;
+	timeout: ReturnType<typeof setTimeout>;
+};
+
+const PERSIST_WORKER_TIMEOUT_MS = 10_000;
+const pendingPersistEntries = new Map<string, unknown>();
+const inFlightWorkerBatches = new Map<number, PersistWorkerBatch>();
+const activePersistOperations = new Set<Promise<void>>();
+let persistFlushScheduled = false;
+let nextPersistBatchId = 1;
+let persistWorkerHealthy = Boolean(persistWorker);
+let directPersistChain: Promise<void> = Promise.resolve();
+
 export async function hydrateMemoryKeys(keys: readonly string[]): Promise<void> {
 	const uniqueKeys = Array.from(new Set(keys)).filter((key) =>
 		Object.prototype.hasOwnProperty.call(memory, key),
@@ -571,6 +589,198 @@ export async function safeBulkPut<T extends AnyRecord>(
 	}
 }
 
+function writeLocalStorageMirror(key: string, value: unknown) {
+	if (typeof localStorage === "undefined") {
+		return;
+	}
+
+	if (!shouldPersistToLocalStorage(key)) {
+		localStorage.removeItem(`posa_${key}`);
+		return;
+	}
+
+	try {
+		localStorage.setItem(`posa_${key}`, JSON.stringify(value));
+	} catch (error) {
+		console.error("Failed to persist", key, "to localStorage", error);
+	}
+}
+
+async function persistEntriesDirectly(entries: PersistEntry[]) {
+	if (!entries.length) {
+		return;
+	}
+	if (!db.isOpen()) {
+		await db.open();
+	}
+
+	const rowsByTable = new Map<string, PersistEntry[]>();
+	for (const entry of entries) {
+		const tableName = tableForKey(entry.key);
+		const rows = rowsByTable.get(tableName) || [];
+		rows.push(entry);
+		rowsByTable.set(tableName, rows);
+	}
+
+	await Promise.all(
+		Array.from(rowsByTable.entries()).map(([tableName, rows]) =>
+			safeBulkPut(tableName, rows),
+		),
+	);
+}
+
+function queueDirectPersist(entries: PersistEntry[]) {
+	const operation = directPersistChain.then(() =>
+		persistEntriesDirectly(entries),
+	);
+	directPersistChain = operation.catch(() => undefined);
+	return operation;
+}
+
+function trackPersistOperation(operation: Promise<void>) {
+	activePersistOperations.add(operation);
+	void operation.then(
+		() => activePersistOperations.delete(operation),
+		() => activePersistOperations.delete(operation),
+	);
+	return operation;
+}
+
+function disablePersistWorker(error: unknown) {
+	if (!persistWorkerHealthy && !persistWorker) {
+		return;
+	}
+	persistWorkerHealthy = false;
+	console.error("Persistence worker disabled; using main-thread fallback", error);
+	try {
+		persistWorker?.terminate();
+	} catch {
+		// The worker is already unusable; direct persistence remains available.
+	}
+	persistWorker = null;
+}
+
+function settleWorkerBatch(
+	batchId: number,
+	error?: unknown,
+) {
+	const batch = inFlightWorkerBatches.get(batchId);
+	if (!batch) {
+		return;
+	}
+	inFlightWorkerBatches.delete(batchId);
+	clearTimeout(batch.timeout);
+
+	if (!error) {
+		batch.resolve();
+		return;
+	}
+
+	disablePersistWorker(error);
+	void queueDirectPersist(batch.entries).then(batch.resolve, batch.reject);
+}
+
+function failAllWorkerBatches(error: unknown) {
+	disablePersistWorker(error);
+	for (const batchId of Array.from(inFlightWorkerBatches.keys())) {
+		settleWorkerBatch(batchId, error);
+	}
+}
+
+if (persistWorker) {
+	persistWorker.onmessage = (event: MessageEvent) => {
+		const data = event.data || {};
+		if (data.type === "persisted_batch") {
+			settleWorkerBatch(Number(data.batchId));
+		} else if (data.type === "persist_batch_failed") {
+			failAllWorkerBatches(
+				new Error(
+					data.error ||
+						`Persistence worker rejected batch ${Number(data.batchId)}`,
+				),
+			);
+		}
+	};
+	persistWorker.onerror = (event: ErrorEvent) => {
+		failAllWorkerBatches(event.error || new Error(event.message));
+	};
+}
+
+function dispatchPersistBatch(entries: PersistEntry[]) {
+	if (!entries.length) {
+		return Promise.resolve();
+	}
+
+	if (!persistWorker || !persistWorkerHealthy) {
+		return queueDirectPersist(entries);
+	}
+
+	const batchId = nextPersistBatchId++;
+	const operation = new Promise<void>((resolve, reject) => {
+		const timeout = setTimeout(() => {
+			failAllWorkerBatches(
+				new Error(`Persistence worker batch ${batchId} timed out`),
+			);
+		}, PERSIST_WORKER_TIMEOUT_MS);
+		inFlightWorkerBatches.set(batchId, {
+			entries,
+			resolve,
+			reject,
+			timeout,
+		});
+
+		try {
+			persistWorker?.postMessage({
+				type: "persist_batch",
+				batchId,
+				entries,
+			});
+		} catch (error) {
+			failAllWorkerBatches(error);
+		}
+	});
+
+	return operation;
+}
+
+function drainPendingPersistEntries() {
+	const entries = Array.from(
+		pendingPersistEntries,
+		([key, value]) => ({ key, value }),
+	);
+	pendingPersistEntries.clear();
+	return entries;
+}
+
+function flushPendingPersistBatch() {
+	persistFlushScheduled = false;
+	const entries = drainPendingPersistEntries();
+	if (!entries.length) {
+		return Promise.resolve();
+	}
+	return trackPersistOperation(dispatchPersistBatch(entries));
+}
+
+function schedulePersistFlush() {
+	if (persistFlushScheduled) {
+		return;
+	}
+	persistFlushScheduled = true;
+	queueMicrotask(() => {
+		void flushPendingPersistBatch().catch((error) => {
+			console.error("Failed to persist offline batch", error);
+		});
+	});
+}
+
+export async function flushPersistQueue() {
+	await flushPendingPersistBatch();
+	while (activePersistOperations.size) {
+		await Promise.all(Array.from(activePersistOperations));
+	}
+	await directPersistChain;
+}
+
 export async function safeBulkDelete(
 	tableName: string,
 	keys: Array<string | number>,
@@ -710,38 +920,10 @@ export function persist(key: string, value: unknown = memory[key]) {
 		return;
 	}
 
-	if (persistWorker) {
-		let clean = value;
-		try {
-			clean = JSON.parse(JSON.stringify(value));
-		} catch (e) {
-			console.error("Failed to serialize", key, e);
-		}
-		try {
-			persistWorker.postMessage({ type: "persist", key, value: clean });
-			return;
-		} catch (e) {
-			console.error("Failed to persist via worker", key, e);
-		}
-	}
-
+	writeLocalStorageMirror(key, value);
 	if (shouldPersistToIndexedDb(key)) {
-		const table = tableForKey(key);
-		db.table(table)
-			.put({ key, value })
-			.catch((e) => console.error(`Failed to persist ${key}`, e));
-	}
-
-	if (typeof localStorage !== "undefined") {
-		if (shouldPersistToLocalStorage(key)) {
-			try {
-				localStorage.setItem(`posa_${key}`, JSON.stringify(value));
-			} catch (err) {
-				console.error("Failed to persist", key, "to localStorage", err);
-			}
-		} else {
-			localStorage.removeItem(`posa_${key}`);
-		}
+		pendingPersistEntries.set(key, value);
+		schedulePersistFlush();
 	}
 }
 

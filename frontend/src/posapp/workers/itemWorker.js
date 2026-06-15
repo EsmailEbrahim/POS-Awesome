@@ -34,7 +34,7 @@ const SCHEMA_V14 = {
 
 const SCHEMA_SIGNATURE = JSON.stringify(SCHEMA_V14);
 
-(async () => {
+const dbReady = (async () => {
 	let DexieLib;
 	try {
 		importScripts("/assets/posawesome/dist/js/libs/dexie.min.js?v=1");
@@ -173,6 +173,7 @@ const SCHEMA_SIGNATURE = JSON.stringify(SCHEMA_V14);
 	} catch (err) {
 		console.error("Failed to open IndexedDB in worker", err);
 	}
+	return db;
 })();
 
 const KEY_TABLE_MAP = {
@@ -213,52 +214,62 @@ const KEY_TABLE_MAP = {
 	pos_last_sync_totals: "sync_state",
 };
 
-const LARGE_KEYS = new Set(["items", "item_details_cache", "local_stock_cache"]);
-const LOCAL_STORAGE_KEYS = new Set([
-	"manual_offline",
-	"invoice_outbox_mode",
-	"bootstrap_snapshot",
-	"bootstrap_snapshot_status",
-	"bootstrap_limited_mode",
-	"cache_ready",
-	"stock_cache_ready",
-	"schema_signature",
-	"tax_inclusive",
-]);
 const MEMORY_ONLY_KEYS = new Set(["customer_storage"]);
+let persistBatchChain = Promise.resolve();
 
 function tableForKey(key) {
 	return KEY_TABLE_MAP[key] || "keyval";
 }
 
-async function persist(key, value) {
-	if (!MEMORY_ONLY_KEYS.has(key)) {
-		try {
-			if (!db.isOpen()) {
-				await db.open();
-			}
-			const table = tableForKey(key);
-			await db.table(table).put({ key, value });
-		} catch (e) {
-			console.error("Worker persist failed", e);
-		}
+async function safeBulkPut(tableName, rows) {
+	if (!rows.length) {
+		return;
 	}
 
-	if (typeof localStorage !== "undefined") {
-		if (LOCAL_STORAGE_KEYS.has(key) && !LARGE_KEYS.has(key)) {
-			try {
-				localStorage.setItem(`posa_${key}`, JSON.stringify(value));
-			} catch (err) {
-				console.error("Worker localStorage failed", err);
+	const table = db.table(tableName);
+	try {
+		await db.transaction("rw", table, async () => {
+			await table.bulkPut(rows);
+		});
+	} catch (error) {
+		console.warn(
+			`Worker bulkPut failed for ${tableName}; retrying row-by-row`,
+			error,
+		);
+		await db.transaction("rw", table, async () => {
+			for (const row of rows) {
+				await table.put(row);
 			}
-		} else {
-			localStorage.removeItem(`posa_${key}`);
-		}
+		});
 	}
+}
+
+async function persistBatch(entries) {
+	await dbReady;
+	if (!db.isOpen()) {
+		await db.open();
+	}
+	const rowsByTable = new Map();
+	for (const entry of entries || []) {
+		if (!entry || MEMORY_ONLY_KEYS.has(entry.key)) {
+			continue;
+		}
+		const tableName = tableForKey(entry.key);
+		const rows = rowsByTable.get(tableName) || [];
+		rows.push({ key: entry.key, value: entry.value });
+		rowsByTable.set(tableName, rows);
+	}
+
+	await Promise.all(
+		Array.from(rowsByTable.entries()).map(([tableName, rows]) =>
+			safeBulkPut(tableName, rows),
+		),
+	);
 }
 
 async function bulkPutItems(items, syncedAt = Date.now()) {
 	try {
+		await dbReady;
 		if (!db.isOpen()) {
 			await db.open();
 		}
@@ -282,6 +293,7 @@ async function bulkPutPrices(priceList, items, syncedAt = Date.now()) {
 		if (!priceList) {
 			return;
 		}
+		await dbReady;
 		if (!db.isOpen()) {
 			await db.open();
 		}
@@ -368,9 +380,25 @@ self.onmessage = async (event) => {
 			console.log(err);
 			self.postMessage({ type: "error", error: err.message });
 		}
-	} else if (data.type === "persist") {
-		await persist(data.key, data.value);
-		self.postMessage({ type: "persisted", key: data.key });
+	} else if (data.type === "persist_batch") {
+		try {
+			const operation = persistBatchChain.then(() =>
+				persistBatch(data.entries),
+			);
+			persistBatchChain = operation.catch(() => undefined);
+			await operation;
+			self.postMessage({
+				type: "persisted_batch",
+				batchId: data.batchId,
+			});
+		} catch (error) {
+			console.error("Worker persist batch failed", error);
+			self.postMessage({
+				type: "persist_batch_failed",
+				batchId: data.batchId,
+				error: error?.message || String(error),
+			});
+		}
 	} else if (data.type === "bulk_put_items") {
 		await bulkPutItems(data.items || [], data.syncedAt || Date.now());
 		self.postMessage({ type: "items_saved" });
