@@ -310,6 +310,7 @@ import {
 	initializePaymentLinesForDialog,
 	rebalancePreferredPaymentLine,
 	resolvePreferredPaymentLine,
+	resolveReturnDefaultAmount,
 } from "../../utils/paymentInitialization";
 import { resolvePaymentPrintFormatDoctypes } from "../../utils/paymentPrintDoctype";
 import { resolvePaymentPrintFormat } from "../../utils/paymentPrintFormat";
@@ -1102,7 +1103,9 @@ const syncPreferredPaymentToCurrentTotal = (doc = invoice_doc.value) => {
 	}
 
 	const total = netInvoiceSettlementAmount.value;
-	const normalizedTotal = doc.is_return ? -Math.abs(total) : Math.abs(total);
+	// For returns, cap the auto-filled refund at what was paid on the original
+	// invoice (0 for an unpaid/credit invoice → recorded as a credit note).
+	const normalizedTotal = resolveReturnDefaultAmount(doc, total);
 	const conversionRate = flt(doc.conversion_rate || 1, currency_precision.value);
 
 	payments.forEach((payment) => {
