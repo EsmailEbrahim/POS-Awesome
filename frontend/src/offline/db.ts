@@ -76,6 +76,14 @@ const SCHEMA_V14 = {
 		"&name,profile_name,company,from_currency,to_currency,date,modified,[profile_name+company+from_currency+to_currency]",
 };
 
+const SCHEMA_V15 = {
+	...SCHEMA_V14,
+	write_queue:
+		"++queue_id,entity_type,status,resource,next_attempt_at,created_at,last_attempt_at,retry_count,&idempotency_key,[entity_type+status],[status+next_attempt_at],[status+last_attempt_at],[status+created_at]",
+	invoice_outbox:
+		"++outbox_id,&client_request_id,status,resource,created_at,updated_at,acknowledged_at,next_retry_at,nextAttemptAt,retry_count,[status+next_retry_at],[resource+status],[status+nextAttemptAt],[status+acknowledged_at],[status+updated_at],[status+created_at]",
+};
+
 export const KEY_TABLE_MAP: Record<string, string> = {
 	offline_invoices: "queue",
 	offline_customers: "queue",
@@ -256,6 +264,7 @@ db.version(11).stores(BASE_SCHEMA);
 db.version(12).stores(BASE_SCHEMA);
 db.version(13).stores(BASE_SCHEMA);
 db.version(14).stores(SCHEMA_V14);
+db.version(15).stores(SCHEMA_V15);
 
 let persistWorker: Worker | null = null;
 if (typeof Worker !== "undefined") {
@@ -804,6 +813,126 @@ function isOlderThan(value: unknown, cutoff: number) {
 	return Number.isFinite(epoch) && epoch < cutoff;
 }
 
+const PRUNE_DELETE_CHUNK_SIZE = 500;
+
+type PruneCollectionFactory = (
+	_table: Dexie.Table<any, any>,
+) => Dexie.Collection<any, any>;
+
+async function pruneCollectionInChunks(
+	tableName: string,
+	createCollection: PruneCollectionFactory,
+	predicate: (_row: AnyRecord) => boolean,
+): Promise<number> {
+	const table = db.table(tableName);
+	let deleted = 0;
+
+	while (true) {
+		const keys = (await createCollection(table)
+			.filter((row) => predicate(row as AnyRecord))
+			.limit(PRUNE_DELETE_CHUNK_SIZE)
+			.primaryKeys()) as Array<string | number>;
+
+		if (!keys.length) {
+			return deleted;
+		}
+
+		await safeBulkDelete(tableName, keys);
+		deleted += keys.length;
+
+		if (keys.length < PRUNE_DELETE_CHUNK_SIZE) {
+			return deleted;
+		}
+	}
+}
+
+function statusDateRange(
+	table: Dexie.Table<any, any>,
+	indexName: string,
+	status: string,
+	cutoffIso: string,
+) {
+	return table
+		.where(indexName)
+		.between([status, Dexie.minKey], [status, cutoffIso], false, true);
+}
+
+async function pruneInvoiceOutboxRows(cutoff: number, cutoffIso: string) {
+	let deleted = 0;
+	for (const status of ["acknowledged", "dead_letter"]) {
+		deleted += await pruneCollectionInChunks(
+			"invoice_outbox",
+			(table) => statusDateRange(table, "[status+acknowledged_at]", status, cutoffIso),
+			(row) =>
+				row.status === status &&
+				isOlderThan(row.acknowledged_at || row.updated_at || row.created_at, cutoff),
+		);
+		deleted += await pruneCollectionInChunks(
+			"invoice_outbox",
+			(table) => statusDateRange(table, "[status+updated_at]", status, cutoffIso),
+			(row) =>
+				row.status === status &&
+				!row.acknowledged_at &&
+				isOlderThan(row.updated_at || row.created_at, cutoff),
+		);
+		deleted += await pruneCollectionInChunks(
+			"invoice_outbox",
+			(table) => statusDateRange(table, "[status+created_at]", status, cutoffIso),
+			(row) =>
+				row.status === status &&
+				!row.acknowledged_at &&
+				!row.updated_at &&
+				isOlderThan(row.created_at, cutoff),
+		);
+	}
+	return deleted;
+}
+
+async function pruneWriteQueueRows(cutoff: number, cutoffIso: string) {
+	const status = "synced";
+	let deleted = await pruneCollectionInChunks(
+		"write_queue",
+		(table) => statusDateRange(table, "[status+last_attempt_at]", status, cutoffIso),
+		(row) =>
+			row.status === status &&
+			isOlderThan(row.last_attempt_at || row.created_at, cutoff),
+	);
+	deleted += await pruneCollectionInChunks(
+		"write_queue",
+		(table) => statusDateRange(table, "[status+created_at]", status, cutoffIso),
+		(row) =>
+			row.status === status &&
+			!row.last_attempt_at &&
+			isOlderThan(row.created_at, cutoff),
+	);
+	return deleted;
+}
+
+async function pruneSyncStateRows(cutoff: number, cutoffIso: string) {
+	let deleted = await pruneCollectionInChunks(
+		"sync_state",
+		(table) => table.where("updated_at").below(cutoffIso),
+		(row) => isOlderThan(row.updated_at || row.value?.lastSyncedAt, cutoff),
+	);
+	deleted += await pruneCollectionInChunks(
+		"sync_state",
+		(table) => table.where("key").startsWith("posa_sync_state::"),
+		(row) => !row.updated_at && isOlderThan(row.value?.lastSyncedAt, cutoff),
+	);
+	return deleted;
+}
+
+async function pruneKeyvalPrefixRows(
+	prefix: string,
+	cutoff: number,
+): Promise<number> {
+	return pruneCollectionInChunks(
+		"keyval",
+		(table) => table.where("key").startsWith(prefix),
+		(row) => isOlderThan(row.value?.created_at || row.value?.updated_at, cutoff),
+	);
+}
+
 export type OfflinePruneResult = {
 	invoiceOutbox: number;
 	writeQueue: number;
@@ -826,68 +955,12 @@ export async function pruneOfflineStorage(
 		localTelemetry: 0,
 	};
 
-	await withDbTransaction(
-		"rw",
-		["invoice_outbox", "write_queue", "sync_state", "keyval"],
-		async () => {
-			const outboxRows = (await db.table("invoice_outbox").toArray()) as AnyRecord[];
-			const outboxIds = outboxRows
-				.filter(
-					(row) =>
-						["acknowledged", "dead_letter"].includes(row.status) &&
-						isOlderThan(row.acknowledged_at || row.updated_at || row.created_at, cutoff),
-				)
-				.map((row) => row.outbox_id)
-				.filter((key): key is number => Number.isFinite(Number(key)));
-			if (outboxIds.length) {
-				await db.table("invoice_outbox").bulkDelete(outboxIds);
-				result.invoiceOutbox = outboxIds.length;
-			}
-
-			const writeQueueRows = (await db.table("write_queue").toArray()) as AnyRecord[];
-			const writeQueueIds = writeQueueRows
-				.filter(
-					(row) =>
-						row.status === "synced" &&
-						isOlderThan(row.last_attempt_at || row.created_at, cutoff),
-				)
-				.map((row) => row.queue_id)
-				.filter((key): key is number => Number.isFinite(Number(key)));
-			if (writeQueueIds.length) {
-				await db.table("write_queue").bulkDelete(writeQueueIds);
-				result.writeQueue = writeQueueIds.length;
-			}
-
-			const syncRows = (await db.table("sync_state").toArray()) as AnyRecord[];
-			const syncKeys = syncRows
-				.filter((row) => isOlderThan(row.updated_at || row.value?.lastSyncedAt, cutoff))
-				.map((row) => row.key)
-				.filter(Boolean);
-			if (syncKeys.length) {
-				await db.table("sync_state").bulkDelete(syncKeys);
-				result.syncState = syncKeys.length;
-			}
-
-			const keyvalRows = (await db.table("keyval").toArray()) as AnyRecord[];
-			const tombstoneKeys = keyvalRows
-				.filter((row) => String(row.key || "").startsWith("tombstone:"))
-				.filter((row) => isOlderThan(row.value?.created_at || row.value?.updated_at, cutoff))
-				.map((row) => row.key);
-			if (tombstoneKeys.length) {
-				await db.table("keyval").bulkDelete(tombstoneKeys);
-				result.tombstones = tombstoneKeys.length;
-			}
-
-			const telemetryKeys = keyvalRows
-				.filter((row) => String(row.key || "").startsWith("local_telemetry:"))
-				.filter((row) => isOlderThan(row.value?.created_at || row.value?.updated_at, cutoff))
-				.map((row) => row.key);
-			if (telemetryKeys.length) {
-				await db.table("keyval").bulkDelete(telemetryKeys);
-				result.localTelemetry = telemetryKeys.length;
-			}
-		},
-	);
+	const cutoffIso = new Date(cutoff).toISOString();
+	result.invoiceOutbox = await pruneInvoiceOutboxRows(cutoff, cutoffIso);
+	result.writeQueue = await pruneWriteQueueRows(cutoff, cutoffIso);
+	result.syncState = await pruneSyncStateRows(cutoff, cutoffIso);
+	result.tombstones = await pruneKeyvalPrefixRows("tombstone:", cutoff);
+	result.localTelemetry = await pruneKeyvalPrefixRows("local_telemetry:", cutoff);
 
 	return result;
 }

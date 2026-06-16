@@ -6,7 +6,9 @@ const BASE_SCHEMA = {
 	keyval: "&key",
 	queue: "&key",
 	write_queue:
-		"++queue_id,entity_type,status,created_at,last_attempt_at,retry_count,&idempotency_key,[entity_type+status]",
+		"++queue_id,entity_type,status,resource,next_attempt_at,created_at,last_attempt_at,retry_count,&idempotency_key,[entity_type+status],[status+next_attempt_at]",
+	invoice_outbox:
+		"++outbox_id,&client_request_id,status,resource,created_at,next_retry_at,nextAttemptAt,retry_count,[status+next_retry_at],[resource+status],[status+nextAttemptAt]",
 	cache: "&key",
 	items: "&item_code,item_name,item_group,*barcodes,*name_keywords,*serials,*batches",
 	item_prices: "&[price_list+item_code],price_list,item_code",
@@ -19,7 +21,7 @@ const BASE_SCHEMA = {
 	translations: "&key",
 	pricing_rules: "&key",
 	settings: "&key",
-	sync_state: "&key",
+	sync_state: "&key,resourceId,status,nextRetryAt,lastAttemptAt,updated_at",
 };
 
 const SCHEMA_V14 = {
@@ -32,7 +34,15 @@ const SCHEMA_V14 = {
 		"&name,profile_name,company,from_currency,to_currency,date,modified,[profile_name+company+from_currency+to_currency]",
 };
 
-const SCHEMA_SIGNATURE = JSON.stringify(SCHEMA_V14);
+const SCHEMA_V15 = {
+	...SCHEMA_V14,
+	write_queue:
+		"++queue_id,entity_type,status,resource,next_attempt_at,created_at,last_attempt_at,retry_count,&idempotency_key,[entity_type+status],[status+next_attempt_at],[status+last_attempt_at],[status+created_at]",
+	invoice_outbox:
+		"++outbox_id,&client_request_id,status,resource,created_at,updated_at,acknowledged_at,next_retry_at,nextAttemptAt,retry_count,[status+next_retry_at],[resource+status],[status+nextAttemptAt],[status+acknowledged_at],[status+updated_at],[status+created_at]",
+};
+
+const SCHEMA_SIGNATURE = JSON.stringify(SCHEMA_V15);
 
 const dbReady = (async () => {
 	let DexieLib;
@@ -168,6 +178,7 @@ const dbReady = (async () => {
 	db.version(12).stores(BASE_SCHEMA);
 	db.version(13).stores(BASE_SCHEMA);
 	db.version(14).stores(SCHEMA_V14);
+	db.version(15).stores(SCHEMA_V15);
 	try {
 		await db.open();
 	} catch (err) {

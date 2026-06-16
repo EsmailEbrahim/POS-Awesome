@@ -106,28 +106,73 @@ describe("offline IndexedDB maintenance", () => {
 				updated_at: freshIso,
 			},
 		]);
+		await db.table("write_queue").bulkPut([
+			{
+				entity_type: "invoice",
+				resource: "invoice",
+				payload: {},
+				created_at: oldIso,
+				last_attempt_at: oldIso,
+				next_attempt_at: null,
+				retry_count: 0,
+				status: "synced",
+				idempotency_key: "synced-old",
+				last_error: null,
+			},
+			{
+				entity_type: "invoice",
+				resource: "invoice",
+				payload: {},
+				created_at: oldIso,
+				last_attempt_at: oldIso,
+				next_attempt_at: null,
+				retry_count: 0,
+				status: "pending",
+				idempotency_key: "pending-old",
+				last_error: null,
+			},
+		]);
 		await db.table("keyval").bulkPut([
+			{ key: "tombstone:old", value: { created_at: oldIso } },
+			{ key: "tombstone:fresh", value: { created_at: freshIso } },
 			{ key: "local_telemetry:old", value: { created_at: oldIso } },
 			{ key: "local_telemetry:fresh", value: { created_at: freshIso } },
 		]);
 
+		const toArraySpies = [
+			"invoice_outbox",
+			"write_queue",
+			"sync_state",
+			"keyval",
+		].map((tableName) => vi.spyOn(db.table(tableName), "toArray"));
+
 		const result = await pruneOfflineStorage({ now: Date.now(), maxAgeDays: 30 });
 
 		expect(result.invoiceOutbox).toBe(1);
+		expect(result.writeQueue).toBe(1);
 		expect(result.syncState).toBe(1);
+		expect(result.tombstones).toBe(1);
 		expect(result.localTelemetry).toBe(1);
+		for (const spy of toArraySpies) {
+			expect(spy).not.toHaveBeenCalled();
+			spy.mockRestore();
+		}
 		expect(await db.table("invoice_outbox").toArray()).toEqual(
 			expect.arrayContaining([
 				expect.objectContaining({ client_request_id: "pending" }),
 				expect.objectContaining({ client_request_id: "fresh-ack" }),
 			]),
 		);
+		expect(await db.table("write_queue").toArray()).toEqual([
+			expect.objectContaining({ idempotency_key: "pending-old" }),
+		]);
 		expect(await db.table("sync_state").toArray()).toEqual([
 			expect.objectContaining({ key: "posa_sync_state::fresh" }),
 		]);
-		expect(await db.table("keyval").toArray()).toEqual([
-			expect.objectContaining({ key: "local_telemetry:fresh" }),
-		]);
+		const keyvalKeys = (await db.table("keyval").toArray())
+			.map((row) => row.key)
+			.sort();
+		expect(keyvalKeys).toEqual(["local_telemetry:fresh", "tombstone:fresh"]);
 	});
 
 	it("keeps failed quick health checks non-destructive", async () => {
