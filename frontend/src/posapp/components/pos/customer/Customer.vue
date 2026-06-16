@@ -59,9 +59,6 @@
 
 				<!-- Add icon (right) -->
 				<template #append-inner>
-					<span v-if="showCustomerLoadProgress" class="customer-load-percent">
-						{{ customerLoadedCountLabel }} · {{ customerLoadPercent }}%
-					</span>
 					<v-tooltip :text="__('Add new customer')" content-class="posa-theme-tooltip">
 						<template #activator="{ props }">
 							<v-icon
@@ -105,6 +102,18 @@
 				class="customer-load-bar"
 				rounded
 			/>
+			<div
+				v-if="showCustomerLoadProgress"
+				class="customer-load-status"
+				aria-live="polite"
+			>
+				<span class="customer-load-status__count">
+					{{ customerLoadedCountLabel }}
+				</span>
+				<span class="customer-load-status__percent">
+					{{ customerLoadPercent }}%
+				</span>
+			</div>
 		</div>
 		<!-- Update customer modal -->
 		<div class="mt-4">
@@ -148,13 +157,31 @@
 	opacity: 0.95;
 }
 
-.customer-load-percent {
+.customer-load-status {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 12px;
+	width: 100%;
+	margin-top: 6px;
+	padding: 0 10px;
 	font-size: 0.72rem;
 	font-weight: 700;
-	margin-right: 8px;
+	line-height: 1.25;
 	color: rgb(var(--v-theme-primary));
-	min-width: 42px;
-	text-align: right;
+	box-sizing: border-box;
+	white-space: nowrap;
+}
+
+.customer-load-status__count {
+	min-width: 0;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.customer-load-status__percent {
+	flex: 0 0 auto;
+	font-variant-numeric: tabular-nums;
 }
 
 .customer-autocomplete:hover {
@@ -195,9 +222,9 @@
 		padding-right: 0;
 	}
 
-	.customer-load-percent {
-		min-width: 34px;
-		margin-right: 4px;
+	.customer-load-status {
+		padding: 0 4px;
+		font-size: 0.68rem;
 	}
 }
 </style>
@@ -262,12 +289,12 @@ export default {
 		);
 		const customerFieldLabel = computed(() =>
 			showCustomerLoadProgress.value
-				? `${frappe._("Loading customers")} ${customerLoadPercent.value}%`
+				? frappe._("Loading customers")
 				: frappe._("Customer"),
 		);
 		const customerFieldPlaceholder = computed(() =>
 			showCustomerLoadProgress.value
-				? `${__("Loading customers...")} ${customerLoadPercent.value}%`
+				? __("Loading customers...")
 				: __("Search customer"),
 		);
 		const customerNoDataText = computed(() =>
