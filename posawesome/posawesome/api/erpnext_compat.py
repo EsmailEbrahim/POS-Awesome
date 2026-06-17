@@ -75,3 +75,21 @@ def resolve_make_sales_invoice_from_delivery():
         "This version of POS Awesome requires ERPNext v15. "
         "For ERPNext v16+, use the v16-compatible branch of POS Awesome."
     )
+
+
+def resolve_get_party_bank_account():
+    """Resolve ``get_party_bank_account`` (v15: erpnext.accounts.party, v16+: erpnext.accounts.doctype.bank_account.bank_account)."""
+    try:
+        from erpnext.accounts.doctype.bank_account.bank_account import get_party_bank_account
+        return get_party_bank_account
+    except ImportError:
+        pass
+    try:
+        from erpnext.accounts.party import get_party_bank_account
+        return get_party_bank_account
+    except ImportError:
+        pass
+    raise ImportError(
+        "Cannot import 'get_party_bank_account' from ERPNext. "
+        "This version of POS Awesome requires ERPNext v15 or v16."
+    )
