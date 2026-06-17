@@ -36,7 +36,8 @@
 					theme="dark"
 					prepend-icon="mdi-share-variant"
 					@click="$emit('share-last-payment')"
-					:disabled="disabled || loading"
+					:disabled="disabled || loading || shareLoading"
+					:loading="shareLoading"
 				>
 					{{ __("Share Last Payment") }}
 				</v-btn>
@@ -49,6 +50,7 @@
 defineProps({
 	loading: Boolean,
 	disabled: Boolean,
+	shareLoading: Boolean,
 });
 
 defineEmits(["submit", "submit-and-print", "share-last-payment"]);
