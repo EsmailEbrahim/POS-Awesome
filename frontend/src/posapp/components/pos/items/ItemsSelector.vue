@@ -570,6 +570,10 @@ const itemsSelectorSearch = useItemsSelectorSearch({
 	isLimitSearchEnabled: () => usesLimitSearch.value,
 	runLimitSearch: (term) => itemsIntegration.searchItems(term),
 	clearHighlightedItem: () => itemSelection.clearHighlightedItem(),
+	lookupItemByBarcode,
+	ensureBarcodeIndex,
+	replaceBarcodeIndex,
+	getItems: () => items.value,
 });
 const itemsSelectorSettings = useItemsSelectorSettings({ getVM: () => settingsContext, itemSync });
 const itemsSelectorFocus = useItemsSelectorFocus({
@@ -772,6 +776,7 @@ const scanProcessor = useScanProcessor({
 	ratePrecision: itemDisplay.ratePrecision,
 	customer: selectedCustomer,
 	onItemAdded: () => {
+		scannerInput.pendingScanCode.value = "";
 		clearSearch();
 		itemsSelectorFocus.focusItemSearch();
 	},
@@ -1058,6 +1063,11 @@ watch(isPosSupervisor, (isSupervisor) => {
 	scheduleLastBuyingRateRefresh();
 });
 
+// Auto-process barcodes when user stops typing (barcode fields only, excludes item_code/serial/batch)
+watch(search_input, (value) => {
+	autoAddByBarcode(value);
+});
+
 // 9. Template Bindings & Direct Exports
 const {
 	ratePrecision,
@@ -1168,6 +1178,28 @@ const click_item_row = (e: any, data: any) => {
 };
 const onVirtualRangeUpdate = (s, e, vs, ve) => itemsLoader.onVirtualRangeUpdate(s, e, vs, ve);
 const onListScroll = (e) => handleListScroll(e);
+
+// Strict barcode-only lookup for auto-process (excludes item_code/serial/batch)
+const findItemByBarcodeOnly = (code: string): any => {
+	const normalized = String(code).toLowerCase().trim();
+	if (!normalized || normalized.length < 3) return null;
+	return (items.value || []).find(item =>
+		(item.barcode && String(item.barcode).toLowerCase() === normalized) ||
+		(Array.isArray(item.item_barcode) && item.item_barcode.some(
+			(b: any) => b.barcode && String(b.barcode).toLowerCase() === normalized
+		)) ||
+		(Array.isArray(item.barcodes) && item.barcodes.some(
+			(bc: any) => String(bc).toLowerCase() === normalized
+		))
+	) || null;
+};
+
+const autoAddByBarcode = _.debounce((code: string) => {
+	if (!code || code.length < 3) return;
+	if (findItemByBarcodeOnly(code)) {
+		onBarcodeScanned(code);
+	}
+}, 300);
 
 defineExpose({
 	search_input,

@@ -14,6 +14,10 @@ type SearchDeps = {
 	isLimitSearchEnabled?: () => boolean;
 	runLimitSearch?: (_term: string) => Promise<unknown> | unknown;
 	clearHighlightedItem?: () => void;
+	lookupItemByBarcode?: (_code: string) => any;
+	ensureBarcodeIndex?: () => any;
+	replaceBarcodeIndex?: (_items: any[]) => void;
+	getItems?: () => any[];
 };
 
 export const useItemsSelectorSearch = ({
@@ -25,6 +29,10 @@ export const useItemsSelectorSearch = ({
 	isLimitSearchEnabled,
 	runLimitSearch,
 	clearHighlightedItem,
+	lookupItemByBarcode,
+	ensureBarcodeIndex,
+	replaceBarcodeIndex,
+	getItems,
 }: SearchDeps) => {
 	const getVm = (): any => (typeof getVM === "function" ? getVM() : null);
 
@@ -289,6 +297,27 @@ export const useItemsSelectorSearch = ({
 		// Keep both search refs aligned with the value we are about to process.
 		vm.first_search = trimmedQuery;
 		syncSearchInput(vm, trimmedQuery);
+
+		// First try synchronous barcode index lookup (supports ALL barcode formats: EAN, UPC, CODE-39, GS1, ISBN, etc.)
+		if (typeof ensureBarcodeIndex === "function" && typeof lookupItemByBarcode === "function") {
+			const index = ensureBarcodeIndex();
+			// Only populate index when empty to avoid O(n) rebuild on every Enter
+			if ((!index || index.size === 0) && typeof replaceBarcodeIndex === "function" && typeof getItems === "function") {
+				replaceBarcodeIndex(getItems());
+			}
+			if (lookupItemByBarcode(trimmedQuery)) {
+				// Guard: auto-add watcher already triggered scan pipeline for this code
+				if (scannerInput?.pendingScanCode?.value === trimmedQuery) {
+					return;
+				}
+				if (typeof vm.onBarcodeScanned === "function") {
+					vm.onBarcodeScanned(trimmedQuery);
+				} else if (scannerInput.onBarcodeScanned) {
+					scannerInput.onBarcodeScanned(trimmedQuery);
+				}
+				return;
+			}
+		}
 
 		// If the input is a numeric string 12 characters or longer, treat it as a barcode
 		if (/^\d{12,}$/.test(trimmedQuery)) {
