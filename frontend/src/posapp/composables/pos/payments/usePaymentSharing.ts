@@ -1,12 +1,12 @@
 import { ref, unref, type Ref } from "vue";
 import { isOffline } from "../../../../offline/index";
+import { DEFAULT_PAYMENT_ENTRY_PRINT_FORMAT } from "../../../utils/paymentPrintFormat";
 
 type MaybeRef<T> = Ref<T> | T;
 
 type PaymentSharingOptions = {
 	customerName: MaybeRef<string>;
 	partyType: MaybeRef<string>;
-	posProfile: MaybeRef<Record<string, any>>;
 	eventBus?: { emit?: (_event: string, _payload: Record<string, any>) => void };
 	fetchPdf?: typeof fetch;
 	downloadPdfBlob?: (_blob: Blob, _name: string) => void;
@@ -30,7 +30,6 @@ const defaultDownloadPdfBlob = (blob: Blob, name: string) => {
 export function usePaymentSharing({
 	customerName,
 	partyType,
-	posProfile,
 	eventBus,
 	fetchPdf = globalThis.fetch?.bind(globalThis),
 	downloadPdfBlob = defaultDownloadPdfBlob,
@@ -79,10 +78,7 @@ export function usePaymentSharing({
 			}
 
 			const paymentName = payments[0].name;
-			const profile = unref(posProfile) || {};
-			const printFormat =
-				profile.print_format_for_online || profile.print_format || "Standard";
-			const pdfUrl = `/api/method/frappe.utils.print_format.download_pdf?doctype=Payment%20Entry&name=${encodeURIComponent(paymentName)}&format=${encodeURIComponent(printFormat)}&no_letterhead=0`;
+			const pdfUrl = `/api/method/frappe.utils.print_format.download_pdf?doctype=Payment%20Entry&name=${encodeURIComponent(paymentName)}&format=${encodeURIComponent(DEFAULT_PAYMENT_ENTRY_PRINT_FORMAT)}&no_letterhead=0`;
 			const response = await fetchPdf(pdfUrl, {
 				headers: { "X-Frappe-CSRF-Token": (frappe as any).csrf_token },
 			});

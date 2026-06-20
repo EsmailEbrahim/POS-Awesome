@@ -258,6 +258,7 @@ import {
 	isPaymentRouteLocked as resolvePaymentRouteLocked,
 } from "../../../utils/paymentRouteReadiness";
 import { loadPaymentMethodCurrencyMap } from "../../../utils/paymentMethodCurrencyCache";
+import { DEFAULT_PAYMENT_ENTRY_PRINT_FORMAT } from "../../../utils/paymentPrintFormat";
 
 const getTodayDate = () => frappe?.datetime?.nowdate?.() || new Date().toISOString().slice(0, 10);
 const formatDisplayDate = (date) => {
@@ -425,7 +426,7 @@ export default {
 						await printDocumentViaQz({
 							doctype: "Payment Entry",
 							name: payment_name,
-							printFormat: "Standard",
+							printFormat: DEFAULT_PAYMENT_ENTRY_PRINT_FORMAT,
 							noLetterhead: 1,
 						});
 						return;
@@ -666,7 +667,6 @@ export default {
 			usePaymentSharing({
 				customerName: customer_name,
 				partyType,
-				posProfile: pos_profile,
 				eventBus: proxy?.eventBus,
 			});
 

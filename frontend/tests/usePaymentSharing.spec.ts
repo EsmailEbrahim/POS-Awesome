@@ -42,15 +42,15 @@ describe("usePaymentSharing", () => {
 	});
 
 	it("filters the latest payment by party and party type", async () => {
+		const fetchPdf = vi.fn().mockResolvedValue({
+			ok: true,
+			blob: vi.fn().mockResolvedValue(new Blob(["pdf"], { type: "application/pdf" })),
+		});
 		const { shareLastPayment } = usePaymentSharing({
 			customerName: ref("Shared Party"),
 			partyType: ref("Supplier"),
-			posProfile: ref({ print_format: "POS Payment" }),
 			eventBus: { emit: vi.fn() },
-			fetchPdf: vi.fn().mockResolvedValue({
-				ok: true,
-				blob: vi.fn().mockResolvedValue(new Blob(["pdf"], { type: "application/pdf" })),
-			}),
+			fetchPdf,
 			downloadPdfBlob: vi.fn(),
 			shareNavigator: {},
 		});
@@ -68,6 +68,10 @@ describe("usePaymentSharing", () => {
 				},
 			}),
 		});
+		expect(fetchPdf).toHaveBeenCalledWith(
+			expect.stringContaining("doctype=Payment%20Entry&name=ACC-PAY-0001&format=Standard"),
+			expect.any(Object),
+		);
 	});
 
 	it("warns before server calls when payment sharing is requested offline", async () => {
@@ -78,7 +82,6 @@ describe("usePaymentSharing", () => {
 		const { shareLastPayment } = usePaymentSharing({
 			customerName: ref("Customer A"),
 			partyType: ref("Customer"),
-			posProfile: ref({}),
 			eventBus,
 			fetchPdf,
 			downloadPdfBlob: vi.fn(),
@@ -110,7 +113,6 @@ describe("usePaymentSharing", () => {
 		const { shareLastPayment, isSharing } = usePaymentSharing({
 			customerName: ref("Customer A"),
 			partyType: ref("Customer"),
-			posProfile: ref({}),
 			eventBus: { emit: vi.fn() },
 			fetchPdf,
 			downloadPdfBlob: vi.fn(),
