@@ -147,19 +147,19 @@
 				</v-card>
 			</div>
 
-		<v-expand-transition>
-			<div v-if="multiSelect" class="multi-select-bar">
-				<v-btn
-					color="primary"
-					size="large"
-					:disabled="selectedItems.size === 0"
-					@click="emitAddSelected"
-					class="px-6"
-				>
+			<v-expand-transition>
+				<div v-if="multiSelect" class="multi-select-bar">
+					<v-btn
+						color="primary"
+						size="large"
+						:disabled="selectedItems.size === 0"
+						@click="emitAddSelected"
+						class="px-6"
+					>
 					{{ __('Add Selected') }} ({{ selectedItems.size }})
-				</v-btn>
-			</div>
-		</v-expand-transition>
+					</v-btn>
+				</div>
+			</v-expand-transition>
 		</v-card>
 		<ItemActionToolbar
 			v-model="item_group"
@@ -348,6 +348,7 @@ const {
 	indexItem,
 	replaceBarcodeIndex,
 	lookupItemByBarcode,
+	resolveItemByBarcode,
 	searchItemsByCode: searchItemsByCodeFn,
 } = useBarcodeIndexing();
 
@@ -570,10 +571,7 @@ const itemsSelectorSearch = useItemsSelectorSearch({
 	isLimitSearchEnabled: () => usesLimitSearch.value,
 	runLimitSearch: (term) => itemsIntegration.searchItems(term),
 	clearHighlightedItem: () => itemSelection.clearHighlightedItem(),
-	lookupItemByBarcode,
-	ensureBarcodeIndex,
-	replaceBarcodeIndex,
-	getItems: () => items.value,
+	resolveItemByBarcode: (code) => resolveItemByBarcode(items.value, code),
 });
 const itemsSelectorSettings = useItemsSelectorSettings({ getVM: () => settingsContext, itemSync });
 const itemsSelectorFocus = useItemsSelectorFocus({
@@ -1063,11 +1061,6 @@ watch(isPosSupervisor, (isSupervisor) => {
 	scheduleLastBuyingRateRefresh();
 });
 
-// Auto-process barcodes when user stops typing (barcode fields only, excludes item_code/serial/batch)
-watch(search_input, (value) => {
-	autoAddByBarcode(value);
-});
-
 // 9. Template Bindings & Direct Exports
 const {
 	ratePrecision,
@@ -1178,44 +1171,6 @@ const click_item_row = (e: any, data: any) => {
 };
 const onVirtualRangeUpdate = (s, e, vs, ve) => itemsLoader.onVirtualRangeUpdate(s, e, vs, ve);
 const onListScroll = (e) => handleListScroll(e);
-
-// Strict barcode-only lookup for auto-process (excludes item_code/serial/batch)
-const findItemByBarcodeOnly = (code: string): any => {
-	const normalized = String(code).toLowerCase().trim();
-	if (!normalized || normalized.length < 3) return null;
-
-	if (typeof lookupItemByBarcode === "function") {
-		const indexedItem = lookupItemByBarcode(normalized);
-		if (indexedItem) {
-			const isBarcodeMatch =
-				(indexedItem.barcode && String(indexedItem.barcode).toLowerCase() === normalized) ||
-				(Array.isArray(indexedItem.item_barcode) && indexedItem.item_barcode.some(
-					(b: any) => b.barcode && String(b.barcode).toLowerCase() === normalized
-				)) ||
-				(Array.isArray(indexedItem.barcodes) && indexedItem.barcodes.some(
-					(bc: any) => String(bc).toLowerCase() === normalized
-				));
-			if (isBarcodeMatch) return indexedItem;
-		}
-	}
-
-	return (items.value || []).find(item =>
-		(item.barcode && String(item.barcode).toLowerCase() === normalized) ||
-		(Array.isArray(item.item_barcode) && item.item_barcode.some(
-			(b: any) => b.barcode && String(b.barcode).toLowerCase() === normalized
-		)) ||
-		(Array.isArray(item.barcodes) && item.barcodes.some(
-			(bc: any) => String(bc).toLowerCase() === normalized
-		))
-	) || null;
-};
-
-const autoAddByBarcode = _.debounce((code: string) => {
-	if (!code || code.length < 3) return;
-	if (findItemByBarcodeOnly(code)) {
-		onBarcodeScanned(code);
-	}
-}, 300);
 
 defineExpose({
 	search_input,

@@ -5,10 +5,6 @@ import { resolveBooleanSetting } from "./selectorSearch/resolveBooleanSetting";
 
 declare const flt: (_value: unknown) => number;
 
-// Safety threshold: above this catalog size, skip the O(1) barcode index Map
-// and fall back to O(n) linear scan to avoid OOM from the Map entries.
-const MAX_BARCODE_INDEX_SIZE = 100_000;
-
 type SearchDeps = {
 	getVM?: () => any;
 	scannerInput?: any;
@@ -18,10 +14,7 @@ type SearchDeps = {
 	isLimitSearchEnabled?: () => boolean;
 	runLimitSearch?: (_term: string) => Promise<unknown> | unknown;
 	clearHighlightedItem?: () => void;
-	lookupItemByBarcode?: (_code: string) => any;
-	ensureBarcodeIndex?: () => any;
-	replaceBarcodeIndex?: (_items: any[]) => void;
-	getItems?: () => any[];
+	resolveItemByBarcode?: (_code: string) => any;
 };
 
 export const useItemsSelectorSearch = ({
@@ -33,10 +26,7 @@ export const useItemsSelectorSearch = ({
 	isLimitSearchEnabled,
 	runLimitSearch,
 	clearHighlightedItem,
-	lookupItemByBarcode,
-	ensureBarcodeIndex,
-	replaceBarcodeIndex,
-	getItems,
+	resolveItemByBarcode,
 }: SearchDeps) => {
 	const getVm = (): any => (typeof getVM === "function" ? getVM() : null);
 
@@ -302,15 +292,9 @@ export const useItemsSelectorSearch = ({
 		vm.first_search = trimmedQuery;
 		syncSearchInput(vm, trimmedQuery);
 
-		// First try synchronous barcode index lookup (supports ALL barcode formats: EAN, UPC, CODE-39, GS1, ISBN, etc.)
-		if (typeof ensureBarcodeIndex === "function" && typeof lookupItemByBarcode === "function") {
-			const index = ensureBarcodeIndex();
-			const allItems = typeof getItems === "function" ? getItems() : [];
-			// Only populate index when empty and within the 100K safety threshold to avoid OOM
-			if ((!index || index.size === 0) && allItems && allItems.length <= MAX_BARCODE_INDEX_SIZE && typeof replaceBarcodeIndex === "function") {
-				replaceBarcodeIndex(allItems);
-			}
-			if (lookupItemByBarcode(trimmedQuery)) {
+		// The barcode index owns its memory threshold and large-catalog fallback.
+		if (typeof resolveItemByBarcode === "function") {
+			if (resolveItemByBarcode(trimmedQuery)) {
 				// Guard: auto-add watcher already triggered scan pipeline for this code
 				if (scannerInput?.pendingScanCode?.value === trimmedQuery) {
 					return;
