@@ -147,19 +147,19 @@
 				</v-card>
 			</div>
 
-		<v-expand-transition>
-			<div v-if="multiSelect" class="multi-select-bar">
-				<v-btn
-					color="primary"
-					size="large"
-					:disabled="selectedItems.size === 0"
-					@click="emitAddSelected"
-					class="px-6"
-				>
+			<v-expand-transition>
+				<div v-if="multiSelect" class="multi-select-bar">
+					<v-btn
+						color="primary"
+						size="large"
+						:disabled="selectedItems.size === 0"
+						@click="emitAddSelected"
+						class="px-6"
+					>
 					{{ __('Add Selected') }} ({{ selectedItems.size }})
-				</v-btn>
-			</div>
-		</v-expand-transition>
+					</v-btn>
+				</div>
+			</v-expand-transition>
 		</v-card>
 		<ItemActionToolbar
 			v-model="item_group"
@@ -348,6 +348,7 @@ const {
 	indexItem,
 	replaceBarcodeIndex,
 	lookupItemByBarcode,
+	resolveItemByBarcode,
 	searchItemsByCode: searchItemsByCodeFn,
 } = useBarcodeIndexing();
 
@@ -570,6 +571,7 @@ const itemsSelectorSearch = useItemsSelectorSearch({
 	isLimitSearchEnabled: () => usesLimitSearch.value,
 	runLimitSearch: (term) => itemsIntegration.searchItems(term),
 	clearHighlightedItem: () => itemSelection.clearHighlightedItem(),
+	resolveItemByBarcode: (code) => resolveItemByBarcode(items.value, code),
 });
 const itemsSelectorSettings = useItemsSelectorSettings({ getVM: () => settingsContext, itemSync });
 const itemsSelectorFocus = useItemsSelectorFocus({
@@ -772,6 +774,7 @@ const scanProcessor = useScanProcessor({
 	ratePrecision: itemDisplay.ratePrecision,
 	customer: selectedCustomer,
 	onItemAdded: () => {
+		scannerInput.pendingScanCode.value = "";
 		clearSearch();
 		itemsSelectorFocus.focusItemSearch();
 	},
