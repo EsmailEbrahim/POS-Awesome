@@ -1,0 +1,784 @@
+/**
+ * Global Theme CSS Custom Properties for POSAwesome
+ * These variables are updated dynamically by the useTheme composable
+ */
+
+:root {
+	/* Clinical-retail foundation */
+	--pos-font-sans: "Aptos", "Segoe UI Variable", "Segoe UI", "Noto Sans Arabic", Tahoma, sans-serif;
+	--pos-font-display:
+		"Aptos Display", "Segoe UI Variable Display", "Segoe UI", "Noto Sans Arabic", Tahoma, sans-serif;
+	--pos-control-height: 44px;
+	--pos-control-height-compact: 38px;
+	--pos-action-pay: #16784a;
+	--pos-action-pay-hover: #105f3a;
+	--pos-action-primary: #0b5cab;
+	--pos-action-primary-hover: #084d96;
+	--pos-action-danger: #b3261e;
+	--pos-action-danger-hover: #8c1d18;
+	--pos-focus-ring: #0b7a75;
+	--pos-focus-halo: rgba(11, 122, 117, 0.2);
+	--pos-elevation-1: 0 1px 2px rgba(19, 43, 40, 0.06), 0 4px 12px rgba(19, 43, 40, 0.04);
+	--pos-elevation-2: 0 8px 24px rgba(19, 43, 40, 0.08), 0 2px 6px rgba(19, 43, 40, 0.05);
+	--pos-elevation-3: 0 18px 48px rgba(19, 43, 40, 0.14), 0 4px 12px rgba(19, 43, 40, 0.08);
+
+	/* Primary Background Colors */
+	--pos-bg-primary: #ffffff;
+	--pos-bg-secondary: #f3f7f6;
+	--pos-bg-tertiary: #e1eeec;
+
+	/* Surface Colors */
+	--pos-surface: #ffffff;
+	--pos-surface-variant: #e7efed;
+	--pos-surface-container: #f8faf9;
+
+	/* Text Colors */
+	--pos-text-primary: #172321;
+	--pos-text-secondary: #52615e;
+	--pos-text-disabled: #8b9794;
+	--pos-text-hint: #73817e;
+	--pos-text-muted: #61706d;
+
+	/* Primary Colors - Original Light Mode */
+	--pos-primary: #006d72;
+	--pos-primary-variant: #00575b;
+	--pos-primary-container: #d4efed;
+	--pos-on-primary: #ffffff;
+
+	/* Secondary Colors - Original Light Mode */
+	--pos-secondary: #0b7a75;
+	--pos-secondary-variant: #075f5b;
+	--pos-secondary-container: #d8efeb;
+	--pos-on-secondary: #ffffff;
+
+	/* Accent Colors - Modern Orange (Light Mode) */
+	--pos-accent: #c4511b;
+	--pos-accent-variant: #9f3d10;
+
+	/* Semantic Colors */
+	--pos-success: #16784a;
+	--pos-success-container: #dff3e7;
+	--pos-warning: #a94f08;
+	--pos-warning-container: #fff0d8;
+	--pos-error: #b3261e;
+	--pos-error-container: #f9dedc;
+	--pos-info: #0b67a3;
+	--pos-info-container: #dceefa;
+
+	/* Border and Divider Colors */
+	--pos-border: #c7d3d0;
+	--pos-border-light: #dce5e3;
+	--pos-divider: #e4ebe9;
+	--pos-outline: #95a6a2;
+
+	/* Shadow Colors */
+	--pos-shadow: rgba(0, 0, 0, 0.1);
+	--pos-shadow-dark: rgba(0, 0, 0, 0.2);
+	--pos-shadow-light: rgba(0, 0, 0, 0.05);
+
+	/* Interactive Colors */
+	--pos-hover-bg: rgba(25, 118, 210, 0.04);
+	--pos-pressed-bg: rgba(25, 118, 210, 0.08);
+	--pos-selected-bg: rgba(25, 118, 210, 0.12);
+	--pos-focus-bg: rgba(25, 118, 210, 0.06);
+
+	/* Card and Component Backgrounds */
+	--pos-card-bg: #ffffff;
+	--pos-input-bg: #f8faf9;
+	--pos-button-bg: #ffffff;
+	--pos-menu-bg: #ffffff;
+	--pos-dialog-bg: #ffffff;
+	--pos-surface-raised: #ffffff;
+	--pos-surface-muted: #edf3f1;
+	--pos-tooltip-bg: #ffffff;
+	--pos-tooltip-border: rgba(15, 23, 42, 0.12);
+	--pos-tooltip-shadow: rgba(15, 23, 42, 0.14);
+
+	/* Shared Radius Scale */
+	--pos-radius-xs: 6px;
+	--pos-radius-sm: 9px;
+	--pos-radius-md: 13px;
+	--pos-radius-lg: 18px;
+
+	/* Shared Spacing Scale */
+	--pos-space-1: 4px;
+	--pos-space-2: 8px;
+	--pos-space-3: 12px;
+	--pos-space-4: 16px;
+	--pos-space-5: 24px;
+	--pos-space-6: 32px;
+
+	/* Special Use Cases */
+	--pos-navbar-bg: #ffffff;
+	--pos-sidebar-bg: #edf3f1;
+	--pos-invoice-bg: #ffffff;
+	--pos-table-header-bg: #e7efed;
+	--pos-table-row-hover: rgba(0, 109, 114, 0.06);
+
+	/* RTL Support Variables */
+	--pos-direction: ltr;
+	--pos-text-align: left;
+	--pos-margin-start: 0;
+	--pos-margin-end: 0;
+	--pos-padding-start: 0;
+	--pos-padding-end: 0;
+	color-scheme: light;
+}
+
+/* Dark Theme Override */
+[data-theme="dark"],
+[data-theme-mode="dark"],
+.v-theme--dark {
+	--pos-focus-ring: #75d6d0;
+	--pos-focus-halo: rgba(117, 214, 208, 0.24);
+	--pos-action-pay: #16784a;
+	--pos-action-pay-hover: #105f3a;
+	--pos-action-primary: #0b5cab;
+	--pos-action-primary-hover: #084d96;
+	--pos-action-danger: #b3261e;
+	--pos-action-danger-hover: #8c1d18;
+	--pos-elevation-1: 0 1px 2px rgba(0, 0, 0, 0.25), 0 4px 14px rgba(0, 0, 0, 0.18);
+	--pos-elevation-2: 0 10px 28px rgba(0, 0, 0, 0.3), 0 2px 8px rgba(0, 0, 0, 0.22);
+	--pos-elevation-3: 0 20px 52px rgba(0, 0, 0, 0.44), 0 6px 16px rgba(0, 0, 0, 0.3);
+	/* Primary Background Colors */
+	--pos-bg-primary: #111918;
+	--pos-bg-secondary: #0d1413;
+	--pos-bg-tertiary: #22302e;
+
+	/* Surface Colors */
+	--pos-surface: #17201f;
+	--pos-surface-variant: #2b3937;
+	--pos-surface-container: #202c2a;
+
+	/* Text Colors - Enhanced Contrast for Dark Mode */
+	--pos-text-primary: #eef5f3;
+	--pos-text-secondary: #bdc9c6;
+	--pos-text-disabled: #84918e;
+	--pos-text-hint: #9aa7a4;
+	--pos-text-muted: #aebbb8;
+
+	/* Primary Colors - High Contrast Blue-Cyan */
+	--pos-primary: #75d6d0;
+	--pos-primary-variant: #9be7e1;
+	--pos-primary-container: #164946;
+	--pos-on-primary: #000000;
+
+	/* Secondary Colors - High Contrast Cyan-Green */
+	--pos-secondary: #9bd0ca;
+	--pos-secondary-variant: #b7e2dd;
+	--pos-secondary-container: #294b48;
+	--pos-on-secondary: #000000;
+
+	/* Accent Colors - Modern Orange */
+	--pos-accent: #ffb68f;
+	--pos-accent-variant: #ff8c56;
+
+	/* Semantic Colors - High Contrast */
+	--pos-success: #75d6a1;
+	--pos-success-container: #184f34;
+	--pos-warning: #ffbd79;
+	--pos-warning-container: #5c3816;
+	--pos-error: #ffb4ab;
+	--pos-error-container: #5c201d;
+	--pos-info: #9dccf0;
+	--pos-info-container: #173f5c;
+
+	/* Border and Divider Colors */
+	--pos-border: #40514e;
+	--pos-border-light: #2d3d3a;
+	--pos-divider: #2a3836;
+	--pos-outline: #71817e;
+
+	/* Shadow Colors */
+	--pos-shadow: rgba(0, 0, 0, 0.4);
+	--pos-shadow-dark: rgba(0, 0, 0, 0.6);
+	--pos-shadow-light: rgba(0, 0, 0, 0.2);
+
+	/* Interactive Colors - Better Visibility */
+	--pos-hover-bg: rgba(255, 255, 255, 0.12);
+	--pos-pressed-bg: rgba(255, 255, 255, 0.16);
+	--pos-selected-bg: rgba(255, 255, 255, 0.2);
+	--pos-focus-bg: rgba(255, 255, 255, 0.14);
+
+	/* Card and Component Backgrounds */
+	--pos-card-bg: #17201f;
+	--pos-input-bg: #202c2a;
+	--pos-button-bg: #202c2a;
+	--pos-menu-bg: #17201f;
+	--pos-dialog-bg: #17201f;
+	--pos-surface-raised: #1c2826;
+	--pos-surface-muted: #131c1b;
+	--pos-tooltip-bg: #202c2a;
+	--pos-tooltip-border: rgba(148, 163, 184, 0.2);
+	--pos-tooltip-shadow: rgba(0, 0, 0, 0.4);
+
+	/* Special Use Cases */
+	--pos-navbar-bg: #111918;
+	--pos-sidebar-bg: #0d1413;
+	--pos-invoice-bg: #17201f;
+	--pos-table-header-bg: #263330;
+	--pos-table-row-hover: rgba(117, 214, 208, 0.08);
+	color-scheme: dark;
+}
+
+/* Automatic mode resolves data-theme before the app mounts; the dark token set above is authoritative. */
+
+body[data-page-route="posapp"] {
+	background:
+		radial-gradient(
+			circle at 8% 0%,
+			color-mix(in srgb, var(--pos-primary-container) 52%, transparent) 0,
+			transparent 30rem
+		),
+		var(--pos-bg-secondary) !important;
+	color: var(--pos-text-primary);
+	font-family: var(--pos-font-sans);
+	font-size: 15px;
+	font-synthesis: none;
+	-webkit-font-smoothing: antialiased;
+	text-rendering: optimizeLegibility;
+}
+
+/* Utility Classes for Theme Colors - Scoped to POSApp */
+.posapp,
+.posapp .v-application,
+.posapp .v-application__wrap,
+.posapp .v-main,
+.posapp .v-main__wrap {
+	background-color: var(--pos-bg-secondary);
+	color: var(--pos-text-primary);
+	font-family: var(--pos-font-sans);
+}
+
+.posapp h1,
+.posapp h2,
+.posapp h3,
+.posapp h4,
+.posapp h5,
+.posapp h6,
+.posapp .text-h1,
+.posapp .text-h2,
+.posapp .text-h3,
+.posapp .text-h4,
+.posapp .text-h5,
+.posapp .text-h6 {
+	font-family: var(--pos-font-display);
+	letter-spacing: -0.015em;
+}
+
+.posapp strong,
+.posapp .font-weight-bold,
+.posapp .font-weight-semibold {
+	font-weight: 650 !important;
+}
+
+.posapp .pos-bg-primary {
+	background-color: var(--pos-bg-primary) !important;
+}
+.posapp .pos-bg-secondary {
+	background-color: var(--pos-bg-secondary) !important;
+}
+.posapp .pos-bg-surface {
+	background-color: var(--pos-surface) !important;
+}
+.posapp .pos-bg-card {
+	background-color: var(--pos-card-bg) !important;
+}
+.posapp .pos-bg-raised {
+	background-color: var(--pos-surface-raised) !important;
+}
+.posapp .pos-bg-muted {
+	background-color: var(--pos-surface-muted) !important;
+}
+
+.posapp .pos-text-primary {
+	color: var(--pos-text-primary) !important;
+}
+.posapp .pos-text-secondary {
+	color: var(--pos-text-secondary) !important;
+}
+
+.posapp .pos-border {
+	border-color: var(--pos-border) !important;
+}
+.posapp .pos-border-light {
+	border-color: var(--pos-border-light) !important;
+}
+
+/* Theme-aware component base styles - Scoped to POSApp */
+.posapp .pos-themed-card {
+	background-color: var(--pos-surface-raised);
+	color: var(--pos-text-primary);
+	border: 1px solid var(--pos-border);
+	border-radius: var(--pos-radius-md);
+	box-shadow: var(--pos-elevation-1);
+}
+
+.posapp .pos-themed-input {
+	background-color: var(--pos-input-bg);
+	color: var(--pos-text-primary);
+	border-color: var(--pos-border);
+	border-radius: var(--pos-radius-sm);
+}
+
+/* Ensure inputs adapt to the active theme without per-component overrides */
+.posapp .pos-themed-input :deep(.v-field__input),
+.posapp .pos-themed-input :deep(input),
+.posapp .pos-themed-input :deep(.v-label) {
+	color: var(--pos-text-primary) !important;
+}
+
+.posapp .pos-themed-input :deep(.v-field__overlay) {
+	background-color: var(--pos-input-bg) !important;
+}
+
+/* Fix for Frappe navbar collapse elements being hidden by POSAwesome CSS */
+/* This overrides the problematic .collapse { visibility: collapse; } rule */
+.navbar-collapse,
+.navbar-collapse.collapsing,
+.navbar-collapse.show,
+.navbar-collapse.collapse.show {
+	visibility: visible !important;
+}
+
+/* Ensure Bootstrap collapse behavior works correctly */
+.collapse:not(.show) {
+	display: none;
+}
+
+.collapsing {
+	height: 0;
+	overflow: hidden;
+	transition: height 0.35s ease;
+}
+
+/* Specific fix for Frappe's awesome bar and navbar elements */
+#navbar-breadcrumbs,
+.navbar-right,
+.awesome-bar,
+.navbar-user-image {
+	visibility: visible !important;
+}
+
+/* Restore horizontal layout for Frappe breadcrumbs */
+#navbar-breadcrumbs {
+	display: flex !important;
+	align-items: center;
+	flex-wrap: nowrap;
+}
+
+#navbar-breadcrumbs .breadcrumb {
+	margin-bottom: 0;
+	flex-wrap: nowrap;
+}
+
+.posapp .pos-themed-button {
+	background-color: var(--pos-button-bg);
+	color: var(--pos-text-primary);
+	border-color: var(--pos-border);
+}
+
+.posapp .pos-themed-button:hover {
+	background-color: var(--pos-hover-bg);
+}
+
+.posapp .pos-themed-menu {
+	background-color: var(--pos-menu-bg);
+	color: var(--pos-text-primary);
+	border-color: var(--pos-border);
+}
+
+.posapp .v-card,
+.posapp .v-sheet,
+.posapp .v-list,
+.posapp .v-table,
+.posapp .v-data-table-virtual,
+.posapp .v-table__wrapper,
+.posapp .v-data-table,
+.posapp .v-toolbar,
+.posapp .v-tabs,
+.posapp .v-window,
+.posapp .v-window-item {
+	background-color: var(--pos-card-bg);
+	color: var(--pos-text-primary);
+}
+
+.posapp .v-table thead,
+.posapp .v-table thead tr,
+.posapp .v-table thead th,
+.posapp .v-data-table-virtual thead,
+.posapp .v-data-table-virtual thead tr,
+.posapp .v-data-table-virtual thead th {
+	background-color: var(--pos-table-header-bg) !important;
+	color: var(--pos-text-primary) !important;
+}
+
+.posapp .v-table tbody tr:hover,
+.posapp .v-data-table tbody tr:hover,
+.posapp .v-data-table-virtual tbody tr:hover {
+	background-color: var(--pos-table-row-hover) !important;
+}
+
+.posapp .v-field,
+.posapp .v-field__field,
+.posapp .v-field__input,
+.posapp .v-select__selection,
+.posapp .v-text-field input,
+.posapp .v-text-field textarea {
+	color: var(--pos-text-primary) !important;
+}
+
+.posapp .v-field__overlay {
+	background-color: var(--pos-input-bg) !important;
+}
+
+.posapp .v-field--variant-outlined .v-field__outline,
+.posapp .v-field--variant-solo .v-field__outline,
+.posapp .v-field--variant-filled .v-field__outline {
+	color: var(--pos-border) !important;
+}
+
+.posapp .v-label,
+.posapp .text-medium-emphasis,
+.posapp .text-caption,
+.posapp .v-list-item-subtitle {
+	color: var(--pos-text-secondary) !important;
+}
+
+.posapp .v-btn:focus-visible,
+.posapp [role="button"]:focus-visible,
+.posapp button:focus-visible,
+.posapp input:focus-visible,
+.posapp [tabindex]:focus-visible {
+	outline: 3px solid var(--pos-focus-ring);
+	outline-offset: 3px;
+	box-shadow: 0 0 0 5px var(--pos-focus-halo);
+}
+
+/* Shared Material 3-inspired control treatment for the POS surface. */
+.posapp .v-btn:not(.v-btn--icon) {
+	min-height: var(--pos-control-height);
+	border-radius: var(--pos-radius-sm);
+	font-weight: 650;
+	letter-spacing: 0.005em;
+	text-transform: none;
+}
+
+.posapp .v-btn--icon {
+	min-width: var(--pos-control-height);
+	min-height: var(--pos-control-height);
+	border-radius: var(--pos-radius-sm);
+}
+
+.posapp .v-field {
+	min-height: var(--pos-control-height);
+	border-radius: var(--pos-radius-sm);
+	transition:
+		border-color 140ms ease,
+		box-shadow 140ms ease,
+		background-color 140ms ease;
+}
+
+.posapp .v-field--focused {
+	box-shadow: 0 0 0 3px var(--pos-focus-halo);
+}
+
+.posapp .v-card:not(.counter-grid-summary-card),
+.posapp .v-dialog > .v-overlay__content > .v-card {
+	border-color: var(--pos-border-light);
+}
+
+.posapp ::selection {
+	background: var(--pos-primary-container);
+	color: var(--pos-text-primary);
+}
+
+.posapp * {
+	scrollbar-color: var(--pos-outline) transparent;
+	scrollbar-width: thin;
+}
+
+@media (pointer: coarse) {
+	:root {
+		--pos-control-height: 48px;
+		--pos-control-height-compact: 44px;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.posapp *,
+	.posapp *::before,
+	.posapp *::after {
+		scroll-behavior: auto !important;
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.01ms !important;
+	}
+}
+
+body[data-page-route="posapp"] .v-overlay__content > .v-card,
+body[data-page-route="posapp"] .v-overlay__content > .v-sheet,
+body[data-page-route="posapp"] .v-overlay__content .v-card {
+	background-color: var(--pos-card-bg) !important;
+	color: var(--pos-text-primary) !important;
+	border: 1px solid var(--pos-border);
+}
+
+body[data-page-route="posapp"] .v-overlay__content,
+body[data-page-route="posapp"] .v-overlay__content .v-list,
+body[data-page-route="posapp"] .v-overlay__content .v-list-item,
+body[data-page-route="posapp"] .v-overlay__content .v-list-item-title,
+body[data-page-route="posapp"] .v-overlay__content .v-list-item-subtitle,
+body[data-page-route="posapp"] .v-overlay__content .v-btn__content,
+body[data-page-route="posapp"] .v-overlay__content .v-chip__content,
+body[data-page-route="posapp"] .v-overlay__content .v-card-title,
+body[data-page-route="posapp"] .v-overlay__content .v-card-text,
+body[data-page-route="posapp"] .v-overlay__content .v-card-actions,
+body[data-page-route="posapp"] .v-overlay__content .v-label,
+body[data-page-route="posapp"] .v-overlay__content .text-medium-emphasis,
+body[data-page-route="posapp"] .v-overlay__content .text-caption {
+	color: var(--pos-text-primary) !important;
+}
+
+body[data-page-route="posapp"] .v-overlay__content .v-list-item-subtitle,
+body[data-page-route="posapp"] .v-overlay__content .text-medium-emphasis,
+body[data-page-route="posapp"] .v-overlay__content .text-caption {
+	color: var(--pos-text-secondary) !important;
+}
+
+body[data-page-route="posapp"] .v-tooltip > .v-overlay__content,
+body[data-page-route="posapp"] .v-overlay-container .v-tooltip > .v-overlay__content,
+body[data-page-route="posapp"] .v-tooltip .v-overlay__content,
+body[data-page-route="posapp"] .v-overlay__content.posa-theme-tooltip {
+	--v-theme-on-surface: 33, 33, 33;
+	--v-theme-on-surface-variant: 33, 33, 33;
+	background: var(--pos-tooltip-bg) !important;
+	color: var(--pos-text-primary) !important;
+	-webkit-text-fill-color: var(--pos-text-primary) !important;
+	border: 1px solid var(--pos-tooltip-border) !important;
+	border-radius: var(--pos-radius-sm) !important;
+	box-shadow: 0 14px 30px var(--pos-tooltip-shadow) !important;
+	padding: 10px 12px !important;
+	backdrop-filter: blur(12px);
+	opacity: 1 !important;
+}
+
+[data-theme="dark"] body[data-page-route="posapp"] .v-overlay-container .v-tooltip > .v-overlay__content,
+[data-theme="dark"] body[data-page-route="posapp"] .v-tooltip .v-overlay__content,
+[data-theme="dark"] body[data-page-route="posapp"] .v-overlay__content.posa-theme-tooltip,
+[data-theme-mode="dark"] body[data-page-route="posapp"] .v-overlay-container .v-tooltip > .v-overlay__content,
+[data-theme-mode="dark"] body[data-page-route="posapp"] .v-tooltip .v-overlay__content,
+[data-theme-mode="dark"] body[data-page-route="posapp"] .v-overlay__content.posa-theme-tooltip {
+	--v-theme-on-surface: 255, 255, 255;
+	--v-theme-on-surface-variant: 255, 255, 255;
+}
+
+body[data-page-route="posapp"] .v-overlay-container .v-tooltip > .v-overlay__content *,
+body[data-page-route="posapp"] .v-tooltip .v-overlay__content *,
+body[data-page-route="posapp"] .v-overlay__content.posa-theme-tooltip * {
+	color: var(--pos-text-primary) !important;
+	-webkit-text-fill-color: var(--pos-text-primary) !important;
+	opacity: 1 !important;
+}
+
+body[data-page-route="posapp"] .v-overlay-container .v-tooltip > .v-overlay__content > span,
+body[data-page-route="posapp"] .v-overlay-container .v-tooltip > .v-overlay__content > div,
+body[data-page-route="posapp"] .v-tooltip .v-overlay__content > span,
+body[data-page-route="posapp"] .v-tooltip .v-overlay__content > div,
+body[data-page-route="posapp"] .v-overlay__content.posa-theme-tooltip > span,
+body[data-page-route="posapp"] .v-overlay__content.posa-theme-tooltip > div {
+	color: var(--pos-text-primary) !important;
+	-webkit-text-fill-color: var(--pos-text-primary) !important;
+}
+
+body[data-page-route="posapp"] .v-overlay-container .v-tooltip > .v-overlay__content .text-medium-emphasis,
+body[data-page-route="posapp"] .v-overlay-container .v-tooltip > .v-overlay__content .text-caption,
+body[data-page-route="posapp"] .v-tooltip .v-overlay__content .text-medium-emphasis,
+body[data-page-route="posapp"] .v-tooltip .v-overlay__content .text-caption,
+body[data-page-route="posapp"] .v-overlay__content.posa-theme-tooltip .text-medium-emphasis,
+body[data-page-route="posapp"] .v-overlay__content.posa-theme-tooltip .text-caption {
+	color: var(--pos-text-secondary) !important;
+}
+
+body[data-page-route="posapp"] .v-overlay__scrim {
+	background: color-mix(in srgb, var(--pos-bg-primary) 72%, transparent) !important;
+}
+
+/* Optimized fast theme transitions - scoped to POSApp only */
+.posapp .pos-themed-card *,
+.posapp .pos-themed-card *::before,
+.posapp .pos-themed-card *::after,
+.posapp .pos-themed-input *,
+.posapp .pos-themed-button *,
+.posapp .pos-text-primary,
+.posapp .pos-text-secondary {
+	transition-property: background-color, color, border-color;
+	transition-duration: 0.05s;
+	transition-timing-function: ease-out;
+}
+
+/* Ultra-fast immediate update for critical elements - Scoped to POSApp */
+.posapp .pos-themed-card,
+.posapp .pos-themed-button,
+.posapp .pos-themed-input,
+.posapp .pos-text-primary,
+.posapp .pos-text-secondary,
+.posapp nav.pos-themed-card,
+.posapp .v-app-bar,
+.posapp .v-btn,
+.posapp .v-icon,
+.posapp .v-chip {
+	transition:
+		background-color 0.02s linear,
+		color 0.02s linear,
+		border-color 0.02s linear !important;
+}
+
+/* Prevent animation on theme change for specific elements that shouldn't animate - Scoped to POSApp */
+.posapp .pos-no-theme-transition,
+.posapp .pos-no-theme-transition * {
+	transition: none !important;
+}
+
+/* Immediate theme update class for critical UI elements - Scoped to POSApp */
+.posapp .pos-theme-immediate {
+	transition:
+		background-color 0.01s linear,
+		color 0.01s linear,
+		border-color 0.01s linear !important;
+}
+
+.posapp .pos-theme-immediate * {
+	transition:
+		background-color 0.01s linear,
+		color 0.01s linear,
+		border-color 0.01s linear !important;
+}
+/* Fix for view toggle buttons text color in dark mode */
+[data-theme="dark"] .view-toggle-btn .v-btn--selected .v-btn__content {
+	color: #ffffff !important;
+}
+
+[data-theme="dark"] .view-toggle-btn .v-btn--selected {
+	background-color: var(--pos-primary) !important;
+}
+
+/* Fix for VueDatePicker inside pos-themed-input in Dark Mode */
+[data-theme="dark"] .pos-themed-input .dp__input {
+	background-color: var(--pos-input-bg) !important;
+	color: var(--pos-text-primary) !important;
+	border-color: var(--pos-border) !important;
+}
+
+[data-theme="dark"] .pos-themed-input .dp__icon {
+	color: var(--pos-text-secondary) !important;
+}
+
+/* Ensure placeholder text is visible */
+[data-theme="dark"] .pos-themed-input .dp__input::placeholder {
+	color: var(--pos-text-hint) !important;
+	opacity: 1;
+}
+
+/* Fix popup menu background in dark mode */
+[data-theme="dark"] .dp__menu {
+	background-color: var(--pos-card-bg) !important;
+	border-color: var(--pos-border) !important;
+}
+
+[data-theme="dark"] .dp__calendar_header_item {
+	color: var(--pos-text-secondary) !important;
+}
+
+[data-theme="dark"] .dp__cell_inner {
+	color: var(--pos-text-primary) !important;
+}
+
+[data-theme="dark"] .dp__month_year_select {
+	color: var(--pos-text-primary) !important;
+}
+
+[data-theme="dark"] .dp__arrow_top,
+[data-theme="dark"] .dp__arrow_bottom {
+	background-color: var(--pos-card-bg) !important;
+	border-color: var(--pos-border) !important;
+}
+
+/* Active/Selected dates */
+[data-theme="dark"] .dp__active_date,
+[data-theme="dark"] .dp__range_start,
+[data-theme="dark"] .dp__range_end {
+	background-color: var(--pos-primary) !important;
+	color: var(--pos-on-primary) !important;
+}
+
+/* Today's date */
+[data-theme="dark"] .dp__today {
+	border-color: var(--pos-primary) !important;
+}
+
+/* Action buttons */
+[data-theme="dark"] .dp__action_select {
+	background-color: var(--pos-primary) !important;
+	color: var(--pos-on-primary) !important;
+}
+
+[data-theme="dark"] .dp__action_cancel {
+	color: var(--pos-text-secondary) !important;
+}
+
+/* ==========================================================================
+   POSAwesome - Hide Frappe Desk Elements in POS View
+   Target only when in POSApp route to avoid affecting the host desk layout
+   ========================================================================== */
+
+/* Only apply when in POSApp page route to preserve desk compatibility */
+body[data-page-route="posapp"] .body-sidebar-container,
+body[data-page-route="posapp"] .body-sidebar,
+body[data-page-route="posapp"] .desk-sidebar,
+body[data-page-route="posapp"] .app-sidebar,
+body[data-page-route="posapp"] .layout-side-section,
+body[data-page-route="posapp"] .page-head,
+body[data-page-route="posapp"] .navbar.navbar-default.navbar-fixed-top,
+body[data-page-route="posapp"] .sidebar-overlay {
+	display: none !important;
+}
+
+/* Ensure POSApp takes full width without sidebar offset */
+body[data-page-route="posapp"] {
+	--posa-desk-sidebar-width: 0px !important;
+	--sidebar-width: 0px !important;
+}
+
+/* Remove padding/margin that Frappe adds for sidebar */
+body[data-page-route="posapp"] .container1 {
+	padding-inline-start: 0 !important;
+	margin-inline-start: 0 !important;
+}
+
+/* Ensure content fills the entire viewport */
+body[data-page-route="posapp"] .main-content {
+	width: 100% !important;
+	max-width: 100% !important;
+}
+
+/* Hide any remaining Frappe UI elements that might appear */
+body[data-page-route="posapp"] .page-container,
+body[data-page-route="posapp"] .content.page-wrapper {
+	padding: 0 !important;
+	margin: 0 !important;
+}
+
+/* Override Frappe's layout constraints */
+body[data-page-route="posapp"] #body {
+	display: block !important;
+	min-height: 100dvh !important;
+	height: auto !important;
+	overflow-x: hidden !important;
+	overflow-y: auto !important;
+}
+
+/* Ensure no residual sidebar space */
+body[data-page-route="posapp"] .desk-container {
+	padding-left: 0 !important;
+}
